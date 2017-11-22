@@ -10,6 +10,7 @@ use App\RecipeIngredient;
 
 use App\RecipeDirection;
 
+File;
 
 class RecipeController extends Controller
 {
