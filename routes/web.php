@@ -12,9 +12,8 @@
 */
 
 // Front End Design
-Route::get('/', function () {
-    return view('frontend/index');
-});
+Route::resource('/', 'FrontEnd\TestController');
+Route::get('/getTest', 'FrontEnd\TestController@getTest');
 
 // authentication 
 

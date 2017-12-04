@@ -19,7 +19,6 @@
         <!-- <div v-tabs>asf</div> -->
     </form>
 
-
 </template>
 
 <script type="text/javascript">
