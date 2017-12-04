@@ -16374,10 +16374,6 @@ var render = function() {
           },
           [_vm._v("Login")]
         )
-      ]),
-      _vm._v(" "),
-      _c("div", { directives: [{ name: "tabs", rawName: "v-tabs" }] }, [
-        _vm._v("asf")
       ])
     ]
   )
