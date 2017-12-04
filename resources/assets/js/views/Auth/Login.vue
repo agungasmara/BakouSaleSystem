@@ -1,3 +1,4 @@
+
 <template>
     <form class="form" @submit.prevent="login">
         <h1 class="form__title">Sign In Account</h1>
@@ -14,7 +15,11 @@
         <div class="form__group">
             <button :disabled="isProcessing" class="btn btn__primary">Login</button>
         </div>
+
+        <div v-tabs>asf</div>
     </form>
+
+
 </template>
 
 <script type="text/javascript">
@@ -33,7 +38,6 @@
         },
         mounted: function () {
             console.log(this.$http);
-            console.log("sf");
         },
           ready() {
               this.credential.email    = credential.email;
@@ -57,7 +61,7 @@
                 //     $.snackbar({content: data.message, style: 'toast', toggle: 'snackbar'});
 
                 //   });
-                post('http://localhost:8000/login', this.credential)
+                post('/login', this.credential)
                     .then((res) => {
                         console.log(res);
                     if(res.data.success) {

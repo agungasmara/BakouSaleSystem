@@ -26,7 +26,7 @@ Route::post('login', function(Illuminate\Http\Request $request)
     return response()->json(['success' => false, 'message' => 'Unable to login'], 401);
 });
 
-Route::group(['middleware' => 'auth'], function() { 
+Route::group(['middleware' => 'auth'], function() {
 
     Route::post('logout', function()
     {
