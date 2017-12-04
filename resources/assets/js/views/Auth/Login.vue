@@ -16,7 +16,7 @@
             <button :disabled="isProcessing" class="btn btn__primary">Login</button>
         </div>
 
-        <div v-tabs>asf</div>
+        <!-- <div v-tabs>asf</div> -->
     </form>
 
 
