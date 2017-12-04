@@ -11,11 +11,12 @@
 |
 */
 
-
+// Front End Design
 Route::get('/', function () {
-    return view('welcome');
+    return view('frontend/index');
 });
 
+// authentication 
 
 Route::post('login', function(Illuminate\Http\Request $request) 
 {
@@ -27,6 +28,7 @@ Route::post('login', function(Illuminate\Http\Request $request)
 });
 
 Route::group(['middleware' => 'auth'], function() {
+    
 
     Route::post('logout', function()
     {
@@ -39,4 +41,9 @@ Route::group(['middleware' => 'auth'], function() {
 
         return response()->json(['success' => 'true', 'message' => 'Loading users', 'data' => ['users' => $users->toJson()]], 200);
     });
+});
+
+
+Route::get('admin/', function () {
+    return view('welcome');
 });
