@@ -1,0 +1,5 @@
+Step1: run=> npm install
+
+Step2: open first cmd and browse director run=> npm run watch
+
+step3: open second cmd and browse director run => php artisan serve
