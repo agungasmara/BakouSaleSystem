@@ -12208,7 +12208,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "container" },
+    { staticClass: "_container" },
     [
       _c("div", { staticClass: "navbar" }, [
         _c(
@@ -15309,6 +15309,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -16296,83 +16306,119 @@ var render = function() {
       }
     },
     [
-      _c("h1", { staticClass: "form__title" }, [_vm._v("Sign In Account")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form__group" }, [
-        _c("label", [_vm._v("Email")]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.credential.email,
-              expression: "credential.email"
-            }
-          ],
-          staticClass: "form__control",
-          attrs: { type: "text" },
-          domProps: { value: _vm.credential.email },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.credential, "email", $event.target.value)
-            }
-          }
-        }),
-        _vm._v(" "),
-        _vm.error.email
-          ? _c("small", { staticClass: "error__control" }, [
-              _vm._v(_vm._s(_vm.error.email[0]))
-            ])
-          : _vm._e()
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form__group" }, [
-        _c("label", [_vm._v("Password")]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.credential.password,
-              expression: "credential.password"
-            }
-          ],
-          staticClass: "form__control",
-          attrs: { type: "password" },
-          domProps: { value: _vm.credential.password },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.credential, "password", $event.target.value)
-            }
-          }
-        }),
-        _vm._v(" "),
-        _vm.error.password
-          ? _c("small", { staticClass: "error__control" }, [
-              _vm._v(_vm._s(_vm.error.password[0]))
-            ])
-          : _vm._e()
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form__group" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn__primary",
-            attrs: { disabled: _vm.isProcessing }
-          },
-          [_vm._v("Login")]
-        )
-      ])
-    ]
+      _c(
+        "v-app",
+        [
+          _c(
+            "v-content",
+            [
+              _c(
+                "v-alert",
+                { staticClass: "success", attrs: { value: "true" } },
+                [
+                  _c("v-icon", [_vm._v("home")]),
+                  _vm._v(" Welcome Testing\n        ")
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-badge",
+                { staticClass: "badge--left", attrs: { value: "true" } },
+                [
+                  _c("span", { staticClass: "badge__badge primary" }, [
+                    _vm._v("6"),
+                    _c("span")
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c("h1", { staticClass: "form__title" }, [
+                _vm._v("Sign In Account")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form__group" }, [
+                _c("label", [_vm._v("Email")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.credential.email,
+                      expression: "credential.email"
+                    }
+                  ],
+                  staticClass: "form__control",
+                  attrs: { type: "text" },
+                  domProps: { value: _vm.credential.email },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.credential, "email", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm.error.email
+                  ? _c("small", { staticClass: "error__control" }, [
+                      _vm._v(_vm._s(_vm.error.email[0]))
+                    ])
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form__group" }, [
+                _c("label", [_vm._v("Password")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.credential.password,
+                      expression: "credential.password"
+                    }
+                  ],
+                  staticClass: "form__control",
+                  attrs: { type: "password" },
+                  domProps: { value: _vm.credential.password },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.credential, "password", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm.error.password
+                  ? _c("small", { staticClass: "error__control" }, [
+                      _vm._v(_vm._s(_vm.error.password[0]))
+                    ])
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form__group" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn__primary",
+                    attrs: { disabled: _vm.isProcessing }
+                  },
+                  [_vm._v("Login")]
+                )
+              ])
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
   )
 }
 var staticRenderFns = []
@@ -20814,15 +20860,8 @@ var dimensions = {
     isShown: function isShown(el) {
       return !!el && el.style.display !== 'none';
     },
-    resetDimensions: function resetDimensions() {
-      this.dimensions = Object.assign({}, dimensions);
-    },
     updateDimensions: function updateDimensions() {
       var _this3 = this;
-
-      // Ensure that overflow calculation
-      // can work properly every update
-      this.resetDimensions();
 
       var dimensions = {};
 
@@ -22831,7 +22870,7 @@ process.umask = function() { return 0; };
 /* 50 */
 /***/ (function(module, exports) {
 
-module.exports = {"name":"vuetify","version":"0.17.2","author":{"name":"John Leider","email":"john@vuetifyjs.com"},"license":"MIT","homepage":"http://vuetifyjs.com","main":"dist/vuetify.js","unpkg":"dist/vuetify.js","types":"index.d.ts","scripts":{"watch":"cross-env TARGET=development webpack --config build/config.js --progress --hide-modules --watch","dev":"cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.config.js --open --hot","build":"npm run build:dist && npm run build:es5","build:dev":"cross-env NODE_ENV=production node build/webpack.dev.config.js","build:dist":"rimraf dist && cross-env NODE_ENV=production webpack --config build/config.js --progress --hide-modules","build:es5":"rimraf es5 && cross-env NODE_ENV=es5 babel src --out-dir es5","debug-build":"node --inspect --debug-brk build/config.js","debug:test":"./node_modules/.bin/cross-env NODE_ENV=test node --inspect --inspect-brk ./node_modules/jest/bin/jest.js --no-cache --runInBand --verbose","test":"cross-env NODE_ENV=test jest -i","test:coverage":"cross-env NODE_ENV=test jest -i --coverage","lint":"eslint --ext .js,.vue src","preparecommitmsg":"node dev/prepare-commit-message.js","precommit":"yarn run lint && yarn test","prepush":"yarn run lint && yarn test","prepare":"git update-index --skip-worktree .env"},"description":"Vue.js 2 Semantic Component Framework","devDependencies":{"autoprefixer":"^7.1.4","avoriaz":"^4.1.0","babel-cli":"^6.26.0","babel-core":"^6.26.0","babel-eslint":"^8.0.0","babel-jest":"^21.0.2","babel-loader":"^7.1.2","babel-plugin-add-filehash":"^6.9.4","babel-plugin-detective":"^2.0.0","babel-plugin-module-resolver":"^2.7.1","babel-plugin-transform-async-to-generator":"^6.24.1","babel-plugin-transform-runtime":"^6.23.0","babel-polyfill":"^6.26.0","babel-preset-env":"^1.5.1","babel-preset-es2015":"^6.24.1","babel-preset-stage-2":"^6.24.1","cross-env":"^5.0.5","cross-spawn":"^5.1.0","css-loader":"^0.28.7","css-mqpacker":"^6.0.1","cssnano":"^3.10.0","dotenv":"^4.0.0","eslint":"^4.6.1","eslint-config-standard":"^10.2.1","eslint-config-vue":"^2.0.2","eslint-friendly-formatter":"^3.0.0","eslint-loader":"^1.6.1","eslint-plugin-html":"^3.2.1","eslint-plugin-import":"^2.7.0","eslint-plugin-node":"^5.1.1","eslint-plugin-promise":"^3.4.0","eslint-plugin-pug":"^1.0.0","eslint-plugin-standard":"^3.0.1","eslint-plugin-vue":"^2.1.0","eventsource-polyfill":"^0.9.6","extract-text-webpack-plugin":"^3.0.0","friendly-errors-webpack-plugin":"^1.6.1","function-bind":"^1.1.1","husky":"^0.14.3","jest":"^21.1.0","jest-cli":"^21.1.0","jest-css-modules":"^1.1.0","jest-serializer-html":"^4.0.0","jest-vue-preprocessor":"^1.1.0","optimize-css-assets-webpack-plugin":"^3.2.0","optimize-js-plugin":"^0.0.4","postcss-loader":"^1.3.3","progress-bar-webpack-plugin":"^1.10.0","pug":"^2.0.0-rc.4","pug-loader":"^2.3.0","ress":"^1.1.1","rimraf":"^2.6.2","semver":"^5.4.1","serialize-javascript":"^1.3.0","style-loader":"^0.18.2","stylus":"^0.54.5","stylus-loader":"^3.0.1","uglifyjs-webpack-plugin":"^0.4.6","vue":"^2.5.4","vue-loader":"^13.5.0","vue-router":"^3.0.1","vue-server-renderer":"^2.5.4","vue-template-compiler":"^2.5.4","webpack":"^3.6.0","webpack-bundle-analyzer":"^2.9.0","webpack-bundle-size-analyzer":"^2.7.0","webpack-dev-server":"^2.8.2","webpack-merge":"^4.1.0","write-file-webpack-plugin":"^4.1.0"},"dependencies":{},"peerDependencies":{"vue":"^2.5.0"},"engines":{"node":">= 4.0.0","npm":">= 3.0.0"},"jest":{"verbose":false,"roots":["<rootDir>/src"],"moduleFileExtensions":["js","vue"],"moduleDirectories":["node_modules"],"moduleNameMapper":{"src/(.*)":"<rootDir>/src/$1"},"transform":{".*\\.(vue)$":"<rootDir>/node_modules/jest-vue-preprocessor","\\.(styl)$":"<rootDir>/node_modules/jest-css-modules",".*\\.(vue|js)$":"<rootDir>/node_modules/babel-jest"},"transformIgnorePatterns":["node_modules/(?!vue-router)"],"snapshotSerializers":["jest-serializer-html"]}}
+module.exports = {"name":"vuetify","version":"0.17.3","author":{"name":"John Leider","email":"john@vuetifyjs.com"},"license":"MIT","homepage":"http://vuetifyjs.com","main":"dist/vuetify.js","unpkg":"dist/vuetify.js","types":"index.d.ts","scripts":{"watch":"cross-env TARGET=development webpack --config build/config.js --progress --hide-modules --watch","dev":"cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.config.js --open --hot","build":"npm run build:dist && npm run build:es5","build:dev":"cross-env NODE_ENV=production node build/webpack.dev.config.js","build:dist":"rimraf dist && cross-env NODE_ENV=production webpack --config build/config.js --progress --hide-modules","build:es5":"rimraf es5 && cross-env NODE_ENV=es5 babel src --out-dir es5","debug-build":"node --inspect --debug-brk build/config.js","debug:test":"./node_modules/.bin/cross-env NODE_ENV=test node --inspect --inspect-brk ./node_modules/jest/bin/jest.js --no-cache --runInBand --verbose","test":"cross-env NODE_ENV=test jest -i","test:coverage":"cross-env NODE_ENV=test jest -i --coverage","lint":"eslint --ext .js,.vue src","preparecommitmsg":"node dev/prepare-commit-message.js","precommit":"yarn run lint && yarn test","prepush":"yarn run lint && yarn test","prepare":"git update-index --skip-worktree .env"},"description":"Vue.js 2 Semantic Component Framework","devDependencies":{"autoprefixer":"^7.1.4","avoriaz":"^4.1.0","babel-cli":"^6.26.0","babel-core":"^6.26.0","babel-eslint":"^8.0.0","babel-jest":"^21.0.2","babel-loader":"^7.1.2","babel-plugin-add-filehash":"^6.9.4","babel-plugin-detective":"^2.0.0","babel-plugin-module-resolver":"^2.7.1","babel-plugin-transform-async-to-generator":"^6.24.1","babel-plugin-transform-runtime":"^6.23.0","babel-polyfill":"^6.26.0","babel-preset-env":"^1.5.1","babel-preset-es2015":"^6.24.1","babel-preset-stage-2":"^6.24.1","cross-env":"^5.0.5","cross-spawn":"^5.1.0","css-loader":"^0.28.7","css-mqpacker":"^6.0.1","cssnano":"^3.10.0","dotenv":"^4.0.0","eslint":"^4.6.1","eslint-config-standard":"^10.2.1","eslint-config-vue":"^2.0.2","eslint-friendly-formatter":"^3.0.0","eslint-loader":"^1.6.1","eslint-plugin-html":"^3.2.1","eslint-plugin-import":"^2.7.0","eslint-plugin-node":"^5.1.1","eslint-plugin-promise":"^3.4.0","eslint-plugin-pug":"^1.0.0","eslint-plugin-standard":"^3.0.1","eslint-plugin-vue":"^2.1.0","eventsource-polyfill":"^0.9.6","extract-text-webpack-plugin":"^3.0.0","friendly-errors-webpack-plugin":"^1.6.1","function-bind":"^1.1.1","husky":"^0.14.3","jest":"^21.1.0","jest-cli":"^21.1.0","jest-css-modules":"^1.1.0","jest-serializer-html":"^4.0.0","jest-vue-preprocessor":"^1.1.0","optimize-css-assets-webpack-plugin":"^3.2.0","optimize-js-plugin":"^0.0.4","postcss-loader":"^1.3.3","progress-bar-webpack-plugin":"^1.10.0","pug":"^2.0.0-rc.4","pug-loader":"^2.3.0","ress":"^1.1.1","rimraf":"^2.6.2","semver":"^5.4.1","serialize-javascript":"^1.3.0","style-loader":"^0.18.2","stylus":"^0.54.5","stylus-loader":"^3.0.1","uglifyjs-webpack-plugin":"^0.4.6","vue":"^2.5.4","vue-loader":"^13.5.0","vue-router":"^3.0.1","vue-server-renderer":"^2.5.4","vue-template-compiler":"^2.5.4","webpack":"^3.6.0","webpack-bundle-analyzer":"^2.9.0","webpack-bundle-size-analyzer":"^2.7.0","webpack-dev-server":"^2.8.2","webpack-merge":"^4.1.0","write-file-webpack-plugin":"^4.1.0"},"dependencies":{},"peerDependencies":{"vue":"^2.5.0"},"engines":{"node":">= 4.0.0","npm":">= 3.0.0"},"jest":{"verbose":false,"roots":["<rootDir>/src"],"moduleFileExtensions":["js","vue"],"moduleDirectories":["node_modules"],"moduleNameMapper":{"src/(.*)":"<rootDir>/src/$1"},"transform":{".*\\.(vue)$":"<rootDir>/node_modules/jest-vue-preprocessor","\\.(styl)$":"<rootDir>/node_modules/jest-css-modules",".*\\.(vue|js)$":"<rootDir>/node_modules/babel-jest"},"transformIgnorePatterns":["node_modules/(?!vue-router)"],"snapshotSerializers":["jest-serializer-html"]}}
 
 /***/ }),
 /* 51 */
@@ -25387,6 +25426,8 @@ __webpack_require__(106);
       type: Function,
       default: function _default(items, search, filter, headers) {
         search = search.toString().toLowerCase();
+        if (search.trim() === '') return items;
+
         var props = headers.map(function (h) {
           return h.value;
         });
@@ -27241,11 +27282,14 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       }) : this.filteredItems;
     },
     nudgeTop: function nudgeTop() {
-      var nudgeTop = 0;
+      var nudgeTop = -18;
 
-      if (this.auto) nudgeTop = -18;else if (this.solo) nudgeTop = 0;else if (this.isDropdown) {
-        nudgeTop = this.hideDetails ? 2 : 26;
-      } else if (this.shouldOffset) nudgeTop = 24;
+      if (this.solo) nudgeTop = 0;else if (this.shouldOffset) {
+        nudgeTop += 44;
+
+        nudgeTop += this.hideDetails ? -24 : 0;
+        nudgeTop += this.isAutocomplete && !this.isDropdown ? -2 : 0;
+      }
 
       return nudgeTop;
     },
@@ -27278,7 +27322,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       }) || null;
     },
     shouldOffset: function shouldOffset() {
-      return this.isAutocomplete || this.offset || this.isDropdown;
+      return this.isAutocomplete || this.isDropdown;
     }
   }
 });
@@ -28992,7 +29036,6 @@ var pad = function pad(n) {
         var _date = this.sanitizeDateString(year + '-' + (this.tableMonth + 1) + '-' + this.day, 'date');
         if (this.isAllowed(_date)) this.inputDate = _date;
         this.tableDate = year + '-' + (this.tableMonth + 1);
-        this.inputDate = _date;
         this.activePicker = 'MONTH';
       }
     },
@@ -30259,7 +30302,7 @@ __webpack_require__(165);
 
       if (this.temporary || this.isMobile) {
         this.tryOverlay();
-        this.$el.scrollTop = 0;
+        this.$el && (this.$el.scrollTop = 0);
       }
 
       this.updateApplication();
@@ -30277,6 +30320,7 @@ __webpack_require__(165);
       if (prev == null || this.resizeIsDisabled || !this.reactsToMobile) return;
 
       this.isActive = !val;
+      this.updateApplication();
     },
     miniVariant: function miniVariant() {
       this.updateApplication();
@@ -31061,6 +31105,11 @@ __webpack_require__(178);
   },
 
   watch: {
+    hasError: function hasError(val) {
+      this.radios.forEach(function (radio) {
+        radio.parentError = val;
+      });
+    },
     inputValue: function inputValue(val) {
       this.radios.forEach(function (radio) {
         radio.isActive = val === radio.value;
@@ -31073,7 +31122,8 @@ __webpack_require__(178);
       return {
         'radio-group': true,
         'radio-group--column': this.column && !this.row,
-        'radio-group--row': this.row
+        'radio-group--row': this.row,
+        'error--text': this.hasError
       };
     }
   },
@@ -31180,23 +31230,23 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
   mixins: [__WEBPACK_IMPORTED_MODULE_2__mixins_colorable__["a" /* default */], __WEBPACK_IMPORTED_MODULE_3__mixins_rippleable__["a" /* default */], Object(__WEBPACK_IMPORTED_MODULE_6__mixins_registrable__["a" /* inject */])('radio', 'v-radio', 'v-radio-group'), __WEBPACK_IMPORTED_MODULE_4__mixins_tab_focusable__["a" /* default */], __WEBPACK_IMPORTED_MODULE_5__mixins_themeable__["a" /* default */]],
 
+  data: function data() {
+    return {
+      defaultColor: 'accent',
+      isActive: false,
+      parentError: false
+    };
+  },
+
   props: {
     disabled: Boolean,
     value: null,
     label: String
   },
 
-  data: function data() {
-    return {
-      defaultColor: 'accent',
-      isActive: false
-    };
-  },
-
-
   computed: {
     classes: function classes() {
-      return this.addTextColorClassChecks({
+      var classes = {
         'input-group': true,
         'input-group--active': this.isActive,
         'input-group--disabled': this.disabled,
@@ -31205,7 +31255,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         'radio': true,
         'theme--dark': this.dark,
         'theme--light': this.light
-      });
+      };
+
+      if (!this.parentError) {
+        return this.addTextColorClassChecks(classes);
+      }
+
+      return classes;
     },
     icon: function icon() {
       return this.isActive ? 'radio_button_checked' : 'radio_button_unchecked';
@@ -34824,6 +34880,9 @@ __webpack_require__(225);
     }
   },
 
+  mounted: function mounted() {
+    this.value && this.callActivate();
+  },
   render: function render(h) {
     var _addBackgroundColorCl,
         _this = this;

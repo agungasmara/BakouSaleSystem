@@ -4,4 +4,4 @@ Step2: open first cmd and browse director run=> npm run watch
 
 step3: open second cmd and browse director run => php artisan serve
 
-Step4: install yarn
+Step4: install yarn-1.3.2.msi

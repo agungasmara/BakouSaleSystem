@@ -1,9 +1,5 @@
-<script type="text/javascript">
-    import('path/to/node_modules/vuetify/dist/vuetify.min.css')
-</script>
-
 <template>
-    <div class="container">
+    <div class="_container">
         <div class="navbar">
             <div class="navbar__brand">
                 <router-link to="/"> Bakou Sale System</router-link>
