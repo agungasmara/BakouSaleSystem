@@ -15,6 +15,10 @@
                 </li>
 
                 <li class="navbar__item">
+                    <router-link to="/list">LIST</router-link>
+                </li>
+
+                <li class="navbar__item">
                     <router-link to="/logout">LOGOUT</router-link>
                 </li>
 

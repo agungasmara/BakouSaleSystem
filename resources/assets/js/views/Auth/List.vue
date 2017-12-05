@@ -1,19 +1,13 @@
 <template>
     <div>
-        <div class="flash flash__success" v-if="flash.success">
-            {{flash.success}}
-        </div>
-        <form class="form" @submit.prevent="login">
-            <v-app>
-              <v-content>
-                <div v-loop {{$}} >
-                    
-                </div>
-              </v-content>
-            </v-app>
-            <!-- <div v-tabs>asf</div> -->
-             
-        </form>
+          <div>asdf
+              <ul id="example-1">
+                <li v-for="item in items">
+                  {{ item.message }}
+                </li>
+              </ul>
+          </div>
+
 
         <router-view></router-view>
     </div>
@@ -58,8 +52,16 @@
                 //     $.snackbar({content: data.message, style: 'toast', toggle: 'snackbar'});
 
                 //   });
-                post('/api/getTest', this.credential)
-                    $getTest = getHttpExposeAPI(res);
+                post('/login', this.credential)
+                    .then((res) => {
+                        console.log(res);
+                    if(res.data.success) {
+                        Flash.setSuccess('Congratulations! You have now successfully registered.')
+                    }else{
+                        Flash.setError('Error while trying to login.')
+                        // this.$router.push('/register')
+                    }
+                    this.isProcessing = false
                 })
                 .catch((err) => {
                     if(err.response.status === 422) {
@@ -71,4 +73,20 @@
             }
         }
     }
+</script>
+
+
+<script type="text/javascript">
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+
+    var example1 = new Vue({
+      el: '#example-1',
+      data: {
+        items: [
+          { message: 'Foo' },
+          { message: 'Bar' }
+        ]
+      }
+    })
 </script>
