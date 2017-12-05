@@ -12186,7 +12186,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             flash: __WEBPACK_IMPORTED_MODULE_0__helper_flash__["a" /* default */].state
-
         };
     },
 
@@ -15345,7 +15344,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             //     this.$dispatch('login:success');
             //     storage.saveArray('credential', this.credential);
             //     $.snackbar({content: data.message, style: 'toast', toggle: 'snackbar'});
-
 
             //   }).error(function (data, status, request) {
 

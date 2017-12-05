@@ -53,8 +53,6 @@
                 //     storage.saveArray('credential', this.credential);
                 //     $.snackbar({content: data.message, style: 'toast', toggle: 'snackbar'});
 
-                     
-
                 //   }).error(function (data, status, request) {
 
                 //     $.snackbar({content: data.message, style: 'toast', toggle: 'snackbar'});

@@ -1,3 +1,7 @@
+<script type="text/javascript">
+    import('path/to/node_modules/vuetify/dist/vuetify.min.css')
+</script>
+
 <template>
     <div class="container">
         <div class="navbar">
@@ -37,12 +41,11 @@
         data(){
             return{
                 flash: Flash.state,
-
             }
         },
         methods: function() {
             alert('sd');
-              // window.location = "#/login";
+            // window.location = "#/login";
           },
           mounted: function () {
             window.location = "#/login";

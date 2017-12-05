@@ -11,9 +11,17 @@
 |
 */
 
+// language
+if(isset($_COOKIE['Language'])){
+    session(['languageActive' => $_COOKIE['Language']]);
+} else {
+    session(['languageActive' => 'English']);
+    setcookie("Language", 'English', time()+3600*24*365, '/');
+}
+
 // Front End Design
 Route::resource('/', 'FrontEnd\TestController');
-Route::get('/getTest', 'FrontEnd\TestController@getTest');
+Route::get('/api/getTest', 'FrontEnd\TestController@getTest');
 
 // authentication 
 
