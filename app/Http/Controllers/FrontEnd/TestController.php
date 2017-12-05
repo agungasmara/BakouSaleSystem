@@ -36,11 +36,25 @@ class TestController extends Controller
         return view('frontend.index');
     }
 
+    
+
     public function getTest()
     {
         // $Test = Test::all();
 
+        // $tests = Test::paginate(5);
         $tests = Test::paginate(5);
+        return response()->json($tests);
+        // return response()->json(['data' => $items,'success' => false, 'message' => 'Unable to login'], 401);
+        // return view('frontend.index');
+    }
+
+    public function getShow($id)
+    {
+        // $Test = Test::all();
+
+        // $tests = Test::paginate(5);
+        $tests = Test::Where('id',$id)->get();
         return response()->json($tests);
         // return response()->json(['data' => $items,'success' => false, 'message' => 'Unable to login'], 401);
         // return view('frontend.index');
@@ -84,10 +98,9 @@ class TestController extends Controller
      */
     public function show($id)
     {
-        $Positions = Position::find($id);
-        return view('Admin.members.position.form')->with('Positions',$Positions)
-                                        ->with('view_title',$this->view_title)
-                                        ->with('action',"View");
+        $tests = Test::paginate(5);
+        return response()->json($tests);
+   
     }
  
     /**

@@ -22,6 +22,7 @@ if(isset($_COOKIE['Language'])){
 // Front End Design
 Route::resource('/', 'FrontEnd\TestController');
 Route::get('/api/getTest', 'FrontEnd\TestController@getTest');
+Route::get('/api/show/{id}', 'FrontEnd\TestController@getShow');
 
 // authentication 
 

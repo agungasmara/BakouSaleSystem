@@ -5,9 +5,7 @@
               <div class="row" style="border:1px solid #f00;">
                 <p><strong>{{post.id}}</strong></p>
                 <p>{{post.name}}</p>
-                <p>
-                  <router-link :to="`/show/${post.id}`">Edit</router-link>
-                </p>
+                <p><a href="/"></a></p>
               </div><br/>
             </li>
           </ul>
@@ -33,11 +31,11 @@ export default {
 
   // Fetches posts when the component is created.
   created() {
-    axios.get(`/api/getTest`)
+    axios.get(`/api/show/1`)
     // post('http://jsonplaceholder.typicode.com/posts', this.credential)
     .then(response => {
       // JSON responses are automatically parsed.
-      this.posts = response.data['data']
+      this.posts = response.data
       // console.log(response.data)
     })
     .catch(e => {
