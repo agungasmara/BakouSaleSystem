@@ -10,7 +10,7 @@
         <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet">
         <!-- Styles -->
         <link rel="stylesheet" type="text/css" href="{{mix('css/app.css')}}">
-        <link rel="stylesheet" type="text/css" href="/css/stylus/main.styl">
+        {{-- <link rel="stylesheet" type="text/css" href="{{url('stylus/main.styl')}}"> --}}
 
     </head>
 
@@ -18,10 +18,10 @@
         <div id="root">
         </div>
     </body>
-    <script type="text/javascript" src="{{mix('js/app.js')}}"></script>
-    {{-- <script src="https://unpkg.com/vue/dist/vue.js"></script> --}}
-    {{-- <script src="https://unpkg.com/vuetify/dist/vuetify.js"></script> --}}
+    <script type="text/javascript" src="{{url('js/app.js')}}"></script>
+    {{-- <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vuetify/dist/vuetify.js"></script>
     <script>
         new Vue({ el: '#root' })
-    </script>
+    </script> --}}
 </html>

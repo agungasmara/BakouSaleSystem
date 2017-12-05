@@ -21,10 +21,6 @@
             </div>
         </div>
 
-        <div class="flash flash__success" v-if="flash.success">
-            {{flash.success}}
-        </div>
-
         <router-view></router-view>
 
     </div>
@@ -33,6 +29,7 @@
 
 <script type="text/javascript">
     import Flash from './helper/flash'
+
     export default{
         data(){
             return{

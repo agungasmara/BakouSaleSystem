@@ -33,7 +33,6 @@ class AuthController extends Controller
 
             ->json([
                 'registered' => true
-
             ]);
     }
 

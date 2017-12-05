@@ -34,6 +34,15 @@ Route::post('login', function(Illuminate\Http\Request $request)
     return response()->json(['success' => false, 'message' => 'Unable to login'], 401);
 });
 
+Route::post('api/register', function(Illuminate\Http\Request $request) 
+{
+    // if (Auth::attempt(['email' => $request->get('email'), 'password' => $request->get('password')])) {
+    //     return response()->json(['success' => true, 'message' => 'Login successfully performed'], 200);
+    // }
+
+    // return response()->json(['success' => false, 'message' => 'Unable to login'], 401);
+});
+
 Route::group(['middleware' => 'auth'], function() {
     
 

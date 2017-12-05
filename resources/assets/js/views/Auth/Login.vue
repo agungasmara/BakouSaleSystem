@@ -1,39 +1,50 @@
 <template>
+    <div>
+        <div class="flash flash__success" v-if="flash.success">
+            {{flash.success}}
+        </div>
+        <form class="form" @submit.prevent="login">
+            <v-app>
+              <v-content>
+                <v-alert class="success" value='true'>
+                    <v-icon>home</v-icon> Welcome Testing
+                </v-alert>
 
-    <form class="form" @submit.prevent="login">
-        <v-app>
-          <v-content>
-            <v-alert class="success" value='true'>
-                <v-icon>home</v-icon> Welcome Testing
-            </v-alert>
+                <v-badge class="badge--left" value='true'><span class="badge__badge primary">6<span></span></span></v-badge>
+                <h1 class="form__title">Sign In Account</h1>
+                <!-- <div class="flash flash-success" v-if="flash.success">
+                    {{ flash.success }}
+                </div> -->
+                <div class="flash flash-success" v-if="flash.error">
+                    {{ flash.error }}
+                </div>
+                <div class="form__group">
+                    <label>Email</label>
+                    <input type="text" class="form__control" v-model="credential.email">
+                    <small class="error__control" v-if="error.email">{{error.email[0]}}</small>
+                </div>
+                <div class="form__group">
+                    <label>Password</label>
+                    <input type="password" class="form__control" v-model="credential.password">
+                    <small class="error__control" v-if="error.password">{{error.password[0]}}</small>
+                </div>
+                <div class="form__group">
+                    <button :disabled="isProcessing" class="btn btn__primary">Login</button>
+                </div>
+              </v-content>
+            </v-app>
+            <!-- <div v-tabs>asf</div> -->
+             
+        </form>
 
-            <v-badge class="badge--left" value='true'><span class="badge__badge primary">6<span></span></span></v-badge>
-            <h1 class="form__title">Sign In Account</h1>
-            <div class="form__group">
-                <label>Email</label>
-                <input type="text" class="form__control" v-model="credential.email">
-                <small class="error__control" v-if="error.email">{{error.email[0]}}</small>
-            </div>
-            <div class="form__group">
-                <label>Password</label>
-                <input type="password" class="form__control" v-model="credential.password">
-                <small class="error__control" v-if="error.password">{{error.password[0]}}</small>
-            </div>
-            <div class="form__group">
-                <button :disabled="isProcessing" class="btn btn__primary">Login</button>
-            </div>
-          </v-content>
-        </v-app>
-        
-
-        <!-- <div v-tabs>asf</div> -->
-    </form>
-
+        <router-view></router-view>
+    </div>
 </template>
 
 <script type="text/javascript">
+    import Flash from '../../helper/flash'
     import {post} from '../../helper/api'
-    import {Flash} from '../../helper/flash'
+    
     export default {
         data() {
             return {
@@ -41,18 +52,19 @@
                     email: '',
                     password: ''
                 },
-                error: {},
+                flash: Flash.state,
+                error: Flash.state,
                 isProcessing: false
             }
         },
         mounted: function () {
             console.log(this.$http);
         },
-          ready() {
-              this.credential.email    = credential.email;
-              this.credential.password = credential.password;
-              this.login();
-          },
+        ready() {
+          this.credential.email    = credential.email;
+          this.credential.password = credential.password;
+          this.login();
+        },
         methods: {
             login() {
                 this.isProcessing = true
@@ -72,16 +84,18 @@
                     .then((res) => {
                         console.log(res);
                     if(res.data.success) {
-                    // Flash.setSuccess('Congratulations! You have now successfully registered.')
-                    // alert('sd')
-                    this.$router.push('/register')
-                }
-                this.isProcessing = false
+                        Flash.setSuccess('Congratulations! You have now successfully registered.')
+                    }else{
+                        Flash.setError('Error while trying to login.')
+                        // this.$router.push('/register')
+                    }
+                    this.isProcessing = false
                 })
                 .catch((err) => {
-                        if(err.response.status === 422) {
+                    if(err.response.status === 422) {
                         this.error = err.response.data
                     }
+                    Flash.setError('Error while trying to login.')
                     this.isProcessing = false
                 })
             }
