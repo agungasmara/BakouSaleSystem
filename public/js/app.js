@@ -12219,7 +12219,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         // window.location = "#/login";
     },
     mounted: function mounted() {
-        window.location = "#/login";
+        // window.location = "#/login";
     }
 });
 
@@ -16752,9 +16752,10 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helper_api__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helper_flash__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helper_api__ = __webpack_require__(2);
 //
 //
 //
@@ -16776,16 +16777,90 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      credential: {
+        id: '',
+        name: ''
+      },
       recipe: [],
       errors: [],
-      name: '',
-      id: ''
+      isProcessing: false
     };
   },
 
@@ -16794,7 +16869,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   created: function created() {
     var _this = this;
 
-    __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/api/show/' + this.$route.params.id)
+    __WEBPACK_IMPORTED_MODULE_1_axios___default.a.get('/api/show/' + this.$route.params.id)
     // axios.get(`http://jsonplaceholder.typicode.com/posts`)
     // post('http://jsonplaceholder.typicode.com/posts', this.credential)
     .then(function (response) {
@@ -16804,15 +16879,44 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }).catch(function (e) {
       _this.errors.push(e);
     });
+  },
+  ready: function ready() {
+    this.credential.id = credential.id;
+    this.credential.name = credential.name;
+    this.update();
+  },
 
-    // async / await version (created() becomes async created())
-    //
-    // try {
-    //   const response = await axios.get(`http://jsonplaceholder.typicode.com/posts`)
-    //   this.posts = response.data
-    // } catch (e) {
-    //   this.errors.push(e)
-    // }
+  methods: {
+    update: function update() {
+      var id = '' + this.$route.params.id;
+      var name = this.credential.name;
+      __WEBPACK_IMPORTED_MODULE_1_axios___default.a.put('/api/update', { id: id, name: this.credential.name }).then(function (response) {
+        // commit('SET_USER_PROFILE', { profile: response.data })
+        console.log(response.data);
+      }, function (err) {
+        console.log(err);
+      });
+      // // console.log(this.credential)
+      // this.isProcessing = true
+      // this.error = {}
+      // axios.put(`/api/update/${this.$route.params.id}`, this.credential)
+      //   .then((res) => {
+      //       console.log(res);
+      //   if(res.data.success) {
+      //       Flash.setSuccess('Congratulations! You have now successfully modified.')
+      //   }else{
+      //       Flash.setError('Error while trying to update.')
+      //   }
+      //   this.isProcessing = false
+      // })
+      // .catch((err) => {
+      //   if(err.response.status === 422) {
+      //       this.error = err.response.data
+      //   }
+      //   Flash.setError('Error while trying to login.')
+      //   this.isProcessing = false
+      // })
+    }
   }
 });
 
@@ -16825,101 +16929,115 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm.recipe && _vm.recipe.length
-      ? _c(
-          "ul",
-          _vm._l(_vm.recipe, function(post) {
-            return _c("li", [
-              _c(
-                "div",
-                {
-                  staticClass: "row",
-                  staticStyle: { border: "1px solid #f00" }
-                },
-                [
-                  _c("p", [
-                    _c("strong", [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: post.id,
-                            expression: "post.id"
-                          }
-                        ],
-                        attrs: { type: "text", id: "jack" },
-                        domProps: { value: post.id },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
+    _c(
+      "form",
+      {
+        staticClass: "form",
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            _vm.update($event)
+          }
+        }
+      },
+      [
+        _vm.recipe && _vm.recipe.length
+          ? _c(
+              "ul",
+              _vm._l(_vm.recipe, function(credential) {
+                return _c("li", [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "row",
+                      staticStyle: { border: "1px solid #f00" }
+                    },
+                    [
+                      _c("p", [
+                        _c("strong", [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: credential.id,
+                                expression: "credential.id"
+                              }
+                            ],
+                            staticClass: "form__control",
+                            attrs: { type: "text" },
+                            domProps: { value: credential.id },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(credential, "id", $event.target.value)
+                              }
                             }
-                            _vm.$set(post, "id", $event.target.value)
+                          })
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("p", [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: credential.name,
+                              expression: "credential.name"
+                            }
+                          ],
+                          staticClass: "form__control",
+                          attrs: { type: "text" },
+                          domProps: { value: credential.name },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(credential, "name", $event.target.value)
+                            }
                           }
-                        }
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("p", [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: post.name,
-                          expression: "post.name"
-                        }
-                      ],
-                      attrs: { type: "text", id: "jack" },
-                      domProps: { value: post.name },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(post, "name", $event.target.value)
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(0, true, false),
-                  _vm._v(" "),
-                  _vm._m(1, true, false)
-                ]
-              ),
-              _c("br")
-            ])
-          })
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.errors && _vm.errors.length
-      ? _c(
-          "ul",
-          _vm._l(_vm.errors, function(error) {
-            return _c("li", [
-              _vm._v("\n          " + _vm._s(error.message) + "\n        ")
-            ])
-          })
-        )
-      : _vm._e()
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("p", [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn__primary",
+                            attrs: { disabled: _vm.isProcessing }
+                          },
+                          [_vm._v("Update")]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(0, true, false)
+                    ]
+                  ),
+                  _c("br")
+                ])
+              })
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.errors && _vm.errors.length
+          ? _c(
+              "ul",
+              _vm._l(_vm.errors, function(error) {
+                return _c("li", [
+                  _vm._v("\n        " + _vm._s(error.message) + "\n      ")
+                ])
+              })
+            )
+          : _vm._e()
+      ]
+    )
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", [
-      _c("input", {
-        staticClass: "btn btn-success",
-        attrs: { type: "submit", value: "Update", name: "" }
-      })
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -17013,6 +17131,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -17059,41 +17179,55 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm.posts && _vm.posts.length
-      ? _c(
-          "ul",
-          _vm._l(_vm.posts, function(post) {
-            return _c("li", [
-              _c(
-                "div",
-                {
-                  staticClass: "row",
-                  staticStyle: { border: "1px solid #f00" }
-                },
-                [
-                  _c("p", [_c("strong", [_vm._v(_vm._s(post.id))])]),
-                  _vm._v(" "),
-                  _c("p", [_vm._v(_vm._s(post.name))]),
-                  _vm._v(" "),
-                  _vm._m(0, true, false)
-                ]
-              ),
-              _c("br")
-            ])
-          })
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.errors && _vm.errors.length
-      ? _c(
-          "ul",
-          _vm._l(_vm.errors, function(error) {
-            return _c("li", [
-              _vm._v("\n          " + _vm._s(error.message) + "\n        ")
-            ])
-          })
-        )
-      : _vm._e()
+    _c(
+      "form",
+      {
+        staticClass: "form",
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            _vm.update($event)
+          }
+        }
+      },
+      [
+        _vm.posts && _vm.posts.length
+          ? _c(
+              "ul",
+              _vm._l(_vm.posts, function(post) {
+                return _c("li", [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "row",
+                      staticStyle: { border: "1px solid #f00" }
+                    },
+                    [
+                      _c("p", [_c("strong", [_vm._v(_vm._s(post.id))])]),
+                      _vm._v(" "),
+                      _c("p", [_vm._v(_vm._s(post.name))]),
+                      _vm._v(" "),
+                      _vm._m(0, true, false)
+                    ]
+                  ),
+                  _c("br")
+                ])
+              })
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.errors && _vm.errors.length
+          ? _c(
+              "ul",
+              _vm._l(_vm.errors, function(error) {
+                return _c("li", [
+                  _vm._v("\n        " + _vm._s(error.message) + "\n      ")
+                ])
+              })
+            )
+          : _vm._e()
+      ]
+    )
   ])
 }
 var staticRenderFns = [

@@ -45,7 +45,7 @@
             // window.location = "#/login";
           },
           mounted: function () {
-            window.location = "#/login";
+            // window.location = "#/login";
         },
     }
 </script>

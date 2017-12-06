@@ -60,7 +60,10 @@ class TestController extends Controller
         // return view('frontend.index');
     }
 
-
+    public function UpdateApi(Request $request){
+        Test::Where('id',$request->get('id'))->update(['name'=>$request->get('name')]);
+        return response()->json(['request'=>$request->all(),'success' => true, 'message' => 'Updated successfully'], 200);
+    }
 
     /**
      * Show the form for creating a new resource.

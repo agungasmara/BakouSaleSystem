@@ -1,22 +1,24 @@
 <template>
-    <div>
-          <ul v-if="posts && posts.length">
-            <li v-for="post of posts">
-              <div class="row" style="border:1px solid #f00;">
-                <p><strong>{{post.id}}</strong></p>
-                <p>{{post.name}}</p>
-                <p><a href="/"></a></p>
-              </div><br/>
-            </li>
-          </ul>
+  <div>
+    <form class="form" @submit.prevent="update">
+      <ul v-if="posts && posts.length">
+        <li v-for="post of posts">
+          <div class="row" style="border:1px solid #f00;">
+            <p><strong>{{post.id}}</strong></p>
+            <p>{{post.name}}</p>
+            <p><a href="/"></a></p>
+          </div><br/>
+        </li>
+      </ul>
 
-          <ul v-if="errors && errors.length">
-            <li v-for="error of errors">
-              {{error.message}}
-            </li>
-          </ul>
-            </div>
-        </template>
+      <ul v-if="errors && errors.length">
+        <li v-for="error of errors">
+          {{error.message}}
+        </li>
+      </ul>
+    </form>
+  </div>
+</template>
 
 <script>
 import axios from 'axios';
