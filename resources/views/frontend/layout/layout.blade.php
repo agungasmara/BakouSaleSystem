@@ -14,10 +14,3 @@
 	</div>
 </body>
 </html>
-
-<script src="https://unpkg.com/vue/dist/vue.js"></script>
-<script src="https://unpkg.com/vuetify/dist/vuetify.js"></script>
-
-<script>
-	new Vue({ el: '#app-content' })
-</script>

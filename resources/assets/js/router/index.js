@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Home from '../views/Components/index.vue'
 import Register from '../views/Auth/Register.vue'
 import Login from '../views/Auth/Login.vue'
 import List from '../views/Auth/List.vue'
@@ -16,6 +17,7 @@ Vue.use(VueRouter)
 const router = new VueRouter({
   routes: [
     // dynamic segments start with a colon
+    { path: '/home', component: Home },
     { path: '/register', component: Register },
     { path: '/login', component: Login },
     { path: '/list', component: List },
