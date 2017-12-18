@@ -1,0 +1,52 @@
+<?php
+
+namespace App\Http\Controllers\Frontend\product;
+
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Models\FrontEnd\Cart;
+use App\Http\Models\FrontEnd\Category;
+use App\Http\Models\FrontEnd\Customer;
+use App\Http\Models\FrontEnd\Product;
+use App\Http\Models\FrontEnd\SessionModel;
+use Illuminate\Support\Facades\Input;
+use DB;
+use App\user;
+use Carbon\Carbon;
+use Auth;
+use Session;
+use Validator;
+use rules;
+use Redirect;
+class CartController extends Controller
+{	
+	public function __construct()
+    {   
+
+        $this->middleware(function ($request, $next) {
+        	// dd(Auth::check());
+            SessionModel::AddSession();
+            $data['MyCart']=SessionModel::find(session()->getId())->Cart()->get();
+            dd($data);
+            View::share($data);
+            return $next($request);
+        });
+      
+    } 
+    public function AddToCart(Request $request)
+    {
+       return Cart::AddToCart($request->all());
+    }
+    public function RemoveFromCart(Request $request)
+    {
+       return Cart::RemoveFromCart($request->all());
+    }
+    public function ProductCart()
+    {
+    	if (Auth::check()) {
+    		return $data['MyCart']=Customer::find(Auth::user()->customer_id)->Cart()->get();
+    	}else{
+    		return $data['MyCart']=SessionModel::find(session()->getId())->Cart()->get();
+    	}
+    }
+}

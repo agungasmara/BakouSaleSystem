@@ -20,7 +20,8 @@ if(isset($_COOKIE['Language'])){
 }
 
 // Front End Design
-Route::resource('/', 'FrontEnd\TestController');
+Route::resource('/', 'FrontEnd\Product\CartController@ProductCart');
+
 Route::get('/api/getTest', 'FrontEnd\TestController@getTest');
 Route::get('/api/show/{id}', 'FrontEnd\TestController@getShow');
 Route::put('/api/update', 'FrontEnd\TestController@UpdateApi');
