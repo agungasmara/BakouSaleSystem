@@ -18933,6 +18933,42 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -19005,7 +19041,152 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("section", { attrs: { id: "content" } }, [
-    _vm._m(0, false, false),
+    _c("div", { attrs: { id: "breadcrumbs-wrapper" } }, [
+      _vm._m(0, false, false),
+      _vm._v("\n<<<<<<< HEAD\n        "),
+      _c(
+        "form",
+        {
+          staticClass: "form",
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              _vm.login($event)
+            }
+          }
+        },
+        [
+          _c(
+            "v-app",
+            [
+              _c(
+                "v-content",
+                [
+                  _c(
+                    "v-alert",
+                    { staticClass: "success", attrs: { value: "true" } },
+                    [
+                      _c("v-icon", [_vm._v("home")]),
+                      _vm._v(" Welcome Testing\n                ")
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-badge",
+                    { staticClass: "badge--left", attrs: { value: "true" } },
+                    [
+                      _c("span", { staticClass: "badge__badge primary" }, [
+                        _vm._v("6"),
+                        _c("span")
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("h1", { staticClass: "form__title" }, [
+                    _vm._v("Sign In Account")
+                  ]),
+                  _vm._v(" "),
+                  _vm.flash.error
+                    ? _c("div", { staticClass: "flash flash-success" }, [
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(_vm.flash.error) +
+                            "\n                "
+                        )
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form__group" }, [
+                    _c("label", [_vm._v("Email")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.credential.email,
+                          expression: "credential.email"
+                        }
+                      ],
+                      staticClass: "form__control",
+                      attrs: { type: "text" },
+                      domProps: { value: _vm.credential.email },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.credential, "email", $event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.error.email
+                      ? _c("small", { staticClass: "error__control" }, [
+                          _vm._v(_vm._s(_vm.error.email[0]))
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form__group" }, [
+                    _c("label", [_vm._v("Password")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.credential.password,
+                          expression: "credential.password"
+                        }
+                      ],
+                      staticClass: "form__control",
+                      attrs: { type: "password" },
+                      domProps: { value: _vm.credential.password },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.credential,
+                            "password",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.error.password
+                      ? _c("small", { staticClass: "error__control" }, [
+                          _vm._v(_vm._s(_vm.error.password[0]))
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form__group" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn__primary",
+                        attrs: { disabled: _vm.isProcessing }
+                      },
+                      [_vm._v("Login")]
+                    )
+                  ])
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v("\n=======\n        "),
+      _vm._m(1, false, false)
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "container" }, [
       _c("div", { staticClass: "section" }, [
@@ -19023,9 +19204,9 @@ var render = function() {
               _vm.flash.success
                 ? _c("div", { staticClass: "flash flash__success" }, [
                     _vm._v(
-                      "\n            " +
+                      "\n                " +
                         _vm._s(_vm.flash.success) +
-                        "\n          "
+                        "\n              "
                     )
                   ])
                 : _vm._e(),
@@ -19056,7 +19237,7 @@ var render = function() {
                             },
                             [
                               _c("v-icon", [_vm._v("home")]),
-                              _vm._v(" Welcome Testing\n                  ")
+                              _vm._v(" Welcome Testing\n                      ")
                             ],
                             1
                           ),
@@ -19086,9 +19267,9 @@ var render = function() {
                                 { staticClass: "flash flash-success" },
                                 [
                                   _vm._v(
-                                    "\n                      " +
+                                    "\n                          " +
                                       _vm._s(_vm.flash.error) +
-                                      "\n                  "
+                                      "\n                      "
                                   )
                                 ]
                               )
@@ -19190,7 +19371,8 @@ var render = function() {
             ],
             1
           )
-        ])
+        ]),
+        _vm._v("\n>>>>>>> 0bdbfb700e306af2d081e65eea41c56f78094360\n\n        ")
       ])
     ])
   ])
@@ -19200,110 +19382,110 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "breadcrumbs-wrapper" } }, [
-      _c(
-        "div",
-        {
-          staticClass: "header-search-wrapper grey lighten-2 hide-on-large-only"
-        },
-        [
-          _c("input", {
-            staticClass: "header-search-input z-depth-2",
-            attrs: {
-              type: "text",
-              name: "Search",
-              placeholder: "Explore Materialize"
-            }
-          })
-        ]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "container" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col s10 m6 l6" }, [
-            _c("h5", { staticClass: "breadcrumbs-title" }, [_vm._v("Forms")]),
+    return _c(
+      "div",
+      {
+        staticClass: "header-search-wrapper grey lighten-2 hide-on-large-only"
+      },
+      [
+        _c("input", {
+          staticClass: "header-search-input z-depth-2",
+          attrs: {
+            type: "text",
+            name: "Search",
+            placeholder: "Explore Materialize"
+          }
+        })
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col s10 m6 l6" }, [
+          _c("h5", { staticClass: "breadcrumbs-title" }, [_vm._v("Forms")]),
+          _vm._v(" "),
+          _c("ol", { staticClass: "breadcrumbs" }, [
+            _c("li", [
+              _c("a", { attrs: { href: "index.html" } }, [_vm._v("Dashboard")])
+            ]),
             _vm._v(" "),
-            _c("ol", { staticClass: "breadcrumbs" }, [
-              _c("li", [
-                _c("a", { attrs: { href: "index.html" } }, [
-                  _vm._v("Dashboard")
-                ])
+            _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Forms")])]),
+            _vm._v(" "),
+            _c("li", { staticClass: "active" }, [_vm._v("Forms Layouts")])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col s2 m6 l6" }, [
+          _c(
+            "a",
+            {
+              staticClass:
+                "btn dropdown-settings waves-effect waves-light breadcrumbs-btn right",
+              attrs: { href: "#!", "data-activates": "dropdown1" }
+            },
+            [
+              _c("i", { staticClass: "material-icons hide-on-med-and-up" }, [
+                _vm._v("settings")
               ]),
               _vm._v(" "),
-              _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Forms")])]),
+              _c("span", { staticClass: "hide-on-small-onl" }, [
+                _vm._v("Settings")
+              ]),
               _vm._v(" "),
-              _c("li", { staticClass: "active" }, [_vm._v("Forms Layouts")])
-            ])
-          ]),
+              _c("i", { staticClass: "material-icons right" }, [
+                _vm._v("arrow_drop_down")
+              ])
+            ]
+          ),
           _vm._v(" "),
-          _c("div", { staticClass: "col s2 m6 l6" }, [
-            _c(
-              "a",
-              {
-                staticClass:
-                  "btn dropdown-settings waves-effect waves-light breadcrumbs-btn right",
-                attrs: { href: "#!", "data-activates": "dropdown1" }
-              },
-              [
-                _c("i", { staticClass: "material-icons hide-on-med-and-up" }, [
-                  _vm._v("settings")
-                ]),
-                _vm._v(" "),
-                _c("span", { staticClass: "hide-on-small-onl" }, [
-                  _vm._v("Settings")
-                ]),
-                _vm._v(" "),
-                _c("i", { staticClass: "material-icons right" }, [
-                  _vm._v("arrow_drop_down")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "ul",
-              { staticClass: "dropdown-content", attrs: { id: "dropdown1" } },
-              [
-                _c("li", [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "grey-text text-darken-2",
-                      attrs: { href: "#!" }
-                    },
-                    [
-                      _vm._v("Access"),
-                      _c("span", { staticClass: "badge" }, [_vm._v("1")])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "grey-text text-darken-2",
-                      attrs: { href: "#!" }
-                    },
-                    [
-                      _vm._v("Profile"),
-                      _c("span", { staticClass: "new badge" }, [_vm._v("2")])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "grey-text text-darken-2",
-                      attrs: { href: "#!" }
-                    },
-                    [_vm._v("Notifications")]
-                  )
-                ])
-              ]
-            )
-          ])
+          _c(
+            "ul",
+            { staticClass: "dropdown-content", attrs: { id: "dropdown1" } },
+            [
+              _c("li", [
+                _c(
+                  "a",
+                  {
+                    staticClass: "grey-text text-darken-2",
+                    attrs: { href: "#!" }
+                  },
+                  [
+                    _vm._v("Access"),
+                    _c("span", { staticClass: "badge" }, [_vm._v("1")])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("li", [
+                _c(
+                  "a",
+                  {
+                    staticClass: "grey-text text-darken-2",
+                    attrs: { href: "#!" }
+                  },
+                  [
+                    _vm._v("Profile"),
+                    _c("span", { staticClass: "new badge" }, [_vm._v("2")])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("li", [
+                _c(
+                  "a",
+                  {
+                    staticClass: "grey-text text-darken-2",
+                    attrs: { href: "#!" }
+                  },
+                  [_vm._v("Notifications")]
+                )
+              ])
+            ]
+          )
         ])
       ])
     ])
@@ -19481,7 +19663,7 @@ var render = function() {
           "ul",
           _vm._l(_vm.errors, function(error) {
             return _c("li", [
-              _vm._v("\n          " + _vm._s(error.message) + "\n        ")
+              _vm._v("\n      " + _vm._s(error.message) + "\n    ")
             ])
           })
         )
