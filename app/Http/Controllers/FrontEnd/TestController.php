@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Test;
+use App\Http\Models\FrontEnd\Cart;
+use App\Http\Models\FrontEnd\Category;
+use App\Http\Models\FrontEnd\Customer;
+use App\Http\Models\FrontEnd\Product;
+use App\Http\Models\FrontEnd\SessionModel;
+
 use App\Http\Requests\Admin\PositionRequest;
 use Illuminate\Support\Facades\Input;
 use App\Models\Admin\Position;
@@ -26,18 +32,36 @@ class TestController extends Controller
 
     public function __construct()
     {   
+
+        $this->middleware(function ($request, $next) {
+            SessionModel::AddSession();
+            $data['MyCart']=SessionModel::find(session()->getId())->Cart()->get();
+            dd($data);
+            View::share($data);
+            return $next($request);
+        });
+       // $user=Customer::find(9);
+
+       // // $test->cart();
+        
+       //  dd($user->cart()->get()->toArray());
     }   
 
     
     public function index()
     {
-        $Test = Test::all();
-        // return response()->json(['data' => $Test,'success' => false, 'message' => 'Unable to login'], 401);
+       
         return view('frontend.index');
     }
 
-    
-
+    public function GetProduct()
+    {
+        return DB::table('product as p')->join('product_description as pd','p.product_id','=','pd.product_id')->take(5)->get();
+    }
+    public function AddToCart(Request $request)
+    {
+       return Cart::AddToCart($request->all());
+    }
     public function getTest()
     {
         // $Test = Test::all();
