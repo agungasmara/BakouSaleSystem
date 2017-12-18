@@ -24,6 +24,23 @@ Route::resource('/', 'FrontEnd\TestController');
 Route::get('/api/getTest', 'FrontEnd\TestController@getTest');
 Route::get('/api/show/{id}', 'FrontEnd\TestController@getShow');
 Route::put('/api/update', 'FrontEnd\TestController@UpdateApi');
+/*|Api Request Header--*/
+Route::get('/api/header','FrontEnd\common\HeaderController@index');
+/*--| Api Request Slide--*/
+Route::get('/api/slide','FrontEnd\includes\SlideController@index');
+
+Route::resource('product/category', 'FrontEnd\Product\FrontEndController');
+Route::get('product/detail', 'FrontEnd\Product\FrontEndController@product_detail');
+Route::get('ajax/product', 'FrontEnd\Product\FrontEndController@ajax_product');
+Route::get('order/status', 'FrontEnd\Product\FrontEndController@order_status');
+Route::get('order/lists', 'FrontEnd\Product\FrontEndController@order_lists');
+Route::get('whish/lists', 'FrontEnd\Product\FrontEndController@wish_lists');
+Route::get('cart', 'FrontEnd\Product\FrontEndController@cart_view');
+Route::get('customer/address', 'FrontEnd\Product\FrontEndController@customer_address');
+Route::get('account', 'FrontEnd\Product\FrontEndController@account');
+
+
+
 
 // authentication 
 

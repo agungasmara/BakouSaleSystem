@@ -6,6 +6,41 @@
         <div class="header-search-wrapper grey lighten-2 hide-on-large-only">
           <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize">
         </div>
+<<<<<<< HEAD
+        <form class="form" @submit.prevent="login">
+            <v-app>
+              <v-content>
+                <v-alert class="success" value='true'>
+                    <v-icon>home</v-icon> Welcome Testing
+                </v-alert>
+
+                <v-badge class="badge--left" value='true'><span class="badge__badge primary">6<span></span></span></v-badge>
+                <h1 class="form__title">Sign In Account</h1>
+                <!-- <div class="flash flash-success" v-if="flash.success">
+                    {{ flash.success }}
+                </div> -->
+                <div class="flash flash-success" v-if="flash.error">
+                    {{ flash.error }}
+                </div>
+                <div class="form__group">
+                    <label>Email</label>
+                    <input type="text" class="form__control" v-model="credential.email">
+                    <small class="error__control" v-if="error.email">{{error.email[0]}}</small>
+                </div>
+                <div class="form__group">
+                    <label>Password</label>
+                    <input type="password" class="form__control" v-model="credential.password">
+                    <small class="error__control" v-if="error.password">{{error.password[0]}}</small>
+                </div>
+                <div class="form__group">
+                    <button :disabled="isProcessing" class="btn btn__primary">Login</button>
+                </div>
+              </v-content>
+            </v-app>
+            <!-- <div v-tabs>asf</div> -->
+             
+        </form>
+=======
         <div class="container">
           <div class="row">
             <div class="col s10 m6 l6">
@@ -85,6 +120,7 @@
 
             </div>
           </div>
+>>>>>>> 0bdbfb700e306af2d081e65eea41c56f78094360
 
         </div>
       </div>
