@@ -20,7 +20,13 @@ if(isset($_COOKIE['Language'])){
 }
 
 // Front End Design
-Route::resource('/', 'FrontEnd\Product\CartController@ProductCart');
+// Route::resource('/', 'FrontEnd\TestController');
+// Route::get('/', function () {
+//     return view('frontend.index');
+// });
+
+// Front End Design
+Route::resource('/', 'FrontEnd\Product\CartController');
 
 Route::get('/api/getTest', 'FrontEnd\TestController@getTest');
 Route::get('/api/show/{id}', 'FrontEnd\TestController@getShow');
@@ -42,6 +48,10 @@ Route::get('account', 'FrontEnd\Product\FrontEndController@account');
 
 
 
+Route::resource('test/', 'FrontEnd\TestController');
+Route::get('/api/getTest', 'FrontEnd\TestController@getTest');
+Route::get('/api/show/{id}', 'FrontEnd\TestController@getShow');
+Route::put('/api/update', 'FrontEnd\TestController@UpdateApi');
 
 // authentication 
 
@@ -53,6 +63,7 @@ Route::post('login', function(Illuminate\Http\Request $request)
 
     return response()->json(['success' => false, 'message' => 'Unable to login'], 401);
 });
+
 
 Route::post('api/register', function(Illuminate\Http\Request $request) 
 {
@@ -66,20 +77,53 @@ Route::post('api/register', function(Illuminate\Http\Request $request)
 Route::group(['middleware' => 'auth'], function() {
     
 
-    Route::post('logout', function()
-    {
-        Auth::logout();
-        return response()->json(['success' => true, 'message' => 'You logout with success'], 200);
-    });
+    // Route::post('logout', function()
+    // {
+    //     Auth::logout();
+    //     return response()->json(['success' => true, 'message' => 'You logout with success'], 200);
+    // });
 
     Route::get('users', function() {
         $users = App\User::all();
 
         return response()->json(['success' => 'true', 'message' => 'Loading users', 'data' => ['users' => $users->toJson()]], 200);
     });
+
+    Route::get('/admin', 'Backend\CommonController@list');
+    Route::get('/admin/list', 'Backend\CommonController@list');
+
+    Route::get('welcome/', function () {
+        return view('index');
+    });
+
+    Route::get('register/', function () {
+        return view('index');
+    });
+    Route::get('login/', function () {
+        return view('index');
+    });
+
+    Route::get('admin/list', function () {
+        return view('index');
+    });
+    Route::get('list', function () {
+        return view('index');
+    });
 });
 
 
-Route::get('admin/', function () {
-    return view('welcome');
-});
+
+// authentication
+
+Route::post('auth/login', 'Auth\LoginController@login');
+
+Route::get('auth/login', 'Auth\LoginController@showLoginForm');
+
+Route::get('auth/logout', 'Auth\AuthController@getLogout');
+
+Route::get('logout', function()
+{
+    Auth::logout();
+    return redirect("auth/login");
+    // return response()->json(['success' => true, 'message' => 'You logout with success'], 200);
+})->name('login');
