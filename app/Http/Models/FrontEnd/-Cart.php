@@ -21,6 +21,9 @@ class Cart extends Model
 	public $timestamps = false;
 	static function AddToCart($data)
 	{
+<<<<<<< HEAD
+		if (Auth::user()) {
+=======
 		if (Auth::check()) {
 			$key['customer_id']=Auth::id();
 		}else{
@@ -43,6 +46,7 @@ class Cart extends Model
 	static function RemoveFromCart($data)
 	{
 		if (Auth::check()) {
+>>>>>>> 7a2389c1820d01bc9034ebe887ee85ecfdf266c1
 			$key['customer_id']=Auth::id();
 			$key['product_id']=$data['product_id'];
 		}else{
@@ -54,7 +58,8 @@ class Cart extends Model
 		$value['date_added']=$data['date_added'];
 		return static::updateOrCreate($key,$value);
 	}
-
+<<<<<<< HEAD
+=======
 	static function MyCart()
 	{	
 		// $key= Auth::user()!== null ? 'customer_id':'session_id';
@@ -63,7 +68,7 @@ class Cart extends Model
 		}else{
 			$key['session_id']=session()->getId();
 		}
-	}
+>>>>>>> 7a2389c1820d01bc9034ebe887ee85ecfdf266c1
 
 	static function CartInsert($data)
 	{

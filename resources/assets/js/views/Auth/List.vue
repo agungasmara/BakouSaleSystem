@@ -1,24 +1,24 @@
 <template>
-  <div>
-    <ul v-if="posts && posts.length">
-      <li v-for="post of posts">
-        <div class="row" style="border:1px solid #f00;">
-          <p><strong>{{post.id}}</strong></p>
-          <p>{{post.name}}</p>
-          <p>
-            <router-link :to="`/show/${post.id}`">Edit</router-link>
-          </p>
-        </div><br/>
-      </li>
-    </ul>
+    <div>
+          <ul v-if="posts && posts.length">
+            <li v-for="post of posts">
+              <div class="row" style="border:1px solid #f00;">
+                <p><strong>{{post.id}}</strong></p>
+                <p>{{post.name}}</p>
+                <p>
+                  <router-link :to="`/show/${post.id}`">Edit</router-link>
+                </p>
+              </div><br/>
+            </li>
+          </ul>
 
-    <ul v-if="errors && errors.length">
-      <li v-for="error of errors">
-        {{error.message}}
-      </li>
-    </ul>
-  </div>
-</template>
+          <ul v-if="errors && errors.length">
+            <li v-for="error of errors">
+              {{error.message}}
+            </li>
+          </ul>
+            </div>
+        </template>
 
 <script>
 import axios from 'axios';

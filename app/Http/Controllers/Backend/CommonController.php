@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\FrontEnd;
+namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -18,7 +18,7 @@ use Validator;
 use rules;
 use Redirect;
 
-class TestController extends Controller
+class CommonController extends Controller
 {
 	
 	public $view_title = "Members <small> >> Position</small>";
@@ -26,28 +26,16 @@ class TestController extends Controller
 
     public function __construct()
     {   
-
-        // $this->middleware(function ($request, $next) {
-        //     SessionModel::AddSession();
-        //     $data['MyCart']=SessionModel::find(session()->getId())->Cart()->get();
-        //     dd($data);
-        //     View::share($data);
-        //     return $next($request);
-        // });
-       // $user=Customer::find(9);
-
-       // // $test->cart();
-        
-       //  dd($user->cart()->get()->toArray());
-
     }   
 
-    
-     public function index()
+    public function index()
     {
-        $Test = Test::all();
-        // return response()->json(['data' => $Test,'success' => false, 'message' => 'Unable to login'], 401);
-        return view('frontend.index');
+        return view('index');
+    }
+
+    public function list()
+    {
+        return view('index');
     }
 
     public function test()
@@ -56,6 +44,7 @@ class TestController extends Controller
         // return response()->json(['data' => $Test,'success' => false, 'message' => 'Unable to login'], 401);
         return view('frontend.index');
     }
+
     
 
     public function getTest()
@@ -93,8 +82,8 @@ class TestController extends Controller
     public function create()
     {
         return view('Admin.members.position.form')
-                                        ->with('view_title',$this->view_title)
-                                        ->with('action',"Create");
+        								->with('view_title',$this->view_title)
+										->with('action',"Create");
     }
 
   

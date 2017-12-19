@@ -12,16 +12,12 @@ Vue.use(VueRouter)
 // const User = {
 //   template: '<div>User</div>'
 // }
-
 const router = new VueRouter({
+	mode: 'history',
   routes: [
-    // dynamic segments start with a colon
-    { path: '/home', component: Home },
-    { path: '/register', component: Register },
-    { path: '/login', component: Login },
-    { path: '/list', component: List },
-    { path: '/show/:id', component: ShowForm },
-    { path: '/list/:id/edit', component: CreateForm, meta:{mode:'edit'}}
+    { path: '/admin', component: Home },
+    { path: '/admin/list', component: List },
+    { path: '/register', component: Register }
   ]
 })
 

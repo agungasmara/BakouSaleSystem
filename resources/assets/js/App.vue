@@ -7,6 +7,12 @@
           <div class="loader-section section-right"></div>
         </div>
         <!-- End Page Loading -->
+
+        <div>
+          <span class="pokemon-name"></span>
+        </div>
+        <img class="pokemon-image"></img>
+
         <!-- //////////////////////////////////////////////////////////////////////////// -->
         <!-- START HEADER -->
         <header id="header" class="page-topbar">
@@ -16,10 +22,12 @@
                 <ul class="left">
                   <li>
                     <h1 class="logo-wrapper">
-                      <a href="/admin" class="brand-logo darken-1">
-                        <img src="/images/logo/materialize-logo.png" alt="materialize logo">
-                        <span class="logo-text hide-on-med-and-down">Materialize</span>
-                      </a>
+                      <!-- <a href="/admin" class="brand-logo darken-1"> -->
+                        <router-link class="brand-logo darken-1"  to="/admin">
+                          <img src="/images/logo/materialize-logo.png" alt="materialize logo">
+                          <span class="logo-text hide-on-med-and-down">Materialize</span>
+                        </router-link>
+                      <!-- </a> -->
                     </h1>
                   </li>
                 </ul>
@@ -132,7 +140,7 @@
                       <i class="material-icons">lock_outline</i> Lock</a>
                   </li>
                   <li>
-                    <a href="#" class="grey-text text-darken-1">
+                    <a href="/logout" class="grey-text text-darken-1">
                       <i class="material-icons">keyboard_tab</i> Logout</a>
                   </li>
                 </ul>
@@ -158,6 +166,7 @@
                       </span>
                     </a>
                   </li>
+
                   <li>
                     <a class="dropdown-menu" href="#!" data-activates="Cardsdropdown">
                       <i class="material-icons">cast</i>
@@ -280,7 +289,7 @@
             <!-- AdvancedUIdropdown-->
             <ul id="AdvancedUIdropdown" class="dropdown-content dropdown-horizontal-list">
               <li>
-                <router-link class="dropdown-menu"  to="/login">
+                <router-link class="dropdown-menu"  to="/admin/list">
                   Carousel
                 </router-link>
               </li>
@@ -375,6 +384,7 @@
             </div>
           </div>
         </footer>
+        <!-- <router-view class="view"></router-view> -->
     </div>
 </template>
 
@@ -393,7 +403,7 @@
             // window.location = "#/login";
           },
           mounted: function () {
-            window.location = "#/home";
+            // window.location = "#/home";
         },
     }
 </script>

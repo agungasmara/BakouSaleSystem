@@ -1,46 +1,11 @@
 <template>
     <section id="content">
       <!--breadcrumbs start-->
-      <div id="breadcrumbs-wrapper">
+      <div id="breadcrumbs-wrapper" style="display: none;">
         <!-- Search for small screen -->
         <div class="header-search-wrapper grey lighten-2 hide-on-large-only">
           <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize">
         </div>
-<<<<<<< HEAD
-        <form class="form" @submit.prevent="login">
-            <v-app>
-              <v-content>
-                <v-alert class="success" value='true'>
-                    <v-icon>home</v-icon> Welcome Testing
-                </v-alert>
-
-                <v-badge class="badge--left" value='true'><span class="badge__badge primary">6<span></span></span></v-badge>
-                <h1 class="form__title">Sign In Account</h1>
-                <!-- <div class="flash flash-success" v-if="flash.success">
-                    {{ flash.success }}
-                </div> -->
-                <div class="flash flash-success" v-if="flash.error">
-                    {{ flash.error }}
-                </div>
-                <div class="form__group">
-                    <label>Email</label>
-                    <input type="text" class="form__control" v-model="credential.email">
-                    <small class="error__control" v-if="error.email">{{error.email[0]}}</small>
-                </div>
-                <div class="form__group">
-                    <label>Password</label>
-                    <input type="password" class="form__control" v-model="credential.password">
-                    <small class="error__control" v-if="error.password">{{error.password[0]}}</small>
-                </div>
-                <div class="form__group">
-                    <button :disabled="isProcessing" class="btn btn__primary">Login</button>
-                </div>
-              </v-content>
-            </v-app>
-            <!-- <div v-tabs>asf</div> -->
-             
-        </form>
-=======
         <div class="container">
           <div class="row">
             <div class="col s10 m6 l6">
@@ -75,8 +40,6 @@
       <!--start container-->
       <div class="container">
         <div class="section">
-          <p class="caption">Includes predefined classes for easy form layout options.</p>
-          <div class="divider"></div>
           <!--Basic Form-->
           <div id="basic-form" class="section">
             <div class="row">
@@ -120,7 +83,6 @@
 
             </div>
           </div>
->>>>>>> 0bdbfb700e306af2d081e65eea41c56f78094360
 
         </div>
       </div>
@@ -171,6 +133,8 @@
                         console.log(res);
                     if(res.data.success) {
                         Flash.setSuccess('Congratulations! You have now successfully registered.')
+                        window.location.href="/admin"
+                        // this.$router.push('/admin')
                     }else{
                         Flash.setError('Error while trying to login.')
                         // this.$router.push('/register')
