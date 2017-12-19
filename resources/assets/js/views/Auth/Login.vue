@@ -1,7 +1,7 @@
 <template>
     <section id="content">
       <!--breadcrumbs start-->
-      <div id="breadcrumbs-wrapper">
+      <div id="breadcrumbs-wrapper" style="display: none;">
         <!-- Search for small screen -->
         <div class="header-search-wrapper grey lighten-2 hide-on-large-only">
           <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize">
@@ -40,8 +40,6 @@
       <!--start container-->
       <div class="container">
         <div class="section">
-          <p class="caption">Includes predefined classes for easy form layout options.</p>
-          <div class="divider"></div>
           <!--Basic Form-->
           <div id="basic-form" class="section">
             <div class="row">

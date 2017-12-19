@@ -36,7 +36,6 @@
 
     <div id="app-content">
 		@yield('content')
-		@include('frontend.include.footer')
 	</div>
 
 </body>

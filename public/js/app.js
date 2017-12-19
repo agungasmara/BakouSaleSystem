@@ -14916,6 +14916,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helper_api__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Auth_Register_vue__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Auth_Register_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Auth_Register_vue__);
 //
 //
 //
@@ -14940,19 +14942,952 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      Register: Register,
       posts: [],
       errors: [],
       loading: true
     };
   },
 
+  components: {
+    RegisterComponent: __WEBPACK_IMPORTED_MODULE_2__Auth_Register_vue___default.a
 
+  },
   // Fetches posts when the component is created.
   created: function created() {
     var _this = this;
@@ -15870,68 +16805,2820 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm.posts && _vm.posts.length
-      ? _c(
-          "ul",
-          _vm._l(_vm.posts, function(post) {
-            return _c("li", [
+    _c(
+      "div",
+      { staticClass: "container main-container" },
+      [
+        [_c("RegisterComponent")],
+        _vm._v(" "),
+        _vm.posts && _vm.posts.length
+          ? _c(
+              "ul",
+              _vm._l(_vm.posts, function(post) {
+                return _c("li", [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "row",
+                      staticStyle: { border: "1px solid #f00" }
+                    },
+                    [
+                      _c("p", [_c("strong", [_vm._v(_vm._s(post.id))])]),
+                      _vm._v(" "),
+                      _c("p", [_vm._v(_vm._s(post.name))]),
+                      _vm._v(" "),
+                      _c(
+                        "p",
+                        [
+                          _c(
+                            "router-link",
+                            { attrs: { to: "/show/" + post.id } },
+                            [_vm._v("Edit")]
+                          )
+                        ],
+                        1
+                      )
+                    ]
+                  ),
+                  _c("br")
+                ])
+              })
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        _c(
+          "i",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.loading,
+                expression: "loading"
+              }
+            ],
+            staticClass: "fa fa-spinner fa-spin"
+          },
+          [_vm._v("Loading ...")]
+        ),
+        _vm._v(" "),
+        _vm.errors && _vm.errors.length
+          ? _c(
+              "ul",
+              _vm._l(_vm.errors, function(error) {
+                return _c("li", [
+                  _vm._v("\n          " + _vm._s(error.message) + "\n        ")
+                ])
+              })
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        _vm._m(0, false, false)
+      ],
+      2
+    ),
+    _vm._v(" "),
+    _vm._m(1, false, false),
+    _vm._v(" "),
+    _vm._m(2, false, false),
+    _vm._v(" "),
+    _vm._m(3, false, false),
+    _vm._v(" "),
+    _vm._m(4, false, false)
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "row featuredPostContainer globalPadding style2" },
+      [
+        _c("h3", { staticClass: "section-title style2 text-center" }, [
+          _c("span", [_vm._v("NEW ARRIVALS")])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "owl-carousel owl-theme",
+            attrs: { id: "productslider" }
+          },
+          [
+            _c("div", { staticClass: "item" }, [
+              _c("div", { staticClass: "product" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "add-fav tooltipHere",
+                    attrs: {
+                      "data-toggle": "tooltip",
+                      "data-original-title": "Add to Wishlist",
+                      "data-placement": "left"
+                    }
+                  },
+                  [_c("i", { staticClass: "glyphicon glyphicon-heart" })]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "image" }, [
+                  _c("div", { staticClass: "quickview" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-xs btn-quickview",
+                        attrs: {
+                          "data-toggle": "modal",
+                          href: "/ajax/product",
+                          "data-target": "#productSetailsModalAjax"
+                        }
+                      },
+                      [_vm._v("QUICK View")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("a", { attrs: { href: "product-details.html" } }, [
+                    _c("img", {
+                      staticClass: "img-responsive",
+                      attrs: {
+                        src: "/assets/frontend/images/product/34.jpg",
+                        alt: "img"
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "promotion" }, [
+                    _c("span", { staticClass: "new-product" }, [
+                      _vm._v(" NEW")
+                    ]),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "discount" }, [_vm._v("15% OFF")])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "description" }, [
+                  _c("h4", [
+                    _c("a", { attrs: { href: "product-details.html" } }, [
+                      _vm._v("consectetuer adipiscing ")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [
+                    _vm._v(
+                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "size" }, [_vm._v("XL / XXL / S ")])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "price" }, [
+                  _c("span", [_vm._v("$25")])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "action-control" }, [
+                  _c("a", { staticClass: "btn btn-primary" }, [
+                    _c("span", { staticClass: "add2cart" }, [
+                      _c("i", {
+                        staticClass: "glyphicon glyphicon-shopping-cart"
+                      }),
+                      _vm._v(" Add Cart ")
+                    ])
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "item" }, [
+              _c("div", { staticClass: "product" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "add-fav tooltipHere",
+                    attrs: {
+                      "data-toggle": "tooltip",
+                      "data-original-title": "Add to Wishlist",
+                      "data-placement": "left"
+                    }
+                  },
+                  [_c("i", { staticClass: "glyphicon glyphicon-heart" })]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "image" }, [
+                  _c("div", { staticClass: "quickview" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-xs btn-quickview",
+                        attrs: {
+                          "data-toggle": "modal",
+                          href: "/ajax/product",
+                          "data-target": "#productSetailsModalAjax"
+                        }
+                      },
+                      [_vm._v("Quick View ")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("a", { attrs: { href: "product-details.html" } }, [
+                    _c("img", {
+                      staticClass: "img-responsive",
+                      attrs: {
+                        src: "/assets/frontend/images/product/30.jpg",
+                        alt: "img"
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "promotion" }, [
+                    _c("span", { staticClass: "discount" }, [_vm._v("15% OFF")])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "description" }, [
+                  _c("h4", [
+                    _c("a", { attrs: { href: "product-details.html" } }, [
+                      _vm._v("luptatum zzril delenit")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [
+                    _vm._v(
+                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "size" }, [_vm._v("XL / XXL / S ")])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "price" }, [
+                  _c("span", [_vm._v("$25")])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "action-control" }, [
+                  _c("a", { staticClass: "btn btn-primary" }, [
+                    _c("span", { staticClass: "add2cart" }, [
+                      _c("i", {
+                        staticClass: "glyphicon glyphicon-shopping-cart"
+                      }),
+                      _vm._v(" Add to cart ")
+                    ])
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "item" }, [
+              _c("div", { staticClass: "product" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "add-fav tooltipHere",
+                    attrs: {
+                      "data-toggle": "tooltip",
+                      "data-original-title": "Add to Wishlist",
+                      "data-placement": "left"
+                    }
+                  },
+                  [_c("i", { staticClass: "glyphicon glyphicon-heart" })]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "image" }, [
+                  _c("div", { staticClass: "quickview" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-xs btn-quickview",
+                        attrs: {
+                          "data-toggle": "modal",
+                          href: "/ajax/product",
+                          "data-target": "#productSetailsModalAjax"
+                        }
+                      },
+                      [_vm._v("Quick View ")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("a", { attrs: { href: "product-details.html" } }, [
+                    _c("img", {
+                      staticClass: "img-responsive",
+                      attrs: {
+                        src: "/assets/frontend/images/product/36.jpg",
+                        alt: "img"
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "promotion" }, [
+                    _c("span", { staticClass: "new-product" }, [_vm._v(" NEW")])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "description" }, [
+                  _c("h4", [
+                    _c("a", { attrs: { href: "product-details.html" } }, [
+                      _vm._v("eleifend option ")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [
+                    _vm._v(
+                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "size" }, [_vm._v("XL / XXL / S ")])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "price" }, [
+                  _c("span", [_vm._v("$25")])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "action-control" }, [
+                  _c("a", { staticClass: "btn btn-primary" }, [
+                    _c("span", { staticClass: "add2cart" }, [
+                      _c("i", {
+                        staticClass: "glyphicon glyphicon-shopping-cart"
+                      }),
+                      _vm._v(" Add to cart ")
+                    ])
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "item" }, [
+              _c("div", { staticClass: "product" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "add-fav tooltipHere",
+                    attrs: {
+                      "data-toggle": "tooltip",
+                      "data-original-title": "Add to Wishlist",
+                      "data-placement": "left"
+                    }
+                  },
+                  [_c("i", { staticClass: "glyphicon glyphicon-heart" })]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "image" }, [
+                  _c("div", { staticClass: "quickview" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-xs btn-quickview",
+                        attrs: {
+                          "data-toggle": "modal",
+                          href: "/ajax/product",
+                          "data-target": "#productSetailsModalAjax"
+                        }
+                      },
+                      [_vm._v("Quick View ")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("a", { attrs: { href: "product-details.html" } }, [
+                    _c("img", {
+                      staticClass: "img-responsive",
+                      attrs: {
+                        src: "/assets/frontend/images/product/9.jpg",
+                        alt: "img"
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "description" }, [
+                  _c("h4", [
+                    _c("a", { attrs: { href: "product-details.html" } }, [
+                      _vm._v("mutationem consuetudium ")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [
+                    _vm._v(
+                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "size" }, [_vm._v("XL / XXL / S ")])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "price" }, [
+                  _c("span", [_vm._v("$25")])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "action-control" }, [
+                  _c("a", { staticClass: "btn btn-primary" }, [
+                    _c("span", { staticClass: "add2cart" }, [
+                      _c("i", {
+                        staticClass: "glyphicon glyphicon-shopping-cart"
+                      }),
+                      _vm._v(" Add to cart ")
+                    ])
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "item" }, [
+              _c("div", { staticClass: "product" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "add-fav tooltipHere",
+                    attrs: {
+                      "data-toggle": "tooltip",
+                      "data-original-title": "Add to Wishlist",
+                      "data-placement": "left"
+                    }
+                  },
+                  [_c("i", { staticClass: "glyphicon glyphicon-heart" })]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "image" }, [
+                  _c("div", { staticClass: "quickview" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-xs btn-quickview",
+                        attrs: {
+                          "data-toggle": "modal",
+                          href: "/ajax/product",
+                          "data-target": "#productSetailsModalAjax"
+                        }
+                      },
+                      [_vm._v("Quick View ")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("a", { attrs: { href: "product-details.html" } }, [
+                    _c("img", {
+                      staticClass: "img-responsive",
+                      attrs: {
+                        src: "/assets/frontend/images/product/12.jpg",
+                        alt: "img"
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "description" }, [
+                  _c("h4", [
+                    _c("a", { attrs: { href: "product-details.html" } }, [
+                      _vm._v("sequitur mutationem ")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [
+                    _vm._v(
+                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "size" }, [_vm._v("XL / XXL / S ")])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "price" }, [
+                  _c("span", [_vm._v("$25")])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "action-control" }, [
+                  _c("a", { staticClass: "btn btn-primary" }, [
+                    _c("span", { staticClass: "add2cart" }, [
+                      _c("i", {
+                        staticClass: "glyphicon glyphicon-shopping-cart"
+                      }),
+                      _vm._v(" Add to cart ")
+                    ])
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "item" }, [
+              _c("div", { staticClass: "product" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "add-fav tooltipHere",
+                    attrs: {
+                      "data-toggle": "tooltip",
+                      "data-original-title": "Add to Wishlist",
+                      "data-placement": "left"
+                    }
+                  },
+                  [_c("i", { staticClass: "glyphicon glyphicon-heart" })]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "image" }, [
+                  _c("div", { staticClass: "quickview" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-xs btn-quickview",
+                        attrs: {
+                          "data-toggle": "modal",
+                          href: "/ajax/product",
+                          "data-target": "#productSetailsModalAjax"
+                        }
+                      },
+                      [_vm._v("Quick View ")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("a", { attrs: { href: "product-details.html" } }, [
+                    _c("img", {
+                      staticClass: "img-responsive",
+                      attrs: {
+                        src: "/assets/frontend/images/product/13.jpg",
+                        alt: "img"
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "description" }, [
+                  _c("h4", [
+                    _c("a", { attrs: { href: "product-details.html" } }, [
+                      _vm._v("consuetudium lectorum.")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [
+                    _vm._v(
+                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "size" }, [_vm._v("XL / XXL / S ")])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "price" }, [
+                  _c("span", [_vm._v("$25")])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "action-control" }, [
+                  _c("a", { staticClass: "btn btn-primary" }, [
+                    _c("span", { staticClass: "add2cart" }, [
+                      _c("i", {
+                        staticClass: "glyphicon glyphicon-shopping-cart"
+                      }),
+                      _vm._v(" Add to cart ")
+                    ])
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "item" }, [
+              _c("div", { staticClass: "product" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "add-fav tooltipHere",
+                    attrs: {
+                      "data-toggle": "tooltip",
+                      "data-original-title": "Add to Wishlist",
+                      "data-placement": "left"
+                    }
+                  },
+                  [_c("i", { staticClass: "glyphicon glyphicon-heart" })]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "image" }, [
+                  _c("div", { staticClass: "quickview" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-xs btn-quickview",
+                        attrs: {
+                          "data-toggle": "modal",
+                          href: "/ajax/product",
+                          "data-target": "#productSetailsModalAjax"
+                        }
+                      },
+                      [_vm._v("Quick View ")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("a", { attrs: { href: "product-details.html" } }, [
+                    _c("img", {
+                      staticClass: "img-responsive",
+                      attrs: {
+                        src: "/assets/frontend/images/product/21.jpg",
+                        alt: "img"
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "description" }, [
+                  _c("h4", [
+                    _c("a", { attrs: { href: "product-details.html" } }, [
+                      _vm._v("parum claram")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [
+                    _vm._v(
+                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "size" }, [_vm._v("XL / XXL / S ")])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "price" }, [
+                  _c("span", [_vm._v("$25")])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "action-control" }, [
+                  _c("a", { staticClass: "btn btn-primary" }, [
+                    _c("span", { staticClass: "add2cart" }, [
+                      _c("i", {
+                        staticClass: "glyphicon glyphicon-shopping-cart"
+                      }),
+                      _vm._v(" Add to cart ")
+                    ])
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "item" }, [
+              _c("div", { staticClass: "product" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "add-fav tooltipHere",
+                    attrs: {
+                      "data-toggle": "tooltip",
+                      "data-original-title": "Add to Wishlist",
+                      "data-placement": "left"
+                    }
+                  },
+                  [_c("i", { staticClass: "glyphicon glyphicon-heart" })]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "image" }, [
+                  _c("div", { staticClass: "quickview" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-xs btn-quickview",
+                        attrs: {
+                          "data-toggle": "modal",
+                          href: "/ajax/product",
+                          "data-target": "#productSetailsModalAjax"
+                        }
+                      },
+                      [_vm._v("Quick View ")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("a", { attrs: { href: "product-details.html" } }, [
+                    _c("img", {
+                      staticClass: "img-responsive",
+                      attrs: {
+                        src: "/assets/frontend/images/product/24.jpg",
+                        alt: "img"
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "description" }, [
+                  _c("h4", [
+                    _c("a", { attrs: { href: "product-details.html" } }, [
+                      _vm._v("duis dolore ")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [
+                    _vm._v(
+                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "size" }, [_vm._v("XL / XXL / S ")])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "price" }, [
+                  _c("span", [_vm._v("$25")])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "action-control" }, [
+                  _c("a", { staticClass: "btn btn-primary" }, [
+                    _c("span", { staticClass: "add2cart" }, [
+                      _c("i", {
+                        staticClass: "glyphicon glyphicon-shopping-cart"
+                      }),
+                      _vm._v(" Add to cart ")
+                    ])
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "item" }, [
+              _c("div", { staticClass: "product" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "add-fav tooltipHere",
+                    attrs: {
+                      "data-toggle": "tooltip",
+                      "data-original-title": "Add to Wishlist",
+                      "data-placement": "left"
+                    }
+                  },
+                  [_c("i", { staticClass: "glyphicon glyphicon-heart" })]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "image" }, [
+                  _c("div", { staticClass: "quickview" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-xs btn-quickview",
+                        attrs: {
+                          "data-toggle": "modal",
+                          href: "/ajax/product",
+                          "data-target": "#productSetailsModalAjax"
+                        }
+                      },
+                      [_vm._v("Quick View ")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("a", { attrs: { href: "product-details.html" } }, [
+                    _c("img", {
+                      staticClass: "img-responsive",
+                      attrs: {
+                        src: "/assets/frontend/images/product/15.jpg",
+                        alt: "img"
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "description" }, [
+                  _c("h4", [
+                    _c("a", { attrs: { href: "product-details.html" } }, [
+                      _vm._v("feugait nulla facilisi")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [
+                    _vm._v(
+                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "size" }, [_vm._v("XL / XXL / S ")])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "price" }, [
+                  _c("span", [_vm._v("$25")])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "action-control" }, [
+                  _c("a", { staticClass: "btn btn-primary" }, [
+                    _c("span", { staticClass: "add2cart" }, [
+                      _c("i", {
+                        staticClass: "glyphicon glyphicon-shopping-cart"
+                      }),
+                      _vm._v(" Add to cart ")
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          ]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "parallax-section parallax-image-1" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "row " }, [
+          _c(
+            "div",
+            { staticClass: "col-xs-12 col-sm-12 col-md-12 col-lg-12" },
+            [
+              _c("div", { staticClass: "parallax-content clearfix" }, [
+                _c("h1", { staticClass: "parallaxPrce" }, [_vm._v(" $200 ")]),
+                _vm._v(" "),
+                _c("h2", { staticClass: "uppercase" }, [
+                  _vm._v(
+                    "FREE INTERNATIONAL SHIPPING! Get Free Shipping Coupons"
+                  )
+                ]),
+                _vm._v(" "),
+                _c("h3", [
+                  _vm._v(
+                    " Energistically develop parallel mindshare rather than premier deliverables. "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticStyle: { clear: "both" } }),
+                _vm._v(" "),
+                _c("a", { staticClass: "btn btn-discover " }, [
+                  _c("i", { staticClass: "fa fa-shopping-cart" }),
+                  _vm._v(" Shop Now ")
+                ])
+              ])
+            ]
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container main-container" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "morePost row featuredPostContainer style2 globalPaddingTop "
+        },
+        [
+          _c("h3", { staticClass: "section-title style2 text-center" }, [
+            _c("span", [_vm._v("NEW FEATURES")])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "container" }, [
+            _c("div", { staticClass: "row xsResponse categoryProduct" }, [
               _c(
                 "div",
                 {
-                  staticClass: "row",
-                  staticStyle: { border: "1px solid #f00" }
+                  staticClass:
+                    "item itemauto col-lg-3 col-md-3 col-sm-6 col-xs-6"
                 },
                 [
-                  _c("p", [_c("strong", [_vm._v(_vm._s(post.id))])]),
-                  _vm._v(" "),
-                  _c("p", [_vm._v(_vm._s(post.name))]),
-                  _vm._v(" "),
-                  _c(
-                    "p",
-                    [
-                      _c("router-link", { attrs: { to: "/show/" + post.id } }, [
-                        _vm._v("Edit")
+                  _c("div", { staticClass: "product" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "add-fav tooltipHere",
+                        attrs: {
+                          "data-toggle": "tooltip",
+                          "data-original-title": "Add to Wishlist",
+                          "data-placement": "left"
+                        }
+                      },
+                      [_c("i", { staticClass: "glyphicon glyphicon-heart" })]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "imageHover" }, [
+                      _c("div", { staticClass: "promotion" }, [
+                        _c("span", { staticClass: "discount" }, [
+                          _vm._v("15% OFF")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "carousel slide",
+                          attrs: {
+                            id: "carousel-id-1",
+                            "data-ride": "carousel",
+                            "data-interval": "0"
+                          }
+                        },
+                        [
+                          _c("ol", { staticClass: "carousel-indicators" }, [
+                            _c("li", {
+                              staticClass: "active",
+                              attrs: {
+                                "data-target": "#carousel-id-1",
+                                "data-slide-to": "0"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("li", {
+                              attrs: {
+                                "data-target": "#carousel-id-1",
+                                "data-slide-to": "1"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("li", {
+                              attrs: {
+                                "data-target": "#carousel-id-1",
+                                "data-slide-to": "2"
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "carousel-inner",
+                              attrs: { role: "listbox" }
+                            },
+                            [
+                              _c("div", { staticClass: "item active" }, [
+                                _c(
+                                  "a",
+                                  { attrs: { href: "product-details.html" } },
+                                  [
+                                    _c("img", {
+                                      staticClass: "img-responsive ",
+                                      attrs: {
+                                        src:
+                                          "/assets/frontend/images/product/5.jpg",
+                                        alt: "img"
+                                      }
+                                    })
+                                  ]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "item" }, [
+                                _c(
+                                  "a",
+                                  { attrs: { href: "product-details.html" } },
+                                  [
+                                    _c("img", {
+                                      staticClass: "img-responsive ",
+                                      attrs: {
+                                        src:
+                                          "/assets/frontend/images/product/21.jpg",
+                                        alt: "img"
+                                      }
+                                    })
+                                  ]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "item" }, [
+                                _c(
+                                  "a",
+                                  { attrs: { href: "product-details.html" } },
+                                  [
+                                    _c("img", {
+                                      staticClass: "img-responsive ",
+                                      attrs: {
+                                        src:
+                                          "/assets/frontend/images/product/30.jpg",
+                                        alt: "img"
+                                      }
+                                    })
+                                  ]
+                                )
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            {
+                              staticClass: "left carousel-control",
+                              attrs: {
+                                href: "#carousel-id-1",
+                                role: "button",
+                                "data-slide": "prev"
+                              }
+                            },
+                            [
+                              _c("span", {
+                                staticClass: "glyphicon glyphicon-chevron-left",
+                                attrs: { "aria-hidden": "true" }
+                              }),
+                              _vm._v(" "),
+                              _c("span", { staticClass: "sr-only" }, [
+                                _vm._v("Previous")
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            {
+                              staticClass: "right carousel-control",
+                              attrs: {
+                                href: "#carousel-id-1",
+                                role: "button",
+                                "data-slide": "next"
+                              }
+                            },
+                            [
+                              _c("span", {
+                                staticClass:
+                                  "glyphicon glyphicon-chevron-right",
+                                attrs: { "aria-hidden": "true" }
+                              }),
+                              _vm._v(" "),
+                              _c("span", { staticClass: "sr-only" }, [
+                                _vm._v("Next")
+                              ])
+                            ]
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "description" }, [
+                      _c("h4", [
+                        _c("a", { attrs: { href: "product-details.html" } }, [
+                          _vm._v(" Product Slider ")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "grid-description" }, [
+                        _c("p", [
+                          _vm._v(
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "list-description" }, [
+                        _c("p", [
+                          _vm._v(
+                            " Sed sed rutrum purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n                                    Pellentesque risus lacus, iaculis in ante vitae, viverra hendrerit ante. Aliquam vel\n                                    fermentum elit. Morbi rhoncus, neque in vulputate facilisis, leo tortor sollicitudin\n                                    odio, quis pellentesque lorem nisi quis enim. In dolor mi, hendrerit at blandit\n                                    vulputate, congue a purus. Sed eget turpis sit amet orci euismod accumsan. Praesent\n                                    sit amet placerat elit. "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "size" }, [
+                        _vm._v("XL / XXL / S ")
                       ])
-                    ],
-                    1
-                  )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "price" }, [
+                      _c("span", [_vm._v("$25")])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "action-control" }, [
+                      _c("a", { staticClass: "btn btn-primary" }, [
+                        _c("span", { staticClass: "add2cart" }, [
+                          _c("i", {
+                            staticClass: "glyphicon glyphicon-shopping-cart"
+                          }),
+                          _vm._v(" Add to cart ")
+                        ])
+                      ])
+                    ])
+                  ])
                 ]
               ),
-              _c("br")
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "item itemauto col-lg-3 col-md-3 col-sm-6 col-xs-6"
+                },
+                [
+                  _c("div", { staticClass: "product" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "add-fav tooltipHere",
+                        attrs: {
+                          "data-toggle": "tooltip",
+                          "data-original-title": "Add to Wishlist",
+                          "data-placement": "left"
+                        }
+                      },
+                      [_c("i", { staticClass: "glyphicon glyphicon-heart" })]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "imageHover" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "carousel slide carousel-fade",
+                          attrs: {
+                            id: "carousel-id-2",
+                            "data-ride": "carousel"
+                          }
+                        },
+                        [
+                          _c("ol", { staticClass: "carousel-indicators" }, [
+                            _c("li", {
+                              staticClass: "active",
+                              attrs: {
+                                "data-target": "#carousel-id-2",
+                                "data-slide-to": "0"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("li", {
+                              attrs: {
+                                "data-target": "#carousel-id-2",
+                                "data-slide-to": "1"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("li", {
+                              attrs: {
+                                "data-target": "#carousel-id-2",
+                                "data-slide-to": "2"
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "carousel-inner",
+                              attrs: { role: "listbox" }
+                            },
+                            [
+                              _c("div", { staticClass: "item active" }, [
+                                _c(
+                                  "a",
+                                  { attrs: { href: "product-details.html" } },
+                                  [
+                                    _c("img", {
+                                      staticClass: "img-responsive ",
+                                      attrs: {
+                                        src:
+                                          "/assets/frontend/images/product/22.jpg",
+                                        alt: "img"
+                                      }
+                                    })
+                                  ]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "item" }, [
+                                _c(
+                                  "a",
+                                  { attrs: { href: "product-details.html" } },
+                                  [
+                                    _c("img", {
+                                      staticClass: "img-responsive ",
+                                      attrs: {
+                                        src:
+                                          "/assets/frontend/images/product/5.jpg",
+                                        alt: "img"
+                                      }
+                                    })
+                                  ]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "item" }, [
+                                _c(
+                                  "a",
+                                  { attrs: { href: "product-details.html" } },
+                                  [
+                                    _c("img", {
+                                      staticClass: "img-responsive ",
+                                      attrs: {
+                                        src:
+                                          "/assets/frontend/images/product/18.jpg",
+                                        alt: "img"
+                                      }
+                                    })
+                                  ]
+                                )
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            {
+                              staticClass: "left carousel-control",
+                              attrs: {
+                                href: "#carousel-id-2",
+                                role: "button",
+                                "data-slide": "prev"
+                              }
+                            },
+                            [
+                              _c("span", {
+                                staticClass: "glyphicon glyphicon-chevron-left",
+                                attrs: { "aria-hidden": "true" }
+                              }),
+                              _vm._v(" "),
+                              _c("span", { staticClass: "sr-only" }, [
+                                _vm._v("Previous")
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            {
+                              staticClass: "right carousel-control",
+                              attrs: {
+                                href: "#carousel-id-2",
+                                role: "button",
+                                "data-slide": "next"
+                              }
+                            },
+                            [
+                              _c("span", {
+                                staticClass:
+                                  "glyphicon glyphicon-chevron-right",
+                                attrs: { "aria-hidden": "true" }
+                              }),
+                              _vm._v(" "),
+                              _c("span", { staticClass: "sr-only" }, [
+                                _vm._v("Next")
+                              ])
+                            ]
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "description" }, [
+                      _c("h4", [
+                        _c("a", { attrs: { href: "product-details.html" } }, [
+                          _vm._v(" Slider FadeIn ")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "grid-description" }, [
+                        _c("p", [
+                          _vm._v(
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "list-description" }, [
+                        _c("p", [
+                          _vm._v(
+                            " Sed sed rutrum purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n                                    Pellentesque risus lacus, iaculis in ante vitae, viverra hendrerit ante. Aliquam vel\n                                    fermentum elit. Morbi rhoncus, neque in vulputate facilisis, leo tortor sollicitudin\n                                    odio, quis pellentesque lorem nisi quis enim. In dolor mi, hendrerit at blandit\n                                    vulputate, congue a purus. Sed eget turpis sit amet orci euismod accumsan. Praesent\n                                    sit amet placerat elit. "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "size" }, [
+                        _vm._v("XL / XXL / S ")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "price" }, [
+                      _c("span", [_vm._v("$25")])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "action-control" }, [
+                      _c("a", { staticClass: "btn btn-primary" }, [
+                        _c("span", { staticClass: "add2cart" }, [
+                          _c("i", {
+                            staticClass: "glyphicon glyphicon-shopping-cart"
+                          }),
+                          _vm._v(" Add to cart ")
+                        ])
+                      ])
+                    ])
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "item itemauto  col-lg-3 col-md-3 col-sm-6 col-xs-6"
+                },
+                [
+                  _c("div", { staticClass: "product" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "add-fav tooltipHere",
+                        attrs: {
+                          "data-toggle": "tooltip",
+                          "data-original-title": "Add to Wishlist",
+                          "data-placement": "left"
+                        }
+                      },
+                      [_c("i", { staticClass: "glyphicon glyphicon-heart" })]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "imageHover" }, [
+                      _c("a", { attrs: { href: "product-details.html" } }, [
+                        _c("img", {
+                          staticClass: "img-responsive primaryImage",
+                          attrs: {
+                            src: "/assets/frontend/images/product/12.jpg",
+                            alt: "img"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("img", {
+                          staticClass: "img-responsive secondaryImage",
+                          attrs: {
+                            src: "/assets/frontend/images/product/21.jpg",
+                            alt: "img"
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "promotion" }, [
+                        _c("span", { staticClass: "discount" }, [
+                          _vm._v("15% OFF")
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "description" }, [
+                      _c("h4", [
+                        _c("a", { attrs: { href: "product-details.html" } }, [
+                          _vm._v(" Hover FadeIn ")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "grid-description" }, [
+                        _c("p", [
+                          _vm._v(
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "list-description" }, [
+                        _c("p", [
+                          _vm._v(
+                            " Sed sed rutrum purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n                                    Pellentesque risus lacus, iaculis in ante vitae, viverra hendrerit ante. Aliquam vel\n                                    fermentum elit. Morbi rhoncus, neque in vulputate facilisis, leo tortor sollicitudin\n                                    odio, quis pellentesque lorem nisi quis enim. In dolor mi, hendrerit at blandit\n                                    vulputate, congue a purus. Sed eget turpis sit amet orci euismod accumsan. Praesent\n                                    sit amet placerat elit. "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "size" }, [
+                        _vm._v("XL / XXL / S ")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "price" }, [
+                      _c("span", [_vm._v("$25")])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "action-control" }, [
+                      _c("a", { staticClass: "btn btn-primary" }, [
+                        _c("span", { staticClass: "add2cart" }, [
+                          _c("i", {
+                            staticClass: "glyphicon glyphicon-shopping-cart"
+                          }),
+                          _vm._v(" Add to cart ")
+                        ])
+                      ])
+                    ])
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "item itemauto  col-lg-3 col-md-3 col-sm-6 col-xs-6"
+                },
+                [
+                  _c("div", { staticClass: "product" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "add-fav tooltipHere",
+                        attrs: {
+                          "data-toggle": "tooltip",
+                          "data-original-title": "Add to Wishlist",
+                          "data-placement": "left"
+                        }
+                      },
+                      [_c("i", { staticClass: "glyphicon glyphicon-heart" })]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "imageHover imageHoverFlip" }, [
+                      _c("a", { attrs: { href: "product-details.html" } }, [
+                        _c("img", {
+                          staticClass: "img-responsive primaryImage",
+                          attrs: {
+                            src: "/assets/frontend/images/product/7.jpg",
+                            alt: "img"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("img", {
+                          staticClass: "img-responsive secondaryImage",
+                          attrs: {
+                            src: "/assets/frontend/images/product/13.jpg",
+                            alt: "img"
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "promotion" }, [
+                        _c("span", { staticClass: "discount" }, [
+                          _vm._v("15% OFF")
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "description" }, [
+                      _c("h4", [
+                        _c("a", { attrs: { href: "product-details.html" } }, [
+                          _vm._v(" Hover Flip ")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "grid-description" }, [
+                        _c("p", [
+                          _vm._v(
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "list-description" }, [
+                        _c("p", [
+                          _vm._v(
+                            " Sed sed rutrum purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n                                    Pellentesque risus lacus, iaculis in ante vitae, viverra hendrerit ante. Aliquam vel\n                                    fermentum elit. Morbi rhoncus, neque in vulputate facilisis, leo tortor sollicitudin\n                                    odio, quis pellentesque lorem nisi quis enim. In dolor mi, hendrerit at blandit\n                                    vulputate, congue a purus. Sed eget turpis sit amet orci euismod accumsan. Praesent\n                                    sit amet placerat elit. "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "size" }, [
+                        _vm._v("XL / XXL / S ")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "price" }, [
+                      _c("span", [_vm._v("$25")])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "action-control" }, [
+                      _c("a", { staticClass: "btn btn-primary" }, [
+                        _c("span", { staticClass: "add2cart" }, [
+                          _c("i", {
+                            staticClass: "glyphicon glyphicon-shopping-cart"
+                          }),
+                          _vm._v(" Add to cart ")
+                        ])
+                      ])
+                    ])
+                  ])
+                ]
+              )
             ])
-          })
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    _c(
-      "i",
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass:
+            "morePost row featuredPostContainer style2 globalPaddingTop "
+        },
+        [
+          _c("h3", { staticClass: "section-title style2 text-center" }, [
+            _c("span", [_vm._v("FEATURES PRODUCT")])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "container" }, [
+            _c(
+              "div",
+              { staticClass: "row xsResponse equalHeightCategoryProduct" },
+              [
+                _c(
+                  "div",
+                  { staticClass: "item col-lg-3 col-md-3 col-sm-4 col-xs-6" },
+                  [
+                    _c("div", { staticClass: "product" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "add-fav tooltipHere",
+                          attrs: {
+                            "data-toggle": "tooltip",
+                            "data-original-title": "Add to Wishlist",
+                            "data-placement": "left"
+                          }
+                        },
+                        [_c("i", { staticClass: "glyphicon glyphicon-heart" })]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "image" }, [
+                        _c("div", { staticClass: "quickview" }, [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "btn btn-xs btn-quickview",
+                              attrs: {
+                                "data-toggle": "modal",
+                                href: "ajax/product",
+                                "data-target": "#productSetailsModalAjax"
+                              }
+                            },
+                            [_vm._v("Quick View ")]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("a", { attrs: { href: "product-details.html" } }, [
+                          _c("img", {
+                            staticClass: "img-responsive",
+                            attrs: {
+                              src: "/assets/frontend/images/product/30.jpg",
+                              alt: "img"
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "promotion" }, [
+                          _c("span", { staticClass: "new-product" }, [
+                            _vm._v(" NEW")
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "discount" }, [
+                            _vm._v("15% OFF")
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "description" }, [
+                        _c("h4", [
+                          _c("a", { attrs: { href: "product-details.html" } }, [
+                            _vm._v("aliquam erat volutpat")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "size" }, [
+                          _vm._v("XL / XXL / S ")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "price" }, [
+                        _c("span", [_vm._v("$25")]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "old-price" }, [
+                          _vm._v("$75")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "action-control" }, [
+                        _c("a", { staticClass: "btn btn-primary" }, [
+                          _c("span", { staticClass: "add2cart" }, [
+                            _c("i", {
+                              staticClass: "glyphicon glyphicon-shopping-cart"
+                            }),
+                            _vm._v(" Add to cart ")
+                          ])
+                        ])
+                      ])
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "item col-lg-3 col-md-3 col-sm-4 col-xs-6" },
+                  [
+                    _c("div", { staticClass: "product" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "add-fav tooltipHere",
+                          attrs: {
+                            "data-toggle": "tooltip",
+                            "data-original-title": "Add to Wishlist",
+                            "data-placement": "left"
+                          }
+                        },
+                        [_c("i", { staticClass: "glyphicon glyphicon-heart" })]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "image" }, [
+                        _c("div", { staticClass: "quickview" }, [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "btn btn-xs btn-quickview",
+                              attrs: {
+                                "data-toggle": "modal",
+                                href: "ajax/product",
+                                "data-target": "#productSetailsModalAjax"
+                              }
+                            },
+                            [_vm._v("Quick View ")]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("a", { attrs: { href: "product-details.html" } }, [
+                          _c("img", {
+                            staticClass: "img-responsive",
+                            attrs: {
+                              src: "/assets/frontend/images/product/31.jpg",
+                              alt: "img"
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "promotion" }, [
+                          _c("span", { staticClass: "discount" }, [
+                            _vm._v("15% OFF")
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "description" }, [
+                        _c("h4", [
+                          _c("a", { attrs: { href: "product-details.html" } }, [
+                            _vm._v("ullamcorper suscipit lobortis ")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "size" }, [
+                          _vm._v("XL / XXL / S ")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "price" }, [
+                        _c("span", [_vm._v("$25")])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "action-control" }, [
+                        _c("a", { staticClass: "btn btn-primary" }, [
+                          _c("span", { staticClass: "add2cart" }, [
+                            _c("i", {
+                              staticClass: "glyphicon glyphicon-shopping-cart"
+                            }),
+                            _vm._v(" Add to cart ")
+                          ])
+                        ])
+                      ])
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "item col-lg-3 col-md-3 col-sm-4 col-xs-6" },
+                  [
+                    _c("div", { staticClass: "product" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "add-fav tooltipHere",
+                          attrs: {
+                            "data-toggle": "tooltip",
+                            "data-original-title": "Add to Wishlist",
+                            "data-placement": "left"
+                          }
+                        },
+                        [_c("i", { staticClass: "glyphicon glyphicon-heart" })]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "image" }, [
+                        _c("div", { staticClass: "quickview" }, [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "btn btn-xs btn-quickview",
+                              attrs: {
+                                "data-toggle": "modal",
+                                href: "ajax/product",
+                                "data-target": "#productSetailsModalAjax"
+                              }
+                            },
+                            [_vm._v("Quick View ")]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("a", { attrs: { href: "product-details.html" } }, [
+                          _c("img", {
+                            staticClass: "img-responsive",
+                            attrs: {
+                              src: "/assets/frontend/images/product/34.jpg",
+                              alt: "img"
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "promotion" }, [
+                          _c("span", { staticClass: "new-product" }, [
+                            _vm._v(" NEW")
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "description" }, [
+                        _c("h4", [
+                          _c("a", { attrs: { href: "product-details.html" } }, [
+                            _vm._v("demonstraverunt lectores ")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "size" }, [
+                          _vm._v("XL / XXL / S ")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "price" }, [
+                        _c("span", [_vm._v("$25")])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "action-control" }, [
+                        _c("a", { staticClass: "btn btn-primary" }, [
+                          _c("span", { staticClass: "add2cart" }, [
+                            _c("i", {
+                              staticClass: "glyphicon glyphicon-shopping-cart"
+                            }),
+                            _vm._v(" Add to cart ")
+                          ])
+                        ])
+                      ])
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "item col-lg-3 col-md-3 col-sm-4 col-xs-6" },
+                  [
+                    _c("div", { staticClass: "product" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "add-fav tooltipHere",
+                          attrs: {
+                            "data-toggle": "tooltip",
+                            "data-original-title": "Add to Wishlist",
+                            "data-placement": "left"
+                          }
+                        },
+                        [_c("i", { staticClass: "glyphicon glyphicon-heart" })]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "image" }, [
+                        _c("div", { staticClass: "quickview" }, [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "btn btn-xs btn-quickview",
+                              attrs: {
+                                "data-toggle": "modal",
+                                href: "ajax/product",
+                                "data-target": "#productSetailsModalAjax"
+                              }
+                            },
+                            [_vm._v("Quick View ")]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("a", { attrs: { href: "product-details.html" } }, [
+                          _c("img", {
+                            staticClass: "img-responsive",
+                            attrs: {
+                              src: "/assets/frontend/images/product/12.jpg",
+                              alt: "img"
+                            }
+                          })
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "description" }, [
+                        _c("h4", [
+                          _c("a", { attrs: { href: "product-details.html" } }, [
+                            _vm._v("humanitatis per")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "size" }, [
+                          _vm._v("XL / XXL / S ")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "price" }, [
+                        _c("span", [_vm._v("$25")])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "action-control" }, [
+                        _c("a", { staticClass: "btn btn-primary" }, [
+                          _c("span", { staticClass: "add2cart" }, [
+                            _c("i", {
+                              staticClass: "glyphicon glyphicon-shopping-cart"
+                            }),
+                            _vm._v(" Add to cart ")
+                          ])
+                        ])
+                      ])
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "item col-lg-3 col-md-3 col-sm-4 col-xs-6" },
+                  [
+                    _c("div", { staticClass: "product" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "add-fav tooltipHere",
+                          attrs: {
+                            "data-toggle": "tooltip",
+                            "data-original-title": "Add to Wishlist",
+                            "data-placement": "left"
+                          }
+                        },
+                        [_c("i", { staticClass: "glyphicon glyphicon-heart" })]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "image" }, [
+                        _c("div", { staticClass: "quickview" }, [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "btn btn-xs btn-quickview",
+                              attrs: {
+                                "data-toggle": "modal",
+                                href: "ajax/product",
+                                "data-target": "#productSetailsModalAjax"
+                              }
+                            },
+                            [_vm._v("Quick View ")]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("a", { attrs: { href: "product-details.html" } }, [
+                          _c("img", {
+                            staticClass: "img-responsive",
+                            attrs: {
+                              src: "/assets/frontend/images/product/33.jpg",
+                              alt: "img"
+                            }
+                          })
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "description" }, [
+                        _c("h4", [
+                          _c("a", { attrs: { href: "product-details.html" } }, [
+                            _vm._v("Eodem modo typi")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "size" }, [
+                          _vm._v("XL / XXL / S ")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "price" }, [
+                        _c("span", [_vm._v("$25")])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "action-control" }, [
+                        _c("a", { staticClass: "btn btn-primary" }, [
+                          _c("span", { staticClass: "add2cart" }, [
+                            _c("i", {
+                              staticClass: "glyphicon glyphicon-shopping-cart"
+                            }),
+                            _vm._v(" Add to cart ")
+                          ])
+                        ])
+                      ])
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "item col-lg-3 col-md-3 col-sm-4 col-xs-6" },
+                  [
+                    _c("div", { staticClass: "product" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "add-fav tooltipHere",
+                          attrs: {
+                            "data-toggle": "tooltip",
+                            "data-original-title": "Add to Wishlist",
+                            "data-placement": "left"
+                          }
+                        },
+                        [_c("i", { staticClass: "glyphicon glyphicon-heart" })]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "image" }, [
+                        _c("div", { staticClass: "quickview" }, [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "btn btn-xs btn-quickview",
+                              attrs: {
+                                "data-toggle": "modal",
+                                href: "ajax/product",
+                                "data-target": "#productSetailsModalAjax"
+                              }
+                            },
+                            [_vm._v("Quick View ")]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("a", { attrs: { href: "product-details.html" } }, [
+                          _c("img", {
+                            staticClass: "img-responsive",
+                            attrs: {
+                              src: "/assets/frontend/images/product/10.jpg",
+                              alt: "img"
+                            }
+                          })
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "description" }, [
+                        _c("h4", [
+                          _c("a", { attrs: { href: "product-details.html" } }, [
+                            _vm._v("sequitur mutationem ")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "size" }, [
+                          _vm._v("XL / XXL / S ")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "price" }, [
+                        _c("span", [_vm._v("$25")])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "action-control" }, [
+                        _c("a", { staticClass: "btn btn-primary" }, [
+                          _c("span", { staticClass: "add2cart" }, [
+                            _c("i", {
+                              staticClass: "glyphicon glyphicon-shopping-cart"
+                            }),
+                            _vm._v(" Add to cart ")
+                          ])
+                        ])
+                      ])
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "item col-lg-3 col-md-3 col-sm-4 col-xs-6" },
+                  [
+                    _c("div", { staticClass: "product" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "add-fav tooltipHere",
+                          attrs: {
+                            "data-toggle": "tooltip",
+                            "data-original-title": "Add to Wishlist",
+                            "data-placement": "left"
+                          }
+                        },
+                        [_c("i", { staticClass: "glyphicon glyphicon-heart" })]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "image" }, [
+                        _c("div", { staticClass: "quickview" }, [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "btn btn-xs btn-quickview",
+                              attrs: {
+                                "data-toggle": "modal",
+                                href: "ajax/product",
+                                "data-target": "#productSetailsModalAjax"
+                              }
+                            },
+                            [_vm._v("Quick View ")]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("a", { attrs: { href: "product-details.html" } }, [
+                          _c("img", {
+                            staticClass: "img-responsive",
+                            attrs: {
+                              src: "/assets/frontend/images/product/37.jpg",
+                              alt: "img"
+                            }
+                          })
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "description" }, [
+                        _c("h4", [
+                          _c("a", { attrs: { href: "product-details.html" } }, [
+                            _vm._v("consuetudium lectorum.")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "size" }, [
+                          _vm._v("XL / XXL / S ")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "price" }, [
+                        _c("span", [_vm._v("$25")])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "action-control" }, [
+                        _c("a", { staticClass: "btn btn-primary" }, [
+                          _c("span", { staticClass: "add2cart" }, [
+                            _c("i", {
+                              staticClass: "glyphicon glyphicon-shopping-cart"
+                            }),
+                            _vm._v(" Add to cart ")
+                          ])
+                        ])
+                      ])
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "item col-lg-3 col-md-3 col-sm-4 col-xs-6" },
+                  [
+                    _c("div", { staticClass: "product" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "add-fav tooltipHere",
+                          attrs: {
+                            "data-toggle": "tooltip",
+                            "data-original-title": "Add to Wishlist",
+                            "data-placement": "left"
+                          }
+                        },
+                        [_c("i", { staticClass: "glyphicon glyphicon-heart" })]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "image" }, [
+                        _c("div", { staticClass: "quickview" }, [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "btn btn-xs btn-quickview",
+                              attrs: {
+                                "data-toggle": "modal",
+                                href: "ajax/product",
+                                "data-target": "#productSetailsModalAjax"
+                              }
+                            },
+                            [_vm._v("Quick View ")]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("a", { attrs: { href: "product-details.html" } }, [
+                          _c("img", {
+                            staticClass: "img-responsive",
+                            attrs: {
+                              src: "/assets/frontend/images/product/35.jpg",
+                              alt: "img"
+                            }
+                          })
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "description" }, [
+                        _c("h4", [
+                          _c("a", { attrs: { href: "product-details.html" } }, [
+                            _vm._v("parum claram")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "size" }, [
+                          _vm._v("XL / XXL / S ")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "price" }, [
+                        _c("span", [_vm._v("$25")]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "old-price" }, [
+                          _vm._v("$75")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "action-control" }, [
+                        _c("a", { staticClass: "btn btn-primary" }, [
+                          _c("span", { staticClass: "add2cart" }, [
+                            _c("i", {
+                              staticClass: "glyphicon glyphicon-shopping-cart"
+                            }),
+                            _vm._v(" Add to cart ")
+                          ])
+                        ])
+                      ])
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "item col-lg-3 col-md-3 col-sm-4 col-xs-6" },
+                  [
+                    _c("div", { staticClass: "product" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "add-fav tooltipHere",
+                          attrs: {
+                            "data-toggle": "tooltip",
+                            "data-original-title": "Add to Wishlist",
+                            "data-placement": "left"
+                          }
+                        },
+                        [_c("i", { staticClass: "glyphicon glyphicon-heart" })]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "image" }, [
+                        _c("div", { staticClass: "quickview" }, [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "btn btn-xs btn-quickview",
+                              attrs: {
+                                "data-toggle": "modal",
+                                href: "ajax/product",
+                                "data-target": "#productSetailsModalAjax"
+                              }
+                            },
+                            [_vm._v("Quick View ")]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("a", { attrs: { href: "product-details.html" } }, [
+                          _c("img", {
+                            staticClass: "img-responsive",
+                            attrs: {
+                              src: "/assets/frontend/images/product/13.jpg",
+                              alt: "img"
+                            }
+                          })
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "description" }, [
+                        _c("h4", [
+                          _c("a", { attrs: { href: "product-details.html" } }, [
+                            _vm._v("duis dolore ")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "size" }, [
+                          _vm._v("XL / XXL / S ")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "price" }, [
+                        _c("span", [_vm._v("$25")])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "action-control" }, [
+                        _c("a", { staticClass: "btn btn-primary" }, [
+                          _c("span", { staticClass: "add2cart" }, [
+                            _c("i", {
+                              staticClass: "glyphicon glyphicon-shopping-cart"
+                            }),
+                            _vm._v(" Add to cart ")
+                          ])
+                        ])
+                      ])
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "item col-lg-3 col-md-3 col-sm-4 col-xs-6" },
+                  [
+                    _c("div", { staticClass: "product" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "add-fav tooltipHere",
+                          attrs: {
+                            "data-toggle": "tooltip",
+                            "data-original-title": "Add to Wishlist",
+                            "data-placement": "left"
+                          }
+                        },
+                        [_c("i", { staticClass: "glyphicon glyphicon-heart" })]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "image" }, [
+                        _c("div", { staticClass: "quickview" }, [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "btn btn-xs btn-quickview",
+                              attrs: {
+                                "data-toggle": "modal",
+                                href: "ajax/product",
+                                "data-target": "#productSetailsModalAjax"
+                              }
+                            },
+                            [_vm._v("Quick View ")]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("a", { attrs: { href: "product-details.html" } }, [
+                          _c("img", {
+                            staticClass: "img-responsive",
+                            attrs: {
+                              src: "/assets/frontend/images/product/21.jpg",
+                              alt: "img"
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "promotion" }, [
+                          _c("span", { staticClass: "new-product" }, [
+                            _vm._v(" NEW")
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "discount" }, [
+                            _vm._v("15% OFF")
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "description" }, [
+                        _c("h4", [
+                          _c("a", { attrs: { href: "product-details.html" } }, [
+                            _vm._v("aliquam erat volutpat")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "size" }, [
+                          _vm._v("XL / XXL / S ")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "price" }, [
+                        _c("span", [_vm._v("$25")])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "action-control" }, [
+                        _c("a", { staticClass: "btn btn-primary" }, [
+                          _c("span", { staticClass: "add2cart" }, [
+                            _c("i", {
+                              staticClass: "glyphicon glyphicon-shopping-cart"
+                            }),
+                            _vm._v(" Add to cart ")
+                          ])
+                        ])
+                      ])
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "item col-lg-3 col-md-3 col-sm-4 col-xs-6" },
+                  [
+                    _c("div", { staticClass: "product" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "add-fav tooltipHere",
+                          attrs: {
+                            "data-toggle": "tooltip",
+                            "data-original-title": "Add to Wishlist",
+                            "data-placement": "left"
+                          }
+                        },
+                        [_c("i", { staticClass: "glyphicon glyphicon-heart" })]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "image" }, [
+                        _c("div", { staticClass: "quickview" }, [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "btn btn-xs btn-quickview",
+                              attrs: {
+                                "data-toggle": "modal",
+                                href: "ajax/product",
+                                "data-target": "#productSetailsModalAjax"
+                              }
+                            },
+                            [_vm._v("Quick View ")]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("a", { attrs: { href: "product-details.html" } }, [
+                          _c("img", {
+                            staticClass: "img-responsive",
+                            attrs: {
+                              src: "/assets/frontend/images/product/14.jpg",
+                              alt: "img"
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "promotion" }, [
+                          _c("span", { staticClass: "discount" }, [
+                            _vm._v("15% OFF")
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "description" }, [
+                        _c("h4", [
+                          _c("a", { attrs: { href: "product-details.html" } }, [
+                            _vm._v("ullamcorper suscipit lobortis ")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "size" }, [
+                          _vm._v("XL / XXL / S ")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "price" }, [
+                        _c("span", [_vm._v("$25")])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "action-control" }, [
+                        _c("a", { staticClass: "btn btn-primary" }, [
+                          _c("span", { staticClass: "add2cart" }, [
+                            _c("i", {
+                              staticClass: "glyphicon glyphicon-shopping-cart"
+                            }),
+                            _vm._v(" Add to cart ")
+                          ])
+                        ])
+                      ])
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "item col-lg-3 col-md-3 col-sm-4 col-xs-6" },
+                  [
+                    _c("div", { staticClass: "product" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "add-fav tooltipHere",
+                          attrs: {
+                            "data-toggle": "tooltip",
+                            "data-original-title": "Add to Wishlist",
+                            "data-placement": "left"
+                          }
+                        },
+                        [_c("i", { staticClass: "glyphicon glyphicon-heart" })]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "image" }, [
+                        _c("div", { staticClass: "quickview" }, [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "btn btn-xs btn-quickview",
+                              attrs: {
+                                "data-toggle": "modal",
+                                href: "ajax/product",
+                                "data-target": "#productSetailsModalAjax"
+                              }
+                            },
+                            [_vm._v("Quick View ")]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("a", { attrs: { href: "product-details.html" } }, [
+                          _c("img", {
+                            staticClass: "img-responsive",
+                            attrs: {
+                              src: "/assets/frontend/images/product/17.jpg",
+                              alt: "img"
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "promotion" }, [
+                          _c("span", { staticClass: "new-product" }, [
+                            _vm._v(" NEW")
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "description" }, [
+                        _c("h4", [
+                          _c("a", { attrs: { href: "product-details.html" } }, [
+                            _vm._v("demonstraverunt lectores ")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "size" }, [
+                          _vm._v("XL / XXL / S ")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "price" }, [
+                        _c("span", [_vm._v("$25")])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "action-control" }, [
+                        _c("a", { staticClass: "btn btn-primary" }, [
+                          _c("span", { staticClass: "add2cart" }, [
+                            _c("i", {
+                              staticClass: "glyphicon glyphicon-shopping-cart"
+                            }),
+                            _vm._v(" Add to cart ")
+                          ])
+                        ])
+                      ])
+                    ])
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "load-more-block text-center" }, [
+                _c("a", { staticClass: "btn btn-thin", attrs: { href: "#" } }, [
+                  _c("i", { staticClass: "fa fa-plus-sign" }, [_vm._v("+")]),
+                  _vm._v(" load more products")
+                ])
+              ])
+            ])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c("hr", { staticClass: "no-margin-top" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "width100 section-block " }, [
+        _c("div", { staticClass: "row featureImg" }, [
+          _c("div", { staticClass: "col-md-3 col-sm-3 col-xs-6" }, [
+            _c("a", { attrs: { href: "category.html" } }, [
+              _c("img", {
+                staticClass: "img-responsive",
+                attrs: {
+                  src: "/assets/frontend/images/site/new-collection-1.jpg",
+                  alt: "img"
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-3 col-sm-3 col-xs-6" }, [
+            _c("a", { attrs: { href: "category.html" } }, [
+              _c("img", {
+                staticClass: "img-responsive",
+                attrs: {
+                  src: "/assets/frontend/images/site/new-collection-2.jpg",
+                  alt: "img"
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-3 col-sm-3 col-xs-6" }, [
+            _c("a", { attrs: { href: "category.html" } }, [
+              _c("img", {
+                staticClass: "img-responsive",
+                attrs: {
+                  src: "/assets/frontend/images/site/new-collection-3.jpg",
+                  alt: "img"
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-3 col-sm-3 col-xs-6" }, [
+            _c("a", { attrs: { href: "category.html" } }, [
+              _c("img", {
+                staticClass: "img-responsive",
+                attrs: {
+                  src: "/assets/frontend/images/site/new-collection-4.jpg",
+                  alt: "img"
+                }
+              })
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "width100 section-block" }, [
+        _c("h3", { staticClass: "section-title" }, [
+          _c("span", [_vm._v(" BRAND")]),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "link pull-right carousel-nav",
+              attrs: { id: "nextBrand" }
+            },
+            [_c("i", { staticClass: "fa fa-angle-right" })]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "link pull-right carousel-nav",
+              attrs: { id: "prevBrand" }
+            },
+            [_c("i", { staticClass: "fa fa-angle-left" })]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-lg-12" }, [
+            _c(
+              "ul",
+              {
+                staticClass: "no-margin brand-carousel owl-carousel owl-theme"
+              },
+              [
+                _c("li", [
+                  _c("a", [
+                    _c("img", {
+                      attrs: {
+                        src: "/assets/frontend/images/brand/1.gif",
+                        alt: "img"
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c("img", {
+                    attrs: {
+                      src: "/assets/frontend/images/brand/2.png",
+                      alt: "img"
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c("img", {
+                    attrs: {
+                      src: "/assets/frontend/images/brand/3.png",
+                      alt: "img"
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c("img", {
+                    attrs: {
+                      src: "/assets/frontend/images/brand/4.png",
+                      alt: "img"
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c("img", {
+                    attrs: {
+                      src: "/assets/frontend/images/brand/5.png",
+                      alt: "img"
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c("img", {
+                    attrs: {
+                      src: "/assets/frontend/images/brand/6.png",
+                      alt: "img"
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c("img", {
+                    attrs: {
+                      src: "/assets/frontend/images/brand/7.png",
+                      alt: "img"
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c("img", {
+                    attrs: {
+                      src: "/assets/frontend/images/brand/8.png",
+                      alt: "img"
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c("img", {
+                    attrs: {
+                      src: "/assets/frontend/images/brand/1.gif",
+                      alt: "img"
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c("img", {
+                    attrs: {
+                      src: "/assets/frontend/images/brand/2.png",
+                      alt: "img"
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c("img", {
+                    attrs: {
+                      src: "/assets/frontend/images/brand/3.png",
+                      alt: "img"
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c("img", {
+                    attrs: {
+                      src: "/assets/frontend/images/brand/4.png",
+                      alt: "img"
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c("img", {
+                    attrs: {
+                      src: "/assets/frontend/images/brand/5.png",
+                      alt: "img"
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c("img", {
+                    attrs: {
+                      src: "/assets/frontend/images/brand/6.png",
+                      alt: "img"
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c("img", {
+                    attrs: {
+                      src: "/assets/frontend/images/brand/7.png",
+                      alt: "img"
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c("img", {
+                    attrs: {
+                      src: "/assets/frontend/images/brand/8.png",
+                      alt: "img"
+                    }
+                  })
+                ])
+              ]
+            )
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "parallax-section parallax-image-2" }, [
+      _c("div", { staticClass: "w100 parallax-section-overley" }, [
+        _c("div", { staticClass: "container" }, [
+          _c("div", { staticClass: "row" }, [
+            _c(
+              "div",
+              { staticClass: "col-xs-12 col-sm-12 col-md-12 col-lg-12" },
+              [
+                _c("div", { staticClass: "parallax-content clearfix" }, [
+                  _c("h1", { staticClass: "xlarge" }, [
+                    _vm._v(" Trusted Seller 500+ ")
+                  ]),
+                  _vm._v(" "),
+                  _c("h5", { staticClass: "parallaxSubtitle" }, [
+                    _vm._v(" Lorem ipsum dolor sit amet consectetuer ")
+                  ])
+                ])
+              ]
+            )
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
       {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.loading,
-            expression: "loading"
-          }
-        ],
-        staticClass: "fa fa-spinner fa-spin"
+        staticClass: "modal fade",
+        attrs: {
+          id: "productSetailsModalAjax",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "productSetailsModalAjaxLabel",
+          "aria-hidden": "true"
+        }
       },
-      [_vm._v("Loading ...")]
-    ),
-    _vm._v(" "),
-    _vm.errors && _vm.errors.length
-      ? _c(
-          "ul",
-          _vm._l(_vm.errors, function(error) {
-            return _c("li", [
-              _vm._v("\n      " + _vm._s(error.message) + "\n    ")
-            ])
-          })
-        )
-      : _vm._e()
-  ])
-}
-var staticRenderFns = []
+      [
+        _c("div", { staticClass: "modal-dialog" }, [
+          _c("div", { staticClass: "modal-content" })
+        ])
+      ]
+    )
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -17271,8 +20958,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 
 
@@ -17351,12 +21036,6 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "container" }, [
       _c("div", { staticClass: "section" }, [
-        _c("p", { staticClass: "caption" }, [
-          _vm._v("Includes predefined classes for easy form layout options.")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "divider" }),
-        _vm._v(" "),
         _c("div", { staticClass: "section", attrs: { id: "basic-form" } }, [
           _c(
             "div",
@@ -17542,113 +21221,125 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "breadcrumbs-wrapper" } }, [
-      _c(
-        "div",
-        {
-          staticClass: "header-search-wrapper grey lighten-2 hide-on-large-only"
-        },
-        [
-          _c("input", {
-            staticClass: "header-search-input z-depth-2",
-            attrs: {
-              type: "text",
-              name: "Search",
-              placeholder: "Explore Materialize"
-            }
-          })
-        ]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "container" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col s10 m6 l6" }, [
-            _c("h5", { staticClass: "breadcrumbs-title" }, [_vm._v("Forms")]),
+    return _c(
+      "div",
+      {
+        staticStyle: { display: "none" },
+        attrs: { id: "breadcrumbs-wrapper" }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass:
+              "header-search-wrapper grey lighten-2 hide-on-large-only"
+          },
+          [
+            _c("input", {
+              staticClass: "header-search-input z-depth-2",
+              attrs: {
+                type: "text",
+                name: "Search",
+                placeholder: "Explore Materialize"
+              }
+            })
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "container" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col s10 m6 l6" }, [
+              _c("h5", { staticClass: "breadcrumbs-title" }, [_vm._v("Forms")]),
+              _vm._v(" "),
+              _c("ol", { staticClass: "breadcrumbs" }, [
+                _c("li", [
+                  _c("a", { attrs: { href: "index.html" } }, [
+                    _vm._v("Dashboard")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c("a", { attrs: { href: "#" } }, [_vm._v("Forms")])
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "active" }, [_vm._v("Forms Layouts")])
+              ])
+            ]),
             _vm._v(" "),
-            _c("ol", { staticClass: "breadcrumbs" }, [
-              _c("li", [
-                _c("a", { attrs: { href: "index.html" } }, [
-                  _vm._v("Dashboard")
-                ])
-              ]),
+            _c("div", { staticClass: "col s2 m6 l6" }, [
+              _c(
+                "a",
+                {
+                  staticClass:
+                    "btn dropdown-settings waves-effect waves-light breadcrumbs-btn right",
+                  attrs: { href: "#!", "data-activates": "dropdown1" }
+                },
+                [
+                  _c(
+                    "i",
+                    { staticClass: "material-icons hide-on-med-and-up" },
+                    [_vm._v("settings")]
+                  ),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "hide-on-small-onl" }, [
+                    _vm._v("Settings")
+                  ]),
+                  _vm._v(" "),
+                  _c("i", { staticClass: "material-icons right" }, [
+                    _vm._v("arrow_drop_down")
+                  ])
+                ]
+              ),
               _vm._v(" "),
-              _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Forms")])]),
-              _vm._v(" "),
-              _c("li", { staticClass: "active" }, [_vm._v("Forms Layouts")])
+              _c(
+                "ul",
+                { staticClass: "dropdown-content", attrs: { id: "dropdown1" } },
+                [
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "grey-text text-darken-2",
+                        attrs: { href: "#!" }
+                      },
+                      [
+                        _vm._v("Access"),
+                        _c("span", { staticClass: "badge" }, [_vm._v("1")])
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "grey-text text-darken-2",
+                        attrs: { href: "#!" }
+                      },
+                      [
+                        _vm._v("Profile"),
+                        _c("span", { staticClass: "new badge" }, [_vm._v("2")])
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "grey-text text-darken-2",
+                        attrs: { href: "#!" }
+                      },
+                      [_vm._v("Notifications")]
+                    )
+                  ])
+                ]
+              )
             ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col s2 m6 l6" }, [
-            _c(
-              "a",
-              {
-                staticClass:
-                  "btn dropdown-settings waves-effect waves-light breadcrumbs-btn right",
-                attrs: { href: "#!", "data-activates": "dropdown1" }
-              },
-              [
-                _c("i", { staticClass: "material-icons hide-on-med-and-up" }, [
-                  _vm._v("settings")
-                ]),
-                _vm._v(" "),
-                _c("span", { staticClass: "hide-on-small-onl" }, [
-                  _vm._v("Settings")
-                ]),
-                _vm._v(" "),
-                _c("i", { staticClass: "material-icons right" }, [
-                  _vm._v("arrow_drop_down")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "ul",
-              { staticClass: "dropdown-content", attrs: { id: "dropdown1" } },
-              [
-                _c("li", [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "grey-text text-darken-2",
-                      attrs: { href: "#!" }
-                    },
-                    [
-                      _vm._v("Access"),
-                      _c("span", { staticClass: "badge" }, [_vm._v("1")])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "grey-text text-darken-2",
-                      attrs: { href: "#!" }
-                    },
-                    [
-                      _vm._v("Profile"),
-                      _c("span", { staticClass: "new badge" }, [_vm._v("2")])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "grey-text text-darken-2",
-                      attrs: { href: "#!" }
-                    },
-                    [_vm._v("Notifications")]
-                  )
-                ])
-              ]
-            )
           ])
         ])
-      ])
-    ])
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -19031,6 +22722,123 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -19105,7 +22913,9 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _c("router-view")
+      _c("router-view"),
+      _vm._v(" "),
+      _vm._m(7, false, false)
     ],
     1
   )
@@ -21192,6 +25002,327 @@ var staticRenderFns = [
           { staticClass: "btn-nobg search-btn", attrs: { type: "submit" } },
           [_c("i", { staticClass: "fa fa-search" })]
         )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("footer", [
+      _c("div", { staticClass: "footer" }, [
+        _c("div", { staticClass: "container" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-lg-3  col-md-3 col-sm-4 col-xs-6" }, [
+              _c("h3", [_vm._v(" Support ")]),
+              _vm._v(" "),
+              _c("ul", [
+                _c("li", { staticClass: "supportLi" }, [
+                  _c("p", [
+                    _vm._v(" Lorem ipsum dolor sit amet, consectetur ")
+                  ]),
+                  _vm._v(" "),
+                  _c("h4", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "inline",
+                        attrs: { href: "callto:+12025550151" }
+                      },
+                      [
+                        _c("strong", [
+                          _c("i", { staticClass: "fa fa-phone" }),
+                          _vm._v(
+                            "\n                                  +1-202-555-0151 "
+                          )
+                        ])
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("h4", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "inline",
+                        attrs: { href: "mailto:help@yourweb.com" }
+                      },
+                      [
+                        _c("i", { staticClass: "fa fa-envelope-o" }),
+                        _vm._v(
+                          "\n                                  help@yourweb.com "
+                        )
+                      ]
+                    )
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-lg-2  col-md-2 col-sm-4 col-xs-6" }, [
+              _c("h3", [_vm._v(" Shop ")]),
+              _vm._v(" "),
+              _c("ul", [
+                _c("li", [
+                  _c("a", { attrs: { href: "#" } }, [
+                    _vm._v(
+                      "\n                              Men's\n                          "
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c("a", { attrs: { href: "#" } }, [
+                    _vm._v("\n                              Women's")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c("a", { attrs: { href: "#" } }, [
+                    _vm._v(
+                      "\n                              Kids'\n                          "
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c("a", { attrs: { href: "#" } }, [
+                    _vm._v("Shoes\n                          ")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c("a", { attrs: { href: "#" } }, [
+                    _vm._v(
+                      "\n                              Gift Cards\n                          "
+                    )
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", {
+              staticClass: "hide visible-xs",
+              staticStyle: { clear: "both" }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-lg-2  col-md-2 col-sm-4 col-xs-6" }, [
+              _c("h3", [_vm._v(" Information ")]),
+              _vm._v(" "),
+              _c("ul", { staticClass: "list-unstyled footer-nav" }, [
+                _c("li", [
+                  _c("a", { attrs: { href: "#" } }, [
+                    _vm._v("Questions?\n                          ")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c("a", { attrs: { href: "#" } }, [
+                    _vm._v(" Order Status\n                          ")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c("a", { attrs: { href: "#" } }, [
+                    _vm._v(" Sizing Charts\n                          ")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c("a", { attrs: { href: "#" } }, [_vm._v(" Return Policy ")])
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c("a", { attrs: { href: "#" } }, [
+                    _vm._v(
+                      "\n                              Contact Us\n                          "
+                    )
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-lg-2  col-md-2 col-sm-4 col-xs-6" }, [
+              _c("h3", [_vm._v(" My Account")]),
+              _vm._v(" "),
+              _c("ul", [
+                _c("li", [
+                  _c("a", { attrs: { href: "account.html" } }, [
+                    _vm._v(" My Account ")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c("a", { attrs: { href: "/customer/address" } }, [
+                    _vm._v(" My Address ")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c("a", { attrs: { href: "/whish/lists" } }, [
+                    _vm._v(" Wish List ")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c("a", { attrs: { href: "/order/lists" } }, [
+                    _vm._v(" Order list ")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c("a", { attrs: { href: "/order/status" } }, [
+                    _vm._v(" Order Status ")
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", {
+              staticClass: "hide visible-xs",
+              staticStyle: { clear: "both" }
+            }),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col-lg-3  col-md-3 col-sm-6 col-xs-12 " },
+              [
+                _c("h3", [_vm._v(" Stay In Touch")]),
+                _vm._v(" "),
+                _c("ul", [
+                  _c("li", [
+                    _c(
+                      "div",
+                      { staticClass: "input-append newsLatterBox text-center" },
+                      [
+                        _c("input", {
+                          staticClass: "full text-center",
+                          attrs: { type: "text", placeholder: "Email" }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn  bg-gray",
+                            attrs: { type: "button" }
+                          },
+                          [
+                            _vm._v(" SubSCript "),
+                            _c("i", { staticClass: "fa fa-long-arrow-right" })
+                          ]
+                        )
+                      ]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("ul", { staticClass: "social" }, [
+                  _c("li", [
+                    _c("a", { attrs: { href: "http://facebook.com" } }, [
+                      _c("i", { staticClass: " fa fa-facebook" }, [
+                        _vm._v("   ")
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c("a", { attrs: { href: "http://twitter.com" } }, [
+                      _c("i", { staticClass: "fa fa-twitter" }, [_vm._v("   ")])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c("a", { attrs: { href: "https://plus.google.com" } }, [
+                      _c("i", { staticClass: "fa fa-google-plus" }, [
+                        _vm._v("   ")
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c("a", { attrs: { href: "http://youtube.com" } }, [
+                      _c("i", { staticClass: "fa fa-pinterest" }, [
+                        _vm._v("   ")
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c("a", { attrs: { href: "http://youtube.com" } }, [
+                      _c("i", { staticClass: "fa fa-youtube" }, [_vm._v("   ")])
+                    ])
+                  ])
+                ])
+              ]
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "footer-bottom" }, [
+        _c("div", { staticClass: "container" }, [
+          _c("p", { staticClass: "pull-left" }, [
+            _vm._v(" © TSHOP 2014. All right reserved. ")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "pull-right paymentMethodImg" }, [
+            _c("img", {
+              staticClass: "pull-right",
+              attrs: {
+                height: "30",
+                src: "/assets/frontend/images/site/payment/master_card.png",
+                alt: "img"
+              }
+            }),
+            _vm._v(" "),
+            _c("img", {
+              staticClass: "pull-right",
+              attrs: {
+                height: "30",
+                src: "/assets/frontend/images/site/payment/visa_card.png",
+                alt: "img"
+              }
+            }),
+            _vm._v(" "),
+            _c("img", {
+              staticClass: "pull-right",
+              attrs: {
+                height: "30",
+                src: "/assets/frontend/images/site/payment/paypal.png",
+                alt: "img"
+              }
+            }),
+            _vm._v(" "),
+            _c("img", {
+              staticClass: "pull-right",
+              attrs: {
+                height: "30",
+                src:
+                  "/assets/frontend/images/site/payment/american_express_card.png",
+                alt: "img"
+              }
+            }),
+            _vm._v(" "),
+            _c("img", {
+              staticClass: "pull-right",
+              attrs: {
+                height: "30",
+                src:
+                  "/assets/frontend/images/site/payment/discover_network_card.png",
+                alt: "img"
+              }
+            }),
+            _vm._v(" "),
+            _c("img", {
+              staticClass: "pull-right",
+              attrs: {
+                height: "30",
+                src: "/assets/frontend/images/site/payment/google_wallet.png",
+                alt: "img"
+              }
+            })
+          ])
+        ])
       ])
     ])
   }
