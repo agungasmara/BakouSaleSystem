@@ -2,6 +2,11 @@
 @section('content')
 @include('frontend.include.slide')
 
+<div id="root_frontend">
+    <router-view class="view"></router-view>
+</div>
+
+<div style="display: none;">
 <div class="container main-container">
 
     <!-- Main component call to action -->
@@ -926,6 +931,7 @@
 </div>
 <!-- /.modal -->
 <!-- End Modal -->
+</div>
 
 
 @endsection

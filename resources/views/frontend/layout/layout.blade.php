@@ -35,10 +35,10 @@
 <body>
 
     <div id="app-content">
-		@include('frontend.include.header')
 		@yield('content')
 		@include('frontend.include.footer')
 	</div>
 
 </body>
 </html>
+<script type="text/javascript" src="{{url('js/app.js')}}"></script>
