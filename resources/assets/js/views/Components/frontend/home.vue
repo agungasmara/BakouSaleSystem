@@ -1,11 +1,12 @@
 <template>
   <div>
+    <!-- include template slider -->
+    <template lang="jade">
+      <SlideComponent/>
+    </template>
 
     <div class="container main-container">
        <!--remote this ####################-->
-        <template lang="jade">
-          <RegisterComponent/>
-        </template>
         <ul v-if="posts && posts.length">
           <li v-for="post of posts">
             <div class="row" style="border:1px solid #f00;">
@@ -954,6 +955,7 @@
 import axios from 'axios'
 import {post} from '../../../helper/api'
 import RegisterComponent from './../../Auth/Register.vue'
+import SlideComponent from './../../Components/frontend/include/slide.vue'
 export default {
   data() {
     return {
@@ -964,9 +966,9 @@ export default {
     }
   },
   components:{
-      RegisterComponent
-
-    },
+    RegisterComponent,
+    SlideComponent
+  },
   // Fetches posts when the component is created.
   created() {
     axios.get(`/api/getTest`)

@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 
 // FrontEnd #######################
 import FHome from './views/Components/frontend/home.vue'
+import FAccount from './views/Components/frontend/account/signin.vue'
 // Backend ###################
 import Home from './views/Components/index.vue'
 import Register from './views/Auth/Register.vue'
@@ -25,6 +26,8 @@ const router = new VueRouter({
   routes: [
     // routing FrontEnd
     { path: '/', name:'fhome',component: FHome },
+    { path: '/my_account', name:'fmyaccount', component: FAccount },
+    { path: '/signin', name:'fsignin', component: FAccount },
     // routing Backend
     { path: '/auth/login', name:'login',component: Login },
     { path: '/admin', name:'ahome',component: Home },

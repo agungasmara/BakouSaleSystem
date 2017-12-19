@@ -27,6 +27,8 @@ if(isset($_COOKIE['Language'])){
 
 // Front End Design
 Route::resource('/', 'FrontEnd\Product\CartController');
+Route::get('my_account', 'FrontEnd\Product\CartController@index');
+Route::get('signin', 'FrontEnd\Product\CartController@index');
 
 Route::get('/api/getTest', 'FrontEnd\TestController@getTest');
 Route::get('/api/show/{id}', 'FrontEnd\TestController@getShow');
@@ -75,7 +77,6 @@ Route::post('api/register', function(Illuminate\Http\Request $request)
 });
 
 Route::group(['middleware' => 'auth'], function() {
-    
 
     // Route::post('logout', function()
     // {
@@ -110,7 +111,6 @@ Route::group(['middleware' => 'auth'], function() {
         return view('index');
     });
 });
-
 
 
 // authentication

@@ -20,10 +20,10 @@
                     <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6 no-margin no-padding">
                         <div class="pull-right">
                             <ul class="userMenu">
-                                <li><a href="/account"><span class="hidden-xs">My Account</span> <i
-                                        class="glyphicon glyphicon-user hide visible-xs "></i></a></li>
-                                <li><a href="#" data-toggle="modal" data-target="#ModalLogin"> <span class="hidden-xs">SignIn</span>
-                                    <i class="glyphicon glyphicon-log-in hide visible-xs "></i> </a></li>
+                                <li><router-link to="/my_account"><span class="hidden-xs">My Account</span> <i
+                                        class="glyphicon glyphicon-user hide visible-xs "></i></router-link></li>
+                                <li><router-link to="/signin" data-toggle="modal" data-target="#ModalLogin"> <span class="hidden-xs">SignIn</span>
+                                    <i class="glyphicon glyphicon-log-in hide visible-xs "></i> </router-link></li>
                                 <li class="hidden-xs"><a href="#" data-toggle="modal" data-target="#ModalSignup">Create Account</a></li>
                             </ul>
                         </div>
