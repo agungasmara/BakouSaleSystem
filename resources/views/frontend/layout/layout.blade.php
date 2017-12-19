@@ -33,12 +33,12 @@
 
 </head>
 <body>
+
     <div id="app-content">
 		@include('frontend.include.header')
 		@yield('content')
 		@include('frontend.include.footer')
 	</div>
-
 
 </body>
 </html>

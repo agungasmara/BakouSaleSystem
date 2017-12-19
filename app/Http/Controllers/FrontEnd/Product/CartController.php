@@ -1,6 +1,4 @@
-<?php
-
-namespace App\Http\Controllers\Frontend\product;
+<?php namespace App\Http\Controllers\FrontEnd\Product;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -18,6 +16,8 @@ use Session;
 use Validator;
 use rules;
 use Redirect;
+use View;
+
 class CartController extends Controller
 {	
 	public function __construct()
@@ -27,12 +27,19 @@ class CartController extends Controller
         	// dd(Auth::check());
             SessionModel::AddSession();
             $data['MyCart']=SessionModel::find(session()->getId())->Cart()->get();
-            dd($data);
+            //dd($data);
             View::share($data);
             return $next($request);
         });
       
     } 
+
+    public function index()
+    {
+
+        return view('frontend.index');
+    }
+
     public function AddToCart(Request $request)
     {
        return Cart::AddToCart($request->all());
@@ -43,6 +50,7 @@ class CartController extends Controller
     }
     public function ProductCart()
     {
+        // dd("test");
     	if (Auth::check()) {
     		return $data['MyCart']=Customer::find(Auth::user()->customer_id)->Cart()->get();
     	}else{

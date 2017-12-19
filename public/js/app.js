@@ -14074,7 +14074,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
 var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
   routes: [
   // dynamic segments start with a colon
-  { path: '/home', component: __WEBPACK_IMPORTED_MODULE_2__views_Components_index_vue___default.a }, { path: '/register', component: __WEBPACK_IMPORTED_MODULE_3__views_Auth_Register_vue___default.a }, { path: '/login', component: __WEBPACK_IMPORTED_MODULE_4__views_Auth_Login_vue___default.a }, { path: '/list', component: __WEBPACK_IMPORTED_MODULE_5__views_Auth_List_vue___default.a }, { path: '/show/:id', component: __WEBPACK_IMPORTED_MODULE_6__views_Auth_Show_vue___default.a }, { path: '/list/:id/edit', component: __WEBPACK_IMPORTED_MODULE_7__views_Auth_Form_vue___default.a, meta: { mode: 'edit' } }]
+  { path: '/shome', component: __WEBPACK_IMPORTED_MODULE_2__views_Components_index_vue___default.a }, { path: '/register', component: __WEBPACK_IMPORTED_MODULE_3__views_Auth_Register_vue___default.a }, { path: '/login', component: __WEBPACK_IMPORTED_MODULE_4__views_Auth_Login_vue___default.a }, { path: '/list', component: __WEBPACK_IMPORTED_MODULE_5__views_Auth_List_vue___default.a }, { path: '/show/:id', component: __WEBPACK_IMPORTED_MODULE_6__views_Auth_Show_vue___default.a }, { path: '/list/:id/edit', component: __WEBPACK_IMPORTED_MODULE_7__views_Auth_Form_vue___default.a, meta: { mode: 'edit' } }]
 });
 
 // const router = new VueRouter({
