@@ -127,3 +127,10 @@ Route::get('logout', function()
     return redirect("auth/login");
     // return response()->json(['success' => true, 'message' => 'You logout with success'], 200);
 })->name('login');
+
+
+//Backend
+
+Route::get('/admin/{any}',function(){
+    return view('index');
+})->where(['any'=>'.*']);
