@@ -134,3 +134,7 @@ Route::get('logout', function()
 Route::get('/admin/{any}',function(){
     return view('index');
 })->where(['any'=>'.*']);
+
+Route::get('/{any}',function(){
+    return view('frontend.index');
+})->where(['any'=>'.*']);
