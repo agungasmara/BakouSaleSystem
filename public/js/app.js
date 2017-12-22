@@ -26499,7 +26499,7 @@ exports = module.exports = __webpack_require__(69)(undefined);
 
 
 // module
-exports.push([module.i, "\nul.temp-menu{\n  display:inline;\n}\n", ""]);
+exports.push([module.i, "\nul.temp-nav li ul.sub-temp-nav li{\n  display:inline;\n  margin-top:100px;\n  padding:0 10px 0 10px;\n}\n", ""]);
 
 // exports
 
@@ -27245,6 +27245,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -27277,8 +27293,6 @@ var render = function() {
     _vm._m(0),
     _vm._v(" "),
     _vm._m(1),
-    _vm._v(" "),
-    _c("img", { staticClass: "pokemon-image" }),
     _vm._v(" "),
     _c("header", { staticClass: "page-topbar", attrs: { id: "header" } }, [
       _c("div", { staticClass: "navbar-fixed" }, [
@@ -27359,7 +27373,41 @@ var render = function() {
       _c(
         "div",
         { staticClass: "wrapper" },
-        [_c("router-view"), _vm._v(" "), _vm._m(25)],
+        [
+          _c(
+            "ul",
+            { staticClass: "temp-nav", staticStyle: { "margin-top": "100px" } },
+            _vm._l(_vm.menus, function(menu) {
+              return _c("li", { staticClass: "items" }, [
+                _c("span", [_vm._v(_vm._s(menu.label))]),
+                _vm._v(" "),
+                _c(
+                  "ul",
+                  { staticClass: "sub-temp-nav" },
+                  _vm._l(menu.child, function(child) {
+                    return _c(
+                      "li",
+                      [
+                        _c("router-link", { attrs: { to: child.url } }, [
+                          _vm._v(
+                            "\n                " +
+                              _vm._s(child.label) +
+                              "\n              "
+                          )
+                        ])
+                      ],
+                      1
+                    )
+                  })
+                )
+              ])
+            })
+          ),
+          _vm._v(" "),
+          _c("router-view"),
+          _vm._v(" "),
+          _vm._m(25)
+        ],
         1
       )
     ]),
@@ -29304,12 +29352,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
 		return {
+			settingName: '',
+			settingID: '',
+			dialog: false,
 			max25chars: function max25chars(v) {
 				return v.length <= 25 || 'Input too long!';
 			},
@@ -29342,6 +29406,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			__WEBPACK_IMPORTED_MODULE_1_axios___default.a.get('/api/setting/list').then(function (response) {
 				_this.settings = response.data;
 			});
+		},
+		confirmDel: function confirmDel(id, name) {
+			this.dialog = true;
+			this.settingName = name;
+			this.settingID = id;
 		}
 	}
 });
@@ -29465,7 +29534,27 @@ var render = function() {
                           _vm._v(_vm._s(props.item.serialized))
                         ]),
                         _vm._v(" "),
-                        _c("td", { staticClass: "text-xs-center" })
+                        _c("td", { staticClass: "text-xs-center" }, [
+                          _c(
+                            "span",
+                            {
+                              staticStyle: { cursor: "pointer" },
+                              on: {
+                                click: function($event) {
+                                  _vm.confirmDel(
+                                    props.item.setting_id,
+                                    props.item.name
+                                  )
+                                }
+                              }
+                            },
+                            [
+                              _c("i", { staticClass: "fa fa-trash-o" }, [
+                                _vm._v("Delete")
+                              ])
+                            ]
+                          )
+                        ])
                       ]
                     }
                   },
@@ -29487,6 +29576,81 @@ var render = function() {
                   }
                 ])
               })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-layout",
+            { attrs: { row: "", "justify-center": "" } },
+            [
+              _c(
+                "v-dialog",
+                {
+                  attrs: { persistent: "", "max-width": "290" },
+                  model: {
+                    value: _vm.dialog,
+                    callback: function($$v) {
+                      _vm.dialog = $$v
+                    },
+                    expression: "dialog"
+                  }
+                },
+                [
+                  _c(
+                    "v-card",
+                    [
+                      _c("v-card-title", { staticClass: "headline" }, [
+                        _vm._v("Message")
+                      ]),
+                      _vm._v(" "),
+                      _c("v-card-text", [
+                        _vm._v(
+                          "Are you sure you want to delete setting with ID: " +
+                            _vm._s(_vm.settingID) +
+                            "?"
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "v-card-actions",
+                        [
+                          _c("v-spacer"),
+                          _vm._v(" "),
+                          _c(
+                            "v-btn",
+                            {
+                              attrs: { color: "green darken-1", flat: "" },
+                              nativeOn: {
+                                click: function($event) {
+                                  _vm.dialog = false
+                                }
+                              }
+                            },
+                            [_vm._v("Disagree")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-btn",
+                            {
+                              attrs: { color: "green darken-1", flat: "" },
+                              nativeOn: {
+                                click: function($event) {
+                                  _vm.dialog = false
+                                }
+                              }
+                            },
+                            [_vm._v("Agree")]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
             ],
             1
           )

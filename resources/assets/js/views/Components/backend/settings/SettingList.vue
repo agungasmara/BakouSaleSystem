@@ -30,7 +30,7 @@
 						<td class="text-xs-left">{{ props.item.value }}</td>
 						<td class="text-xs-left">{{ props.item.serialized }}</td>
 						<td class="text-xs-center">
-							<!--<a href="#" v-on:click="confirmDel(props.item.id,props.item.name)"><i class="fa fa-trash-o"></i></a>-->
+							<span style="cursor:pointer" v-on:click="confirmDel(props.item.setting_id,props.item.name)"><i class="fa fa-trash-o">Delete</i></span>
 						</td>
 					</template>
 					<template slot="pageText" slot-scope="{ pageStart, pageStop }">
@@ -38,6 +38,19 @@
 			        </template>
 			    </v-data-table>
 		    </v-card>
+		    <v-layout row justify-center>
+		      <v-dialog v-model="dialog" persistent max-width="290">
+		        <v-card>
+		          <v-card-title class="headline">Message</v-card-title>
+		          <v-card-text>Are you sure you want to delete setting with ID: {{settingID}}?</v-card-text>
+		          <v-card-actions>
+		            <v-spacer></v-spacer>
+		            <v-btn color="green darken-1" flat @click.native="dialog = false">Disagree</v-btn>
+		            <v-btn color="green darken-1" flat @click.native="dialog = false">Agree</v-btn>
+		          </v-card-actions>
+		        </v-card>
+		      </v-dialog>
+		    </v-layout>
 		</v-app>
 	</div>
 </template>
@@ -48,6 +61,9 @@
 	export default{
 		data(){
 			return{
+				settingName:'',
+				settingID:'',
+				dialog:false,
 				max25chars: (v) => v.length <= 25 || 'Input too long!',
 				tmp: '',
 				search: '',
@@ -88,6 +104,11 @@
 					this.settings=response.data;
 				});
 			},
+			confirmDel(id,name){
+				this.dialog=true;
+				this.settingName=name
+				this.settingID=id
+			}
 		}
 	}
 </script>
