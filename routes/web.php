@@ -11,17 +11,25 @@
 */
 
 // language
+
 if(isset($_COOKIE['Language'])){
     session(['languageActive' => $_COOKIE['Language']]);
 } else {
     session(['languageActive' => 'English']);
     setcookie("Language", 'English', time()+3600*24*365, '/');
 }
+Route::post('login', function(Illuminate\Http\Request $request) 
+{
+    if (Auth::attempt(['email' => $request->get('email'), 'password' => $request->get('password')])) {
+        return response()->json(['success' => true, 'message' => 'Login successfully performed'], 200);
+    }
 
-
+    return response()->json(['success' => false, 'message' => 'Unable to login'], 401);
+});
 if (Request::is('admin*')){
-    Route::middleware(['auth'])->prefix('admin')->group(function () {
-        Route::get('{any}',function(){
+    Route::middleware(['auth'])->group(function () {
+        
+        Route::get('admin/{any?}',function(){
             return view('index');
         })->where(['any'=>'.*']);
     });
@@ -98,26 +106,19 @@ if (Request::is('admin*')){
 // Route::get('/api/show/{id}', 'FrontEnd\TestController@getShow');
 // Route::put('/api/update', 'FrontEnd\TestController@UpdateApi');
 
-// // authentication 
-
-// Route::post('login', function(Illuminate\Http\Request $request) 
-// {
-//     if (Auth::attempt(['email' => $request->get('email'), 'password' => $request->get('password')])) {
-//         return response()->json(['success' => true, 'message' => 'Login successfully performed'], 200);
-//     }
-
-//     return response()->json(['success' => false, 'message' => 'Unable to login'], 401);
-// });
+// authentication 
 
 
-// Route::post('api/register', function(Illuminate\Http\Request $request) 
-// {
-//     // if (Auth::attempt(['email' => $request->get('email'), 'password' => $request->get('password')])) {
-//     //     return response()->json(['success' => true, 'message' => 'Login successfully performed'], 200);
-//     // }
 
-//     // return response()->json(['success' => false, 'message' => 'Unable to login'], 401);
-// });
+
+Route::post('api/register', function(Illuminate\Http\Request $request) 
+{
+    // if (Auth::attempt(['email' => $request->get('email'), 'password' => $request->get('password')])) {
+    //     return response()->json(['success' => true, 'message' => 'Login successfully performed'], 200);
+    // }
+
+    // return response()->json(['success' => false, 'message' => 'Unable to login'], 401);
+});
 
 // Route::group(['middleware' => 'auth'], function() {
 
