@@ -1,6 +1,8 @@
 <style>
-  ul.temp-menu{
+  ul.temp-nav li ul.sub-temp-nav li{
     display:inline;
+    margin-top:100px;
+    padding:0 10px 0 10px;
   }
 </style>
 
@@ -17,7 +19,7 @@
         <div>
           <span class="pokemon-name"></span>
         </div>
-        <img class="pokemon-image"></img>
+        <!--<img class="pokemon-image"></img>-->
 
         <!-- //////////////////////////////////////////////////////////////////////////// -->
         <!-- START HEADER -->
@@ -363,6 +365,20 @@
         <!-- START MAIN -->
         <div id="main">
           <div class="wrapper">
+
+          <ul class="temp-nav" style="margin-top:100px;">
+            <li class="items" v-for="menu in menus">
+              <span>{{menu.label}}</span>
+              <ul class="sub-temp-nav">
+                <li v-for="child in menu.child">
+                  <router-link :to="child.url">
+                    {{child.label}}
+                  </router-link>
+                </li>
+              </ul>
+            </li>
+          </ul>
+
             <router-view></router-view>
             <!-- aside -->
             <aside id="left-sidebar-nav hide-on-large-only">
