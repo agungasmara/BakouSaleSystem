@@ -60,13 +60,12 @@ if (Request::is('admin*')){
         Route::get('get_product/{num}', 'FrontEnd\Product\ProductController@GetProduct');
     });
 }else{
-    Route::get('/{any}',function(){
-        return view('frontend.index');
-    })->where(['any'=>'.*']);
+    Route::get('/{any?}','FrontEnd\Product\FrontEndController@index')->where(['any'=>'.*']);
 }
 
 
-
+Route::post('/AddToCart','FrontEnd\Product\CartController@AddToCart');
+Route::post('/RemoveFromCart','FrontEnd\Product\CartController@RemoveFromCart');
 
 
 

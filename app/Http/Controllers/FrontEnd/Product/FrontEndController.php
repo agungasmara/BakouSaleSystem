@@ -4,9 +4,16 @@ namespace App\Http\Controllers\FrontEnd\Product;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\Http\Models\FrontEnd\SessionModel;
 class FrontEndController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            SessionModel::AddSession();
+            return $next($request);
+        });
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +21,7 @@ class FrontEndController extends Controller
      */
     public function index()
     {
-         return view('frontend.category');
+         return view('frontend.index');
     }
 
      /**
