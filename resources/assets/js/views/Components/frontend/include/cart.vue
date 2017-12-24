@@ -4,7 +4,7 @@
 	    <table >
 	        <tbody >
 
-	        <tr v-for="product in CartProduct.products" class="miniCartProduct" v-model="total=product.price"  v-if="CartProduct.products.length">
+	        <tr v-for="product in CartProduct.products" class="miniCartProduct"  v-if="CartProduct.products.length">
 	            <td style="width:20%" class="miniCartProductThumb">
 	                <div><a href="product-details.html"> <img src="/assets/frontend/images/product/3.jpg" alt="img"> </a>
 	                </div>
