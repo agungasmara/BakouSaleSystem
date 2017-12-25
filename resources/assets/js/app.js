@@ -21,6 +21,22 @@ import Vuetify from 'vuetify'
 Vue.use(Vuetify)
 Vue.use(VueResource);
 Vue.use(VueRouter)
+
+Vue.http.options.credentials = true;
+
+Vue.http.options.xhr = {
+  withCredentials: true
+}
+Vue.http.options.emulateJSON = true
+Vue.http.options.emulateHTTP = true
+Vue.http.options.crossOrigin = true
+
+Vue.http.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:9200'
+Vue.http.headers.common['Access-Control-Request-Method'] = '*'
+Vue.http.headers.common['Content-Type'] = 'application/x-www-form-urlencoded'
+Vue.http.headers.common['Accept'] = 'application/json, text/plain, */*'
+Vue.http.headers.common['Access-Control-Allow-Headers'] = 'Origin, Accept, Content-Type, Authorization, Access-Control-Allow-Origin'
+
 const router = new VueRouter({
   mode: 'history',
   routes: [
