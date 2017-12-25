@@ -6,12 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Test;
-use App\Http\Models\FrontEnd\Cart;
-use App\Http\Models\FrontEnd\Category;
-use App\Http\Models\FrontEnd\Customer;
-use App\Http\Models\FrontEnd\Product;
-use App\Http\Models\FrontEnd\SessionModel;
-
 use App\Http\Requests\Admin\PositionRequest;
 use Illuminate\Support\Facades\Input;
 use App\Models\Admin\Position;
@@ -45,11 +39,14 @@ class TestController extends Controller
        // // $test->cart();
         
        //  dd($user->cart()->get()->toArray());
+
     }   
 
     
      public function index()
     {
+        $Test = Test::all();
+        // return response()->json(['data' => $Test,'success' => false, 'message' => 'Unable to login'], 401);
         return view('frontend.index');
     }
 
@@ -59,7 +56,6 @@ class TestController extends Controller
         // return response()->json(['data' => $Test,'success' => false, 'message' => 'Unable to login'], 401);
         return view('frontend.index');
     }
-
     
 
     public function getTest()

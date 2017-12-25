@@ -4,7 +4,6 @@ namespace App\Http\Models\FrontEnd;
 
 use Illuminate\Database\Eloquent\Model;
 use Auth;
-use session;
 use Carbon\Carbon;
 class Cart extends Model
 {
@@ -51,8 +50,10 @@ class Cart extends Model
 			$key['session_id']=session()->getId();
 			$key['product_id']=$data['product_id'];
 		}
+		
 		return static::where($key)->delete();
 	}
+
 	static function MyCart()
 	{	
 		// $key= Auth::user()!== null ? 'customer_id':'session_id';
@@ -61,7 +62,10 @@ class Cart extends Model
 		}else{
 			$key['session_id']=session()->getId();
 		}
+	}
 
-		return static::where($key)->get()->toArray();
+	static function CartInsert($data)
+	{
+		return static::insert($data);
 	}
 }
