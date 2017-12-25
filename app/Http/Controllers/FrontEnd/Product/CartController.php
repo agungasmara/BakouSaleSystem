@@ -23,14 +23,14 @@ class CartController extends Controller
 	public function __construct()
     {   
 
-        $this->middleware(function ($request, $next) {
-        	// dd(Auth::check());
-            SessionModel::AddSession();
-            $data['MyCart']=SessionModel::find(session()->getId())->Cart()->get();
-            //dd($data);
-            View::share($data);
-            return $next($request);
-        });
+        // $this->middleware(function ($request, $next) {
+        // 	// dd(Auth::check());
+        //     SessionModel::AddSession();
+        //     $data['MyCart']=SessionModel::find(session()->getId())->Cart()->get();
+        //     //dd($data);
+        //     View::share($data);
+        //     return $next($request);
+        // });
       
     } 
 
