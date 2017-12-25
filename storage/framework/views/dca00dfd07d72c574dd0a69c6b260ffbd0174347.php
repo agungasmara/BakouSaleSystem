@@ -40,4 +40,5 @@
 
 </body>
 </html>
-<script type="text/javascript" src="<?php echo e(url('js/app.js')); ?>"></script>
+<script type="text/javascript" src="<?php echo e(asset('js/app.js')); ?>"></script>
+<!-- <script type="text/javascript" src="<?php echo e(url('js/app.js')); ?>"></script> -->

@@ -106,8 +106,6 @@ Route::put('/api/update', 'FrontEnd\TestController@UpdateApi');
 // authentication 
 
 
-
-
 Route::post('api/register', function(Illuminate\Http\Request $request) 
 {
     // if (Auth::attempt(['email' => $request->get('email'), 'password' => $request->get('password')])) {
@@ -121,8 +119,9 @@ Route::post('api/register', function(Illuminate\Http\Request $request)
 
     Route::get('users', function() {
         $users = App\User::all();
+
 //         return response()->json(['success' => 'true', 'message' => 'Loading users', 'data' => ['users' => $users->toJson()]], 200);
-//     });
+    });
 
 //     Route::get('/admin', 'Backend\CommonController@list');
 //     Route::get('/admin/list', 'Backend\CommonController@list');
@@ -146,7 +145,11 @@ Route::post('api/register', function(Illuminate\Http\Request $request)
 //     });
 // });
 
+
 // // authentication
+
+
+
 
 // //Backend
 
