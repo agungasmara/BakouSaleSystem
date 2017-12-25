@@ -34,7 +34,7 @@ class CartController extends Controller
 
     public function index()
     {
-
+        header('Access-Control-Allow-Origin: *');
         return view('frontend.index');
     }
 

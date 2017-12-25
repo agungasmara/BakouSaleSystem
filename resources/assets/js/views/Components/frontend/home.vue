@@ -4,9 +4,18 @@
     <template lang="jade">
       <SlideComponent/>
     </template>
+    <!-- {searchResults}} -->
+    <div v-if="searchResults">
+      <div v-for="item of searchResults['elasticdata']">
+        {{item._source.name}}<br/>
+      </div>
+    </div>
+    <!-- elastic search -->
+    <br/>
+    <center><input style="width:300px" placeholder="Search, Branch, Shop, ..." v-model="q" type="text" @keyup="search" name=""/></center>
 
     <div class="container main-container">
-      <!-- Main component call to action -->
+
        <!-- Main component call to action -->
 
     <div class="row featuredPostContainer globalPadding style2">
@@ -932,37 +941,200 @@
 </template>
 
 <script>
+import Vue from 'vue'
+import VueResource from 'vue-resource'
+import Request from 'sync-request'
 import axios from 'axios'
 import {post} from '../../../helper/api'
+import {createIndex} from '../../../helper/createIndex'
+import Flash from '../../../helper/flash'
 import RegisterComponent from './../../Auth/Register.vue'
 import SlideComponent from './../../Components/frontend/include/slide.vue'
+// import { search } from './helper/elasticsearch'
+
+Vue.use(VueResource)
+
+Vue.http.options.emulateJSON = true
+Vue.http.options.emulateHTTP = true
+Vue.http.options.crossOrigin = true
+Vue.http.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:9200/'
+
+Vue.http.headers.common['Access-Control-Request-Method'] = '*'
+Vue.http.headers.common['Content-Type'] = 'application/x-www-form-urlencoded'
+Vue.http.headers.common['Accept'] = 'application/json, text/plain, */*'
+Vue.http.headers.common['Access-Control-Allow-Headers'] = 'Origin, Accept, Content-Type, Authorization, Access-Control-Allow-Origin'
+
+
+const es_host = 'http://localhost'; // For Production
+const es_port = 9200;
+// import ES from 'elasticsearch'
+var es = require('elasticsearch');
+// var client = new elasticsearch.Client({
+//     host: '127.0.0.1:9200'
+// });
+
+// var client = new ES.Client({
+//   host: 'localhost:9200',
+//   log: 'trace'
+// });
+
+var client = new es.Client({
+  host: 'localhost:9200',
+  log: 'trace',
+});
+
+
+// var client = new ES.Client({
+//     host: 'localhost:9200',
+//     log: 'trace',
+//     keepAlive: true
+// });
+
+// var searchText = "myiphone";
+// Vue.http.headers.common['Access-Control-Allow-Origin'] = '*';
+// Vue.http.headers.common['Access-Control-Request-Method'] = '*';
 export default {
   data() {
     return {
-      // Register: Register,
+      q:'',
+      searchResults:Flash.state,
       posts: [],
       errors: [],
-      loading: true
+      loading: true,
+      results: null,
+    }
+  },
+  ready() {
+    this.q = q;
+  },
+  methods: {
+    search: function() {
+      // client.ping({
+      //   requestTimeout: 30000,
+      // }, function (error) {
+      //   if (error) {
+      //     console.error('elasticsearch cluster is down!');
+      //   } else {
+      //     console.log('All is well');
+      //   }
+      // });
+      var searchText = this.q;
+      client.search({
+        index: "store",
+        type: "product",
+        body: {
+                  "size": 5,
+                    "sort": [
+                  {"popular": {"order": "desc"}}
+              ],
+              "query": {
+                    "query_string": {
+                    "query": (searchText == '' || searchText == ' ')? '*' : searchText+"*",
+                    "fields": ["name"]
+                }
+              }
+              ,
+              "aggs": {
+                  "categories": {
+                      "terms": {
+                          "field": "categories.cat_id",
+                          "size": 5 // limit number result distinct
+                      },
+                      "aggs": {
+                          "tops": {
+                              "top_hits": {
+                                  "size": 5
+                              }
+                          }
+                      }
+                  }
+              }// end aggs
+        }// end body
+      }).then(function (resp) {
+          // return hits = resp.hits.hits;
+          Flash.setState(resp['hits']['hits']);
+      }, function (err) {
+        console.trace(err.message);
+      });
     }
   },
   components:{
     RegisterComponent,
-    SlideComponent
+    SlideComponent,
   },
   // Fetches posts when the component is created.
   created() {
-    // axios.get(`/api/getTest`)
-    // // post('http://jsonplaceholder.typicode.com/posts', this.credential)
-    // .then(response => {
-    //   this.loading = false
-    //   this.posts = response.data['data']
-    // })
-    // .catch(e => {
-    //   this.errors.push(e)
-    // })
+    var params = '';
+    params = {
+      data: {
+        "mappings": {
+          "products": {
+            "properties":{
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string",
+                "fielddata": true
+              },
+              "alias": {
+                "type": "string",
+              },
+              "image": {
+                "type": "string"
+              },
+              "price": {
+                "type": "double"
+              },
+              // "ex_price": {
+              //   "type": "double"
+              // },
+              // "price_range_id": {
+              //   "type": "string"
+              // },
+              "status": {
+                "type": "integer"
+              },
+              "description": {
+                "type": "string"
+              },
+              "isCrawler":{
+                "type":"boolean"
+              },
+              "categories": {
+                "properties": {
+                  "cat_id": {
+                    "type": "string",
+                    "fielddata": true
+                  },
+                  "cat_name": { "type": "string" },
+                  "cat_alias": { "type": "string" }
+                }
+              },
+              "brand":{
+                "properties":{
+                  "id":{
+                    "type": "string",
+                    "fielddata": true
+                  },
+                  "name":{
+                    "type":"string"
+                  }
+                }
+              },
+              "popular": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      }
+    };
+    // createIndex('http://localhost:9200', params);
+    // Vue.http.put("http://localhost:9200", params)
 
     // async / await version (created() becomes async created())
-    //
+    
     // try {
     //   const response = await axios.get(`http://jsonplaceholder.typicode.com/posts`)
     //   this.posts = response.data

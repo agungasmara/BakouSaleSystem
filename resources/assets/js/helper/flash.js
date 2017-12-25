@@ -1,7 +1,11 @@
 export default{
 	state: {
 		success: null,
+		elasticdata : '',
 		error: null
+	},
+	setState(message){
+		this.state.elasticdata = message
 	},
 	setSuccess(message){
 		this.state.success = message
@@ -10,7 +14,6 @@ export default{
 			this.removeSuccess() 
 		},3000)
 	},
-
 	setError(message){
 		this.state.error = message 
 		setTimeout(() => {

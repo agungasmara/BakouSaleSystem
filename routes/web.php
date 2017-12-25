@@ -99,6 +99,11 @@ Route::get('/api/lastest','FrontEnd\Product\LastestController@index');
 // /*--| Api Request Slide--*/
 // Route::get('/api/slide','FrontEnd\includes\SlideController@index');
 
+Route::resource('test/', 'FrontEnd\TestController');
+Route::get('/api/getTest', 'FrontEnd\TestController@getTest');
+Route::get('/api/show/{id}', 'FrontEnd\TestController@getShow');
+Route::put('/api/update', 'FrontEnd\TestController@UpdateApi');
+
 // Route::resource('product/category', 'FrontEnd\Product\FrontEndController');
 // Route::get('product/detail', 'FrontEnd\Product\FrontEndController@product_detail');
 // Route::get('ajax/product', 'FrontEnd\Product\FrontEndController@ajax_product');
@@ -139,6 +144,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('users', function() {
         $users = App\User::all();
     //         return response()->json(['success' => 'true', 'message' => 'Loading users', 'data' => ['users' => $users->toJson()]], 200);
+
+//         return response()->json(['success' => 'true', 'message' => 'Loading users', 'data' => ['users' => $users->toJson()]], 200);
     });
 
     // admin router

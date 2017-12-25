@@ -514,7 +514,11 @@ module.exports = __webpack_require__(22);
 /* harmony default export */ __webpack_exports__["a"] = ({
 	state: {
 		success: null,
+		elasticdata: '',
 		error: null
+	},
+	setState: function setState(message) {
+		this.state.elasticdata = message;
 	},
 	setSuccess: function setSuccess(message) {
 		var _this = this;
@@ -1247,6 +1251,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_16_vuetify___default.a);
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_15_vue_resource__["a" /* default */]);
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.http.options.credentials = true;
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.http.options.xhr = {
+  withCredentials: true
+};
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.http.options.emulateJSON = true;
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.http.options.emulateHTTP = true;
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.http.options.crossOrigin = true;
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.http.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:9200';
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.http.headers.common['Access-Control-Request-Method'] = '*';
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.http.headers.common['Content-Type'] = 'application/x-www-form-urlencoded';
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.http.headers.common['Accept'] = 'application/json, text/plain, */*';
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.http.headers.common['Access-Control-Allow-Headers'] = 'Origin, Accept, Content-Type, Authorization, Access-Control-Allow-Origin';
+
 var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
   mode: 'history',
   routes: [
@@ -14972,13 +14992,28 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helper_api__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Auth_Register_vue__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Auth_Register_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Auth_Register_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Components_frontend_include_slide_vue__ = __webpack_require__(42);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Components_frontend_include_slide_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__Components_frontend_include_slide_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_resource__ = __webpack_require__(71);
+throw new Error("Cannot find module \"sync-request\"");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__helper_api__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__helper_createIndex__ = __webpack_require__(93);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__helper_flash__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Auth_Register_vue__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Auth_Register_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__Auth_Register_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Components_frontend_include_slide_vue__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Components_frontend_include_slide_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__Components_frontend_include_slide_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -15917,34 +15952,192 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+
+
+
+
+
+// import { search } from './helper/elasticsearch'
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_resource__["a" /* default */]);
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.http.options.emulateJSON = true;
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.http.options.emulateHTTP = true;
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.http.options.crossOrigin = true;
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.http.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:9200/';
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.http.headers.common['Access-Control-Request-Method'] = '*';
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.http.headers.common['Content-Type'] = 'application/x-www-form-urlencoded';
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.http.headers.common['Accept'] = 'application/json, text/plain, */*';
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.http.headers.common['Access-Control-Allow-Headers'] = 'Origin, Accept, Content-Type, Authorization, Access-Control-Allow-Origin';
+
+var es_host = 'http://localhost'; // For Production
+var es_port = 9200;
+// import ES from 'elasticsearch'
+var es = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"elasticsearch\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+// var client = new elasticsearch.Client({
+//     host: '127.0.0.1:9200'
+// });
+
+// var client = new ES.Client({
+//   host: 'localhost:9200',
+//   log: 'trace'
+// });
+
+var client = new es.Client({
+  host: 'localhost:9200',
+  log: 'trace'
+});
+
+// var client = new ES.Client({
+//     host: 'localhost:9200',
+//     log: 'trace',
+//     keepAlive: true
+// });
+
+// var searchText = "myiphone";
+// Vue.http.headers.common['Access-Control-Allow-Origin'] = '*';
+// Vue.http.headers.common['Access-Control-Request-Method'] = '*';
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      // Register: Register,
+      q: '',
+      searchResults: __WEBPACK_IMPORTED_MODULE_6__helper_flash__["a" /* default */].state,
       posts: [],
       errors: [],
-      loading: true
+      loading: true,
+      results: null
     };
   },
+  ready: function ready() {
+    this.q = q;
+  },
 
+  methods: {
+    search: function search() {
+      // client.ping({
+      //   requestTimeout: 30000,
+      // }, function (error) {
+      //   if (error) {
+      //     console.error('elasticsearch cluster is down!');
+      //   } else {
+      //     console.log('All is well');
+      //   }
+      // });
+      var searchText = this.q;
+      client.search({
+        index: "store",
+        type: "product",
+        body: {
+          "size": 5,
+          "sort": [{ "popular": { "order": "desc" } }],
+          "query": {
+            "query_string": {
+              "query": searchText == '' || searchText == ' ' ? '*' : searchText + "*",
+              "fields": ["name"]
+            }
+          },
+
+          "aggs": {
+            "categories": {
+              "terms": {
+                "field": "categories.cat_id",
+                "size": 5 // limit number result distinct
+              },
+              "aggs": {
+                "tops": {
+                  "top_hits": {
+                    "size": 5
+                  }
+                }
+              }
+            } // end aggs
+          } // end body
+        } }).then(function (resp) {
+        // return hits = resp.hits.hits;
+        __WEBPACK_IMPORTED_MODULE_6__helper_flash__["a" /* default */].setState(resp['hits']['hits']);
+      }, function (err) {
+        console.trace(err.message);
+      });
+    }
+  },
   components: {
-    RegisterComponent: __WEBPACK_IMPORTED_MODULE_2__Auth_Register_vue___default.a,
-    SlideComponent: __WEBPACK_IMPORTED_MODULE_3__Components_frontend_include_slide_vue___default.a
+    RegisterComponent: __WEBPACK_IMPORTED_MODULE_7__Auth_Register_vue___default.a,
+    SlideComponent: __WEBPACK_IMPORTED_MODULE_8__Components_frontend_include_slide_vue___default.a
   },
   // Fetches posts when the component is created.
   created: function created() {
-    // axios.get(`/api/getTest`)
-    // // post('http://jsonplaceholder.typicode.com/posts', this.credential)
-    // .then(response => {
-    //   this.loading = false
-    //   this.posts = response.data['data']
-    // })
-    // .catch(e => {
-    //   this.errors.push(e)
-    // })
+    var params = '';
+    params = {
+      data: {
+        "mappings": {
+          "products": {
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string",
+                "fielddata": true
+              },
+              "alias": {
+                "type": "string"
+              },
+              "image": {
+                "type": "string"
+              },
+              "price": {
+                "type": "double"
+              },
+              // "ex_price": {
+              //   "type": "double"
+              // },
+              // "price_range_id": {
+              //   "type": "string"
+              // },
+              "status": {
+                "type": "integer"
+              },
+              "description": {
+                "type": "string"
+              },
+              "isCrawler": {
+                "type": "boolean"
+              },
+              "categories": {
+                "properties": {
+                  "cat_id": {
+                    "type": "string",
+                    "fielddata": true
+                  },
+                  "cat_name": { "type": "string" },
+                  "cat_alias": { "type": "string" }
+                }
+              },
+              "brand": {
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "fielddata": true
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              },
+              "popular": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      }
+    };
+    // createIndex('http://localhost:9200', params);
+    // Vue.http.put("http://localhost:9200", params)
 
     // async / await version (created() becomes async created())
-    //
+
     // try {
     //   const response = await axios.get(`http://jsonplaceholder.typicode.com/posts`)
     //   this.posts = response.data
@@ -17478,6 +17671,44 @@ var render = function() {
     "div",
     [
       [_c("SlideComponent")],
+      _vm._v(" "),
+      _vm.searchResults
+        ? _c(
+            "div",
+            _vm._l(_vm.searchResults["elasticdata"], function(item) {
+              return _c("div", [
+                _vm._v("\n      " + _vm._s(item._source.name)),
+                _c("br")
+              ])
+            })
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("center", [
+        _c("input", {
+          directives: [
+            { name: "model", rawName: "v-model", value: _vm.q, expression: "q" }
+          ],
+          staticStyle: { width: "300px" },
+          attrs: {
+            placeholder: "Search, Branch, Shop, ...",
+            type: "text",
+            name: ""
+          },
+          domProps: { value: _vm.q },
+          on: {
+            keyup: _vm.search,
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.q = $event.target.value
+            }
+          }
+        })
+      ]),
       _vm._v(" "),
       _vm._m(0, false, false),
       _vm._v(" "),
@@ -44176,6 +44407,24 @@ if (false) {
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-90d3cdb6", module.exports)
   }
+}
+
+/***/ }),
+/* 93 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export createIndex */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+
+
+function createIndex(url, data) {
+	return __WEBPACK_IMPORTED_MODULE_0_axios___default()({
+		method: 'POST',
+		url: url,
+		data: data
+	});
 }
 
 /***/ })
