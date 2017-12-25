@@ -23,4 +23,8 @@ class SessionModel extends Model
 		$value['expire']=Carbon::now();
 		return static::updateOrCreate($key,$value);
 	}
+	public function cart()
+    {
+    	return $this->hasManyThrough(Product::class,Cart::class,'session_id','product_id','session_id','product_id')->addSelect('product.*','cart.quantity as cart_quantity');
+    }
 }

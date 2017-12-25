@@ -22,7 +22,6 @@ class CartController extends Controller
 {	
 	public function __construct()
     {   
-
         // $this->middleware(function ($request, $next) {
         // 	// dd(Auth::check());
         //     SessionModel::AddSession();
@@ -30,8 +29,7 @@ class CartController extends Controller
         //     //dd($data);
         //     View::share($data);
         //     return $next($request);
-        // });
-      
+        // });   
     } 
 
     public function index()

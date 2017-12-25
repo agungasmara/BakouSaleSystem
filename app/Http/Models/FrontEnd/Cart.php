@@ -3,7 +3,8 @@
 namespace App\Http\Models\FrontEnd;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Auth;
+use Carbon\Carbon;
 class Cart extends Model
 {
 	protected $table = 'cart';
@@ -49,10 +50,8 @@ class Cart extends Model
 			$key['session_id']=session()->getId();
 			$key['product_id']=$data['product_id'];
 		}
-		$value['option']=$data['option'];
-		$value['quantity']=$data['quantity'];
-		$value['date_added']=$data['date_added'];
-		return static::updateOrCreate($key,$value);
+		
+		return static::where($key)->delete();
 	}
 
 	static function MyCart()

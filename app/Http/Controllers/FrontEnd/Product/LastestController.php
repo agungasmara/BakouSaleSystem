@@ -23,6 +23,7 @@ class LastestController extends Controller
             'start' => 0,
             'limit' => 4
         );
+        $results = $this->getProducts($filter_data);
     }
 
     /**

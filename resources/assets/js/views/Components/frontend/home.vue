@@ -939,6 +939,7 @@ import SlideComponent from './../../Components/frontend/include/slide.vue'
 export default {
   data() {
     return {
+      // Register: Register,
       posts: [],
       errors: [],
       loading: true
@@ -950,15 +951,15 @@ export default {
   },
   // Fetches posts when the component is created.
   created() {
-    axios.get(`/api/getTest`)
-    // post('http://jsonplaceholder.typicode.com/posts', this.credential)
-    .then(response => {
-      this.loading = false
-      this.posts = response.data['data']
-    })
-    .catch(e => {
-      this.errors.push(e)
-    })
+    // axios.get(`/api/getTest`)
+    // // post('http://jsonplaceholder.typicode.com/posts', this.credential)
+    // .then(response => {
+    //   this.loading = false
+    //   this.posts = response.data['data']
+    // })
+    // .catch(e => {
+    //   this.errors.push(e)
+    // })
 
     // async / await version (created() becomes async created())
     //

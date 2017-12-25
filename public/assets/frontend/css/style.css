@@ -1076,7 +1076,7 @@ legend {
 }
 
 .miniCartTable {
-    max-height: 300px;
+    /*max-height: 300px;*/
     width: 100%;
     display: block;
 }
