@@ -30,7 +30,10 @@
 						<td class="text-xs-left">{{ props.item.value }}</td>
 						<td class="text-xs-left">{{ props.item.serialized }}</td>
 						<td class="text-xs-center">
-							<span style="cursor:pointer" v-on:click="confirmDel(props.item.setting_id,props.item.name)"><i class="fa fa-trash-o">Delete</i></span>
+							<router-link to="/admin/setting/edit/" settingid="props.item.setting_id" replace>
+								<i class="material-icons">edit</i>
+							</router-link>
+							<span style="cursor:pointer;color:red;" v-on:click="confirmDel(props.item.setting_id,props.item.name)"><i class="material-icons">delete_forever</i></span>
 						</td>
 					</template>
 					<template slot="pageText" slot-scope="{ pageStart, pageStop }">
@@ -45,8 +48,8 @@
 		          <v-card-text>Are you sure you want to delete setting with ID: {{settingID}}?</v-card-text>
 		          <v-card-actions>
 		            <v-spacer></v-spacer>
-		            <v-btn color="green darken-1" flat @click.native="dialog = false">Disagree</v-btn>
-		            <v-btn color="green darken-1" flat @click.native="dialog = false">Agree</v-btn>
+		            <v-btn color="green darken-1" flat @click="deleteItem(settingID,0)">Cancle</v-btn>
+		            <v-btn color="green darken-1" flat @click="deleteItem(settingID,1)">Agree</v-btn>
 		          </v-card-actions>
 		        </v-card>
 		      </v-dialog>
@@ -59,6 +62,7 @@
 	import Flash from '../../../../helper/flash'
 	import axios from 'axios'
 	export default{
+		props:['settingid'],
 		data(){
 			return{
 				settingName:'',
@@ -108,6 +112,19 @@
 				this.dialog=true;
 				this.settingName=name
 				this.settingID=id
+			},
+			deleteItem(id,opt){
+				if(opt==1){
+					axios.delete('/api/setting/delete/'+id).then((res)=>{
+						if(res.data.deleted==true){
+							this.dialog=false
+							this.fetchSettings()
+						}
+						
+					})
+				}else{
+					this.dialog=false
+				}
 			}
 		}
 	}

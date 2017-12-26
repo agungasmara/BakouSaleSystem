@@ -46,4 +46,14 @@ class SettingsController extends Controller
     			  ->get();
     	return response()->json($settings);
     }
+    public function destroy($id)
+    {
+    	//$id=226;
+    	$setting=Setting::select('*')->where('setting_id',$id);
+        $setting->delete();
+        return response()->json([
+        	'deleted'=>true,
+        	'settings'=>Setting::all()
+        ]);
+    }
 }
