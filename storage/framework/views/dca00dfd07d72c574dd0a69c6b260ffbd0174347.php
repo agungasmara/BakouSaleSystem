@@ -4,7 +4,7 @@
 	<title>Front End Website</title>
 	<link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
-
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<!-- Fav and touch icons -->
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo e(url('assets/frontend/ico/apple-touch-icon-144-precomposed.png')); ?>">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?php echo e(url('assets/frontend/ico/apple-touch-icon-114-precomposed.png')); ?>">
@@ -33,12 +33,12 @@
 
 </head>
 <body>
-    <div id="app-content">
-		<?php echo $__env->make('frontend.include.header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-		<?php echo $__env->yieldContent('content'); ?>
-		<?php echo $__env->make('frontend.include.footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-	</div>
 
+    <div id="app-content">
+		<?php echo $__env->yieldContent('content'); ?>
+	</div>
 
 </body>
 </html>
+<script type="text/javascript" src="<?php echo e(asset('js/app.js')); ?>"></script>
+<!-- <script type="text/javascript" src="<?php echo e(url('js/app.js')); ?>"></script> -->

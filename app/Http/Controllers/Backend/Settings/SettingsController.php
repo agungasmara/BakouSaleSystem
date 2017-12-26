@@ -56,4 +56,8 @@ class SettingsController extends Controller
         	'settings'=>Setting::all()
         ]);
     }
+    public function GetSettingByID($id)
+    {
+    	return response()->json(Setting::select('*')->where('setting_id',$id)->get());
+    }
 }

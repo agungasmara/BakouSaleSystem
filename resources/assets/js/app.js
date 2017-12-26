@@ -15,8 +15,9 @@ import FAccount from './views/Components/frontend/account/signin.vue'
     import App from './App.vue'
     import Appl from './Appl.vue'
     //setting########################
-    import SettingForm from './views/Components/backend/settings/MainForm.vue';
-    import SettingList from './views/Components/backend/settings/SettingList.vue';
+    import SettingForm from './views/Components/backend/settings/MainForm.vue'
+    import SettingList from './views/Components/backend/settings/SettingList.vue'
+    import SettingEditForm from './views/Components/backend/Settings/EditForm.vue'
     //end setting####################
 //import router from './router'
 import VueResource from 'vue-resource'
@@ -25,6 +26,22 @@ import Vuetify from 'vuetify'
 Vue.use(Vuetify)
 Vue.use(VueResource);
 Vue.use(VueRouter)
+
+Vue.http.options.credentials = true;
+
+Vue.http.options.xhr = {
+  withCredentials: true
+}
+Vue.http.options.emulateJSON = true
+Vue.http.options.emulateHTTP = true
+Vue.http.options.crossOrigin = true
+
+Vue.http.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:9200'
+Vue.http.headers.common['Access-Control-Request-Method'] = '*'
+Vue.http.headers.common['Content-Type'] = 'application/x-www-form-urlencoded'
+Vue.http.headers.common['Accept'] = 'application/json, text/plain, */*'
+Vue.http.headers.common['Access-Control-Allow-Headers'] = 'Origin, Accept, Content-Type, Authorization, Access-Control-Allow-Origin'
+
 const router = new VueRouter({
   mode: 'history',
   routes: [
@@ -37,8 +54,9 @@ const router = new VueRouter({
     { path: '/admin', name:'ahome',component: Home },
     { path: '/admin/list', name:'floo',component: List },
     { path: '/register', name:'foo',component: Register },
-    {path: '/admin/settings/add',component:SettingForm},
-    {path: '/admin/settings/list',component:SettingList}
+    { path: '/admin/settings/add',component:SettingForm},
+    { path: '/admin/settings/list',component:SettingList},
+    { path: '/admin/settings/edit/:id',component:SettingEditForm,props:true}
   ]
 })
 

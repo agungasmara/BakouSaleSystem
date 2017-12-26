@@ -30,9 +30,9 @@
 						<td class="text-xs-left">{{ props.item.value }}</td>
 						<td class="text-xs-left">{{ props.item.serialized }}</td>
 						<td class="text-xs-center">
-							<router-link to="/admin/setting/edit/" settingid="props.item.setting_id" replace>
+							<span @click="editSetting(props.item.setting_id)"">
 								<i class="material-icons">edit</i>
-							</router-link>
+							</span>
 							<span style="cursor:pointer;color:red;" v-on:click="confirmDel(props.item.setting_id,props.item.name)"><i class="material-icons">delete_forever</i></span>
 						</td>
 					</template>
@@ -45,7 +45,9 @@
 		      <v-dialog v-model="dialog" persistent max-width="290">
 		        <v-card>
 		          <v-card-title class="headline">Message</v-card-title>
-		          <v-card-text>Are you sure you want to delete setting with ID: {{settingID}}?</v-card-text>
+		          	<v-card-text>
+		          		{{ deleteMessage }} {{ settingID }}?
+		          	</v-card-text>
 		          <v-card-actions>
 		            <v-spacer></v-spacer>
 		            <v-btn color="green darken-1" flat @click="deleteItem(settingID,0)">Cancle</v-btn>
@@ -65,6 +67,7 @@
 		props:['settingid'],
 		data(){
 			return{
+				deleteMessage:'',
 				settingName:'',
 				settingID:'',
 				dialog:false,
@@ -109,14 +112,18 @@
 				});
 			},
 			confirmDel(id,name){
+				this.deleteMessage='Are you sure you want to delete setting with ID:'
 				this.dialog=true;
 				this.settingName=name
 				this.settingID=id
 			},
 			deleteItem(id,opt){
 				if(opt==1){
+					this.deleteMessage='Deleting...'
 					axios.delete('/api/setting/delete/'+id).then((res)=>{
+						
 						if(res.data.deleted==true){
+							this.deleteMessage='Delete Successfully'
 							this.dialog=false
 							this.fetchSettings()
 						}
@@ -125,6 +132,10 @@
 				}else{
 					this.dialog=false
 				}
+			},
+			editSetting(id){
+				//this.components.push(id)
+				this.$router.push('/admin/settings/edit/'+id)
 			}
 		}
 	}

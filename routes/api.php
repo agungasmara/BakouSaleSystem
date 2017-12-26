@@ -26,3 +26,4 @@ Route::get('/getStore','Backend\Settings\SettingsController@getStore');
 Route::post('/setting/save','Backend\Settings\SettingsController@Store');
 Route::get('/setting/list','Backend\Settings\SettingsController@list');
 Route::delete('/setting/delete/{id}','Backend\Settings\SettingsController@destroy');
+Route::get('/setting/getsettingbyid/{id}','Backend\Settings\SettingsController@GetSettingByID');

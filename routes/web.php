@@ -60,13 +60,12 @@ if (Request::is('admin*')){
         Route::get('get_product/{num}', 'FrontEnd\Product\ProductController@GetProduct');
     });
 }else{
-    Route::get('/{any}',function(){
-        return view('frontend.index');
-    })->where(['any'=>'.*']);
+    Route::get('/{any?}','FrontEnd\Product\FrontEndController@index')->where(['any'=>'.*']);
 }
 
 
-
+Route::post('/AddToCart','FrontEnd\Product\CartController@AddToCart');
+Route::post('/RemoveFromCart','FrontEnd\Product\CartController@RemoveFromCart');
 
 
 
@@ -76,10 +75,21 @@ if (Request::is('admin*')){
 // //     return view('frontend.index');
 // // });
 
-// // Front End Design
-// Route::resource('/', 'FrontEnd\Product\CartController');
-// Route::get('my_account', 'FrontEnd\Product\CartController@index');
-// Route::get('signin', 'FrontEnd\Product\CartController@index');
+// Front End Router
+Route::resource('/', 'FrontEnd\Product\CartController');
+Route::get('my_account', 'FrontEnd\Product\CartController@index');
+Route::get('signin', 'FrontEnd\Product\CartController@index');
+
+// Front End API
+Route::get('/api/getTest', 'FrontEnd\TestController@getTest');
+Route::get('/api/show/{id}', 'FrontEnd\TestController@getShow');
+Route::put('/api/update', 'FrontEnd\TestController@UpdateApi');
+/*|Api Request Header--*/
+Route::get('/api/header','FrontEnd\common\HeaderController@index');
+/*--| Api Request Slide--*/
+Route::get('/api/slide','FrontEnd\includes\SlideController@index');
+Route::get('/api/lastest','FrontEnd\Product\LastestController@index');
+
 
 // Route::get('/api/getTest', 'FrontEnd\TestController@getTest');
 // Route::get('/api/show/{id}', 'FrontEnd\TestController@getShow');
@@ -88,6 +98,11 @@ if (Request::is('admin*')){
 // Route::get('/api/header','FrontEnd\common\HeaderController@index');
 // /*--| Api Request Slide--*/
 // Route::get('/api/slide','FrontEnd\includes\SlideController@index');
+
+Route::resource('test/', 'FrontEnd\TestController');
+Route::get('/api/getTest', 'FrontEnd\TestController@getTest');
+Route::get('/api/show/{id}', 'FrontEnd\TestController@getShow');
+Route::put('/api/update', 'FrontEnd\TestController@UpdateApi');
 
 // Route::resource('product/category', 'FrontEnd\Product\FrontEndController');
 // Route::get('product/detail', 'FrontEnd\Product\FrontEndController@product_detail');
@@ -100,7 +115,6 @@ if (Request::is('admin*')){
 // Route::get('account', 'FrontEnd\Product\FrontEndController@account');
 
 
-
 // Route::resource('test/', 'FrontEnd\TestController');
 // Route::get('/api/getTest', 'FrontEnd\TestController@getTest');
 // Route::get('/api/show/{id}', 'FrontEnd\TestController@getShow');
@@ -108,8 +122,13 @@ if (Request::is('admin*')){
 
 // authentication 
 
-
-
+Route::post('login', function(Illuminate\Http\Request $request) 
+{
+    if (Auth::attempt(['email' => $request->get('email'), 'password' => $request->get('password')])) {
+        return response()->json(['success' => true, 'message' => 'Login successfully performed'], 200);
+    }
+    return response()->json(['success' => false, 'message' => 'Unable to login'], 401);
+});
 
 Route::post('api/register', function(Illuminate\Http\Request $request) 
 {
@@ -120,20 +139,19 @@ Route::post('api/register', function(Illuminate\Http\Request $request)
     // return response()->json(['success' => false, 'message' => 'Unable to login'], 401);
 });
 
-// Route::group(['middleware' => 'auth'], function() {
-
-//     // Route::post('logout', function()
-//     // {
-//     //     Auth::logout();
-//     //     return response()->json(['success' => true, 'message' => 'You logout with success'], 200);
-//     // });
-
-//     Route::get('users', function() {
-//         $users = App\User::all();
+Route::group(['middleware' => 'auth'], function() {
+    
+    Route::get('users', function() {
+        $users = App\User::all();
+    //         return response()->json(['success' => 'true', 'message' => 'Loading users', 'data' => ['users' => $users->toJson()]], 200);
 
 //         return response()->json(['success' => 'true', 'message' => 'Loading users', 'data' => ['users' => $users->toJson()]], 200);
-//     });
+    });
 
+    // admin router
+    Route::get('/admin', 'Backend\CommonController@list');
+    Route::get('/admin/list', 'Backend\CommonController@list');
+});
 //     Route::get('/admin', 'Backend\CommonController@list');
 //     Route::get('/admin/list', 'Backend\CommonController@list');
 
@@ -156,12 +174,7 @@ Route::post('api/register', function(Illuminate\Http\Request $request)
 //     });
 // });
 
-
 // // authentication
-
-
-
-
 // //Backend
 
 

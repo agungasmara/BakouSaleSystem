@@ -4,265 +4,254 @@
     <template lang="jade">
       <SlideComponent/>
     </template>
+    <!-- {searchResults}} -->
+    <div v-if="searchResults">
+      <div v-for="item of searchResults['elasticdata']">
+        {{item._source.name}}<br/>
+      </div>
+    </div>
+    <!-- elastic search -->
+    <br/>
+    <center><input style="width:300px" placeholder="Search, Branch, Shop, ..." v-model="q" type="text" @keyup="search" name=""/></center>
 
     <div class="container main-container">
-       <!--remote this ####################-->
-        <ul v-if="posts && posts.length">
-          <li v-for="post of posts">
-            <div class="row" style="border:1px solid #f00;">
-              <p><strong>{{post.id}}</strong></p>
-              <p>{{post.name}}</p>
-              <p>
-                <router-link :to="`/show/${post.id}`">Edit</router-link>
-              </p>
-            </div><br/>
-          </li>
-        </ul>
 
-        <i v-show="loading" class="fa fa-spinner fa-spin">Loading ...</i>
+       <!-- Main component call to action -->
 
-        <ul v-if="errors && errors.length">
-          <li v-for="error of errors">
-            {{error.message}}
-          </li>
-        </ul>
+    <div class="row featuredPostContainer globalPadding style2">
+        <h3 class="section-title style2 text-center"><span>BEST SELLER</span></h3>
 
-        <!--#END REmove This ###############-->
-      <!-- Main component call to action -->
+        <div id="productslider" class="owl-carousel owl-theme">
+            <div class="item">
+                <div class="product">
+                    <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
+                       data-placement="left">
+                        <i class="glyphicon glyphicon-heart"></i>
+                    </a>
 
-      <div class="row featuredPostContainer globalPadding style2">
-          <h3 class="section-title style2 text-center"><span>NEW ARRIVALS</span></h3>
+                    <div class="image">
+                        <div class="quickview">
+                            <a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product.html"
+                               data-target="#productSetailsModalAjax">Quick View </a>
+                        </div>
+                        <a href="product-details.html"><img src="/assets/frontend/images/product/34.jpg" alt="img"
+                                                            class="img-responsive"></a>
 
-          <div id="productslider" class="owl-carousel owl-theme">
-              <div class="item">
-                  <div class="product">
-                      <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
-                         data-placement="left">
-                          <i class="glyphicon glyphicon-heart"></i>
-                      </a>
+                        <div class="promotion"><span class="new-product"> NEW</span> <span
+                                class="discount">15% OFF</span></div>
+                    </div>
+                    <div class="description">
+                        <h4><a href="product-details.html">consectetuer adipiscing </a></h4>
 
-                      <div class="image">
-                          <div class="quickview">
-                              <a data-toggle="modal" class="btn btn-xs btn-quickview" href="/ajax/product"
-                                 data-target="#productSetailsModalAjax">QUICK View</a>
-                          </div>
-                          <a href="product-details.html"><img src="/assets/frontend/images/product/34.jpg" alt="img" class="img-responsive"></a>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+                        <span class="size">XL / XXL / S </span></div>
+                    <div class="price"><span>$25</span></div>
+                    <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
+                            class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
+                </div>
+            </div>
+            <!-- <div class="item">
+                <div class="product">
+                    <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
+                       data-placement="left">
+                        <i class="glyphicon glyphicon-heart"></i>
+                    </a>
 
-                          <div class="promotion"><span class="new-product"> NEW</span> <span
-                                  class="discount">15% OFF</span></div>
-                      </div>
-                      <div class="description">
-                          <h4><a href="product-details.html">consectetuer adipiscing </a></h4>
+                    <div class="image">
+                        <div class="quickview">
+                            <a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product.html"
+                               data-target="#productSetailsModalAjax">Quick View </a>
+                        </div>
+                        <a href="product-details.html"><img src="/assets/frontend/images/product/30.jpg" alt="img" class="img-responsive"></a>
 
-                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-                          <span class="size">XL / XXL / S </span></div>
-                      <div class="price"><span>$25</span></div>
-                      <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
-                              class="glyphicon glyphicon-shopping-cart"> </i> Add Cart </span> </a></div>
-                  </div>
-              </div>
-              <div class="item">
-                  <div class="product">
-                      <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
-                         data-placement="left">
-                          <i class="glyphicon glyphicon-heart"></i>
-                      </a>
+                        <div class="promotion"><span class="discount">15% OFF</span></div>
+                    </div>
+                    <div class="description">
+                        <h4><a href="product-details.html">luptatum zzril delenit</a></h4>
 
-                      <div class="image">
-                          <div class="quickview">
-                              <a data-toggle="modal" class="btn btn-xs btn-quickview" href="/ajax/product"
-                                 data-target="#productSetailsModalAjax">Quick View </a>
-                          </div>
-                          <a href="product-details.html"><img src="/assets/frontend/images/product/30.jpg" alt="img"
-                                                              class="img-responsive"></a>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+                        <span class="size">XL / XXL / S </span></div>
+                    <div class="price"><span>$25</span></div>
+                    <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
+                            class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="product">
+                    <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
+                       data-placement="left">
+                        <i class="glyphicon glyphicon-heart"></i>
+                    </a>
 
-                          <div class="promotion"><span class="discount">15% OFF</span></div>
-                      </div>
-                      <div class="description">
-                          <h4><a href="product-details.html">luptatum zzril delenit</a></h4>
+                    <div class="image">
+                        <div class="quickview">
+                            <a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product.html"
+                               data-target="#productSetailsModalAjax">Quick View </a>
+                        </div>
+                        <a href="product-details.html"><img src="/assets/frontend/images/product/36.jpg" alt="img"
+                                                            class="img-responsive"></a>
 
-                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-                          <span class="size">XL / XXL / S </span></div>
-                      <div class="price"><span>$25</span></div>
-                      <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
-                              class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
-                  </div>
-              </div>
-              <div class="item">
-                  <div class="product">
-                      <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
-                         data-placement="left">
-                          <i class="glyphicon glyphicon-heart"></i>
-                      </a>
+                        <div class="promotion"><span class="new-product"> NEW</span></div>
+                    </div>
+                    <div class="description">
+                        <h4><a href="product-details.html">eleifend option </a></h4>
 
-                      <div class="image">
-                          <div class="quickview">
-                              <a data-toggle="modal" class="btn btn-xs btn-quickview" href="/ajax/product"
-                                 data-target="#productSetailsModalAjax">Quick View </a>
-                          </div>
-                          <a href="product-details.html"><img src="/assets/frontend/images/product/36.jpg" alt="img"
-                                                              class="img-responsive"></a>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+                        <span class="size">XL / XXL / S </span></div>
+                    <div class="price"><span>$25</span></div>
+                    <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
+                            class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="product">
+                    <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
+                       data-placement="left">
+                        <i class="glyphicon glyphicon-heart"></i>
+                    </a>
 
-                          <div class="promotion"><span class="new-product"> NEW</span></div>
-                      </div>
-                      <div class="description">
-                          <h4><a href="product-details.html">eleifend option </a></h4>
+                    <div class="image">
+                        <div class="quickview">
+                            <a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product.html"
+                               data-target="#productSetailsModalAjax">Quick View </a>
+                        </div>
+                        <a href="product-details.html"><img src="/assets/frontend/images/product/9.jpg" alt="img" class="img-responsive"></a>
+                    </div>
+                    <div class="description">
+                        <h4><a href="product-details.html">mutationem consuetudium </a></h4>
 
-                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-                          <span class="size">XL / XXL / S </span></div>
-                      <div class="price"><span>$25</span></div>
-                      <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
-                              class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
-                  </div>
-              </div>
-              <div class="item">
-                  <div class="product">
-                      <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
-                         data-placement="left">
-                          <i class="glyphicon glyphicon-heart"></i>
-                      </a>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+                        <span class="size">XL / XXL / S </span></div>
+                    <div class="price"><span>$25</span></div>
+                    <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
+                            class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="product">
+                    <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
+                       data-placement="left">
+                        <i class="glyphicon glyphicon-heart"></i>
+                    </a>
 
-                      <div class="image">
-                          <div class="quickview">
-                              <a data-toggle="modal" class="btn btn-xs btn-quickview" href="/ajax/product"
-                                 data-target="#productSetailsModalAjax">Quick View </a>
-                          </div>
-                          <a href="product-details.html"><img src="/assets/frontend/images/product/9.jpg" alt="img" class="img-responsive"></a>
-                      </div>
-                      <div class="description">
-                          <h4><a href="product-details.html">mutationem consuetudium </a></h4>
+                    <div class="image">
+                        <div class="quickview">
+                            <a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product.html"
+                               data-target="#productSetailsModalAjax">Quick View </a>
+                        </div>
+                        <a href="product-details.html"><img src="/assets/frontend/images/product/12.jpg" alt="img"
+                                                            class="img-responsive"></a></div>
+                    <div class="description">
+                        <h4><a href="product-details.html">sequitur mutationem </a></h4>
 
-                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-                          <span class="size">XL / XXL / S </span></div>
-                      <div class="price"><span>$25</span></div>
-                      <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
-                              class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
-                  </div>
-              </div>
-              <div class="item">
-                  <div class="product">
-                      <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
-                         data-placement="left">
-                          <i class="glyphicon glyphicon-heart"></i>
-                      </a>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+                        <span class="size">XL / XXL / S </span></div>
+                    <div class="price"><span>$25</span></div>
+                    <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
+                            class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="product">
+                    <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
+                       data-placement="left">
+                        <i class="glyphicon glyphicon-heart"></i>
+                    </a>
 
-                      <div class="image">
-                          <div class="quickview">
-                              <a data-toggle="modal" class="btn btn-xs btn-quickview" href="/ajax/product"
-                                 data-target="#productSetailsModalAjax">Quick View </a>
-                          </div>
-                          <a href="product-details.html"><img src="/assets/frontend/images/product/12.jpg" alt="img"
-                                                              class="img-responsive"></a></div>
-                      <div class="description">
-                          <h4><a href="product-details.html">sequitur mutationem </a></h4>
+                    <div class="image">
+                        <div class="quickview">
+                            <a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product.html"
+                               data-target="#productSetailsModalAjax">Quick View </a>
+                        </div>
+                        <a href="product-details.html"><img src="/assets/frontend/images/product/13.jpg" alt="img"
+                                                            class="img-responsive"></a></div>
+                    <div class="description">
+                        <h4><a href="product-details.html">consuetudium lectorum.</a></h4>
 
-                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-                          <span class="size">XL / XXL / S </span></div>
-                      <div class="price"><span>$25</span></div>
-                      <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
-                              class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
-                  </div>
-              </div>
-              <div class="item">
-                  <div class="product">
-                      <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
-                         data-placement="left">
-                          <i class="glyphicon glyphicon-heart"></i>
-                      </a>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+                        <span class="size">XL / XXL / S </span></div>
+                    <div class="price"><span>$25</span></div>
+                    <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
+                            class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="product">
+                    <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
+                       data-placement="left">
+                        <i class="glyphicon glyphicon-heart"></i>
+                    </a>
 
-                      <div class="image">
-                          <div class="quickview">
-                              <a data-toggle="modal" class="btn btn-xs btn-quickview" href="/ajax/product"
-                                 data-target="#productSetailsModalAjax">Quick View </a>
-                          </div>
-                          <a href="product-details.html"><img src="/assets/frontend/images/product/13.jpg" alt="img"
-                                                              class="img-responsive"></a></div>
-                      <div class="description">
-                          <h4><a href="product-details.html">consuetudium lectorum.</a></h4>
+                    <div class="image">
+                        <div class="quickview">
+                            <a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product.html"
+                               data-target="#productSetailsModalAjax">Quick View </a>
+                        </div>
+                        <a href="product-details.html"><img src="/assets/frontend/images/product/21.jpg" alt="img"
+                                                            class="img-responsive"></a></div>
+                    <div class="description">
+                        <h4><a href="product-details.html">parum claram</a></h4>
 
-                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-                          <span class="size">XL / XXL / S </span></div>
-                      <div class="price"><span>$25</span></div>
-                      <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
-                              class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
-                  </div>
-              </div>
-              <div class="item">
-                  <div class="product">
-                      <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
-                         data-placement="left">
-                          <i class="glyphicon glyphicon-heart"></i>
-                      </a>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+                        <span class="size">XL / XXL / S </span></div>
+                    <div class="price"><span>$25</span></div>
+                    <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
+                            class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="product">
+                    <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
+                       data-placement="left">
+                        <i class="glyphicon glyphicon-heart"></i>
+                    </a>
 
-                      <div class="image">
-                          <div class="quickview">
-                              <a data-toggle="modal" class="btn btn-xs btn-quickview" href="/ajax/product"
-                                 data-target="#productSetailsModalAjax">Quick View </a>
-                          </div>
-                          <a href="product-details.html"><img src="/assets/frontend/images/product/21.jpg" alt="img"
-                                                              class="img-responsive"></a></div>
-                      <div class="description">
-                          <h4><a href="product-details.html">parum claram</a></h4>
+                    <div class="image">
+                        <div class="quickview">
+                            <a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product.html"
+                               data-target="#productSetailsModalAjax">Quick View </a>
+                        </div>
+                        <a href="product-details.html"><img src="/assets/frontend/images/product/24.jpg" alt="img"
+                                                            class="img-responsive"></a></div>
+                    <div class="description">
+                        <h4><a href="product-details.html">duis dolore </a></h4>
 
-                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-                          <span class="size">XL / XXL / S </span></div>
-                      <div class="price"><span>$25</span></div>
-                      <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
-                              class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
-                  </div>
-              </div>
-              <div class="item">
-                  <div class="product">
-                      <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
-                         data-placement="left">
-                          <i class="glyphicon glyphicon-heart"></i>
-                      </a>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+                        <span class="size">XL / XXL / S </span></div>
+                    <div class="price"><span>$25</span></div>
+                    <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
+                            class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="product">
+                    <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
+                       data-placement="left">
+                        <i class="glyphicon glyphicon-heart"></i>
+                    </a>
 
-                      <div class="image">
-                          <div class="quickview">
-                              <a data-toggle="modal" class="btn btn-xs btn-quickview" href="/ajax/product"
-                                 data-target="#productSetailsModalAjax">Quick View </a>
-                          </div>
-                          <a href="product-details.html"><img src="/assets/frontend/images/product/24.jpg" alt="img"
-                                                              class="img-responsive"></a></div>
-                      <div class="description">
-                          <h4><a href="product-details.html">duis dolore </a></h4>
+                    <div class="image">
+                        <div class="quickview">
+                            <a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product.html"
+                               data-target="#productSetailsModalAjax">Quick View </a>
+                        </div>
+                        <a href="product-details.html"><img src="/assets/frontend/images/product/15.jpg" alt="img"
+                                                            class="img-responsive"></a></div>
+                    <div class="description">
+                        <h4><a href="product-details.html">feugait nulla facilisi</a></h4>
 
-                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-                          <span class="size">XL / XXL / S </span></div>
-                      <div class="price"><span>$25</span></div>
-                      <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
-                              class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
-                  </div>
-              </div>
-              <div class="item">
-                  <div class="product">
-                      <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
-                         data-placement="left">
-                          <i class="glyphicon glyphicon-heart"></i>
-                      </a>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+                        <span class="size">XL / XXL / S </span></div>
+                    <div class="price"><span>$25</span></div>
+                    <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
+                            class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
+                </div>
+            </div> -->
+        </div>
+        <!--/.productslider-->
 
-                      <div class="image">
-                          <div class="quickview">
-                              <a data-toggle="modal" class="btn btn-xs btn-quickview" href="/ajax/product"
-                                 data-target="#productSetailsModalAjax">Quick View </a>
-                          </div>
-                          <a href="product-details.html"><img src="/assets/frontend/images/product/15.jpg" alt="img"
-                                                              class="img-responsive"></a></div>
-                      <div class="description">
-                          <h4><a href="product-details.html">feugait nulla facilisi</a></h4>
-
-                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-                          <span class="size">XL / XXL / S </span></div>
-                      <div class="price"><span>$25</span></div>
-                      <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
-                              class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
-                  </div>
-              </div>
-          </div>
-          <!--/.productslider-->
-
-      </div>
+    </div>
+    <!--/.featuredPostContainer-->      
       <!--/.featuredPostContainer-->
   </div>
   <!-- /main container -->
@@ -296,7 +285,7 @@
       <div class="morePost row featuredPostContainer style2 globalPaddingTop ">
           <!-- this div is for demo || Please remove it when use this page -->
 
-          <h3 class="section-title style2 text-center"><span>NEW FEATURES</span></h3>
+          <h3 class="section-title style2 text-center"><span>LATEST PRODUCT</span></h3>
 
           <div class="container">
               <div class="row xsResponse categoryProduct">
@@ -531,7 +520,7 @@
       <!-- Main component call to action -->
 
       <div class="morePost row featuredPostContainer style2 globalPaddingTop ">
-          <h3 class="section-title style2 text-center"><span>FEATURES PRODUCT</span></h3>
+          <h3 class="section-title style2 text-center"><span>RECOMMADED PRODUCT</span></h3>
 
           <div class="container">
               <div class="row xsResponse equalHeightCategoryProduct">
@@ -952,37 +941,200 @@
 </template>
 
 <script>
+import Vue from 'vue'
+import VueResource from 'vue-resource'
+import Request from 'sync-request'
 import axios from 'axios'
 import {post} from '../../../helper/api'
+import {createIndex} from '../../../helper/createIndex'
+import Flash from '../../../helper/flash'
 import RegisterComponent from './../../Auth/Register.vue'
 import SlideComponent from './../../Components/frontend/include/slide.vue'
+// import { search } from './helper/elasticsearch'
+
+Vue.use(VueResource)
+
+Vue.http.options.emulateJSON = true
+Vue.http.options.emulateHTTP = true
+Vue.http.options.crossOrigin = true
+Vue.http.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:9200/'
+
+Vue.http.headers.common['Access-Control-Request-Method'] = '*'
+Vue.http.headers.common['Content-Type'] = 'application/x-www-form-urlencoded'
+Vue.http.headers.common['Accept'] = 'application/json, text/plain, */*'
+Vue.http.headers.common['Access-Control-Allow-Headers'] = 'Origin, Accept, Content-Type, Authorization, Access-Control-Allow-Origin'
+
+
+const es_host = 'http://localhost'; // For Production
+const es_port = 9300;
+// import ES from 'elasticsearch'
+var es = require('elasticsearch');
+// var client = new elasticsearch.Client({
+//     host: '127.0.0.1:9200'
+// });
+
+// var client = new ES.Client({
+//   host: 'localhost:9200',
+//   log: 'trace'
+// });
+
+var client = new es.Client({
+  host: 'localhost:9300',
+  log: 'trace',
+});
+
+
+// var client = new ES.Client({
+//     host: 'localhost:9200',
+//     log: 'trace',
+//     keepAlive: true
+// });
+
+// var searchText = "myiphone";
+// Vue.http.headers.common['Access-Control-Allow-Origin'] = '*';
+// Vue.http.headers.common['Access-Control-Request-Method'] = '*';
 export default {
   data() {
     return {
-      Register: Register,
+      q:'',
+      searchResults:Flash.state,
       posts: [],
       errors: [],
-      loading: true
+      loading: true,
+      results: null,
+    }
+  },
+  ready() {
+    this.q = q;
+  },
+  methods: {
+    search: function() {
+      // client.ping({
+      //   requestTimeout: 30000,
+      // }, function (error) {
+      //   if (error) {
+      //     console.error('elasticsearch cluster is down!');
+      //   } else {
+      //     console.log('All is well');
+      //   }
+      // });
+      var searchText = this.q;
+      client.search({
+        index: "store",
+        type: "product",
+        body: {
+                  "size": 5,
+                    "sort": [
+                  {"popular": {"order": "desc"}}
+              ],
+              "query": {
+                    "query_string": {
+                    "query": (searchText == '' || searchText == ' ')? '*' : searchText+"*",
+                    "fields": ["name"]
+                }
+              }
+              ,
+              "aggs": {
+                  "categories": {
+                      "terms": {
+                          "field": "categories.cat_id",
+                          "size": 5 // limit number result distinct
+                      },
+                      "aggs": {
+                          "tops": {
+                              "top_hits": {
+                                  "size": 5
+                              }
+                          }
+                      }
+                  }
+              }// end aggs
+        }// end body
+      }).then(function (resp) {
+          // return hits = resp.hits.hits;
+          Flash.setState(resp['hits']['hits']);
+      }, function (err) {
+        console.trace(err.message);
+      });
     }
   },
   components:{
     RegisterComponent,
-    SlideComponent
+    SlideComponent,
   },
   // Fetches posts when the component is created.
   created() {
-    axios.get(`/api/getTest`)
-    // post('http://jsonplaceholder.typicode.com/posts', this.credential)
-    .then(response => {
-      this.loading = false
-      this.posts = response.data['data']
-    })
-    .catch(e => {
-      this.errors.push(e)
-    })
+    var params = '';
+    params = {
+      data: {
+        "mappings": {
+          "products": {
+            "properties":{
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string",
+                "fielddata": true
+              },
+              "alias": {
+                "type": "string",
+              },
+              "image": {
+                "type": "string"
+              },
+              "price": {
+                "type": "double"
+              },
+              // "ex_price": {
+              //   "type": "double"
+              // },
+              // "price_range_id": {
+              //   "type": "string"
+              // },
+              "status": {
+                "type": "integer"
+              },
+              "description": {
+                "type": "string"
+              },
+              "isCrawler":{
+                "type":"boolean"
+              },
+              "categories": {
+                "properties": {
+                  "cat_id": {
+                    "type": "string",
+                    "fielddata": true
+                  },
+                  "cat_name": { "type": "string" },
+                  "cat_alias": { "type": "string" }
+                }
+              },
+              "brand":{
+                "properties":{
+                  "id":{
+                    "type": "string",
+                    "fielddata": true
+                  },
+                  "name":{
+                    "type":"string"
+                  }
+                }
+              },
+              "popular": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      }
+    };
+    // createIndex('http://localhost:9200', params);
+    // Vue.http.put("http://localhost:9200", params)
 
     // async / await version (created() becomes async created())
-    //
+    
     // try {
     //   const response = await axios.get(`http://jsonplaceholder.typicode.com/posts`)
     //   this.posts = response.data

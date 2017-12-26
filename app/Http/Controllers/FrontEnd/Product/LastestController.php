@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\FrontEnd\includes;
+namespace App\Http\Controllers\FrontEnd\Product;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class SlideController extends Controller
+class LastestController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,26 +15,15 @@ class SlideController extends Controller
     public function index()
     {
         //
-        static $module = 0;     
-        $banners = array();
-        $results = $this->getBanner();
-        // dd($results);
-        foreach ($results as $result) {
-
-            // if (is_file($result->image)) {
-                $banners[] = array(
-                    'banner_image_id' => $result->banner_image_id,
-                    'title' => $result->title,
-                    'link'  => $result->link,
-                    //'image' => $this->resize($result->image, $setting->width, $setting->height)
-                    'image' => $result->image
-                );
-            // }
-        }
-
-        $module = $module++;
-        $data = array('data'=>$banners);
-        return response()->json($data);
+        dd("hellowrold");
+        $products = array();
+        $filter_data = array(
+            'sort'  => 'p.date_added',
+            'order' => 'DESC',
+            'start' => 0,
+            'limit' => 4
+        );
+        $results = $this->getProducts($filter_data);
     }
 
     /**
