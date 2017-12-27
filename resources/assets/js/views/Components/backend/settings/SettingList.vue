@@ -30,7 +30,7 @@
 						<td class="text-xs-left">{{ props.item.value }}</td>
 						<td class="text-xs-left">{{ props.item.serialized }}</td>
 						<td class="text-xs-center">
-							<span @click="editSetting(props.item.setting_id)"">
+							<span style="cursor:pointer;" @click="editSetting(props.item.setting_id)"">
 								<i class="material-icons">edit</i>
 							</span>
 							<span style="cursor:pointer;color:red;" v-on:click="confirmDel(props.item.setting_id,props.item.name)"><i class="material-icons">delete_forever</i></span>

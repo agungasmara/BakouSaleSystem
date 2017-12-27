@@ -38,7 +38,7 @@ class SettingsController extends Controller
     	]);
     }
 
-    public function list()
+    public function List()
     {
     	$settings=DB::table('setting')
     			  ->join('store','store.store_id','=','setting.store_id')
@@ -58,6 +58,30 @@ class SettingsController extends Controller
     }
     public function GetSettingByID($id)
     {
-    	return response()->json(Setting::select('*')->where('setting_id',$id)->get());
+    	$setting=Setting::get()->where('setting_id',$id);
+    	foreach ($setting as $key => $value) {
+    		return response()->json([
+	    		'code'=>$value->code,
+	    		'key'=>$value->key,
+	    		'value'=>$value->value,
+	    		'store_id'=>$value->store_id
+	    	]);
+    	}
+    	
+    }
+    public function Update(Request $request,$id)
+    {
+    	
+    	Setting::where('setting_id',$id)->Update([
+    		'store_id'=>$request->store,
+    		'code'=>$request->code,
+			'key'=>$request->key,
+			'value'=>$request->value,
+			'serialized'=>0
+    	]);
+    	return response()->json([
+    		'success'=>true,
+    		'message'=>'Data successfully updated.'
+    	]);
     }
 }

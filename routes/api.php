@@ -24,6 +24,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/getStore','Backend\Settings\SettingsController@getStore');
 Route::post('/setting/save','Backend\Settings\SettingsController@Store');
-Route::get('/setting/list','Backend\Settings\SettingsController@list');
+Route::get('/setting/list','Backend\Settings\SettingsController@List');
 Route::delete('/setting/delete/{id}','Backend\Settings\SettingsController@destroy');
 Route::get('/setting/getsettingbyid/{id}','Backend\Settings\SettingsController@GetSettingByID');
+Route::put('/setting/getsettingbyid/{id}','Backend\Settings\SettingsController@Update');
