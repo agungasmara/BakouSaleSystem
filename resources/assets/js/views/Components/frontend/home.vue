@@ -966,7 +966,7 @@ Vue.http.headers.common['Access-Control-Allow-Headers'] = 'Origin, Accept, Conte
 
 
 const es_host = 'http://localhost'; // For Production
-const es_port = 9300;
+const es_port = 9200;
 // import ES from 'elasticsearch'
 var es = require('elasticsearch');
 // var client = new elasticsearch.Client({
@@ -979,7 +979,7 @@ var es = require('elasticsearch');
 // });
 
 var client = new es.Client({
-  host: 'localhost:9300',
+  host: 'localhost:9200',
   log: 'trace',
 });
 
