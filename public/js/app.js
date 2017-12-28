@@ -92487,9 +92487,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
+            valid: true,
             credential: {
                 email: '',
-                password: ''
+                password: '',
+                emailRules: [function (v) {
+                    return !!v || 'E-mail is required';
+                }, function (v) {
+                    return (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
+                    );
+                }],
+                passwordRules: [function (v) {
+                    return !!v || 'password is required';
+                }, function (v) {
+                    return v && v.length <= 32 || 'Code must be less than 32 characters';
+                }]
             },
             flash: __WEBPACK_IMPORTED_MODULE_0__helper_flash__["a" /* default */].state,
             error: __WEBPACK_IMPORTED_MODULE_0__helper_flash__["a" /* default */].state,
@@ -92510,37 +92522,39 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         login: function login() {
             var _this = this;
 
-            this.isProcessing = true;
-            this.error = {};
-            // post('http://localhost:8000/login', this.credential, function (data, status, request) {
-            //     window.location = "#/register";
-            //     this.$dispatch('login:success');
-            //     storage.saveArray('credential', this.credential);
-            //     $.snackbar({content: data.message, style: 'toast', toggle: 'snackbar'});
+            if (this.$refs.form.validate()) {
+                this.isProcessing = true;
+                this.error = {};
+                // post('http://localhost:8000/login', this.credential, function (data, status, request) {
+                //     window.location = "#/register";
+                //     this.$dispatch('login:success');
+                //     storage.saveArray('credential', this.credential);
+                //     $.snackbar({content: data.message, style: 'toast', toggle: 'snackbar'});
 
-            //   }).error(function (data, status, request) {
+                //   }).error(function (data, status, request) {
 
-            //     $.snackbar({content: data.message, style: 'toast', toggle: 'snackbar'});
+                //     $.snackbar({content: data.message, style: 'toast', toggle: 'snackbar'});
 
-            //   });
-            Object(__WEBPACK_IMPORTED_MODULE_1__helper_api__["a" /* post */])('/login', this.credential).then(function (res) {
-                console.log(res);
-                if (res.data.success) {
-                    __WEBPACK_IMPORTED_MODULE_0__helper_flash__["a" /* default */].setSuccess('Congratulations! You have now successfully registered.');
-                    window.location.href = "/admin";
-                    // this.$router.push('/admin')
-                } else {
+                //   });
+                Object(__WEBPACK_IMPORTED_MODULE_1__helper_api__["a" /* post */])('/login', this.credential).then(function (res) {
+                    console.log(res);
+                    if (res.data.success) {
+                        __WEBPACK_IMPORTED_MODULE_0__helper_flash__["a" /* default */].setSuccess('Congratulations! You have now successfully registered.');
+                        window.location.href = "/admin";
+                        // this.$router.push('/admin')
+                    } else {
+                        __WEBPACK_IMPORTED_MODULE_0__helper_flash__["a" /* default */].setError('Error while trying to login.');
+                        // this.$router.push('/register')
+                    }
+                    _this.isProcessing = false;
+                }).catch(function (err) {
+                    if (err.response.status === 422) {
+                        _this.error = err.response.data;
+                    }
                     __WEBPACK_IMPORTED_MODULE_0__helper_flash__["a" /* default */].setError('Error while trying to login.');
-                    // this.$router.push('/register')
-                }
-                _this.isProcessing = false;
-            }).catch(function (err) {
-                if (err.response.status === 422) {
-                    _this.error = err.response.data;
-                }
-                __WEBPACK_IMPORTED_MODULE_0__helper_flash__["a" /* default */].setError('Error while trying to login.');
-                _this.isProcessing = false;
-            });
+                    _this.isProcessing = false;
+                });
+            }
         }
     }
 });
@@ -92553,45 +92567,51 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", { attrs: { id: "content" } }, [
-    _vm._m(0),
-    _vm._v(" "),
-    _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "section" }, [
-        _c("div", { staticClass: "section", attrs: { id: "basic-form" } }, [
+  return _c(
+    "section",
+    [
+      _c(
+        "v-app",
+        { attrs: { id: "inspire" } },
+        [
           _c(
-            "div",
-            { staticClass: "row" },
+            "v-flex",
+            {
+              attrs: {
+                xs12: "",
+                "offset-xs0": "",
+                sm6: "",
+                "offset-sm3": "",
+                md6: "",
+                "offset-md3": ""
+              }
+            },
             [
-              _vm.flash.success
-                ? _c("div", { staticClass: "flash flash__success" }, [
-                    _vm._v(
-                      "\n            " +
-                        _vm._s(_vm.flash.success) +
-                        "\n          "
-                    )
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
               _c(
-                "form",
-                {
-                  staticClass: "form",
-                  on: {
-                    submit: function($event) {
-                      $event.preventDefault()
-                      _vm.login($event)
-                    }
-                  }
-                },
+                "v-card",
                 [
                   _c(
-                    "v-app",
+                    "v-form",
+                    {
+                      ref: "form",
+                      attrs: { "lazy-validation": "" },
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          _vm.login($event)
+                        }
+                      },
+                      model: {
+                        value: _vm.valid,
+                        callback: function($$v) {
+                          _vm.valid = $$v
+                        },
+                        expression: "valid"
+                      }
+                    },
                     [
-                      _c(
-                        "v-content",
-                        [
-                          _c(
+                      _vm.flash.success
+                        ? _c(
                             "v-alert",
                             {
                               staticClass: "success",
@@ -92599,126 +92619,141 @@ var render = function() {
                             },
                             [
                               _c("v-icon", [_vm._v("home")]),
-                              _vm._v(" Welcome Testing\n                  ")
+                              _vm._v(
+                                " " +
+                                  _vm._s(_vm.flash.success) +
+                                  "\n                      "
+                              )
                             ],
                             1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-badge",
-                            {
-                              staticClass: "badge--left",
-                              attrs: { value: "true" }
-                            },
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.flash.error
+                        ? _c(
+                            "v-alert",
+                            { staticClass: "danger", attrs: { value: "true" } },
                             [
-                              _c(
-                                "span",
-                                { staticClass: "badge__badge primary" },
-                                [_vm._v("6"), _c("span")]
+                              _vm._v(
+                                "\n                          " +
+                                  _vm._s(_vm.flash.error) +
+                                  "\n                      "
                               )
                             ]
-                          ),
-                          _vm._v(" "),
-                          _c("h1", { staticClass: "form__title" }, [
-                            _vm._v("Sign In Account")
-                          ]),
-                          _vm._v(" "),
-                          _vm.flash.error
-                            ? _c(
-                                "div",
-                                { staticClass: "flash flash-success" },
-                                [
-                                  _vm._v(
-                                    "\n                      " +
-                                      _vm._s(_vm.flash.error) +
-                                      "\n                  "
-                                  )
-                                ]
-                              )
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "form__group" }, [
-                            _c("label", [_vm._v("Email")]),
-                            _vm._v(" "),
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.credential.email,
-                                  expression: "credential.email"
-                                }
-                              ],
-                              staticClass: "form__control",
-                              attrs: { type: "text" },
-                              domProps: { value: _vm.credential.email },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    _vm.credential,
-                                    "email",
-                                    $event.target.value
-                                  )
-                                }
-                              }
-                            }),
-                            _vm._v(" "),
-                            _vm.error.email
-                              ? _c("small", { staticClass: "error__control" }, [
-                                  _vm._v(_vm._s(_vm.error.email[0]))
-                                ])
-                              : _vm._e()
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "form__group" }, [
-                            _c("label", [_vm._v("Password")]),
-                            _vm._v(" "),
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.credential.password,
-                                  expression: "credential.password"
-                                }
-                              ],
-                              staticClass: "form__control",
-                              attrs: { type: "password" },
-                              domProps: { value: _vm.credential.password },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    _vm.credential,
-                                    "password",
-                                    $event.target.value
-                                  )
-                                }
-                              }
-                            }),
-                            _vm._v(" "),
-                            _vm.error.password
-                              ? _c("small", { staticClass: "error__control" }, [
-                                  _vm._v(_vm._s(_vm.error.password[0]))
-                                ])
-                              : _vm._e()
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "form__group" }, [
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn__primary",
-                                attrs: { disabled: _vm.isProcessing }
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      !_vm.flash.success && !_vm.flash.error
+                        ? _c(
+                            "v-alert",
+                            { staticClass: "info", attrs: { value: "true" } },
+                            [
+                              _c("v-icon", [_vm._v("home")]),
+                              _vm._v(" Sign In\n                      ")
+                            ],
+                            1
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        {
+                          attrs: {
+                            xs10: "",
+                            "offset-xs1": "",
+                            sm10: "",
+                            "offset-sm1": "",
+                            md10: "",
+                            "offset-md1": ""
+                          }
+                        },
+                        [
+                          _c("v-text-field", {
+                            attrs: {
+                              label: "Email",
+                              rules: _vm.credential.emailRules,
+                              required: ""
+                            },
+                            model: {
+                              value: _vm.credential.email,
+                              callback: function($$v) {
+                                _vm.$set(_vm.credential, "email", $$v)
                               },
-                              [_vm._v("Login")]
-                            )
-                          ])
+                              expression: "credential.email"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm.error.email
+                            ? _c("small", { staticClass: "error__control" }, [
+                                _vm._v(_vm._s(_vm.error.email[0]))
+                              ])
+                            : _vm._e()
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        {
+                          attrs: {
+                            xs10: "",
+                            "offset-xs1": "",
+                            sm10: "",
+                            "offset-sm1": "",
+                            md10: "",
+                            "offset-md1": ""
+                          }
+                        },
+                        [
+                          _c("v-text-field", {
+                            attrs: {
+                              type: "password",
+                              label: "Password",
+                              rules: _vm.credential.passwordRules,
+                              required: ""
+                            },
+                            model: {
+                              value: _vm.credential.password,
+                              callback: function($$v) {
+                                _vm.$set(_vm.credential, "password", $$v)
+                              },
+                              expression: "credential.password"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm.error.password
+                            ? _c("small", { staticClass: "error__control" }, [
+                                _vm._v(_vm._s(_vm.error.password[0]))
+                              ])
+                            : _vm._e()
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        {
+                          attrs: {
+                            xs6: "",
+                            "offset-xs8": "",
+                            sm6: "",
+                            "offset-sm8": "",
+                            md6: "",
+                            "offset-md8": ""
+                          }
+                        },
+                        [
+                          _c(
+                            "v-btn",
+                            {
+                              staticClass: "btn primary",
+                              attrs: {
+                                type: "submit",
+                                disabled: _vm.isProcessing
+                              }
+                            },
+                            [_vm._v("Login")]
+                          )
                         ],
                         1
                       )
@@ -92727,143 +92762,18 @@ var render = function() {
                   )
                 ],
                 1
-              ),
-              _vm._v(" "),
-              _c("router-view")
+              )
             ],
             1
           )
-        ])
-      ])
-    ])
-  ])
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticStyle: { display: "none" },
-        attrs: { id: "breadcrumbs-wrapper" }
-      },
-      [
-        _c(
-          "div",
-          {
-            staticClass:
-              "header-search-wrapper grey lighten-2 hide-on-large-only"
-          },
-          [
-            _c("input", {
-              staticClass: "header-search-input z-depth-2",
-              attrs: {
-                type: "text",
-                name: "Search",
-                placeholder: "Explore Materialize"
-              }
-            })
-          ]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "container" }, [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col s10 m6 l6" }, [
-              _c("h5", { staticClass: "breadcrumbs-title" }, [_vm._v("Forms")]),
-              _vm._v(" "),
-              _c("ol", { staticClass: "breadcrumbs" }, [
-                _c("li", [
-                  _c("a", { attrs: { href: "index.html" } }, [
-                    _vm._v("Dashboard")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c("a", { attrs: { href: "#" } }, [_vm._v("Forms")])
-                ]),
-                _vm._v(" "),
-                _c("li", { staticClass: "active" }, [_vm._v("Forms Layouts")])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col s2 m6 l6" }, [
-              _c(
-                "a",
-                {
-                  staticClass:
-                    "btn dropdown-settings waves-effect waves-light breadcrumbs-btn right",
-                  attrs: { href: "#!", "data-activates": "dropdown1" }
-                },
-                [
-                  _c(
-                    "i",
-                    { staticClass: "material-icons hide-on-med-and-up" },
-                    [_vm._v("settings")]
-                  ),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "hide-on-small-onl" }, [
-                    _vm._v("Settings")
-                  ]),
-                  _vm._v(" "),
-                  _c("i", { staticClass: "material-icons right" }, [
-                    _vm._v("arrow_drop_down")
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "ul",
-                { staticClass: "dropdown-content", attrs: { id: "dropdown1" } },
-                [
-                  _c("li", [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "grey-text text-darken-2",
-                        attrs: { href: "#!" }
-                      },
-                      [
-                        _vm._v("Access"),
-                        _c("span", { staticClass: "badge" }, [_vm._v("1")])
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "grey-text text-darken-2",
-                        attrs: { href: "#!" }
-                      },
-                      [
-                        _vm._v("Profile"),
-                        _c("span", { staticClass: "new badge" }, [_vm._v("2")])
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "grey-text text-darken-2",
-                        attrs: { href: "#!" }
-                      },
-                      [_vm._v("Notifications")]
-                    )
-                  ])
-                ]
-              )
-            ])
-          ])
-        ])
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

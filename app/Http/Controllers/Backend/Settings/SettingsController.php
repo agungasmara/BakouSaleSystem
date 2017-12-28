@@ -38,7 +38,7 @@ class SettingsController extends Controller
     	]);
     }
 
-    public function List()
+    public function list()
     {
     	$settings=DB::table('setting')
     			  ->join('store','store.store_id','=','setting.store_id')
@@ -56,7 +56,7 @@ class SettingsController extends Controller
         	'settings'=>Setting::all()
         ]);
     }
-    public function GetSettingByID($id)
+    public function getSettingByID($id)
     {
     	$setting=Setting::get()->where('setting_id',$id);
     	foreach ($setting as $key => $value) {
@@ -69,7 +69,7 @@ class SettingsController extends Controller
     	}
     	
     }
-    public function Update(Request $request,$id)
+    public function ppdate(Request $request,$id)
     {
     	
     	Setting::where('setting_id',$id)->Update([
