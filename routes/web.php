@@ -26,12 +26,20 @@ Route::post('login', function(Illuminate\Http\Request $request)
 
     return response()->json(['success' => false, 'message' => 'Unable to login'], 401);
 });
+
 if (Request::is('admin*')){
     Route::middleware(['auth'])->group(function () {
+        if (Request::is('admin/api*')){
+            // admin api route
+
+
+        }else{
+            Route::get('admin/{any?}',function(){
+                return view('index');
+            })->where(['any'=>'.*']);
+            
+        }
         
-        Route::get('admin/{any?}',function(){
-            return view('index');
-        })->where(['any'=>'.*']);
     });
     Route::get('auth/logout', function()
     {
