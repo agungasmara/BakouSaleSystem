@@ -36,10 +36,16 @@
 					      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="100" required></v-text-field>
 					      	</v-flex>
 
-					      	<v-btn @click="submit(id)" :disabled="!valid">
-						        submit
+					      	<v-btn @click="submit(id,1)" :disabled="!valid">
+						        Update
 						    </v-btn>
-
+						    <v-btn @click="submit(id,2)" :disabled="!valid">
+						        Update & Close
+						    </v-btn>
+						    <router-link to="/admin/settings/list"><v-btn>
+						        Cancele
+						    </v-btn>
+						    </router-link>
 					    </v-layout>
 					</v-container>
 			    </v-form>
@@ -111,7 +117,7 @@
 					this.select=res.data.store_id
 				});
 			},
-			submit (id) {
+			submit (id,opt) {
 		      if (this.$refs.form.validate()) {
 		        // Native form submission is not yet supported
 		        axios.put('/api/setting/getsettingbyid/'+id, {
@@ -122,6 +128,9 @@
 		        }).then((res)=>{
 		        	if(res.data.success==true){
 		        		Flash.setSuccess(res.data.message)
+		        		if(opt==2){
+		        			this.$router.push('/admin/settings/list')
+		        		}
 		        	}
 		        })
 		      }

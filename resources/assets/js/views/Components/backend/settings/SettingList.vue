@@ -16,7 +16,7 @@
 		      <v-card-title>
 		        <v-spacer>
 		        	<div>
-		                <router-link to="create" replace><v-btn color="primary">Create New</v-btn></router-link>
+		                <router-link to="/admin/settings/add" replace><v-btn color="primary">Create New</v-btn></router-link>
 		            </div>
 		        </v-spacer>
 		        <v-text-field append-icon="search" label="Search" single-line hide-details v-model="search"></v-text-field>

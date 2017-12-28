@@ -33099,7 +33099,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.http.headers.common['Accept'] = 'app
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.http.headers.common['Access-Control-Allow-Headers'] = 'Origin, Accept, Content-Type, Authorization, Access-Control-Allow-Origin';
 
 var es_host = 'http://localhost'; // For Production
-var es_port = 9300;
+var es_port = 9200;
 // import ES from 'elasticsearch'
 var es = __webpack_require__(86);
 // var client = new elasticsearch.Client({
@@ -33112,7 +33112,7 @@ var es = __webpack_require__(86);
 // });
 
 var client = new es.Client({
-  host: 'localhost:9300',
+  host: 'localhost:9200',
   log: 'trace'
 });
 
@@ -96055,6 +96055,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -96107,7 +96114,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				_this.items = res.data;
 			});
 		},
-		submit: function submit() {
+		submit: function submit(opt) {
+			var _this2 = this;
+
 			if (this.$refs.form.validate()) {
 				// Native form submission is not yet supported
 				__WEBPACK_IMPORTED_MODULE_1_axios___default.a.post('/api/setting/save', {
@@ -96118,6 +96127,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				}).then(function (res) {
 					if (res.data.success == true) {
 						__WEBPACK_IMPORTED_MODULE_0__helper_flash__["a" /* default */].setSuccess(res.data.message);
+						if (opt == 1) {
+							_this2.select = "";
+							_this2.code = "";
+							_this2.key = "";
+							_this2.value = "";
+						} else if (opt == 2) {
+							_this2.$router.push('/admin/settings/list');
+						}
 					}
 				});
 			}
@@ -96327,13 +96344,47 @@ var render = function() {
                             "v-btn",
                             {
                               attrs: { disabled: !_vm.valid },
-                              on: { click: _vm.submit }
+                              on: {
+                                click: function($event) {
+                                  _vm.submit(1)
+                                }
+                              }
                             },
                             [
                               _vm._v(
-                                "\n\t\t\t\t\t\t        submit\n\t\t\t\t\t\t    "
+                                "\n\t\t\t\t\t\t        Save & New\n\t\t\t\t\t\t    "
                               )
                             ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-btn",
+                            {
+                              attrs: { disabled: !_vm.valid },
+                              on: {
+                                click: function($event) {
+                                  _vm.submit(2)
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n\t\t\t\t\t\t        Save & Close\n\t\t\t\t\t\t    "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "router-link",
+                            { attrs: { to: "/admin/settings/list" } },
+                            [
+                              _c("v-btn", [
+                                _vm._v(
+                                  "\n\t\t\t\t\t\t\t        Cancele\n\t\t\t\t\t\t\t    "
+                                )
+                              ])
+                            ],
+                            1
                           )
                         ],
                         1
@@ -96607,7 +96658,7 @@ var render = function() {
                       [
                         _c(
                           "router-link",
-                          { attrs: { to: "create", replace: "" } },
+                          { attrs: { to: "/admin/settings/add", replace: "" } },
                           [
                             _c("v-btn", { attrs: { color: "primary" } }, [
                               _vm._v("Create New")
@@ -96937,6 +96988,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -97004,7 +97061,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				_this2.select = res.data.store_id;
 			});
 		},
-		submit: function submit(id) {
+		submit: function submit(id, opt) {
+			var _this3 = this;
+
 			if (this.$refs.form.validate()) {
 				// Native form submission is not yet supported
 				__WEBPACK_IMPORTED_MODULE_1_axios___default.a.put('/api/setting/getsettingbyid/' + id, {
@@ -97015,6 +97074,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				}).then(function (res) {
 					if (res.data.success == true) {
 						__WEBPACK_IMPORTED_MODULE_0__helper_flash__["a" /* default */].setSuccess(res.data.message);
+						if (opt == 2) {
+							_this3.$router.push('/admin/settings/list');
+						}
 					}
 				});
 			}
@@ -97226,15 +97288,45 @@ var render = function() {
                               attrs: { disabled: !_vm.valid },
                               on: {
                                 click: function($event) {
-                                  _vm.submit(_vm.id)
+                                  _vm.submit(_vm.id, 1)
                                 }
                               }
                             },
                             [
                               _vm._v(
-                                "\n\t\t\t\t\t\t        submit\n\t\t\t\t\t\t    "
+                                "\n\t\t\t\t\t\t        Update\n\t\t\t\t\t\t    "
                               )
                             ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-btn",
+                            {
+                              attrs: { disabled: !_vm.valid },
+                              on: {
+                                click: function($event) {
+                                  _vm.submit(_vm.id, 2)
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n\t\t\t\t\t\t        Update & Close\n\t\t\t\t\t\t    "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "router-link",
+                            { attrs: { to: "/admin/settings/list" } },
+                            [
+                              _c("v-btn", [
+                                _vm._v(
+                                  "\n\t\t\t\t\t\t        Cancele\n\t\t\t\t\t\t    "
+                                )
+                              ])
+                            ],
+                            1
                           )
                         ],
                         1
