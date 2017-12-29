@@ -16,10 +16,10 @@
         </div>
         <!-- End Page Loading -->
 
-        <div>
+        <!--<div>
           <span class="pokemon-name"></span>
         </div>
-        <!--<img class="pokemon-image"></img>-->
+        <img class="pokemon-image"></img>-->
 
         <!-- //////////////////////////////////////////////////////////////////////////// -->
         <!-- START HEADER -->

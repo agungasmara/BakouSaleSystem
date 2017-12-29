@@ -17,8 +17,15 @@ import FAccount from './views/Components/frontend/account/signin.vue'
     //setting########################
     import SettingForm from './views/Components/backend/settings/MainForm.vue'
     import SettingList from './views/Components/backend/settings/SettingList.vue'
-    import SettingEditForm from './views/Components/backend/Settings/EditForm.vue'
+    import SettingEditForm from './views/Components/backend/settings/EditForm.vue'
     //end setting####################
+
+    //setting########################
+    import UserGroupForm from './views/Components/backend/users/MainForm.vue'
+    import UserGroupList from './views/Components/backend/users/UserGroupList.vue'
+    import UserGroupEditForm from './views/Components/backend/users/EditForm.vue'
+    //end setting####################
+
 //import router from './router'
 import VueResource from 'vue-resource'
 import Vuetify from 'vuetify'
@@ -54,9 +61,14 @@ const router = new VueRouter({
     { path: '/admin', name:'ahome',component: Home },
     { path: '/admin/list', name:'floo',component: List },
     { path: '/register', name:'foo',component: Register },
+    //Setting
     { path: '/admin/settings/add',component:SettingForm},
     { path: '/admin/settings/list',component:SettingList},
-    { path: '/admin/settings/edit/:id',component:SettingEditForm,props:true}
+    { path: '/admin/settings/edit/:id',component:SettingEditForm,props:true},
+    //User Group
+    { path: '/admin/user_group/add',component:UserGroupForm},
+    { path: '/admin/user_group/list',component:UserGroupList},
+    { path: '/admin/user_group/edit/:id',component:UserGroupEditForm,props:true}
   ]
 })
 

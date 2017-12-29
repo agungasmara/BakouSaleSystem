@@ -5123,7 +5123,7 @@ small {
   }
 }
 
-.tabs {
+./*tabs {
   position: relative;
   overflow-x: auto;
   overflow-y: hidden;
@@ -5200,7 +5200,7 @@ small {
   height: 2px;
   background-color: #a98fd6;
   will-change: left, right;
-}
+}*/
 
 @media only screen and (max-width: 992px) {
   .tabs {

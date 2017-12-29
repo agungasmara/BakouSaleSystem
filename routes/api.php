@@ -32,6 +32,7 @@ Route::put('/setting/getsettingbyid/{id}','Backend\Settings\SettingsController@u
 
 //=====User Group API
 //=====User Group API
+Route::get('/getUsers','Backend\Users\UserGroupsController@getUsers');
 Route::get('/permission','Backend\Users\UserGroupsController@getPermission');
 Route::post('/user_group/save','Backend\Users\UserGroupsController@store');
 Route::get('/user_group/list','Backend\Users\UserGroupsController@list');
