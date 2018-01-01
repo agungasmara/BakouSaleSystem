@@ -117,10 +117,7 @@
 		        	if(res.data.success==true){
 		        		Flash.setSuccess(res.data.message)
 		        		if(opt==1){
-		        			this.select=""
-					        this.code=""
-					        this.key=""
-					        this.value=""
+		        			this.$refs.form.reset()
 		        		}
 		        		else if(opt==2){
 		        			this.$router.push('/admin/settings/list')

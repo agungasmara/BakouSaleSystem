@@ -5892,7 +5892,7 @@ button.btn-floating {
   margin: 16px 0;
 }
 
-.chip {
+/*.chip {
   display: inline-block;
   height: 32px;
   font-size: 13px;
@@ -5979,7 +5979,7 @@ button.btn-floating {
 .chips:empty ~ label {
   font-size: 0.8rem;
   transform: translateY(-140%);
-}
+}*/
 
 .materialboxed {
   display: block;

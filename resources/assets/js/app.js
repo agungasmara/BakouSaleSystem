@@ -65,8 +65,9 @@ const router = new VueRouter({
     { path: '/admin/settings/add',component:SettingForm},
     { path: '/admin/settings/list',component:SettingList},
     { path: '/admin/settings/edit/:id',component:SettingEditForm,props:true},
-    //User Group
-    { path: '/admin/user_group/add',component:UserGroupForm},
+    //User and User Group 
+    { path: '/admin/user/add',component:UserGroupForm},
+    { path: '/admin/user/list',component:UserGroupForm},
     { path: '/admin/user_group/list',component:UserGroupList},
     { path: '/admin/user_group/edit/:id',component:UserGroupEditForm,props:true}
   ]
