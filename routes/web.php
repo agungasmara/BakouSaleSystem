@@ -85,12 +85,13 @@ Route::get('/api/getTest', 'FrontEnd\TestController@getTest');
 Route::get('/api/show/{id}', 'FrontEnd\TestController@getShow');
 Route::put('/api/update', 'FrontEnd\TestController@UpdateApi');
 /*|Api Request Header--*/
-Route::get('/api/header','FrontEnd\common\HeaderController@index');
+Route::get('/api/header','FrontEnd\Common\HeaderController@index');
 /*--| Api Request Slide--*/
-Route::get('/api/slide','FrontEnd\includes\SlideController@index');
-Route::get('/api/lastest','FrontEnd\Product\LastestController@index');
-
-
+Route::get('/api/slide','FrontEnd\Includes\SlideController@index');
+Route::get('/api/latest','FrontEnd\Product\LastestController@index');
+Route::get('/api/bestSeller','FrontEnd\Product\BestSellerController@index');
+/*--| Api Request Banner--*/
+Route::get('/api/banner','FrontEnd\Design\BannerController@index');
 // Route::get('/api/getTest', 'FrontEnd\TestController@getTest');
 // Route::get('/api/show/{id}', 'FrontEnd\TestController@getShow');
 // Route::put('/api/update', 'FrontEnd\TestController@UpdateApi');

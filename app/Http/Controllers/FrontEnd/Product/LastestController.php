@@ -12,18 +12,43 @@ class LastestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-        //
-        dd("hellowrold");
-        $products = array();
+
         $filter_data = array(
             'sort'  => 'p.date_added',
             'order' => 'DESC',
             'start' => 0,
             'limit' => 4
+            // 'limit' => $setting['limit']
         );
+
         $results = $this->getProducts($filter_data);
+        // dd($results);
+        $products = array();
+        if($results){
+            foreach ($results as $p) {
+                // $products = array();
+                // foreach($rs as $p){
+                    $products[] = array(
+                        'product_id'  => $p->product_id,
+                        'thumb'       => $p->image,
+                        'name'        => $p->name,
+                        // 'description' => utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, $this->config->get($this->config->get('config_theme') . '_product_description_length')) . '..',
+                        'description' => $p->description,
+                        'price'       => $p->price,
+                        'special'     => $p->special,
+                        // 'tax'         => $p->tax,
+                        'rating'      => $p->rating,
+                        // 'href'        => $this->url->link('product/product', 'product_id=' . $p->product_id)
+                    );
+                // }   
+            }
+
+        }
+        // dd($products);
+        return response()->json(['data' => $products,'success' => true, 'message' => 'Success']);
     }
 
     /**
