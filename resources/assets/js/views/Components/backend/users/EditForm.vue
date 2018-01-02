@@ -1,4 +1,4 @@
-<template>
+<template id="{{ $route.params.id }}">
 	<div>
 		
 		<v-app id="inspire">
@@ -20,33 +20,31 @@
 			    <v-form v-model="valid" ref="form" lazy-validation>
 			    	<v-container grid-list-md>
               			<v-layout wrap>
-
 					    	<v-flex xs12 sm6 md6>
-					      		<v-select label="Select Store" v-model="select" :items="items" :rules="[v => !!v || 'Item is required']" required></v-select>
+					      		<v-select label="Select Store" v-model="select"  :items="items"  :rules="[v => !!v || 'Item is required']" required></v-select>
 					      	</v-flex>
 
 					    	<v-flex xs12 sm6 md6>
-					      		<v-text-field label="Code" v-model="code" :rules="codeRules" :counter="10" required></v-text-field>
+					      		<v-text-field label="Code" v-model="code" :rules="codeRules" :counter="100" required></v-text-field>
 					      	</v-flex>
 
 					      	<v-flex xs12 sm6 md6>
-					      		<v-text-field label="Key" v-model="key" :rules="keyRules" :counter="10" required></v-text-field>
+					      		<v-text-field label="Key" v-model="key" :rules="keyRules" :counter="100" required></v-text-field>
 					      	</v-flex>
 
 					      	<v-flex xs12 sm6 md6>
-					      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="10" required></v-text-field>
+					      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="100" required></v-text-field>
 					      	</v-flex>
 
-					      	<v-btn @click="submit(1)" :disabled="!valid">
-						        Save & New
+					      	<v-btn @click="submit(id,1)" :disabled="!valid">
+						        Update
 						    </v-btn>
-						    <v-btn @click="submit(2)" :disabled="!valid">
-						        Save & Close
+						    <v-btn @click="submit(id,2)" :disabled="!valid">
+						        Update & Close
 						    </v-btn>
-						    <router-link to="/admin/settings/list">
-							    <v-btn>
-							        Cancele
-							    </v-btn>
+						    <router-link to="/admin/settings/list"><v-btn>
+						        Cancele
+						    </v-btn>
 						    </router-link>
 					    </v-layout>
 					</v-container>
@@ -55,29 +53,34 @@
 		</v-app>
 	</div>
 </template>
+
 <script>
 	import Flash from '../../../../helper/flash'
 	import axios from 'axios'
+
 	export default{
+		props:['id'],
 		data(){
 			return{
+
 				valid: true,
 			    code: '',
 			    codeRules: [
 			      (v) => !!v || 'Code is required',
-			      (v) => v && v.length <= 10 || 'Code must be less than 10 characters'
+			      (v) => v && v.length <= 100 || 'Code must be less than 100 characters'
 			    ],
 			    key: '',
 			    keyRules: [
 			      (v) => !!v || 'Key is required',
-			      (v) => v && v.length <= 10 || 'Key must be less than 10 characters'
+			      (v) => v && v.length <= 100 || 'Key must be less than 100 characters'
 			    ],
 			    value: '',
 			    valueRules: [
 			      (v) => !!v || 'Value is required',
-			      (v) => v && v.length <= 10 || 'Value must be less than 10 characters'
+			      (v) => v && v.length <= 100 || 'Value must be less than 100 characters'
 			    ],
-			    select: null,
+				settings:[],
+			    select: 0,
 			    items: [],
 			    breadcrumbs: [
 			        {
@@ -97,6 +100,7 @@
 			}
 		},
 		created(){
+			this.fetchSetting(this.id)
 			this.getStore()
 		},
 		methods:{
@@ -105,10 +109,18 @@
 					this.items=res.data
 				})
 			},
-			submit (opt) {
+			fetchSetting(id){
+				axios.get('/api/setting/getsettingbyid/'+id).then(res=>{
+					this.code=res.data.code
+					this.key=res.data.key
+					this.value=res.data.value
+					this.select=res.data.store_id
+				});
+			},
+			submit (id,opt) {
 		      if (this.$refs.form.validate()) {
 		        // Native form submission is not yet supported
-		        axios.post('/api/setting/save', {
+		        axios.put('/api/setting/getsettingbyid/'+id, {
 		          store: this.select,
 		          code: this.code,
 		          key: this.key,
@@ -116,10 +128,7 @@
 		        }).then((res)=>{
 		        	if(res.data.success==true){
 		        		Flash.setSuccess(res.data.message)
-		        		if(opt==1){
-		        			this.$refs.form.reset()
-		        		}
-		        		else if(opt==2){
+		        		if(opt==2){
 		        			this.$router.push('/admin/settings/list')
 		        		}
 		        	}

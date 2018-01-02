@@ -16,32 +16,32 @@
         </div>
         <!-- End Page Loading -->
 
-        <div>
+        <!--<div>
           <span class="pokemon-name"></span>
         </div>
-        <!--<img class="pokemon-image"></img>-->
+        <img class="pokemon-image"></img>-->
 
         <!-- //////////////////////////////////////////////////////////////////////////// -->
         <!-- START HEADER -->
         <header id="header" class="page-topbar">
-          <!--<div class="navbar-fixed">
+          <div class="navbar-fixed">
             <nav class="navbar-color gradient-45deg-light-blue-cyan">
               <div class="nav-wrapper">
                 <ul class="left">
                   <li>
-                    <h1 class="logo-wrapper">-->
+                    <h1 class="logo-wrapper">
                       <!-- <a href="/admin" class="brand-logo darken-1"> -->
-                        <!--<router-link class="brand-logo darken-1"  to="/admin">
+                        <router-link class="brand-logo darken-1"  to="/admin">
                           <img src="/images/logo/materialize-logo.png" alt="materialize logo">
                           <span class="logo-text hide-on-med-and-down">Materialize</span>
-                        </router-link>-->
+                        </router-link>
                       <!-- </a> -->
-                    <!--</h1>
+                    </h1>
                   </li>
                 </ul>
                 <div class="header-search-wrapper hide-on-med-and-down">
                   <i class="material-icons">search</i>
-                  <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize" />
+                  <input type="text" name="Search" class="header-search-input z-depth-2 materialize-search" placeholder="Explore Materialize" />
                 </div>
                 <ul class="right hide-on-med-and-down">
                   <li>
@@ -74,9 +74,9 @@
                       <i class="material-icons">format_indent_increase</i>
                     </a>
                   </li>
-                </ul>-->
+                </ul>
                 <!-- translation-button -->
-                <!--<ul id="translation-dropdown" class="dropdown-content">
+                <ul id="translation-dropdown" class="dropdown-content">
                   <li>
                     <a href="#!" class="grey-text text-darken-1">
                       <i class="flag-icon flag-icon-gb"></i> English</a>
@@ -93,9 +93,9 @@
                     <a href="#!" class="grey-text text-darken-1">
                       <i class="flag-icon flag-icon-de"></i> German</a>
                   </li>
-                </ul>-->
+                </ul>
                 <!-- notifications-dropdown -->
-                <!--<ul id="notifications-dropdown" class="dropdown-content">
+                <ul id="notifications-dropdown" class="dropdown-content">
                   <li>
                     <h6>NOTIFICATIONS
                       <span class="new badge">5</span>
@@ -127,9 +127,9 @@
                       <span class="material-icons icon-bg-circle amber small">trending_up</span> Generate monthly report</a>
                     <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">1 week ago</time>
                   </li>
-                </ul>-->
+                </ul>
                 <!-- profile-dropdown -->
-                <!--<ul id="profile-dropdown" class="dropdown-content">
+                <ul id="profile-dropdown" class="dropdown-content">
                   <li>
                     <a href="#" class="grey-text text-darken-1">
                       <i class="material-icons">face</i> Profile</a>
@@ -153,9 +153,9 @@
                   </li>
                 </ul>
               </div>
-            </nav>-->
+            </nav>
             <!-- HORIZONTL NAV START-->
-            <!--<nav id="horizontal-nav" class="white hide-on-med-and-down">
+            <nav id="horizontal-nav" class="white hide-on-med-and-down">
               <div class="nav-wrapper">
                 <ul id="ul-horizontal-nav" class="left hide-on-med-and-down">
                   <li class="active">
@@ -247,28 +247,28 @@
                   </li>
                 </ul>
               </div>
-            </nav>-->
+            </nav>
             <!-- Dashboarddropdown -->
-            <!--<ul id="Dashboarddropdown" class="dropdown-content dropdown-horizontal-list">
+            <ul id="Dashboarddropdown" class="dropdown-content dropdown-horizontal-list">
               <li><a href="dashboard-ecommerce.html">eCommerce</a></li>
               <li class="active"><a href="/admin">Analytics</a></li>
-            </ul>-->
+            </ul>
             <!-- Templatesdropdown -->
-            <!--<ul id="Templatesdropdown" class="dropdown-content dropdown-horizontal-list">
+            <ul id="Templatesdropdown" class="dropdown-content dropdown-horizontal-list">
               <li><a href="../collapsible-menu/">Collapsible Menu</a></li>
               <li><a href="../semi-dark-menu/">Semi Dark Menu</a></li>
               <li><a href="../fixed-menu/">Fixed Menu</a></li>
               <li><a href="../overlay-menu/">Overlay Menu</a></li>
               <li><a href="../horizontal-menu/">Horizontal Menu</a></li>
-            </ul>-->
+            </ul>
             <!-- Cardsdropdown -->
-            <!--<ul id="Cardsdropdown" class="dropdown-content dropdown-horizontal-list">
+            <ul id="Cardsdropdown" class="dropdown-content dropdown-horizontal-list">
               <li><a href="cards-basic.html">Basic</a></li>
               <li><a href="cards-advance.html">Advance</a></li>
               <li><a href="cards-extended.html">Extended</a></li>
-            </ul>-->
+            </ul>
             <!-- CSSdropdown -->
-            <!--<ul id="CSSdropdown" class="dropdown-content dropdown-horizontal-list">
+            <ul id="CSSdropdown" class="dropdown-content dropdown-horizontal-list">
               <li><a href="css-typography.html">Typography</a></li>
               <li><a href="css-color.html">Color</a></li>
               <li><a href="css-grid.html">Grid</a></li>
@@ -279,9 +279,9 @@
               <li><a href="css-shadow.html">Shadow</a></li>
               <li><a href="css-animations.html">Animations</a></li>
               <li><a href="css-transitions.html">Transition</a></li>
-            </ul>-->
+            </ul>
             <!-- BasicUIdropdown-->
-            <!--<ul id="BasicUIdropdown" class="dropdown-content dropdown-horizontal-list">
+            <ul id="BasicUIdropdown" class="dropdown-content dropdown-horizontal-list">
               <li><a href="ui-basic-buttons.html">Basic</a></li>
               <li><a href="ui-extended-buttons.html">Extended</a></li>
               <li><a href="ui-icons.html">Icons</a></li>
@@ -293,9 +293,9 @@
               <li><a href="ui-navbar.html">Navbar</a></li>
               <li><a href="ui-pagination.html">Pagination</a></li>
               <li><a href="ui-preloader.html">Preloader</a></li>
-            </ul>-->
+            </ul>
             <!-- AdvancedUIdropdown-->
-            <!--<ul id="AdvancedUIdropdown" class="dropdown-content dropdown-horizontal-list">
+            <ul id="AdvancedUIdropdown" class="dropdown-content dropdown-horizontal-list">
               <li>
                 <router-link class="dropdown-menu"  to="/admin/list">
                   Carousel
@@ -313,33 +313,33 @@
               <li><a href="advance-ui-tabs.html">Tabs</a></li>
               <li><a href="advance-ui-transitions.html">Transitions</a></li>
               <li><a href="advance-ui-waves.html">Waves</a></li>
-            </ul>-->
+            </ul>
             <!-- ExtraComponentsdropdown-->
-            <!--<ul id="ExtraComponentsdropdown" class="dropdown-content dropdown-horizontal-list">
+            <ul id="ExtraComponentsdropdown" class="dropdown-content dropdown-horizontal-list">
               <li><a href="extra-components-range-slider.html">Range Slider</a></li>
               <li><a href="extra-components-sweetalert.html">SweetAlert</a></li>
               <li><a href="extra-components-nestable.html">Shortable & Nestable</a></li>
               <li><a href="extra-components-translation.html">Language Translation</a></li>
               <li><a href="extra-components-highlight.html">Highlight</a></li>
-            </ul>-->
+            </ul>
             <!-- Tablesdropdown -->
-            <!--<ul id="Tablesdropdown" class="dropdown-content dropdown-horizontal-list">
+            <ul id="Tablesdropdown" class="dropdown-content dropdown-horizontal-list">
               <li><a href="table-basic.html">Basic Tables</a></li>
               <li><a href="table-data.html">Data Tables</a></li>
               <li><a href="table-jsgrid.html">jsGrid</a></li>
               <li><a href="table-editable.html">Editable Table</a></li>
               <li><a href="table-floatThead.html">FloatThead</a></li>
-            </ul>-->
+            </ul>
             <!-- Formsdropdown -->
-            <!--<ul id="Formsdropdown" class="dropdown-content dropdown-horizontal-list">
+            <ul id="Formsdropdown" class="dropdown-content dropdown-horizontal-list">
               <li><a href="form-elements.html">Form Elements</a></li>
               <li><a href="form-layouts.html">Form Layouts</a></li>
               <li><a href="form-validation.html">Form Validations</a></li>
               <li><a href="form-masks.html">Form Masks</a></li>
               <li><a href="form-file-uploads.html">File Uploads</a></li>
-            </ul>-->
+            </ul>
             <!-- Pagesdropdown -->
-            <!--<ul id="Pagesdropdown" class="dropdown-content dropdown-horizontal-list">
+            <ul id="Pagesdropdown" class="dropdown-content dropdown-horizontal-list">
               <li><a href="page-contact.html">Contact Page</a></li>
               <li><a href="page-todo.html">ToDos</a></li>
               <li><a href="page-blog-1.html">Blog Type 1</a></li>
@@ -348,36 +348,13 @@
               <li><a href="page-500.html">500</a></li>
               <li><a href="page-blank.html">Blank</a></li>
             </ul>
-          </div>-->
-          <ul class="temp-menu">
-            <li v-for="menu in menus">
-              {{ menu.label }}
-              <ul>
-                <li v-for="child in menu.child">
-                  <router-link :to="child.url">{{ child.label }}</router-link>
-                </li>
-              </ul>
-            </li>
-          </ul>
+          </div>
         </header>
         <!-- END HEADER -->
         
         <!-- START MAIN -->
         <div id="main">
           <div class="wrapper">
-
-          <ul class="temp-nav" style="margin-top:100px;">
-            <li class="items" v-for="menu in menus">
-              <span>{{menu.label}}</span>
-              <ul class="sub-temp-nav">
-                <li v-for="child in menu.child">
-                  <router-link :to="child.url">
-                    {{child.label}}
-                  </router-link>
-                </li>
-              </ul>
-            </li>
-          </ul>
 
             <router-view></router-view>
             <!-- aside -->
@@ -427,17 +404,7 @@
     export default{
         data(){
             return{
-                flash: Flash.state,
-                menus:[
-                  {label:'Setting',child:[
-                    {label:'Create',url:'/admin/settings/add'},
-                    {label:'List',url:'/admin/settings/list'}
-                  ]},
-                  {label:'Users',child:[
-                    {label:'Create',url:'/admin/users/add'},
-                    {label:'List',url:'/admin/users/list'}
-                  ]}
-                ]
+                flash: Flash.state
             }
         },
         methods: function() {

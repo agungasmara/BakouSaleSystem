@@ -9,7 +9,7 @@ class Setting extends Model
 {
     protected $table='setting';
     public $timestamps = false;
-    //protected $primaryKey='store_id';
+    protected $primaryKey='store_id';
     protected $fillable=[
     	'store_id',
     	'code',
