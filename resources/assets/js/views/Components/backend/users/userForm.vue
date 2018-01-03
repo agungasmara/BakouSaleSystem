@@ -60,7 +60,7 @@
 			    <v-btn @click="saveUser(2)" :disabled="!valid">
 			        Save & Close
 			    </v-btn>
-			    <router-link to="/admin/users/list">
+			    <router-link to="/admin/user/list">
 				    <v-btn>
 				        Cancele
 				    </v-btn>

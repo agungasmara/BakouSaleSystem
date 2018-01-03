@@ -120,7 +120,7 @@
 			submit (id,opt) {
 		      if (this.$refs.form.validate()) {
 		        // Native form submission is not yet supported
-		        axios.put('/api/setting/getsettingbyid/'+id, {
+		        axios.put('/api/setting/update/'+id, {
 		          store: this.select,
 		          code: this.code,
 		          key: this.key,

@@ -46,16 +46,7 @@ class SettingsController extends Controller
     			  ->get();
     	return response()->json($settings);
     }
-    public function destroy($id)
-    {
-    	//$id=226;
-    	$setting=Setting::select('*')->where('setting_id',$id);
-        $setting->delete();
-        return response()->json([
-        	'deleted'=>true,
-        	'settings'=>Setting::all()
-        ]);
-    }
+    
     public function getSettingByID($id)
     {
     	$setting=Setting::get()->where('setting_id',$id);
@@ -69,10 +60,20 @@ class SettingsController extends Controller
     	}
     	
     }
+    public function destroy($id)
+    {
+        //$id=226;
+        $setting=Setting::select('*')->where('setting_id',$id);
+        $setting->delete();
+        return response()->json([
+            'deleted'=>true,
+            'settings'=>Setting::all()
+        ]);
+    }
     public function ppdate(Request $request,$id)
     {
     	
-    	Setting::where('setting_id',$id)->Update([
+    	Setting::where('setting_id',$id)->update([
     		'store_id'=>$request->store,
     		'code'=>$request->code,
 			'key'=>$request->key,
