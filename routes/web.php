@@ -28,10 +28,13 @@ Route::post('login', function(Illuminate\Http\Request $request)
 });
 if (Request::is('admin*')){
     Route::middleware(['auth'])->group(function () {
-        
+        Route::get('admin/api/getMenus', 'Backend\Settings\GroupRolesController@index');
+
         Route::get('admin/{any?}',function(){
             return view('index');
         })->where(['any'=>'.*']);
+
+        // Route::resource('admin/api/getMenus', 'Backend\Settings\GroupRolesController');
     });
     Route::get('auth/logout', function()
     {
@@ -62,7 +65,6 @@ if (Request::is('admin*')){
 }else{
     Route::get('/{any?}','FrontEnd\Product\FrontEndController@index')->where(['any'=>'.*']);
 }
-
 
 Route::post('/AddToCart','FrontEnd\Product\CartController@AddToCart');
 Route::post('/RemoveFromCart','FrontEnd\Product\CartController@RemoveFromCart');
@@ -119,8 +121,7 @@ Route::post('api/register', function(Illuminate\Http\Request $request)
 
     Route::get('users', function() {
         $users = App\User::all();
-
-//         return response()->json(['success' => 'true', 'message' => 'Loading users', 'data' => ['users' => $users->toJson()]], 200);
+        //return response()->json(['success' => 'true', 'message' => 'Loading users', 'data' => ['users' => $users->toJson()]], 200);
     });
 
 //     Route::get('/admin', 'Backend\CommonController@list');
