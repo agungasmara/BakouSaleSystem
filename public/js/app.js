@@ -94328,7 +94328,7 @@ var staticRenderFns = [
         _c("i", { staticClass: "material-icons" }, [_vm._v("search")]),
         _vm._v(" "),
         _c("input", {
-          staticClass: "header-search-input z-depth-2",
+          staticClass: "header-search-input z-depth-2 search-box",
           attrs: {
             type: "text",
             name: "Search",
@@ -96012,6 +96012,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -96029,7 +96033,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			tmp: '',
 			search: '',
 			pagination: {},
-			headers: [{ text: 'Setting ID', align: 'left', value: 'setting_id' }, { text: 'Store Name', align: 'center', value: 'name' }, { text: 'code', align: 'center', value: 'code' }, { text: 'Key', align: 'center', value: 'key' }, { text: 'Value', align: 'center', value: 'value' }, { text: 'Serialized', align: 'center', value: 'serialized' }, { text: 'Action', value: 'action', align: 'center', sortable: false }],
+			headers: [{ text: 'Setting ID', align: 'center', value: 'setting_id' }, { text: 'Store Name', align: 'center', value: 'name' }, { text: 'code', align: 'center', value: 'code' }, { text: 'Key', align: 'center', value: 'key' }, { text: 'Value', align: 'center', value: 'value' }, { text: 'Serialized', align: 'center', value: 'serialized' }],
 			settings: [],
 			items: [{
 				text: 'Administrator',
@@ -96186,7 +96190,50 @@ var render = function() {
                         ]),
                         _vm._v(" "),
                         _c("td", { staticClass: "text-xs-left" }, [
-                          _vm._v(_vm._s(props.item.name))
+                          _c("div", [
+                            _vm._v(
+                              "\n\t\t\t\t\t\t\t" +
+                                _vm._s(props.item.name) +
+                                "\n\t\t\t\t\t\t"
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", [
+                            _c(
+                              "span",
+                              {
+                                staticStyle: {
+                                  cursor: "pointer",
+                                  color: "blue"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    _vm.editSetting(props.item.setting_id)
+                                  }
+                                }
+                              },
+                              [_vm._v("\n\t\t\t\t\t\t\tEdit\n\t\t\t\t\t\t")]
+                            ),
+                            _vm._v(" \n\t\t\t\t\t\t"),
+                            _c(
+                              "span",
+                              {
+                                staticStyle: {
+                                  cursor: "pointer",
+                                  color: "red"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    _vm.confirmDel(
+                                      props.item.setting_id,
+                                      props.item.name
+                                    )
+                                  }
+                                }
+                              },
+                              [_vm._v("Delete")]
+                            )
+                          ])
                         ]),
                         _vm._v(" "),
                         _c("td", { staticClass: "text-xs-left" }, [
@@ -96201,47 +96248,8 @@ var render = function() {
                           _vm._v(_vm._s(props.item.value))
                         ]),
                         _vm._v(" "),
-                        _c("td", { staticClass: "text-xs-left" }, [
-                          _vm._v(_vm._s(props.item.serialized))
-                        ]),
-                        _vm._v(" "),
                         _c("td", { staticClass: "text-xs-center" }, [
-                          _c(
-                            "span",
-                            {
-                              staticStyle: { cursor: "pointer" },
-                              on: {
-                                click: function($event) {
-                                  _vm.editSetting(props.item.setting_id)
-                                }
-                              }
-                            },
-                            [
-                              _c("i", { staticClass: "material-icons" }, [
-                                _vm._v("edit")
-                              ])
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "span",
-                            {
-                              staticStyle: { cursor: "pointer", color: "red" },
-                              on: {
-                                click: function($event) {
-                                  _vm.confirmDel(
-                                    props.item.setting_id,
-                                    props.item.name
-                                  )
-                                }
-                              }
-                            },
-                            [
-                              _c("i", { staticClass: "material-icons" }, [
-                                _vm._v("delete_forever")
-                              ])
-                            ]
-                          )
+                          _vm._v(_vm._s(props.item.serialized))
                         ])
                       ]
                     }
@@ -98226,6 +98234,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -98242,7 +98257,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			tmp: '',
 			search: '',
 			pagination: {},
-			headers: [{ text: 'User ID', align: 'left', value: 'user_id' }, { text: 'Group', align: 'center', value: 'group' }, { text: 'Username', align: 'center', value: 'username' }, { text: 'First Name', align: 'center', value: 'fisrtame' }, { text: 'Last Name', align: 'center', value: 'lastName' }, { text: 'Email', align: 'center', value: 'email' }, { text: 'Code', align: 'center', value: 'code' }, { text: 'Image', align: 'center', value: 'image' }, { text: 'Date Added', align: 'center', value: 'date_added' }, { text: 'Action', value: 'action', align: 'center', sortable: false }],
+			headers: [{ text: 'User ID', align: 'left', value: 'user_id' }, { text: 'Username', align: 'center', value: 'username' }, { text: 'Group', align: 'center', value: 'group' }, { text: 'First Name', align: 'center', value: 'firstname' }, { text: 'Last Name', align: 'center', value: 'lastname' }, { text: 'Email', align: 'center', value: 'email' }, { text: 'Code', align: 'center', value: 'code' }, { text: 'Image', align: 'center', value: 'image' }, { text: 'Date Added', align: 'center', value: 'date_added' }],
 			users: [],
 			items: [{
 				text: 'Administrator',
@@ -98395,15 +98410,62 @@ var render = function() {
                     fn: function(props) {
                       return [
                         _c("td", { staticClass: "text-xs-center" }, [
-                          _vm._v(_vm._s(props.item.user_id))
+                          _vm._v(
+                            "\n\t\t\t\t\t\t" +
+                              _vm._s(props.item.user_id) +
+                              "\n\t\t\t\t\t\t\n\t\t\t\t\t"
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "text-xs-left" }, [
+                          _c("div", [
+                            _vm._v(
+                              "\n\t\t\t\t\t\t\t" +
+                                _vm._s(props.item.username) +
+                                "\n\t\t\t\t\t\t"
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", [
+                            _c(
+                              "span",
+                              {
+                                staticStyle: {
+                                  cursor: "pointer",
+                                  color: "blue"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    _vm.editUser(props.item.user_id)
+                                  }
+                                }
+                              },
+                              [_vm._v("\n\t\t\t\t\t\t\t\tEdit\n\t\t\t\t\t\t\t")]
+                            ),
+                            _vm._v(" \n\t\t\t\t\t\t\t"),
+                            _c(
+                              "span",
+                              {
+                                staticStyle: {
+                                  cursor: "pointer",
+                                  color: "red"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    _vm.confirmDel(
+                                      props.item.user_id,
+                                      props.item.username
+                                    )
+                                  }
+                                }
+                              },
+                              [_vm._v("Delete")]
+                            )
+                          ])
                         ]),
                         _vm._v(" "),
                         _c("td", { staticClass: "text-xs-left" }, [
                           _vm._v(_vm._s(props.item.group))
-                        ]),
-                        _vm._v(" "),
-                        _c("td", { staticClass: "text-xs-left" }, [
-                          _vm._v(_vm._s(props.item.username))
                         ]),
                         _vm._v(" "),
                         _c("td", { staticClass: "text-xs-left" }, [
@@ -98424,51 +98486,18 @@ var render = function() {
                         _vm._v(" "),
                         _c("td", { staticClass: "text-xs-left" }, [
                           _c("img", {
-                            attrs: { src: props.item.image, width: "50" }
+                            staticStyle: {
+                              width: "auto",
+                              height: "auto",
+                              "max-width": "50px",
+                              "max-height": "50px"
+                            },
+                            attrs: { src: props.item.image }
                           })
                         ]),
                         _vm._v(" "),
                         _c("td", { staticClass: "text-xs-left" }, [
                           _vm._v(_vm._s(props.item.date_added))
-                        ]),
-                        _vm._v(" "),
-                        _c("td", { staticClass: "text-xs-center" }, [
-                          _c(
-                            "span",
-                            {
-                              staticStyle: { cursor: "pointer" },
-                              on: {
-                                click: function($event) {
-                                  _vm.editUser(props.item.user_id)
-                                }
-                              }
-                            },
-                            [
-                              _c("i", { staticClass: "material-icons" }, [
-                                _vm._v("edit")
-                              ])
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "span",
-                            {
-                              staticStyle: { cursor: "pointer", color: "red" },
-                              on: {
-                                click: function($event) {
-                                  _vm.confirmDel(
-                                    props.item.user_id,
-                                    props.item.username
-                                  )
-                                }
-                              }
-                            },
-                            [
-                              _c("i", { staticClass: "material-icons" }, [
-                                _vm._v("delete_forever")
-                              ])
-                            ]
-                          )
                         ])
                       ]
                     }

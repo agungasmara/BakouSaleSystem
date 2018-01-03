@@ -24,17 +24,21 @@
 			    <v-data-table v-bind:headers="headers" :items="settings" v-bind:search="search" class="elevation-1" >
 					<template slot="items" slot-scope="props">
 						<td class="text-xs-center">{{ props.item.setting_id }}</td>
-						<td class="text-xs-left">{{ props.item.name }}</td>
+						<td class="text-xs-left">
+							<div>
+								{{ props.item.name }}
+							</div>
+							<div>
+								<span style="cursor:pointer;color:blue;" @click="editSetting(props.item.setting_id)"">
+								Edit
+							</span>&nbsp;
+							<span style="cursor:pointer;color:red;" v-on:click="confirmDel(props.item.setting_id,props.item.name)">Delete</span>
+							</div>
+						</td>
 						<td class="text-xs-left">{{ props.item.code }}</td>
 						<td class="text-xs-left">{{ props.item.key }}</td>
 						<td class="text-xs-left">{{ props.item.value }}</td>
-						<td class="text-xs-left">{{ props.item.serialized }}</td>
-						<td class="text-xs-center">
-							<span style="cursor:pointer;" @click="editSetting(props.item.setting_id)"">
-								<i class="material-icons">edit</i>
-							</span>
-							<span style="cursor:pointer;color:red;" v-on:click="confirmDel(props.item.setting_id,props.item.name)"><i class="material-icons">delete_forever</i></span>
-						</td>
+						<td class="text-xs-center">{{ props.item.serialized }}</td>
 					</template>
 					<template slot="pageText" slot-scope="{ pageStart, pageStop }">
 			          From {{ pageStart }} to {{ pageStop }}
@@ -76,13 +80,12 @@
 				search: '',
 				pagination: {},
 				headers: [
-			        { text: 'Setting ID',align: 'left',value: 'setting_id'},
+			        { text: 'Setting ID',align: 'center',value: 'setting_id'},
 			        { text: 'Store Name',align:'center', value: 'name' },
 			        { text: 'code',align:'center', value: 'code' },
 			        { text: 'Key',align:'center', value: 'key' },
 			        { text: 'Value',align:'center', value: 'value' },
-			        { text: 'Serialized',align:'center', value: 'serialized' },
-			        { text: 'Action', value: 'action',align:'center',sortable:false }
+			        { text: 'Serialized',align:'center', value: 'serialized' }
 			    ],
 				settings:[],
 				items: [

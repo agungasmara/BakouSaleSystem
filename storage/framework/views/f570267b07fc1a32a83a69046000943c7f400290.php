@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ app()->getLocale() }}">
+<html lang="<?php echo e(app()->getLocale()); ?>">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,7 +10,7 @@
         <!--<link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet">-->
         <link href="/css/vuetify.min.css" rel="stylesheet"> 
         <!-- Styles -->
-        {{-- <link rel="stylesheet" type="text/css" href="{{mix('css/app.css')}}"> --}}
+        
         <link href="/css/themes/horizontal-menu/materialize.css" type="text/css" rel="stylesheet">
         <link href="/css/themes/horizontal-menu/style.css" type="text/css" rel="stylesheet">
         <!-- Custome CSS-->
@@ -21,8 +21,8 @@
         <link href="/vendors/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet">
         <link href="/vendors/jvectormap/jquery-jvectormap.css" type="text/css" rel="stylesheet">
         <link href="/vendors/flag-icon/css/flag-icon.min.css" type="text/css" rel="stylesheet">
-        {{-- <link rel="stylesheet" type="text/css" href="/css/ .css"> --}}
-        {{-- <link rel="stylesheet" type="text/css" href="{{url('stylus/main.styl')}}"> --}}
+        
+        
 
     </head>
 
@@ -32,7 +32,7 @@
         </div>
     </body>
     <!-- <router-view></router-view> -->
-    <script type="text/javascript" src="{{url('js/app.js')}}"></script>
+    <script type="text/javascript" src="<?php echo e(url('js/app.js')); ?>"></script>
     <script type="text/javascript" src="/vendors/jquery-3.2.1.min.js"></script>
     <!--materialize js-->
     <script type="text/javascript" src="/js/materialize.min.js"></script>
