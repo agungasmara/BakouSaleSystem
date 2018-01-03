@@ -18,239 +18,15 @@
 
        <!-- Main component call to action -->
 
-    <div class="row featuredPostContainer globalPadding style2">
-        <h3 class="section-title style2 text-center"><span>BEST SELLER</span></h3>
+    <!-- BestSeller -->
+     <!-- ***** template component BestSeller ***** -->
+        <template>
+          <BestSellerProductComponent/>
+        </template>
 
-        <div id="productslider" class="owl-carousel owl-theme">
-            <div class="item">
-                <div class="product">
-                    <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
-                       data-placement="left">
-                        <i class="glyphicon glyphicon-heart"></i>
-                    </a>
+      <!-- Main component call to action -->
+     <!-- BestSeller -->
 
-                    <div class="image">
-                        <div class="quickview">
-                            <a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product.html"
-                               data-target="#productSetailsModalAjax">Quick View </a>
-                        </div>
-                        <a href="product-details.html"><img src="/assets/frontend/images/product/34.jpg" alt="img"
-                                                            class="img-responsive"></a>
-
-                        <div class="promotion"><span class="new-product"> NEW</span> <span
-                                class="discount">15% OFF</span></div>
-                    </div>
-                    <div class="description">
-                        <h4><a href="product-details.html">consectetuer adipiscing </a></h4>
-
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-                        <span class="size">XL / XXL / S </span></div>
-                    <div class="price"><span>$25</span></div>
-                    <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
-                            class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
-                </div>
-            </div>
-            <!-- <div class="item">
-                <div class="product">
-                    <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
-                       data-placement="left">
-                        <i class="glyphicon glyphicon-heart"></i>
-                    </a>
-
-                    <div class="image">
-                        <div class="quickview">
-                            <a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product.html"
-                               data-target="#productSetailsModalAjax">Quick View </a>
-                        </div>
-                        <a href="product-details.html"><img src="/assets/frontend/images/product/30.jpg" alt="img" class="img-responsive"></a>
-
-                        <div class="promotion"><span class="discount">15% OFF</span></div>
-                    </div>
-                    <div class="description">
-                        <h4><a href="product-details.html">luptatum zzril delenit</a></h4>
-
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-                        <span class="size">XL / XXL / S </span></div>
-                    <div class="price"><span>$25</span></div>
-                    <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
-                            class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="product">
-                    <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
-                       data-placement="left">
-                        <i class="glyphicon glyphicon-heart"></i>
-                    </a>
-
-                    <div class="image">
-                        <div class="quickview">
-                            <a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product.html"
-                               data-target="#productSetailsModalAjax">Quick View </a>
-                        </div>
-                        <a href="product-details.html"><img src="/assets/frontend/images/product/36.jpg" alt="img"
-                                                            class="img-responsive"></a>
-
-                        <div class="promotion"><span class="new-product"> NEW</span></div>
-                    </div>
-                    <div class="description">
-                        <h4><a href="product-details.html">eleifend option </a></h4>
-
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-                        <span class="size">XL / XXL / S </span></div>
-                    <div class="price"><span>$25</span></div>
-                    <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
-                            class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="product">
-                    <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
-                       data-placement="left">
-                        <i class="glyphicon glyphicon-heart"></i>
-                    </a>
-
-                    <div class="image">
-                        <div class="quickview">
-                            <a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product.html"
-                               data-target="#productSetailsModalAjax">Quick View </a>
-                        </div>
-                        <a href="product-details.html"><img src="/assets/frontend/images/product/9.jpg" alt="img" class="img-responsive"></a>
-                    </div>
-                    <div class="description">
-                        <h4><a href="product-details.html">mutationem consuetudium </a></h4>
-
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-                        <span class="size">XL / XXL / S </span></div>
-                    <div class="price"><span>$25</span></div>
-                    <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
-                            class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="product">
-                    <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
-                       data-placement="left">
-                        <i class="glyphicon glyphicon-heart"></i>
-                    </a>
-
-                    <div class="image">
-                        <div class="quickview">
-                            <a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product.html"
-                               data-target="#productSetailsModalAjax">Quick View </a>
-                        </div>
-                        <a href="product-details.html"><img src="/assets/frontend/images/product/12.jpg" alt="img"
-                                                            class="img-responsive"></a></div>
-                    <div class="description">
-                        <h4><a href="product-details.html">sequitur mutationem </a></h4>
-
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-                        <span class="size">XL / XXL / S </span></div>
-                    <div class="price"><span>$25</span></div>
-                    <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
-                            class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="product">
-                    <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
-                       data-placement="left">
-                        <i class="glyphicon glyphicon-heart"></i>
-                    </a>
-
-                    <div class="image">
-                        <div class="quickview">
-                            <a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product.html"
-                               data-target="#productSetailsModalAjax">Quick View </a>
-                        </div>
-                        <a href="product-details.html"><img src="/assets/frontend/images/product/13.jpg" alt="img"
-                                                            class="img-responsive"></a></div>
-                    <div class="description">
-                        <h4><a href="product-details.html">consuetudium lectorum.</a></h4>
-
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-                        <span class="size">XL / XXL / S </span></div>
-                    <div class="price"><span>$25</span></div>
-                    <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
-                            class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="product">
-                    <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
-                       data-placement="left">
-                        <i class="glyphicon glyphicon-heart"></i>
-                    </a>
-
-                    <div class="image">
-                        <div class="quickview">
-                            <a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product.html"
-                               data-target="#productSetailsModalAjax">Quick View </a>
-                        </div>
-                        <a href="product-details.html"><img src="/assets/frontend/images/product/21.jpg" alt="img"
-                                                            class="img-responsive"></a></div>
-                    <div class="description">
-                        <h4><a href="product-details.html">parum claram</a></h4>
-
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-                        <span class="size">XL / XXL / S </span></div>
-                    <div class="price"><span>$25</span></div>
-                    <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
-                            class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="product">
-                    <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
-                       data-placement="left">
-                        <i class="glyphicon glyphicon-heart"></i>
-                    </a>
-
-                    <div class="image">
-                        <div class="quickview">
-                            <a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product.html"
-                               data-target="#productSetailsModalAjax">Quick View </a>
-                        </div>
-                        <a href="product-details.html"><img src="/assets/frontend/images/product/24.jpg" alt="img"
-                                                            class="img-responsive"></a></div>
-                    <div class="description">
-                        <h4><a href="product-details.html">duis dolore </a></h4>
-
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-                        <span class="size">XL / XXL / S </span></div>
-                    <div class="price"><span>$25</span></div>
-                    <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
-                            class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="product">
-                    <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
-                       data-placement="left">
-                        <i class="glyphicon glyphicon-heart"></i>
-                    </a>
-
-                    <div class="image">
-                        <div class="quickview">
-                            <a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product.html"
-                               data-target="#productSetailsModalAjax">Quick View </a>
-                        </div>
-                        <a href="product-details.html"><img src="/assets/frontend/images/product/15.jpg" alt="img"
-                                                            class="img-responsive"></a></div>
-                    <div class="description">
-                        <h4><a href="product-details.html">feugait nulla facilisi</a></h4>
-
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-                        <span class="size">XL / XXL / S </span></div>
-                    <div class="price"><span>$25</span></div>
-                    <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
-                            class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
-                </div>
-            </div> -->
-        </div>
-        <!--/.productslider-->
-
-    </div>
     <!--/.featuredPostContainer-->      
       <!--/.featuredPostContainer-->
   </div>
@@ -698,6 +474,7 @@ import Flash from '../../../helper/flash'
 import RegisterComponent from './../../Auth/Register.vue'
 import SlideComponent from './../../Components/frontend/include/slide.vue'
 import LatestProductComponent from './../../Components/frontend/product/_latest.vue'
+import BestSellerProductComponent from './../../Components/frontend/product/_bestseller.vue'
 // ***** design component *****
 import CarouselDesignComponent from './../../Components/frontend/desgin/_carousel.vue'
 // import { search } from './helper/elasticsearch'
@@ -813,6 +590,7 @@ export default {
     RegisterComponent,
     SlideComponent,
     LatestProductComponent,
+    BestSellerProductComponent,
     CarouselDesignComponent,
   },
   // Fetches posts when the component is created.

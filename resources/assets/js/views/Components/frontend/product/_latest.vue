@@ -115,39 +115,10 @@
 		    })
         },
         ready() {
-            this.credential.name    = credential.name;
-            this.credential.email    = credential.email;
-            this.credential.password = credential.password;
-            this.credential.password_confirmation = credential.password_confirmation;
-            this.register();
+           
         },
         methods: {
-            thClassValue: function (id) {
-                var value = ['slider-item slider-item-img'+id]
-                // if (this.orderKey === id) {
-                //   value.push('active')
-                // }
-                return value.join(' ')
-            },
-            register() {
-                this.isProcessing = true
-                this.error = {}
-                post('/api/register', this.credential)
-                    .then((res) => {
-                    console.log(res);
-                    if(res.data.registered) {
-                    Flash.setSuccess('Congratulations! You have now successfully registered.')
-                    this.$router.push('/login')
-                }
-                this.isProcessing = false
-            })
-            .catch((err) => {
-                    if(err.response.status === 422) {
-                    this.error = err.response.data
-                }
-                this.isProcessing = false
-            })
-            }
+           
         }
     }
 </script>
