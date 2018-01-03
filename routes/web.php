@@ -29,10 +29,11 @@ Route::post('login', function(Illuminate\Http\Request $request)
 
 if (Request::is('admin*')){
     Route::middleware(['auth'])->group(function () {
+
         if (Request::is('admin/api*')){
             // admin api route
 
-
+            Route::get('admin/api/getMenus', 'Backend\Settings\GroupRolesController@index');
         }else{
             Route::get('admin/{any?}',function(){
                 return view('index');
@@ -70,7 +71,6 @@ if (Request::is('admin*')){
 }else{
     Route::get('/{any?}','FrontEnd\Product\FrontEndController@index')->where(['any'=>'.*']);
 }
-
 
 Route::post('/AddToCart','FrontEnd\Product\CartController@AddToCart');
 Route::post('/RemoveFromCart','FrontEnd\Product\CartController@RemoveFromCart');
@@ -152,9 +152,11 @@ Route::group(['middleware' => 'auth'], function() {
     
     Route::get('users', function() {
         $users = App\User::all();
+
     //         return response()->json(['success' => 'true', 'message' => 'Loading users', 'data' => ['users' => $users->toJson()]], 200);
 
 //         return response()->json(['success' => 'true', 'message' => 'Loading users', 'data' => ['users' => $users->toJson()]], 200);
+        
     });
 
     // admin router

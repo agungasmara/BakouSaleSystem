@@ -29,7 +29,7 @@
 
     <!--/.featuredPostContainer-->      
       <!--/.featuredPostContainer-->
-  </div>
+    </div>
   <!-- /main container -->
 
   <div class="parallax-section parallax-image-1">
