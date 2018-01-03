@@ -2648,6 +2648,7 @@ body.layout-semi-dark .footer-copyright {
 }
 
 #main {
+  margin-top:55px;
   min-height: calc(100% - 100px);
   padding-left: 240px;
   -webkit-transition: .3s ease all;

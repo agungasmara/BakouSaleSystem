@@ -22,9 +22,14 @@ class CartController extends Controller
 {	
 	public function __construct()
     {   
-
-        
-      
+        // $this->middleware(function ($request, $next) {
+        // 	// dd(Auth::check());
+        //     SessionModel::AddSession();
+        //     $data['MyCart']=SessionModel::find(session()->getId())->Cart()->get();
+        //     //dd($data);
+        //     View::share($data);
+        //     return $next($request);
+        // });   
     } 
 
     public function index()
@@ -44,10 +49,10 @@ class CartController extends Controller
     public function ProductCart()
     {
         // dd("test");
-    	if (Auth::check()) {
-    		return $data['MyCart']=Customer::find(Auth::user()->customer_id)->Cart()->get();
-    	}else{
-    		return $data['MyCart']=SessionModel::find(session()->getId())->Cart()->get();
-    	}
+    	// if (Auth::check()) {
+    	// 	return $data['MyCart']=Customer::find(Auth::user()->customer_id)->Cart()->get();
+    	// }else{
+    	// 	return $data['MyCart']=SessionModel::find(session()->getId())->Cart()->get();
+    	// }
     }
 }

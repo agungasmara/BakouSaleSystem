@@ -46,4 +46,43 @@ class SettingsController extends Controller
     			  ->get();
     	return response()->json($settings);
     }
+    
+    public function getSettingByID($id)
+    {
+    	$setting=Setting::get()->where('setting_id',$id);
+    	foreach ($setting as $key => $value) {
+    		return response()->json([
+	    		'code'=>$value->code,
+	    		'key'=>$value->key,
+	    		'value'=>$value->value,
+	    		'store_id'=>$value->store_id
+	    	]);
+    	}
+    	
+    }
+    public function destroy($id)
+    {
+        //$id=226;
+        $setting=Setting::select('*')->where('setting_id',$id);
+        $setting->delete();
+        return response()->json([
+            'deleted'=>true,
+            'settings'=>Setting::all()
+        ]);
+    }
+    public function ppdate(Request $request,$id)
+    {
+    	
+    	Setting::where('setting_id',$id)->update([
+    		'store_id'=>$request->store,
+    		'code'=>$request->code,
+			'key'=>$request->key,
+			'value'=>$request->value,
+			'serialized'=>0
+    	]);
+    	return response()->json([
+    		'success'=>true,
+    		'message'=>'Data successfully updated.'
+    	]);
+    }
 }

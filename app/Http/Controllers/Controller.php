@@ -7,17 +7,26 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use DB;
+use AVG;
+use Carbon\Carbon;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
+    public function getTypeCategory(){
+    	// $query = DB::table('category_type')->get();
+    	$query = DB::table('category_type')
+				->Join('category_type_description' ,'category_type.category_type_id','=' ,'category_type_description.category_type_id')
+				->get();
+    	return $query;
+    }
     /*
 	# query get category
     */
-	public function getCategories($parent_id = 0) {
+	public function getCategories($parent_id = 0,$cat_type = 0) {
 		$query = DB::table('category')
 				->leftJoin('category_description' ,'category.category_id','=' ,'category_description.category_id')
 				->leftJoin('category_to_store' , 'category.category_id', '=', 'category_to_store.category_id')
+				->where('category_type_id',$cat_type)
 				->where('category.parent_id',$parent_id)
 				->where('category_to_store.store_id',0)
 				->where('category.status',1)
@@ -172,5 +181,165 @@ class Controller extends BaseController
 		$query = $this->db->query($sql);
 
 		return $query->row['total'];
+	}
+
+	/*
+	# query get getLatestProduct
+    */
+	public function getProducts($data = array()) {
+		// $query1 = DB::select("SELECT p.product_id, (SELECT AVG(rating) AS total FROM sg_review r1 
+		// 		WHERE r1.product_id = p.product_id AND r1.status = '1' 
+		// 		GROUP BY r1.product_id) AS rating, 
+		// 		(SELECT price FROM sg_product_discount pd2 WHERE pd2.product_id = p.product_id 
+		// 		AND pd2.customer_group_id = 1 AND pd2.quantity = '1'  AND ((pd2.date_start = '0000-00-00' 
+		// 		OR pd2.date_start < NOW()) 
+		// 		AND (pd2.date_end = '0000-00-00' OR pd2.date_end > NOW())) 
+		// 		ORDER BY pd2.priority ASC, pd2.price ASC LIMIT 1) 
+		// 		AS discount, 
+		// 		(SELECT price FROM sg_product_special ps WHERE ps.product_id = p.product_id AND ps.customer_group_id = 1 AND ((ps.date_start = '0000-00-00' OR ps.date_start < NOW()) AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW())) 
+		// 		ORDER BY ps.priority ASC
+		// 		, ps.price ASC LIMIT 1) AS special 
+		// 		FROM sg_product p
+
+		// 		LEFT JOIN sg_product_description pd ON (p.product_id = pd.product_id) 
+		// 		LEFT JOIN sg_product_to_store p2s ON (p.product_id = p2s.product_id) 
+		// 		WHERE pd.language_id = 1
+		// 		AND p.status = '1' 
+		// 		AND p.date_available <= NOW() AND p2s.store_id = 0 
+		// 		GROUP BY p.product_id LIMIT 4");
+		$sql = DB::table('product')
+				->select('product.product_id',DB::raw('(SELECT AVG(rating) AS total FROM sg_review r1 
+				WHERE r1.product_id = sg_product.product_id AND r1.status = 1 
+				GROUP BY r1.product_id) AS rating'),DB::raw('(SELECT price FROM sg_product_discount pd2 WHERE pd2.product_id = sg_product.product_id 
+				AND pd2.customer_group_id = 1 AND pd2.quantity = 1  AND ((pd2.date_start = 0000-00-00
+				OR pd2.date_start < NOW()) 
+				AND (pd2.date_end = 0000-00-00 OR pd2.date_end > NOW())) 
+				ORDER BY pd2.priority ASC, pd2.price ASC LIMIT 1) 
+				AS discount'),DB::raw('(SELECT price FROM sg_product_special ps WHERE ps.product_id = sg_product.product_id AND ps.customer_group_id = 1 AND ((ps.date_start = 0000-00-00 OR ps.date_start < NOW()) AND (ps.date_end = 0000-00-00 OR ps.date_end > NOW())) 
+				ORDER BY ps.priority ASC
+				, ps.price ASC LIMIT 1) AS special'))
+				->leftJoin('product_description','product.product_id','=','product_description.product_id')
+				->leftJoin('product_to_store','product.product_id','=','product_to_store.product_id')
+				->where('product_description.language_id',1)
+				->where('product.status',1)
+				->where('product.date_available','<=',Carbon::today())
+				->where('product_to_store.store_id',0)
+				->groupBy('product.product_id');
+				// ->limit(4);
+				// ->get();
+
+		if (isset($data['limit'])) {
+			$sql->Limit($data['limit']);
+		}
+
+		if (isset($data['order']) && ($data['order'] == 'DESC')) {
+			$sql->OrderBy("product_description.name","DESC");
+		} else {
+			$sql->OrderBy("product_description.name","ASC");
+		}
+
+		$query = $sql->get();
+
+		// dd($query);
+		$product_data = array();
+		foreach ($query as $result) {
+			// dd($result->product_id);
+			$product_data[] = $this->getProduct($result->product_id);
+		}
+		// dd($product_data);
+		return $product_data;
+
+		// $product_data = $this->getProduct(31);
+		// return $product_data;
+	}  
+
+
+	public function getProduct($product_id) {
+		// $query1 = DB::select("SELECT DISTINCT * 
+		// 				, pd.name AS NAME
+		// 				, p.image
+		// 				, m.name AS manufacturer
+		// 				, (SELECT price FROM sg_product_discount pd2 WHERE pd2.product_id = p.product_id AND pd2.customer_group_id = 1 AND pd2.quantity = 1 AND ((pd2.date_start = '0000-00-00' OR pd2.date_start < NOW()) AND (pd2.date_end = '0000-00-00' OR pd2.date_end > NOW())) ORDER BY pd2.priority ASC
+		// 				, pd2.price ASC LIMIT 1) AS discount
+		// 				, (SELECT price FROM sg_product_special ps WHERE ps.product_id = p.product_id AND ps.customer_group_id = 1 AND ((ps.date_start = '0000-00-00' OR ps.date_start < NOW()) AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW())) ORDER BY ps.priority ASC
+		// 				, ps.price ASC LIMIT 1) AS special
+		// 				, (SELECT points FROM sg_product_reward pr WHERE pr.product_id = p.product_id AND customer_group_id = 1) AS reward
+		// 				, (SELECT ss.name FROM sg_stock_status ss WHERE ss.stock_status_id = p.stock_status_id AND ss.language_id = 1 ) AS stock_status
+		// 				, (SELECT wcd.unit FROM sg_weight_class_description wcd WHERE p.weight_class_id = wcd.weight_class_id AND wcd.language_id = 1 ) AS weight_class
+		// 				, (SELECT lcd.unit FROM sg_length_class_description lcd WHERE p.length_class_id = lcd.length_class_id AND lcd.language_id = 1 ) AS length_class
+		// 				, (SELECT AVG(rating) AS total FROM sg_review r1 WHERE r1.product_id = p.product_id AND r1.status = 1 GROUP BY r1.product_id) AS rating
+		// 				, (SELECT COUNT(*) AS total FROM sg_review r2 WHERE r2.product_id = p.product_id AND r2.status = 1 GROUP BY r2.product_id) AS reviews, p.sort_order 
+		// 				FROM sg_product p
+		// 				LEFT JOIN sg_product_description pd ON (p.product_id = pd.product_id) 
+		// 				LEFT JOIN sg_product_to_store p2s ON (p.product_id = p2s.product_id) 
+		// 				LEFT JOIN sg_manufacturer m ON (p.manufacturer_id = m.manufacturer_id)
+		// 				WHERE p.product_id = 28
+		// 				AND pd.language_id = 1
+		// 				AND p.status = 1 
+		// 				AND p.date_available <= NOW() 
+		// 				AND p2s.store_id = 0
+		// 				");
+		$query = DB::table('product')
+				->select(DB::raw('DISTINCT *'),'product.product_id','product_description.name as name','product.image','manufacturer.name AS manufacturer',DB::raw('(SELECT price FROM sg_product_discount pd2 WHERE pd2.product_id = sg_product.product_id AND pd2.customer_group_id = 1 AND pd2.quantity = 1 AND ((pd2.date_start = 0000-00-00 OR pd2.date_start < NOW()) AND (pd2.date_end = 0000-00-00 OR pd2.date_end > NOW())) ORDER BY pd2.priority ASC
+						, pd2.price ASC LIMIT 1) AS discount'),DB::raw('(SELECT price FROM sg_product_special ps WHERE ps.product_id = sg_product.product_id AND ps.customer_group_id = 1 AND ((ps.date_start = 0000-00-00 OR ps.date_start < NOW()) AND (ps.date_end = 0000-00-00 OR ps.date_end > NOW())) ORDER BY ps.priority ASC
+						, ps.price ASC LIMIT 1) AS special'),DB::raw('(SELECT points FROM sg_product_reward pr WHERE pr.product_id = sg_product.product_id AND customer_group_id = 1) AS reward'),DB::raw('(SELECT ss.name FROM sg_stock_status ss WHERE ss.stock_status_id = sg_product.stock_status_id AND ss.language_id = 1 ) AS stock_status'),DB::raw('(SELECT wcd.unit FROM sg_weight_class_description wcd WHERE sg_product.weight_class_id = wcd.weight_class_id AND wcd.language_id = 1 ) AS weight_class'),DB::raw('(SELECT lcd.unit FROM sg_length_class_description lcd WHERE sg_product.length_class_id = lcd.length_class_id AND lcd.language_id = 1 ) AS length_class'),DB::raw('(SELECT AVG(rating) AS total FROM sg_review r1 WHERE r1.product_id = sg_product.product_id AND r1.status = 1 GROUP BY r1.product_id) AS rating'),DB::raw('(SELECT COUNT(*) AS total FROM sg_review r2 WHERE r2.product_id = sg_product.product_id AND r2.status = 1 GROUP BY r2.product_id) AS reviews'),'product.sort_order')
+				->leftJoin('product_description','product.product_id','=','product_description.product_id')
+				->leftJoin('product_to_store','product.product_id','=','product_to_store.product_id')
+				->leftJoin('manufacturer','product.product_id','=','product_to_store.product_id')
+				->where('product.product_id',$product_id)
+				->where('product_description.language_id',1)
+				->where('product.status',1)
+				->where('product.date_available','<=',Carbon::today())
+				->where('product_to_store.store_id',0)
+				->first();
+			return($query);
+		//dd($query);
+		// if ($query->num_rows) {
+		// 	return array(
+		// 		'product_id'       => $query->row['product_id'],
+		// 		'name'             => $query->row['name'],
+		// 		'description'      => $query->row['description'],
+		// 		'meta_title'       => $query->row['meta_title'],
+		// 		'meta_description' => $query->row['meta_description'],
+		// 		'meta_keyword'     => $query->row['meta_keyword'],
+		// 		'tag'              => $query->row['tag'],
+		// 		'model'            => $query->row['model'],
+		// 		'sku'              => $query->row['sku'],
+		// 		'upc'              => $query->row['upc'],
+		// 		'ean'              => $query->row['ean'],
+		// 		'jan'              => $query->row['jan'],
+		// 		'isbn'             => $query->row['isbn'],
+		// 		'mpn'              => $query->row['mpn'],
+		// 		'location'         => $query->row['location'],
+		// 		'quantity'         => $query->row['quantity'],
+		// 		'stock_status'     => $query->row['stock_status'],
+		// 		'image'            => $query->row['image'],
+		// 		'manufacturer_id'  => $query->row['manufacturer_id'],
+		// 		'manufacturer'     => $query->row['manufacturer'],
+		// 		'price'            => ($query->row['discount'] ? $query->row['discount'] : $query->row['price']),
+		// 		'special'          => $query->row['special'],
+		// 		'reward'           => $query->row['reward'],
+		// 		'points'           => $query->row['points'],
+		// 		'tax_class_id'     => $query->row['tax_class_id'],
+		// 		'date_available'   => $query->row['date_available'],
+		// 		'weight'           => $query->row['weight'],
+		// 		'weight_class_id'  => $query->row['weight_class_id'],
+		// 		'length'           => $query->row['length'],
+		// 		'width'            => $query->row['width'],
+		// 		'height'           => $query->row['height'],
+		// 		'length_class_id'  => $query->row['length_class_id'],
+		// 		'subtract'         => $query->row['subtract'],
+		// 		'rating'           => round($query->row['rating']),
+		// 		'reviews'          => $query->row['reviews'] ? $query->row['reviews'] : 0,
+		// 		'minimum'          => $query->row['minimum'],
+		// 		'sort_order'       => $query->row['sort_order'],
+		// 		'status'           => $query->row['status'],
+		// 		'date_added'       => $query->row['date_added'],
+		// 		'date_modified'    => $query->row['date_modified'],
+		// 		'viewed'           => $query->row['viewed']
+		// 	);
+		// } else {
+		// 	return false;
+		// }
 	}
 }

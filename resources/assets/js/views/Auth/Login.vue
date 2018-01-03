@@ -1,9 +1,10 @@
 <template>
-    <section id="content">
+    <!--<section id="content">-->
+    <section>
       <!--breadcrumbs start-->
-      <div id="breadcrumbs-wrapper" style="display: none;">
+      <!--<div id="breadcrumbs-wrapper" style="display: none;">-->
         <!-- Search for small screen -->
-        <div class="header-search-wrapper grey lighten-2 hide-on-large-only">
+        <!--<div class="header-search-wrapper grey lighten-2 hide-on-large-only">
           <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize">
         </div>
         <div class="container">
@@ -35,57 +36,56 @@
             </div>
           </div>
         </div>
-      </div>
+      </div>-->
       <!--breadcrumbs end-->
       <!--start container-->
-      <div class="container">
-        <div class="section">
+      <!--<div class="container">
+        <div class="section">-->
           <!--Basic Form-->
-          <div id="basic-form" class="section">
-            <div class="row">
-              
-              <div class="flash flash__success" v-if="flash.success">
-                {{flash.success}}
-              </div>
-              <form class="form" @submit.prevent="login">
-                  <v-app>
-                    <v-content>
-                      <v-alert class="success" value='true'>
-                          <v-icon>home</v-icon> Welcome Testing
-                      </v-alert>
-                      
-                      <v-badge class="badge--left" value='true'><span class="badge__badge primary">6<span></span></span></v-badge>
-                      <h1 class="form__title">Sign In Account</h1>
-                      <!-- <div class="flash flash-success" v-if="flash.success">
-                          {{ flash.success }}
-                      </div> -->
-                      <div class="flash flash-success" v-if="flash.error">
-                          {{ flash.error }}
-                      </div>
-                      <div class="form__group">
-                          <label>Email</label>
-                          <input type="text" class="form__control" v-model="credential.email">
-                          <small class="error__control" v-if="error.email">{{error.email[0]}}</small>
-                      </div>
-                      <div class="form__group">
-                          <label>Password</label>
-                          <input type="password" class="form__control" v-model="credential.password">
-                          <small class="error__control" v-if="error.password">{{error.password[0]}}</small>
-                      </div>
-                      <div class="form__group">
-                          <button :disabled="isProcessing" class="btn btn__primary">Login</button>
-                      </div>
-                    </v-content>
-                  </v-app>
-                  <!-- <div v-tabs>asf</div> -->   
-              </form>
-              <router-view></router-view>
-
-            </div>
+          <!--<div id="basic-form" class="section">
+            <div class="row">-->
+              <v-app id="inspire">
+              <v-flex xs12 offset-xs0 sm6 offset-sm3 md6 offset-md3>
+                <v-card>
+                  <!--<div class="flash flash__success" v-if="flash.success">
+                    {{flash.success}}
+                  </div>-->
+                  <v-form v-model="valid" ref="form" lazy-validation @submit.prevent="login">
+                          <v-alert class="success" value='true' v-if="flash.success">
+                              <v-icon>home</v-icon> {{flash.success}}
+                          </v-alert>
+                          <v-alert class="danger" value='true' v-if="flash.error">
+                              {{ flash.error }}
+                          </v-alert>
+                          <!--<v-badge class="badge--left" value='true'><span class="badge__badge primary">6<span></span></span></v-badge>-->
+                          <v-alert class="info" value='true' v-if="!flash.success && !flash.error">
+                              <v-icon>home</v-icon> Sign In
+                          </v-alert>
+                          <!-- <div class="flash flash-success" v-if="flash.success">
+                              {{ flash.success }}
+                          </div> -->
+                          
+                          <v-flex xs10 offset-xs1 sm10 offset-sm1 md10 offset-md1>
+                              <v-text-field label="Email" v-model="credential.email" :rules="credential.emailRules" required></v-text-field>
+                              <small class="error__control" v-if="error.email">{{error.email[0]}}</small>
+                          </v-flex>
+                          <v-flex xs10 offset-xs1 sm10 offset-sm1 md10 offset-md1>
+                              <v-text-field type="password" label="Password" v-model="credential.password" :rules="credential.passwordRules" required></v-text-field>
+                              <small class="error__control" v-if="error.password">{{error.password[0]}}</small>
+                          </v-flex>
+                          <v-flex xs6 offset-xs8 sm6 offset-sm8 md6 offset-md8>
+                              <v-btn type="submit" class="btn primary" :disabled="isProcessing">Login</v-btn>
+                          </v-flex>
+                      <!-- <div v-tabs>asf</div> -->   
+                  </v-form>
+                </v-card>
+              </v-flex>
+              </v-app>
+            <!--</div>
           </div>
 
         </div>
-      </div>
+      </div>-->
     </section>
 </template>
 
@@ -96,9 +96,18 @@
     export default {
         data() {
             return {
+                valid: true,
                 credential: {
                     email: '',
-                    password: ''
+                    password: '',
+                    emailRules: [
+                      (v) => !!v || 'E-mail is required',
+                      (v) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
+                    ],
+                    passwordRules: [
+                      (v) => !!v || 'password is required',
+                      (v) => v && v.length <= 32 || 'Code must be less than 32 characters'
+                    ]
                 },
                 flash: Flash.state,
                 error: Flash.state,
@@ -115,39 +124,41 @@
         },
         methods: {
             login() {
-                this.isProcessing = true
-                this.error = {}
-                // post('http://localhost:8000/login', this.credential, function (data, status, request) {
-                //     window.location = "#/register";
-                //     this.$dispatch('login:success');
-                //     storage.saveArray('credential', this.credential);
-                //     $.snackbar({content: data.message, style: 'toast', toggle: 'snackbar'});
+              if (this.$refs.form.validate()) {
+                  this.isProcessing = true
+                  this.error = {}
+                  // post('http://localhost:8000/login', this.credential, function (data, status, request) {
+                  //     window.location = "#/register";
+                  //     this.$dispatch('login:success');
+                  //     storage.saveArray('credential', this.credential);
+                  //     $.snackbar({content: data.message, style: 'toast', toggle: 'snackbar'});
 
-                //   }).error(function (data, status, request) {
+                  //   }).error(function (data, status, request) {
 
-                //     $.snackbar({content: data.message, style: 'toast', toggle: 'snackbar'});
+                  //     $.snackbar({content: data.message, style: 'toast', toggle: 'snackbar'});
 
-                //   });
-                post('/login', this.credential)
-                    .then((res) => {
-                        console.log(res);
-                    if(res.data.success) {
-                        Flash.setSuccess('Congratulations! You have now successfully registered.')
-                        window.location.href="/admin"
-                        // this.$router.push('/admin')
-                    }else{
-                        Flash.setError('Error while trying to login.')
-                        // this.$router.push('/register')
-                    }
-                    this.isProcessing = false
-                })
-                .catch((err) => {
-                    if(err.response.status === 422) {
-                        this.error = err.response.data
-                    }
-                    Flash.setError('Error while trying to login.')
-                    this.isProcessing = false
-                })
+                  //   });
+                  post('/login', this.credential)
+                      .then((res) => {
+                          console.log(res);
+                      if(res.data.success) {
+                          Flash.setSuccess('Congratulations! You have now successfully registered.')
+                          window.location.href="/admin"
+                          // this.$router.push('/admin')
+                      }else{
+                          Flash.setError('Error while trying to login.')
+                          // this.$router.push('/register')
+                      }
+                      this.isProcessing = false
+                  })
+                  .catch((err) => {
+                      if(err.response.status === 422) {
+                          this.error = err.response.data
+                      }
+                      Flash.setError('Error while trying to login.')
+                      this.isProcessing = false
+                  })
+              }
             }
         }
     }

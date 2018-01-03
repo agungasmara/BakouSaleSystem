@@ -40,5 +40,6 @@
 
 </body>
 </html>
-<script type="text/javascript" src="<?php echo e(asset('js/app.js')); ?>"></script>
-<!-- <script type="text/javascript" src="<?php echo e(url('js/app.js')); ?>"></script> -->
+
+<script type="text/javascript" src="<?php echo e(url('js/app.js')); ?>"></script>
+<?php echo $__env->make('frontend.include.script', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

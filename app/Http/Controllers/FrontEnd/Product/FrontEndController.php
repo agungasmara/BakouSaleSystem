@@ -9,10 +9,10 @@ class FrontEndController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(function ($request, $next) {
-            SessionModel::AddSession();
-            return $next($request);
-        });
+        // $this->middleware(function ($request, $next) {
+        //     SessionModel::AddSession();
+        //     return $next($request);
+        // });
     }
     /**
      * Display a listing of the resource.

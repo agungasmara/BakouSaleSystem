@@ -14,29 +14,33 @@
                      data-cycle-swipe=true
                      data-cycle-prev=".prevControl"
                      data-cycle-next=".nextControl" data-cycle-loader="wait">
-                    <div class="slider-item slider-item-img1"><img src="/assets/frontend/images/slider/slider0.jpg"
+                    
+                     <!-- <div class="slider-item slider-item-img1">
+                        <img src="/assets/frontend/images/slider/slider0.jpg"
                                                                    class="img-responsive parallaximg sliderImg" alt="img">
-                    </div>
-                    <div class="slider-item slider-item-img1">
+                    </div> -->
+
+                    <div v-for="post of posts" :class="thClassValue(post.banner_image_id)">
                         <div class="sliderInfo">
                             <div class="container">
                                 <div class="col-lg-12 col-md-12 col-sm-12 sliderTextFull ">
                                     <div class="inner text-center">
                                         <div class="topAnima animated">
-                                            <h1 class="uppercase xlarge">FREE SHIPPING</h1>
+                                            <h1 class="uppercase xlarge">{{post.title}}</h1>
 
                                             <h3 class="hidden-xs"> Free Standard Shipping on Orders Over $100 </h3>
                                         </div>
                                         <a class="btn btn-danger btn-lg bottomAnima animated opacity0">SHOP NOW ON TSHOP
-                                            <span class="arrowUnicode">►</span></a></div>
+                                        <span class="arrowUnicode">►</span></a></div>
                                 </div>
                             </div>
                         </div>
-                        <img src="/assets/frontend/images/slider/slider1.jpg" class="img-responsive parallaximg sliderImg" alt="img"></div>
+                        <img src="/assets/frontend/images/slider/slider1.jpg" class="img-responsive parallaximg sliderImg" alt="img">
+                    </div>
                     <!--/.slider-item-->
 
-                    <div class="slider-item slider-item-img2 ">
-                        <div class="sliderInfo">
+                    
+                        <!-- <div class="sliderInfo">
                             <div class="container">
                                 <div class="col-lg-12 col-md-12 col-sm-12 sliderTextFull  ">
                                     <div class="inner dark maxwidth500 text-center animated topAnima">
@@ -46,14 +50,16 @@
                                             <h3 class="hidden-xs"> Custom Slides to Your Slider </h3>
                                         </div>
                                         <a class="btn btn-danger btn-lg">SHOP NOW ON TSHOP <span
-                                                class="arrowUnicode">►</span></a></div>
+                                                class="arrowUnicode">►</span></a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <img src="/assets/frontend/images/slider/slider3.jpg" class="img-responsive parallaximg sliderImg" alt="img"></div>
+                        <img src="/assets/frontend/images/slider/slider3.jpg" class="img-responsive parallaximg sliderImg" alt="img"> -->
+                    </div>
                     <!--/.slider-item-->
 
-                    <div class="slider-item slider-item-img3 ">
+                    <!-- <div class="slider-item slider-item-img3 ">
                         <div class="sliderInfo">
                             <div class="container">
                                 <div class="col-lg-5 col-md-4 col-sm-6 col-xs-8   pull-left sliderText white hidden-xs">
@@ -70,10 +76,10 @@
                                 </div>
                             </div>
                         </div>
-                        <img src="/assets/frontend/images/slider/slider4.jpg" class="img-responsive parallaximg sliderImg" alt="img"></div>
+                        <img src="/assets/frontend/images/slider/slider4.jpg" class="img-responsive parallaximg sliderImg" alt="img"></div> -->
                     <!--/.slider-item-->
 
-                    <div class="slider-item slider-item-img3">
+                    <!-- <div class="slider-item slider-item-img3">
                         <div class="sliderInfo">
                             <div class="container">
                                 <div class="col-lg-5 col-md-6 col-sm-5 col-xs-5 pull-left sliderText blankstyle transformRight">
@@ -90,7 +96,7 @@
                                 </div>
                             </div>
                         </div>
-                        <img src="/assets/frontend/images/slider/6.jpg" class="img-responsive parallaximg sliderImg" alt="img"></div>
+                        <img src="/assets/frontend/images/slider/6.jpg" class="img-responsive parallaximg sliderImg" alt="img"></div> -->
                 </div>
                 <!--/.slider slider-v1-->
             </div>
@@ -103,6 +109,7 @@
 </template>
 
 <script type="text/javascript">
+    import axios from 'axios'
     import Flash from '../../../../helper/flash'
     import {post} from '../../../../helper/api'
 
@@ -118,8 +125,18 @@
                 flash: Flash.state,
                 error: Flash.state,
                 error: {},
+                posts: [],
                 isProcessing: false
             }
+        },
+        created() {
+            axios.get(`/api/slide`)
+            .then(response => {
+              this.posts = response.data['data']
+            })
+            .catch(e => {
+              this.errors.push(e)
+            })
         },
         ready() {
             this.credential.name    = credential.name;
@@ -129,6 +146,13 @@
             this.register();
         },
         methods: {
+            thClassValue: function (id) {
+                var value = ['slider-item slider-item-img'+id]
+                // if (this.orderKey === id) {
+                //   value.push('active')
+                // }
+                return value.join(' ')
+            },
             register() {
                 this.isProcessing = true
                 this.error = {}

@@ -40,5 +40,6 @@
 
 </body>
 </html>
-<script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
-<!-- <script type="text/javascript" src="{{url('js/app.js')}}"></script> -->
+
+<script type="text/javascript" src="{{url('js/app.js')}}"></script>
+@include('frontend.include.script')

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\FrontEnd\includes;
+namespace App\Http\Controllers\FrontEnd\Includes;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -18,19 +18,23 @@ class SlideController extends Controller
         static $module = 0;     
         $banners = array();
         $results = $this->getBanner();
-
+        // dd($results);
         foreach ($results as $result) {
-            if (is_file($result->image)) {
+
+            // if (is_file($result->image)) {
                 $banners[] = array(
+                    'banner_image_id' => $result->banner_image_id,
                     'title' => $result->title,
                     'link'  => $result->link,
                     //'image' => $this->resize($result->image, $setting->width, $setting->height)
                     'image' => $result->image
                 );
-            }
+            // }
         }
+
         $module = $module++;
-        return response()->json($results);
+        $data = array('data'=>$banners);
+        return response()->json($data);
     }
 
     /**
