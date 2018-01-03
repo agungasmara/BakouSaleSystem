@@ -135,7 +135,7 @@
           <div class="nav-wrapper">
             <ul id="ul-horizontal-nav" class="left hide-on-med-and-down">
             	<li v-for="m of menu_data">
-	                <a class="dropdown-menu" href="#!" v-bind:data-activates="activityMenu(m.parent_menu_id)">
+	                <a class="dropdown-menu" href="#!" data-activates="">
 	                  <i class="material-icons">dvr</i>
 	                  <span>{{m.parent_menu_name}}
 	                    <i class="material-icons right">keyboard_arrow_down</i>
@@ -233,10 +233,10 @@
           </div>
         </nav>
         <!-- Dashboarddropdown -->
-        <ul v-for="menu of menu_data['children_menu']" v-bind:id="activityMenu(menu.parent_menu_id)" class="dropdown-content dropdown-horizontal-list">
+        <!-- <ul v-for="menu of menu_data['children_menu']" id="" class="dropdown-content dropdown-horizontal-list">
           <li><a href="dashboard-ecommerce.html">eCommerce</a></li>
           <li class="active"><a href="/admin">Analytics</a></li>
-        </ul>
+        </ul> -->
         <!-- Templatesdropdown -->
         <ul id="Templatesdropdown" class="dropdown-content dropdown-horizontal-list">
           <li><a href="../collapsible-menu/">Collapsible Menu</a></li>
@@ -333,7 +333,7 @@
           <li><a href="page-blank.html">Blank</a></li>
         </ul>
       </div>
-      <ul class="temp-menu">
+      <!-- <ul class="temp-menu">
         <li v-for="menu in menus">
           {{ menu.label }}
           <ul>
@@ -342,7 +342,7 @@
             </li>
           </ul>
         </li>
-      </ul>
+      </ul> -->
     </header>
 </template>
 
@@ -367,10 +367,10 @@
             }
         },
         methods:{
-        	activityMenu:function(id){
-	        	var menu ="Menudropdown"+id;
-	        	return menu;
-	        },
+        	// activityMenu:function(id){
+	        // 	var menu ="Menudropdown"+id;
+	        // 	return menu;
+	        // },
         },
         created() {
         	axios.get(`/admin/api/getMenus`)
