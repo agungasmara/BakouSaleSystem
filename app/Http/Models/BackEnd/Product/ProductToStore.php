@@ -4,7 +4,8 @@ namespace App\Http\Models\BackEnd\Product;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class ProductToStore extends Model
 {
+    protected $table = 'product_to_store';
     //
 }
