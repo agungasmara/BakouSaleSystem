@@ -83,33 +83,33 @@
     import MenuComponent from './views/Components/backend/include/_menu.vue'
 
     export default{
-        data(){
-            return{
-                flash: Flash.state
-            }
-        },
-        components:{
-          MenuComponent,
-        },
-        methods: function() {
-            alert('sd');
-            // window.location = "#/login";
-        },
-        mounted: function () {
-            // window.location = "#/home";
-        },
-        created() {
-          // createIndex('http://localhost:9200', params);
-          // Vue.http.put("http://localhost:9200", params)
+      data(){
+          return{
+              flash: Flash.state
+          }
+      },
+      components:{
+        MenuComponent,
+      },
+      methods: function() {
+          alert('sd');
+          // window.location = "#/login";
+      },
+      mounted: function () {
+          // window.location = "#/home";
+      },
+      created() {
+        // createIndex('http://localhost:9200', params);
+        // Vue.http.put("http://localhost:9200", params)
 
-          // async / await version (created() becomes async created())
-          
-          // try {
-          //   const response = await axios.get(`http://jsonplaceholder.typicode.com/posts`)
-          //   this.posts = response.data
-          // } catch (e) {
-          //   this.errors.push(e)
-          // }
-        }
+        // async / await version (created() becomes async created())
+        
+        // try {
+        //   const response = await axios.get(`http://jsonplaceholder.typicode.com/posts`)
+        //   this.posts = response.data
+        // } catch (e) {
+        //   this.errors.push(e)
+        // }
+      }
     }
 </script>
