@@ -19,11 +19,11 @@
             <!-- product Image and Zoom -->
             <div class="main-image sp-wrap col-lg-12 no-padding">
 
-                <a href="images/product_details/hi-res-croped/1.jpg"><img
+                <a href="/images/product_details/hi-res-croped/1.jpg"><img
                         src="images/product_details/low-res-white/1.jpg" class="img-responsive" alt="img"></a>
-                <a href="images/product_details/hi-res-croped/2.jpg"><img
+                <a href="/images/product_details/hi-res-croped/2.jpg"><img
                         src="images/product_details/low-res-white/2.jpg" class="img-responsive" alt="img"></a>
-                <a href="images/product_details/hi-res-croped/3.jpg"><img
+                <a href="/images/product_details/hi-res-croped/3.jpg"><img
                         src="images/product_details/low-res-white/3.jpg" class="img-responsive" alt="img"></a></div>
         </div>
         <!--/ left column end -->
@@ -277,7 +277,7 @@
             <!--/.item-->
 
             <div class="item">
-                <div class="product"><a class="product-image"> <img src="images/product/13.jpg" alt="img"> </a>
+                <div class="product"><a class="product-image"> <img src="/images/product/13.jpg" alt="img"> </a>
 
                     <div class="description">
                         <h4><a href="san-remo-spaghetti">Denim T-Shirts </a></h4>
@@ -295,5 +295,5 @@
 </div>
 <!-- /main-container -->
 
-<div class="gap"></div>
+<!-- <div class="gap"></div> -->
 </template>

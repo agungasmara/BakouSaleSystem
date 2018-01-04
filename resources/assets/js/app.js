@@ -4,29 +4,36 @@ import VueRouter from 'vue-router'
 // FrontEnd #######################
 import Appf from './Appf.vue'
 import FHome from './views/Components/frontend/home.vue'
-import FAccount from './views/Components/frontend/account/signin.vue'
-// Backend ###################
-    import Home from './views/Components/index.vue'
-    import Register from './views/Auth/Register.vue'
-    import Login from './views/Auth/Login.vue'
-    import List from './views/Auth/List.vue'
-    import ShowForm from './views/Auth/Show.vue'
-    import CreateForm from './views/Auth/Form.vue'
-    import App from './App.vue'
-    import Appl from './Appl.vue'
-    //setting########################
-    import SettingForm from './views/Components/backend/settings/MainForm.vue'
-    import SettingList from './views/Components/backend/settings/SettingList.vue'
-    import SettingEditForm from './views/Components/backend/settings/EditForm.vue'
-    //end setting####################
+//***** Account *****
+import Account from './views/Components/frontend/account/account.vue'
+import FSignIn from './views/Components/frontend/account/signin.vue'
+import FRegister from './views/Components/frontend/account/register.vue'
+//***** products *****
+import Product from './views/Components/frontend/product/product.vue'
+import ProductDetail from './views/Components/frontend/product/product_detail.vue'
 
-    //User and user Group########################
-    import UserGroupForm from './views/Components/backend/users/MainForm.vue'
-    import UserList from './views/Components/backend/users/UserList.vue'
-    import UserEditForm from './views/Components/backend/users/UserEditForm.vue'
-    import UserGroupList from './views/Components/backend/users/UserGroupList.vue'
-    import UserGroupEditForm from './views/Components/backend/users/EditForm.vue'
-    //End User Group####################
+// Backend ###################
+import Home from './views/Components/index.vue'
+import Register from './views/Auth/Register.vue'
+import Login from './views/Auth/Login.vue'
+import List from './views/Auth/List.vue'
+import ShowForm from './views/Auth/Show.vue'
+import CreateForm from './views/Auth/Form.vue'
+import App from './App.vue'
+import Appl from './Appl.vue'
+//setting########################
+import SettingForm from './views/Components/backend/settings/MainForm.vue'
+import SettingList from './views/Components/backend/settings/SettingList.vue'
+import SettingEditForm from './views/Components/backend/settings/EditForm.vue'
+//end setting####################
+
+//User and user Group########################
+import UserGroupForm from './views/Components/backend/users/MainForm.vue'
+import UserList from './views/Components/backend/users/UserList.vue'
+import UserEditForm from './views/Components/backend/users/UserEditForm.vue'
+import UserGroupList from './views/Components/backend/users/UserGroupList.vue'
+import UserGroupEditForm from './views/Components/backend/users/EditForm.vue'
+//End User Group####################
 
 //import router from './router'
 import VueResource from 'vue-resource'
@@ -56,8 +63,29 @@ const router = new VueRouter({
   routes: [
     // routing FrontEnd
     { path: '/', name:'fhome',component: FHome },
-    { path: '/my_account', name:'fmyaccount', component: FAccount },
-    { path: '/signin', name:'fsignin', component: FAccount },
+    // {path: '/product/product_detail/:id', name:'product_detail',component:ProductDetail},
+    {path: '/product', name:'product',component:Product,
+        children: [
+            {
+              path: 'product_detail/:id',
+              component: ProductDetail
+            }
+        ]
+    },
+    { path: '/account', name:'account', component: Account,
+        children: [
+            {
+              path: 'signin',
+              name:'signin',
+              component: FSignIn
+            },
+            {
+              path: 'register',
+              name:'register',
+              component: FRegister
+            }
+        ]
+    },
     // routing Backend
     { path: '/auth/login', name:'login',component: Login },
     { path: '/admin', name:'ahome',component: Home },
