@@ -8,7 +8,7 @@
         <title>Bakou Sale System</title>
         <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
         <!--<link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet">-->
-        <!-- <link href="/css/vuetify.min.css" rel="stylesheet"> -->
+        <link href="/css/vuetify.min.css" rel="stylesheet"> 
         <!-- Styles -->
         {{-- <link rel="stylesheet" type="text/css" href="{{mix('css/app.css')}}"> --}}
         <link href="/css/themes/horizontal-menu/materialize.css" type="text/css" rel="stylesheet">

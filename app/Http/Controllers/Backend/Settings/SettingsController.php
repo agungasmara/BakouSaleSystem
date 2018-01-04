@@ -70,7 +70,7 @@ class SettingsController extends Controller
             'settings'=>Setting::all()
         ]);
     }
-    public function ppdate(Request $request,$id)
+    public function update(Request $request,$id)
     {
     	
     	Setting::where('setting_id',$id)->update([

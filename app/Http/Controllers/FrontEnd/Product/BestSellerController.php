@@ -9,36 +9,62 @@ use DB;
 class BestSellerController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the BestSeller Create On 01-02-2018
      *
      * @return \Illuminate\Http\Response
      */
     public function index(){
+    	 $filter_data = array(
+            'order' => 'DESC',
+            'limit' => 4
+        );
     	$Products = array();
-    	$results = $this->getBestSellerProducts(4);
-    	// dd($results);
+    	$results = $this->getBestSellerProducts($filter_data);
+    	if($results){
+    		foreach ($results as $result) {
+				$products[] = array(
+					'product_id'  => $result->product_id,
+					'thumb'       => $result->image,
+					'name'        => $result->name,
+					'description' => $result->description,
+					// 'description' => utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, $this->config->get($this->config->get('config_theme') . '_product_description_length')) . '..',
+					'price'       => $result->price,
+					'special'     => $result->special,
+					// 'tax'         => $result->tax,
+					'rating'      => $result->rating,
+					// 'href'        => $this->url->link('product/product', 'product_id=' . $result['product_id'])
+					'href'        => 'product/product', 'product_id=' . $result->product_id
+				);
+    		}
+    	}
+
+    	return response()->json(['data'=>$products,'success' => true, 'message' => 'Success']);
+
     }
 
-    public function getBestSellerProducts($limit){
+    public function getBestSellerProducts($data = array()){
     	$product_data = array();
-
-		// $query = $this->db->query("SELECT op.product_id, SUM(op.quantity) AS total FROM " . DB_PREFIX . "order_product op LEFT JOIN `" . DB_PREFIX . "order` o ON (op.order_id = o.order_id) LEFT JOIN `" . DB_PREFIX . "product` p ON (op.product_id = p.product_id) LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p.product_id = p2s.product_id) WHERE o.order_status_id > '0' AND p.status = '1' AND p.date_available <= NOW() AND p2s.store_id = '" . (int)$this->config->get('config_store_id') . "' GROUP BY op.product_id ORDER BY total DESC LIMIT " . (int)$limit);
-		$query = DB::table('order_product')
+		$sql = DB::table('order_product')
+				->SELECT('order_product.product_id',DB::raw('SUM('.env('DB_PREFIX').'order_product.quantity) as total'))
 				->leftJoin('order','order.order_id','=','order.order_id')
 				->leftJoin('product','order_product.product_id','=','product.product_id')
-				// ->leftJoin('product_to_store','product.product_id','=','product_to_store.product_id')
-				
-				->limit(4)
-				->get();
-		dd($query);
-			
-
-
-		foreach ($query->rows as $result) {
-			$product_data[$result['product_id']] = $this->getProduct($result['product_id']);
+				->leftJoin('product_to_store','product.product_id','=','product_to_store.product_id')
+				->where('order.order_status_id','>',0)
+				->where('product.status',1)
+				->where('product.date_available','<=',Carbon::today())
+				->where('product_to_store.store_id',0)
+				->GroupBy('order_product.product_id');
+			if (isset($data['order']) && ($data['order'] == 'DESC')) {
+				$sql->OrderBy("total","DESC");
+			}
+			if (isset($data['limit'])) {
+				$sql->Limit($data['limit']);
+			}
+		$query = $sql->get();
+		$product_data = array();
+		foreach ($query as $result) {
+			$product_data[] = $this->getProduct($result->product_id);
 		}
-
-		$this->cache->set('product.bestseller.' . (int)$this->config->get('config_language_id') . '.' . (int)$this->config->get('config_store_id') . '.' . $this->config->get('config_customer_group_id') . '.' . (int)$limit, $product_data);
 
 		return $product_data;
     }

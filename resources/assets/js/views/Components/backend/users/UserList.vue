@@ -23,21 +23,28 @@
 		      </v-card-title>
 			    <v-data-table v-bind:headers="headers" :items="users" v-bind:search="search" class="elevation-1" >
 					<template slot="items" slot-scope="props">
-						<td class="text-xs-center">{{ props.item.user_id }}</td>
+						<td class="text-xs-center">
+							{{ props.item.user_id }}
+							
+						</td>
+						<td class="text-xs-left">
+							<div>
+								{{ props.item.username }}
+							</div>
+							<div>
+								<span style="cursor:pointer;color:blue;" @click="editUser(props.item.user_id)"">
+									Edit
+								</span>&nbsp;
+								<span style="cursor:pointer;color:red;" v-on:click="confirmDel(props.item.user_id,props.item.username)">Delete</span>
+							</div>
+						</td>
 						<td class="text-xs-left">{{ props.item.group }}</td>
-						<td class="text-xs-left">{{ props.item.username }}</td>
 						<td class="text-xs-left">{{ props.item.firstname }}</td>
 						<td class="text-xs-left">{{ props.item.lastname }}</td>
 						<td class="text-xs-left">{{ props.item.email }}</td>
 						<td class="text-xs-left">{{ props.item.code }}</td>
-						<td class="text-xs-left"><img :src=props.item.image width="50"></td>
+						<td class="text-xs-left"><img :src="props.item.image" style="width:auto;height:auto;max-width:50px;max-height:50px;"></td>
 						<td class="text-xs-left">{{ props.item.date_added }}</td>
-						<td class="text-xs-center">
-							<span style="cursor:pointer;" @click="editUser(props.item.user_id)"">
-								<i class="material-icons">edit</i>
-							</span>
-							<span style="cursor:pointer;color:red;" v-on:click="confirmDel(props.item.user_id,props.item.username)"><i class="material-icons">delete_forever</i></span>
-						</td>
 					</template>
 					<template slot="pageText" slot-scope="{ pageStart, pageStop }">
 			          From {{ pageStart }} to {{ pageStop }}
@@ -79,15 +86,14 @@
 				pagination: {},
 				headers: [
 			        { text: 'User ID',align: 'left',value: 'user_id'},
-			        { text: 'Group',align:'center', value: 'group' },
 			        { text: 'Username',align:'center', value: 'username' },
-			        { text: 'First Name',align:'center', value: 'fisrtame' },
-			        { text: 'Last Name',align:'center', value: 'lastName' },
+			        { text: 'Group',align:'center', value: 'group' },
+			        { text: 'First Name',align:'center', value: 'firstname' },
+			        { text: 'Last Name',align:'center', value: 'lastname' },
 			        { text: 'Email',align:'center', value: 'email' },
 			        { text: 'Code',align:'center', value: 'code' },
 			        { text: 'Image',align:'center', value: 'image' },
-			        { text: 'Date Added',align:'center', value: 'date_added' },
-			        { text: 'Action', value: 'action',align:'center',sortable:false }
+			        { text: 'Date Added',align:'center', value: 'date_added' }
 			    ],
 				users:[],
 				items: [
