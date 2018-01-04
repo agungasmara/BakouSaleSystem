@@ -7,6 +7,10 @@ use App\Http\Controllers\Controller;
 
 class ProductsController extends Controller
 {
+    public function __construct()
+    {
+        
+    }
     public function list()
     {
 

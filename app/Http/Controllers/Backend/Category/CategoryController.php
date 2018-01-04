@@ -10,18 +10,18 @@ class CategoryController extends Controller
     public function __construct()
     {
         
-        $data=array(
-                'image'=>1234,
-                'parent_id'=>1234,
-                'top'=>1,
-                'column'=>1234,
-                'sort_order'=>1234,
-                'status'=>2,
-            );
-        $result=CategoryModel::getAllCategories();
+        // $data=array(
+        //         'image'=>1234,
+        //         'parent_id'=>1234,
+        //         'top'=>1,
+        //         'column'=>1234,
+        //         'sort_order'=>1234,
+        //         'status'=>2,
+        //     );
+        // $result=CategoryModel::getAllCategories();
 
 
-        dd($result);
+        // dd($result);
     }
     /**
      * Display a listing of the resource.
