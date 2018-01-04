@@ -33,15 +33,25 @@
 
                               <!-- Wrapper for slides -->
                               <div class="carousel-inner" role="listbox">
-                                  <div class="item active"><a href="product-details.html"> <img
-                                          src="/assets/frontend/images/product/5.jpg" alt="img" class="img-responsive "></a></div>
-                                  <div class="item"><a href="product-details.html"> <img src="/assets/frontend/images/product/21.jpg"
-                                                                                         alt="img"
-                                                                                         class="img-responsive "></a>
+                                  <div class="item active">
+                                    <router-link to="/my_account">
+                                        <img src="/assets/frontend/images/product/5.jpg" alt="img" class="img-responsive ">
+                                    </router-link>
+                                    <!-- <a href="product-details.html"> 
+                                      <img src="/assets/frontend/images/product/5.jpg" alt="img" class="img-responsive ">
+                                    </a> -->
                                   </div>
-                                  <div class="item"><a href="product-details.html"> <img src="/assets/frontend/images/product/30.jpg"
-                                                                                         alt="img"
-                                                                                         class="img-responsive "></a>
+                                  <div class="item">
+                                    <a href="product-details.html"> 
+                                      <img src="/assets/frontend/images/product/21.jpg" alt="img"
+                                        class="img-responsive ">
+                                    </a>
+                                  </div>
+                                  <div class="item">
+                                    <a href="product-details.html"> 
+                                      <img src="/assets/frontend/images/product/30.jpg" alt="img"
+                                        class="img-responsive ">
+                                    </a>
                                   </div>
                               </div>
 
