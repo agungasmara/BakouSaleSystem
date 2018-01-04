@@ -108,6 +108,7 @@
         created() {
             axios.get(`/api/latest`)
 		    .then(response => {
+          
 		      this.latestProducts = response.data['data']
 		    })
 		    .catch(e => {
