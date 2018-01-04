@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Http\Models\BackEnd\User\User;
-
+use Intervention\Image\ImageManagerStatic as Image;
 class UsersController extends Controller
 {
     public function list()
@@ -20,12 +20,24 @@ class UsersController extends Controller
     public function store(Request $request)
     {
     	$success=false;
+
+
+        if( preg_match('/data:image/', $request->userImage) ){                
+          preg_match('/data:image\/(?<mime>.*?)\;/', $request->userImage , $groups);
+          $mimetype = $groups['mime'];
+                       
+          $firstname='images/testpost.'.$mimetype;
+          $image = Image::make($request->userImage)
+            ->fit(400, 500) 
+            ->encode($mimetype, 100) 
+            ->save(public_path($firstname));                
+      } 
     	$saved=User::create([
     		'username'=>$request->username,
 			'firstname'=>$request->fname,
 			'lastname'=>$request->lname,
 			'user_group_id'=>$request->userGroup,
-			'image'=>$request->userImage,
+			'image'=>$firstname,
 			'email'=>$request->email,
 			'password'=>bcrypt($request->password),
 			'code'=>$request->code,
@@ -75,7 +87,16 @@ class UsersController extends Controller
     }
     public function update(Request $request,$id)
     {
-    	
+    	if( preg_match('/data:image/', $request->userImage) ){                
+          preg_match('/data:image\/(?<mime>.*?)\;/', $request->userImage , $groups);
+          $mimetype = $groups['mime'];
+                       
+          $firstname='images/testpost.'.$mimetype;
+          $image = Image::make($request->userImage)
+            // ->fit(400, 500) 
+            ->encode($mimetype, 100) 
+            ->save(public_path($firstname));                
+        } 
     	User::where('user_id',$id)->update([
     		'user_group_id'=>$request->userGroup,
     		'username'=>$request->username,
@@ -84,7 +105,7 @@ class UsersController extends Controller
 			'email'=>$request->email,
 			'password'=>bcrypt($request->password),
 			'code'=>$request->code,
-			'image'=>$request->userImage,
+			'image'=>$firstname,
 			'status'=>$request->status,
 			'ip'=>$request->ip(),
 			'salt'=>'xy390xz',
