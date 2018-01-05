@@ -39,7 +39,7 @@
 	import groupForm from './groupForm.vue'
 	export default{
 		components:{
-			'user-form':userForm,
+			'UserForm':userForm,
 			'group-form':groupForm
 		},
 		data(){

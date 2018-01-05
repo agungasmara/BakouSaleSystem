@@ -9,7 +9,7 @@
                   <!-- <a href="/admin" class="brand-logo darken-1"> -->
                     <router-link class="brand-logo darken-1"  to="/admin">
                       <img src="/images/logo/materialize-logo.png" alt="materialize logo">
-                      <span class="logo-text hide-on-med-and-down">Materialize</span>
+                      <span class="logo-text hide-on-med-and-down">Bakou Store</span>
                     </router-link>
                   <!-- </a> -->
                 </h1>
