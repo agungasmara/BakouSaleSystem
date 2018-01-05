@@ -31,6 +31,7 @@
     "vue-elasticsearch": "^1.0.3-rc3",
     "vue-resource": "^1.3.4",
     "vue-router": "^3.0.1",
+    "vuejs-dialog": "^0.4.5",
     "vuetify": "^0.17.5"
   }
 }

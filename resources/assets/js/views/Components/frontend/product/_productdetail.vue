@@ -18,14 +18,15 @@
         <div class="col-lg-6 col-md-6 col-sm-6">
             <!-- product Image and Zoom -->
             <div class="main-image sp-wrap col-lg-12 no-padding">
-                <a href="/assets/frontend/images/product_details/hi-res-croped/1.jpg">
-                    <img src="/assets/frontend/images/product_details/low-res-white/1.jpg" class="img-responsive" alt="img">
+
+                <a href="images/product_details/hi-res-croped/1.jpg">
+                	<img src="images/product_details/low-res-white/1.jpg" class="img-responsive" alt="img">
                 </a>
-                <a href="/assets/frontend/images/product_details/hi-res-croped/2.jpg">
-                    <img src="/assets/frontend/images/product_details/low-res-white/2.jpg" class="img-responsive" alt="img">
+                <a href="images/product_details/hi-res-croped/2.jpg">
+                	<img src="images/product_details/low-res-white/2.jpg" class="img-responsive" alt="img">
                 </a>
-                <a href="/assets/frontend/images/product_details/hi-res-croped/3.jpg">
-                    <img src="/assets/frontend/images/product_details/low-res-white/3.jpg" class="img-responsive" alt="img">
+                <a href="images/product_details/hi-res-croped/3.jpg">
+                	<img src="images/product_details/low-res-white/3.jpg" class="img-responsive" alt="img">
                 </a>
             </div>
         </div>
@@ -196,7 +197,7 @@
 
         <div id="SimilarProductSlider">
             <div class="item">
-                <div class="product"><a class="product-image"> <img src="/assets/frontend/images/product/a1.jpg" alt="img"> </a>
+                <div class="product"><a class="product-image"> <img src="images/product/a1.jpg" alt="img"> </a>
 
                     <div class="description">
                         <h4><a href="san-remo-spaghetti">YOUR LIFE</a></h4>
@@ -208,7 +209,7 @@
             <!--/.item-->
 
             <div class="item">
-                <div class="product"><a class="product-image"> <img src="/assets/frontend/images/product/a2.jpg" alt="img"> </a>
+                <div class="product"><a class="product-image"> <img src="images/product/a2.jpg" alt="img"> </a>
 
                     <div class="description">
                         <h4><a href="san-remo-spaghetti">RED CROWN</a></h4>
@@ -220,7 +221,7 @@
             <!--/.item-->
 
             <div class="item">
-                <div class="product"><a class="product-image"> <img src="/assets/frontend/images/product/a3.jpg" alt="img"> </a>
+                <div class="product"><a class="product-image"> <img src="images/product/a3.jpg" alt="img"> </a>
 
                     <div class="description">
                         <h4><a href="san-remo-spaghetti">WHITE GOLD</a></h4>
@@ -232,7 +233,7 @@
             <!--/.item-->
 
             <div class="item">
-                <div class="product"><a class="product-image"> <img src="/assets/frontend/images/product/a4.jpg" alt="img"> </a>
+                <div class="product"><a class="product-image"> <img src="images/product/a4.jpg" alt="img"> </a>
 
                     <div class="description">
                         <h4><a href="san-remo-spaghetti">DENIM 4240</a></h4>
@@ -244,7 +245,7 @@
             <!--/.item-->
 
             <div class="item">
-                <div class="product"><a class="product-image"> <img src="/assets/frontend/images/product/30.jpg" alt="img"> </a>
+                <div class="product"><a class="product-image"> <img src="images/product/30.jpg" alt="img"> </a>
 
                     <div class="description">
                         <h4><a href="san-remo-spaghetti">CROWN ROCK</a></h4>
@@ -256,7 +257,7 @@
             <!--/.item-->
 
             <div class="item">
-                <div class="product"><a class="product-image"> <img src="/assets/frontend/images/product/a5.jpg" alt="img"> </a>
+                <div class="product"><a class="product-image"> <img src="images/product/a5.jpg" alt="img"> </a>
 
                     <div class="description">
                         <h4><a href="san-remo-spaghetti">SLIM ROCK</a></h4>
@@ -268,7 +269,7 @@
             <!--/.item-->
 
             <div class="item">
-                <div class="product"><a class="product-image"> <img src="/assets/frontend/images/product/36.jpg" alt="img"> </a>
+                <div class="product"><a class="product-image"> <img src="images/product/36.jpg" alt="img"> </a>
 
                     <div class="description">
                         <h4><a href="san-remo-spaghetti">ROCK T-Shirts </a></h4>
@@ -280,7 +281,7 @@
             <!--/.item-->
 
             <div class="item">
-                <div class="product"><a class="product-image"> <img src="/assets/frontend/images/product/13.jpg" alt="img"> </a>
+                <div class="product"><a class="product-image"> <img src="images/product/13.jpg" alt="img"> </a>
 
                     <div class="description">
                         <h4><a href="san-remo-spaghetti">Denim T-Shirts </a></h4>
@@ -298,5 +299,5 @@
 </div>
 <!-- /main-container -->
 
-<!-- <div class="gap"></div> -->
+<div class="gap"></div>
 </template>

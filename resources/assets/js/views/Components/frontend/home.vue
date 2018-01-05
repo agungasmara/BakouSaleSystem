@@ -54,42 +54,41 @@
   <!--/.parallax-image-1-->
 
   <div class="container main-container">
-
-
+    
     <!-- ***** template component latest ***** -->
     <template>
       <LatestProductComponent/>
       <RecommendProductComponent/>
     </template>
-      <!--/.featuredPostContainer-->
+    <!--/.featuredPostContainer-->
 
-      <hr class="no-margin-top">
-      <div class="width100 section-block ">
-          <div class="row featureImg">
-              <div class="col-md-3 col-sm-3 col-xs-6"><a href="category.html"><img src="/assets/frontend/images/site/new-collection-1.jpg"
-                                                                                   class="img-responsive" alt="img"></a>
-              </div>
-              <div class="col-md-3 col-sm-3 col-xs-6"><a href="category.html"><img src="/assets/frontend/images/site/new-collection-2.jpg"
-                                                                                   class="img-responsive" alt="img"></a>
-              </div>
-              <div class="col-md-3 col-sm-3 col-xs-6"><a href="category.html"><img src="/assets/frontend/images/site/new-collection-3.jpg"
-                                                                                   class="img-responsive" alt="img"></a>
-              </div>
-              <div class="col-md-3 col-sm-3 col-xs-6"><a href="category.html"><img src="/assets/frontend/images/site/new-collection-4.jpg"
-                                                                                   class="img-responsive" alt="img"></a>
-              </div>
-          </div>
-          <!--/.row-->
-      </div>
-      <!--/.section-block-->
+    <hr class="no-margin-top">
+    <div class="width100 section-block ">
+        <div class="row featureImg">
+            <div class="col-md-3 col-sm-3 col-xs-6"><a href="category.html"><img src="/assets/frontend/images/site/new-collection-1.jpg"
+                                                                                 class="img-responsive" alt="img"></a>
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-6"><a href="category.html"><img src="/assets/frontend/images/site/new-collection-2.jpg"
+                                                                                 class="img-responsive" alt="img"></a>
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-6"><a href="category.html"><img src="/assets/frontend/images/site/new-collection-3.jpg"
+                                                                                 class="img-responsive" alt="img"></a>
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-6"><a href="category.html"><img src="/assets/frontend/images/site/new-collection-4.jpg"
+                                                                                 class="img-responsive" alt="img"></a>
+            </div>
+        </div>
+        <!--/.row-->
+    </div>
+    <!--/.section-block-->
 
-      <!-- ***** template component Carousel ***** -->
-      <template>
-        <CarouselDesignComponent/>
-      </template>
-      <!-- Main component call to action -->
+    <!-- ***** template component Carousel ***** -->
+    <template>
+      <CarouselDesignComponent/>
+    </template>
+    <!-- Main component call to action -->
 
-      <!--/.section-block-->
+    <!--/.section-block-->
   </div>
   <!--main-container-->
 

@@ -10,85 +10,82 @@
 			  <div class="row">
 			    <div class="col s10 m6 l6">
 			      <h5 class="breadcrumbs-title">Forms</h5>
-			      <ol class="breadcrumbs">
+			      <!-- <ol class="breadcrumbs">
 			        <li><a href="index.html">Dashboard</a>
 			        </li>
 			        <li><a href="#">Forms</a>
 			        </li>
 			        <li class="active">Forms Layouts</li>
-			      </ol>
+			      </ol> -->
+			      	<v-breadcrumbs>
+			        	<v-icon slot="divider">/</v-icon>
+		        		<v-breadcrumbs-item  v-for="item in breadcrumbs" :key="item.text" :disabled="item.disabled">
+		          			{{ item.text }}
+		        		</v-breadcrumbs-item>
+		      		</v-breadcrumbs>
 			    </div>
 			    <div class="col s2 m6 l6">
-			      <a class="btn dropdown-settings waves-effect waves-light breadcrumbs-btn right" href="#!" data-activates="dropdown1">
-			        <i class="material-icons hide-on-med-and-up">settings</i>
-			        <span class="hide-on-small-onl">Settings</span>
-			        <i class="material-icons right">arrow_drop_down</i>
-			      </a>
-			      <ul id="dropdown1" class="dropdown-content">
-			        <li><a href="#!" class="grey-text text-darken-2">Access<span class="badge">1</span></a>
-			        </li>
-			        <li><a href="#!" class="grey-text text-darken-2">Profile<span class="new badge">2</span></a>
-			        </li>
-			        <li><a href="#!" class="grey-text text-darken-2">Notifications</a>
-			        </li>
-			      </ul>
+			      	<router-link to="/admin/attributes/list" replace><v-btn color="primary" class="btn dropdown-settings breadcrumbs-btn right">Cancel</v-btn></router-link>
+
+			     	<v-btn @click="submit(id,1)" class="btn dropdown-settings waves-effect waves-light breadcrumbs-btn right" color="success">Update</v-btn>
 			    </div>
 			  </div>
 			</div>
 		</div>
 		<!--breadcrumbs end-->
-		<div>
-			
-			<v-app id="inspire">
-				<v-card>
+		<div id="basic-form" class="section">
+			<div class="container">
+				<v-app id="inspire">
+					<v-card>
 
-					<v-card-title>	
-						<v-breadcrumbs>
-				        	<v-icon slot="divider">forward</v-icon>
+						<!-- <v-card-title>	
+							<v-breadcrumbs>
+					        	<v-icon slot="divider">forward</v-icon>
 				        		<v-breadcrumbs-item  v-for="item in breadcrumbs" :key="item.text" :disabled="item.disabled">
 				          			{{ item.text }}
 				        		</v-breadcrumbs-item>
-				      	</v-breadcrumbs>
-					</v-card-title>
-					<div class="flash flash__success" v-if="flash.success">
-						<v-alert color="success" icon="check_circle" value="true">
-			            	{{flash.success}}
-			            </v-alert>
-		          	</div>
-				    <v-form v-model="valid" ref="form" lazy-validation>
-				    	<v-container grid-list-md>
-	              			<v-layout wrap>
-						    	<v-flex xs12 sm6 md6>
-						      		<v-select label="Select Store" v-model="select"  :items="items"  :rules="[v => !!v || 'Item is required']" required></v-select>
-						      	</v-flex>
+					      	</v-breadcrumbs>
+						</v-card-title> -->
+						<div class="flash flash__success" v-if="flash.success">
+							<v-alert color="success" icon="check_circle" value="true">
+				            	{{flash.success}}
+				            </v-alert>
+			          	</div>
+					    <v-form v-model="valid" ref="form" lazy-validation>
+					    	<v-container grid-list-md>
+		              			<v-layout wrap>
+							    	<v-flex xs12 sm6 md6>
+							      		<v-select label="Select Store" v-model="select"  :items="items"  :rules="[v => !!v || 'Item is required']" required></v-select>
+							      	</v-flex>
 
-						    	<v-flex xs12 sm6 md6>
-						      		<v-text-field label="Code" v-model="code" :rules="codeRules" :counter="100" required></v-text-field>
-						      	</v-flex>
+							    	<v-flex xs12 sm6 md6>
+							      		<v-text-field label="Code" v-model="code" :rules="codeRules" :counter="100" required></v-text-field>
+							      	</v-flex>
 
-						      	<v-flex xs12 sm6 md6>
-						      		<v-text-field label="Key" v-model="key" :rules="keyRules" :counter="100" required></v-text-field>
-						      	</v-flex>
+							      	<v-flex xs12 sm6 md6>
+							      		<v-text-field label="Key" v-model="key" :rules="keyRules" :counter="100" required></v-text-field>
+							      	</v-flex>
 
-						      	<v-flex xs12 sm6 md6>
-						      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="100" required></v-text-field>
-						      	</v-flex>
+							      	<v-flex xs12 sm6 md6>
+							      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="100" required></v-text-field>
+							      	</v-flex>
 
-						      	<v-btn @click="submit(id,1)" :disabled="!valid">
-							        Update
-							    </v-btn>
-							    <v-btn @click="submit(id,2)" :disabled="!valid">
-							        Update & Close
-							    </v-btn>
-							    <router-link to="/admin/settings/list"><v-btn>
-							        Cancele
-							    </v-btn>
-							    </router-link>
-						    </v-layout>
-						</v-container>
-				    </v-form>
-				</v-card>
-			</v-app>
+							      	<!-- <v-btn @click="submit(id,1)" :disabled="!valid">
+								        Update
+								    </v-btn>
+								    <v-btn @click="submit(id,2)" :disabled="!valid">
+								        Update & Close
+								    </v-btn>
+								    <router-link to="/admin/settings/list"><v-btn>
+								        Cancele
+								    </v-btn>
+								    </router-link> -->
+							    </v-layout>
+							</v-container>
+					    </v-form>
+					</v-card>
+				</v-app>
+			</div>
 		</div>
 	</section>
 </template>
@@ -123,15 +120,15 @@
 			    items: [],
 			    breadcrumbs: [
 			        {
-			          text: 'Adminstrator',
+			          text: 'Dashboard',
 			          disabled: false
 			        },
 			        {
-			          text: 'Setting',
+			          text: 'Attributes',
 			          disabled: false
 			        },
 			        {
-			          text: 'Create',
+			          text: 'Edit',
 			          disabled: true
 			        }
 		      	],

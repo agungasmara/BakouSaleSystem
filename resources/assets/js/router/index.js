@@ -7,6 +7,7 @@ import List from '../views/Auth/List.vue'
 import ShowForm from '../views/Auth/Show.vue'
 import CreateForm from '../views/Auth/Form.vue'
 
+
 Vue.use(VueRouter)
 
 // const User = {

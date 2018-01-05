@@ -1,41 +1,55 @@
 <template>
-	<div>
+
+	<section id="content">
+
 		<v-app id="inspire">
-			<v-breadcrumbs>
-		        <v-icon slot="divider">chevron_right</v-icon>
 
-	        	<v-breadcrumbs-item v-for="item in items" :key="item.text" :disabled="item.disabled">
+			<!--breadcrumbs start-->
+			<div id="breadcrumbs-wrapper">
+				<v-breadcrumbs>
 
-	          		{{ item.text }}
+			        <v-icon slot="divider">chevron_right</v-icon>
 
-	        	</v-breadcrumbs-item>
-		    </v-breadcrumbs>
+		        	<v-breadcrumbs-item v-for="item in items" :key="item.text" :disabled="item.disabled">
 
-			    <data-table 
-			    	v-bind:data-header="headers" 
-			    	v-bind:data-value="settings"
-			    	v-bind:get-api="getApiUrl"
-			    	v-bind:delete-api="deleteApiUrl"
-		    		v-bind:edit-url="urlEdit"
-			    	v-on:change="fetchData">
-			    </data-table>
+		          		{{ item.text }}
+
+		        	</v-breadcrumbs-item>
+
+			    </v-breadcrumbs>
+			</div>
+
+			<!--Data table component-->
+
+		    <data-table 
+		    	v-bind:data-header="headers" 
+		    	v-bind:data-value="settings"
+		    	v-bind:get-api="getApiUrl"
+		    	v-bind:delete-api="deleteApiUrl"
+	    		v-bind:edit-url="urlEdit"
+		    	v-on:change="fetchData">
+		    </data-table>
+
+		    <!--End of data table-->
 
 		</v-app>
-	</div>
+
+	</section>
+
 </template>
 
 <script>
 	import Flash from '../../../../helper/flash'
 	import axios from 'axios'
-	import dataTable from '../commons/dataTable.vue'
+	import dataTable from '../commons/tables/dataTable.vue'
 	export default{
 		props:[
-			'id',
-			'dataHeader',
-			'dataValue',
-			'getApi',
-			'deleteApi',
-			'editUrl'
+			'id',//this use to pass id of record to data table component
+			'dataHeader',//data table header(column name)
+			'dataValue',//fetch record and pass to data table component
+			'getApi',//provide get api url
+			'deleteApi',//provide delete api url
+			'editUrl'//provide edit api url
 		],
 		data(){
 			return{

@@ -1,5 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import VuejsDialog from "vuejs-dialog"
+
+
 
 // FrontEnd #######################
 import Appf from './Appf.vue'
@@ -35,6 +38,12 @@ import UserGroupList from './views/Components/backend/users/UserGroupList.vue'
 import UserGroupEditForm from './views/Components/backend/users/EditForm.vue'
 //End User Group####################
 
+//***** Attribute *****
+import Attribute from './views/Components/backend/attributes/Attribute.vue'
+import AttributeList from './views/Components/backend/attributes/AttributeList.vue'
+import AttributeForm from './views/Components/backend/attributes/AttributeForm.vue'
+import AttributeEdit from './views/Components/backend/attributes/AttributeEdit.vue'
+
 //import router from './router'
 import VueResource from 'vue-resource'
 import Vuetify from 'vuetify'
@@ -42,6 +51,7 @@ import Vuetify from 'vuetify'
 Vue.use(Vuetify)
 Vue.use(VueResource);
 Vue.use(VueRouter)
+Vue.use(VuejsDialog)
 
 Vue.http.options.credentials = true;
 
@@ -73,24 +83,46 @@ const router = new VueRouter({
         ]
     },
     { path: '/account', name:'account', component: Account,
-        children: [
-            {
-              path: 'signin',
-              name:'signin',
-              component: FSignIn
-            },
-            {
-              path: 'register',
-              name:'register',
-              component: FRegister
-            }
-        ]
+      children: [
+          {
+            path: 'signin',
+            name:'signin',
+            component: FSignIn
+          },
+          {
+            path: 'register',
+            name:'register',
+            component: FRegister
+          }
+      ]
     },
     // routing Backend
     { path: '/auth/login', name:'login',component: Login },
     { path: '/admin', name:'ahome',component: Home },
     { path: '/admin/list', name:'floo',component: List },
     { path: '/register', name:'foo',component: Register },
+    // ***** attributes *****
+    { path: '/admin/attributes', name:'attributes',component: Attribute,
+      children: [
+        {
+          path: 'list',
+          name:'AttributeList',
+          component: AttributeList
+        },
+        {
+          path: 'add',
+          name:'AttributeForm',
+          component: AttributeForm
+        },
+        {
+          path: 'edit/:id',
+          name:'AttributeEdit',
+          component: AttributeEdit,props:true
+        }
+      ]
+    },
+
+
     //Setting
     { path: '/admin/settings/add',component:SettingForm},
     { path: '/admin/settings/list',component:SettingList},

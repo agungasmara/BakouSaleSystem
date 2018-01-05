@@ -27,7 +27,7 @@
 <script> 
 	import Flash from '../../../../helper/flash'
 	import axios from 'axios'
-	import dataTable from '../commons/dataTable.vue'
+	import dataTable from '../commons/tables/dataTable.vue'
 	export default{
 		props:[
 			'id',
@@ -43,7 +43,7 @@
 				deleteApiUrl:'/api/user/delete/',
 				urlEdit:'/admin/user/edit/',
 				headers: [
-			        { text: 'User ID',align: 'left',value: 'id'},
+			        { text: 'ID',align: 'left',value: 'id'},
 			        { text: 'Username',align:'center', value: 'username' },
 			        { text: 'Group',align:'center', value: 'group' },
 			        { text: 'First Name',align:'center', value: 'firstname' },
@@ -51,7 +51,9 @@
 			        { text: 'Email',align:'center', value: 'email' },
 			        { text: 'Code',align:'center', value: 'code' },
 			        { text: 'Image',align:'center', value: 'image' },
-			        { text: 'Date Added',align:'center', value: 'date_added' }
+			        { text: 'Status',align:'center', value: 'status' },
+			        { text: 'Date',align:'center', value: 'date_added' },
+			        { text: 'Action', value: 'action',align:'center',sortable:false }
 			    ],
 				users:[],
 				items: [

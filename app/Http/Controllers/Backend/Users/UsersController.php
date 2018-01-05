@@ -13,7 +13,7 @@ class UsersController extends Controller
     {
     	$users=DB::table('user')
     			  ->join('user_group','user_group.user_group_id','=','user.user_group_id')
-    			  ->select('user_id as id','username','user_group.name as group','firstname','lastname','email','image','code','status','date_added')
+    			  ->select('user_id as id','username','user_group.name as group','firstname','lastname','email','user.code as code','image','status','date_added')
     			  ->get();
     	return response()->json($users);
     }
