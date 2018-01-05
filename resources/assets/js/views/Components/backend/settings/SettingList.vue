@@ -11,40 +11,8 @@
 	        	</v-breadcrumbs-item>
 		    </v-breadcrumbs>
 
-			<v-card>
-			  
-		      <v-card-title>
-		        <v-spacer>
-		        	<div>
-		                <router-link to="/admin/settings/add" replace><v-btn color="primary">Create New</v-btn></router-link>
-		            </div>
-		        </v-spacer>
-		        <v-text-field append-icon="search" label="Search" single-line hide-details v-model="search"></v-text-field>
-		      </v-card-title>
-			    <v-data-table v-bind:headers="headers" :items="settings" v-bind:search="search" class="elevation-1" >
-					<template slot="items" slot-scope="props">
-						<td class="text-xs-center">{{ props.item.setting_id }}</td>
-						<td class="text-xs-left">
-							<div>
-								{{ props.item.name }}
-							</div>
-							<div>
-								<span style="cursor:pointer;color:blue;" @click="editSetting(props.item.setting_id)"">
-								Edit
-							</span>&nbsp;
-							<span style="cursor:pointer;color:red;" v-on:click="confirmDel(props.item.setting_id,props.item.name)">Delete</span>
-							</div>
-						</td>
-						<td class="text-xs-left">{{ props.item.code }}</td>
-						<td class="text-xs-left">{{ props.item.key }}</td>
-						<td class="text-xs-left">{{ props.item.value }}</td>
-						<td class="text-xs-center">{{ props.item.serialized }}</td>
-					</template>
-					<template slot="pageText" slot-scope="{ pageStart, pageStop }">
-			          From {{ pageStart }} to {{ pageStop }}
-			        </template>
-			    </v-data-table>
-		    </v-card>
+			    <data-table v-bind:data-header="headers" v-bind:data-value="settings"></data-table>
+
 		    <v-layout row justify-center>
 		      <v-dialog v-model="dialog" persistent max-width="290">
 		        <v-card>
@@ -67,18 +35,15 @@
 <script>
 	import Flash from '../../../../helper/flash'
 	import axios from 'axios'
+	import dataTable from '../commons/dataTable.vue'
 	export default{
-		props:['settingid'],
+		props:['settingid','dataHeader','dataValue'],
 		data(){
 			return{
 				deleteMessage:'',
 				settingName:'',
 				settingID:'',
 				dialog:false,
-				max25chars: (v) => v.length <= 25 || 'Input too long!',
-				tmp: '',
-				search: '',
-				pagination: {},
 				headers: [
 			        { text: 'Setting ID',align: 'center',value: 'setting_id'},
 			        { text: 'Store Name',align:'center', value: 'name' },
@@ -104,6 +69,7 @@
 			    ]
 			}
 		},
+		components:{'dataTable':dataTable},
 		created(){
 			this.fetchSettings()
 			document.title = 'Setting List';
