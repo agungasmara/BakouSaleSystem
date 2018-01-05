@@ -98,6 +98,8 @@ Route::get('/api/header','FrontEnd\Common\HeaderController@index');
 Route::get('/api/slide','FrontEnd\Includes\SlideController@index');
 Route::get('/api/latest','FrontEnd\Product\LastestController@index');
 Route::get('/api/bestSeller','FrontEnd\Product\BestSellerController@index');
+Route::get('/api/detail','FrontEnd\Product\ProductController@index');
+
 /*--| Api Request Banner--*/
 Route::get('/api/banner','FrontEnd\Design\BannerController@index');
 // Route::get('/api/getTest', 'FrontEnd\TestController@getTest');

@@ -16,7 +16,9 @@
 	                              <a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product"
 	                                 data-target="#productSetailsModalAjax">Quick View </a>
 	                          </div>
-	                          <router-link to="/product/product_detail/1"><img src="/assets/frontend/images/product/30.jpg" alt="img" class="img-responsive"></router-link>
+	                          <router-link to="/product/product_detail/1">
+	                          	<img src="/assets/frontend/images/product/30.jpg" alt="img" class="img-responsive">
+	                          </router-link>
 
 	                          <div class="promotion"><span class="new-product"> NEW</span> <span
 	                                  class="discount">15% OFF</span></div>

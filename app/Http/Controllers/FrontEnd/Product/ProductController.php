@@ -7,8 +7,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Models\FrontEnd\Product;
 class ProductController extends Controller
 {
-    public function GetProduct($num)
-    {
-    	return Product::take($num)->get();
+    // public function GetProduct($num)
+    // {
+    // 	return Product::take($num)->get();
+    // }
+
+    public function index(){
+    	dd("Hellowrold");
     }
+
 }
