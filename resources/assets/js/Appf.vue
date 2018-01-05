@@ -25,7 +25,7 @@
                             <ul class="userMenu">
                                 <li><router-link to="/account/signin"><span class="hidden-xs">My Account</span> <i
                                         class="glyphicon glyphicon-user hide visible-xs "></i></router-link></li>
-                                <li><router-link to="/account/register" data-toggle="modal" data-target="#ModalLogin"> <span class="hidden-xs">SignIn</span>
+                                <li><router-link to="/account/signin" data-toggle="modal" data-target="#ModalLogin"> <span class="hidden-xs">SignIn</span>
                                     <i class="glyphicon glyphicon-log-in hide visible-xs "></i> </router-link></li>
                                 <li class="hidden-xs">
                                     <router-link to="/account/register" data-toggle="modal" data-target="#ModalSignup">Create Account</router-link>

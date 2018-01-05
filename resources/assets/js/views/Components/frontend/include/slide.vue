@@ -20,7 +20,7 @@
                                                                    class="img-responsive parallaximg sliderImg" alt="img">
                     </div> -->
 
-                    <div v-for="post of posts" :class="thClassValue(post.banner_image_id)">
+                    <!-- <div v-for="post of posts" :class="thClassValue(post.banner_image_id)">
                         <div class="sliderInfo">
                             <div class="container">
                                 <div class="col-lg-12 col-md-12 col-sm-12 sliderTextFull ">
@@ -36,11 +36,11 @@
                             </div>
                         </div>
                         <img src="/assets/frontend/images/slider/slider1.jpg" class="img-responsive parallaximg sliderImg" alt="img">
-                    </div>
+                    </div> -->
                     <!--/.slider-item-->
 
                     
-                        <!-- <div class="sliderInfo">
+                        <div class="sliderInfo">
                             <div class="container">
                                 <div class="col-lg-12 col-md-12 col-sm-12 sliderTextFull  ">
                                     <div class="inner dark maxwidth500 text-center animated topAnima">
@@ -55,7 +55,7 @@
                                 </div>
                             </div>
                         </div>
-                        <img src="/assets/frontend/images/slider/slider3.jpg" class="img-responsive parallaximg sliderImg" alt="img"> -->
+                        <img src="/assets/frontend/images/slider/slider3.jpg" class="img-responsive parallaximg sliderImg" alt="img">
                     </div>
                     <!--/.slider-item-->
 

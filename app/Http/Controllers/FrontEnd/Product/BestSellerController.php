@@ -18,7 +18,7 @@ class BestSellerController extends Controller
             'order' => 'DESC',
             'limit' => 4
         );
-    	$Products = array();
+    	$products = array();
     	$results = $this->getBestSellerProducts($filter_data);
     	if($results){
     		foreach ($results as $result) {
