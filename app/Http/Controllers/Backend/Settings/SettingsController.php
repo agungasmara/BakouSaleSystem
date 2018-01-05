@@ -42,7 +42,7 @@ class SettingsController extends Controller
     {
     	$settings=DB::table('setting')
     			  ->join('store','store.store_id','=','setting.store_id')
-    			  ->select('setting_id','name','code','key','value','serialized')
+    			  ->select('setting_id as id','name','code','key','value','serialized')
     			  ->get();
     	return response()->json($settings);
     }

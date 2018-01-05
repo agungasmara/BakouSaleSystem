@@ -11,23 +11,15 @@
 	        	</v-breadcrumbs-item>
 		    </v-breadcrumbs>
 
-			    <data-table v-bind:data-header="headers" v-bind:data-value="settings"></data-table>
+			    <data-table 
+			    	v-bind:data-header="headers" 
+			    	v-bind:data-value="settings"
+			    	v-bind:get-api="getApiUrl"
+			    	v-bind:delete-api="deleteApiUrl"
+		    		v-bind:edit-url="urlEdit"
+			    	v-on:change="fetchData">
+			    </data-table>
 
-		    <v-layout row justify-center>
-		      <v-dialog v-model="dialog" persistent max-width="290">
-		        <v-card>
-		          <v-card-title class="headline">Message</v-card-title>
-		          	<v-card-text>
-		          		{{ deleteMessage }} {{ settingID }}?
-		          	</v-card-text>
-		          <v-card-actions>
-		            <v-spacer></v-spacer>
-		            <v-btn color="green darken-1" flat @click="deleteItem(settingID,0)">Cancle</v-btn>
-		            <v-btn color="green darken-1" flat @click="deleteItem(settingID,1)">Agree</v-btn>
-		          </v-card-actions>
-		        </v-card>
-		      </v-dialog>
-		    </v-layout>
 		</v-app>
 	</div>
 </template>
@@ -37,15 +29,21 @@
 	import axios from 'axios'
 	import dataTable from '../commons/dataTable.vue'
 	export default{
-		props:['settingid','dataHeader','dataValue'],
+		props:[
+			'id',
+			'dataHeader',
+			'dataValue',
+			'getApi',
+			'deleteApi',
+			'editUrl'
+		],
 		data(){
 			return{
-				deleteMessage:'',
-				settingName:'',
-				settingID:'',
-				dialog:false,
+				getApiUrl:'/api/setting/list/',
+				deleteApiUrl:'/api/setting/delete/',
+				urlEdit:'/admin/settings/edit/',
 				headers: [
-			        { text: 'Setting ID',align: 'center',value: 'setting_id'},
+			        { text: 'Setting ID',align: 'center',value: 'id'},
 			        { text: 'Store Name',align:'center', value: 'name' },
 			        { text: 'code',align:'center', value: 'code' },
 			        { text: 'Key',align:'center', value: 'key' },
@@ -71,40 +69,14 @@
 		},
 		components:{'dataTable':dataTable},
 		created(){
-			this.fetchSettings()
+			this.fetchData()
 			document.title = 'Setting List';
 		},
 		methods:{
-			fetchSettings(){
-				axios.get('/api/setting/list').then(response=>{
+			fetchData(){
+				axios.get(this.getApiUrl).then(response=>{
 					this.settings=response.data;
 				});
-			},
-			confirmDel(id,name){
-				this.deleteMessage='Are you sure you want to delete setting with ID:'
-				this.dialog=true;
-				this.settingName=name
-				this.settingID=id
-			},
-			deleteItem(id,opt){
-				if(opt==1){
-					this.deleteMessage='Deleting...'
-					axios.delete('/api/setting/delete/'+id).then((res)=>{
-						
-						if(res.data.deleted==true){
-							this.deleteMessage='Delete Successfully'
-							this.dialog=false
-							this.fetchSettings()
-						}
-						
-					})
-				}else{
-					this.dialog=false
-				}
-			},
-			editSetting(id){
-				//this.components.push(id)
-				this.$router.push('/admin/settings/edit/'+id)
 			}
 		}
 	}
