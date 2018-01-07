@@ -120,14 +120,14 @@
             }
         },
         created() {
-            axios.get(`/api/latest`)
-		    .then(response => {
-          
-		      this.latestProducts = response.data['data']
-		    })
-		    .catch(e => {
-		      this.errors.push(e)
-		    })
+          axios.get(`/api/latest`)
+  		    .then(response => {
+            
+  		      this.latestProducts = response.data['data']
+  		    })
+  		    .catch(e => {
+  		      this.errors.push(e)
+  		    })
         },
         ready() {
            

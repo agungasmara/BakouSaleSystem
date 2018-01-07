@@ -12,7 +12,7 @@
             </ul>
         </div>
     </div>
-    <div class="row transitionfx">
+    <div class="row transitionfx" v-for="itemProductDetail of itemProductDetails">
         <!-- left column -->
         <div class="col-lg-6 col-md-6 col-sm-6">
             <!-- product Image and Zoom -->
@@ -32,7 +32,7 @@
 
         <!-- right column -->
         <div class="col-lg-6 col-md-6 col-sm-5">
-            <h1 class="product-title"> Lorem ipsum dolor sit amet</h1>
+            <h1 class="product-title">{{itemProductDetail.name}}</h1>
 
             <h3 class="product-code">Product Code : DEN1098</h3>
 
@@ -42,7 +42,9 @@
                         class="fa fa-star-o "></i></span> <span class="ratingInfo"> <span> / </span> <a
                         data-target="#modal-review" data-toggle="modal"> Write a review</a> </span></p>
             </div>
-            <div class="product-price"><span class="price-sales"> $70</span> <span class="price-standard">$95</span>
+            <div class="product-price">
+                <span class="price-sales"> $100</span> 
+                <span class="price-standard">$95</span>
             </div>
             <div class="details-description">
                 <p>In scelerisque libero ut elit porttitor commodo Suspendisse laoreet magna. </p>
@@ -308,7 +310,7 @@
         props:['id'],
         data(){
             return{
-                name:'',
+                itemProductDetails:'',
             }
         },
         created(){
@@ -317,9 +319,7 @@
         methods:{
             productDetails(id){
                 axios.get('/api/detail/'+id).then(res=>{
-                    this.items=res.data['data'];
-                    // console.log("===============hello=================world");
-                    // console.log(res.data['data']['product_id']);
+                    this.itemProductDetails=res.data;
                 });
             }
         }
