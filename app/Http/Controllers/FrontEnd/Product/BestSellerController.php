@@ -65,7 +65,7 @@ class BestSellerController extends Controller
 		foreach ($query as $result) {
 			$product_data[] = $this->getProduct($result->product_id);
 		}
-
+		
 		return $product_data;
     }
 }

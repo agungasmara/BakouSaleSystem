@@ -37,7 +37,7 @@
 				return 0;
 			}
 		}
-
+		
 		public static function getCurrencyDefault($table_field){
 	      $Currency = Currency::Where('is_default',1)->first();
 	      return $Currency->$table_field;

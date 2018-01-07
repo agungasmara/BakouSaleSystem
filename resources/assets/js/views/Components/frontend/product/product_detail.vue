@@ -12,7 +12,7 @@
             </ul>
         </div>
     </div>
-    <div class="row transitionfx" v-for="itemProductDetail of itemProductDetails">
+    <div class="row transitionfx">
         <!-- left column -->
         <div class="col-lg-6 col-md-6 col-sm-6">
             <!-- product Image and Zoom -->
@@ -32,22 +32,27 @@
 
         <!-- right column -->
         <div class="col-lg-6 col-md-6 col-sm-5">
-            <h1 class="product-title">{{itemProductDetail.name}}</h1>
+            <h1 class="product-title">{{productInfo.name}}</h1>
 
-            <h3 class="product-code">Product Code : DEN1098</h3>
+            <h3 class="product-code">Product Code : {{productInfo.sku}}</h3>
 
             <div class="rating">
-                <p><span><i class="fa fa-star"></i></span> <span><i class="fa fa-star"></i></span> <span><i
-                        class="fa fa-star"></i></span> <span><i class="fa fa-star"></i></span> <span><i
-                        class="fa fa-star-o "></i></span> <span class="ratingInfo"> <span> / </span> <a
-                        data-target="#modal-review" data-toggle="modal"> Write a review</a> </span></p>
+                <p>.
+                    <span><i class="fa fa-star"></i></span> 
+                    <span><i class="fa fa-star"></i></span> 
+                    <span><i class="fa fa-star"></i></span> 
+                    <span><i class="fa fa-star-o "></i></span> 
+                    <span class="ratingInfo"> <span>/</span> 
+                    <a data-target="#modal-review" data-toggle="modal"> 
+                        Write a review</a></span>
+                </p>
             </div>
             <div class="product-price">
-                <span class="price-sales"> $100</span> 
+                <span class="price-sales"> ${{productInfo.price}}</span> 
                 <span class="price-standard">$95</span>
             </div>
             <div class="details-description">
-                <p>In scelerisque libero ut elit porttitor commodo Suspendisse laoreet magna. </p>
+                <p>{{productInfo.description}}. </p>
             </div>
             <div class="color-details"><span class="selected-color"><strong>COLOR</strong></span>
                 <ul class="swatches Color">
@@ -310,7 +315,7 @@
         props:['id'],
         data(){
             return{
-                itemProductDetails:'',
+                productInfo:[],
             }
         },
         created(){
@@ -319,7 +324,7 @@
         methods:{
             productDetails(id){
                 axios.get('/api/detail/'+id).then(res=>{
-                    this.itemProductDetails=res.data;
+                    this.productInfo=res.data['data'];
                 });
             }
         }
