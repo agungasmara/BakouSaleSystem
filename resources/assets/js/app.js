@@ -1,8 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-// import VuejsDialog from "vuejs-dialog"
-
-
 
 // FrontEnd #######################
 import Appf from './Appf.vue'
@@ -51,7 +48,6 @@ import Vuetify from 'vuetify'
 Vue.use(Vuetify)
 Vue.use(VueResource);
 Vue.use(VueRouter)
-// Vue.use(VuejsDialog)
 
 Vue.http.options.credentials = true;
 
@@ -73,12 +69,13 @@ const router = new VueRouter({
   routes: [
     // routing FrontEnd
     { path: '/', name:'fhome',component: FHome },
-    {path: '/product/product_detail/:id', name:'product_detail',component:ProductDetail},
+    // {path: '/product/product_detail/:id', name:'product_detail',component:ProductDetail},
     {path: '/product', name:'product',component:Product,
         children: [
             {
               path: 'product_detail/:id',
-              component: ProductDetail
+              name: ProductDetail,
+              component: ProductDetail,props:true
             }
         ]
     },

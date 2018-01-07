@@ -15,6 +15,7 @@ class ProductController extends Controller
     public function index($id){
     	
 		$product_info = $this->getProduct($id);
+		dd($product_info);
 		return response()->json(['data' => $product_info,'success' => true, 'message' => 'Success']);
     }
 
