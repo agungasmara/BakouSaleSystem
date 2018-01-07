@@ -61,6 +61,8 @@
 
 					this.$emit('change', response.data)//'change' is the event pass from parent component
 
+					//this.dataValue=response.data
+
 					//this.$emit('change',newData) this use to tell the parent component when chile component have changed
 
 					//vue props not allow to update child props without tell parent

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import VuejsDialog from "vuejs-dialog"
+//import VuejsDialog from "vuejs-dialog"
 
 
 
@@ -25,12 +25,14 @@ import CreateForm from './views/Auth/Form.vue'
 import App from './App.vue'
 import Appl from './Appl.vue'
 //setting########################
+import Setting from './views/Components/backend/settings/Setting.vue'
 import SettingForm from './views/Components/backend/settings/MainForm.vue'
 import SettingList from './views/Components/backend/settings/SettingList.vue'
 import SettingEditForm from './views/Components/backend/settings/EditForm.vue'
 //end setting####################
 
 //User and user Group########################
+import User from './views/Components/backend/users/User.vue'
 import UserGroupForm from './views/Components/backend/users/MainForm.vue'
 import UserList from './views/Components/backend/users/UserList.vue'
 import UserEditForm from './views/Components/backend/users/UserEditForm.vue'
@@ -51,7 +53,7 @@ import Vuetify from 'vuetify'
 Vue.use(Vuetify)
 Vue.use(VueResource);
 Vue.use(VueRouter)
-Vue.use(VuejsDialog)
+//Vue.use(VuejsDialog)
 
 Vue.http.options.credentials = true;
 
@@ -124,15 +126,67 @@ const router = new VueRouter({
 
 
     //Setting
-    { path: '/admin/settings/add',component:SettingForm},
-    { path: '/admin/settings/list',component:SettingList},
-    { path: '/admin/settings/edit/:id',component:SettingEditForm,props:true},
+    {path:'/admin/settings',name:'settings',component:Setting,
+        children:[
+            {
+                path:'list',
+                name:'SettingsList',
+                component:SettingList
+            },
+            {
+                path:'add',
+                name:'SettingsForm',
+                component:SettingForm
+            },
+            {
+                path:'edit/:id',
+                name:'SettingForm',
+                component:SettingEditForm,
+                props:true
+            }
+        ]       
+    },
     //User and User Group 
-    { path: '/admin/user/add',component:UserGroupForm},
-    { path: '/admin/user/list',component:UserList},
-     { path: '/admin/user/edit/:id',component:UserEditForm,props:true},
-    { path: '/admin/user_group/list',component:UserGroupList},
-    { path: '/admin/user_group/edit/:id',component:UserGroupEditForm,props:true}
+    {path:'/admin/user',name:'user',component:User,
+        children:[
+            {
+                path:'list',
+                name:'UserList',
+                component:UserList
+            },
+            {
+                path:'add',
+                name:'UserGroupForm',
+                component:UserGroupForm
+            },
+            {
+                path:'edit/:id',
+                name:'UserForm',
+                component:UserEditForm,
+                props:true
+            }
+        ]       
+    },
+    {path:'/admin/user_group',name:'user_group',component:User,
+        children:[
+            {
+                path:'list',
+                name:'UserGroupList',
+                component:UserGroupList
+            },
+            {
+                path:'add',
+                name:'UserGroupForm',
+                component:UserGroupForm
+            },
+            {
+                path:'edit/:id',
+                name:'UserGroupForm',
+                component:UserGroupEditForm,
+                props:true
+            }
+        ]       
+    }
   ]
 })
 
