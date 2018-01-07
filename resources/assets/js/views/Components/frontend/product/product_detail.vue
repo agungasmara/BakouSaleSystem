@@ -13,7 +13,9 @@
         </div>
     </div>
     <div class="row transitionfx">
-
+       <div v-for="productDetail of productDetails['itemDeatils']">
+           
+       </div>
         <!-- left column -->
         <div class="col-lg-6 col-md-6 col-sm-6">
             <!-- product Image and Zoom -->
@@ -33,7 +35,7 @@
 
         <!-- right column -->
         <div class="col-lg-6 col-md-6 col-sm-5">
-            <h1 class="product-title"> Lorem ipsum dolor sit amet</h1>
+            <h1 class="product-title"> Lorem ipsum dolor sit amet  <div>test=== {{$items.product_id}}</div></h1>
 
             <h3 class="product-code">Product Code : DEN1098</h3>
 
@@ -300,3 +302,29 @@
 
 <!-- <div class="gap"></div> -->
 </template>
+
+<script>
+    import Flash from '../../../../helper/flash'
+    import axios from 'axios'
+
+    export default{
+        props:['id'],
+        data(){
+            return{
+                name:'',
+            }
+        },
+        created(){
+            this.productDetails(this.id);
+        },
+        methods:{
+            productDetails(id){
+                axios.get('/api/detail/'+id).then(res=>{
+                    this.items=res.data['data'];
+                    // console.log("===============hello=================world");
+                    // console.log(res.data['data']['product_id']);
+                });
+            }
+        }
+    }
+</script>

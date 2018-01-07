@@ -12,8 +12,10 @@ class ProductController extends Controller
     // 	return Product::take($num)->get();
     // }
 
-    public function index(){
-    	dd("Hellowrold");
+    public function index($id){
+    	
+		$product_info = $this->getProduct($id);
+		return response()->json(['data' => $product_info,'success' => true, 'message' => 'Success']);
     }
 
 }
