@@ -5249,11 +5249,11 @@ small {
 .btn, .btn-large,
 .btn-flat {
   border: none;
-  border-radius: 50px;
+  /*border-radius: 50px;*/
   display: inline-block;
   height: 36px;
   line-height: 36px;
-  padding: 0 2rem;
+  /*padding: 0 2rem;*/
   text-transform: uppercase;
   vertical-align: middle;
   -webkit-tap-highlight-color: transparent;

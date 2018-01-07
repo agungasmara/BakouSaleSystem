@@ -1,11 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-<<<<<<< HEAD
-//import VuejsDialog from "vuejs-dialog"
 
-
-=======
->>>>>>> 4ba3eed3ea62c78a0120afcd2eb869c26d9ebab7
 
 // FrontEnd #######################
 import Appf from './Appf.vue'
@@ -56,10 +51,7 @@ import Vuetify from 'vuetify'
 Vue.use(Vuetify)
 Vue.use(VueResource);
 Vue.use(VueRouter)
-<<<<<<< HEAD
-//Vue.use(VuejsDialog)
-=======
->>>>>>> 4ba3eed3ea62c78a0120afcd2eb869c26d9ebab7
+
 
 Vue.http.options.credentials = true;
 

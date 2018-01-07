@@ -63,15 +63,15 @@
 						      	</v-flex>
 
 						    	<v-flex xs12 sm6 md6>
-						      		<v-text-field label="Code" v-model="code" :rules="codeRules" :counter="100" required></v-text-field>
+						      		<v-select label="Select Code" v-model="code"  :items="settingCode.text" ></v-select>
 						      	</v-flex>
 
 						      	<v-flex xs12 sm6 md6>
-						      		<v-text-field label="Key" v-model="key" :rules="keyRules" :counter="100" required></v-text-field>
+						      		<v-select label="Select Key" v-model="key"  :items="settingKey.text" ></v-select>
 						      	</v-flex>
 
 						      	<v-flex xs12 sm6 md6>
-						      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="100" required></v-text-field>
+						      		<v-select label="Select Value" v-model="value"  :items="settingValue.text" ></v-select>
 						      	</v-flex>
 
 						      	<v-btn @click="submit(id,1)" :disabled="!valid">
@@ -119,6 +119,9 @@
 			      (v) => v && v.length <= 100 || 'Value must be less than 100 characters'
 			    ],
 				settings:[],
+				settingCode:[],
+				settingKey: [],
+				settingValue:[],
 			    select: 0,
 			    items: [],
 			    breadcrumbs: [
@@ -139,7 +142,8 @@
 			}
 		},
 		created(){
-			this.fetchSetting(this.id)
+			this.fetchSettingByID(this.id)
+			this.fetchSettingItem()
 			this.getStore()
 		},
 		methods:{
@@ -148,13 +152,20 @@
 					this.items=res.data
 				})
 			},
-			fetchSetting(id){
+			fetchSettingByID(id){
 				axios.get('/api/setting/getsettingbyid/'+id).then(res=>{
 					this.code=res.data.code
 					this.key=res.data.key
 					this.value=res.data.value
 					this.select=res.data.store_id
 				});
+			},
+			fetchSettingItem(){
+				axios.get('/api/setting/item/').then((res)=>{
+					this.settingCode=res.data.code
+					this.settingKey=res.data.key
+					this.settingValue=res.data.value
+				})
 			},
 			submit (id,opt) {
 		      if (this.$refs.form.validate()) {
