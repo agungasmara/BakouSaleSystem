@@ -28,17 +28,32 @@ Route::post('login', function(Illuminate\Http\Request $request)
 });
 
 if (Request::is('admin*')){
-    Route::middleware(['auth'])->group(function () {
+    
+    Route::middleware(['auth'])->prefix('admin')->group(function () {
 
         if (Request::is('admin/api*')){
-            // admin api route
+            Route::prefix('api')->group(function () {
+                //=====Categories API=============================
+                Route::get('/categories/list','Backend\Category\CategoryController@list');
+                Route::post('/categories/save','Backend\Category\CategoryController@store');
+                Route::get('/categories/getsettingbyid/{id}','Backend\Category\CategoryController@getSettingByID');
+                Route::put('/categories/update/{id}','Backend\Category\CategoryController@update');
+                Route::delete('/categories/delete/{id}','Backend\Category\CategoryController@destroy');
 
-            Route::get('admin/api/getMenus', 'Backend\Settings\GroupRolesController@index');
+                 //=====Product API=============================
+                Route::get('/product/list','Backend\Products\ProductsController@list');
+                Route::post('/product/save','Backend\Products\ProductsController@store');
+                Route::get('/product/getsettingbyid/{id}','Backend\Products\ProductsController@getSettingByID');
+                Route::put('/product/update/{id}','Backend\Products\ProductsController@update');
+                Route::delete('/product/delete/{id}','Backend\Products\ProductsController@destroy');
+
+                Route::get('/getMenus', 'Backend\Settings\GroupRolesController@index');
+            });
+
         }else{
-            Route::get('admin/{any?}',function(){
+            Route::get('/{any?}',function(){
                 return view('index');
             })->where(['any'=>'.*']);
-            
         }
         
     });
@@ -67,6 +82,7 @@ if (Request::is('admin*')){
 
         Route::get('product_cart', 'FrontEnd\Product\CartController@ProductCart');
         Route::get('get_product/{num}', 'FrontEnd\Product\ProductController@GetProduct');
+        Route::get('footer', 'FrontEnd\Common\FooterController@getFooter');
     });
 }else{
     Route::get('/{any?}','FrontEnd\Product\FrontEndController@index')->where(['any'=>'.*']);

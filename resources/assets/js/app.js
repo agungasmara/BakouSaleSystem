@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-
 // FrontEnd #######################
 import Appf from './Appf.vue'
 import FHome from './views/Components/frontend/home.vue'
@@ -12,6 +11,7 @@ import FRegister from './views/Components/frontend/account/register.vue'
 //***** products *****
 import Product from './views/Components/frontend/product/product.vue'
 import ProductDetail from './views/Components/frontend/product/product_detail.vue'
+import Information from './views/Components/frontend/information/information.vue'
 
 // Backend ###################
 import Home from './views/Components/index.vue'
@@ -23,15 +23,18 @@ import CreateForm from './views/Auth/Form.vue'
 import App from './App.vue'
 import Appl from './Appl.vue'
 //setting########################
-import Setting from './views/Components/backend/settings/Setting.vue'
 import SettingForm from './views/Components/backend/settings/MainForm.vue'
 import SettingList from './views/Components/backend/settings/SettingList.vue'
 import SettingEditForm from './views/Components/backend/settings/EditForm.vue'
 //end setting####################
 
 //User and user Group########################
+<<<<<<< HEAD
 import User from './views/Components/backend/users/User.vue'
 import UserForm from './views/Components/backend/users/MainForm.vue'
+=======
+import UserGroupForm from './views/Components/backend/users/MainForm.vue'
+>>>>>>> ed0bf485898351eacbb061cf557fd96cce0d874a
 import UserList from './views/Components/backend/users/UserList.vue'
 import UserEditForm from './views/Components/backend/users/UserEditForm.vue'
 //Uer group#########################
@@ -39,6 +42,12 @@ import UserGroupForm from './views/Components/backend/groups/MainForm.vue'
 import UserGroupList from './views/Components/backend/groups/UserGroupList.vue'
 import UserGroupEditForm from './views/Components/backend/groups/UserGroupEditForm.vue'
 //End User Group####################
+
+//***** Categories *****
+import Category from './views/Components/backend/categories/Category.vue'
+import CategoryList from './views/Components/backend/categories/CategoryList.vue'
+import CategoryForm from './views/Components/backend/categories/CategoryForm.vue'
+import CategoryEdit from './views/Components/backend/categories/CategoryEdit.vue'
 
 //***** Attribute *****
 import Attribute from './views/Components/backend/attributes/Attribute.vue'
@@ -53,7 +62,6 @@ import Vuetify from 'vuetify'
 Vue.use(Vuetify)
 Vue.use(VueResource);
 Vue.use(VueRouter)
-
 
 Vue.http.options.credentials = true;
 
@@ -75,7 +83,7 @@ const router = new VueRouter({
   routes: [
     // routing FrontEnd
     { path: '/', name:'fhome',component: FHome },
-    // {path: '/product/product_detail/:id', name:'product_detail',component:ProductDetail},
+    {path: '/product/product_detail/:id', name:'product_detail',component:ProductDetail},
     {path: '/product', name:'product',component:Product,
         children: [
             {
@@ -99,6 +107,7 @@ const router = new VueRouter({
           }
       ]
     },
+    { path: '/information', name:'information',component: Information },
     // routing Backend
     { path: '/auth/login', name:'login',component: Login },
     { path: '/admin', name:'ahome',component: Home },
@@ -124,30 +133,32 @@ const router = new VueRouter({
         }
       ]
     },
-
+    { path: '/admin/categories', name:'categories',component: Category,
+      children: [
+        {
+          path: 'list',
+          name:'CategoryList',
+          component: CategoryList
+        },
+        {
+          path: 'add',
+          name:'CategoryForm',
+          component: CategoryForm
+        },
+        {
+          path: 'edit/:id',
+          name:'CategoryEdit',
+          component: CategoryEdit,props:true
+        }
+      ]
+    },
 
     //Setting
-    {path:'/admin/settings',name:'settings',component:Setting,
-        children:[
-            {
-                path:'list',
-                name:'SettingsList',
-                component:SettingList
-            },
-            {
-                path:'add',
-                name:'SettingsForm',
-                component:SettingForm
-            },
-            {
-                path:'edit/:id',
-                name:'SettingForm',
-                component:SettingEditForm,
-                props:true
-            }
-        ]       
-    },
+    { path: '/admin/settings/add',component:SettingForm},
+    { path: '/admin/settings/list',component:SettingList},
+    { path: '/admin/settings/edit/:id',component:SettingEditForm,props:true},
     //User and User Group 
+<<<<<<< HEAD
     {path:'/admin/user',name:'user',component:User,
         children:[
             {
@@ -188,6 +199,13 @@ const router = new VueRouter({
             }
         ]       
     }
+=======
+    { path: '/admin/user/add',component:UserGroupForm},
+    { path: '/admin/user/list',component:UserList},
+     { path: '/admin/user/edit/:id',component:UserEditForm,props:true},
+    { path: '/admin/user_group/list',component:UserGroupList},
+    { path: '/admin/user_group/edit/:id',component:UserGroupEditForm,props:true}
+>>>>>>> ed0bf485898351eacbb061cf557fd96cce0d874a
   ]
 })
 

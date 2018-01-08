@@ -135,22 +135,22 @@
           <div class="nav-wrapper">
             <ul id="ul-horizontal-nav" class="left hide-on-med-and-down">
             	<li v-for="m of menu_data">
-	                <a class="dropdown-menu" href="#!" data-activates="">
-	                  <i class="material-icons">dvr</i>
-	                  <span>{{m.parent_menu_name}}
-	                    <i class="material-icons right">keyboard_arrow_down</i>
-	                  </span>
-	                </a>
+                <a class="dropdown-menu" href="#!" :data-activates="thClassValue(m.parent_menu_id)">
+                  <i class="material-icons">dvr</i>
+                  <span>{{m.parent_menu_name}}
+                    <i class="material-icons right">keyboard_arrow_down</i>
+                  </span>
+                </a>
 	            </li>
-              <!-- <li class="active">
-                <a class="dropdown-menu active" href="#!" data-activates="Dashboarddropdown">
+              <!-- <li class="">
+                <a class="dropdown-menu" href="#!" data-activates="Cardsdropdown">
                   <i class="material-icons">dashboard</i>
                   <span>Dashboard
                     <i class="material-icons right">keyboard_arrow_down</i>
                   </span>
                 </a>
-              </li>
-              <li>
+              </li> -->
+              <!-- <li>
                 <a class="dropdown-menu" href="#!" data-activates="Templatesdropdown">
                   <i class="material-icons">dvr</i>
                   <span>Templates
@@ -238,12 +238,8 @@
           <li class="active"><a href="/admin">Analytics</a></li>
         </ul> -->
         <!-- Templatesdropdown -->
-        <ul id="Templatesdropdown" class="dropdown-content dropdown-horizontal-list">
-          <li><a href="../collapsible-menu/">Collapsible Menu</a></li>
-          <li><a href="../semi-dark-menu/">Semi Dark Menu</a></li>
-          <li><a href="../fixed-menu/">Fixed Menu</a></li>
-          <li><a href="../overlay-menu/">Overlay Menu</a></li>
-          <li><a href="../horizontal-menu/">Horizontal Menu</a></li>
+        <ul v-for="m of menu_data" :id="thClassValue(m.parent_menu_id)" class="dropdown-content dropdown-horizontal-list">
+          <li v-for="sm of m['children_menu']"><a href="../collapsible-menu/">{{sm.child_menu_name}}</a></li>
         </ul>
         <!-- Cardsdropdown -->
         <ul id="Cardsdropdown" class="dropdown-content dropdown-horizontal-list">
@@ -348,7 +344,7 @@
 
 <script type="text/javascript">
 	import axios from 'axios';
-   
+  import common from '../../../../helper/common' 
     export default{
         data(){
             return{
@@ -367,19 +363,26 @@
             }
         },
         methods:{
-        	// activityMenu:function(id){
-	        // 	var menu ="Menudropdown"+id;
-	        // 	return menu;
-	        // },
+        	thClassValue: function (id) {
+            var value = ['Templatesdropdown'+id]
+            // if (this.orderKey === id) {
+            //   value.push('active')
+            // }
+            return value.join(' ')
+          },
+          getApiMenu(){
+            axios.get(`/admin/api/getMenus`)
+            .then(response => {
+              this.menu_data = response.data['data']
+            })
+            .catch(e => {
+              this.errors.push(e)
+            })
+          }
         },
         created() {
-        	axios.get(`/admin/api/getMenus`)
-		    .then(response => {
-		    	this.menu_data = response.data['data']
-		    })
-		    .catch(e => {
-		    	this.errors.push(e)
-		    })
+        	this.getApiMenu();
+          // $.getScript("http://localhost:8000/js/materialize.min.js");
         }
     }
 </script>

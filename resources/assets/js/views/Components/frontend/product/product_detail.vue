@@ -286,8 +286,10 @@
             <!--/.item-->
 
             <div class="item">
-                <div class="product"><a class="product-image"> <img src="/assets/frontend/images/product/13.jpg" alt="img"> </a>
-
+                <div class="product">
+                    <a class="product-image"> 
+                        <img src="/assets/frontend/images/product/13.jpg" alt="img"> 
+                    </a>
                     <div class="description">
                         <h4><a href="san-remo-spaghetti">Denim T-Shirts </a></h4>
 
