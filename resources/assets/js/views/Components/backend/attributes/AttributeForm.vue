@@ -33,7 +33,7 @@
 			</div>
 		</div>
 		<!--breadcrumbs end-->
-		<div id="basic-form" class="section">
+		<div id="basic-form" class="section col s6 offset-s3">
 			<div class="container">
 				<v-app id="inspire">
 					<v-card>
@@ -51,7 +51,7 @@
 				            </v-alert>
 			          	</div>
 					    <v-form v-model="valid" ref="form" lazy-validation>
-					    	<v-container grid-list-md offset-s3>
+					    	<v-container grid-list-md>
 		              			<v-layout wrap>
 							    	<v-flex xs12 sm6 md6>
 							      		<v-select label="Select Store" v-model="select" :items="items" :rules="[v => !!v || 'Item is required']" required></v-select>

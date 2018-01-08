@@ -69,12 +69,12 @@ const router = new VueRouter({
   routes: [
     // routing FrontEnd
     { path: '/', name:'fhome',component: FHome },
-    // {path: '/product/product_detail/:id', name:'product_detail',component:ProductDetail},
+    {path: '/product/product_detail/:id', name:'product_detail',component:ProductDetail},
     {path: '/product', name:'product',component:Product,
         children: [
             {
               path: 'product_detail/:id',
-              component: ProductDetail
+              component: ProductDetail,props:true
             }
         ]
     },
