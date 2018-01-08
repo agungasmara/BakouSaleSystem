@@ -67,6 +67,7 @@ if (Request::is('admin*')){
 
         Route::get('product_cart', 'FrontEnd\Product\CartController@ProductCart');
         Route::get('get_product/{num}', 'FrontEnd\Product\ProductController@GetProduct');
+        Route::get('footer', 'FrontEnd\Common\FooterController@getFooter');
     });
 }else{
     Route::get('/{any?}','FrontEnd\Product\FrontEndController@index')->where(['any'=>'.*']);
