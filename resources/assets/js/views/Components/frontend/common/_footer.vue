@@ -36,7 +36,7 @@
 
                     <div style="clear:both" class="hide visible-xs"></div>
 
-                    <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+                    <div class="col-lg-3  col-md-2 col-sm-4 col-xs-6">
                         <h3>Information</h3>
                         <ul class="list-unstyled footer-nav">
                             <li v-for="footer of footers">
@@ -47,23 +47,11 @@
                             	  	{{footer.title}}
 		                        </router-link> -->
                         	</li>
-                            <!-- <li>
-                            	<a href="#"> Order Status</a>
-                        	</li>
-                            <li>
-                            	<a href="#"> Sizing Charts</a>
-                            </li>
-                            <li>
-                            	<a href="#"> Return Policy </a>
-                            </li>
-                            <li>
-                            	<a href="#">Contact Us</a>
-                        	</li> -->
                         </ul>
                     </div>
 
 
-                    <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+                    <div class="col-lg-3  col-md-2 col-sm-4 col-xs-6">
                         <h3> My Account</h3>
                         <ul>
                             <li><a href="account.html"> My Account </a></li>
