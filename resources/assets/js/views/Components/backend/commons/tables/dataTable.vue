@@ -25,7 +25,25 @@
           From {{ pageStart }} to {{ pageStop }}
         </template>
     </v-data-table>
-    
+    <v-layout row justify-center>
+      <v-dialog v-model="dialog" persistent max-width="500px">
+        <v-card>
+          <v-card-title class="headline"><v-icon medium color="primary" dark>info</v-icon> Message</v-card-title>
+          	<v-card-text>
+          		{{ deleteMessage }}
+          	</v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="red" dark @click="dialog=false">
+            	Cancle<v-icon dark right>block</v-icon>
+            </v-btn>
+            <v-btn color="primary" dark @click="deleteItem(dataID)">
+            	Agree<v-icon dark right>check_circle</v-icon>
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-layout>
 </v-card>
 </template>
 
@@ -43,6 +61,7 @@
 		data(){
 			return{
 				refreshTable:[],
+				Message:'Are you sure you want to delete item with ID=',
 				deleteMessage:'',
 				dataName:'',
 				dataID:'',
@@ -61,32 +80,28 @@
 
 					this.$emit('change', response.data)//'change' is the event pass from parent component
 
+					//this.dataValue=response.data
+
 					//this.$emit('change',newData) this use to tell the parent component when chile component have changed
 
 					//vue props not allow to update child props without tell parent
 				});
 			},
 			confirmDel(id,name){
-
-				this.$dialog.confirm('Are you sure you want to delete the item with ID: '+id+'?',{
-				loader: true
-				}).then((dialog)=>{
-					setTimeout(() => {
-			            this.deleteItem(id)
-			            dialog.close();
-			        }, 2500);
-				})
+				this.deleteMessage=this.Message+id
+				this.dataID=id
+				this.dialog=true
 			},
-			deleteItem(id,opt){
-			
+			deleteItem(id){
+					this.deleteMessage="Deleting..."
 					axios.delete(this.deleteApi+id).then((res)=>{
 						
 						if(res.data.deleted==true){
 
 							this.fetchData()
-
 						}
-						
+						this.dialog=false
+						this.deleteMessage='Item have successfully deleted.'
 					})
 				
 			},

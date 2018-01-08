@@ -26,6 +26,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/getStore','Backend\Settings\SettingsController@getStore');
 Route::post('/setting/save','Backend\Settings\SettingsController@store');
 Route::get('/setting/list','Backend\Settings\SettingsController@list');
+Route::get('/setting/item','Backend\Settings\SettingsController@item');//use to get all config item to put into dropdown list in setting edit form
 Route::delete('/setting/delete/{id}','Backend\Settings\SettingsController@destroy');
 Route::get('/setting/getsettingbyid/{id}','Backend\Settings\SettingsController@getSettingByID');
 Route::put('/setting/update/{id}','Backend\Settings\SettingsController@update');
