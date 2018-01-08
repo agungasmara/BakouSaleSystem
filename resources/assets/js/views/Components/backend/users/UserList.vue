@@ -1,13 +1,22 @@
 <template>
 	<div>
 		<v-app id="inspire">
-			<breadcrumb v-bind:breadcrumb-item="items"></breadcrumb>
+			<v-breadcrumbs>
+		        <v-icon slot="divider">chevron_right</v-icon>
+
+	        	<v-breadcrumbs-item v-for="item in items" :key="item.text" :disabled="item.disabled">
+
+	          		{{ item.text }}
+
+	        	</v-breadcrumbs-item>
+		    </v-breadcrumbs>
+
 			<data-table 
 		    	v-bind:data-header="headers" 
 		    	v-bind:data-value="users"
 		    	v-bind:get-api="getApiUrl"
 		    	v-bind:delete-api="deleteApiUrl"
-	    		v-bind:edit-url="urlEdit"
+		    	v-bind:edit-url="urlEdit"
 		    	v-on:change="fetchData">
 		    </data-table>
 
@@ -19,7 +28,6 @@
 	import Flash from '../../../../helper/flash'
 	import axios from 'axios'
 	import dataTable from '../commons/tables/dataTable.vue'
-	import breadcrumb from '../commons/breadcrumb/breadcrumb.vue'
 	export default{
 		props:[
 			'id',
@@ -27,8 +35,7 @@
 			'dataValue',
 			'getApi',
 			'deleteApi',
-			'editUrl',
-			'breadcrumbItem'
+			'editUrl'
 			],
 		data(){
 			return{
@@ -59,13 +66,13 @@
 			          disabled: false
 			        },
 			        {
-			          text: 'Lists',
+			          text: 'List',
 			          disabled: true
 			        }
 			    ]
 			}
 		},
-		components:{'dataTable':dataTable,'breadcrumb':breadcrumb},
+		components:{'dataTable':dataTable},
 		created(){
 			this.fetchData()
 			document.title = 'User List';

@@ -46,34 +46,7 @@ class SettingsController extends Controller
     			  ->get();
     	return response()->json($settings);
     }
-    public function item()
-    {
-        $settings=DB::table('setting')
-                  ->select('setting_id as id','code','key','value')
-                  ->get();
-        $itemsArr = array();
-        foreach($settings as $item)
-        {
-            $itemsArr['code'][]=$item->code;
-            $itemsArr['key'][]=$item->key;
-            $itemsArr['value'][]=$item->value;
-        }
-        return response()->json([
-            'code'=>[
-                'text'=>$itemsArr['code'],
-                'value'=>$itemsArr['code']
-            ],
-            'key'=>[
-                'text'=>$itemsArr['key'],
-                'value'=>$itemsArr['key']
-            ],
-            'value'=>[
-                'text'=>$itemsArr['value'],
-                'value'=>$itemsArr['value']
-            ]
-        ]);
-
-    }
+    
     public function getSettingByID($id)
     {
     	$setting=Setting::get()->where('setting_id',$id);

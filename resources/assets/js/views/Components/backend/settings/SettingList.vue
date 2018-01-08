@@ -1,9 +1,23 @@
 <template>
 
+	<section id="content">
+
 		<v-app id="inspire">
 
 			<!--breadcrumbs start-->
-			<breadcrumb v-bind:breadcrumb-item="items"></breadcrumb>
+			<div id="breadcrumbs-wrapper">
+				<v-breadcrumbs>
+
+			        <v-icon slot="divider">chevron_right</v-icon>
+
+		        	<v-breadcrumbs-item v-for="item in items" :key="item.text" :disabled="item.disabled">
+
+		          		{{ item.text }}
+
+		        	</v-breadcrumbs-item>
+
+			    </v-breadcrumbs>
+			</div>
 
 			<!--Data table component-->
 
@@ -20,13 +34,14 @@
 
 		</v-app>
 
+	</section>
+
 </template>
 
 <script>
 	import Flash from '../../../../helper/flash'
 	import axios from 'axios'
 	import dataTable from '../commons/tables/dataTable.vue'
-	import breadcrumb from '../commons/breadcrumb/breadcrumb.vue'
 	export default{
 		props:[
 			'id',//this use to pass id of record to data table component
@@ -56,17 +71,17 @@
 			          disabled: false
 			        },
 			        {
-			          text: 'Settings',
+			          text: 'Users',
 			          disabled: false
 			        },
 			        {
-			          text: 'Lists',
+			          text: 'List',
 			          disabled: true
 			        }
 			    ]
 			}
 		},
-		components:{'dataTable':dataTable,'breadcrumb':breadcrumb},
+		components:{'dataTable':dataTable},
 		created(){
 			this.fetchData()
 			document.title = 'Setting List';
