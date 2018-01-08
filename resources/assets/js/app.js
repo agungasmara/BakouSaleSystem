@@ -31,11 +31,13 @@ import SettingEditForm from './views/Components/backend/settings/EditForm.vue'
 
 //User and user Group########################
 import User from './views/Components/backend/users/User.vue'
-import UserGroupForm from './views/Components/backend/users/MainForm.vue'
+import UserForm from './views/Components/backend/users/MainForm.vue'
 import UserList from './views/Components/backend/users/UserList.vue'
 import UserEditForm from './views/Components/backend/users/UserEditForm.vue'
-import UserGroupList from './views/Components/backend/users/UserGroupList.vue'
-import UserGroupEditForm from './views/Components/backend/users/EditForm.vue'
+//Uer group#########################
+import UserGroupForm from './views/Components/backend/groups/MainForm.vue'
+import UserGroupList from './views/Components/backend/groups/UserGroupList.vue'
+import UserGroupEditForm from './views/Components/backend/groups/UserGroupEditForm.vue'
 //End User Group####################
 
 //***** Attribute *****
@@ -155,8 +157,8 @@ const router = new VueRouter({
             },
             {
                 path:'add',
-                name:'UserGroupForm',
-                component:UserGroupForm
+                name:'UserForm',
+                component:UserForm
             },
             {
                 path:'edit/:id',

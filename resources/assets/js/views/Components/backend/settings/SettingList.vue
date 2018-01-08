@@ -13,6 +13,7 @@
 		    	v-bind:get-api="getApiUrl"
 		    	v-bind:delete-api="deleteApiUrl"
 	    		v-bind:edit-url="urlEdit"
+	    		v-bind:btn-new-url="btnNewUrl"
 		    	v-on:change="fetchData">
 		    </data-table>
 
@@ -29,18 +30,14 @@
 	import breadcrumb from '../commons/breadcrumb/breadcrumb.vue'
 	export default{
 		props:[
-			'id',//this use to pass id of record to data table component
-			'dataHeader',//data table header(column name)
-			'dataValue',//fetch record and pass to data table component
-			'getApi',//provide get api url
-			'deleteApi',//provide delete api url
-			'editUrl'//provide edit api url
+			'id'//this use to pass id of record to data table component
 		],
 		data(){
 			return{
 				getApiUrl:'/api/setting/list/',
 				deleteApiUrl:'/api/setting/delete/',
 				urlEdit:'/admin/settings/edit/',
+				btnNewUrl:'/admin/settings/add',
 				headers: [
 			        { text: 'Setting ID',align: 'center',value: 'id'},
 			        { text: 'Store Name',align:'center', value: 'name' },

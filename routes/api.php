@@ -32,6 +32,7 @@ Route::get('/setting/getsettingbyid/{id}','Backend\Settings\SettingsController@g
 Route::put('/setting/update/{id}','Backend\Settings\SettingsController@update');
 
 //=====User Group API
+
 Route::get('/getUsers','Backend\Users\UserGroupsController@getUsers');
 Route::get('/permission','Backend\Users\UserGroupsController@getPermission');
 Route::post('/user_group/save','Backend\Users\UserGroupsController@store');
@@ -41,8 +42,10 @@ Route::get('/user_group/getusergroupbyid/{id}','Backend\Users\UserGroupsControll
 Route::put('/user_group/update/{id}','Backend\Users\UserGroupsController@update');
 
 //=====User API
-Route::post('/user/save','Backend\Users\UsersController@store');
 Route::get('/user/list','Backend\Users\UsersController@list');
+Route::get('/user/checkUser/{username}','Backend\Users\UsersController@checkUser');
+Route::get('/user/checkEmail/{email}','Backend\Users\UsersController@checkEmail');
+Route::post('/user/save','Backend\Users\UsersController@store');
 Route::delete('/user/delete/{id}','Backend\Users\UsersController@destroy');
 Route::get('/user/getuserbyid/{id}','Backend\Users\UsersController@getUserByID');
 Route::put('/user/update/{id}','Backend\Users\UsersController@update');
