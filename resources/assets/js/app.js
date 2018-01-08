@@ -41,6 +41,14 @@ import Category from './views/Components/backend/categories/Category.vue'
 import CategoryList from './views/Components/backend/categories/CategoryList.vue'
 import CategoryForm from './views/Components/backend/categories/CategoryForm.vue'
 import CategoryEdit from './views/Components/backend/categories/CategoryEdit.vue'
+//***** End Categories *****
+
+//***** products *****
+import Products from './views/Components/backend/products/Product.vue'
+import ProductList from './views/Components/backend/products/ProductList.vue'
+import ProductForm from './views/Components/backend/products/ProductForm.vue'
+import ProductEdit from './views/Components/backend/products/ProductEdit.vue'
+//***** End products *****
 
 //***** Attribute *****
 import Attribute from './views/Components/backend/attributes/Attribute.vue'
@@ -142,6 +150,25 @@ const router = new VueRouter({
           path: 'edit/:id',
           name:'CategoryEdit',
           component: CategoryEdit,props:true
+        }
+      ]
+    },
+    { path: '/admin/products', name:'products',component: Products,
+      children: [
+        {
+          path: 'list',
+          name:'ProductList',
+          component: ProductList
+        },
+        {
+          path: 'add',
+          name:'ProductForm',
+          component: ProductForm
+        },
+        {
+          path: 'edit/:id',
+          name:'ProductEdit',
+          component: ProductEdit,props:true
         }
       ]
     },
