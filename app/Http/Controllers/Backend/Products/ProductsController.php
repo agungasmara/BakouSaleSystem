@@ -15,24 +15,21 @@ class ProductsController extends Controller
     {
 
     }
-    public function getPermission()
-    {
-
-    }
+   
     public function store(Request $request)
     {
-
+        $result=CategoryModel::UpdateOrCreate($request->all());
     }
-    public function getUserByID($id)
+    public function edit($id)
     {
 
     }
     public function update(Request $request,$id)
     {
-
+        $result=CategoryModel::UpdateOrCreate($request->all(),$id);
     }
     public function destroy($id)
     {
-    	
+    	$result=CategoryModel::DeleteCategory($id);
     }
 }

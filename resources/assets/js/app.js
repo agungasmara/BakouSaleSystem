@@ -36,6 +36,12 @@ import UserGroupList from './views/Components/backend/users/UserGroupList.vue'
 import UserGroupEditForm from './views/Components/backend/users/EditForm.vue'
 //End User Group####################
 
+//***** Categories *****
+import Category from './views/Components/backend/categories/Category.vue'
+import CategoryList from './views/Components/backend/categories/CategoryList.vue'
+import CategoryForm from './views/Components/backend/categories/CategoryForm.vue'
+import CategoryEdit from './views/Components/backend/categories/CategoryEdit.vue'
+
 //***** Attribute *****
 import Attribute from './views/Components/backend/attributes/Attribute.vue'
 import AttributeList from './views/Components/backend/attributes/AttributeList.vue'
@@ -120,7 +126,25 @@ const router = new VueRouter({
         }
       ]
     },
-
+    { path: '/admin/categories', name:'categories',component: Category,
+      children: [
+        {
+          path: 'list',
+          name:'CategoryList',
+          component: CategoryList
+        },
+        {
+          path: 'add',
+          name:'CategoryForm',
+          component: CategoryForm
+        },
+        {
+          path: 'edit/:id',
+          name:'CategoryEdit',
+          component: CategoryEdit,props:true
+        }
+      ]
+    },
 
     //Setting
     { path: '/admin/settings/add',component:SettingForm},
