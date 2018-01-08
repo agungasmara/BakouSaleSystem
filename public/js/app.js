@@ -36265,6 +36265,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 
@@ -36315,12 +36317,51 @@ var render = function() {
         },
         [
           _vm._l(_vm.bestSellerProducts, function(bestSellerProduct) {
-            return _c("div", { staticClass: "item" }, [_vm._m(1, true)])
+            return _c("div", { staticClass: "item" }, [
+              _c("div", { staticClass: "product" }, [
+                _vm._m(1, true),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "image" },
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        attrs: {
+                          to:
+                            "/product/product_detail/" +
+                            bestSellerProduct.product_id
+                        }
+                      },
+                      [
+                        _c("img", {
+                          staticClass: "img-responsive ",
+                          attrs: {
+                            src: "/assets/frontend/images/product/30.jpg",
+                            alt: "img"
+                          }
+                        })
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm._m(2, true)
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _vm._m(3, true),
+                _vm._v(" "),
+                _vm._m(4, true),
+                _vm._v(" "),
+                _vm._m(5, true)
+              ])
+            ])
           }),
           _vm._v(" "),
-          _vm._m(2),
+          _vm._m(6),
           _vm._v(" "),
-          _vm._m(3)
+          _vm._m(7)
         ],
         2
       )
@@ -36340,72 +36381,62 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "product" }, [
-      _c(
-        "a",
-        {
-          staticClass: "add-fav tooltipHere",
-          attrs: {
-            "data-toggle": "tooltip",
-            "data-original-title": "Add to Wishlist",
-            "data-placement": "left"
-          }
-        },
-        [_c("i", { staticClass: "glyphicon glyphicon-heart" })]
-      ),
+    return _c(
+      "a",
+      {
+        staticClass: "add-fav tooltipHere",
+        attrs: {
+          "data-toggle": "tooltip",
+          "data-original-title": "Add to Wishlist",
+          "data-placement": "left"
+        }
+      },
+      [_c("i", { staticClass: "glyphicon glyphicon-heart" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "promotion" }, [
+      _c("span", { staticClass: "new-product" }, [_vm._v(" NEW")]),
       _vm._v(" "),
-      _c("div", { staticClass: "image" }, [
-        _c("div", { staticClass: "quickview" }, [
-          _c(
-            "a",
-            {
-              staticClass: "btn btn-xs btn-quickview",
-              attrs: {
-                "data-toggle": "modal",
-                href: "ajax/product.html",
-                "data-target": "#productSetailsModalAjax"
-              }
-            },
-            [_vm._v("Quick View ")]
-          )
-        ]),
-        _vm._v(" "),
+      _c("span", { staticClass: "discount" }, [_vm._v("15% OFF")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "description" }, [
+      _c("h4", [
         _c("a", { attrs: { href: "product-details.html" } }, [
-          _c("img", {
-            staticClass: "img-responsive",
-            attrs: { src: "/assets/frontend/images/product/34.jpg", alt: "img" }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "promotion" }, [
-          _c("span", { staticClass: "new-product" }, [_vm._v(" NEW")]),
-          _vm._v(" "),
-          _c("span", { staticClass: "discount" }, [_vm._v("15% OFF")])
+          _vm._v("consectetuer adipiscing ")
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "description" }, [
-        _c("h4", [
-          _c("a", { attrs: { href: "product-details.html" } }, [
-            _vm._v("consectetuer adipiscing ")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v("Lorem ipsum dolor sit amet, consectetur adipiscing elit. ")
-        ]),
-        _vm._v(" "),
-        _c("span", { staticClass: "size" }, [_vm._v("XL / XXL / S ")])
+      _c("p", [
+        _vm._v("Lorem ipsum dolor sit amet, consectetur adipiscing elit. ")
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "price" }, [_c("span", [_vm._v("$25")])]),
-      _vm._v(" "),
-      _c("div", { staticClass: "action-control" }, [
-        _c("a", { staticClass: "btn btn-primary" }, [
-          _c("span", { staticClass: "add2cart" }, [
-            _c("i", { staticClass: "glyphicon glyphicon-shopping-cart" }),
-            _vm._v(" Add to cart ")
-          ])
+      _c("span", { staticClass: "size" }, [_vm._v("XL / XXL / S ")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "price" }, [_c("span", [_vm._v("$25")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "action-control" }, [
+      _c("a", { staticClass: "btn btn-primary" }, [
+        _c("span", { staticClass: "add2cart" }, [
+          _c("i", { staticClass: "glyphicon glyphicon-shopping-cart" }),
+          _vm._v(" Add to cart ")
         ])
       ])
     ])
@@ -92720,6 +92751,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -92728,7 +92764,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     props: ['id'],
     data: function data() {
         return {
-            itemProductDetails: ''
+            productInfo: []
         };
     },
     created: function created() {
@@ -92740,7 +92776,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             __WEBPACK_IMPORTED_MODULE_1_axios___default.a.get('/api/detail/' + id).then(function (res) {
-                _this.itemProductDetails = res.data;
+                _this.productInfo = res.data['data'];
             });
         }
     }
@@ -92754,54 +92790,55 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "container main-container headerOffset" },
-    [
-      _vm._m(0),
+  return _c("div", { staticClass: "container main-container headerOffset" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "row transitionfx" }, [
+      _vm._m(1),
       _vm._v(" "),
-      _vm._l(_vm.itemProductDetails, function(itemProductDetail) {
-        return _c("div", { staticClass: "row transitionfx" }, [
-          _vm._m(1, true),
+      _c("div", { staticClass: "col-lg-6 col-md-6 col-sm-5" }, [
+        _c("h1", { staticClass: "product-title" }, [
+          _vm._v(_vm._s(_vm.productInfo.name))
+        ]),
+        _vm._v(" "),
+        _c("h3", { staticClass: "product-code" }, [
+          _vm._v("Product Code : " + _vm._s(_vm.productInfo.sku))
+        ]),
+        _vm._v(" "),
+        _vm._m(2),
+        _vm._v(" "),
+        _c("div", { staticClass: "product-price" }, [
+          _c("span", { staticClass: "price-sales" }, [
+            _vm._v(" $" + _vm._s(_vm.productInfo.price))
+          ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-lg-6 col-md-6 col-sm-5" }, [
-            _c("h1", { staticClass: "product-title" }, [
-              _vm._v(_vm._s(itemProductDetail.name))
-            ]),
-            _vm._v(" "),
-            _c("h3", { staticClass: "product-code" }, [
-              _vm._v("Product Code : DEN1098")
-            ]),
-            _vm._v(" "),
-            _vm._m(2, true),
-            _vm._v(" "),
-            _vm._m(3, true),
-            _vm._v(" "),
-            _vm._m(4, true),
-            _vm._v(" "),
-            _vm._m(5, true),
-            _vm._v(" "),
-            _vm._m(6, true),
-            _vm._v(" "),
-            _vm._m(7, true),
-            _vm._v(" "),
-            _c("div", { staticClass: "clear" }),
-            _vm._v(" "),
-            _vm._m(8, true),
-            _vm._v(" "),
-            _c("div", { staticStyle: { clear: "both" } }),
-            _vm._v(" "),
-            _vm._m(9, true)
-          ])
-        ])
-      }),
-      _vm._v(" "),
-      _vm._m(10),
-      _vm._v(" "),
-      _c("div", { staticStyle: { clear: "both" } })
-    ],
-    2
-  )
+          _c("span", { staticClass: "price-standard" }, [_vm._v("$95")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "details-description" }, [
+          _c("p", [_vm._v(_vm._s(_vm.productInfo.description) + ". ")])
+        ]),
+        _vm._v(" "),
+        _vm._m(3),
+        _vm._v(" "),
+        _vm._m(4),
+        _vm._v(" "),
+        _vm._m(5),
+        _vm._v(" "),
+        _c("div", { staticClass: "clear" }),
+        _vm._v(" "),
+        _vm._m(6),
+        _vm._v(" "),
+        _c("div", { staticStyle: { clear: "both" } }),
+        _vm._v(" "),
+        _vm._m(7)
+      ])
+    ]),
+    _vm._v(" "),
+    _vm._m(8),
+    _vm._v(" "),
+    _c("div", { staticStyle: { clear: "both" } })
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -92908,8 +92945,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "rating" }, [
       _c("p", [
-        _c("span", [_c("i", { staticClass: "fa fa-star" })]),
-        _vm._v(" "),
+        _vm._v(".\r\n                    "),
         _c("span", [_c("i", { staticClass: "fa fa-star" })]),
         _vm._v(" "),
         _c("span", [_c("i", { staticClass: "fa fa-star" })]),
@@ -92919,38 +92955,16 @@ var staticRenderFns = [
         _c("span", [_c("i", { staticClass: "fa fa-star-o " })]),
         _vm._v(" "),
         _c("span", { staticClass: "ratingInfo" }, [
-          _c("span", [_vm._v(" / ")]),
+          _c("span", [_vm._v("/")]),
           _vm._v(" "),
           _c(
             "a",
             {
               attrs: { "data-target": "#modal-review", "data-toggle": "modal" }
             },
-            [_vm._v(" Write a review")]
+            [_vm._v(" \r\n                        Write a review")]
           )
         ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "product-price" }, [
-      _c("span", { staticClass: "price-sales" }, [_vm._v(" $100")]),
-      _vm._v(" "),
-      _c("span", { staticClass: "price-standard" }, [_vm._v("$95")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "details-description" }, [
-      _c("p", [
-        _vm._v(
-          "In scelerisque libero ut elit porttitor commodo Suspendisse laoreet magna. "
-        )
       ])
     ])
   },
@@ -98736,7 +98750,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			});
 		},
 		confirmDel: function confirmDel(id, name) {
-			this.deleteMessage = this.Message;
+			this.deleteMessage = this.Message + id;
 			this.dataID = id;
 			this.dialog = true;
 		},
@@ -98936,9 +98950,7 @@ var render = function() {
                     _vm._v(
                       "\r\n          \t\t" +
                         _vm._s(_vm.deleteMessage) +
-                        " " +
-                        _vm._s(_vm.dataID) +
-                        "?\r\n          \t"
+                        "\r\n          \t"
                     )
                   ]),
                   _vm._v(" "),

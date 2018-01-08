@@ -30,7 +30,7 @@
         <v-card>
           <v-card-title class="headline"><v-icon medium color="primary" dark>info</v-icon> Message</v-card-title>
           	<v-card-text>
-          		{{ deleteMessage }} {{ dataID }}?
+          		{{ deleteMessage }}
           	</v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
@@ -88,7 +88,7 @@
 				});
 			},
 			confirmDel(id,name){
-				this.deleteMessage=this.Message
+				this.deleteMessage=this.Message+id
 				this.dataID=id
 				this.dialog=true
 			},
