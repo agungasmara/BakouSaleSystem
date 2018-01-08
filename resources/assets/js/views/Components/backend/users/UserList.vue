@@ -1,27 +1,14 @@
 <template>
 	<div>
 		<v-app id="inspire">
-			<v-breadcrumbs>
-		        <v-icon slot="divider">chevron_right</v-icon>
-
-	        	<v-breadcrumbs-item v-for="item in items" :key="item.text" :disabled="item.disabled">
-
-	          		{{ item.text }}
-
-	        	</v-breadcrumbs-item>
-		    </v-breadcrumbs>
-
+			<breadcrumb v-bind:breadcrumb-item="items"></breadcrumb>
 			<data-table 
 		    	v-bind:data-header="headers" 
 		    	v-bind:data-value="users"
 		    	v-bind:get-api="getApiUrl"
 		    	v-bind:delete-api="deleteApiUrl"
-<<<<<<< HEAD
 	    		v-bind:edit-url="urlEdit"
 	    		v-bind:btn-new-url="btnNewUrl"
-=======
-		    	v-bind:edit-url="urlEdit"
->>>>>>> ed0bf485898351eacbb061cf557fd96cce0d874a
 		    	v-on:change="fetchData">
 		    </data-table>
 
@@ -33,20 +20,11 @@
 	import Flash from '../../../../helper/flash'
 	import axios from 'axios'
 	import dataTable from '../commons/tables/dataTable.vue'
+	import breadcrumb from '../commons/breadcrumb/breadcrumb.vue'
 	export default{
 		props:[
-<<<<<<< HEAD
 			'id'
 		],
-=======
-			'id',
-			'dataHeader',
-			'dataValue',
-			'getApi',
-			'deleteApi',
-			'editUrl'
-			],
->>>>>>> ed0bf485898351eacbb061cf557fd96cce0d874a
 		data(){
 			return{
 				getApiUrl:'/api/user/list/',
@@ -77,13 +55,13 @@
 			          disabled: false
 			        },
 			        {
-			          text: 'List',
+			          text: 'Lists',
 			          disabled: true
 			        }
 			    ]
 			}
 		},
-		components:{'dataTable':dataTable},
+		components:{'dataTable':dataTable,'breadcrumb':breadcrumb},
 		created(){
 			this.fetchData()
 			document.title = 'User List';
