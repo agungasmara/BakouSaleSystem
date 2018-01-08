@@ -24,15 +24,30 @@ class ProductModel extends Model
 				return false;
 			}
 			return $Product->update($data);
+			// insertGetId
 		}
 	}
 	static function DeleteProduct($product_id)
 	{
 		$Product=static::find($product_id);
 		if (!$Product) {
-			return false;
+			return ['success'=>false,
+					'message'=>'Data fail to delete.'];
 		}
-		return $Product->delete();
+		return ['success'=>$Product->delete(),
+    			'message'=>'Data successfully deleted.'];
+	}
+	public function scopeFilter($query,$filter=array())
+	{
+	  	foreach ($filter as $key => $value) {
+	  		$query->where($key,$value);
+	  	}
+	  	return $query;
+	  	
+	}
+	public function scopeSort($query,$sort='sort_order',$type='desc')
+	{
+	  	return $query->orderBy($sort,$type);
 	}
 	public function Description()
 	{

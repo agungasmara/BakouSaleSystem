@@ -9,7 +9,7 @@
 			<div class="container">
 			  <div class="row">
 			    <div class="col s10 m6 l6">
-			      <h5 class="breadcrumbs-title">Attribute</h5>
+			      <h5 class="breadcrumbs-title">Product</h5>
 			      <!-- <ol class="breadcrumbs">
 			        <li><a href="index.html">Dashboard</a>
 			        </li>
@@ -49,24 +49,24 @@
 			      <v-card-title>
 			        <v-spacer>
 			        	<div>
-			                Attribute List
+			                Product List
 			            </div>
 			        </v-spacer>
 			        <v-text-field append-icon="search" label="Search" single-line hide-details v-model="search"></v-text-field>
 			      </v-card-title>
 				    <v-data-table v-bind:headers="headers" :items="settings" v-bind:search="search" class="elevation-1" >
 						<template slot="items" slot-scope="props">
-							<td class="text-xs-center">{{ props.item.setting_id }}</td>
+							<td class="text-xs-center">{{ props.item.product_id }}</td>
 							<td class="text-xs-left">{{ props.item.name }}</td>
-							<td class="text-xs-left">{{ props.item.code }}</td>
-							<td class="text-xs-left">{{ props.item.key }}</td>
-							<td class="text-xs-left">{{ props.item.value }}</td>
-							<td class="text-xs-left">{{ props.item.serialized }}</td>
+							<td class="text-xs-left">{{ props.item.price }}</td>
+							<td class="text-xs-left">{{ props.item.quantity }}</td>
+							<td class="text-xs-left">{{ props.item.sort_order }}</td>
+							<td class="text-xs-left">{{ props.item.status }}</td>
 							<td class="text-xs-center">
 								<span style="cursor:pointer;" @click="editSetting(props.item.setting_id)"">
 									<i class="material-icons">edit</i>
 								</span>
-								<span style="cursor:pointer;" v-on:click="confirmDel(props.item.setting_id,props.item.name)"><i class="material-icons">delete_forever</i></span>
+								<span style="cursor:pointer;" v-on:click="confirmDel(props.item.product_id,props.item.name)"><i class="material-icons">delete_forever</i></span>
 							</td>
 						</template>
 						<template slot="pageText" slot-scope="{ pageStart, pageStop }">
@@ -110,13 +110,14 @@
 				search: '',
 				pagination: {},
 				headers: [
-			        { text: 'Setting ID',align: 'left',value: 'setting_id'},
-			        { text: 'Store Name',align:'center', value: 'name' },
-			        { text: 'code',align:'center', value: 'code' },
-			        { text: 'Key',align:'center', value: 'key' },
-			        { text: 'Value',align:'center', value: 'value' },
-			        { text: 'Serialized',align:'center', value: 'serialized' },
+			        { text: 'Name',align: 'left',value: 'product_id'},
+			        { text: 'Model',align:'center', value: 'name' },
+			        { text: 'Price',align:'center', value: 'price' },
+			        { text: 'Quantity',align:'center', value: 'quantity' },
+			        { text: 'Sort Order',align:'center', value: 'sort_order' },
+			        { text: 'Status',align:'center', value: 'status' },
 			        { text: 'Action', value: 'action',align:'center',sortable:false }
+
 			    ],
 				settings:[],
 				breadcrumbs: [
@@ -125,7 +126,7 @@
 			          disabled: false
 			        },
 			        {
-			          text: 'Attributes',
+			          text: 'Product',
 			          disabled: false
 			        },
 			        {
@@ -136,17 +137,17 @@
 			}
 		},
 		created(){
-			this.fetchSettings()
+			this.fetchData()
 			document.title = 'Attributes';
 		},
 		methods:{
-			fetchSettings(){
-				axios.get('/api/setting/list').then(response=>{
+			fetchData(){
+				axios.get('/admin/api/product/list').then(response=>{
 					this.settings=response.data;
 				});
 			},
 			confirmDel(id,name){
-				this.deleteMessage='Are you sure you want to delete setting with ID:'
+				this.deleteMessage='Are you sure you want to delete product with ID:'
 				this.dialog=true;
 				this.settingName=name
 				this.settingID=id
@@ -154,12 +155,12 @@
 			deleteItem(id,opt){
 				if(opt==1){
 					this.deleteMessage='Deleting...'
-					axios.delete('/api/setting/delete/'+id).then((res)=>{
+					axios.delete('/admin/api/product/delete/'+id).then((res)=>{
 						
-						if(res.data.deleted==true){
-							this.deleteMessage='Delete Successfully'
+						if(res.success){
+							this.deleteMessage=res.message
 							this.dialog=false
-							this.fetchSettings()
+							this.fetchData()
 						}
 						
 					})
@@ -169,7 +170,7 @@
 			},
 			editSetting(id){
 				//this.components.push(id)
-				this.$router.push('/admin/attributes/edit/'+id)
+				this.$router.push('/admin/product/edit/'+id)
 			}
 		}
 	}
