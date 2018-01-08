@@ -16,7 +16,12 @@
 		    	v-bind:data-value="users"
 		    	v-bind:get-api="getApiUrl"
 		    	v-bind:delete-api="deleteApiUrl"
+<<<<<<< HEAD
+	    		v-bind:edit-url="urlEdit"
+	    		v-bind:btn-new-url="btnNewUrl"
+=======
 		    	v-bind:edit-url="urlEdit"
+>>>>>>> ed0bf485898351eacbb061cf557fd96cce0d874a
 		    	v-on:change="fetchData">
 		    </data-table>
 
@@ -30,6 +35,10 @@
 	import dataTable from '../commons/tables/dataTable.vue'
 	export default{
 		props:[
+<<<<<<< HEAD
+			'id'
+		],
+=======
 			'id',
 			'dataHeader',
 			'dataValue',
@@ -37,11 +46,13 @@
 			'deleteApi',
 			'editUrl'
 			],
+>>>>>>> ed0bf485898351eacbb061cf557fd96cce0d874a
 		data(){
 			return{
 				getApiUrl:'/api/user/list/',
 				deleteApiUrl:'/api/user/delete/',
 				urlEdit:'/admin/user/edit/',
+				btnNewUrl:'/admin/user/add',
 				headers: [
 			        { text: 'ID',align: 'left',value: 'id'},
 			        { text: 'Username',align:'center', value: 'username' },

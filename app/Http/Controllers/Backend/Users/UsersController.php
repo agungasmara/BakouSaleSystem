@@ -17,27 +17,55 @@ class UsersController extends Controller
     			  ->get();
     	return response()->json($users);
     }
+    public function checkUser($username){
+        
+        $existed=false;
+
+        $count = User::where('username', $username)->count();
+
+        if($count>0){
+            $existed=true;
+        }
+
+        return response()->json([
+            'usernameExist'=>$existed
+        ]);
+    }
+    public function checkEmail($email){
+        
+        $existed=false;
+
+        $count = User::where('email', $email)->count();
+
+        if($count>0){
+            $existed=true;
+        }
+
+        return response()->json([
+            'emailExist'=>$existed
+        ]);
+    }
     public function store(Request $request)
     {
     	$success=false;
+        $image="test";
 
-
-        if( preg_match('/data:image/', $request->userImage) ){                
+        /*if( preg_match('/data:image/', $request->userImage) ){                
           preg_match('/data:image\/(?<mime>.*?)\;/', $request->userImage , $groups);
           $mimetype = $groups['mime'];
                        
-          $firstname='images/testpost.'.$mimetype;
+          $image='images/testpost.'.$mimetype;
           $image = Image::make($request->userImage)
             ->fit(400, 500) 
             ->encode($mimetype, 100) 
-            ->save(public_path($firstname));                
-      } 
+            ->save(public_path($image));                
+      }*/ 
     	$saved=User::create([
     		'username'=>$request->username,
 			'firstname'=>$request->fname,
 			'lastname'=>$request->lname,
 			'user_group_id'=>$request->userGroup,
-			'image'=>$firstname,
+			'image'=>$request->userImage,
 			'email'=>$request->email,
 			'password'=>bcrypt($request->password),
 			'code'=>$request->code,

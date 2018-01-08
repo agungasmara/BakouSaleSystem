@@ -4,7 +4,7 @@
   <v-card-title>
     <v-spacer>
     	<div>
-            <router-link to="/admin/settings/add" replace><v-btn color="primary">Create New</v-btn></router-link>
+            <router-link :to="btnNewUrl" replace><v-btn color="primary">Create New</v-btn></router-link>
         </div>
     </v-spacer>
     <v-text-field append-icon="search" label="Search" single-line hide-details v-model="search"></v-text-field>
@@ -12,8 +12,9 @@
 	<v-data-table v-bind:headers="dataHeader" :items="dataValue" v-bind:search="search" class="elevation-1" :rows-per-page-items="[25,50,100, { text: 'All', value: -1 }]">
 		<template slot="items" slot-scope="props">
 			<td v-for="(value,index) in props.item">
-				{{ value }}
+				
 				<img v-if="index=='image'" :src="props.item.image" width="50" height="50">
+				<span v-else>{{ value }}</span>
 			</td>
 			<td>
 				<span style="cursor:pointer;color:blue;" @click="editData(props.item.id)"">
@@ -34,11 +35,12 @@
 	import axios from 'axios'
 	export default{
 		props:[
-			'dataHeader',
-			'dataValue',
-			'getApi',
-			'deleteApi',
-			'editUrl'
+			'dataHeader',//data table header(column name)
+			'dataValue',//fetch record and pass to data table component
+			'getApi',//provide get api url
+			'deleteApi',//provide delete api url
+			'editUrl',//provide edit api url
+			'btnNewUrl'//url for button
 		],
 		data(){
 			return{
