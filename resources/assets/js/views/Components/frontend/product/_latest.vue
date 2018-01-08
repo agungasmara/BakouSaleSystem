@@ -34,24 +34,28 @@
                               <!-- Wrapper for slides -->
                               <div class="carousel-inner" role="listbox">
                                   <div class="item active">
-                                    <router-link to="/my_account">
-                                        <img src="/assets/frontend/images/product/5.jpg" alt="img" class="img-responsive ">
+                                     <router-link v-bind:to="'/product/product_detail/'+ latestProduct.product_id">
+                                      <img src="/assets/frontend/images/product/5.jpg" alt="img" class="img-responsive ">
                                     </router-link>
+                                   <!--  <a v-bind:href="'/product/product_detail/'+ latestProduct.product_id">
+                                      <img src="/assets/frontend/images/product/5.jpg" alt="img" class="img-responsive ">
+                                    </a>   -->
+
                                     <!-- <a href="product-details.html"> 
                                       <img src="/assets/frontend/images/product/5.jpg" alt="img" class="img-responsive ">
                                     </a> -->
                                   </div>
                                   <div class="item">
-                                    <a href="product-details.html"> 
+                                    <router-link to="/product/product_detail/1">
                                       <img src="/assets/frontend/images/product/21.jpg" alt="img"
                                         class="img-responsive ">
-                                    </a>
+                                    </router-link>
                                   </div>
                                   <div class="item">
-                                    <a href="product-details.html"> 
+                                    <router-link to="/product/product_detail/1">
                                       <img src="/assets/frontend/images/product/30.jpg" alt="img"
                                         class="img-responsive ">
-                                    </a>
+                                    </router-link>
                                   </div>
                               </div>
 
@@ -116,14 +120,14 @@
             }
         },
         created() {
-            axios.get(`/api/latest`)
-		    .then(response => {
-          
-		      this.latestProducts = response.data['data']
-		    })
-		    .catch(e => {
-		      this.errors.push(e)
-		    })
+          axios.get(`/api/latest`)
+  		    .then(response => {
+            
+  		      this.latestProducts = response.data['data']
+  		    })
+  		    .catch(e => {
+  		      this.errors.push(e)
+  		    })
         },
         ready() {
            

@@ -11,6 +11,7 @@ import FRegister from './views/Components/frontend/account/register.vue'
 //***** products *****
 import Product from './views/Components/frontend/product/product.vue'
 import ProductDetail from './views/Components/frontend/product/product_detail.vue'
+import Information from './views/Components/frontend/information/information.vue'
 
 // Backend ###################
 import Home from './views/Components/index.vue'
@@ -74,6 +75,7 @@ const router = new VueRouter({
         children: [
             {
               path: 'product_detail/:id',
+              name: ProductDetail,
               component: ProductDetail,props:true
             }
         ]
@@ -92,6 +94,7 @@ const router = new VueRouter({
           }
       ]
     },
+    { path: '/information', name:'information',component: Information },
     // routing Backend
     { path: '/auth/login', name:'login',component: Login },
     { path: '/admin', name:'ahome',component: Home },

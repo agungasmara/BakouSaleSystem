@@ -11,12 +11,13 @@
                     </a>
 
                     <div class="image">
-                        <div class="quickview">
+                       <!--  <div class="quickview">
                             <a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product.html"
                                data-target="#productSetailsModalAjax">Quick View </a>
-                        </div>
-                        <a href="product-details.html"><img src="/assets/frontend/images/product/34.jpg" alt="img"
-                                                            class="img-responsive"></a>
+                        </div> -->
+                        <router-link v-bind:to="'/product/product_detail/'+ bestSellerProduct.product_id">
+                          <img src="/assets/frontend/images/product/30.jpg" alt="img" class="img-responsive ">
+                        </router-link>
 
                         <div class="promotion"><span class="new-product"> NEW</span> <span
                                 class="discount">15% OFF</span></div>
@@ -30,6 +31,7 @@
                     <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
                 </div>
             </div>
+
             <div class="item">
                 <div class="product">
                     <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"

@@ -13,37 +13,46 @@
         </div>
     </div>
     <div class="row transitionfx">
-
         <!-- left column -->
         <div class="col-lg-6 col-md-6 col-sm-6">
             <!-- product Image and Zoom -->
             <div class="main-image sp-wrap col-lg-12 no-padding">
-
-                <a href="/images/product_details/hi-res-croped/1.jpg"><img
-                        src="images/product_details/low-res-white/1.jpg" class="img-responsive" alt="img"></a>
-                <a href="/images/product_details/hi-res-croped/2.jpg"><img
-                        src="images/product_details/low-res-white/2.jpg" class="img-responsive" alt="img"></a>
-                <a href="/images/product_details/hi-res-croped/3.jpg"><img
-                        src="images/product_details/low-res-white/3.jpg" class="img-responsive" alt="img"></a></div>
+                <a href="/assets/frontend/images/product_details/hi-res-croped/1.jpg">
+                    <img src="/assets/frontend/images/product_details/low-res-white/1.jpg" class="img-responsive" alt="img">
+                </a>
+                <a href="/assets/frontend/images/product_details/hi-res-croped/2.jpg">
+                    <img src="/assets/frontend/images/product_details/low-res-white/2.jpg" class="img-responsive" alt="img">
+                </a>
+                <a href="/assets/frontend/images/product_details/hi-res-croped/3.jpg">
+                    <img src="/assets/frontend/images/product_details/low-res-white/3.jpg" class="img-responsive" alt="img">
+                </a>
+            </div>
         </div>
         <!--/ left column end -->
 
         <!-- right column -->
         <div class="col-lg-6 col-md-6 col-sm-5">
-            <h1 class="product-title"> Lorem ipsum dolor sit amet</h1>
+            <h1 class="product-title">{{productInfo.name}}</h1>
 
-            <h3 class="product-code">Product Code : DEN1098</h3>
+            <h3 class="product-code">Product Code : {{productInfo.sku}}</h3>
 
             <div class="rating">
-                <p><span><i class="fa fa-star"></i></span> <span><i class="fa fa-star"></i></span> <span><i
-                        class="fa fa-star"></i></span> <span><i class="fa fa-star"></i></span> <span><i
-                        class="fa fa-star-o "></i></span> <span class="ratingInfo"> <span> / </span> <a
-                        data-target="#modal-review" data-toggle="modal"> Write a review</a> </span></p>
+                <p>.
+                    <span><i class="fa fa-star"></i></span> 
+                    <span><i class="fa fa-star"></i></span> 
+                    <span><i class="fa fa-star"></i></span> 
+                    <span><i class="fa fa-star-o "></i></span> 
+                    <span class="ratingInfo"> <span>/</span> 
+                    <a data-target="#modal-review" data-toggle="modal"> 
+                        Write a review</a></span>
+                </p>
             </div>
-            <div class="product-price"><span class="price-sales"> $70</span> <span class="price-standard">$95</span>
+            <div class="product-price">
+                <span class="price-sales"> ${{productInfo.price}}</span> 
+                <span class="price-standard">$95</span>
             </div>
             <div class="details-description">
-                <p>In scelerisque libero ut elit porttitor commodo Suspendisse laoreet magna. </p>
+                <p>{{productInfo.description}}. </p>
             </div>
             <div class="color-details"><span class="selected-color"><strong>COLOR</strong></span>
                 <ul class="swatches Color">
@@ -193,7 +202,7 @@
 
         <div id="SimilarProductSlider">
             <div class="item">
-                <div class="product"><a class="product-image"> <img src="images/product/a1.jpg" alt="img"> </a>
+                <div class="product"><a class="product-image"> <img src="/assets/frontend/images/product/a1.jpg" alt="img"> </a>
 
                     <div class="description">
                         <h4><a href="san-remo-spaghetti">YOUR LIFE</a></h4>
@@ -205,7 +214,7 @@
             <!--/.item-->
 
             <div class="item">
-                <div class="product"><a class="product-image"> <img src="images/product/a2.jpg" alt="img"> </a>
+                <div class="product"><a class="product-image"> <img src="/assets/frontend/images/product/a2.jpg" alt="img"> </a>
 
                     <div class="description">
                         <h4><a href="san-remo-spaghetti">RED CROWN</a></h4>
@@ -217,7 +226,7 @@
             <!--/.item-->
 
             <div class="item">
-                <div class="product"><a class="product-image"> <img src="images/product/a3.jpg" alt="img"> </a>
+                <div class="product"><a class="product-image"> <img src="/assets/frontend/images/product/a3.jpg" alt="img"> </a>
 
                     <div class="description">
                         <h4><a href="san-remo-spaghetti">WHITE GOLD</a></h4>
@@ -229,7 +238,7 @@
             <!--/.item-->
 
             <div class="item">
-                <div class="product"><a class="product-image"> <img src="images/product/a4.jpg" alt="img"> </a>
+                <div class="product"><a class="product-image"> <img src="/assets/frontend/images/product/a4.jpg" alt="img"> </a>
 
                     <div class="description">
                         <h4><a href="san-remo-spaghetti">DENIM 4240</a></h4>
@@ -241,7 +250,7 @@
             <!--/.item-->
 
             <div class="item">
-                <div class="product"><a class="product-image"> <img src="images/product/30.jpg" alt="img"> </a>
+                <div class="product"><a class="product-image"> <img src="/assets/frontend/images/product/30.jpg" alt="img"> </a>
 
                     <div class="description">
                         <h4><a href="san-remo-spaghetti">CROWN ROCK</a></h4>
@@ -253,7 +262,7 @@
             <!--/.item-->
 
             <div class="item">
-                <div class="product"><a class="product-image"> <img src="images/product/a5.jpg" alt="img"> </a>
+                <div class="product"><a class="product-image"> <img src="/assets/frontend/images/product/a5.jpg" alt="img"> </a>
 
                     <div class="description">
                         <h4><a href="san-remo-spaghetti">SLIM ROCK</a></h4>
@@ -265,7 +274,7 @@
             <!--/.item-->
 
             <div class="item">
-                <div class="product"><a class="product-image"> <img src="images/product/36.jpg" alt="img"> </a>
+                <div class="product"><a class="product-image"> <img src="/assets/frontend/images/product/36.jpg" alt="img"> </a>
 
                     <div class="description">
                         <h4><a href="san-remo-spaghetti">ROCK T-Shirts </a></h4>
@@ -277,8 +286,10 @@
             <!--/.item-->
 
             <div class="item">
-                <div class="product"><a class="product-image"> <img src="/images/product/13.jpg" alt="img"> </a>
-
+                <div class="product">
+                    <a class="product-image"> 
+                        <img src="/assets/frontend/images/product/13.jpg" alt="img"> 
+                    </a>
                     <div class="description">
                         <h4><a href="san-remo-spaghetti">Denim T-Shirts </a></h4>
 
@@ -297,3 +308,27 @@
 
 <!-- <div class="gap"></div> -->
 </template>
+
+<script>
+    import Flash from '../../../../helper/flash'
+    import axios from 'axios'
+
+    export default{
+        props:['id'],
+        data(){
+            return{
+                productInfo:[],
+            }
+        },
+        created(){
+            this.productDetails(this.id);
+        },
+        methods:{
+            productDetails(id){
+                axios.get('/api/detail/'+id).then(res=>{
+                    this.productInfo=res.data['data'];
+                });
+            }
+        }
+    }
+</script>

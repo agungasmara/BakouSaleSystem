@@ -67,6 +67,7 @@ if (Request::is('admin*')){
 
         Route::get('product_cart', 'FrontEnd\Product\CartController@ProductCart');
         Route::get('get_product/{num}', 'FrontEnd\Product\ProductController@GetProduct');
+        Route::get('footer', 'FrontEnd\Common\FooterController@getFooter');
     });
 }else{
     Route::get('/{any?}','FrontEnd\Product\FrontEndController@index')->where(['any'=>'.*']);
@@ -98,6 +99,8 @@ Route::get('/api/header','FrontEnd\Common\HeaderController@index');
 Route::get('/api/slide','FrontEnd\Includes\SlideController@index');
 Route::get('/api/latest','FrontEnd\Product\LastestController@index');
 Route::get('/api/bestSeller','FrontEnd\Product\BestSellerController@index');
+Route::get('/api/detail/{id}','FrontEnd\Product\ProductController@index');
+
 /*--| Api Request Banner--*/
 Route::get('/api/banner','FrontEnd\Design\BannerController@index');
 // Route::get('/api/getTest', 'FrontEnd\TestController@getTest');
