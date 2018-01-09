@@ -27,7 +27,9 @@ class ProductsController extends Controller
     }
     public function edit($id)
     {
-
+        $Product = ProductModel::find($id);
+        $Product->description=$Product->Description()->get();
+        return $Product;
     }
     public function update(Request $request,$id)
     {
