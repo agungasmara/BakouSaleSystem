@@ -12,7 +12,6 @@ class ProductModel extends Model
 	public $timestamps = false;
 	static function UpdateOrCreate($data,$product_id='')
 	{
-		// dd($data);
 		if (!$product_id) {
 			$data['date_added']=Carbon::now();
 			$data['date_modified']=Carbon::now();
@@ -24,7 +23,6 @@ class ProductModel extends Model
 				return false;
 			}
 			return $Product->update($data);
-			// insertGetId
 		}
 	}
 	static function DeleteProduct($product_id)
@@ -53,6 +51,9 @@ class ProductModel extends Model
 	{
 		return $this->hasMany(ProductDescription::class,'product_id');
 	}
-	
+	public function getDescription()
+	{
+		return $this->hasMany(ProductDescription::class,'product_id')->get()->toArray();
+	}
 	
 }

@@ -34,7 +34,8 @@ if (Request::is('admin*')){
         if (Request::is('admin/api*')){
             Route::prefix('api')->group(function () {
                 //=====Categories API=============================
-                Route::get('/categories/list','Backend\Category\CategoryController@list');
+                Route::get('/categories/list','FrontEnd\Common\HeaderController@index');
+                // Route::get('/categories/list','Backend\Category\CategoryController@list');
                 Route::post('/categories/save','Backend\Category\CategoryController@store');
                 Route::get('/categories/getsettingbyid/{id}','Backend\Category\CategoryController@getSettingByID');
                 Route::put('/categories/update/{id}','Backend\Category\CategoryController@update');
@@ -43,7 +44,7 @@ if (Request::is('admin*')){
                  //=====Product API=============================
                 Route::get('/product/list','Backend\Products\ProductsController@list');
                 Route::post('/product/save','Backend\Products\ProductsController@store');
-                Route::get('/product/getsettingbyid/{id}','Backend\Products\ProductsController@getSettingByID');
+                Route::get('/product/{id}','Backend\Products\ProductsController@edit');
                 Route::put('/product/update/{id}','Backend\Products\ProductsController@update');
                 Route::delete('/product/delete/{id}','Backend\Products\ProductsController@destroy');
 

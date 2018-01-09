@@ -25,7 +25,7 @@
 		      		</v-breadcrumbs>
 			    </div>
 			    <div class="col s2 m6 l6">
-			      	<router-link to="/admin/attributes/add" replace><v-btn class="btn dropdown-settings waves-effect waves-light breadcrumbs-btn right" color="primary">Create New</v-btn></router-link>
+			      	<router-link to="/admin/products/add" replace><v-btn class="btn dropdown-settings waves-effect waves-light breadcrumbs-btn right" color="primary">Create New</v-btn></router-link>
 			    </div>
 			  </div>
 			</div>
@@ -63,7 +63,7 @@
 							<td class="text-xs-left">{{ props.item.sort_order }}</td>
 							<td class="text-xs-left">{{ props.item.status }}</td>
 							<td class="text-xs-center">
-								<span style="cursor:pointer;" @click="editSetting(props.item.setting_id)"">
+								<span style="cursor:pointer;" @click="editSetting(props.item.product_id)"">
 									<i class="material-icons">edit</i>
 								</span>
 								<span style="cursor:pointer;" v-on:click="confirmDel(props.item.product_id,props.item.name)"><i class="material-icons">delete_forever</i></span>

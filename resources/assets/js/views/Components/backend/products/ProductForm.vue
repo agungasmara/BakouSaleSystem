@@ -25,7 +25,7 @@
 		      		</v-breadcrumbs>
 			    </div>
 			    <div class="col s2 m6 l6">
-			    	<router-link to="/admin/attributes/list" replace><v-btn color="primary" class="btn dropdown-settings breadcrumbs-btn right">Cancel</v-btn></router-link>
+			    	<router-link to="/admin/Products/list" replace><v-btn color="primary" class="btn dropdown-settings breadcrumbs-btn right">Cancel</v-btn></router-link>
 
 			     	<router-link to="/admin/attributes/list" replace><v-btn @click="submit(1)" class="btn dropdown-settings waves-effect waves-light breadcrumbs-btn right" color="success">Save</v-btn></router-link>
 			    </div>
@@ -119,7 +119,7 @@
 			          disabled: false
 			        },
 			        {
-			          text: 'Attributes',
+			          text: 'Products',
 			          disabled: false
 			        },
 			        {
@@ -131,11 +131,11 @@
 			}
 		},
 		created(){
-			this.getStore()
+			this.getCategories()
 		},
 		methods:{
-			getStore(){
-				axios.get('/api/getStore').then((res)=>{
+			getCategories(){
+				axios.get('admin/api/categories/list').then((res)=>{
 					this.items=res.data
 				})
 			},
