@@ -54,7 +54,7 @@
 					    <v-form v-model="valid" ref="form" lazy-validation>
 					    	<v-container grid-list-md>
 		              			<v-layout wrap>
-							    	<v-flex xs12 sm6 md6>
+							    	<!-- <v-flex xs12 sm6 md6>
 							      		<v-select label="Select Store" v-model="select"  :items="items"  :rules="[v => !!v || 'Item is required']" required></v-select>
 							      	</v-flex>
 
@@ -64,11 +64,108 @@
 
 							      	<v-flex xs12 sm6 md6>
 							      		<v-text-field label="Key" v-model="key" :rules="keyRules" :counter="100" required></v-text-field>
-							      	</v-flex>
+							      	</v-flex> -->
 
 							      	<v-flex xs12 sm6 md6>
 							      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="100" required></v-text-field>
 							      	</v-flex>
+							      	<v-flex xs12 sm6 md6>
+							      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="100" required></v-text-field>
+							      	</v-flex>
+							      	<v-flex xs12 sm6 md6>
+							      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="100" required></v-text-field>
+							      	</v-flex>
+							      	<v-flex xs12 sm6 md6>
+							      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="100" required></v-text-field>
+							      	</v-flex>
+							      	<v-flex xs12 sm6 md6>
+							      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="100" required></v-text-field>
+							      	</v-flex>
+							      	<v-flex xs12 sm6 md6>
+							      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="100" required></v-text-field>
+							      	</v-flex>
+							      	<v-flex xs12 sm6 md6>
+							      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="100" required></v-text-field>
+							      	</v-flex>
+							      	<v-flex xs12 sm6 md6>
+							      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="100" required></v-text-field>
+							      	</v-flex>
+							      	<v-flex xs12 sm6 md6>
+							      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="100" required></v-text-field>
+							      	</v-flex>
+							      	<v-flex xs12 sm6 md6>
+							      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="100" required></v-text-field>
+							      	</v-flex>
+							      	<v-flex xs12 sm6 md6>
+							      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="100" required></v-text-field>
+							      	</v-flex>
+							      	<v-flex xs12 sm6 md6>
+							      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="100" required></v-text-field>
+							      	</v-flex>
+							      	<v-flex xs12 sm6 md6>
+							      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="100" required></v-text-field>
+							      	</v-flex>
+							      	<v-flex xs12 sm6 md6>
+							      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="100" required></v-text-field>
+							      	</v-flex>
+							      	<v-flex xs12 sm6 md6>
+							      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="100" required></v-text-field>
+							      	</v-flex>
+							      	<v-flex xs12 sm6 md6>
+							      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="100" required></v-text-field>
+							      	</v-flex>
+							      	<v-flex xs12 sm6 md6>
+							      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="100" required></v-text-field>
+							      	</v-flex>
+							      	<v-flex xs12 sm6 md6>
+							      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="100" required></v-text-field>
+							      	</v-flex>
+							      	<v-flex xs12 sm6 md6>
+							      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="100" required></v-text-field>
+							      	</v-flex>
+							      	<v-flex xs12 sm6 md6>
+							      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="100" required></v-text-field>
+							      	</v-flex>
+							      	<v-flex xs12 sm6 md6>
+							      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="100" required></v-text-field>
+							      	</v-flex>
+							      	<v-flex xs12 sm6 md6>
+							      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="100" required></v-text-field>
+							      	</v-flex>
+							      	<v-flex xs12 sm6 md6>
+							      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="100" required></v-text-field>
+							      	</v-flex>
+							      	<v-flex xs12 sm6 md6>
+							      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="100" required></v-text-field>
+							      	</v-flex>
+							      	<v-flex xs12 sm6 md6>
+							      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="100" required></v-text-field>
+							      	</v-flex>
+							      	<v-flex xs12 sm6 md6>
+							      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="100" required></v-text-field>
+							      	</v-flex>
+							      	<v-flex xs12 sm6 md6>
+							      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="100" required></v-text-field>
+							      	</v-flex>
+							      	<v-flex xs12 sm6 md6>
+							      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="100" required></v-text-field>
+							      	</v-flex>
+							      	<v-flex xs12 sm6 md6>
+							      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="100" required></v-text-field>
+							      	</v-flex>
+							      	<v-flex xs12 sm6 md6>
+							      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="100" required></v-text-field>
+							      	</v-flex>
+							      	<v-flex xs12 sm6 md6>
+							      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="100" required></v-text-field>
+							      	</v-flex>
+							      	<v-flex xs12 sm6 md6>
+							      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="100" required></v-text-field>
+							      	</v-flex>
+							      	<v-flex xs12 sm6 md6>
+							      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="100" required></v-text-field>
+							      	</v-flex>
+							      	
 
 							      	<!-- <v-btn @click="submit(id,1)" :disabled="!valid">
 								        Update
@@ -98,26 +195,63 @@
 		props:['id'],
 		data(){
 			return{
-
-				valid: true,
-			    code: '',
-			    codeRules: [
-			      (v) => !!v || 'Code is required',
-			      (v) => v && v.length <= 100 || 'Code must be less than 100 characters'
-			    ],
-			    key: '',
-			    keyRules: [
-			      (v) => !!v || 'Key is required',
-			      (v) => v && v.length <= 100 || 'Key must be less than 100 characters'
-			    ],
-			    value: '',
-			    valueRules: [
-			      (v) => !!v || 'Value is required',
-			      (v) => v && v.length <= 100 || 'Value must be less than 100 characters'
-			    ],
-				settings:[],
-			    select: 0,
-			    items: [],
+				product:{
+					name:'',
+					model:'',
+					sku:'',
+					upc:'',
+					ean:'',
+					jan:'',
+					isbn:'',
+					mpn:'',
+					location:'',
+					quantity:'',
+					stock_status_id:'',
+					image:'',
+					manufacturer_id:'',
+					shipping:'',
+					price:'',
+					points:'',
+					tax_class_id:'',
+					date_available:'',
+					weight:'',
+					weight_class_id:'',
+					length:'',
+					width:'',
+					height:'',
+					length_class_id:'',
+					subtract:'',
+					minimum:'',
+					sort_order:'',
+					status:'',
+					description:{
+						language_id:'',
+						description:'',
+						tag:'',
+						meta_title:'',
+						meta_description:'',
+						meta_keyword:'',
+					}
+				},
+				// valid: true,
+			 //    code: '',
+			 //    codeRules: [
+			 //      (v) => !!v || 'Code is required',
+			 //      (v) => v && v.length <= 100 || 'Code must be less than 100 characters'
+			 //    ],
+			 //    key: '',
+			 //    keyRules: [
+			 //      (v) => !!v || 'Key is required',
+			 //      (v) => v && v.length <= 100 || 'Key must be less than 100 characters'
+			 //    ],
+			 //    value: '',
+			 //    valueRules: [
+			 //      (v) => !!v || 'Value is required',
+			 //      (v) => v && v.length <= 100 || 'Value must be less than 100 characters'
+			 //    ],
+				// settings:[],
+			 //    select: 0,
+			 //    items: [],
 			    breadcrumbs: [
 			        {
 			          text: 'Dashboard',

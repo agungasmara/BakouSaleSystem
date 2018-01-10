@@ -1,3 +1,36 @@
+<!-- <template>
+  <v-tabs fixed centered>
+    <v-toolbar color="cyan">
+      <v-text-field
+        solo
+        label="Search"
+        append-icon="keyboard_voice"
+        prepend-icon="search"
+      ></v-text-field>
+      <v-tabs-bar color="transparent" slot="extension" dark>
+        <v-tabs-slider color="yellow"></v-tabs-slider>
+        <v-tabs-item
+          v-for="i in 3"
+          :key="i"
+          :href="'#tab-' + i"
+        >
+          Item {{ i }}
+        </v-tabs-item>
+      </v-tabs-bar>
+    </v-toolbar>
+    <v-tabs-items>
+      <v-tabs-content
+        v-for="i in 3"
+        :key="i"
+        :id="'tab-' + i"
+      >
+        <v-card flat>
+          <v-card-text>{{ text }}</v-card-text>
+        </v-card>
+      </v-tabs-content>
+    </v-tabs-items>
+  </v-tabs>
+</template> -->
 <template>
 	<section id="content">
 		<!--breadcrumbs start-->
@@ -50,38 +83,40 @@
 				            	{{flash.success}}
 				            </v-alert>
 			          	</div>
+			          	
 					    <v-form v-model="valid" ref="form" lazy-validation>
-					    	<v-container grid-list-md offset-s3>
-		              			<v-layout wrap>
-							    	<v-flex xs12 sm6 md6>
-							      		<v-select label="Select Store" v-model="select" :items="items" :rules="[v => !!v || 'Item is required']" required></v-select>
-							      	</v-flex>
-
-							    	<!-- <v-flex xs12 sm6 md6>
-							      		<v-text-field label="Code" v-model="code" :rules="codeRules" :counter="10" required></v-text-field>
-							      	</v-flex> -->
-
-							      	<v-flex xs12 sm6 md6>
-							      		<v-text-field label="Key" v-model="key" :rules="keyRules" :counter="10" required></v-text-field>
-							      	</v-flex>
-
-							      	<v-flex xs12 sm6 md6>
-							      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="10" required></v-text-field>
-							      	</v-flex>
-
-							      	<!-- <v-btn @click="submit(1)" :disabled="!valid">
-								        Save & New
-								    </v-btn>
-								    <v-btn @click="submit(2)" :disabled="!valid">
-								        Save & Close
-								    </v-btn>
-								    <router-link to="/admin/settings/list">
-									    <v-btn>
-									        Cancele
-									    </v-btn>
-								    </router-link> -->
-							    </v-layout>
-							</v-container>
+					    	<v-tabs>
+						      	<v-tabs-bar dark color="cyan">
+						        	<v-tabs-slider color="yellow"></v-tabs-slider>
+							        <v-tabs-item
+							          v-for="i in tabs"
+							          :key="i.name"
+							          :href="'#tab-' + i.name"
+							        >
+							           	{{ i.name }}
+							        </v-tabs-item>
+						      	</v-tabs-bar>
+						      	<v-tabs-items>
+						        	<v-tabs-content
+							          v-for="i in tabs"
+							          :key="i.name"
+							          :id="'tab-' + i.name"
+							        >
+							          	<v-card flat>
+							            	<v-card-text>
+							            		<v-container grid-list-md offset-s3>
+							              			<v-layout wrap>
+							              				<v-flex xs12 sm6 md6 v-for="input in i.group" :key="input.key" >
+															<v-text-field :label="input.key" v-model="input.value" :counter="10" required></v-text-field>
+														</v-flex>
+												    </v-layout>
+												</v-container>
+							            	</v-card-text>
+							          	</v-card>
+						        	</v-tabs-content>
+						      	</v-tabs-items>
+						    </v-tabs>
+					    	
 					    </v-form>
 					</v-card>
 				</v-app>
@@ -96,23 +131,131 @@
 		data(){
 			return{
 				valid: true,
-			    code: '',
-			    codeRules: [
-			      (v) => !!v || 'Code is required',
-			      (v) => v && v.length <= 10 || 'Code must be less than 10 characters'
-			    ],
-			    key: '',
-			    keyRules: [
-			      (v) => !!v || 'Key is required',
-			      (v) => v && v.length <= 10 || 'Key must be less than 10 characters'
-			    ],
-			    value: '',
-			    valueRules: [
-			      (v) => !!v || 'Value is required',
-			      (v) => v && v.length <= 10 || 'Value must be less than 10 characters'
-			    ],
-			    select: null,
-			    items: [],
+				tabs:[
+						{
+							name:'General', 
+							group:[
+								{	key:'language_id',	type:'text', Value:''	},
+								{	key:'description',	type:'text', Value:''	},
+								{	key:'tag',	type:'text', Value:''	},
+								{	key:'meta_title',	type:'text', Value:''	},
+								{	key:'meta_description',	type:'text', Value:''	},
+								{	key:'meta_keyword',	type:'text', Value:''	},
+							]
+						},
+						{
+							name:'Data', 
+							group:[
+								{	key:'name',	type:'text', Value:''},
+								{	key:'model',	type:'text', Value:''},
+								{	key:'sku',	type:'text', Value:''},
+								{	key:'upc',	type:'text', Value:''},
+								{	key:'ean',	type:'text', Value:''},
+								{	key:'jan',	type:'text', Value:''},
+								{	key:'isbn',	type:'text', Value:''},
+								{	key:'mpn',	type:'text', Value:''},
+								{	key:'location',	type:'text', Value:''},
+								{	key:'quantity',	type:'text', Value:''},
+								{	key:'stock_status_id',	type:'text', Value:''},
+								{	key:'image',	type:'text', Value:''},
+								{	key:'manufacturer_id',	type:'text', Value:''},
+								{	key:'shipping',	type:'text', Value:''},
+								{	key:'price',	type:'text', Value:''},
+								{	key:'points',	type:'text', Value:''},
+								{	key:'tax_class_id',	type:'text', Value:''},
+								{	key:'date_available',	type:'text', Value:''},
+								{	key:'weight',	type:'text', Value:''},
+								{	key:'weight_class_id',	type:'text', Value:''},
+								{	key:'length',	type:'text', Value:''},
+								{	key:'width',	type:'text', Value:''},
+								{	key:'height',	type:'text', Value:''},
+								{	key:'length_class_id',	type:'text', Value:''},
+								{	key:'subtract',	type:'text', Value:''},
+								{	key:'minimum',	type:'text', Value:''},
+								{	key:'sort_order',	type:'text', Value:''},
+								{	key:'status',	type:'text', Value:''},
+
+							]
+						},
+						{
+							name:'Links', 
+							group:[
+								{	key:'',	type:'', Value:''}
+							]
+						},
+						{
+							name:'Attribute', 
+							group:[
+								{	key:'',	type:'', Value:''}
+							]
+						},
+						{
+							name:'Option', 
+							group:[
+								{	key:'',	type:'', Value:''}
+							]
+						},
+						{
+							name:'Recurring', 
+							group:[
+								{	key:'',	type:'', Value:''}
+							]
+						},
+						{
+							name:'Discount', 
+							group:[
+								{	key:'',	type:'', Value:''}
+							]
+						},
+						{
+							name:'Special', 
+							group:[
+								{	key:'',	type:'', Value:''}
+							]
+						},
+						{
+							name:'Image', 
+							group:[
+								{	key:'',	type:'', Value:''}
+							]
+						},
+						{
+							name:'Reward Points', 
+							group:[
+								{	key:'',	type:'', Value:''}
+							]
+						},
+						{
+							name:'SEO', 
+							group:[
+								{	key:'',	type:'', Value:''}
+							]
+						},
+						{
+							name:'Design', 
+							group:[
+								{	key:'',	type:'', Value:''}
+							]
+						},
+					],
+				
+			    // code: '',
+			    // codeRules: [
+			    //   (v) => !!v || 'Code is required',
+			    //   (v) => v && v.length <= 10 || 'Code must be less than 10 characters'
+			    // ],
+			    // key: '',
+			    // keyRules: [
+			    //   (v) => !!v || 'Key is required',
+			    //   (v) => v && v.length <= 10 || 'Key must be less than 10 characters'
+			    // ],
+			    // value: '',
+			    // valueRules: [
+			    //   (v) => !!v || 'Value is required',
+			    //   (v) => v && v.length <= 10 || 'Value must be less than 10 characters'
+			    // ],
+			    // select: null,
+			    // items: [],
 			    breadcrumbs: [
 			        {
 			          text: 'Dashboard',
