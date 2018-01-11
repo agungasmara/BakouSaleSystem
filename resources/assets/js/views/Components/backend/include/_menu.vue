@@ -124,7 +124,7 @@
                   <i class="material-icons">lock_outline</i> Lock</a>
               </li>
               <li>
-                <a href="/logout" class="grey-text text-darken-1">
+                <a href="/auth/logout" class="grey-text text-darken-1">
                   <i class="material-icons">keyboard_tab</i> Logout</a>
               </li>
             </ul>
@@ -363,7 +363,7 @@
             }
         },
         methods:{
-        	thClassValue: function (id) {
+        	thClassValue (id) {
             var value = ['Templatesdropdown'+id]
             // if (this.orderKey === id) {
             //   value.push('active')

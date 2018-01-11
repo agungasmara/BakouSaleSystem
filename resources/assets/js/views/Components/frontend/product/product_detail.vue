@@ -320,8 +320,19 @@
                 productInfo:[],
             }
         },
+        ready() {
+            // if ( ! window.jQuery ) {
+              var s = document.createElement("script")
+              s.type = "text/javascript"
+              s.src = "http://localhost:8000/assets/frontend/js/script.js"
+              s.async = true
+              this.$el.appendChild(s)
+              alert("s")
+            // }
+        },
         created(){
             this.productDetails(this.id);
+            // alert("s")
         },
         methods:{
             productDetails(id){

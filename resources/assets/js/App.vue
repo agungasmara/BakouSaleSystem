@@ -27,10 +27,9 @@
         <template>
           <MenuComponent/>
         </template>
-
       
         <!-- END HEADER -->
-        
+  
         <!-- START MAIN -->
         <div id="main">
           <div class="wrapper">
@@ -84,19 +83,19 @@
 
     export default{
       data(){
-          return{
-              flash: Flash.state
-          }
+        return{
+          flash: Flash.state
+        }
       },
       components:{
         MenuComponent,
       },
       methods: function() {
-          alert('sd');
-          // window.location = "#/login";
+        alert('sd');
+        // window.location = "#/login";
       },
       mounted: function () {
-          // window.location = "#/home";
+        // window.location = "#/home";
       },
       created() {
         // createIndex('http://localhost:9200', params);
