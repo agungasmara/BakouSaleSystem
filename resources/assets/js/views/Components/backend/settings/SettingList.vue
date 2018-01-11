@@ -1,23 +1,9 @@
 <template>
 
-	<section id="content">
-
 		<v-app id="inspire">
 
 			<!--breadcrumbs start-->
-			<div id="breadcrumbs-wrapper">
-				<v-breadcrumbs>
-
-			        <v-icon slot="divider">chevron_right</v-icon>
-
-		        	<v-breadcrumbs-item v-for="item in items" :key="item.text" :disabled="item.disabled">
-
-		          		{{ item.text }}
-
-		        	</v-breadcrumbs-item>
-
-			    </v-breadcrumbs>
-			</div>
+			<breadcrumb v-bind:breadcrumb-item="items"></breadcrumb>
 
 			<!--Data table component-->
 
@@ -27,6 +13,7 @@
 		    	v-bind:get-api="getApiUrl"
 		    	v-bind:delete-api="deleteApiUrl"
 	    		v-bind:edit-url="urlEdit"
+	    		v-bind:btn-new-url="btnNewUrl"
 		    	v-on:change="fetchData">
 		    </data-table>
 
@@ -34,28 +21,23 @@
 
 		</v-app>
 
-	</section>
-
 </template>
 
 <script>
 	import Flash from '../../../../helper/flash'
 	import axios from 'axios'
 	import dataTable from '../commons/tables/dataTable.vue'
+	import breadcrumb from '../commons/breadcrumb/breadcrumb.vue'
 	export default{
 		props:[
-			'id',//this use to pass id of record to data table component
-			'dataHeader',//data table header(column name)
-			'dataValue',//fetch record and pass to data table component
-			'getApi',//provide get api url
-			'deleteApi',//provide delete api url
-			'editUrl'//provide edit api url
+			'id'//this use to pass id of record to data table component
 		],
 		data(){
 			return{
 				getApiUrl:'/api/setting/list/',
 				deleteApiUrl:'/api/setting/delete/',
 				urlEdit:'/admin/settings/edit/',
+				btnNewUrl:'/admin/settings/add',
 				headers: [
 			        { text: 'Setting ID',align: 'center',value: 'id'},
 			        { text: 'Store Name',align:'center', value: 'name' },
@@ -71,17 +53,17 @@
 			          disabled: false
 			        },
 			        {
-			          text: 'Users',
+			          text: 'Settings',
 			          disabled: false
 			        },
 			        {
-			          text: 'List',
+			          text: 'Lists',
 			          disabled: true
 			        }
 			    ]
 			}
 		},
-		components:{'dataTable':dataTable},
+		components:{'dataTable':dataTable,'breadcrumb':breadcrumb},
 		created(){
 			this.fetchData()
 			document.title = 'Setting List';
