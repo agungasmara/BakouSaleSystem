@@ -29,12 +29,30 @@ import SettingEditForm from './views/Components/backend/settings/EditForm.vue'
 //end setting####################
 
 //User and user Group########################
-import UserGroupForm from './views/Components/backend/users/MainForm.vue'
+
+import User from './views/Components/backend/users/User.vue'
+import UserForm from './views/Components/backend/users/MainForm.vue'
 import UserList from './views/Components/backend/users/UserList.vue'
 import UserEditForm from './views/Components/backend/users/UserEditForm.vue'
-import UserGroupList from './views/Components/backend/users/UserGroupList.vue'
-import UserGroupEditForm from './views/Components/backend/users/EditForm.vue'
+//Uer group#########################
+import UserGroupForm from './views/Components/backend/groups/MainForm.vue'
+import UserGroupList from './views/Components/backend/groups/UserGroupList.vue'
+import UserGroupEditForm from './views/Components/backend/groups/UserGroupEditForm.vue'
 //End User Group####################
+
+//***** Categories *****
+import Category from './views/Components/backend/categories/Category.vue'
+import CategoryList from './views/Components/backend/categories/CategoryList.vue'
+import CategoryForm from './views/Components/backend/categories/CategoryForm.vue'
+import CategoryEdit from './views/Components/backend/categories/CategoryEdit.vue'
+//***** End Categories *****
+
+//***** products *****
+import Products from './views/Components/backend/products/Product.vue'
+import ProductList from './views/Components/backend/products/ProductList.vue'
+import ProductForm from './views/Components/backend/products/ProductForm.vue'
+import ProductEdit from './views/Components/backend/products/ProductEdit.vue'
+//***** End products *****
 
 //***** Attribute *****
 import Attribute from './views/Components/backend/attributes/Attribute.vue'
@@ -120,18 +138,90 @@ const router = new VueRouter({
         }
       ]
     },
-
+    { path: '/admin/categories', name:'categories',component: Category,
+      children: [
+        {
+          path: 'list',
+          name:'CategoryList',
+          component: CategoryList
+        },
+        {
+          path: 'add',
+          name:'CategoryForm',
+          component: CategoryForm
+        },
+        {
+          path: 'edit/:id',
+          name:'CategoryEdit',
+          component: CategoryEdit,props:true
+        }
+      ]
+    },
+    { path: '/admin/products', name:'products',component: Products,
+      children: [
+        {
+          path: 'list',
+          name:'ProductList',
+          component: ProductList
+        },
+        {
+          path: 'add',
+          name:'ProductForm',
+          component: ProductForm
+        },
+        {
+          path: 'edit/:id',
+          name:'ProductEdit',
+          component: ProductEdit,props:true
+        }
+      ]
+    },
 
     //Setting
     { path: '/admin/settings/add',component:SettingForm},
     { path: '/admin/settings/list',component:SettingList},
     { path: '/admin/settings/edit/:id',component:SettingEditForm,props:true},
     //User and User Group 
-    { path: '/admin/user/add',component:UserGroupForm},
-    { path: '/admin/user/list',component:UserList},
-     { path: '/admin/user/edit/:id',component:UserEditForm,props:true},
-    { path: '/admin/user_group/list',component:UserGroupList},
-    { path: '/admin/user_group/edit/:id',component:UserGroupEditForm,props:true}
+    {path:'/admin/user',name:'user',component:User,
+        children:[
+            {
+                path:'list',
+                name:'UserList',
+                component:UserList
+            },
+            {
+                path:'add',
+                name:'UserForm',
+                component:UserForm
+            },
+            {
+                path:'edit/:id',
+                name:'UserForm',
+                component:UserEditForm,
+                props:true
+            }
+        ]       
+    },
+    {path:'/admin/user_group',name:'user_group',component:User,
+        children:[
+            {
+                path:'list',
+                name:'UserGroupList',
+                component:UserGroupList
+            },
+            {
+                path:'add',
+                name:'UserGroupForm',
+                component:UserGroupForm
+            },
+            {
+                path:'edit/:id',
+                name:'UserGroupForm',
+                component:UserGroupEditForm,
+                props:true
+            }
+        ]       
+    }
   ]
 })
 

@@ -12,7 +12,6 @@ class ProductModel extends Model
 	public $timestamps = false;
 	static function UpdateOrCreate($data,$product_id='')
 	{
-		// dd($data);
 		if (!$product_id) {
 			$data['date_added']=Carbon::now();
 			$data['date_modified']=Carbon::now();
@@ -30,14 +29,31 @@ class ProductModel extends Model
 	{
 		$Product=static::find($product_id);
 		if (!$Product) {
-			return false;
+			return ['success'=>false,
+					'message'=>'Data fail to delete.'];
 		}
-		return $Product->delete();
+		return ['success'=>$Product->delete(),
+    			'message'=>'Data successfully deleted.'];
+	}
+	public function scopeFilter($query,$filter=array())
+	{
+	  	foreach ($filter as $key => $value) {
+	  		$query->where($key,$value);
+	  	}
+	  	return $query;
+	  	
+	}
+	public function scopeSort($query,$sort='sort_order',$type='desc')
+	{
+	  	return $query->orderBy($sort,$type);
 	}
 	public function Description()
 	{
 		return $this->hasMany(ProductDescription::class,'product_id');
 	}
-	
+	public function getDescription()
+	{
+		return $this->hasMany(ProductDescription::class,'product_id')->get()->toArray();
+	}
 	
 }
