@@ -94402,42 +94402,41 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 // template
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            flash: __WEBPACK_IMPORTED_MODULE_0__helper_flash__["a" /* default */].state
-        };
-    },
+  data: function data() {
+    return {
+      flash: __WEBPACK_IMPORTED_MODULE_0__helper_flash__["a" /* default */].state
+    };
+  },
 
-    components: {
-        MenuComponent: __WEBPACK_IMPORTED_MODULE_1__views_Components_backend_include_menu_vue___default.a
-    },
-    methods: function methods() {
-        alert('sd');
-        // window.location = "#/login";
-    },
-    mounted: function mounted() {
-        // window.location = "#/home";
-    },
-    created: function created() {
-        // createIndex('http://localhost:9200', params);
-        // Vue.http.put("http://localhost:9200", params)
+  components: {
+    MenuComponent: __WEBPACK_IMPORTED_MODULE_1__views_Components_backend_include_menu_vue___default.a
+  },
+  methods: function methods() {
+    alert('sd');
+    // window.location = "#/login";
+  },
+  mounted: function mounted() {
+    // window.location = "#/home";
+  },
+  created: function created() {
+    // createIndex('http://localhost:9200', params);
+    // Vue.http.put("http://localhost:9200", params)
 
-        // async / await version (created() becomes async created())
+    // async / await version (created() becomes async created())
 
-        // try {
-        //   const response = await axios.get(`http://jsonplaceholder.typicode.com/posts`)
-        //   this.posts = response.data
-        // } catch (e) {
-        //   this.errors.push(e)
-        // }
-    }
+    // try {
+    //   const response = await axios.get(`http://jsonplaceholder.typicode.com/posts`)
+    //   this.posts = response.data
+    // } catch (e) {
+    //   this.errors.push(e)
+    // }
+  }
 });
 
 /***/ }),
@@ -95468,7 +95467,7 @@ var staticRenderFns = [
             "a",
             {
               staticClass: "grey-text text-darken-1",
-              attrs: { href: "/logout" }
+              attrs: { href: "/auth/logout" }
             },
             [
               _c("i", { staticClass: "material-icons" }, [
@@ -120157,8 +120156,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             productInfo: []
         };
     },
+    ready: function ready() {
+        // if ( ! window.jQuery ) {
+        var s = document.createElement("script");
+        s.type = "text/javascript";
+        s.src = "http://localhost:8000/assets/frontend/js/script.js";
+        s.async = true;
+        this.$el.appendChild(s);
+        alert("s");
+        // }
+    },
     created: function created() {
         this.productDetails(this.id);
+        // alert("s")
     },
 
     methods: {
