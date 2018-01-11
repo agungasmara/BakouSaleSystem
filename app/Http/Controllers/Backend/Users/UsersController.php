@@ -11,12 +11,18 @@ class UsersController extends Controller
 {
     public function list()
     {
-    	$users=DB::table('user')
-    			  ->join('user_group','user_group.user_group_id','=','user.user_group_id')
-    			  ->select('user_id as id','username','user_group.name as group','firstname','lastname','email','user.code as code','image','status','date_added')
-    			  ->get();
-    	return response()->json($users);
+
+        $Users = User::get();
+        $data = array();
+        foreach ($Users as $User) {
+            $data[] = array(
+                'name'=>$User->username,
+                'user_group'=>$User->UserGroup->name,
+            );
+        }
+        return $data;
     }
+
     public function checkUser($username){
         
         $existed=false;
