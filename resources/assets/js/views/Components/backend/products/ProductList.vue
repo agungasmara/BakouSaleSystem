@@ -44,51 +44,16 @@
 		        	</v-breadcrumbs-item>
 			    </v-breadcrumbs> -->
 
-				<v-card>
-				  
-			      <v-card-title>
-			        <v-spacer>
-			        	<div>
-			                Product List
-			            </div>
-			        </v-spacer>
-			        <v-text-field append-icon="search" label="Search" single-line hide-details v-model="search"></v-text-field>
-			      </v-card-title>
-				    <v-data-table v-bind:headers="headers" :items="settings" v-bind:search="search" class="elevation-1" >
-						<template slot="items" slot-scope="props">
-							<td class="text-xs-center">{{ props.item.product_id }}</td>
-							<td class="text-xs-left">{{ props.item.name }}</td>
-							<td class="text-xs-left">{{ props.item.price }}</td>
-							<td class="text-xs-left">{{ props.item.quantity }}</td>
-							<td class="text-xs-left">{{ props.item.sort_order }}</td>
-							<td class="text-xs-left">{{ props.item.status }}</td>
-							<td class="text-xs-center">
-								<span style="cursor:pointer;" @click="editSetting(props.item.product_id)"">
-									<i class="material-icons">edit</i>
-								</span>
-								<span style="cursor:pointer;" v-on:click="confirmDel(props.item.product_id,props.item.name)"><i class="material-icons">delete_forever</i></span>
-							</td>
-						</template>
-						<template slot="pageText" slot-scope="{ pageStart, pageStop }">
-				          From {{ pageStart }} to {{ pageStop }}
-				        </template>
-				    </v-data-table>
-			    </v-card>
-			    <v-layout row justify-center>
-			      <v-dialog v-model="dialog" persistent max-width="290">
-			        <v-card>
-			          <v-card-title class="headline">Message</v-card-title>
-			          	<v-card-text>
-			          		{{ deleteMessage }} {{ settingID }}?
-			          	</v-card-text>
-			          <v-card-actions>
-			            <v-spacer></v-spacer>
-			            <v-btn color="green darken-1" flat @click="deleteItem(settingID,0)">Cancle</v-btn>
-			            <v-btn color="green darken-1" flat @click="deleteItem(settingID,1)">Agree</v-btn>
-			          </v-card-actions>
-			        </v-card>
-			      </v-dialog>
-			    </v-layout>
+				<data-table 
+		    	v-bind:data-header="headers" 
+		    	v-bind:data-value="settings"
+		    	v-bind:get-api="getApiUrl"
+		    	v-bind:delete-api="deleteApiUrl"
+	    		v-bind:edit-url="urlEdit"
+	    		v-bind:btn-new-url="btnNewUrl"
+		    	v-on:change="fetchData">
+		    </data-table>
+
 			</v-app>
 		</div>
 	</section>
@@ -97,10 +62,15 @@
 <script>
 	import Flash from '../../../../helper/flash'
 	import axios from 'axios'
+	import dataTable from '../commons/tables/dataTable.vue'
 	export default{
 		props:['settingid'],
 		data(){
 			return{
+				getApiUrl:'/api/user/list/',
+				deleteApiUrl:'/api/user/delete/',
+				urlEdit:'/admin/user/edit/',
+				btnNewUrl:'/admin/user/add',
 				deleteMessage:'',
 				settingName:'',
 				settingID:'',
@@ -136,6 +106,7 @@
 			    ]
 			}
 		},
+		components:{'dataTable':dataTable},
 		created(){
 			this.fetchData()
 			document.title = 'Attributes';

@@ -1,5 +1,7 @@
 <template>
 	<div id="breadcrumbs-wrapper">
+
+      </v-breadcrumbs>
 		<v-breadcrumbs>
         	<v-icon slot="divider">chevron_right</v-icon>
 
@@ -9,10 +11,12 @@
 
     		</v-breadcrumbs-item>
     	</v-breadcrumbs>
-	</div>
+	</div> 
 </template>
 <script type="text/javascript">
 	export default{
-		props:['breadcrumbItem']
+		props:[
+			'breadcrumbItem'
+		]
 	}
 </script>

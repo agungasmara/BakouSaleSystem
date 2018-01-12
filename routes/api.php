@@ -26,24 +26,25 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/getStore','Backend\Settings\SettingsController@getStore');
 Route::post('/setting/save','Backend\Settings\SettingsController@store');
 Route::get('/setting/list','Backend\Settings\SettingsController@list');
+Route::get('/setting/item/{id}','Backend\Settings\SettingsController@item');//use to get all config item to put into dropdown list in setting edit form
 Route::delete('/setting/delete/{id}','Backend\Settings\SettingsController@destroy');
 Route::get('/setting/getsettingbyid/{id}','Backend\Settings\SettingsController@getSettingByID');
 Route::put('/setting/update/{id}','Backend\Settings\SettingsController@update');
 
 //=====User Group API
 
-Route::get('/getUsers','Backend\Users\UserGroupsController@getUsers');
-Route::get('/permission','Backend\Users\UserGroupsController@getPermission');
-Route::post('/user_group/save','Backend\Users\UserGroupsController@store');
-Route::get('/user_group/list','Backend\Users\UserGroupsController@list');
-Route::delete('/user_group/delete/{id}','Backend\Users\UserGroupsController@destroy');
-Route::get('/user_group/getusergroupbyid/{id}','Backend\Users\UserGroupsController@getUserByID');
-Route::put('/user_group/update/{id}','Backend\Users\UserGroupsController@update');
+Route::get('/getUsers','Backend\UserGroups\UserGroupsController@getUsers');
+Route::get('/permission','Backend\UserGroups\UserGroupsController@getPermission');
+Route::get('/user_group/checkIfExisted/{field}/{value}','Backend\UserGroups\UserGroupsController@checkIfExisted');
+Route::post('/user_group/save','Backend\UserGroups\UserGroupsController@store');
+Route::get('/user_group/list','Backend\UserGroups\UserGroupsController@list');
+Route::delete('/user_group/delete/{id}','Backend\UserGroups\UserGroupsController@destroy');
+Route::get('/user_group/getusergroupbyid/{id}','Backend\UserGroups\UserGroupsController@getUserByID');
+Route::put('/user_group/update/{id}','Backend\UserGroups\UserGroupsController@update');
 
 //=====User API
 Route::get('/user/list','Backend\Users\UsersController@list');
-Route::get('/user/checkUser/{username}','Backend\Users\UsersController@checkUser');
-Route::get('/user/checkEmail/{email}','Backend\Users\UsersController@checkEmail');
+Route::get('/user/checkIfExisted/{field}/{value}','Backend\Users\UsersController@checkIfExisted');
 Route::post('/user/save','Backend\Users\UsersController@store');
 Route::delete('/user/delete/{id}','Backend\Users\UsersController@destroy');
 Route::get('/user/getuserbyid/{id}','Backend\Users\UsersController@getUserByID');
