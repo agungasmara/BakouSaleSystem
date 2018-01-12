@@ -23,5 +23,14 @@ class User extends Model
     	'status',
     	'ip',
     	'date_added'
+<<<<<<< HEAD
     ]; 
+=======
+    ];
+
+    public function UserGroup(){
+		return $this->belongsTo('App\Http\Models\BackEnd\User\UserGroup','user_group_id');
+	}
+
+>>>>>>> 1564b7cccb099c7102afdb680110f1cdd8869aa8
 }

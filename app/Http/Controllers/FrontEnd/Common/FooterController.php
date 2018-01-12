@@ -21,7 +21,8 @@ class FooterController extends Controller
                     $informations[] = array(
                         'title' => $result->title,
                         // 'href'  => $this->url->link('information/information', 'information_id=' . $result['information_id'])
-                        'href'  => 'information/information', 'information_id=' . $result->information_id
+                        'href'  => 'information/information', 'information_id=' . $result->information_id,
+                        'information_id' => $result->information_id
                     );
                 }
         }

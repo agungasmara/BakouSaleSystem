@@ -84,6 +84,11 @@ if (Request::is('admin*')){
         Route::get('product_cart', 'FrontEnd\Product\CartController@ProductCart');
         Route::get('get_product/{num}', 'FrontEnd\Product\ProductController@GetProduct');
         Route::get('footer', 'FrontEnd\Common\FooterController@getFooter');
+
+        //Information
+        Route::get('information/{id}', 'FrontEnd\Information\InformationController@index');
+        // Account
+        Route::post('account/register', 'FrontEnd\Account\RegisterController@save');
     });
 }else{
     Route::get('/{any?}','FrontEnd\Product\FrontEndController@index')->where(['any'=>'.*']);
@@ -158,7 +163,7 @@ Route::post('login', function(Illuminate\Http\Request $request)
     return response()->json(['success' => false, 'message' => 'Unable to login'], 401);
 });
 
-Route::post('api/register', function(Illuminate\Http\Request $request) 
+Route::post('api/register1', function(Illuminate\Http\Request $request) 
 {
     // if (Auth::attempt(['email' => $request->get('email'), 'password' => $request->get('password')])) {
     //     return response()->json(['success' => true, 'message' => 'Login successfully performed'], 200);

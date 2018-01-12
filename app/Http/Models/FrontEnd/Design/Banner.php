@@ -17,4 +17,5 @@ class Banner extends Model
 	public function banner_images(){
 		return $this->belongsTo('App\Http\Models\FrontEnd\Design\BannerImage','banner_id');
 	}
+
 }

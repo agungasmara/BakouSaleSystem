@@ -35,7 +35,8 @@
                               <div class="carousel-inner" role="listbox">
                                   <div class="item active">
                                      <router-link v-bind:to="'/product/product_detail/'+ latestProduct.product_id">
-                                      <img src="/assets/frontend/images/product/5.jpg" alt="img" class="img-responsive ">
+
+                                      <img v-bind:src="latestProduct.thumb" alt="img" class="img-responsive ">
                                     </router-link>
                                    <!--  <a v-bind:href="'/product/product_detail/'+ latestProduct.product_id">
                                       <img src="/assets/frontend/images/product/5.jpg" alt="img" class="img-responsive ">
@@ -78,7 +79,7 @@
                           <h4><a href="product-details.html"> {{latestProduct.name}} </a></h4>
 
                           <div class="grid-description">
-                              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+                              <p>{{latestProduct.description}}. </p>
                           </div>
                           <div class="list-description">
                               <p> Sed sed rutrum purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -89,7 +90,7 @@
                                   sit amet placerat elit. </p>
                           </div>
                           <span class="size">XL / XXL / S </span></div>
-                      <div class="price"><span>$25</span></div>
+                      <div class="price"><span>${{latestProduct.price}}</span></div>
                       <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
                               class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
                   </div>

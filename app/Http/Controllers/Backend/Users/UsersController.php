@@ -22,6 +22,7 @@ class UsersController extends Controller
 {
     public function list()
     {
+<<<<<<< HEAD
     	$users=DB::table('user')
     			  ->join('user_group','user_group.user_group_id','=','user.user_group_id')
     			  ->select('user_id as id','username','user_group.name as group','firstname','lastname','email','user.code as code','image','status','date_added')
@@ -30,6 +31,25 @@ class UsersController extends Controller
     	return response()->json($users);
     }
     public function checkIfExisted($field,$value){
+=======
+
+        $Users = User::get();
+        $data = array();
+        foreach ($Users as $User) {
+            $data[] = array(
+                'name'=>$User->username,
+                'user_group'=>$User->UserGroup->name,
+            );
+        }
+        return $data;
+    }
+
+    public function checkUser($username){
+        
+        $existed=false;
+
+        $count = User::where('username', $username)->count();
+>>>>>>> 1564b7cccb099c7102afdb680110f1cdd8869aa8
 
         //instant the object
         $validate=new ValidateDataController;

@@ -40,7 +40,7 @@
                         <h3>Information</h3>
                         <ul class="list-unstyled footer-nav">
                             <li v-for="footer of footers">
-                            	 <router-link to="/information" v-bind:to="'/information/'">
+                            	 <router-link v-bind:to="'/information/information_detail/'+ footer.information_id">
 	                          		{{footer.title}}
 	                          	</router-link>
                             	<!-- <router-link v-bind:to="'/product/product_detail/'+ bestSellerProduct.product_id">
