@@ -197,6 +197,10 @@
         .catch(e => {
           this.errors.push(e)
         })
+
+        let recaptchaScript = document.createElement('script')
+        recaptchaScript.setAttribute('src', 'https://www.google.com/recaptcha/api.js')
+        document.head.appendChild(recaptchaScript)
     },
 
     components:{
@@ -204,7 +208,7 @@
         FooterComponet,
     },
     methods: function() {
-        alert('sd');
+        
         // window.location = "#/login";
     },
     mounted: function(){

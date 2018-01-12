@@ -242,7 +242,10 @@ const router = new VueRouter({
             }
         ]       
     }
-  ]
+  ],
+  scrollBehavior (to, from, savedPosition) {
+    return { x: 10, y: 0 }
+  },
 })
 
 // const routerf = new VueRouter({
@@ -259,37 +262,38 @@ const router = new VueRouter({
 // })
 
 // app frontend
-const appf = new Vue({
-    // el: '#root',
-    router,
-    template: `
-    <appf></appf>
-  `,
-    components: { Appf },
-}).$mount('#root_frontend')
+// if(document.getElementById("#root_frontend") ) {
+  const appf = new Vue({
+      // el: '#root',
+      router,
+      template: `
+      <appf></appf>`,
+      components: { Appf },
+  }).$mount('#root_frontend')
+// }
 
+// if( document.getElementById("#root") ) {
+  // app backend
+  const app = new Vue({
+      // el: '#root',
+      router,
+      template: `
+      <app></app>
+    `,
+      components: { App },
+  }).$mount('#root')
+// }
 
-// app backend
-
-const app = new Vue({
-    // el: '#root',
-    router,
-    template: `
-    <app></app>
-  `,
-    components: { App },
-}).$mount('#root')
-
-
-const AuthLogin = new Vue({
-    // el: '#root',
-    router,
-    template: `
-    <appl></appl>
-  `,
-    components: { Appl },
-}).$mount('#root_login')
-
+// if( document.getElementById("#root_login") ) {
+  const AuthLogin = new Vue({
+      // el: '#root',
+      router,
+      template: `
+      <appl></appl>
+    `,
+      components: { Appl },
+  }).$mount('#root_login')
+// }
 
 
 // import Vue from 'vue'
