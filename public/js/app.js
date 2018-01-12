@@ -125122,7 +125122,7 @@ var render = function() {
               "v-btn",
               {
                 staticClass: "btn dropdown-settings breadcrumbs-btn right",
-                attrs: { disabled: !_vm.isValid, color: "primary" },
+                attrs: { disabled: !_vm.isValid, color: "success" },
                 on: {
                   click: function($event) {
                     $event.preventDefault()
@@ -125160,7 +125160,7 @@ var render = function() {
               "v-btn",
               {
                 staticClass: "btn dropdown-settings breadcrumbs-btn right",
-                attrs: { disabled: !_vm.isValid, color: "primary" },
+                attrs: { disabled: !_vm.isValid, color: "success" },
                 on: {
                   click: function($event) {
                     $event.preventDefault()
