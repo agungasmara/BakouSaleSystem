@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class UserGroup extends Model
 {
     protected $table='user_group';
+    protected $fillable=[
+    	'name',
+    	'group_type',
+    	'permission'
+    ];
     public $timestamps=false;
-    protected $primarykey='user_group_id';
+    protected $primaryKey='user_group_id';
 }

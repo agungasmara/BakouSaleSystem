@@ -27141,28 +27141,35 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
 // })
 
 // app frontend
+// if(document.getElementById("#root_frontend") ) {
 var appf = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
   // el: '#root',
   router: router,
-  template: '\n    <appf></appf>\n  ',
+  template: '\n      <appf></appf>',
   components: { Appf: __WEBPACK_IMPORTED_MODULE_2__Appf_vue___default.a }
 }).$mount('#root_frontend');
+// }
 
+
+// if( document.getElementById("#root") ) {
 // app backend
-
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
   // el: '#root',
   router: router,
-  template: '\n    <app></app>\n  ',
+  template: '\n      <app></app>\n    ',
   components: { App: __WEBPACK_IMPORTED_MODULE_18__App_vue___default.a }
 }).$mount('#root');
+// }
 
+// if( document.getElementById("#root_login") ) {
 var AuthLogin = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
   // el: '#root',
   router: router,
-  template: '\n    <appl></appl>\n  ',
+  template: '\n      <appl></appl>\n    ',
   components: { Appl: __WEBPACK_IMPORTED_MODULE_19__Appl_vue___default.a }
 }).$mount('#root_login');
+// }
+
 
 // import Vue from 'vue'
 // import VueRouter from 'vue-router'
@@ -95779,13 +95786,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     MenuComponent: __WEBPACK_IMPORTED_MODULE_1__views_Components_backend_include_menu_vue___default.a
   },
   methods: function methods() {
-    alert('sd');
     // window.location = "#/login";
   },
   mounted: function mounted() {
-    // window.location = "#/home";
+    window.addEventListener('load', function () {
+      setTimeout(function () {
+        // run after everything is in-place
+      }, 100);
+    });
+    // window.location = "/admin";
+    // return false;
   },
   created: function created() {
+
     // createIndex('http://localhost:9200', params);
     // Vue.http.put("http://localhost:9200", params)
 
