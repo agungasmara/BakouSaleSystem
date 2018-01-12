@@ -40,30 +40,10 @@
             this.helloworld="1";
             this.productDetails(this.id);
         },
-        // beforeRouteEnter (to, from, next) {
-        //     alert(to.params.id);
-        //     // getPost(to.params.id, (err, post) => {
-        //     //   next(vm => vm.setData(err, post))
-        //     // })
-        // },
-
-        // beforeRouteUpdate (to, from, next) {
-        //     var id = to.params.id;
-        //     Flash.setState(this.productDetails(id));
-        // },
-
-        mounted() {
-            this.$nextTick(function () {
-                // alert("testing");
-            });
+        beforeUpdate(){
+            var pid = this.$route.params.id;
+            Flash.setState(this.productDetails(pid));
         },
-        // beforeRouteUpdate() {
-        //     alert(this.$route.params.id);
-        // //     alert(this.id);
-        // //     // this.productInfo = Flash.setState(this.productDetails(this.id));
-        // //     // alert("test");
-        // //     // this.name = to.params.name
-        // },
         methods:{
             productDetails(id){
                 axios.get('/api/information/'+id).then(res=>{
