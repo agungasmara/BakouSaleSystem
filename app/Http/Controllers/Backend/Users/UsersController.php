@@ -7,10 +7,31 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Http\Models\BackEnd\User\User;
 use Intervention\Image\ImageManagerStatic as Image;
+//this controller use for create any validation function
+//currently it have one function to validate data if exist or not yet exist
+//then return the json to pass to axios.get() in veujs
+/*
+    this function there are 3 parameter(tablename,fieldname,value)
+        - tablename: table that we want to check
+        - fieldname: field of that table we want to filter
+        - value: value of field we want to check
+*/
+use App\Http\Controllers\Backend\commons\ValidateDataController;
+
 class UsersController extends Controller
 {
     public function list()
     {
+<<<<<<< HEAD
+    	$users=DB::table('user')
+    			  ->join('user_group','user_group.user_group_id','=','user.user_group_id')
+    			  ->select('user_id as id','username','user_group.name as group','firstname','lastname','email','user.code as code','image','status','date_added')
+    			  ->get('id');
+        // $users=User::AllUser();
+    	return response()->json($users);
+    }
+    public function checkIfExisted($field,$value){
+=======
 
         $Users = User::get();
         $data = array();
@@ -28,50 +49,41 @@ class UsersController extends Controller
         $existed=false;
 
         $count = User::where('username', $username)->count();
+>>>>>>> 1564b7cccb099c7102afdb680110f1cdd8869aa8
 
-        if($count>0){
-            $existed=true;
+        //instant the object
+        $validate=new ValidateDataController;
+        if($field=="username"){
+            //return data json to vuejs when axios request
+            return $validate->CheckDataExist('user','username',$value);    
+        }elseif($field=="email"){
+            //return data json to vuejs when axios request
+            return $validate->CheckDataExist('user','email',$value);
         }
-
-        return response()->json([
-            'usernameExist'=>$existed
-        ]);
-    }
-    public function checkEmail($email){
         
-        $existed=false;
-
-        $count = User::where('email', $email)->count();
-
-        if($count>0){
-            $existed=true;
-        }
-
-        return response()->json([
-            'emailExist'=>$existed
-        ]);
     }
     public function store(Request $request)
     {
     	$success=false;
-        $image="test";
-
-        /*if( preg_match('/data:image/', $request->userImage) ){                
-          preg_match('/data:image\/(?<mime>.*?)\;/', $request->userImage , $groups);
-          $mimetype = $groups['mime'];
+        $image="Test";
+      //     if( preg_match('/data:image/', $request->userImage) ){                
+      //     preg_match('/data:image\/(?<mime>.*?)\;/', $request->userImage , $groups);
+      //     $mimetype = $groups['mime'];
                        
-          $image='images/testpost.'.$mimetype;
-          $image = Image::make($request->userImage)
-            ->fit(400, 500) 
-            ->encode($mimetype, 100) 
-            ->save(public_path($image));                
-      }*/ 
+      //     $image='images/TestImage.'.$mimetype;
+      //     $image = Image::make($request->userImage)
+      //       ->fit(400, 500) 
+      //       ->encode($mimetype, 100) 
+      //       ->save(public_path($image));                
+      // }
+        
+      
     	$saved=User::create([
     		'username'=>$request->username,
 			'firstname'=>$request->fname,
 			'lastname'=>$request->lname,
 			'user_group_id'=>$request->userGroup,
-			'image'=>$request->userImage,
+			'image'=>'',
 			'email'=>$request->email,
 			'password'=>bcrypt($request->password),
 			'code'=>$request->code,
@@ -80,7 +92,7 @@ class UsersController extends Controller
 			'salt'=>'xy390xz',
 			'date_added'=>date('Y-m-d H:i:s')
     	]);
-
+return $request->all();
     	if($saved){
     		$success=true;
     	}else{
@@ -112,16 +124,16 @@ class UsersController extends Controller
     public function destroy($id)
     {
         //$id=226;
-        $setting=Setting::select('*')->where('setting_id',$id);
-        $setting->delete();
+        $user=User::select('*')->where('user_id',$id);
+        $user->delete();
         return response()->json([
             'deleted'=>true,
-            'settings'=>Setting::all()
+            'user'=>User::all()
         ]);
     }
     public function update(Request $request,$id)
     {
-    	if( preg_match('/data:image/', $request->userImage) ){                
+    	if( preg_match('/data:image/', $request->userImage) ){             
           preg_match('/data:image\/(?<mime>.*?)\;/', $request->userImage , $groups);
           $mimetype = $groups['mime'];
                        

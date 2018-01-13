@@ -8,6 +8,7 @@ import FHome from './views/Components/frontend/home.vue'
 import Account from './views/Components/frontend/account/account.vue'
 import FSignIn from './views/Components/frontend/account/signin.vue'
 import FRegister from './views/Components/frontend/account/register.vue'
+import FLogin from './views/Components/frontend/account/login.vue'
 //***** products *****
 import Product from './views/Components/frontend/product/product.vue'
 import ProductDetail from './views/Components/frontend/product/product_detail.vue'
@@ -37,17 +38,22 @@ import User from './views/Components/backend/users/User.vue'
 import UserForm from './views/Components/backend/users/MainForm.vue'
 import UserList from './views/Components/backend/users/UserList.vue'
 import UserEditForm from './views/Components/backend/users/UserEditForm.vue'
-//User group#########################
-import UserGroupForm from './views/Components/backend/groups/MainForm.vue'
-import UserGroupList from './views/Components/backend/groups/UserGroupList.vue'
-import UserGroupEditForm from './views/Components/backend/groups/UserGroupEditForm.vue'
 
+//User group#########################
+// import UserGroupForm from './views/Components/backend/groups/MainForm.vue'
+// import UserGroupList from './views/Components/backend/groups/UserGroupList.vue'
+// import UserGroupEditForm from './views/Components/backend/groups/UserGroupEditForm.vue'
+import UserGroup from './views/Components/backend/user_groups/UserGroup.vue'
+import UserGroupForm from './views/Components/backend/user_groups/MainForm.vue'
+import UserGroupList from './views/Components/backend/user_groups/UserGroupList.vue'
+import UserGroupEditForm from './views/Components/backend/user_groups/UserGroupEditForm.vue'
 //User Role#########################
 import UserRole from './views/Components/backend/users/UserRole.vue'
 import UserRoleList from './views/Components/backend/users/UserRoleList.vue'
 import UserRoleForm from './views/Components/backend/users/UserRoleForm.vue'
 import UserRoleEdit from './views/Components/backend/users/UserRoleEdit.vue'
 import UserRolePermission from './views/Components/backend/users/UserRolePermission.vue'
+
 //End User Group####################
 
 //***** Categories *****
@@ -118,6 +124,11 @@ const router = new VueRouter({
             path: 'register',
             name:'register',
             component: FRegister
+          },
+          {
+            path: 'login',
+            name:'login',
+            component: FLogin
           }
       ]
     },
@@ -229,7 +240,7 @@ const router = new VueRouter({
             }
         ]       
     },
-    {path:'/admin/user_group',name:'user_group',component:User,
+    {path:'/admin/user_group',name:'usergroup',component:UserGroup,
         children:[
             {
                 path:'list',

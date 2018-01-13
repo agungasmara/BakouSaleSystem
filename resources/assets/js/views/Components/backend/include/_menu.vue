@@ -275,6 +275,13 @@
                 ]
             }
         },
+        created() {
+          this.getApiMenu();
+          // $.getScript("http://localhost:8000/js/materialize.min.js");
+          let dataTable = document.createElement('script');    
+          dataTable.setAttribute('src',"../../js/materialize.min.js");
+          document.head.appendChild(dataTable);
+        },
         methods:{
         	thClassValue (id) {
             var value = ['Templatesdropdown'+id]
@@ -292,10 +299,6 @@
               this.errors.push(e)
             })
           }
-        },
-        created() {
-        	this.getApiMenu();
-          // $.getScript("http://localhost:8000/js/materialize.min.js");
         }
     }
 </script>

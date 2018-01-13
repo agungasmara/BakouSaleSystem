@@ -14,12 +14,16 @@
 			<td v-for="(value,index) in props.item">
 				
 				<img v-if="index=='image'" :src="props.item.image" width="50" height="50">
+
 				<span v-else>{{ value }}</span>
+
 			</td>
 			<td>
+
 				<span style="cursor:pointer;color:blue;" @click="editData(props.item.id)"">
 					<i class="material-icons">edit</i>
 				</span>&nbsp;<span style="cursor:pointer;color:red;" v-on:click="confirmDel(props.item.id,props.item.name)"><i class="material-icons">delete_forever</i></span>
+				
 			</td>
 		</template>
 		<template slot="pageText" slot-scope="{ pageStart, pageStop }">
@@ -95,16 +99,16 @@
 				this.dialog=true
 			},
 			deleteItem(id){
-					this.deleteMessage="Deleting..."
-					axios.delete(this.deleteApi+id).then((res)=>{
-						
-						if(res.data.deleted==true){
+				this.deleteMessage="Deleting..."
+				axios.delete(this.deleteApi+id).then((res)=>{
+					
+					if(res.data.deleted==true){
 
-							this.fetchData()
-						}
-						this.dialog=false
-						this.deleteMessage='Item have successfully deleted.'
-					})
+						this.fetchData()
+					}
+					this.dialog=false
+					this.deleteMessage='Item have successfully deleted.'
+				})
 				
 			},
 			editData(id){

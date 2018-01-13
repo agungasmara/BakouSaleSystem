@@ -105,7 +105,7 @@
 		},
 		created(){
 			this.fetchSettingByID(this.id)
-			this.fetchSettingItem()
+			this.fetchSettingItem(this.id)
 			this.getStore()
 		},
 		methods:{
@@ -122,8 +122,8 @@
 					this.select=res.data.store_id
 				});
 			},
-			fetchSettingItem(){
-				axios.get('/api/setting/item/').then((res)=>{
+			fetchSettingItem(id){
+				axios.get('/api/setting/item/'+id).then((res)=>{
 					this.settingCode=res.data.code
 					this.settingKey=res.data.key
 					this.settingValue=res.data.value
