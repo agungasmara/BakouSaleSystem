@@ -40,17 +40,13 @@ class SettingsController extends Controller
 
     public function list()
     {
-        $settings=DB::table('setting')
-                  ->leftJoin('store','store.store_id','=','setting.store_id')
-                  ->select('setting_id as id','name','code','key','value','serialized')
-                  ->get();
+        $settings=Setting::AllSetting();
         return response()->json($settings);
     }
-    public function item($id)
+    public function item()
     {
         $settings=DB::table('setting')
                   ->select('setting_id as id','code','key','value')
-                  ->where('setting_id',$id)
                   ->get();
         $itemsArr = array();
         foreach($settings as $item)

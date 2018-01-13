@@ -27,6 +27,7 @@ import CreateForm from './views/Auth/Form.vue'
 import App from './App.vue'
 import Appl from './Appl.vue'
 //setting########################
+import Setting from './views/Components/backend/settings/Setting.vue'
 import SettingForm from './views/Components/backend/settings/MainForm.vue'
 import SettingList from './views/Components/backend/settings/SettingList.vue'
 import SettingEditForm from './views/Components/backend/settings/EditForm.vue'
@@ -219,8 +220,28 @@ const router = new VueRouter({
     { path: '/admin/settings/add',component:SettingForm},
     { path: '/admin/settings/list',component:SettingList},
     { path: '/admin/settings/edit/:id',component:SettingEditForm,props:true},
+    {path:'/admin/settings',name:'settings',component:Setting,
+        children:[
+            {
+                path:'list',
+                name:'SettingList',
+                component:SettingList
+            },
+            {
+                path:'add',
+                name:'SettingForm',
+                component:SettingForm
+            },
+            {
+                path:'edit/:id',
+                name:'SettingEditForm',
+                component:SettingEditForm,
+                props:true
+            }
+        ]       
+    },
     //User and User Group 
-    {path:'/admin/user',name:'user',component:User,
+    {path:'/admin/users',name:'users',component:User,
         children:[
             {
                 path:'list',
@@ -240,7 +261,7 @@ const router = new VueRouter({
             }
         ]       
     },
-    {path:'/admin/user_group',name:'usergroup',component:UserGroup,
+    {path:'/admin/users_group',name:'usergroup',component:UserGroup,
         children:[
             {
                 path:'list',

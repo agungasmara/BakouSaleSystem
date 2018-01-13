@@ -1,7 +1,12 @@
 <template>
 	<div>
 		<v-app id="inspire">
-			<breadcrumb v-bind:breadcrumb-item="items"></breadcrumb>
+			<!--breadcrumbs start-->
+			<breadcrumb1btn 
+				v-bind:breadcrumb-item="breadcrumbs"
+				v-bind:btn-new-url="btnNewUrl"
+				v-bind:breadcrumb-title="breadcrumbTitle"
+			></breadcrumb1btn>
 			<data-table 
 		    	v-bind:data-header="headers" 
 		    	v-bind:data-value="users"
@@ -20,17 +25,17 @@
 	import Flash from '../../../../helper/flash'
 	import axios from 'axios'
 	import dataTable from '../commons/tables/dataTable.vue'
-	import breadcrumb from '../commons/breadcrumb/breadcrumb.vue'
+	import breadcrumb1btn from '../commons/breadcrumb/breadcrumb1btn.vue'
 	export default{
 		props:[
 			'id'
 		],
 		data(){
 			return{
-				getApiUrl:'/api/user/list/',
-				deleteApiUrl:'/api/user/delete/',
-				urlEdit:'/admin/user/edit/',
-				btnNewUrl:'/admin/user/add',
+				getApiUrl:'/api/users/list/',
+				deleteApiUrl:'/api/users/delete/',
+				urlEdit:'/admin/users/edit/',
+				btnNewUrl:'/admin/users/add',
 				headers: [
 			        { text: 'ID',align: 'left',value: 'id'},
 			        { text: 'Username',align:'center', value: 'username' },
@@ -45,7 +50,8 @@
 			        { text: 'Action', value: 'action',align:'center',sortable:false }
 			    ],
 				users:[],
-				items: [
+				breadcrumbTitle:'Users List',
+				breadcrumbs: [
 			        {
 			          text: 'Administrator',
 			          disabled: false
@@ -61,7 +67,7 @@
 			    ]
 			}
 		},
-		components:{'dataTable':dataTable,'breadcrumb':breadcrumb},
+		components:{'dataTable':dataTable,'breadcrumb1btn':breadcrumb1btn},
 		created(){
 			this.fetchData()
 			document.title = 'User List';

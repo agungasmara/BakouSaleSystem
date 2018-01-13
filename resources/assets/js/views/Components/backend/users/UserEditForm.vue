@@ -178,7 +178,7 @@
 				})
 			},
 			fetchUser(id){
-				axios.get('/api/user/getuserbyid/'+id).then((res)=>{
+				axios.get('/api/users/getuserbyid/'+id).then((res)=>{
 					this.selectGroup=res.data.group
 					this.username=res.data.username
 					this.fname=res.data.firstname
@@ -193,7 +193,7 @@
 		      	if (this.$refs.formUser.validate()) {
 			      	if(this.checkPasswordConfirmed()===false){
 				        // Native form submission is not yet supported
-				        axios.put('/api/user/update/'+id, {
+				        axios.put('/api/users/update/'+id, {
 				          username: this.username,
 				          fname: this.fname,
 				          lname: this.lname,
@@ -207,7 +207,7 @@
 				        	if(res.data.success==true){
 				        		Flash.setSuccess(res.data.message)
 				        		if(opt==2){
-				        			this.$router.push('/admin/user/list')
+				        			this.$router.push('/admin/users/list')
 				        		}
 				        	}
 				        	/*console.log(res.data)*/

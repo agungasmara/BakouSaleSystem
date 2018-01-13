@@ -1,60 +1,48 @@
 <template id="{{ $route.params.id }}">
-	<section id="content">
-		
-		<div>
-			
-			<v-app id="inspire">
-				<!--breadcrumbs start-->
-					<breadcrumb v-bind:breadcrumb-item="items"></breadcrumb>
-				<!--breadcrumbs end-->
-					<div class="flash flash__success" v-if="flash.success">
-						<v-alert color="success" icon="check_circle" value="true">
-			            	{{flash.success}}
-			            </v-alert>
-		          	</div>
-				    <v-form v-model="valid" ref="form" lazy-validation>
-				    	<v-container grid-list-md>
-	              			<v-layout wrap>
-						    	<v-flex xs12 sm6 md6>
-						      		<v-select label="Select Store" v-model="select"  :items="stores"  :rules="[v => !!v || 'Item is required']" required></v-select>
-						      	</v-flex>
+	<v-app id="inspire">
+		<!--breadcrumbs start-->
+			<breadcrumb3button
+			v-bind:breadcrumb-item="breadcrumbs"
+			v-bind:breadcrumb-title="breadcrumbTitle"
+			v-bind:submit="submit"
+			v-bind:is-valid="valid"
+			v-bind:back-url="backUrl"
+			></breadcrumb3button>
+		<!--breadcrumbs end-->
+			<div class="flash flash__success" v-if="flash.success">
+				<v-alert color="success" icon="check_circle" value="true">
+	            	{{flash.success}}
+	            </v-alert>
+          	</div>
+		    <v-form v-model="valid" ref="form" lazy-validation>
+		    	<v-container grid-list-md>
+          			<v-layout wrap>
+				    	<v-flex xs12 sm6 md6>
+				      		<v-select label="Select Store" v-model="select" autocomplete :items="stores"  :rules="[v => !!v || 'Item is required']" required></v-select>
+				      	</v-flex>
 
-						    	<v-flex xs12 sm6 md6>
-						      		<v-select label="Select Code" v-model="code"  :items="settingCode.text" ></v-select>
-						      	</v-flex>
+				    	<v-flex xs12 sm6 md6>
+				      		<v-select label="Select Code" v-model="code" autocomplete :items="settingCode.text" ></v-select>
+				      	</v-flex>
 
-						      	<v-flex xs12 sm6 md6>
-						      		<v-select label="Select Key" v-model="key"  :items="settingKey.text" ></v-select>
-						      	</v-flex>
+				      	<v-flex xs12 sm6 md6>
+				      		<v-select label="Select Key" v-model="key" autocomplete :items="settingKey.text" ></v-select>
+				      	</v-flex>
 
-						      	<v-flex xs12 sm6 md6>
-						      		<v-select label="Select Value" v-model="value"  :items="settingValue.text" ></v-select>
-						      	</v-flex>
-
-						      	<v-btn @click="submit(id,1)" :disabled="!valid" color="green">
-							        Update
-							    </v-btn>
-							    <v-btn @click="submit(id,2)" :disabled="!valid" color="green">
-							        Update & Close
-							    </v-btn>
-							    <router-link to="/admin/settings/list">
-								    <v-btn color="red" dark>
-								        Cancele
-								    </v-btn>
-							    </router-link>
-						    </v-layout>
-						</v-container>
-				    </v-form>
-			</v-app>
-		</div>
-	</section>
+				      	<v-flex xs12 sm6 md6>
+				      		<v-select label="Select Value" v-model="value" autocomplete :items="settingValue.text" ></v-select>
+				      	</v-flex>
+				    </v-layout>
+				</v-container>
+		    </v-form>
+	</v-app>
 </template>
 
 <script>
 	import Flash from '../../../../helper/flash'
 	import axios from 'axios'
 
-	import breadcrumb from '../commons/breadcrumb/breadcrumb.vue'
+	import breadcrumb3button from '../commons/breadcrumb/breadcrumb3button.vue'
 
 	export default{
 		props:['id'],
@@ -84,7 +72,8 @@
 			    select: 0,
 			    stores: [],
 				flash:Flash.state,
-				items: [
+				breadcrumbTitle:'Edit Settings',
+				breadcrumbs: [
 			        {
 			          text: 'Administrator',
 			          disabled: false
@@ -97,11 +86,12 @@
 			          text: 'Edit',
 			          disabled: true
 			        }
-			    ]
+			    ],
+			    backUrl:'/admin/settings/list'
 			}
 		},
 		components:{
-			'breadcrumb':breadcrumb
+			'breadcrumb3button':breadcrumb3button
 		},
 		created(){
 			this.fetchSettingByID(this.id)
@@ -115,24 +105,24 @@
 				})
 			},
 			fetchSettingByID(id){
-				axios.get('/api/setting/getsettingbyid/'+id).then(res=>{
+				axios.get('/api/settings/getsettingbyid/'+id).then(res=>{
 					this.code=res.data.code
 					this.key=res.data.key
 					this.value=res.data.value
 					this.select=res.data.store_id
 				});
 			},
-			fetchSettingItem(id){
-				axios.get('/api/setting/item/'+id).then((res)=>{
+			fetchSettingItem(){
+				axios.get('/api/settings/item/').then((res)=>{
 					this.settingCode=res.data.code
 					this.settingKey=res.data.key
 					this.settingValue=res.data.value
 				})
 			},
-			submit (id,opt) {
+			submit (opt) {
 		      if (this.$refs.form.validate()) {
 		        // Native form submission is not yet supported
-		        axios.put('/api/setting/update/'+id, {
+		        axios.put('/api/settings/update/'+this.id, {
 		          store: this.select,
 		          code: this.code,
 		          key: this.key,

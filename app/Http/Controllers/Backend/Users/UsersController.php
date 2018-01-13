@@ -17,39 +17,20 @@ use Intervention\Image\ImageManagerStatic as Image;
         - value: value of field we want to check
 */
 use App\Http\Controllers\Backend\commons\ValidateDataController;
+use App\Http\Controllers\Backend\commons\ImageMaker;
 
 class UsersController extends Controller
 {
-    public function list()
+    public function index()
     {
-<<<<<<< HEAD
-    	$users=DB::table('user')
-    			  ->join('user_group','user_group.user_group_id','=','user.user_group_id')
-    			  ->select('user_id as id','username','user_group.name as group','firstname','lastname','email','user.code as code','image','status','date_added')
-    			  ->get('id');
-        // $users=User::AllUser();
-    	return response()->json($users);
-    }
-    public function checkIfExisted($field,$value){
-=======
 
-        $Users = User::get();
-        $data = array();
-        foreach ($Users as $User) {
-            $data[] = array(
-                'name'=>$User->username,
-                'user_group'=>$User->UserGroup->name,
-            );
-        }
-        return $data;
+        $Users = User::AllUser();
+    	return response()->json($Users);
     }
 
-    public function checkUser($username){
+    public function ValidateData($field,$value){
         
         $existed=false;
-
-        $count = User::where('username', $username)->count();
->>>>>>> 1564b7cccb099c7102afdb680110f1cdd8869aa8
 
         //instant the object
         $validate=new ValidateDataController;
@@ -65,7 +46,8 @@ class UsersController extends Controller
     public function store(Request $request)
     {
     	$success=false;
-        $image="Test";
+        $ImageMaker=new ImageMaker;
+        //$ImageMaker->base64ToImage("imagesss",$request->userImage);
       //     if( preg_match('/data:image/', $request->userImage) ){                
       //     preg_match('/data:image\/(?<mime>.*?)\;/', $request->userImage , $groups);
       //     $mimetype = $groups['mime'];
@@ -92,7 +74,7 @@ class UsersController extends Controller
 			'salt'=>'xy390xz',
 			'date_added'=>date('Y-m-d H:i:s')
     	]);
-return $request->all();
+//return $request->all();
     	if($saved){
     		$success=true;
     	}else{

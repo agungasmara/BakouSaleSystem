@@ -42,19 +42,6 @@
 				      	<v-flex xs12 sm12 md12>
 				      		<v-select label="Sermissions" autocomplete :loading="loading" multiple cache-items chips required :items="states" :rules="[() => permissions.length > 0 || 'You must choose at least one']" :search-input.sync="search" v-model="permissions"></v-select>
 				      	</v-flex>
-				      	<v-flex xs12 sm12 md12>
-					      	<v-btn @click="saveUserGroup(1)" :disabled="!valid" color="primary">
-						        Save & New
-						    </v-btn>
-						    <v-btn @click="saveUserGroup(2)" :disabled="!valid" color="primary">
-						        Save & Close
-						    </v-btn>
-						    <router-link to="/admin/users_group/list">
-							    <v-btn color="red" dark>
-							        Cancele
-							    </v-btn>
-						    </router-link>
-						</v-flex>
 				    </v-layout>
 				</v-container>
 		    </v-form>
@@ -70,7 +57,6 @@
 		data(){
 			return{
 				valid:true,
-				
 			    loading: false,
 		      	search: null,
       			states: ['Product Attribute','Product Price'],
@@ -100,7 +86,7 @@
 			          disabled: true
 			        }
 		      	],
-		      	backUrl:'/admin/user/list',
+		      	backUrl:'/admin/users_group/list',
 		      	errorName:false,
 		    	checkNameMessage:'',
 		    	validName:false,
@@ -122,7 +108,7 @@
 						this.errorName=false
 						this.validName=false
 						this.checkNameMessage='Checking Group Name...'
-						axios.get('/api/user_group/checkIfExisted/name/'+this.groupName).then((res)=>{
+						axios.get('/api/users_group/checkIfExisted/name/'+this.groupName).then((res)=>{
 							if(res.data.Existed==true){
 								this.valid=false
 								this.errorName=true
@@ -160,7 +146,7 @@
 			submit (opt) {
 		      	if (this.$refs.formUserGroup.validate()) {
 			        // Native form submission is not yet supported
-			        axios.post('/api/user_group/save', {
+			        axios.post('/api/users_group/save', {
 			          groupName: this.groupName,
 			          groupType: this.groupType,
 			          permissions: '{"access":["'+this.permissions.join('","')+'"]}'

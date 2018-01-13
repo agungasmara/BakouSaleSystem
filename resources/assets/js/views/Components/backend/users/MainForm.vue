@@ -310,6 +310,7 @@
 				        		Flash.setSuccess(res.data.message)
 				        		if(opt==1){                            
 				        			this.$refs.formUser.reset()
+				        			this.imageUrl=""
 				        		}
 				        		else if(opt==2){
 				        			this.$router.push('/admin/user/list')

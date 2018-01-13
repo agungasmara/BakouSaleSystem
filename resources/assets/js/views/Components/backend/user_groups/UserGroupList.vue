@@ -1,7 +1,12 @@
 <template>
 	<div>
 		<v-app id="inspire">
-			<breadcrumb v-bind:breadcrumb-item="items"></breadcrumb>
+			<!--breadcrumbs start-->
+			<breadcrumb1btn 
+				v-bind:breadcrumb-item="breadcrumbs"
+				v-bind:btn-new-url="btnNewUrl"
+				v-bind:breadcrumb-title="breadcrumbTitle"
+			></breadcrumb1btn>
 			<data-table 
 		    	v-bind:data-header="headers" 
 		    	v-bind:data-value="groups"
@@ -20,25 +25,26 @@
 	import Flash from '../../../../helper/flash'
 	import axios from 'axios'
 	import dataTable from '../commons/tables/dataTable.vue'
-	import breadcrumb from '../commons/breadcrumb/breadcrumb.vue'
+	import breadcrumb1btn from '../commons/breadcrumb/breadcrumb1btn.vue'
 	export default{
 		props:[
 			'id'//this use to pass id of record to data table component
 		],
 		data(){
 			return{
-				getApiUrl:'/api/user_group/list/',
-				deleteApiUrl:'/api/user_group/delete/',
-				urlEdit:'/admin/user_group/edit/',
-				btnNewUrl:'/admin/user_group/add',
+				getApiUrl:'/api/users_group/list/',
+				deleteApiUrl:'/api/users_group/delete/',
+				urlEdit:'/admin/users_group/edit/',
+				btnNewUrl:'/admin/users_group/add',
 				headers: [
 			        { text: 'Group ID',align: 'center',value: 'id'},
 			        { text: 'Group Name',align:'center', value: 'name' },
 			        { text: 'Group Type',align:'center', value: 'group_type' },
-			        { text: 'Permission',align:'center', value: 'psermission' }
+			        { text: 'Action',align:'center', sortable:false }
 			    ],
 				groups:[],
-				items: [
+				breadcrumbTitle:'Users List',
+				breadcrumbs: [
 			        {
 			          text: 'Administrator',
 			          disabled: false
@@ -54,7 +60,7 @@
 			    ]
 			}
 		},
-		components:{'dataTable':dataTable,'breadcrumb':breadcrumb},
+		components:{'dataTable':dataTable,'breadcrumb1btn':breadcrumb1btn},
 		created(){
 			this.fetchData()
 			document.title = 'Group List';
