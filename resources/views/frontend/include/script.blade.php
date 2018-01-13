@@ -1,27 +1,12 @@
 
 <!-- Le javascript
 ================================================== -->
-
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="{{url('assets/frontend/js/jquery/jquery-2.1.3.min.js')}}"></script>
 <script src="{{url('assets/frontend/bootstrap/js/bootstrap.min.js')}}"></script>
 <!-- include footable plugin -->
 <script src="{{url('assets/frontend/js/footable.js')}}" type="text/javascript"></script>
 <script src="{{url('assets/frontend/js/footable.sortable.js')}}" type="text/javascript"></script>
-<script type="text/javascript">
-    $(function () {
-        $('.footable').footable();
-    });
-</script>
-<script>
-    // this script required for subscribe modal
-    $(window).load(function () {
-        // full load
-        $('#modalAds').modal('show');
-        $('#modalAds').removeClass('hide');
-    });
-
-</script>
 
 <!-- include jqueryCycle plugin -->
 <script src="{{url('assets/frontend/js/jquery.cycle2.min.js')}}"></script>
@@ -51,16 +36,8 @@
 
 <!-- include smoothproducts // product zoom plugin  -->
 <script type="text/javascript" src="{{url('assets/frontend/plugins/smoothproducts-master/js/smoothproducts.min.js')}}"></script>
-
-<script type="text/javascript">
-    /* wait for images to load */
-    $(window).load(function () {
-        $('.sp-wrap').smoothproducts();
-    });
-</script>
-
 <!-- jQuery select2 // custom select   -->
-<script src="http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+<script src="{{url('assets/frontend/js/select2.min.js')}}"></script>
 
 <!-- include touchspin.js // touch friendly input spinner component   -->
 <script src="{{url('assets/frontend/js/bootstrap.touchspin.js')}}"></script>
@@ -72,6 +49,34 @@
 <script src="{{url('assets/frontend/js/enquire.min.js')}}"></script>
 <!-- include custom script for site  -->
 <script src="{{url('assets/frontend/js/script.js')}}"></script>
-<script>
 
+
+<!-- include pace script for automatic web page progress bar  -->
+
+<script>
+    paceOptions = {
+        elements: true
+    };
+</script>
+<script src="{{url('assets/frontend/js/pace.min.js')}}"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $('.footable').footable();
+    });
+</script>
+<script>
+    // this script required for subscribe modal
+    $(window).load(function () {
+        // full load
+        $('#modalAds').modal('show');
+        $('#modalAds').removeClass('hide');
+    });
+
+</script>
+<script type="text/javascript">
+    /* wait for images to load */
+    $(window).load(function () {
+        $('.sp-wrap').smoothproducts();
+    });
 </script>

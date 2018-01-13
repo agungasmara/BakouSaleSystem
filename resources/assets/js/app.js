@@ -39,11 +39,22 @@ import User from './views/Components/backend/users/User.vue'
 import UserForm from './views/Components/backend/users/MainForm.vue'
 import UserList from './views/Components/backend/users/UserList.vue'
 import UserEditForm from './views/Components/backend/users/UserEditForm.vue'
-//Uer group#########################
+
+//User group#########################
+// import UserGroupForm from './views/Components/backend/groups/MainForm.vue'
+// import UserGroupList from './views/Components/backend/groups/UserGroupList.vue'
+// import UserGroupEditForm from './views/Components/backend/groups/UserGroupEditForm.vue'
 import UserGroup from './views/Components/backend/user_groups/UserGroup.vue'
 import UserGroupForm from './views/Components/backend/user_groups/MainForm.vue'
 import UserGroupList from './views/Components/backend/user_groups/UserGroupList.vue'
 import UserGroupEditForm from './views/Components/backend/user_groups/UserGroupEditForm.vue'
+//User Role#########################
+import UserRole from './views/Components/backend/users/UserRole.vue'
+import UserRoleList from './views/Components/backend/users/UserRoleList.vue'
+import UserRoleForm from './views/Components/backend/users/UserRoleForm.vue'
+import UserRoleEdit from './views/Components/backend/users/UserRoleEdit.vue'
+import UserRolePermission from './views/Components/backend/users/UserRolePermission.vue'
+
 //End User Group####################
 
 //***** Categories *****
@@ -266,6 +277,32 @@ const router = new VueRouter({
                 path:'edit/:id',
                 name:'UserGroupForm',
                 component:UserGroupEditForm,
+                props:true
+            }
+        ]       
+    },
+    {path:'/admin/user_role',name:'user_role',component:UserRole,
+        children:[
+            {
+                path:'list',
+                name:'UserRoleList',
+                component:UserRoleList
+            },
+            {
+                path:'add',
+                name:'UserRoleForm',
+                component:UserRoleForm
+            },
+            {
+                path:'edit/:id',
+                name:'UserRoleEdit',
+                component:UserRoleEdit,
+                props:true
+            },
+            {
+                path:'permission/:id',
+                name:'UserRolePermission',
+                component:UserRolePermission,
                 props:true
             }
         ]       

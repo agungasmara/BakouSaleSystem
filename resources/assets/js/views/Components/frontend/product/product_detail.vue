@@ -309,6 +309,88 @@
 <!-- <div class="gap"></div> -->
 </template>
 
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="{{url('assets/frontend/js/jquery/jquery-2.1.3.min.js')}}"></script>
+<script src="{{url('assets/frontend/bootstrap/js/bootstrap.min.js')}}"></script>
+<!-- include footable plugin -->
+<script src="{{url('assets/frontend/js/footable.js')}}" type="text/javascript"></script>
+<script src="{{url('assets/frontend/js/footable.sortable.js')}}" type="text/javascript"></script>
+
+<!-- include jqueryCycle plugin -->
+<script src="{{url('assets/frontend/js/jquery.cycle2.min.js')}}"></script>
+
+<!-- include easing plugin -->
+<script src="{{url('assets/frontend/js/jquery.easing.1.3.js')}}"></script>
+
+<!-- include  parallax plugin -->
+<script type="text/javascript" src="{{url('assets/frontend/js/jquery.parallax-1.1.js')}}"></script>
+
+<!-- optionally include helper plugins -->
+<script type="text/javascript" src="{{url('assets/frontend/js/helper-plugins/jquery.mousewheel.min.js')}}"></script>
+
+<!-- include mCustomScrollbar plugin //Custom Scrollbar  -->
+
+<script type="text/javascript" src="{{url('assets/frontend/js/jquery.mCustomScrollbar.js')}}"></script>
+
+<!-- include icheck plugin // customized checkboxes and radio buttons   -->
+<script type="text/javascript" src="{{url('assets/frontend/plugins/icheck-1.x/icheck.min.js')}}"></script>
+
+<!-- include grid.js // for equal Div height  -->
+<script src="{{url('assets/frontend/plugins/jquery-match-height-master/dist/jquery.matchHeight-min.js')}}"></script>
+<script src="{{url('assets/frontend/js/grids.js')}}"></script>
+
+<!-- include carousel slider plugin  -->
+<script src="{{url('assets/frontend/js/owl.carousel.min.js')}}"></script>
+
+<!-- include smoothproducts // product zoom plugin  -->
+<script type="text/javascript" src="{{url('assets/frontend/plugins/smoothproducts-master/js/smoothproducts.min.js')}}"></script>
+<!-- jQuery select2 // custom select   -->
+<script src="{{url('assets/frontend/js/select2.min.js')}}"></script>
+
+<!-- include touchspin.js // touch friendly input spinner component   -->
+<script src="{{url('assets/frontend/js/bootstrap.touchspin.js')}}"></script>
+
+<!-- include custom script for only homepage  -->
+<script src="{{url('assets/frontend/js/home.js')}}"></script>
+
+<script src="{{url('assets/frontend/js/grids.js')}}"></script>
+<script src="{{url('assets/frontend/js/enquire.min.js')}}"></script>
+<!-- include custom script for site  -->
+<script src="{{url('assets/frontend/js/script.js')}}"></script>
+
+
+<!-- include pace script for automatic web page progress bar  -->
+
+<script>
+    paceOptions = {
+        elements: true
+    };
+</script>
+<script src="{{url('assets/frontend/js/pace.min.js')}}"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $('.footable').footable();
+    });
+</script>
+<script>
+    // this script required for subscribe modal
+    $(window).load(function () {
+        // full load
+        $('#modalAds').modal('show');
+        $('#modalAds').removeClass('hide');
+    });
+
+</script>
+<script type="text/javascript">
+    /* wait for images to load */
+    $(window).load(function () {
+        $('.sp-wrap').smoothproducts();
+    });
+</script>
 <script>
     import Flash from '../../../../helper/flash'
     import axios from 'axios'
@@ -322,17 +404,50 @@
         },
         ready() {
             // if ( ! window.jQuery ) {
-              var s = document.createElement("script")
-              s.type = "text/javascript"
-              s.src = "http://localhost:8000/assets/frontend/js/script.js"
-              s.async = true
-              this.$el.appendChild(s)
-              alert("s")
             // }
+        },
+        mounted(){
+            // alert("testing");
+            // getScript('http://localhost:8000/assets/frontend/js/jquery/jquery-2.1.3.min.js');
+            // getScript('http://localhost:8000/assets/frontend/bootstrap/js/bootstrap.min.js');
+            // getScript('http://localhost:8000/assets/frontend/js/footable.js');
+            // getScript('http://localhost:8000/assets/frontend/js/footable.sortable.js');
+            // getScript('http://localhost:8000/assets/frontend/js/jquery.cycle2.min.js');
+            // getScript('http://localhost:8000/assets/frontend/js/jquery.easing.1.3.js');
+            // getScript('http://localhost:8000/assets/frontend/js/jquery.parallax-1.1.js');
+            // getScript('http://localhost:8000/assets/frontend/js/helper-plugins/jquery.mousewheel.min.js');
+            // getScript('http://localhost:8000/assets/frontend/js/jquery.mCustomScrollbar.js');
+            // getScript('http://localhost:8000/assets/frontend/plugins/icheck-1.x/icheck.min.js');
+            // getScript('http://localhost:8000/assets/frontend/plugins/jquery-match-height-master/dist/jquery.matchHeight-min.js');
+            // getScript('http://localhost:8000/assets/frontend/js/grids.js');
+            // getScript('http://localhost:8000/assets/frontend/js/owl.carousel.min.js');
+            // getScript('http://localhost:8000/assets/frontend/plugins/smoothproducts-master/js/smoothproducts.min.js');
+            // getScript('http://localhost:8000/assets/frontend/js/select2.min.js');
+            // getScript('http://localhost:8000/assets/frontend/js/bootstrap.touchspin.js');
+            // getScript('http://localhost:8000/assets/frontend/js/home.js');
+            // getScript('http://localhost:8000/assets/frontend/js/grids.js');
+            // getScript('http://localhost:8000/assets/frontend/js/enquire.min.js');
+
+            // paceOptions = {
+            //     elements: true
+            // };
+
+            // $.getScript('assets/frontend/js/pace.min.js');
+            // $('.footable').footable();
+
+            // $('#modalAds').modal('show');
+            //     $('#modalAds').removeClass('hide');
+            //             $(document).ready(function() {
+             
+            //               $("#owl-example").owlCarousel();
+                         
+            //             });
+
+            //             // $(window).load(function () {
+            $('.sp-wrap').smoothproducts();
         },
         created(){
             this.productDetails(this.id);
-            // alert("s")
         },
         methods:{
             productDetails(id){
