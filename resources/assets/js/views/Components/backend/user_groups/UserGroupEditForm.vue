@@ -1,14 +1,17 @@
 <template id="{{ $route.params.id }}">
 	<v-app id="inspire">
-		<!--breadcrumbs start-->
-			<breadcrumb3button
-			v-bind:breadcrumb-item="breadcrumbs"
-			v-bind:breadcrumb-title="breadcrumbTitle"
-			v-bind:submit="submit"
-			v-bind:is-valid="valid"
-			v-bind:back-url="backUrl"
-			></breadcrumb3button>
-		<!--breadcrumbs end-->
+		<v-card>
+
+			<!--breadcrumbs start-->
+				<breadcrumb3button
+				v-bind:breadcrumb-item="breadcrumbs"
+				v-bind:breadcrumb-title="breadcrumbTitle"
+				v-bind:submit="submit"
+				v-bind:is-valid="valid"
+				v-bind:back-url="backUrl"
+				></breadcrumb3button>
+			<!--breadcrumbs end-->
+
 			<div class="flash flash__success" v-if="flash.success">
 				<v-alert color="success" icon="check_circle" value="true">
 	            	{{flash.success}}
@@ -18,32 +21,42 @@
 		    	<v-container grid-list-md>
           			<v-layout wrap>
 				    	<v-flex xs12 sm6 md6>
-				      		<v-select label="Select Store" v-model="select" autocomplete :items="stores"  :rules="[v => !!v || 'Item is required']" required></v-select>
+				      		<v-select label="Select Store" v-model="select"  :items="items"  :rules="[v => !!v || 'Item is required']" required></v-select>
 				      	</v-flex>
 
 				    	<v-flex xs12 sm6 md6>
-				      		<v-select label="Select Code" v-model="code" autocomplete :items="settingCode.text" ></v-select>
+				      		<v-text-field label="Code" v-model="code" :rules="codeRules" :counter="100" required></v-text-field>
 				      	</v-flex>
 
 				      	<v-flex xs12 sm6 md6>
-				      		<v-select label="Select Key" v-model="key" autocomplete :items="settingKey.text" ></v-select>
+				      		<v-text-field label="Key" v-model="key" :rules="keyRules" :counter="100" required></v-text-field>
 				      	</v-flex>
 
 				      	<v-flex xs12 sm6 md6>
-				      		<v-select label="Select Value" v-model="value" autocomplete :items="settingValue.text" ></v-select>
+				      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="100" required></v-text-field>
 				      	</v-flex>
+
+				      	<v-btn @click="submit(id,1)" :disabled="!valid">
+					        Update
+					    </v-btn>
+					    <v-btn @click="submit(id,2)" :disabled="!valid">
+					        Update & Close
+					    </v-btn>
+					    <router-link to="/admin/settings/list"><v-btn>
+					        Cancele
+					    </v-btn>
+					    </router-link>
 				    </v-layout>
 				</v-container>
 		    </v-form>
+		</v-card>
 	</v-app>
 </template>
 
 <script>
 	import Flash from '../../../../helper/flash'
 	import axios from 'axios'
-
 	import breadcrumb3button from '../commons/breadcrumb/breadcrumb3button.vue'
-
 	export default{
 		props:['id'],
 		data(){
@@ -66,63 +79,46 @@
 			      (v) => v && v.length <= 100 || 'Value must be less than 100 characters'
 			    ],
 				settings:[],
-				settingCode:[],
-				settingKey: [],
-				settingValue:[],
 			    select: 0,
-			    stores: [],
-				flash:Flash.state,
-				breadcrumbTitle:'Edit Settings',
-				breadcrumbs: [
+			    items: [],
+			    breadcrumbTitle:'Users',
+			    breadcrumbs: [
 			        {
-			          text: 'Administrator',
+			          text: 'Adminstrator',
 			          disabled: false
 			        },
 			        {
-			          text: 'Settings',
+			          text: 'Setting',
 			          disabled: false
 			        },
 			        {
-			          text: 'Edit',
+			          text: 'Create',
 			          disabled: true
 			        }
-			    ],
-			    backUrl:'/admin/settings/list'
+		      	],
+		      	backUrl:'/admin/users_group/list',
+				flash:Flash.state
 			}
 		},
 		components:{
 			'breadcrumb3button':breadcrumb3button
 		},
 		created(){
-			this.fetchSettingByID(this.id)
-			this.fetchSettingItem(this.id)
-			this.getStore()
+			this.fetchUserGroup(this.id)
 		},
 		methods:{
-			getStore(){
-				axios.get('/api/getStore').then((res)=>{
-					this.stores=res.data
-				})
-			},
-			fetchSettingByID(id){
-				axios.get('/api/settings/getsettingbyid/'+id).then(res=>{
+			fetchUserGroup(id){
+				axios.get('/api/users_group/getuser_groupbyid/'+id).then(res=>{
 					this.code=res.data.code
 					this.key=res.data.key
 					this.value=res.data.value
 					this.select=res.data.store_id
 				});
 			},
-			fetchSettingItem(){
-				axios.get('/api/settings/item/').then((res)=>{
-					this.settingCode=res.data.code
-					this.settingKey=res.data.key
-					this.settingValue=res.data.value
-				})
-			},
 			submit (opt) {
 		      if (this.$refs.form.validate()) {
 		        // Native form submission is not yet supported
-		        axios.put('/api/settings/update/'+this.id, {
+		        axios.put('/api/users_group/update/'+this.id, {
 		          store: this.select,
 		          code: this.code,
 		          key: this.key,
@@ -131,7 +127,7 @@
 		        	if(res.data.success==true){
 		        		Flash.setSuccess(res.data.message)
 		        		if(opt==2){
-		        			this.$router.push('/admin/settings/list')
+		        			this.$router.push('/admin/users_group/list')
 		        		}
 		        	}
 		        })

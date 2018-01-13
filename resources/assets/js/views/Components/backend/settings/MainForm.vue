@@ -1,14 +1,15 @@
 <template>
-	<section id="content">
-
 		<v-app id="inspire">
 			<v-card>
-
-				<v-card-title>	
-					<!--breadcrumbs start-->
-						<breadcrumb v-bind:breadcrumb-item="items"></breadcrumb>
-					<!--breadcrumbs end-->
-				</v-card-title>
+				<!--breadcrumbs start-->
+					<breadcrumb3button
+					v-bind:breadcrumb-item="breadcrumbs"
+					v-bind:breadcrumb-title="breadcrumbTitle"
+					v-bind:submit="submit"
+					v-bind:is-valid="valid"
+					v-bind:back-url="backUrl"
+					></breadcrumb3button>
+				<!--breadcrumbs end-->
 				<div class="flash flash__success" v-if="flash.success">
 					<v-alert color="success" icon="check_circle" value="true">
 		            	{{flash.success}}
@@ -19,7 +20,7 @@
               			<v-layout wrap>
 
 					    	<v-flex xs12 sm6 md6>
-					      		<v-select label="Select Store" v-model="select" :items="stores" :rules="[v => !!v || 'Item is required']" required></v-select>
+					      		<v-select label="Select Store" v-model="select" autocomplete :items="stores" :rules="[v => !!v || 'Item is required']" required></v-select>
 					      	</v-flex>
 
 					    	<v-flex xs12 sm6 md6>
@@ -32,29 +33,17 @@
 					      	<v-flex xs12 sm6 md6>
 					      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="50" required></v-text-field>
 					      	</v-flex>
-					      	<v-flex xs12 sm12 md12>
-						      	<v-btn @click="submit(1)" :disabled="!valid" color="primary">
-							        Save & New
-							    </v-btn>
-							    <v-btn @click="submit(2)" :disabled="!valid" color="primary">
-							        Save & Close
-							    </v-btn>
-							    <router-link to="/admin/settings/list">
-								    <v-btn color="red" dark>
-								        Cancele
-								    </v-btn>
-							    </router-link>
-							</v-flex>
+					      	
 					    </v-layout>
 					</v-container>
 			    </v-form>
 			</v-card>
 		</v-app>
-	</section>
 </template>
 <script>
 	import Flash from '../../../../helper/flash'
 	import axios from 'axios'
+	import breadcrumb3button from '../commons/breadcrumb/breadcrumb3button.vue'
 	export default{
 		data(){
 			return{
@@ -76,7 +65,8 @@
 			    ],
 			    select: null,
 			    stores: [],
-			    items: [
+			    breadcrumbTitle:'Settins',
+			    breadcrumbs: [
 			        {
 			          text: 'Adminstrator',
 			          disabled: false
@@ -90,8 +80,12 @@
 			          disabled: true
 			        }
 		      	],
+		      	backUrl:'/admin/settings/list',
 				flash:Flash.state
 			}
+		},
+		components:{
+			'breadcrumb3button':breadcrumb3button
 		},
 		created(){
 			this.getStore()
@@ -102,7 +96,7 @@
 					this.stores=res.data
 				})
 			},
-			submit (opt) {
+			submit:function (opt) {
 		      if (this.$refs.form.validate()) {
 		        // Native form submission is not yet supported
 		        axios.post('/api/setting/save', {
@@ -117,7 +111,7 @@
 		        			this.$refs.form.reset()
 		        		}
 		        		else if(opt==2){
-		        			this.$router.push('/admin/settings/list')
+		        			this.$router.push(this.backUrl)
 		        		}
 		        	}
 		        })

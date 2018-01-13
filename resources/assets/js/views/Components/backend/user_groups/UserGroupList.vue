@@ -1,19 +1,15 @@
 <template>
-
+	<div>
 		<v-app id="inspire">
-
 			<!--breadcrumbs start-->
 			<breadcrumb1btn 
 				v-bind:breadcrumb-item="breadcrumbs"
 				v-bind:btn-new-url="btnNewUrl"
 				v-bind:breadcrumb-title="breadcrumbTitle"
 			></breadcrumb1btn>
-
-			<!--Data table component-->
-
-		    <data-table 
+			<data-table 
 		    	v-bind:data-header="headers" 
-		    	v-bind:data-value="settings"
+		    	v-bind:data-value="groups"
 		    	v-bind:get-api="getApiUrl"
 		    	v-bind:delete-api="deleteApiUrl"
 	    		v-bind:edit-url="urlEdit"
@@ -21,10 +17,8 @@
 		    	v-on:change="fetchData">
 		    </data-table>
 
-		    <!--End of data table-->
-
 		</v-app>
-
+	</div>
 </template>
 
 <script>
@@ -38,26 +32,25 @@
 		],
 		data(){
 			return{
-				getApiUrl:'/api/settings/list/',
-				deleteApiUrl:'/api/settings/delete/',
-				urlEdit:'/admin/settings/edit/',
-				btnNewUrl:'/admin/settings/add',
+				getApiUrl:'/api/users_group/list/',
+				deleteApiUrl:'/api/users_group/delete/',
+				urlEdit:'/admin/users_group/edit/',
+				btnNewUrl:'/admin/users_group/add',
 				headers: [
-			        { text: 'Setting ID',align: 'center',value: 'id'},
-			        { text: 'Store Name',align:'center', value: 'name' },
-			        { text: 'code',align:'center', value: 'code' },
-			        { text: 'Key',align:'center', value: 'key' },
-			        {text: 'Action',align:'center',sortable: false}
+			        { text: 'Group ID',align: 'center',value: 'id'},
+			        { text: 'Group Name',align:'center', value: 'name' },
+			        { text: 'Group Type',align:'center', value: 'group_type' },
+			        { text: 'Action',align:'center', sortable:false }
 			    ],
-				settings:[],
-				breadcrumbTitle:'Settings List',
+				groups:[],
+				breadcrumbTitle:'Users List',
 				breadcrumbs: [
 			        {
 			          text: 'Administrator',
 			          disabled: false
 			        },
 			        {
-			          text: 'Settings',
+			          text: 'Groups',
 			          disabled: false
 			        },
 			        {
@@ -70,12 +63,12 @@
 		components:{'dataTable':dataTable,'breadcrumb1btn':breadcrumb1btn},
 		created(){
 			this.fetchData()
-			document.title = 'Setting List';
+			document.title = 'Group List';
 		},
 		methods:{
 			fetchData(){
 				axios.get(this.getApiUrl).then(response=>{
-					this.settings=response.data;
+					this.groups=response.data;
 				});
 			}
 		}
