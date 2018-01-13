@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Models\BackEnd\UserGroup\UserGroup;
 class User extends Model
 {
-    protected $table=['user'];
+    protected $table='user';
     public $timestamps=false;
     protected $primarykey='user_group_id';
     protected $fillable=[
@@ -23,14 +23,34 @@ class User extends Model
     	'status',
     	'ip',
     	'date_added'
-<<<<<<< HEAD
     ]; 
-=======
-    ];
+    protected $hidden=['user_group_id','password','salt','ip'];
 
     public function UserGroup(){
-		return $this->belongsTo('App\Http\Models\BackEnd\User\UserGroup','user_group_id');
+		return $this->belongsTo(UserGroup::class,'user_group_id');
 	}
-
->>>>>>> 1564b7cccb099c7102afdb680110f1cdd8869aa8
+    static function Users($data = array())
+    {
+        return static::Users();
+    }
+    static function AllUser()
+    {
+        $users=DB::table('user')
+            ->join('user_group', 'user.user_group_id', '=', 'user_group.user_group_id')
+            ->select(
+                'user_id as id', 
+                'username', 
+                'user_group.name as group',
+                'firstname',
+                'lastname',
+                'email', 
+                'code',
+                'image',
+                'status', 
+                'date_added'
+            )
+            ->get();
+        return $users;
+    }
 }
+

@@ -20,14 +20,12 @@ use App\Http\Controllers\Backend\commons\ValidateDataController;
 
 class UserGroupsController extends Controller
 {
-    public function list()
+    public function index()
     {
         //$UserGroup=UserGroup::select('user_group_id as id','name','group_type','permission')->get();
-        $UserGroup=DB::select('select user_group_id as id,name,group_type,
-            case 
-                when length(permission)>0 then concat(substr(permission,1,50),\'...\')
-            end as permission 
-            from sg_user_group');
+        $UserGroup=UserGroup::get([
+            'user_group_id as id','name','group_type'
+        ]);
         
         return response()->json($UserGroup);
     }

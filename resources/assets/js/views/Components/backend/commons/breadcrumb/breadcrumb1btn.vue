@@ -1,5 +1,5 @@
 <template>
-		<!--breadcrumbs start-->
+	<!--breadcrumbs start-->
 		<div id="breadcrumbs-wrapper">
 			<!-- Search for small screen -->
 			<div class="header-search-wrapper grey lighten-2 hide-on-large-only">
@@ -17,14 +17,9 @@
 		      		</v-breadcrumbs>
 			    </div>
 			    <div class="col s2 m6 l6">
-			    	<router-link :to="backUrl" replace><v-btn color="primary" class="btn dropdown-settings breadcrumbs-btn right">Cancel</v-btn></router-link>
-
-			    	<v-btn @click.prevent="submit(2)" :disabled="!isValid" color="success" class="btn dropdown-settings breadcrumbs-btn right"	>
-				        Save & Close
-				    </v-btn>
-			     	<v-btn @click.prevent="submit(1)" class="btn dropdown-settings waves-effect waves-light breadcrumbs-btn right" color="success">
-			     		Save
-			     	</v-btn>
+			    	<router-link :to="btnNewUrl" replace>
+			    		<v-btn color="primary" class="btn dropdown-settings breadcrumbs-btn right">Create New</v-btn>
+			    	</router-link>
 			    </div>
 			  </div>
 			</div>
@@ -35,10 +30,8 @@
 	export default{
 		props:[
 			'breadcrumbItem',
-			'breadcrumbTitle',
-			'submit',
-			'isValid',
-			'backUrl'
+			'btnNewUrl',
+			'breadcrumbTitle'
 		]
 	}
 </script>

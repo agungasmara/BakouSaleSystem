@@ -20,7 +20,7 @@
               			<v-layout wrap>
 
 					    	<v-flex xs12 sm6 md6>
-					      		<v-select label="Select Store" v-model="select" :items="stores" :rules="[v => !!v || 'Item is required']" required></v-select>
+					      		<v-select label="Select Store" v-model="select" autocomplete :items="stores" :rules="[v => !!v || 'Item is required']" required></v-select>
 					      	</v-flex>
 
 					    	<v-flex xs12 sm6 md6>
