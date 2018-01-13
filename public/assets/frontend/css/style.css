@@ -490,10 +490,9 @@ input[type="text"], input[type="password"], input[type="email"] {
     border-width: 1px;
     color: #888888;
     font-size: 14px;
-    margin-bottom: 10px;
     height: 38px;
 }
-
+.form-control{margin-bottom: 15px !important;}
 /*
 
 btn style moved to btn.css in V.5
@@ -6052,6 +6051,9 @@ div.quickview {
 }
 
 /* SELECT 2 PLUGIN CUSTOMIZE */
+.select2-container {
+    margin-bottom: 15px;
+}
 
 .select2-container .select2-selection--single {
     height: 37px;
@@ -6444,3 +6446,39 @@ div.quickview {
     }
 
 }
+/*=============Custome Registerr===============*/
+div.required .control-label:before {
+    content: '* ';
+    color: #F00;
+    font-weight: bold;
+}
+.customer-padding{
+    padding-bottom: 40px;
+}
+
+/*Validation*/
+input {
+  border: 1px solid silver;
+  border-radius: 4px;
+  background: white;
+  padding: 5px 10px;
+}
+
+.error {
+  border-color: red;
+  background: #FDD;
+}
+
+.error:focus {
+  outline-color: #F99;
+}
+
+.valid {
+  border-color: #5A5;
+  background: #EFE;
+}
+
+.valid:focus {
+  outline-color: #8E8;
+}
+
