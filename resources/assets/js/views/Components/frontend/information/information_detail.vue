@@ -8,8 +8,7 @@
         	<p>{{StateData.description}}</p>
             <!-- {{ $route.params.id }} -->
         <!-- </div> -->
-        <!-- <p v-html.customfilter=>{{StateData.description}}</p> -->
-        <template v-html.customfilter="StateData.description"></template>
+        <p>{{StateData.description}}</p>
     </div>
 </div>
 <!-- /main-container -->
