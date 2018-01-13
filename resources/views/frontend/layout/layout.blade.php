@@ -22,15 +22,6 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
 
-    <!-- include pace script for automatic web page progress bar  -->
-
-    <script>
-        paceOptions = {
-            elements: true
-        };
-    </script>
-    <script src="{{url('assets/frontend/js/pace.min.js')}}"></script>
-
 </head>
 <body>
 

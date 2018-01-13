@@ -3,12 +3,13 @@
 <!-- /.Fixed navbar  -->
 <div class="container main-container headerOffset">
     <div class="row">
-        <div v-for="infor of StateData">
-            <h1>{{infor.title}}</h1>
-        	<p>{{infor.description}}</p>
+        <!-- <div v-for="infor of StateData"> -->
+            <h1>{{StateData.title}}</h1>
+        	<p>{{StateData.description}}</p>
             <!-- {{ $route.params.id }} -->
-        </div>
-        <p v-for="infor of informationInfo">{{infor.description}}</p>
+        <!-- </div> -->
+        <!-- <p v-html.customfilter=>{{StateData.description}}</p> -->
+        <template v-html.customfilter="StateData.description"></template>
     </div>
 </div>
 <!-- /main-container -->
@@ -33,11 +34,10 @@
             // alert("testig");
             // alert($route.params.id);
         },
-        components:{
+        components:{    
             InformationDataComponent
         },
         created(){
-            this.helloworld="1";
             this.productDetails(this.id);
         },
         beforeUpdate(){
@@ -47,7 +47,7 @@
         methods:{
             productDetails(id){
                 axios.get('/api/information/'+id).then(res=>{
-                    this.StateData=res.data['data'];
+                    this.StateData=res.data;
                 });
             }
         }

@@ -21,6 +21,12 @@ class InformationController extends Controller
             $information_id = 0;
         }
         $information_info = $this->getInformation($information_id);
+        // dd($information_info);
+        $data = array(
+            'title'=>$information_info->title,
+            'description'=>html_entity_decode($information_info->description, ENT_QUOTES, 'UTF-8')
+        );
+        
         // if ($information_info) {
 
         //     $informationInfor_arr = array();
@@ -33,11 +39,12 @@ class InformationController extends Controller
 
         //     return response()->json(['data' => $informationInfor_arr,'success' => true, 'message' => 'Success']);
         // }
-        return response()->json(['data' => $information_info,'success' => true, 'message' => 'Success']);
+        return response()->json($data);
     }
 
     public function getInformation($information_id) {
         $query = DB::table('information')
+                ->select('*')
                 ->leftJoin('information_description','information.information_id','=','information_description.information_id')
                 ->leftJoin('information_to_store','information.information_id','=','information_to_store.information_id')
                 ->where('information.information_id',$information_id)
@@ -45,7 +52,7 @@ class InformationController extends Controller
                 ->where('information_to_store.store_id',0)
                 ->where('information.status',1)
                 ->distinct()
-                ->get();
+                ->first();
 
         return $query;
     }
