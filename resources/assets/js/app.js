@@ -9,6 +9,7 @@ import Account from './views/Components/frontend/account/account.vue'
 import FSignIn from './views/Components/frontend/account/signin.vue'
 import FRegister from './views/Components/frontend/account/register.vue'
 import FLogin from './views/Components/frontend/account/login.vue'
+import Dashboard from './views/Components/frontend/account/dashboard.vue'
 //***** products *****
 import Product from './views/Components/frontend/product/product.vue'
 import ProductDetail from './views/Components/frontend/product/product_detail.vue'
@@ -130,6 +131,11 @@ const router = new VueRouter({
             path: 'login',
             name:'login',
             component: FLogin
+          },
+          {
+            path: 'dashboard',
+            name: 'dashboard',
+            component: Dashboard
           }
       ]
     },
