@@ -106,8 +106,14 @@
 							            	<v-card-text>
 							            		<v-container grid-list-md offset-s3>
 							              			<v-layout wrap>
-							              				<v-flex xs12 sm6 md6 v-for="input in i.group" :key="input.key" >
-															<v-text-field :label="input.key" v-model="input.value" :counter="10" required></v-text-field>
+							              				<v-flex v-for="input in i.group" :key="input.key" :class="input.class">
+							              					<div v-if="input.type=='select'">
+																<v-select :label="input.key" v-model="input.Value" :items="input.items" required></v-select>
+							              					</div>
+							              					<div v-else>
+																<v-text-field :label="input.key" v-model="input.value" :counter="10" required></v-text-field>
+							              					</div>
+
 														</v-flex>
 												    </v-layout>
 												</v-container>
@@ -127,116 +133,151 @@
 <script>
 	import Flash from '../../../../helper/flash'
 	import axios from 'axios'
+	import ImageUpload from '../commons/image/ImageUpload.vue'
+
 	export default{
+		components: {
+			ImageUpload
+		},
 		data(){
 			return{
 				valid: true,
+				
+				status:[
+					{	Value:1,	text:'Enable'},
+					{	Value:0,	text:'Disable'}
+				],
+				weight_class:[
+					{	Value:1,	text:'Enable'},
+					{	Value:0,	text:'Disable'}
+				],
+				length_class:[
+					{	Value:1,	text:'Enable'},
+					{	Value:0,	text:'Disable'}
+				],
+				subtract_stock:[
+					{	Value:1,	text:'Enable'},
+					{	Value:0,	text:'Disable'}
+				],
+				stock_status:[
+					{	Value:1,	text:'Enable'},
+					{	Value:0,	text:'Disable'}
+				],
+				tax_class:[
+					{	Value:1,	text:'Enable'},
+					{	Value:0,	text:'Disable'}
+				],
+				manufacturer:[
+					{	Value:1,	text:'Enable'},
+					{	Value:0,	text:'Disable'}
+				],
+
+				
 				tabs:[
 						{
 							name:'General', 
 							group:[
-								{	key:'language_id',	type:'text', Value:''	},
-								{	key:'description',	type:'text', Value:''	},
-								{	key:'tag',	type:'text', Value:''	},
-								{	key:'meta_title',	type:'text', Value:''	},
-								{	key:'meta_description',	type:'text', Value:''	},
-								{	key:'meta_keyword',	type:'text', Value:''	},
+								{	class:'xs12 sm6 md6',	 key:'language_id',	type:'text',	 Value:''	},
+								{	class:'xs12 sm6 md6',	 key:'description',	type:'text',	 Value:''	},
+								{	class:'xs12 sm6 md6',	 key:'tag',	type:'text',	 Value:''	},
+								{	class:'xs12 sm6 md6',	 key:'meta_title',	type:'text',	 Value:''	},
+								{	class:'xs12 sm6 md6',	 key:'meta_description',	type:'text',	 Value:''	},
+								{	class:'xs12 sm6 md6',	 key:'meta_keyword',	type:'text',	 Value:''	},
+								{	class:'xs12 sm6 md6',	 key:'name',	type:'text',	 Value:''},
 							]
 						},
 						{
 							name:'Data', 
 							group:[
-								{	key:'name',	type:'text', Value:''},
-								{	key:'model',	type:'text', Value:''},
-								{	key:'sku',	type:'text', Value:''},
-								{	key:'upc',	type:'text', Value:''},
-								{	key:'ean',	type:'text', Value:''},
-								{	key:'jan',	type:'text', Value:''},
-								{	key:'isbn',	type:'text', Value:''},
-								{	key:'mpn',	type:'text', Value:''},
-								{	key:'location',	type:'text', Value:''},
-								{	key:'quantity',	type:'text', Value:''},
-								{	key:'stock_status_id',	type:'text', Value:''},
-								{	key:'image',	type:'text', Value:''},
-								{	key:'manufacturer_id',	type:'text', Value:''},
-								{	key:'shipping',	type:'text', Value:''},
-								{	key:'price',	type:'text', Value:''},
-								{	key:'points',	type:'text', Value:''},
-								{	key:'tax_class_id',	type:'text', Value:''},
-								{	key:'date_available',	type:'text', Value:''},
-								{	key:'weight',	type:'text', Value:''},
-								{	key:'weight_class_id',	type:'text', Value:''},
-								{	key:'length',	type:'text', Value:''},
-								{	key:'width',	type:'text', Value:''},
-								{	key:'height',	type:'text', Value:''},
-								{	key:'length_class_id',	type:'text', Value:''},
-								{	key:'subtract',	type:'text', Value:''},
-								{	key:'minimum',	type:'text', Value:''},
-								{	key:'sort_order',	type:'text', Value:''},
-								{	key:'status',	type:'text', Value:''},
+								{	class:'xs12 sm6 md6',	 key:'model',	type:'text',	 Value:''},
+								{	class:'xs12 sm6 md6',	 key:'manufacturer_id',	type:'select',	 Value:''	,items:this.manufacturer},
+								{	class:'xs12 sm6 md6',	 key:'sku',	type:'text',	 Value:''},
+								{	class:'xs12 sm6 md6',	 key:'upc',	type:'text',	 Value:''},
+								{	class:'xs12 sm6 md6',	 key:'ean',	type:'text',	 Value:''},
+								{	class:'xs12 sm6 md6',	 key:'jan',	type:'text',	 Value:''},
+								{	class:'xs12 sm6 md6',	 key:'isbn',	type:'text',	 Value:''},
+								{	class:'xs12 sm6 md6',	 key:'mpn',	type:'text',	 Value:''},
+								{	class:'xs12 sm6 md6',	 key:'location',	type:'text',	 Value:''},
+								{	class:'xs12 sm6 md6',	 key:'quantity',	type:'text',	 Value:''},
+								{	class:'xs12 sm6 md6',	 key:'stock_status_id',	type:'select',	 Value:'',	items:this.stock_status},
+								{	class:'xs12 sm6 md6',	 key:'price',	type:'text',	 Value:''},
+								{	class:'xs12 sm6 md6',	 key:'minimum',	type:'text',	 Value:''},
+								{	class:'xs12 sm6 md6',	 key:'subtract',	type:'text',	 Value:''},
+								{	class:'xs12 sm6 md6',	 key:'shipping',	type:'text',	 Value:''},
+								{	class:'xs12 sm6 md6',	 key:'points',	type:'text',	 Value:''},
+								{	class:'xs12 sm6 md6',	 key:'tax_class_id',	type:'select',	 Value:'',	items:this.tax_class},
+								{	class:'xs12 sm6 md6',	 key:'date_available',	type:'text',	 Value:''},
+								{	class:'xs12 sm6 md6',	 key:'weight',	type:'text',	 Value:''},
+								{	class:'xs12 sm6 md6',	 key:'weight_class_id',	type:'select',	 Value:'',	items:this.weight_class},
+								{	class:'xs4 sm2',	 key:'length',	type:'text',	 Value:''},
+								{	class:'xs4 sm2',	 key:'width',	type:'text',	 Value:''},
+								{	class:'xs4 sm2',	 key:'height',	type:'text',	 Value:''},
+								{	class:'xs12 sm6 md6',	 key:'length_class_id',	type:'select',	 Value:'',	items:this.length_class},
+								{	class:'xs12 sm6 md6',	 key:'sort_order',	type:'text',	 Value:''},
+								{	class:'xs12 sm6 md6',	 key:'status',	type:'select',	Value:'',	items:this.status	},
 
 							]
 						},
-						{
-							name:'Links', 
-							group:[
-								{	key:'',	type:'', Value:''}
-							]
-						},
-						{
-							name:'Attribute', 
-							group:[
-								{	key:'',	type:'', Value:''}
-							]
-						},
-						{
-							name:'Option', 
-							group:[
-								{	key:'',	type:'', Value:''}
-							]
-						},
-						{
-							name:'Recurring', 
-							group:[
-								{	key:'',	type:'', Value:''}
-							]
-						},
-						{
-							name:'Discount', 
-							group:[
-								{	key:'',	type:'', Value:''}
-							]
-						},
-						{
-							name:'Special', 
-							group:[
-								{	key:'',	type:'', Value:''}
-							]
-						},
+						// {
+						// 	name:'Links', 
+						// 	group:[
+						// 		{	class:'',	 key:'',	type:'',	Value:'',	items:[]}
+						// 	]
+						// },
+						// {
+						// 	name:'Attribute', 
+						// 	group:[
+						// 		{	class:'',	 key:'',	type:'', Value:'',	}
+						// 	]
+						// },
+						// {
+						// 	name:'Option', 
+						// 	group:[
+						// 		{	class:'',	 key:'',	type:'', Value:'',	}
+						// 	]
+						// },
+						// {
+						// 	name:'Recurring', 
+						// 	group:[
+						// 		{	class:'',	 key:'',	type:'', Value:'',	}
+						// 	]
+						// },
+						// {
+						// 	name:'Discount', 
+						// 	group:[
+						// 		{	class:'',	 key:'',	type:'', Value:'',	}
+						// 	]
+						// },
+						// {
+						// 	name:'Special', 
+						// 	group:[
+						// 		{	class:'',	 key:'',	type:'', Value:'',	}
+						// 	]
+						// },
 						{
 							name:'Image', 
 							group:[
-								{	key:'',	type:'', Value:''}
+								{	class:'xs12 sm6 md6',	 key:'image',	type:'text',	 Value:''},
 							]
 						},
-						{
-							name:'Reward Points', 
-							group:[
-								{	key:'',	type:'', Value:''}
-							]
-						},
-						{
-							name:'SEO', 
-							group:[
-								{	key:'',	type:'', Value:''}
-							]
-						},
-						{
-							name:'Design', 
-							group:[
-								{	key:'',	type:'', Value:''}
-							]
-						},
+						// {
+						// 	name:'Reward Points', 
+						// 	group:[
+						// 		{	class:'',	 key:'',	type:'', Value:'',	}
+						// 	]
+						// },
+						// {
+						// 	name:'SEO', 
+						// 	group:[
+						// 		{	class:'',	 key:'',	type:'', Value:'',	}
+						// 	]
+						// },
+						// {
+						// 	name:'Design', 
+						// 	group:[
+						// 		{	class:'',	 key:'',	type:'', Value:'',	}
+						// 	]
+						// },
 					],
 				
 			    // code: '',
