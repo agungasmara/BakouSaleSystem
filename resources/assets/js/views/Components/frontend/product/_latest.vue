@@ -35,7 +35,7 @@
                               <div class="carousel-inner" role="listbox">
                                   <div class="item active">
                                      <router-link v-bind:to="'/product/product_detail/'+ latestProduct.product_id">
-
+                                      
                                       <img v-bind:src="latestProduct.thumb" alt="img" class="img-responsive ">
                                     </router-link>
                                    <!--  <a v-bind:href="'/product/product_detail/'+ latestProduct.product_id">
@@ -77,17 +77,8 @@
 
                       <div class="description">
                           <h4><a href="product-details.html"> {{latestProduct.name}} </a></h4>
-
                           <div class="grid-description">
-                              <p>{{latestProduct.description}}. </p>
-                          </div>
-                          <div class="list-description">
-                              <p> Sed sed rutrum purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                  Pellentesque risus lacus, iaculis in ante vitae, viverra hendrerit ante. Aliquam vel
-                                  fermentum elit. Morbi rhoncus, neque in vulputate facilisis, leo tortor sollicitudin
-                                  odio, quis pellentesque lorem nisi quis enim. In dolor mi, hendrerit at blandit
-                                  vulputate, congue a purus. Sed eget turpis sit amet orci euismod accumsan. Praesent
-                                  sit amet placerat elit. </p>
+                            <p v-html="latestProduct.description"></p>
                           </div>
                           <span class="size">XL / XXL / S </span></div>
                       <div class="price"><span>${{latestProduct.price}}</span></div>
@@ -108,6 +99,7 @@
 <script type="text/javascript">
     import axios from 'axios'
     import Flash from '../../../../helper/flash'
+    import Common from '../../../../helper/common'
     import {post} from '../../../../helper/api'
 
     export default {
@@ -119,6 +111,12 @@
                 latestProducts: [],
                 isProcessing: false
             }
+        },
+        components:{
+          Common
+        },
+        mounted(){
+
         },
         created() {
           axios.get(`/api/latest`)
