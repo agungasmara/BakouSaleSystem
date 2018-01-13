@@ -8,10 +8,14 @@ import FHome from './views/Components/frontend/home.vue'
 import Account from './views/Components/frontend/account/account.vue'
 import FSignIn from './views/Components/frontend/account/signin.vue'
 import FRegister from './views/Components/frontend/account/register.vue'
+import FLogin from './views/Components/frontend/account/login.vue'
 //***** products *****
 import Product from './views/Components/frontend/product/product.vue'
 import ProductDetail from './views/Components/frontend/product/product_detail.vue'
 import Information from './views/Components/frontend/information/information.vue'
+import InformationDetail from './views/Components/frontend/information/information_detail.vue'
+// **** Footer *****
+import Footer from './views/Components/frontend/common/_footer.vue'
 
 // Backend ###################
 import Home from './views/Components/index.vue'
@@ -34,10 +38,22 @@ import User from './views/Components/backend/users/User.vue'
 import UserForm from './views/Components/backend/users/MainForm.vue'
 import UserList from './views/Components/backend/users/UserList.vue'
 import UserEditForm from './views/Components/backend/users/UserEditForm.vue'
-//Uer group#########################
-import UserGroupForm from './views/Components/backend/groups/MainForm.vue'
-import UserGroupList from './views/Components/backend/groups/UserGroupList.vue'
-import UserGroupEditForm from './views/Components/backend/groups/UserGroupEditForm.vue'
+
+//User group#########################
+// import UserGroupForm from './views/Components/backend/groups/MainForm.vue'
+// import UserGroupList from './views/Components/backend/groups/UserGroupList.vue'
+// import UserGroupEditForm from './views/Components/backend/groups/UserGroupEditForm.vue'
+import UserGroup from './views/Components/backend/user_groups/UserGroup.vue'
+import UserGroupForm from './views/Components/backend/user_groups/MainForm.vue'
+import UserGroupList from './views/Components/backend/user_groups/UserGroupList.vue'
+import UserGroupEditForm from './views/Components/backend/user_groups/UserGroupEditForm.vue'
+//User Role#########################
+import UserRole from './views/Components/backend/users/UserRole.vue'
+import UserRoleList from './views/Components/backend/users/UserRoleList.vue'
+import UserRoleForm from './views/Components/backend/users/UserRoleForm.vue'
+import UserRoleEdit from './views/Components/backend/users/UserRoleEdit.vue'
+import UserRolePermission from './views/Components/backend/users/UserRolePermission.vue'
+
 //End User Group####################
 
 //***** Categories *****
@@ -88,7 +104,6 @@ const router = new VueRouter({
   routes: [
     // routing FrontEnd
     { path: '/', name:'fhome',component: FHome },
-    {path: '/product/product_detail/:id', name:'product_detail',component:ProductDetail},
     {path: '/product', name:'product',component:Product,
         children: [
             {
@@ -109,10 +124,33 @@ const router = new VueRouter({
             path: 'register',
             name:'register',
             component: FRegister
+          },
+          {
+            path: 'login',
+            name:'login',
+            component: FLogin
           }
       ]
     },
-    { path: '/information', name:'information',component: Information },
+    { 
+      path: '/information', name:'information',component: Information,
+      children:[
+        {
+          path: 'information_detail/:id',
+          name:'InformationDetail',
+          component: InformationDetail,props:true
+          // props: (route) => ({ id: route.query.id }) 
+          // components: { default: InformationDetail, footer: Footer },
+          // props: { default: true, footer: false }
+          // component: InformationDetail
+        }
+      ]
+    },
+    {
+      path: '/information/information_detail/:id', name:'information',component: Information,
+      components: { default: Information, footer: Footer },
+      props: { default: true, footer: false }
+    },
     // routing Backend
     { path: '/auth/login', name:'login',component: Login },
     { path: '/admin', name:'ahome',component: Home },
@@ -202,7 +240,7 @@ const router = new VueRouter({
             }
         ]       
     },
-    {path:'/admin/user_group',name:'user_group',component:User,
+    {path:'/admin/user_group',name:'usergroup',component:UserGroup,
         children:[
             {
                 path:'list',
@@ -221,8 +259,37 @@ const router = new VueRouter({
                 props:true
             }
         ]       
+    },
+    {path:'/admin/user_role',name:'user_role',component:UserRole,
+        children:[
+            {
+                path:'list',
+                name:'UserRoleList',
+                component:UserRoleList
+            },
+            {
+                path:'add',
+                name:'UserRoleForm',
+                component:UserRoleForm
+            },
+            {
+                path:'edit/:id',
+                name:'UserRoleEdit',
+                component:UserRoleEdit,
+                props:true
+            },
+            {
+                path:'permission/:id',
+                name:'UserRolePermission',
+                component:UserRolePermission,
+                props:true
+            }
+        ]       
     }
-  ]
+  ],
+  scrollBehavior (to, from, savedPosition) {
+    return { x: 10, y: 0 }
+  },
 })
 
 // const routerf = new VueRouter({
@@ -239,37 +306,38 @@ const router = new VueRouter({
 // })
 
 // app frontend
-const appf = new Vue({
-    // el: '#root',
-    router,
-    template: `
-    <appf></appf>
-  `,
-    components: { Appf },
-}).$mount('#root_frontend')
+// if(document.getElementById("#root_frontend") ) {
+  const appf = new Vue({
+      // el: '#root',
+      router,
+      template: `
+      <appf></appf>`,
+      components: { Appf },
+  }).$mount('#root_frontend')
+// }
 
+// if( document.getElementById("#root") ) {
+  // app backend
+  const app = new Vue({
+      // el: '#root',
+      router,
+      template: `
+      <app></app>
+    `,
+      components: { App },
+  }).$mount('#root')
+// }
 
-// app backend
-
-const app = new Vue({
-    // el: '#root',
-    router,
-    template: `
-    <app></app>
-  `,
-    components: { App },
-}).$mount('#root')
-
-
-const AuthLogin = new Vue({
-    // el: '#root',
-    router,
-    template: `
-    <appl></appl>
-  `,
-    components: { Appl },
-}).$mount('#root_login')
-
+// if( document.getElementById("#root_login") ) {
+  const AuthLogin = new Vue({
+      // el: '#root',
+      router,
+      template: `
+      <appl></appl>
+    `,
+      components: { Appl },
+  }).$mount('#root_login')
+// }
 
 
 // import Vue from 'vue'

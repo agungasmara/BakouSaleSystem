@@ -21,10 +21,19 @@
                         </div>
                     </div>
                     <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6 no-margin no-padding">
+                       
                         <div class="pull-right">
                             <ul class="userMenu">
-                                <li><router-link to="/account/signin"><span class="hidden-xs">My Account</span> <i
-                                        class="glyphicon glyphicon-user hide visible-xs "></i></router-link></li>
+                                <li class="dropdown">
+                                  <a href="<?php echo $account; ?>" title="<?php echo $text_account; ?>" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> 
+                                    <span class="hidden-xs hidden-sm hidden-md">My Account</span> 
+                                    <span class="caret"></span>
+                                  </a>
+                                  <ul class="dropdown-menu">
+                                    <li><router-link to="/account/register">Register</router-link></li>
+                                    <li><router-link to="/account/login">Login</router-link></li>
+                                  </ul>
+                                </li>
                                 <li><router-link to="/account/signin" data-toggle="modal" data-target="#ModalLogin"> <span class="hidden-xs">SignIn</span>
                                     <i class="glyphicon glyphicon-log-in hide visible-xs "></i> </router-link></li>
                                 <li class="hidden-xs">
@@ -197,6 +206,10 @@
         .catch(e => {
           this.errors.push(e)
         })
+
+        let recaptchaScript = document.createElement('script')
+        recaptchaScript.setAttribute('src', 'https://www.google.com/recaptcha/api.js')
+        document.head.appendChild(recaptchaScript)
     },
 
     components:{
@@ -204,7 +217,7 @@
         FooterComponet,
     },
     methods: function() {
-        alert('sd');
+        
         // window.location = "#/login";
     },
     mounted: function(){

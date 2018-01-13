@@ -86,8 +86,9 @@
 			          	
 					    <v-form v-model="valid" ref="form" lazy-validation>
 					    	<v-tabs>
-						      	<v-tabs-bar dark color="cyan">
-						        	<v-tabs-slider color="yellow"></v-tabs-slider>
+					    		<v-tabs-bar>
+						      	<!-- <v-tabs-bar dark color="cyan"> -->
+						        	<v-tabs-slider color="green"></v-tabs-slider>
 							        <v-tabs-item
 							          v-for="i in tabs"
 							          :key="i.name"

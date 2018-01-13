@@ -2,7 +2,11 @@ export default{
 	state: {
 		success: null,
 		elasticdata : '',
-		error: null
+		error: null,
+		StateData:[]
+	},
+	setStateData(message){
+		this.state.StateData = message
 	},
 	setState(message){
 		this.state.elasticdata = message

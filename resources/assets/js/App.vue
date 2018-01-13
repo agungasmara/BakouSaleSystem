@@ -27,10 +27,9 @@
         <template>
           <MenuComponent/>
         </template>
-
       
         <!-- END HEADER -->
-        
+  
         <!-- START MAIN -->
         <div id="main">
           <div class="wrapper">
@@ -84,21 +83,28 @@
 
     export default{
       data(){
-          return{
-              flash: Flash.state
-          }
+        return{
+          flash: Flash.state
+        }
       },
       components:{
         MenuComponent,
       },
       methods: function() {
-          alert('sd');
-          // window.location = "#/login";
+        // window.location = "#/login";
       },
       mounted: function () {
-          // window.location = "#/home";
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+              
+              // run after everything is in-place
+            }, 100)
+        })
+        // window.location = "/admin";
+        // return false;
       },
       created() {
+        // alert("loading");
         // createIndex('http://localhost:9200', params);
         // Vue.http.put("http://localhost:9200", params)
 

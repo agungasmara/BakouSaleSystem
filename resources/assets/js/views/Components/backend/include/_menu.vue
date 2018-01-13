@@ -124,7 +124,7 @@
                   <i class="material-icons">lock_outline</i> Lock</a>
               </li>
               <li>
-                <a href="/logout" class="grey-text text-darken-1">
+                <a href="/auth/logout" class="grey-text text-darken-1">
                   <i class="material-icons">keyboard_tab</i> Logout</a>
               </li>
             </ul>
@@ -135,100 +135,13 @@
           <div class="nav-wrapper">
             <ul id="ul-horizontal-nav" class="left hide-on-med-and-down">
             	<li v-for="m of menu_data">
-                <a class="dropdown-menu" href="#!" :data-activates="thClassValue(m.parent_menu_id)">
-                  <i class="material-icons">dvr</i>
+                <router-link class="dropdown-menu" :to="m.p_menu_link" :data-activates="thClassValue(m.parent_menu_id)">
+                  <i class="material-icons">{{m.fa_icon}}</i>
                   <span>{{m.parent_menu_name}}
                     <i class="material-icons right">keyboard_arrow_down</i>
                   </span>
-                </a>
+                </router-link>
 	            </li>
-              <!-- <li class="">
-                <a class="dropdown-menu" href="#!" data-activates="Cardsdropdown">
-                  <i class="material-icons">dashboard</i>
-                  <span>Dashboard
-                    <i class="material-icons right">keyboard_arrow_down</i>
-                  </span>
-                </a>
-              </li> -->
-              <!-- <li>
-                <a class="dropdown-menu" href="#!" data-activates="Templatesdropdown">
-                  <i class="material-icons">dvr</i>
-                  <span>Templates
-                    <i class="material-icons right">keyboard_arrow_down</i>
-                  </span>
-                </a>
-              </li>
-
-              <li>
-                <a class="dropdown-menu" href="#!" data-activates="Cardsdropdown">
-                  <i class="material-icons">cast</i>
-                  <span>Cards
-                    <i class="material-icons right">keyboard_arrow_down</i>
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a href="app-email.html">
-                  <i class="material-icons">mail_outline</i>
-                  <span>Mailbox</span>
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-menu" href="#!" data-activates="CSSdropdown">
-                  <i class="material-icons">invert_colors</i>
-                  <span>CSS
-                    <i class="material-icons right">keyboard_arrow_down</i>
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-menu" href="#!" data-activates="BasicUIdropdown">
-                  <i class="material-icons">photo_filter</i>
-                  <span>Basic UI
-                    <i class="material-icons right">keyboard_arrow_down</i>
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-menu" href="#!" data-activates="AdvancedUIdropdown">
-                  <i class="material-icons">library_add</i>
-                  <span>Advanced UI
-                    <i class="material-icons right">keyboard_arrow_down</i>
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-menu" href="#!" data-activates="ExtraComponentsdropdown">
-                  <i class="material-icons">add_to_queue</i>
-                  <span>Extra Components
-                    <i class="material-icons right">keyboard_arrow_down</i>
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-menu" href="#!" data-activates="Tablesdropdown">
-                  <i class="material-icons">border_all</i>
-                  <span>Tables
-                    <i class="material-icons right">keyboard_arrow_down</i>
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-menu" href="#!" data-activates="Formsdropdown">
-                  <i class="material-icons">chrome_reader_mode</i>
-                  <span>Forms
-                    <i class="material-icons right">keyboard_arrow_down</i>
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-menu" href="#!" data-activates="Pagesdropdown">
-                  <i class="material-icons">pages</i>
-                  <span>Pages
-                    <i class="material-icons right">keyboard_arrow_down</i>
-                  </span>
-                </a>
-              </li> -->
             </ul>
           </div>
         </nav>
@@ -239,7 +152,7 @@
         </ul> -->
         <!-- Templatesdropdown -->
         <ul v-for="m of menu_data" :id="thClassValue(m.parent_menu_id)" class="dropdown-content dropdown-horizontal-list">
-          <li v-for="sm of m['children_menu']"><a href="../collapsible-menu/">{{sm.child_menu_name}}</a></li>
+          <li v-for="sm of m['children_menu']"><router-link :to="sm.c_menu_link">{{sm.child_menu_name}}</router-link></li>
         </ul>
         <!-- Cardsdropdown -->
         <ul id="Cardsdropdown" class="dropdown-content dropdown-horizontal-list">
@@ -362,8 +275,15 @@
                 ]
             }
         },
+        created() {
+          this.getApiMenu();
+          // $.getScript("http://localhost:8000/js/materialize.min.js");
+          let dataTable = document.createElement('script');    
+          dataTable.setAttribute('src',"../../js/materialize.min.js");
+          document.head.appendChild(dataTable);
+        },
         methods:{
-        	thClassValue: function (id) {
+        	thClassValue (id) {
             var value = ['Templatesdropdown'+id]
             // if (this.orderKey === id) {
             //   value.push('active')
@@ -379,10 +299,6 @@
               this.errors.push(e)
             })
           }
-        },
-        created() {
-        	this.getApiMenu();
-          // $.getScript("http://localhost:8000/js/materialize.min.js");
         }
     }
 </script>

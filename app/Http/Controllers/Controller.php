@@ -26,7 +26,7 @@ class Controller extends BaseController
 		$query = DB::table('category')
 				->leftJoin('category_description' ,'category.category_id','=' ,'category_description.category_id')
 				->leftJoin('category_to_store' , 'category.category_id', '=', 'category_to_store.category_id')
-				->where('category_type_id',$cat_type)
+				->where('category_description.category_id',$cat_type)
 				->where('category.parent_id',$parent_id)
 				->where('category_to_store.store_id',0)
 				->where('category.status',1)
