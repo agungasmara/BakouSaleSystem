@@ -16,19 +16,11 @@
     import InformationDataComponent from './../../../Components/frontend/information/_information_data.vue'
     import Flash from '../../../../helper/flash'
     import axios from 'axios'
-    import 'vue-toast/dist/vue-toast.min.css'
-    import VueToast from 'vue-toast'
-    var alert = require('vue-strap/src/alert')
-    // or
-    var alert = require('vue-strap').alert
-    const Entities = require('html-entities').XmlEntities;
-    const entities = new Entities();
 
     export default{
         props:['id'],
         data(){
             return{
-                welcome:"<p>Welcome</p>",
                 StateData:Flash.state,
                 // informationInfo:[],
             }
@@ -38,15 +30,10 @@
             // alert($route.params.id);
         },
         components:{    
-            InformationDataComponent,
-            VueToast ,
-            alert,
-            entities
+            InformationDataComponent
         },
         mounted(){
-            // const toast = this.$refs.toast
-            // toast.showToast('Show me toast')
-            // toast.showToast('Show me toast again!')
+            
         },
         created(){
             this.productDetails(this.id);
