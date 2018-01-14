@@ -11,3 +11,10 @@ npm-debug.log
 yarn-error.log
 .env
 public/js/app.js
+storage/framework/views/ea64a810a80c669e6d154d298b39f8a0a5353044.php
+storage/framework/views/d4a4eca3fc6b05cf2c136386ccb09e96a649e461.php
+storage/framework/views/bc066eb6bdf11d495f1e3af2495f557c6d2cf6a3.php
+storage/framework/views/542a49e26bfccdfb90e0a0403132698e48fe11d0.php
+storage/framework/views/dca00dfd07d72c574dd0a69c6b260ffbd0174347.php
+storage/framework/views/ee9f0353a51915009eea0cce530e92ffc4c654fc.php
+webpack.mix.js

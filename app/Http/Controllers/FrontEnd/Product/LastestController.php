@@ -36,7 +36,7 @@ class LastestController extends Controller
                         'thumb'       => $p->image,
                         'name'        => $p->name,
                         // 'description' => utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, $this->config->get($this->config->get('config_theme') . '_product_description_length')) . '..',
-                        'description' => $p->description,
+                        'description' => html_entity_decode($p->description, ENT_QUOTES, 'UTF-8'),
                         'price'       => $p->price,
                         'special'     => $p->special,
                         // 'tax'         => $p->tax,

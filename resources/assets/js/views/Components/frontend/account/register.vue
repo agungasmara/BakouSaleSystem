@@ -21,10 +21,16 @@
             <div class="row userInfo">
                 <h2 class="block-title-2"> Create an account </h2>
                 <div class="flash flash__success" v-if="flash.success">
-                    <v-alert color="success" icon="check_circle" value="true">
+                   <!--  <v-alert color="success" icon="check_circle" value="true">
                         {{flash.success}}
-                    </v-alert>
+                    </v-alert> -->
+                     <alert :show.sync="showRight" placement="top-right" duration="3000" type="success" width="400px" dismissable value="true">
+                      <span class="icon-ok-circled alert-icon-float-left"></span>
+                      <strong>Well Done!</strong>
+                      <p>{{flash.success}}.</p>
+                    </alert>
                 </div>
+               
                 <form role="form" class="regForm">
 
                     <fieldset id="account">
@@ -33,7 +39,7 @@
                         <label class="col-sm-2 control-label text-right" for="input-firstname">First Name</label>
                         <div class="col-sm-10">
                           <input type="text" name="firstname" value="<?php echo $firstname; ?>" placeholder="First Name" id="input-firstname" class="form-control" v-model="firstname" :rules="firstnameRules" :counter="50" required />
-                          <div class="text-danger"></div>
+                          <div class="text-danger"></div>                          
                         </div>
                       </div>
                       <div class="form-group required">
@@ -172,7 +178,7 @@
                     </div>
                     <div class="customer-padding" style="padding-bottom: 50px !important;"></div>
 
-                    <!-- <div class="form-group">
+                   <!--  <div class="form-group">
                         <label>First name</label>
                         <input title="Please enter your username (at least 3 characters)" type="text" class="form-control" placeholder="Firstname" required minlength="3" v-model="firstname">
                     </div>
@@ -253,7 +259,9 @@
                   confirm: this.confirm,
                 }).then((res)=>{
                     if(res.data.success==true){
-                        Flash.setSuccess(res.data.message)
+                        //Flash.setSuccess(res.data.message)
+                        //this.$router.replace('/account/login');
+                        this.$router.push('/account/login');
                     }else{
                         // Flash.setSuccess(res.data.message)
                         alert("Email already exist!xx");

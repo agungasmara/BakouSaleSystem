@@ -3,12 +3,8 @@
 <!-- /.Fixed navbar  -->
 <div class="container main-container headerOffset">
     <div class="row">
-        <!-- <div v-for="infor of StateData"> -->
-            <h1>{{StateData.title}}</h1>
-        	<p>{{StateData.description}}</p>
-            <!-- {{ $route.params.id }} -->
-        <!-- </div> -->
-        <p>{{StateData.description}}</p>
+        <h1>{{StateData.title}}</h1>
+        <span v-html="StateData.description"></span>
     </div>
 </div>
 <!-- /main-container -->
@@ -35,6 +31,9 @@
         },
         components:{    
             InformationDataComponent
+        },
+        mounted(){
+            
         },
         created(){
             this.productDetails(this.id);

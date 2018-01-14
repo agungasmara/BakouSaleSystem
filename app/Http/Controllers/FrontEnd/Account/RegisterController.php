@@ -26,7 +26,6 @@ class RegisterController extends Controller
         $data = $request->all();             
         $mail = $this->getMails($request->email);
         if($mail){
-           // $mailCol = '';
             return redirect('account/register');
         }else{
             $mailCol = $data['email'];
