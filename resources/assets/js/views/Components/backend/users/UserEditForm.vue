@@ -2,14 +2,15 @@
 <v-app id="inspire">
 	<v-card>
 
-		<v-card-title>	
-			<v-breadcrumbs>
-	        	<v-icon slot="divider">forward</v-icon>
-	        		<v-breadcrumbs-item  v-for="item in breadcrumbs" :key="item.text" :disabled="item.disabled">
-	          			{{ item.text }}
-	        		</v-breadcrumbs-item>
-	      	</v-breadcrumbs>
-		</v-card-title>
+		<!--breadcrumbs start-->
+			<breadcrumb3btn
+			v-bind:breadcrumb-item="breadcrumbs"
+			v-bind:breadcrumb-title="breadcrumbTitle"
+			v-bind:submit="submit"
+			v-bind:is-valid="valid"
+			v-bind:back-url="backUrl"
+			></breadcrumb3btn>
+		<!--breadcrumbs end-->
 		<div class="flash flash__success" v-if="flash.success">
 			<v-alert color="success" icon="check_circle" value="true">
             	{{flash.success}}
@@ -91,6 +92,7 @@
 <script>
 	import Flash from '../../../../helper/flash'
 	import axios from 'axios'
+	import breadcrumb3btn from '../commons/breadcrumb/breadcrumb3btn.vue'
 	export default{
 		props:['id'],
 		data(){
@@ -149,22 +151,27 @@
 			    items: [],
 			    selectGroup:null,
 			    groups:[],
+				breadcrumbTitle:'Users',
 				breadcrumbs: [
 			        {
-			          text: 'Adminstrator',
+			          text: 'Administrator',
 			          disabled: false
 			        },
 			        {
-			          text: 'Setting',
+			          text: 'Users',
 			          disabled: false
 			        },
 			        {
-			          text: 'Create',
+			          text: 'Edit',
 			          disabled: true
 			        }
-		      	],
+			    ],
+			    backUrl:'/admin/users/list',
 				flash:Flash.state
 			}
+		},
+		components:{
+			'breadcrumb3btn':breadcrumb3btn
 		},
 		created(){
 			this.getUserGroup()
@@ -189,11 +196,11 @@
 					this.selectStatus=res.data.status
 				})
 			},
-			saveUser (id,opt) {
+			submit:function (opt) {
 		      	if (this.$refs.formUser.validate()) {
 			      	if(this.checkPasswordConfirmed()===false){
 				        // Native form submission is not yet supported
-				        axios.put('/api/users/update/'+id, {
+				        axios.put('/api/users/update/'+this.id, {
 				          username: this.username,
 				          fname: this.fname,
 				          lname: this.lname,

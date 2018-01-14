@@ -77,6 +77,13 @@ import AttributeList from './views/Components/backend/attributes/AttributeList.v
 import AttributeForm from './views/Components/backend/attributes/AttributeForm.vue'
 import AttributeEdit from './views/Components/backend/attributes/AttributeEdit.vue'
 
+//Language########################
+import Languages from './views/Components/backend/languages/Language.vue'
+import LanguagesForm from './views/Components/backend/languages/MainForm.vue'
+import LanguagesList from './views/Components/backend/languages/LanguagesList.vue'
+import LanguagesEditForm from './views/Components/backend/languages/EditForm.vue'
+//end Language####################
+
 //import router from './router'
 import VueResource from 'vue-resource'
 import Vuetify from 'vuetify'
@@ -148,7 +155,7 @@ const router = new VueRouter({
       ]
     },
     {
-      path: '/information/information_detail/:id', name:'information',component: Information,
+      path: '/information/information_detail/:id', name:'information_detail',component: Information,
       components: { default: Information, footer: Footer },
       props: { default: true, footer: false }
     },
@@ -215,11 +222,6 @@ const router = new VueRouter({
         }
       ]
     },
-
-    //Setting
-    { path: '/admin/settings/add',component:SettingForm},
-    { path: '/admin/settings/list',component:SettingList},
-    { path: '/admin/settings/edit/:id',component:SettingEditForm,props:true},
     {path:'/admin/settings',name:'settings',component:Setting,
         children:[
             {
@@ -255,7 +257,7 @@ const router = new VueRouter({
             },
             {
                 path:'edit/:id',
-                name:'UserForm',
+                name:'UserEditForm',
                 component:UserEditForm,
                 props:true
             }
@@ -275,7 +277,7 @@ const router = new VueRouter({
             },
             {
                 path:'edit/:id',
-                name:'UserGroupForm',
+                name:'UserGroupEdit',
                 component:UserGroupEditForm,
                 props:true
             }
@@ -303,6 +305,26 @@ const router = new VueRouter({
                 path:'permission/:id',
                 name:'UserRolePermission',
                 component:UserRolePermission,
+                props:true
+            }
+        ]       
+    },
+    {path:'/admin/languages',name:'languages',component:Languages,
+        children:[
+            {
+                path:'list',
+                name:'LanguagesList',
+                component:LanguagesList
+            },
+            {
+                path:'add',
+                name:'LanguagesForm',
+                component:LanguagesForm
+            },
+            {
+                path:'edit/:id',
+                name:'LanguagesEdit',
+                component:LanguagesEditForm,
                 props:true
             }
         ]       

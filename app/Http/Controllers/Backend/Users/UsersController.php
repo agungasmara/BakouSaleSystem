@@ -28,21 +28,7 @@ class UsersController extends Controller
     	return response()->json($Users);
     }
 
-    public function ValidateData($field,$value){
-        
-        $existed=false;
-
-        //instant the object
-        $validate=new ValidateDataController;
-        if($field=="username"){
-            //return data json to vuejs when axios request
-            return $validate->CheckDataExist('user','username',$value);    
-        }elseif($field=="email"){
-            //return data json to vuejs when axios request
-            return $validate->CheckDataExist('user','email',$value);
-        }
-        
-    }
+    
     public function store(Request $request)
     {
     	$success=false;
@@ -86,7 +72,7 @@ class UsersController extends Controller
     		'message'=>'Data successfully saved.'
     	]);
     }
-    public function getUserByID($id)
+    public function edit($id)
     {
     	$suers=User::get()->where('user_id',$id);
     	foreach ($suers as $key => $value) {
@@ -103,16 +89,7 @@ class UsersController extends Controller
 	    	]);
     	}
     }
-    public function destroy($id)
-    {
-        //$id=226;
-        $user=User::select('*')->where('user_id',$id);
-        $user->delete();
-        return response()->json([
-            'deleted'=>true,
-            'user'=>User::all()
-        ]);
-    }
+    
     public function update(Request $request,$id)
     {
     	if( preg_match('/data:image/', $request->userImage) ){             
@@ -143,5 +120,30 @@ class UsersController extends Controller
     		'success'=>true,
     		'message'=>'Data successfully updated.'
     	]);
+    }
+    public function destroy($id)
+    {
+        //$id=226;
+        $user=User::select('*')->where('user_id',$id);
+        $user->delete();
+        return response()->json([
+            'deleted'=>true,
+            'user'=>User::all()
+        ]);
+    }
+    public function ValidateData($field,$value){
+        
+        $existed=false;
+
+        //instant the object
+        $validate=new ValidateDataController;
+        if($field=="username"){
+            //return data json to vuejs when axios request
+            return $validate->CheckDataExist('user','username',$value);    
+        }elseif($field=="email"){
+            //return data json to vuejs when axios request
+            return $validate->CheckDataExist('user','email',$value);
+        }
+        
     }
 }
