@@ -7,17 +7,22 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Http\Models\BackEnd\User\User;
 use Intervention\Image\ImageManagerStatic as Image;
-//this controller use for create any validation function
-//currently it have one function to validate data if exist or not yet exist
-//then return the json to pass to axios.get() in veujs
+use App\Http\Controllers\Backend\commons\ImageMaker;
 /*
+    this controller use for create any validation function
+    currently it have one function to validate data if exist or not yet exist
+    then return the json to pass to axios.get() in veujs
     this function there are 3 parameter(tablename,fieldname,value)
         - tablename: table that we want to check
         - fieldname: field of that table we want to filter
         - value: value of field we want to check
 */
 use App\Http\Controllers\Backend\commons\ValidateDataController;
-use App\Http\Controllers\Backend\commons\ImageMaker;
+/*
+    deleteData use for delete the data from any table
+    currently only one function available is delete by id
+*/
+use App\Http\Controllers\Backend\commons\deleteData;
 
 class UsersController extends Controller
 {
@@ -123,13 +128,8 @@ class UsersController extends Controller
     }
     public function destroy($id)
     {
-        //$id=226;
-        $user=User::select('*')->where('user_id',$id);
-        $user->delete();
-        return response()->json([
-            'deleted'=>true,
-            'user'=>User::all()
-        ]);
+        $delete=new deleteData;
+        return $delete->deleteDataById(User::class,'user_id',$id);
     }
     public function ValidateData($field,$value){
         

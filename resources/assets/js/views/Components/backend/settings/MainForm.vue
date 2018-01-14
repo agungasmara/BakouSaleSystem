@@ -63,7 +63,7 @@
 			      (v) => !!v || 'Value is required',
 			      (v) => v && v.length <= 50 || 'Value must be less than 50 characters'
 			    ],
-			    select: null,
+			    select: 0,
 			    stores: [],
 			    breadcrumbTitle:'Settins',
 			    breadcrumbs: [
@@ -100,10 +100,11 @@
 		      if (this.$refs.form.validate()) {
 		        // Native form submission is not yet supported
 		        axios.post('/api/settings/save', {
-		          store: this.select,
+		          store_id: this.select,
 		          code: this.code,
 		          key: this.key,
-		          value: this.value
+		          value: this.value,
+		          serialized:0
 		        }).then((res)=>{
 		        	if(res.data.success==true){
 		        		Flash.setSuccess(res.data.message)

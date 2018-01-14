@@ -71,17 +71,6 @@
 							</div>
 						</v-layout>
 					</v-flex>
-			      	<v-btn @click="saveUser(id,1)" :disabled="!valid">
-				        Update
-				    </v-btn>
-				    <v-btn @click="saveUser(id,2)" :disabled="!valid">
-				        Update & Close
-				    </v-btn>
-				    <router-link to="/admin/user/list">
-					    <v-btn>
-					        Cancele
-					    </v-btn>
-				    </router-link>
 			    </v-layout>
 			</v-container>
 	    </v-form>
@@ -185,7 +174,7 @@
 				})
 			},
 			fetchUser(id){
-				axios.get('/api/users/getuserbyid/'+id).then((res)=>{
+				axios.get('/api/users/edit/'+id).then((res)=>{
 					this.selectGroup=res.data.group
 					this.username=res.data.username
 					this.fname=res.data.firstname

@@ -105,11 +105,11 @@
 				})
 			},
 			fetchSettingByID(id){
-				axios.get('/api/settings/getsettingbyid/'+id).then(res=>{
-					this.code=res.data.code
-					this.key=res.data.key
-					this.value=res.data.value
-					this.select=res.data.store_id
+				axios.get('/api/settings/edit/'+id).then(res=>{
+					this.code=res.data.data.code
+					this.key=res.data.data.key
+					this.value=res.data.data.value
+					this.select=res.data.data.store_id
 				});
 			},
 			fetchSettingItem(){
@@ -123,10 +123,11 @@
 		      if (this.$refs.form.validate()) {
 		        // Native form submission is not yet supported
 		        axios.put('/api/settings/update/'+this.id, {
-		          store: this.select,
+		          store_id: this.select,
 		          code: this.code,
 		          key: this.key,
-		          value: this.value
+		          value: this.value,
+		          serialized:0
 		        }).then((res)=>{
 		        	if(res.data.success==true){
 		        		Flash.setSuccess(res.data.message)

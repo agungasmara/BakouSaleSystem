@@ -6,106 +6,84 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Models\BackEnd\Setting\Setting;
-
+/*
+    DataAction class use for any action the data from any table
+    For more detail i have comment in DataAction class in commons folder
+*/
+use App\Http\Controllers\Backend\commons\DataAction;
 class SettingsController extends Controller
 {
+
     public function index()
     {
+
         $settings=Setting::AllSetting();
+
         return response()->json($settings);
     }
-    public function item()
-    {
-        $settings=DB::table('setting')
-                  ->select('setting_id as id','code','key','value')
-                  ->get();
-        $itemsArr = array();
-        foreach($settings as $item)
-        {
-            $itemsArr['code'][]=$item->code;
-            $itemsArr['key'][]=$item->key;
-            $itemsArr['value'][]=$item->value;
-        }
-        return response()->json([
-            'code'=>[
-                'text'=>$itemsArr['code'],
-                'value'=>$itemsArr['code']
-            ],
-            'key'=>[
-                'text'=>$itemsArr['key'],
-                'value'=>$itemsArr['key']
-            ],
-            'value'=>[
-                'text'=>$itemsArr['value'],
-                'value'=>$itemsArr['value']
-            ]
-        ]);
 
-    }
-    public function getSettingByID($id)
-    {
-        $setting=Setting::get()->where('setting_id',$id);
-        foreach ($setting as $key => $value) {
-            return response()->json([
-                'code'=>$value->code,
-                'key'=>$value->key,
-                'value'=>$value->value,
-                'store_id'=>$value->store_id
-            ]);
-        }
-        
-    }
-    public function getStore()
-    {
-        $stores=DB::table('store')->select(['store_id as value','name as text'])->get();
-        return response()->json($stores);
+    public function show($id){
+
     }
 
     public function store(Request $request)
     {
-        $success=false;
-        $saved=Setting::create([
-            'store_id'=>$request->store,
-            'code'=>$request->code,
-            'key'=>$request->key,
-            'value'=>$request->value,
-            'serialized'=>0
-        ]);
 
-        if($saved){
-            $success=true;
-        }else{
-            $success=false;
-        }
+        $data=$request->all();
 
-        return response()->json([
-            'success'=>$success,
-            'message'=>'Data successfully saved.'
-        ]);
+        $condition=[
+            'key'=>$request->key
+        ];
+
+        return (new DataAction)->StoreData(Setting::class,$condition,$data);
+
     }
-    public function destroy($id)
+
+    public function edit($id)
     {
-        //$id=226;
-        $setting=Setting::select('*')->where('setting_id',$id);
-        $setting->delete();
-        return response()->json([
-            'deleted'=>true,
-            'settings'=>Setting::all()
-        ]);
+        return (new DataAction)->EditData(Setting::class,'setting_id',$id);
+        
     }
+
     public function update(Request $request,$id)
     {
         
-        Setting::where('setting_id',$id)->update([
-            'store_id'=>$request->store,
-            'code'=>$request->code,
-            'key'=>$request->key,
-            'value'=>$request->value,
-            'serialized'=>0
-        ]);
-        return response()->json([
-            'success'=>true,
-            'message'=>'Data successfully updated.'
-        ]);
+        $data=$request->all();
+
+        return (new DataAction)->UpdateData(Setting::class,$data,'setting_id',$id);
+
+    }
+
+    public function destroy($id)
+    {
+
+        return (new DataAction)->DeleteData(Setting::class,'setting_id',$id);
+        
+    }
+
+    public function item()
+    {
+
+        $settingItems=Setting::FetchSettingItem();
+
+        return response()->json($settingItems);
+
+    }
+    public function getStore()
+    {
+
+        $stores=DB::table('store')->select(['store_id as value','name as text'])->get();
+
+        return response()->json($stores);
+
+    }
+    public function test()
+    {
+
+        $condition=['key'=>'testkey','code'=>'test'];
+
+        $count = DB::table('setting')->where($condition)->count();
+
+        return response()->json(['n'=>$count]);
     }
 }

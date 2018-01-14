@@ -5,6 +5,12 @@ namespace App\Http\Controllers\Backend\Languages;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Models\BackEnd\Language\Language;
+/*
+    DataAction class use for any action the data from any table
+    For more detail i have comment in DataAction class in commons folder
+*/
+use App\Http\Controllers\Backend\commons\DataAction;
+
 class LanguagesController extends Controller
 {
     /**
@@ -25,8 +31,9 @@ class LanguagesController extends Controller
 
     public function store(Request $request)
     {
-        $success=false;
-        $saved=Language::create([
+
+        $data=[
+
             'name'=>$request->name,
             'code'=>$request->code,
             'locale'=>$request->local,
@@ -34,36 +41,48 @@ class LanguagesController extends Controller
             'sort_order'=>$request->sort_order,
             'image'=>$request->image,
             'status'=>$request->status
-        ]);
-        if($saved){
-            $success=true;
-        }else{
-            $success=false;
-        }
 
-        return response()->json([
-            'success'=>$success,
-            'message'=>'Data successfully saved.'
-        ]);
+        ];
+
+        return (new DataAction)->StoreData(Language::class,$data);
+
     }
 
     public function show($id)
     {
-        //
+        
     }
 
     public function edit($id)
     {
-        //
+
+        return (new DataAction)->EditData(Language::class,$id);
+
     }
 
     public function update(Request $request, $id)
     {
-        //
+
+        $data=[
+
+            'name'=>$request->name,
+            'code'=>$request->code,
+            'locale'=>$request->local,
+            'directory'=>$request->directory,
+            'sort_order'=>$request->sort_order,
+            'image'=>$request->image,
+            'status'=>$request->status
+
+        ];
+        
+        return (new DataAction)->UpdateData(Language::class,$data,'language_id',$id);
+
     }
 
     public function destroy($id)
     {
-        //
+
+        return (new DataAction)->DeleteData(Language::class,$id);
+
     }
 }

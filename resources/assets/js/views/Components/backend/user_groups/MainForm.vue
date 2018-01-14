@@ -37,7 +37,7 @@
 							</div> 
 				      	</v-flex>
 				      	<v-flex xs12 sm6 md6>
-				      		<v-text-field label="Group Type" v-model="groupType" :rules="groupTypeRules" :counter="100" required></v-text-field>
+				      		<v-text-field type="number" label="Group Type" v-model="groupType" :rules="groupTypeRules" :counter="1" required></v-text-field>
 				      	</v-flex>
 				      	<v-flex xs12 sm12 md12>
 				      		<v-select label="Sermissions" autocomplete :loading="loading" multiple cache-items chips required :items="states" :rules="[() => permissions.length > 0 || 'You must choose at least one']" :search-input.sync="search" v-model="permissions"></v-select>
@@ -68,7 +68,7 @@
 			    groupType: '',
 			    groupTypeRules: [
 			      (v) => !!v || 'Group Type is required',
-			      (v) => v && v.length <= 100 || 'Group Type must be less than 100 characters'
+			      (v) => v && v.length <= 1 || 'Group Type must be less than 1 characters'
 			    ],
 			    permissions: [],
 			    breadcrumbTitle:'Users',

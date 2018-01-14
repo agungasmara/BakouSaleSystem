@@ -108,7 +108,7 @@
 		},
 		methods:{
 			fetchUserGroup(id){
-				axios.get('/api/users_group/getuser_groupbyid/'+id).then(res=>{
+				axios.get('/api/users_group/edit/'+id).then(res=>{
 					this.code=res.data.code
 					this.key=res.data.key
 					this.value=res.data.value
