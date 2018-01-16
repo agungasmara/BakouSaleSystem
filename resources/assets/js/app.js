@@ -317,6 +317,7 @@ const router = new VueRouter({
             }
         ]       
     },
+    //for testing only
     {
       path:'/admin/test/form',name:'testFrom',component:testForm
     },

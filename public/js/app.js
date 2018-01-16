@@ -27226,7 +27226,9 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
       component: __WEBPACK_IMPORTED_MODULE_38__views_Components_backend_users_UserRolePermission_vue___default.a,
       props: true
     }]
-  }, {
+  },
+  //for testing only
+  {
     path: '/admin/test/form', name: 'testFrom', component: __WEBPACK_IMPORTED_MODULE_51__views_Components_backend_commons_test_testForm_vue___default.a
   }, {
     path: '/admin/test/tapform', name: 'testTapFrom', component: __WEBPACK_IMPORTED_MODULE_52__views_Components_backend_commons_test_testTapform_vue___default.a
