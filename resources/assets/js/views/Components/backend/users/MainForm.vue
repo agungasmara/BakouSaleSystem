@@ -187,7 +187,7 @@
 			          disabled: true
 			        }
 			    ],
-			    backUrl:'/admin/user/list',
+			    backUrl:'/admin/users/list',
 			}
 		},
 		components:{

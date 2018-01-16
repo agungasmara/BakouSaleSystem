@@ -100484,7 +100484,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				text: 'Create',
 				disabled: true
 			}],
-			backUrl: '/admin/user/list'
+			backUrl: '/admin/users/list'
 		};
 	},
 
@@ -101683,14 +101683,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			var _this2 = this;
 
 			__WEBPACK_IMPORTED_MODULE_1_axios___default.a.get('/api/users/edit/' + id).then(function (res) {
-				_this2.selectGroup = res.data.group;
-				_this2.username = res.data.username;
-				_this2.fname = res.data.firstname;
-				_this2.lname = res.data.lastname;
-				_this2.email = res.data.email;
-				_this2.code = res.data.code;
-				_this2.imageUrl = res.data.image;
-				_this2.selectStatus = res.data.status;
+				_this2.selectGroup = res.data.data.user_group_id;
+				_this2.username = res.data.data.username;
+				_this2.fname = res.data.data.firstname;
+				_this2.lname = res.data.data.lastname;
+				_this2.email = res.data.data.email;
+				_this2.code = res.data.data.code;
+				_this2.imageUrl = res.data.data.image;
+				_this2.selectStatus = res.data.data.status;
 			});
 		},
 
@@ -101702,11 +101702,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 					// Native form submission is not yet supported
 					__WEBPACK_IMPORTED_MODULE_1_axios___default.a.put('/api/users/update/' + this.id, {
 						username: this.username,
-						fname: this.fname,
-						lname: this.lname,
-						userGroup: this.selectGroup,
+						firstname: this.fname,
+						lastname: this.lname,
+						user_group_id: this.selectGroup,
 						email: this.email,
-						userImage: this.imageUrl,
+						image: this.imageUrl,
 						password: this.password,
 						code: this.code,
 						status: this.selectStatus

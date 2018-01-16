@@ -175,14 +175,14 @@
 			},
 			fetchUser(id){
 				axios.get('/api/users/edit/'+id).then((res)=>{
-					this.selectGroup=res.data.group
-					this.username=res.data.username
-					this.fname=res.data.firstname
-					this.lname=res.data.lastname
-					this.email=res.data.email
-					this.code=res.data.code
-					this.imageUrl=res.data.image
-					this.selectStatus=res.data.status
+					this.selectGroup=res.data.data.user_group_id
+					this.username=res.data.data.username
+					this.fname=res.data.data.firstname
+					this.lname=res.data.data.lastname
+					this.email=res.data.data.email
+					this.code=res.data.data.code
+					this.imageUrl=res.data.data.image
+					this.selectStatus=res.data.data.status
 				})
 			},
 			submit:function (opt) {
@@ -191,11 +191,11 @@
 				        // Native form submission is not yet supported
 				        axios.put('/api/users/update/'+this.id, {
 				          username: this.username,
-				          fname: this.fname,
-				          lname: this.lname,
-				          userGroup: this.selectGroup,
+				          firstname: this.fname,
+				          lastname: this.lname,
+				          user_group_id: this.selectGroup,
 				          email:this.email,
-				          userImage:this.imageUrl,
+				          image:this.imageUrl,
 				          password:this.password,
 				          code:this.code,
 				          status:this.selectStatus

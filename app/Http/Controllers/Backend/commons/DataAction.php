@@ -28,6 +28,7 @@
 					] for many condition
 			That con1,con2,...,conN are feild name of table to be check with the value of
 			val1,val2,...valN
+			+ $OrAnd: use to define if you want to compare more than one condition with AND or OR clause
 	 	==============End of parameter================
 	------------------****************---------------------------------------------- 	
 	 	==============Function========================
@@ -39,23 +40,59 @@
 	*/
 	class DataAction extends Controller{
 		
-		public function StoreData($table,$conditon=[],$data)
+		public function StoreData($table,$condition=[],$OrAnd="",$data)
 		{
 
 			$success=false;
 			$message='';
-
 			$count=0;
 
-			if(!empty($conditon))
+			if(!empty($condition))
 			{
+				if(strtolower($OrAnd)=="and" or $OrAnd==""){
 
-				$count = $table::where($conditon)->count();
+					$count = $table::Where($condition)->count();	
+
+				}
+				elseif (strtolower($OrAnd)=="or") {
+
+					$count = $table::orWhere($condition)->count();
+
+				}
 
 				if($count>0){
 
+					$col="";
+			        $n=0;
+			        $and="";
+
+			        foreach($condition as $key=>$field){
+
+			            if($n>0){
+
+			            	if(strtolower($OrAnd)=="and")
+			            	{
+
+			            		$and=' and ';
+
+			            	}
+			            	elseif(strtolower($OrAnd)=="or")
+			            	{
+
+			            		$and='or';
+
+			            	}
+			                
+
+			            }
+
+			            $col=$col.$and.$key;
+
+			            $n=$n+1;
+
+			        }
 		         	$success=false;
-		         	$message='Data already exist!';
+		         	$message=$col.' already exist!';
 
 		        }
 		        else

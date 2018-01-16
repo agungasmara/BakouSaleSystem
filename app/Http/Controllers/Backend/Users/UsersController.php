@@ -19,10 +19,10 @@ use App\Http\Controllers\Backend\commons\ImageMaker;
 */
 use App\Http\Controllers\Backend\commons\ValidateDataController;
 /*
-    deleteData use for delete the data from any table
-    currently only one function available is delete by id
+    DataAction class use for any action the data from any table
+    For more detail i have comment in DataAction class in commons folder
 */
-use App\Http\Controllers\Backend\commons\deleteData;
+use App\Http\Controllers\Backend\commons\DataAction;
 
 class UsersController extends Controller
 {
@@ -33,12 +33,11 @@ class UsersController extends Controller
     	return response()->json($Users);
     }
 
-    
     public function store(Request $request)
     {
-    	$success=false;
-        $ImageMaker=new ImageMaker;
-        //$ImageMaker->base64ToImage("imagesss",$request->userImage);
+
+      //$ImageMaker=new ImageMaker;
+      //$ImageMaker->base64ToImage("imagesss",$request->userImage);
       //     if( preg_match('/data:image/', $request->userImage) ){                
       //     preg_match('/data:image\/(?<mime>.*?)\;/', $request->userImage , $groups);
       //     $mimetype = $groups['mime'];
@@ -50,8 +49,7 @@ class UsersController extends Controller
       //       ->save(public_path($image));                
       // }
         
-      
-    	$saved=User::create([
+    	$data=[
     		'username'=>$request->username,
 			'firstname'=>$request->fname,
 			'lastname'=>$request->lname,
@@ -64,67 +62,52 @@ class UsersController extends Controller
 			'ip'=>$request->ip(),
 			'salt'=>'xy390xz',
 			'date_added'=>date('Y-m-d H:i:s')
-    	]);
-//return $request->all();
-    	if($saved){
-    		$success=true;
-    	}else{
-    		$success=false;
-    	}
+    	];
 
-    	return response()->json([
-    		'success'=>$success,
-    		'message'=>'Data successfully saved.'
-    	]);
+        $condition=[
+            'username'=>$request->username,
+            'email'=>$request->email
+        ];
+
+        return (new DataAction)->StoreData(User::class,$condition,"or",$data);
+
     }
     public function edit($id)
     {
-    	$suers=User::get()->where('user_id',$id);
-    	foreach ($suers as $key => $value) {
-    		return response()->json([
-	    		'username'=>$value->username,
-	    		'group'=>$value->user_group_id,
-	    		'firstname'=>$value->firstname,
-	    		'lastname'=>$value->lastname,
-	    		'email'=>$value->email,
-	    		'code'=>$value->code,
-	    		'image'=>$value->image,
-	    		'date_added'=>$value->date_added,
-	    		'status'=>$value->status
-	    	]);
-    	}
+
+    	return (new DataAction)->EditData(User::class,'user_id',$id);
+
     }
     
     public function update(Request $request,$id)
     {
-    	if( preg_match('/data:image/', $request->userImage) ){             
-          preg_match('/data:image\/(?<mime>.*?)\;/', $request->userImage , $groups);
-          $mimetype = $groups['mime'];
+    	// if( preg_match('/data:image/', $request->userImage) ){             
+     //      preg_match('/data:image\/(?<mime>.*?)\;/', $request->userImage , $groups);
+     //      $mimetype = $groups['mime'];
                        
-          $firstname='images/testpost.'.$mimetype;
-          $image = Image::make($request->userImage)
-            // ->fit(400, 500) 
-            ->encode($mimetype, 100) 
-            ->save(public_path($firstname));                
-        } 
-    	User::where('user_id',$id)->update([
-    		'user_group_id'=>$request->userGroup,
+     //      $firstname='images/testpost.'.$mimetype;
+     //      $image = Image::make($request->userImage)
+     //        // ->fit(400, 500) 
+     //        ->encode($mimetype, 100) 
+     //        ->save(public_path($firstname));                
+     //    } 
+    	$data=[
+    		'user_group_id'=>$request->user_group_id,
     		'username'=>$request->username,
-			'firstname'=>$request->fname,
-			'lastname'=>$request->lname,
+			'firstname'=>$request->firstname,
+			'lastname'=>$request->lastname,
 			'email'=>$request->email,
 			'password'=>bcrypt($request->password),
 			'code'=>$request->code,
-			'image'=>$firstname,
+			'image'=>'',
 			'status'=>$request->status,
 			'ip'=>$request->ip(),
 			'salt'=>'xy390xz',
 			'date_added'=>date('Y-m-d H:i:s')
-    	]);
-    	return response()->json([
-    		'success'=>true,
-    		'message'=>'Data successfully updated.'
-    	]);
+    	];
+    	$data=$request->all();
+
+        return (new DataAction)->UpdateData(User::class,$data,'user_id',$id);
     }
     public function destroy($id)
     {

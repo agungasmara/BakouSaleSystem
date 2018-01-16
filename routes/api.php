@@ -65,4 +65,4 @@ Route::delete('/languages/delete/{id}','Backend\Languages\LanguagesController@de
 
 
 
-Route::get('setting/test','Backend\Settings\SettingsController@test');
+Route::get('/test','TestController@test');
