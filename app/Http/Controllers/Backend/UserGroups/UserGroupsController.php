@@ -17,11 +17,7 @@ use Illuminate\Support\Facades\DB;
         - value: value of field we want to check
 */
 use App\Http\Controllers\Backend\commons\ValidateDataController;
-/*
-    DataAction class use for any action the data from any table
-    For more detail i have comment in DataAction class in commons folder
-*/
-use App\Http\Controllers\Backend\commons\DataAction;
+
 class UserGroupsController extends Controller
 {
     public function index()
@@ -33,26 +29,47 @@ class UserGroupsController extends Controller
         
         return response()->json($UserGroup);
     }
-    
+    public function getPermission()
+    {
+
+    }
+    public function getUsers()
+    {
+        $users=User::select(['user_id as value','username as text'])->get();
+        $userGroup=UserGroup::select(['user_group_id as value','name as text'])->get();
+        return response()->json([
+            'users'=>$users,
+            'groups'=>$userGroup
+        ]);
+    }
     public function store(Request $request)
     {
-        
-        $data=[
-
+        $success=false;
+        $saved=UserGroup::create([
             'name'=>$request->groupName,
             'group_type'=>$request->groupType,
             'permission'=>$request->permissions
+        ]);
 
-        ];
+        if($saved){
+            $success=true;
+        }else{
+            $success=false;
+        }
 
-        return (new DataAction)->StoreData(UserGroup::class,$data);
-
+        return response()->json([
+            'success'=>$success,
+            'message'=>'Data successfully saved.'
+        ]);
     }
-    public function show($id)
+    public function checkIfExisted($field,$value)
     {
-
+        //instant the object
+        $validate=new ValidateDataController;
+        //return data json to vuejs when axios request
+        return $validate->CheckDataExist('user_group',$field,$value);
     }
-    public function edit($id)
+    public function getUserByID($id)
     {
 
     }
@@ -62,25 +79,6 @@ class UserGroupsController extends Controller
     }
     public function destroy($id)
     {
-
-        return (new DataAction)->DeleteData(UserGroup::class,'user_group_id',$id);
-
-    }
-    public function ValidateData($field,$value)
-    {
-        //instant the object
-        $validate=new ValidateDataController;
-        //return data json to vuejs when axios request
-        return $validate->CheckDataExist('user_group',$field,$value);
-    }
-    
-    public function getUsers()
-    {
-        $users=User::select(['user_id as value','username as text'])->get();
-        $userGroup=UserGroup::select(['user_group_id as value','name as text'])->get();
-        return response()->json([
-            'users'=>$users,
-            'groups'=>$userGroup
-        ]);
+    	
     }
 }

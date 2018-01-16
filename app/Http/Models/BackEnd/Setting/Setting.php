@@ -26,33 +26,4 @@ class Setting extends Model
                   ->get();
         return $settings;
     }
-    static function FetchSettingItem()
-    {
-        $settings=DB::table('setting')
-                  ->select('setting_id as id','code','key','value')
-                  ->get();
-        $itemsArr = array();
-        foreach($settings as $item)
-        {
-            $itemsArr['code'][]=$item->code;
-            $itemsArr['key'][]=$item->key;
-            $itemsArr['value'][]=$item->value;
-        }
-        $settingItem=([
-            'code'=>[
-                'text'=>$itemsArr['code'],
-                'value'=>$itemsArr['code']
-            ],
-            'key'=>[
-                'text'=>$itemsArr['key'],
-                'value'=>$itemsArr['key']
-            ],
-            'value'=>[
-                'text'=>$itemsArr['value'],
-                'value'=>$itemsArr['value']
-            ]
-        ]);
-
-        return $settingItem;
-    }
 }

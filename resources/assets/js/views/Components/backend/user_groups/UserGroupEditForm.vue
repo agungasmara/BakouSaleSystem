@@ -3,13 +3,13 @@
 		<v-card>
 
 			<!--breadcrumbs start-->
-				<breadcrumb3btn
+				<breadcrumb3button
 				v-bind:breadcrumb-item="breadcrumbs"
 				v-bind:breadcrumb-title="breadcrumbTitle"
 				v-bind:submit="submit"
 				v-bind:is-valid="valid"
 				v-bind:back-url="backUrl"
-				></breadcrumb3btn>
+				></breadcrumb3button>
 			<!--breadcrumbs end-->
 
 			<div class="flash flash__success" v-if="flash.success">
@@ -56,7 +56,7 @@
 <script>
 	import Flash from '../../../../helper/flash'
 	import axios from 'axios'
-	import breadcrumb3btn from '../commons/breadcrumb/breadcrumb3btn.vue'
+	import breadcrumb3button from '../commons/breadcrumb/breadcrumb3button.vue'
 	export default{
 		props:['id'],
 		data(){
@@ -101,14 +101,14 @@
 			}
 		},
 		components:{
-			'breadcrumb3btn':breadcrumb3btn
+			'breadcrumb3button':breadcrumb3button
 		},
 		created(){
 			this.fetchUserGroup(this.id)
 		},
 		methods:{
 			fetchUserGroup(id){
-				axios.get('/api/users_group/edit/'+id).then(res=>{
+				axios.get('/api/users_group/getuser_groupbyid/'+id).then(res=>{
 					this.code=res.data.code
 					this.key=res.data.key
 					this.value=res.data.value

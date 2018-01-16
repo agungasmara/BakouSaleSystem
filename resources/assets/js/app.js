@@ -10,9 +10,6 @@ import FSignIn from './views/Components/frontend/account/signin.vue'
 import FRegister from './views/Components/frontend/account/register.vue'
 import FLogin from './views/Components/frontend/account/login.vue'
 import Dashboard from './views/Components/frontend/account/dashboard.vue'
-import OrderList from './views/Components/frontend/account/order_list.vue'
-import AddressList from './views/Components/frontend/account/address_list.vue'
-import AddressForm from './views/Components/frontend/account/address_form.vue'
 //***** products *****
 import Product from './views/Components/frontend/product/product.vue'
 import ProductDetail from './views/Components/frontend/product/product_detail.vue'
@@ -81,13 +78,6 @@ import AttributeList from './views/Components/backend/attributes/AttributeList.v
 import AttributeForm from './views/Components/backend/attributes/AttributeForm.vue'
 import AttributeEdit from './views/Components/backend/attributes/AttributeEdit.vue'
 
-//Language########################
-import Languages from './views/Components/backend/languages/Language.vue'
-import LanguagesForm from './views/Components/backend/languages/MainForm.vue'
-import LanguagesList from './views/Components/backend/languages/LanguagesList.vue'
-import LanguagesEditForm from './views/Components/backend/languages/EditForm.vue'
-//end Language####################
-
 //import router from './router'
 import VueResource from 'vue-resource'
 import Vuetify from 'vuetify'
@@ -146,16 +136,6 @@ const router = new VueRouter({
             path: 'dashboard',
             name: 'dashboard',
             component: Dashboard
-          },
-          {
-            path: 'orderlist',
-            name: 'orderlist',
-            component: OrderList
-          },
-          {
-            path: 'addresslist',
-            name: 'addresslist',
-            component: AddressList
           }
       ]
     },
@@ -174,7 +154,7 @@ const router = new VueRouter({
       ]
     },
     {
-      path: '/information/information_detail/:id', name:'information_detail',component: Information,
+      path: '/information/information_detail/:id', name:'information',component: Information,
       components: { default: Information, footer: Footer },
       props: { default: true, footer: false }
     },
@@ -241,6 +221,11 @@ const router = new VueRouter({
         }
       ]
     },
+
+    //Setting
+    { path: '/admin/settings/add',component:SettingForm},
+    { path: '/admin/settings/list',component:SettingList},
+    { path: '/admin/settings/edit/:id',component:SettingEditForm,props:true},
     {path:'/admin/settings',name:'settings',component:Setting,
         children:[
             {
@@ -276,7 +261,7 @@ const router = new VueRouter({
             },
             {
                 path:'edit/:id',
-                name:'UserEditForm',
+                name:'UserForm',
                 component:UserEditForm,
                 props:true
             }
@@ -296,7 +281,7 @@ const router = new VueRouter({
             },
             {
                 path:'edit/:id',
-                name:'UserGroupEdit',
+                name:'UserGroupForm',
                 component:UserGroupEditForm,
                 props:true
             }
@@ -324,26 +309,6 @@ const router = new VueRouter({
                 path:'permission/:id',
                 name:'UserRolePermission',
                 component:UserRolePermission,
-                props:true
-            }
-        ]       
-    },
-    {path:'/admin/languages',name:'languages',component:Languages,
-        children:[
-            {
-                path:'list',
-                name:'LanguagesList',
-                component:LanguagesList
-            },
-            {
-                path:'add',
-                name:'LanguagesForm',
-                component:LanguagesForm
-            },
-            {
-                path:'edit/:id',
-                name:'LanguagesEdit',
-                component:LanguagesEditForm,
                 props:true
             }
         ]       

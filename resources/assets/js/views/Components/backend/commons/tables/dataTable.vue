@@ -6,24 +6,24 @@
 	</v-card-title>
 	<v-data-table v-bind:headers="dataHeader" :items="dataValue" v-bind:search="search" class="elevation-1" :rows-per-page-items="[25,50,100, { text: 'All', value: -1 }]" :loading="tbloading" sort-desc="true">
 		<template slot="items" slot-scope="props">
-			<td v-for="(value,index) in props.item" :class="index=='id'||index=='status' ? 'text-xs-center':''">
 
-				<img v-if="index=='image'" :src="props.item.image" width="50" height="50">
+			<td v-for="index in dataHeader" >
 
-				<span v-else>{{ value }}</span>
 
+				<img v-if="index.value=='image'" :src="props.item.image" width="50" height="50">
+
+				<div v-else-if="index.text=='Action'">
+					<span style="cursor:pointer;color:blue;" @click="editData(props.item[index.value])"">
+						<i class="material-icons">edit</i>
+					</span>
+					&nbsp;
+					<span style="cursor:pointer;color:red;" v-on:click="confirmDel(props.item[index.value],props.item.name)">
+						<i class="material-icons">delete_forever</i>
+					</span>
+				</div>
+				<span v-else>{{ props.item[index.value] }}</span>
 			</td>
-			<td class="text-xs-center">
-
-				<span style="cursor:pointer;color:blue;" @click="editData(props.item.id)"">
-					<i class="material-icons">edit</i>
-				</span>
-				&nbsp;
-				<span style="cursor:pointer;color:red;" v-on:click="confirmDel(props.item.id,props.item.name)">
-					<i class="material-icons">delete_forever</i>
-				</span>
-
-			</td>
+			
 		</template>
 		<template slot="pageText" slot-scope="{ pageStart, pageStop }">
 			From {{ pageStart }} to {{ pageStop }}
@@ -68,10 +68,7 @@
 		props:[
 			'dataHeader',//data table header(column name)
 			'dataValue',//fetch record and pass to data table component
-			'getApi',//provide get api url
-			'deleteApi',//provide delete api url
-			'editUrl',//provide edit api url
-			'btnNewUrl'//url for button
+			'url',//resource url laravel
 		],
 		data(){
 			return{
@@ -91,12 +88,12 @@
 		mounted(){
 			this.tbloading=false
 		},
+
 		methods:{
 			fetchData(){
-				axios.get(this.getApi).then(response=>{
+				axios.get(this.url).then(response=>{
 
 					//refresh data table when data have changed
-
 					this.$emit('change', response.data)//'change' is the event pass from parent component
 
 					//this.dataValue=response.data
@@ -114,10 +111,10 @@
 			},
 			deleteItem(id){
 				this.deleteMessage="Deleting..."
-				axios.delete(this.deleteApi+id).then((res)=>{
-					
-					if(res.data.deleted==true){
-
+				axios.delete(this.url+id).then((res)=>{
+					console.log(res.data.success);
+					if(res.data.success==true){
+						// alert(1);
 						this.fetchData()
 					}
 					this.dialog=false
@@ -127,7 +124,8 @@
 			},
 			editData(id){
 				//this.components.push(id)
-				this.$router.push(this.editUrl+id)
+
+				this.$router.push('edit/'+id)
 			}
 		}
 	}

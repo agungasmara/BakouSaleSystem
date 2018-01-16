@@ -22,7 +22,7 @@
 			    	<v-btn @click.prevent="submit(2)" :disabled="!isValid" color="success" class="btn dropdown-settings breadcrumbs-btn right"	>
 				        Save & Close
 				    </v-btn>
-			     	<v-btn @click.prevent="submit(1)" :disabled="!isValid" class="btn dropdown-settings waves-effect waves-light breadcrumbs-btn right" color="success">
+			     	<v-btn @click.prevent="submit(1)" class="btn dropdown-settings waves-effect waves-light breadcrumbs-btn right" color="success">
 			     		Save
 			     	</v-btn>
 			    </div>

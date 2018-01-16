@@ -22,25 +22,16 @@
                     </h2>
                     <ul class="myAccountList row ">
                         <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center ">
-                            <div class="thumbnail">
-                                <router-link v-bind:to="'/account/orderlist'" title="Orders">
-                                  <i class="fa fa-calendar"></i> Order history 
-                                </router-link>
-                            </div>
+                            <div class="thumbnail"><a title="Orders" href="order-list.html"><i
+                                    class="fa fa-calendar"></i> Order history </a></div>
                         </li>
                         <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center ">
-                            <div class="thumbnail">
-                                <router-link v-bind:to="'/account/addresslist'" title="My addresses">
-                                    <i class="fa fa-map-marker"></i> My addresses
-                                </router-link>
-                            </div>
+                            <div class="thumbnail"><a title="My addresses" href="my-address.html"><i
+                                    class="fa fa-map-marker"></i> My addresses</a></div>
                         </li>
                         <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center ">
-                            <div class="thumbnail">
-                                 <router-link v-bind:to="'/account/addressform'" title="Add address">
-                                    <i class="fa fa-edit"> </i> Add address
-                                </router-link>
-                            </div>
+                            <div class="thumbnail"><a title="Add  address" href="add-address.html"> <i
+                                    class="fa fa-edit"> </i> Add address</a></div>
                         </li>
                         <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center ">
                             <div class="thumbnail"><a title="Personal information"
