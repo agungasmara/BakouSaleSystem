@@ -20,10 +20,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 //FrontEnd
-//=====Customer Register API
+//=====Customer Account Register API
 Route::post('/customer/register','FrontEnd\Account\RegisterController@store');
-Route::get('/customer/register/get','FrontEnd\Account\RegisterController@index');
-Route::get('/customer/get','FrontEnd\Account\RegisterController@getMails');
+Route::get('/customer/test','FrontEnd\Account\LoginController@test');
+Route::post('/customer/login','FrontEnd\Account\LoginController@AuthLogin');
+Route::get('/customer/get','FrontEnd\Account\LoginController@getPasswordCustomer');
 
 //BackEnd
 
