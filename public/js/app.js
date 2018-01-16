@@ -26953,9 +26953,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_49__views_Components_backend_attributes_AttributeForm_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_49__views_Components_backend_attributes_AttributeForm_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_50__views_Components_backend_attributes_AttributeEdit_vue__ = __webpack_require__(287);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_50__views_Components_backend_attributes_AttributeEdit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_50__views_Components_backend_attributes_AttributeEdit_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_51_vue_resource__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_52_vuetify__ = __webpack_require__(301);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_52_vuetify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_52_vuetify__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_51__views_Components_backend_commons_test_testForm_vue__ = __webpack_require__(315);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_51__views_Components_backend_commons_test_testForm_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_51__views_Components_backend_commons_test_testForm_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_52__views_Components_backend_commons_test_testTapform_vue__ = __webpack_require__(318);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_52__views_Components_backend_commons_test_testTapform_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_52__views_Components_backend_commons_test_testTapform_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_53_vue_resource__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_54_vuetify__ = __webpack_require__(301);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_54_vuetify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_54_vuetify__);
 
 
 
@@ -27036,12 +27040,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+//***** Testing *****
+
+
+
 //import router from './router'
 
 
 
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_52_vuetify___default.a);
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_51_vue_resource__["a" /* default */]);
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_54_vuetify___default.a);
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_53_vue_resource__["a" /* default */]);
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.http.options.credentials = true;
@@ -27218,6 +27226,10 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
       component: __WEBPACK_IMPORTED_MODULE_38__views_Components_backend_users_UserRolePermission_vue___default.a,
       props: true
     }]
+  }, {
+    path: '/admin/test/form', name: 'testFrom', component: __WEBPACK_IMPORTED_MODULE_51__views_Components_backend_commons_test_testForm_vue___default.a
+  }, {
+    path: '/admin/test/tapform', name: 'testTapFrom', component: __WEBPACK_IMPORTED_MODULE_52__views_Components_backend_commons_test_testTapform_vue___default.a
   }],
   scrollBehavior: function scrollBehavior(to, from, savedPosition) {
     return { x: 10, y: 0 };
@@ -107879,47 +107891,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -107947,65 +107918,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			}, {
 				name: 'Data',
 				group: [{ class: 'xs12 sm6 md6', key: 'model', type: 'text', Value: '' }, { class: 'xs12 sm6 md6', key: 'manufacturer_id', type: 'select', Value: '', items: this.manufacturer }, { class: 'xs12 sm6 md6', key: 'sku', type: 'text', Value: '' }, { class: 'xs12 sm6 md6', key: 'upc', type: 'text', Value: '' }, { class: 'xs12 sm6 md6', key: 'ean', type: 'text', Value: '' }, { class: 'xs12 sm6 md6', key: 'jan', type: 'text', Value: '' }, { class: 'xs12 sm6 md6', key: 'isbn', type: 'text', Value: '' }, { class: 'xs12 sm6 md6', key: 'mpn', type: 'text', Value: '' }, { class: 'xs12 sm6 md6', key: 'location', type: 'text', Value: '' }, { class: 'xs12 sm6 md6', key: 'quantity', type: 'text', Value: '' }, { class: 'xs12 sm6 md6', key: 'stock_status_id', type: 'select', Value: '', items: this.stock_status }, { class: 'xs12 sm6 md6', key: 'price', type: 'text', Value: '' }, { class: 'xs12 sm6 md6', key: 'minimum', type: 'text', Value: '' }, { class: 'xs12 sm6 md6', key: 'subtract', type: 'text', Value: '' }, { class: 'xs12 sm6 md6', key: 'shipping', type: 'text', Value: '' }, { class: 'xs12 sm6 md6', key: 'points', type: 'text', Value: '' }, { class: 'xs12 sm6 md6', key: 'tax_class_id', type: 'select', Value: '', items: this.tax_class }, { class: 'xs12 sm6 md6', key: 'date_available', type: 'text', Value: '' }, { class: 'xs12 sm6 md6', key: 'weight', type: 'text', Value: '' }, { class: 'xs12 sm6 md6', key: 'weight_class_id', type: 'select', Value: '', items: this.weight_class }, { class: 'xs4 sm2', key: 'length', type: 'text', Value: '' }, { class: 'xs4 sm2', key: 'width', type: 'text', Value: '' }, { class: 'xs4 sm2', key: 'height', type: 'text', Value: '' }, { class: 'xs12 sm6 md6', key: 'length_class_id', type: 'select', Value: '', items: this.length_class }, { class: 'xs12 sm6 md6', key: 'sort_order', type: 'text', Value: '' }, { class: 'xs12 sm6 md6', key: 'status', type: 'select', Value: '', items: this.status }]
-			},
-			// {
-			// 	name:'Links', 
-			// 	group:[
-			// 		{	class:'',	 key:'',	type:'',	Value:'',	items:[]}
-			// 	]
-			// },
-			// {
-			// 	name:'Attribute', 
-			// 	group:[
-			// 		{	class:'',	 key:'',	type:'', Value:'',	}
-			// 	]
-			// },
-			// {
-			// 	name:'Option', 
-			// 	group:[
-			// 		{	class:'',	 key:'',	type:'', Value:'',	}
-			// 	]
-			// },
-			// {
-			// 	name:'Recurring', 
-			// 	group:[
-			// 		{	class:'',	 key:'',	type:'', Value:'',	}
-			// 	]
-			// },
-			// {
-			// 	name:'Discount', 
-			// 	group:[
-			// 		{	class:'',	 key:'',	type:'', Value:'',	}
-			// 	]
-			// },
-			// {
-			// 	name:'Special', 
-			// 	group:[
-			// 		{	class:'',	 key:'',	type:'', Value:'',	}
-			// 	]
-			// },
-			{
+			}, {
 				name: 'Image',
 				group: [{ class: 'xs12 sm6 md6', key: 'image', type: 'text', Value: '' }]
 			}],
-
-			// code: '',
-			// codeRules: [
-			//   (v) => !!v || 'Code is required',
-			//   (v) => v && v.length <= 10 || 'Code must be less than 10 characters'
-			// ],
-			// key: '',
-			// keyRules: [
-			//   (v) => !!v || 'Key is required',
-			//   (v) => v && v.length <= 10 || 'Key must be less than 10 characters'
-			// ],
-			// value: '',
-			// valueRules: [
-			//   (v) => !!v || 'Value is required',
-			//   (v) => v && v.length <= 10 || 'Value must be less than 10 characters'
-			// ],
-			// select: null,
-			// items: [],
 			breadcrumbs: [{
 				text: 'Dashboard',
 				disabled: false
@@ -128838,7 +128754,9 @@ var render = function() {
           [
             _c(
               "router-link",
-              { attrs: { to: _vm.backUrl, replace: "" } },
+              {
+                attrs: { to: _vm.backUrl, disabled: !_vm.isValid, replace: "" }
+              },
               [
                 _c(
                   "v-btn",
@@ -128914,6 +128832,1080 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-e825f624", module.exports)
+  }
+}
+
+/***/ }),
+/* 309 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(310)
+/* template */
+var __vue_template__ = __webpack_require__(311)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\views\\Components\\backend\\commons\\form\\normalForm.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4c9509ae", Component.options)
+  } else {
+    hotAPI.reload("data-v-4c9509ae", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 310 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helper_flash__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__breadcrumb_breadcrumb3button_vue__ = __webpack_require__(306);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__breadcrumb_breadcrumb3button_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__breadcrumb_breadcrumb3button_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	props: ['formItems', 'formRules'],
+	data: function data() {
+		return {
+			e1: true,
+			count: 0,
+			valid: true,
+			btnImageDisabled: false,
+			btnText: 'Upload Image',
+			imageUrl: '',
+			image: null
+		};
+	},
+
+	methods: {
+		onPickFile: function onPickFile() {
+
+			this.btnImageDisabled = true;
+			this.btnText = "Uploading...";
+		},
+		onFilePicked: function onFilePicked(event) {
+			var _this = this;
+
+			this.image = this.imageUrl;
+			var files = event.target.files;
+			var filename = files[0].name;
+			if (filename.lastIndexOf('.') <= 0) {
+				return alert('Please add a valid file!');
+			}
+			var fileReader = new FileReader();
+			fileReader.addEventListener('load', function () {
+
+				_this.imageUrl = fileReader.result;
+				_this.btnImageDisabled = false;
+				_this.btnText = "Upload Image";
+			});
+			fileReader.readAsDataURL(files[0]);
+		},
+		clearImage: function clearImage() {
+			this.imageUrl = '';
+			var input = this.$refs.fileInput;
+			input.reset();
+		}
+	}
+});
+
+/***/ }),
+/* 311 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-app",
+    { attrs: { id: "inspire" } },
+    [
+      _c(
+        "v-form",
+        {
+          ref: "form",
+          attrs: { "lazy-validation": "" },
+          model: {
+            value: _vm.valid,
+            callback: function($$v) {
+              _vm.valid = $$v
+            },
+            expression: "valid"
+          }
+        },
+        [
+          _c(
+            "v-card",
+            { attrs: { flat: "" } },
+            [
+              _c(
+                "v-card-text",
+                [
+                  _c(
+                    "v-container",
+                    { attrs: { "grid-list-md": "", "offset-s3": "" } },
+                    [
+                      _c(
+                        "v-layout",
+                        { attrs: { wrap: "" } },
+                        _vm._l(_vm.formItems, function(input) {
+                          return _c(
+                            "v-flex",
+                            { key: input.key, class: input.class },
+                            [
+                              input.type == "select"
+                                ? _c(
+                                    "div",
+                                    [
+                                      _c("v-select", {
+                                        attrs: {
+                                          label: input.key,
+                                          rules: _vm.formRules[input.key],
+                                          items: input.items,
+                                          required: ""
+                                        },
+                                        model: {
+                                          value: input.Value,
+                                          callback: function($$v) {
+                                            _vm.$set(input, "Value", $$v)
+                                          },
+                                          expression: "input.Value"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              input.type == "image"
+                                ? _c(
+                                    "div",
+                                    [
+                                      _c("input", {
+                                        ref: "fileInput",
+                                        refInFor: true,
+                                        staticStyle: { display: "none" },
+                                        attrs: {
+                                          type: "file",
+                                          id: "fileInput",
+                                          accept: "image/*"
+                                        },
+                                        on: { change: _vm.onFilePicked }
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-layout",
+                                        {
+                                          attrs: {
+                                            "align-center": "",
+                                            "justify-center": ""
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "div",
+                                            [
+                                              _vm.imageUrl
+                                                ? _c(
+                                                    "v-badge",
+                                                    {
+                                                      attrs: { color: "indigo" }
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "span",
+                                                        {
+                                                          staticStyle: {
+                                                            cursor: "pointer"
+                                                          },
+                                                          attrs: {
+                                                            slot: "badge"
+                                                          },
+                                                          on: {
+                                                            click:
+                                                              _vm.clearImage
+                                                          },
+                                                          slot: "badge"
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            "\n\t\t\t\t\t\t\t\t\t\t\t\tx\n\t\t\t\t\t\t\t\t\t\t\t"
+                                                          )
+                                                        ]
+                                                      )
+                                                    ]
+                                                  )
+                                                : _vm._e(),
+                                              _vm._v(" "),
+                                              _c(
+                                                "label",
+                                                { attrs: { for: "fileInput" } },
+                                                [
+                                                  _c("img", {
+                                                    staticStyle: {
+                                                      height: "100px",
+                                                      "max-width": "300px",
+                                                      cursor: "pointer",
+                                                      "margin-top": "-30px"
+                                                    },
+                                                    attrs: {
+                                                      src: _vm.imageUrl,
+                                                      height: "100"
+                                                    },
+                                                    on: {
+                                                      click: _vm.onPickFile
+                                                    }
+                                                  }),
+                                                  _vm._v(" "),
+                                                  !_vm.imageUrl
+                                                    ? _c(
+                                                        "div",
+                                                        {
+                                                          staticStyle: {
+                                                            height: "100px",
+                                                            "max-width":
+                                                              "300px",
+                                                            cursor: "pointer",
+                                                            "margin-top":
+                                                              "-30px"
+                                                          },
+                                                          attrs: {
+                                                            height: "100"
+                                                          }
+                                                        },
+                                                        [
+                                                          _c(
+                                                            "v-alert",
+                                                            {
+                                                              attrs: {
+                                                                outline: "",
+                                                                color: "info",
+                                                                value: true
+                                                              },
+                                                              on: {
+                                                                click:
+                                                                  _vm.onPickFile
+                                                              }
+                                                            },
+                                                            [
+                                                              _vm._v(
+                                                                _vm._s(
+                                                                  _vm.btnText
+                                                                ) +
+                                                                  "\n\t\t\t\t\t\t\t\t\t\t\t\t"
+                                                              )
+                                                            ]
+                                                          )
+                                                        ],
+                                                        1
+                                                      )
+                                                    : _vm._e()
+                                                ]
+                                              )
+                                            ],
+                                            1
+                                          )
+                                        ]
+                                      )
+                                    ],
+                                    1
+                                  )
+                                : input.type == "password"
+                                  ? _c(
+                                      "div",
+                                      [
+                                        _c("v-text-field", {
+                                          attrs: {
+                                            label: "Confirm Password",
+                                            name: "confirmpassword",
+                                            rules: _vm.formRules[input.key],
+                                            required: "",
+                                            "append-icon": _vm.e1
+                                              ? "visibility"
+                                              : "visibility_off",
+                                            "append-icon-cb": function() {
+                                              return (_vm.e1 = !_vm.e1)
+                                            },
+                                            type: _vm.e1 ? "password" : "text"
+                                          },
+                                          model: {
+                                            value: input.Value,
+                                            callback: function($$v) {
+                                              _vm.$set(input, "Value", $$v)
+                                            },
+                                            expression: "input.Value"
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  : _c(
+                                      "div",
+                                      [
+                                        _c("v-text-field", {
+                                          attrs: {
+                                            label: input.key,
+                                            rules: _vm.formRules[input.key],
+                                            counter: input.count,
+                                            required: ""
+                                          },
+                                          model: {
+                                            value: input.value,
+                                            callback: function($$v) {
+                                              _vm.$set(input, "value", $$v)
+                                            },
+                                            expression: "input.value"
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    )
+                            ]
+                          )
+                        })
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-4c9509ae", module.exports)
+  }
+}
+
+/***/ }),
+/* 312 */,
+/* 313 */,
+/* 314 */,
+/* 315 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(316)
+/* template */
+var __vue_template__ = __webpack_require__(317)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\views\\Components\\backend\\commons\\test\\testForm.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-39e9340b", Component.options)
+  } else {
+    hotAPI.reload("data-v-39e9340b", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 316 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__form_normalForm_vue__ = __webpack_require__(309);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__form_normalForm_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__form_normalForm_vue__);
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	components: {
+		'normalForm': __WEBPACK_IMPORTED_MODULE_0__form_normalForm_vue___default.a
+	},
+	data: function data() {
+		return {
+			group: [{ class: 'xs12 sm6 md6', key: 'language_id', type: 'text', Value: '', count: 10 }, { class: 'xs12 sm6 md6', key: 'description', type: 'text', Value: '', count: 15 }, { class: 'xs12 sm6 md6', key: 'tag', type: 'text', Value: '', count: 20 }, { class: 'xs12 sm6 md6', key: 'meta_title', type: 'text', Value: '', count: 25 }, { class: 'xs12 sm6 md6', key: 'meta_description', type: 'text', Value: '', count: 30 }, { class: 'xs12 sm6 md6', key: 'meta_keyword', type: 'text', Value: '', count: 35 }, { class: 'xs12 sm4 md4', key: 'name', type: 'text', Value: '', count: 40 }, { class: 'xs12 sm4 md4', key: 'password', type: 'password', Value: '', count: 0 }, { class: 'xs12 sm4 md4', key: 'image', type: 'image', Value: '', count: 0 }],
+			rules: {
+				language_id: [function (v) {
+					return !!v || 'Key is required';
+				}, function (v) {
+					return v && v.length <= 10 || 'Key must be less than 10 characters';
+				}],
+				description: [function (v) {
+					return !!v || 'Description is required';
+				}, function (v) {
+					return v && v.length <= 10 || 'Description must be less than 10 characters';
+				}],
+				tag: [function (v) {
+					return !!v || 'Key is required';
+				}, function (v) {
+					return v && v.length <= 10 || 'Key must be less than 10 characters';
+				}],
+				meta_title: [function (v) {
+					return !!v || 'Key is required';
+				}, function (v) {
+					return v && v.length <= 10 || 'Key must be less than 10 characters';
+				}],
+				meta_description: [function (v) {
+					return !!v || 'Key is required';
+				}, function (v) {
+					return v && v.length <= 10 || 'Key must be less than 10 characters';
+				}],
+				meta_keyword: [function (v) {
+					return !!v || 'Key is required';
+				}, function (v) {
+					return v && v.length <= 10 || 'Key must be less than 10 characters';
+				}],
+				name: [function (v) {
+					return !!v || 'Key is required';
+				}, function (v) {
+					return v && v.length <= 10 || 'Key must be less than 10 characters';
+				}],
+
+				model: [function (v) {
+					return !!v || 'Key is required';
+				}, function (v) {
+					return v && v.length <= 10 || 'Key must be less than 10 characters';
+				}],
+				manufacturer_id: [function (v) {
+					return !!v || 'Key is required';
+				}, function (v) {
+					return v && v.length <= 10 || 'Key must be less than 10 characters';
+				}]
+			}
+		};
+	}
+});
+
+/***/ }),
+/* 317 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("normal-form", {
+    attrs: { "form-items": _vm.group, "form-rules": _vm.rules }
+  })
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-39e9340b", module.exports)
+  }
+}
+
+/***/ }),
+/* 318 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(319)
+/* template */
+var __vue_template__ = __webpack_require__(320)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\views\\Components\\backend\\commons\\test\\testTapform.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-590580f0", Component.options)
+  } else {
+    hotAPI.reload("data-v-590580f0", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 319 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__form_multiTapForm_vue__ = __webpack_require__(321);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__form_multiTapForm_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__form_multiTapForm_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	components: {
+		'multiTapForm': __WEBPACK_IMPORTED_MODULE_0__form_multiTapForm_vue___default.a
+	},
+	data: function data() {
+		return {
+			rules: {
+				language_id: [function (v) {
+					return !!v || 'Key is required';
+				}, function (v) {
+					return v && v.length <= 10 || 'Key must be less than 10 characters';
+				}],
+				description: [function (v) {
+					return !!v || 'Key is required';
+				}, function (v) {
+					return v && v.length <= 10 || 'Key must be less than 10 characters';
+				}],
+				tag: [function (v) {
+					return !!v || 'Key is required';
+				}, function (v) {
+					return v && v.length <= 10 || 'Key must be less than 10 characters';
+				}],
+				meta_title: [function (v) {
+					return !!v || 'Key is required';
+				}, function (v) {
+					return v && v.length <= 10 || 'Key must be less than 10 characters';
+				}],
+				meta_description: [function (v) {
+					return !!v || 'Key is required';
+				}, function (v) {
+					return v && v.length <= 10 || 'Key must be less than 10 characters';
+				}],
+				meta_keyword: [function (v) {
+					return !!v || 'Key is required';
+				}, function (v) {
+					return v && v.length <= 10 || 'Key must be less than 10 characters';
+				}],
+				name: [function (v) {
+					return !!v || 'Key is required';
+				}, function (v) {
+					return v && v.length <= 10 || 'Key must be less than 10 characters';
+				}]
+			},
+			select: {
+				status: [{ Value: 1, text: 'Enable' }, { Value: 0, text: 'Disable' }],
+				weight_class: [{ Value: 1, text: 'Enable' }, { Value: 0, text: 'Disable' }],
+				length_class: [{ Value: 1, text: 'Enable' }, { Value: 0, text: 'Disable' }]
+			},
+
+			data: {
+				language_id: '12',
+				description: '12',
+				tag: '12',
+				meta_title: '12',
+				meta_description: '12',
+				meta_keyword: '12',
+				name: '12'
+			},
+			tabs: [{
+				name: 'General',
+				group: [{ class: 'xs12 sm6 md6', key: 'language_id', type: 'text', Value: '' }, { class: 'xs12 sm6 md6', key: 'description', type: 'text', Value: '' }, { class: 'xs12 sm6 md6', key: 'tag', type: 'text', Value: '' }, { class: 'xs12 sm6 md6', key: 'meta_title', type: 'text', Value: '' }, { class: 'xs12 sm6 md6', key: 'meta_description', type: 'text', Value: '' }, { class: 'xs12 sm6 md6', key: 'meta_keyword', type: 'text', Value: '' }, { class: 'xs12 sm6 md6', key: 'name', type: 'text', Value: '' }]
+			}, {
+				name: 'Data',
+				group: [{ class: 'xs12 sm6 md6', key: 'model', type: 'text', Value: '' }, { class: 'xs12 sm6 md6', key: 'sku', type: 'text', Value: '' }, { class: 'xs12 sm6 md6', key: 'upc', type: 'text', Value: '' }, { class: 'xs12 sm6 md6', key: 'ean', type: 'text', Value: '' }, { class: 'xs12 sm6 md6', key: 'jan', type: 'text', Value: '' }, { class: 'xs12 sm6 md6', key: 'isbn', type: 'text', Value: '' }, { class: 'xs12 sm6 md6', key: 'mpn', type: 'text', Value: '' }, { class: 'xs12 sm6 md6', key: 'location', type: 'text', Value: '' }]
+			}, {
+				name: 'Image',
+				group: [{ class: 'xs12 sm6 md6', key: 'image', type: 'text', Value: '' }]
+			}],
+			breadcrumbTitle: 'Users',
+			breadcrumbs: [{
+				text: 'Administrator',
+				disabled: false
+			}, {
+				text: 'Users',
+				disabled: false
+			}, {
+				text: 'Create',
+				disabled: true
+			}],
+			backUrl: '/admin/user/list'
+		};
+	}
+});
+
+/***/ }),
+/* 320 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("multi-tap-form", {
+    attrs: {
+      "tap-items": _vm.tabs,
+      "form-rules": _vm.rules,
+      breadcrumbs: _vm.breadcrumbs,
+      "breadcrumb-title": _vm.breadcrumbTitle,
+      "back-url": _vm.backUrl
+    }
+  })
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-590580f0", module.exports)
+  }
+}
+
+/***/ }),
+/* 321 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(322)
+/* template */
+var __vue_template__ = __webpack_require__(323)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\views\\Components\\backend\\commons\\form\\multiTapForm.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-dbdca29e", Component.options)
+  } else {
+    hotAPI.reload("data-v-dbdca29e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 322 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__breadcrumb_breadcrumb3button_vue__ = __webpack_require__(306);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__breadcrumb_breadcrumb3button_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__breadcrumb_breadcrumb3button_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	props: ['tapItems', 'formRules', 'breadcrumbs', 'breadcrumbTitle', 'backUrl'],
+	components: {
+		'breadcrumb3button': __WEBPACK_IMPORTED_MODULE_0__breadcrumb_breadcrumb3button_vue___default.a
+	},
+	data: function data() {
+		return {
+			e1: true,
+			count: 0,
+			valid: true
+		};
+	},
+
+	methods: {
+		submit: function submit() {
+			if (this.$refs.form.validate()) {}
+		}
+	}
+});
+
+/***/ }),
+/* 323 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-app",
+    { attrs: { id: "inspire" } },
+    [
+      _c(
+        "v-card",
+        [
+          _c("breadcrumb3button", {
+            attrs: {
+              "breadcrumb-item": _vm.breadcrumbs,
+              "breadcrumb-title": _vm.breadcrumbTitle,
+              submit: _vm.submit,
+              "is-valid": _vm.valid,
+              "back-url": _vm.backUrl
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "v-form",
+            {
+              ref: "form",
+              attrs: { "lazy-validation": "" },
+              model: {
+                value: _vm.valid,
+                callback: function($$v) {
+                  _vm.valid = $$v
+                },
+                expression: "valid"
+              }
+            },
+            [
+              _c(
+                "v-tabs",
+                [
+                  _c(
+                    "v-tabs-bar",
+                    [
+                      _c("v-tabs-slider", { attrs: { color: "green" } }),
+                      _vm._v(" "),
+                      _vm._l(_vm.tapItems, function(i) {
+                        return _c(
+                          "v-tabs-item",
+                          { key: i.name, attrs: { href: "#tab-" + i.name } },
+                          [
+                            _vm._v(
+                              "\n\t\t\t           \t" +
+                                _vm._s(i.name) +
+                                "\n\t\t\t        "
+                            )
+                          ]
+                        )
+                      })
+                    ],
+                    2
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-tabs-items",
+                    _vm._l(_vm.tapItems, function(i) {
+                      return _c(
+                        "v-tabs-content",
+                        { key: i.name, attrs: { id: "tab-" + i.name } },
+                        [
+                          _c(
+                            "v-card",
+                            { attrs: { flat: "" } },
+                            [
+                              _c(
+                                "v-card-text",
+                                [
+                                  _c(
+                                    "v-container",
+                                    {
+                                      attrs: {
+                                        "grid-list-md": "",
+                                        "offset-s3": ""
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "v-layout",
+                                        { attrs: { wrap: "" } },
+                                        _vm._l(i.group, function(input) {
+                                          return _c(
+                                            "v-flex",
+                                            {
+                                              key: input.key,
+                                              class: input.class
+                                            },
+                                            [
+                                              input.type == "select"
+                                                ? _c(
+                                                    "div",
+                                                    [
+                                                      _c("v-select", {
+                                                        attrs: {
+                                                          label: input.key,
+                                                          items:
+                                                            _vm.select[
+                                                              input.items
+                                                            ],
+                                                          rules:
+                                                            _vm.formRules[
+                                                              input.key
+                                                            ],
+                                                          required: ""
+                                                        }
+                                                      })
+                                                    ],
+                                                    1
+                                                  )
+                                                : _c(
+                                                    "div",
+                                                    [
+                                                      _c("v-text-field", {
+                                                        attrs: {
+                                                          label: input.key,
+                                                          rules:
+                                                            _vm.formRules[
+                                                              input.key
+                                                            ],
+                                                          counter: 10,
+                                                          required: ""
+                                                        }
+                                                      })
+                                                    ],
+                                                    1
+                                                  )
+                                            ]
+                                          )
+                                        })
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    })
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-dbdca29e", module.exports)
   }
 }
 
