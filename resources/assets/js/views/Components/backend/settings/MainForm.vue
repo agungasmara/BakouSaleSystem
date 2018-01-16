@@ -2,13 +2,13 @@
 		<v-app id="inspire">
 			<v-card>
 				<!--breadcrumbs start-->
-					<breadcrumb3button
+					<breadcrumb3btn
 					v-bind:breadcrumb-item="breadcrumbs"
 					v-bind:breadcrumb-title="breadcrumbTitle"
 					v-bind:submit="submit"
 					v-bind:is-valid="valid"
 					v-bind:back-url="backUrl"
-					></breadcrumb3button>
+					></breadcrumb3btn>
 				<!--breadcrumbs end-->
 				<div class="flash flash__success" v-if="flash.success">
 					<v-alert color="success" icon="check_circle" value="true">
@@ -43,7 +43,7 @@
 <script>
 	import Flash from '../../../../helper/flash'
 	import axios from 'axios'
-	import breadcrumb3button from '../commons/breadcrumb/breadcrumb3button.vue'
+	import breadcrumb3btn from '../commons/breadcrumb/breadcrumb3btn.vue'
 	export default{
 		data(){
 			return{
@@ -63,7 +63,7 @@
 			      (v) => !!v || 'Value is required',
 			      (v) => v && v.length <= 50 || 'Value must be less than 50 characters'
 			    ],
-			    select: null,
+			    select: 0,
 			    stores: [],
 			    breadcrumbTitle:'Settins',
 			    breadcrumbs: [
@@ -85,7 +85,7 @@
 			}
 		},
 		components:{
-			'breadcrumb3button':breadcrumb3button
+			'breadcrumb3btn':breadcrumb3btn
 		},
 		created(){
 			this.getStore()
@@ -99,11 +99,12 @@
 			submit:function (opt) {
 		      if (this.$refs.form.validate()) {
 		        // Native form submission is not yet supported
-		        axios.post('/api/setting/save', {
-		          store: this.select,
+		        axios.post('/api/settings/save', {
+		          store_id: this.select,
 		          code: this.code,
 		          key: this.key,
-		          value: this.value
+		          value: this.value,
+		          serialized:0
 		        }).then((res)=>{
 		        	if(res.data.success==true){
 		        		Flash.setSuccess(res.data.message)

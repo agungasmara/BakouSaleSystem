@@ -6,7 +6,7 @@
 	</v-card-title>
 	<v-data-table v-bind:headers="dataHeader" :items="dataValue" v-bind:search="search" class="elevation-1" :rows-per-page-items="[25,50,100, { text: 'All', value: -1 }]" :loading="tbloading" sort-desc="true">
 		<template slot="items" slot-scope="props">
-			<td v-for="(value,index) in props.item" :class="index=='id' ? 'text-xs-center':''">
+			<td v-for="(value,index) in props.item" :class="index=='id'||index=='status' ? 'text-xs-center':''">
 
 				<img v-if="index=='image'" :src="props.item.image" width="50" height="50">
 
