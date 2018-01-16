@@ -10,6 +10,9 @@ import FSignIn from './views/Components/frontend/account/signin.vue'
 import FRegister from './views/Components/frontend/account/register.vue'
 import FLogin from './views/Components/frontend/account/login.vue'
 import Dashboard from './views/Components/frontend/account/dashboard.vue'
+import OrderList from './views/Components/frontend/account/order_list.vue'
+import AddressList from './views/Components/frontend/account/address_list.vue'
+import AddressForm from './views/Components/frontend/account/address_form.vue'
 //***** products *****
 import Product from './views/Components/frontend/product/product.vue'
 import ProductDetail from './views/Components/frontend/product/product_detail.vue'
@@ -136,6 +139,16 @@ const router = new VueRouter({
             path: 'dashboard',
             name: 'dashboard',
             component: Dashboard
+          },
+          {
+            path: 'orderlist',
+            name: 'orderlist',
+            component: OrderList
+          },
+          {
+            path: 'addresslist',
+            name: 'addresslist',
+            component: AddressList
           }
       ]
     },

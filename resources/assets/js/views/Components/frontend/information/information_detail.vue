@@ -36,16 +36,16 @@
             
         },
         created(){
-            this.productDetails(this.id);
+            this.productDetails(this.id)
         },
         beforeUpdate(){
-            var pid = this.$route.params.id;
-            Flash.setState(this.productDetails(pid));
+            var pid = this.$route.params.id
+            Flash.setState(this.productDetails(pid))
         },
         methods:{
             productDetails(id){
                 axios.get('/api/information/'+id).then(res=>{
-                    this.StateData=res.data;
+                    this.StateData=res.data
                 });
             }
         }

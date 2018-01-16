@@ -3,51 +3,15 @@
 
     <!-- Fixed navbar start -->
     <div class="navbar navbar-tshop navbar-fixed-top megamenu" role="navigation">
-        <div class="navbar-top">
-            
-            <div class="container">
-                <div class="row">
-                    
-                    <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6">
-                        <div class="pull-left ">
-                            <ul class="userMenu ">
-                                <li><a href="#"> <span class="hidden-xs">Helps</span><i
-                                        class="glyphicon glyphicon-info-sign hide visible-xs "></i> </a></li>
-                                <li class="phone-number">
-                                    <a href="callto:+12025550151">
-                                        <span> <i class="glyphicon glyphicon-phone-alt "></i></span>
-                                        <span class="hidden-xs" style="margin-left:5px"> +1-202-555-0151 </span> </a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6 no-margin no-padding">
-                       
-                        <div class="pull-right">
-                            <ul class="userMenu">
-                                <li class="dropdown">
-                                  <a href="<?php echo $account; ?>" title="<?php echo $text_account; ?>" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> 
-                                    <span class="hidden-xs hidden-sm hidden-md">My Account</span> 
-                                    <span class="caret"></span>
-                                  </a>
-                                  <ul class="dropdown-menu">
-                                    <li><router-link to="/account/register">Register</router-link></li>
-                                    <li><router-link to="/account/login">Login</router-link></li>
-                                  </ul>
-                                </li>
-                                <li><router-link to="/account/signin" data-toggle="modal" data-target="#ModalLogin"> <span class="hidden-xs">SignIn</span>
-                                    <i class="glyphicon glyphicon-log-in hide visible-xs "></i> </router-link></li>
-                                <li class="hidden-xs">
-                                    <router-link to="/account/register" data-toggle="modal" data-target="#ModalSignup">Create Account</router-link>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-        </div>
+       
         <!--/.navbar-top-->
+        <!-- Footer -->
+        <!-- ***** template component Footer ***** -->
+        <template>
+          <TopHeaderComponet/>
+        </template>
+        <!-- Footer -->
+         <!-- ***** template component End Footer ***** -->
 
         <div class="container">
             <div class="navbar-header">
@@ -190,6 +154,7 @@
   import Flash from './helper/flash'
   import CartProduct from './views/Components/frontend/include/cart.vue'
   import FooterComponet from './views/Components/frontend/common/_footer.vue'
+  import TopHeaderComponet from './views/Components/frontend/common/_top_header.vue'
 
   export default{
     data(){
@@ -215,6 +180,7 @@
     components:{
         CartProduct,
         FooterComponet,
+        TopHeaderComponet,
     },
     methods: function() {
         

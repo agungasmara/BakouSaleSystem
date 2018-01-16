@@ -15,10 +15,6 @@ class RegisterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(){
-        $get = Customer::get();
-        dd($get);
-    }
     public function store(Request $request)
     {
         $success=false;
