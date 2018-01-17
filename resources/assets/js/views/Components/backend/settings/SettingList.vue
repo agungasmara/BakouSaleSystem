@@ -12,11 +12,10 @@
 			<!--Data table component-->
 
 		    <data-table 
+		    	v-bind:list-title="listTitle"
 		    	v-bind:data-header="headers" 
 		    	v-bind:data-value="settings"
-		    	v-bind:get-api="getApiUrl"
-		    	v-bind:delete-api="deleteApiUrl"
-	    		v-bind:edit-url="urlEdit"
+		    	v-bind:url="url"
 	    		v-bind:btn-new-url="btnNewUrl"
 		    	v-on:change="fetchData">
 		    </data-table>
@@ -38,16 +37,17 @@
 		],
 		data(){
 			return{
-				getApiUrl:'/api/settings/list/',
+				url:'/api/settings/',
 				deleteApiUrl:'/api/settings/delete/',
 				urlEdit:'/admin/settings/edit/',
 				btnNewUrl:'/admin/settings/add',
+				listTitle:'Setting List',
 				headers: [
-			        { text: 'Setting ID',align: 'center',value: 'id'},
-			        { text: 'Store Name',align:'center', value: 'name' },
-			        { text: 'code',align:'center', value: 'code' },
-			        { text: 'Key',align:'center', value: 'key' },
-			        {text: 'Action',align:'center',sortable: false}
+			        { text: 'Setting ID',align: 'center',class:'text-xs-center',value: 'id'},
+			        { text: 'Store Name',align:'center',class:'text-xs-left', value: 'name' },
+			        { text: 'code',align:'center',class:'text-xs-left', value: 'code' },
+			        { text: 'Key',align:'center',class:'text-xs-left', value: 'key' },
+			        {text: 'Action',align:'center',class:'text-xs-center',value:'id',sortable: false}
 			    ],
 				settings:[],
 				breadcrumbTitle:'Settings List',
@@ -74,7 +74,7 @@
 		},
 		methods:{
 			fetchData(){
-				axios.get(this.getApiUrl).then(response=>{
+				axios.get(this.url).then(response=>{
 					this.settings=response.data;
 				});
 			}

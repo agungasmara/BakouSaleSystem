@@ -2,12 +2,20 @@
 	<v-card>
 
 	<v-card-title>
-		<v-text-field append-icon="search" label="Search" single-line hide-details v-model="search"></v-text-field>
-	</v-card-title>
+        {{listTitle}}
+        <v-spacer></v-spacer>
+        <v-text-field
+          append-icon="search"
+          label="Search"
+          single-line
+          hide-details
+          v-model="search"
+        ></v-text-field>
+      </v-card-title>
 	<v-data-table v-bind:headers="dataHeader" :items="dataValue" v-bind:search="search" class="elevation-1" :rows-per-page-items="[25,50,100, { text: 'All', value: -1 }]" :loading="tbloading" sort-desc="true">
 		<template slot="items" slot-scope="props">
 
-			<td v-for="index in dataHeader" >
+			<td v-for="index in dataHeader" :class="index.class">
 
 
 				<img v-if="index.value=='image'" :src="props.item.image" width="50" height="50">
@@ -66,9 +74,11 @@
 	import axios from 'axios'
 	export default{
 		props:[
+			'listTitle',
 			'dataHeader',//data table header(column name)
 			'dataValue',//fetch record and pass to data table component
 			'url',//resource url laravel
+			'btnNewUrl'
 		],
 		data(){
 			return{
@@ -112,8 +122,8 @@
 			deleteItem(id){
 				this.deleteMessage="Deleting..."
 				axios.delete(this.url+id).then((res)=>{
-					console.log(res.data.success);
-					if(res.data.success==true){
+					console.log(res.data.deleted);
+					if(res.data.deleted==true){
 						// alert(1);
 						this.fetchData()
 					}

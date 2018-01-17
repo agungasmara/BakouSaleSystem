@@ -50,116 +50,75 @@
 			if(!empty($condition))
 			{
 				if(strtolower($OrAnd)=="and" or $OrAnd==""){
-
-					$count = $table::Where($condition)->count();	
-
+					$count = $table::Where($condition)->count();
 				}
 				elseif (strtolower($OrAnd)=="or") {
-
 					$count = $table::orWhere($condition)->count();
-
 				}
-
 				if($count>0){
-
 					$col="";
 			        $n=0;
 			        $and="";
-
 			        foreach($condition as $key=>$field){
-
 			            if($n>0){
-
 			            	if(strtolower($OrAnd)=="and")
 			            	{
-
-			            		$and=' and ';
+								$and=' and ';
 
 			            	}
 			            	elseif(strtolower($OrAnd)=="or")
 			            	{
-
 			            		$and='or';
 
 			            	}
-			                
-
 			            }
-
 			            $col=$col.$and.$key;
-
 			            $n=$n+1;
-
 			        }
 		         	$success=false;
 		         	$message=$col.' already exist!';
-
 		        }
 		        else
 		        {
-
 		        	$dataSave=new $table($data);
-
 		        	$saved=$dataSave->save();
-
 		        	if($saved){
-
 			            $success=true;
 			            $message='Data successfully saved.';
-
 			        }
 			        else
 			        {
-
 			            $success=false;
 			            $message='Failed to save data!';
-
 			        }
-
 		        }
-
 			}
 			else
 	        {
 	        	$dataSave=new $table($data);
-
 		        $saved=$dataSave->save();
-
 		        if($saved){
-
 		            $success=true;
 		            $message='Data successfully saved.';
-
 		        }
 		        else
 		        {
-
 		            $success=false;
 		            $message='Failed to save data!';
-
 		        }
 	        }
-
 	        return response()->json([
-
 	            'success'=>$success,
 	            'message'=>$message
-
 	        ]);
 		}
 		public function EditData($table,$field,$id)
 		{
-
 			$data=$table::get()->where($field,$id);
-
 			foreach ($data as $key => $value) {
-
 	            return response()->json([
-
 	            	'data'=>$value
-
 	            ]);
-
 	        }
 		}
 		public function UpdateData($table,$data,$field,$id)
