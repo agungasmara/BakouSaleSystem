@@ -78,6 +78,10 @@ import AttributeList from './views/Components/backend/attributes/AttributeList.v
 import AttributeForm from './views/Components/backend/attributes/AttributeForm.vue'
 import AttributeEdit from './views/Components/backend/attributes/AttributeEdit.vue'
 
+//***** Testing *****
+import testForm from './views/Components/backend/commons/test/testForm.vue'
+import testTapForm from './views/Components/backend/commons/test/testTapform.vue'
+
 //import router from './router'
 import VueResource from 'vue-resource'
 import Vuetify from 'vuetify'
@@ -312,6 +316,13 @@ const router = new VueRouter({
                 props:true
             }
         ]       
+    },
+    //for testing only
+    {
+      path:'/admin/test/form',name:'testFrom',component:testForm
+    },
+    {
+      path:'/admin/test/tapform',name:'testTapFrom',component:testTapForm
     }
   ],
   scrollBehavior (to, from, savedPosition) {

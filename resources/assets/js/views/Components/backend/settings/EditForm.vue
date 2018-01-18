@@ -95,7 +95,7 @@
 		},
 		created(){
 			this.fetchSettingByID(this.id)
-			this.fetchSettingItem(this.id)
+			this.fetchSettingItem()
 			this.getStore()
 		},
 		methods:{
@@ -105,11 +105,11 @@
 				})
 			},
 			fetchSettingByID(id){
-				axios.get('/api/settings/getsettingbyid/'+id).then(res=>{
-					this.code=res.data.code
-					this.key=res.data.key
-					this.value=res.data.value
-					this.select=res.data.store_id
+				axios.get('/api/settings/'+id+'/edit').then(res=>{
+					this.code=res.data.data.code
+					this.key=res.data.data.key
+					this.value=res.data.data.value
+					this.select=res.data.data.store_id
 				});
 			},
 			fetchSettingItem(){
@@ -122,8 +122,8 @@
 			submit (opt) {
 		      if (this.$refs.form.validate()) {
 		        // Native form submission is not yet supported
-		        axios.put('/api/settings/update/'+this.id, {
-		          store: this.select,
+		        axios.put('/api/settings/'+this.id, {
+		          store_id: this.select,
 		          code: this.code,
 		          key: this.key,
 		          value: this.value

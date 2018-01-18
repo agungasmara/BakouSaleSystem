@@ -17,7 +17,7 @@
 		      		</v-breadcrumbs>
 			    </div>
 			    <div class="col s2 m6 l6">
-			    	<router-link :to="backUrl" replace><v-btn color="primary" class="btn dropdown-settings breadcrumbs-btn right">Cancel</v-btn></router-link>
+			    	<router-link :to="backUrl" :disabled="!isValid" replace><v-btn color="primary" class="btn dropdown-settings breadcrumbs-btn right">Cancel</v-btn></router-link>
 
 			    	<v-btn @click.prevent="submit(2)" :disabled="!isValid" color="success" class="btn dropdown-settings breadcrumbs-btn right"	>
 				        Save & Close

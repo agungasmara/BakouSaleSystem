@@ -29,11 +29,13 @@ Route::get('/customer/get','FrontEnd\Account\RegisterController@getMails');
 
 //=====Setting API=============================
 Route::get('/getStore','Backend\Settings\SettingsController@getStore');
-Route::post('/setting/save','Backend\Settings\SettingsController@store');
-Route::get('/setting/list','Backend\Settings\SettingsController@list');
-Route::delete('/setting/delete/{id}','Backend\Settings\SettingsController@destroy');
-Route::get('/setting/getsettingbyid/{id}','Backend\Settings\SettingsController@getSettingByID');
-Route::put('/setting/update/{id}','Backend\Settings\SettingsController@update');
+Route::get('/settings/item/','Backend\Settings\SettingsController@item');//use to get all config item to put into dropdown list in setting edit form 
+//Route::post('/setting/save','Backend\Settings\SettingsController@store');
+Route::Resource('/settings','Backend\Settings\SettingsController');
+
+// Route::delete('/setting/delete/{id}','Backend\Settings\SettingsController@destroy');
+// Route::get('/setting/getsettingbyid/{id}','Backend\Settings\SettingsController@getSettingByID');
+// Route::put('/setting/update/{id}','Backend\Settings\SettingsController@update');
 
 //=====User Group API
 
