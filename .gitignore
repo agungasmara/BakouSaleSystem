@@ -18,3 +18,6 @@ storage/framework/views/542a49e26bfccdfb90e0a0403132698e48fe11d0.php
 storage/framework/views/dca00dfd07d72c574dd0a69c6b260ffbd0174347.php
 storage/framework/views/ee9f0353a51915009eea0cce530e92ffc4c654fc.php
 webpack.mix.js
+public/js/app.js
+public/css/app.css
+public/js/app.js

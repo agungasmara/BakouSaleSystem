@@ -59,7 +59,7 @@
         },
         mounted: function(){
           // alert("test");
-          $.getScript('http://localhost:8000/assets/frontend/js/owl.carousel.min.js');
+          // $.getScript('/assets/frontend/js/owl.carousel.min.js');
         },
         created() {
           axios.get(`/api/banner`)
