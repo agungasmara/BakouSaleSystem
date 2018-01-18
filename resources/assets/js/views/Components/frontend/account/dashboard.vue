@@ -13,7 +13,6 @@
     <div class="row">
         <div class="col-lg-9 col-md-9 col-sm-7">
             <h1 class="section-title-inner"><span><i class="fa fa-unlock-alt"></i> My account </span></h1>
-
             <div class="row userInfo">
                 <div class="col-xs-12 col-sm-12">
                     <p> Your account has been created. </p>
@@ -37,13 +36,20 @@
                             </div>
                         </li>
                         <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center ">
-                            <div class="thumbnail"><a title="Personal information"
-                                                      href="user-information.html"><i class="fa fa-cog"></i>
-                                Personal information</a></div>
+                            <div class="thumbnail">
+                                <router-link v-bind:to="'/account/informationuser'" title="Add address">
+                                    <i class="fa fa-cog"></i>Personal information
+                                </router-link>
+                            </div>
                         </li>
                         <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center ">
-                            <div class="thumbnail"><a title="My wishlists" href="wishlist.html"><i
-                                    class="fa fa-heart"></i> My wishlists </a></div>
+                            <div class="thumbnail">
+                                wishlist
+                                <router-link v-bind:to="'/account/wishlist'" title="My wishlists">
+                                    <i
+                                    class="fa fa-heart"></i> My wishlists 
+                                </router-link>
+                            </div>
                         </li>
                     </ul>
                     <div class="clear clearfix"></div>
