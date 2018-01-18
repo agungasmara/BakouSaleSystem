@@ -93410,7 +93410,6 @@ var render = function() {
                       "col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center "
                   },
                   [
-                    _vm._v("\n<<<<<<< HEAD\n                            "),
                     _c(
                       "div",
                       { staticClass: "thumbnail" },
@@ -93432,18 +93431,13 @@ var render = function() {
                         )
                       ],
                       1
-                    ),
-                    _vm._v("\n=======\n                            "),
-                    _vm._m(5),
-                    _vm._v(
-                      "\n>>>>>>> 50998f9635f671539e20de36c9f66407c2ecbfc1\n                        "
                     )
                   ]
                 ),
                 _vm._v(" "),
-                _vm._m(6),
+                _vm._m(5),
                 _vm._v(" "),
-                _vm._m(7)
+                _vm._m(6)
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "clear clearfix" })
@@ -93543,17 +93537,6 @@ var staticRenderFns = [
         ])
       ]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "thumbnail" }, [
-      _c("a", { attrs: { title: "Add  address", href: "add-address.html" } }, [
-        _c("i", { staticClass: "fa fa-edit" }),
-        _vm._v(" Add address")
-      ])
-    ])
   },
   function() {
     var _vm = this

@@ -30,16 +30,11 @@
                                     class="fa fa-map-marker"></i> My addresses</a></div>
                         </li>
                         <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center ">
-<<<<<<< HEAD
                             <div class="thumbnail">
                                  <router-link v-bind:to="'/account/addressform'" title="Add address">
                                     <i class="fa fa-edit"> </i> Add address
                                 </router-link>
                             </div>
-=======
-                            <div class="thumbnail"><a title="Add  address" href="add-address.html"> <i
-                                    class="fa fa-edit"> </i> Add address</a></div>
->>>>>>> 50998f9635f671539e20de36c9f66407c2ecbfc1
                         </li>
                         <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center ">
                             <div class="thumbnail"><a title="Personal information"
