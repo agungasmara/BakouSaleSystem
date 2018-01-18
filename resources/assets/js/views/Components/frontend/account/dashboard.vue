@@ -13,7 +13,6 @@
     <div class="row">
         <div class="col-lg-9 col-md-9 col-sm-7">
             <h1 class="section-title-inner"><span><i class="fa fa-unlock-alt"></i> My account </span></h1>
-
             <div class="row userInfo">
                 <div class="col-xs-12 col-sm-12">
                     <p> Your account has been created. </p>
