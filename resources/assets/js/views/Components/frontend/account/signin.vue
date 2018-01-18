@@ -12,7 +12,6 @@
         </div>
 
         <div class="row">
-
             <div class="col-lg-9 col-md-9 col-sm-7">
                 <h1 class="section-title-inner"><span><i class="fa fa-lock"></i> Authentication</span></h1>
 

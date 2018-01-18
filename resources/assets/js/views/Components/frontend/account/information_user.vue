@@ -14,7 +14,6 @@
 		        <div class="col-lg-9 col-md-9 col-sm-7">
 		            <h1 class="section-title-inner"><span><i
 		                    class="glyphicon glyphicon-user"></i> My personal information </span></h1>
-
 		            <div class="row userInfo">
 		                <div class="col-lg-12">
 		                    <h2 class="block-title-2"> Please be sure to update your personal information if it has

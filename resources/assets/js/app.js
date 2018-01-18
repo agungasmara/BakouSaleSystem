@@ -10,6 +10,7 @@ import FSignIn from './views/Components/frontend/account/signin.vue'
 import FRegister from './views/Components/frontend/account/register.vue'
 import FLogin from './views/Components/frontend/account/login.vue'
 import Dashboard from './views/Components/frontend/account/dashboard.vue'
+
 import OrderList from './views/Components/frontend/account/order_list.vue'
 import AddressList from './views/Components/frontend/account/address_list.vue'
 import AddressForm from './views/Components/frontend/account/address_form.vue'
@@ -381,17 +382,17 @@ const router = new VueRouter({
 //   ]
 // })
 
-// if( document.getElementById("#root") ) {
-  // app backend
-  const app = new Vue({
-      // el: '#root',
-      router,
-      template: `
-      <app></app>
-    `,
-      components: { App },
-  }).$mount('#root')
-// }
+// // if( document.getElementById("#root") ) {
+//   // app backend
+//   const app = new Vue({
+//       // el: '#root',
+//       router,
+//       template: `
+//       <app></app>
+//     `,
+//       components: { App },
+//   }).$mount('#root')
+// // }
 
 // app frontend
 // if(document.getElementById("#root_frontend") ) {
@@ -404,13 +405,13 @@ const router = new VueRouter({
   }).$mount('#root_frontend')
 // }
 
-// if( document.getElementById("#root_login") ) {
-  const AuthLogin = new Vue({
-      // el: '#root',
-      router,
-      template: `
-      <appl></appl>
-    `,
-      components: { Appl },
-  }).$mount('#root_login')
-// }
+// // if( document.getElementById("#root_login") ) {
+//   const AuthLogin = new Vue({
+//       // el: '#root',
+//       router,
+//       template: `
+//       <appl></appl>
+//     `,
+//       components: { Appl },
+//   }).$mount('#root_login')
+// // }

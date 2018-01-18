@@ -11,7 +11,6 @@
 		        </div>
 		    </div>
 		    <!--/.row-->
-
 		    <div class="row">
 		        <div class="col-lg-9 col-md-9 col-sm-7">
 		            <h1 class="section-title-inner"><span><i class="glyphicon glyphicon-heart"></i> Wisthlist </span></h1>
