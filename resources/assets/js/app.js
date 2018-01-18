@@ -10,6 +10,13 @@ import FSignIn from './views/Components/frontend/account/signin.vue'
 import FRegister from './views/Components/frontend/account/register.vue'
 import FLogin from './views/Components/frontend/account/login.vue'
 import Dashboard from './views/Components/frontend/account/dashboard.vue'
+
+import OrderList from './views/Components/frontend/account/order_list.vue'
+import OrderStatus from './views/Components/frontend/account/order_status.vue'
+import AddressList from './views/Components/frontend/account/address_list.vue'
+import AddressAdd from './views/Components/frontend/account/address_add.vue'
+import AddressForm from './views/Components/frontend/account/address_form.vue'
+import InformationUser from './views/Components/frontend/account/information_user.vue'
 //***** products *****
 import Product from './views/Components/frontend/product/product.vue'
 import ProductDetail from './views/Components/frontend/product/product_detail.vue'
@@ -140,6 +147,31 @@ const router = new VueRouter({
             path: 'dashboard',
             name: 'dashboard',
             component: Dashboard
+          },
+          {
+            path: 'orderlist',
+            name: 'orderlist',
+            component: OrderList
+          },
+          {
+            path: 'orderstatus',
+            name: 'orderstatus',
+            component: OrderStatus
+          },
+          {
+            path: 'addresslist',
+            name: 'addresslist',
+            component: AddressList
+          },
+          {
+            path: 'addressadd',
+            name: 'addressadd',
+            component: AddressAdd
+          },
+          {
+            path: 'informationuser',
+            name: 'informationuser',
+            component: InformationUser
           }
       ]
     },
@@ -157,11 +189,11 @@ const router = new VueRouter({
         }
       ]
     },
-    {
-      path: '/information/information_detail/:id', name:'information',component: Information,
-      components: { default: Information, footer: Footer },
-      props: { default: true, footer: false }
-    },
+    // {
+    //   path: '/information/information_detail/:id', name:'information',component: Information,
+    //   components: { default: Information, footer: Footer },
+    //   props: { default: true, footer: false }
+    // },
     // routing Backend
     { path: '/auth/login', name:'login',component: Login },
     { path: '/admin', name:'ahome',component: Home },
@@ -343,17 +375,17 @@ const router = new VueRouter({
 //   ]
 // })
 
-// if( document.getElementById("#root") ) {
-  // app backend
-  const app = new Vue({
-      // el: '#root',
-      router,
-      template: `
-      <app></app>
-    `,
-      components: { App },
-  }).$mount('#root')
-// }
+// // if( document.getElementById("#root") ) {
+//   // app backend
+//   const app = new Vue({
+//       // el: '#root',
+//       router,
+//       template: `
+//       <app></app>
+//     `,
+//       components: { App },
+//   }).$mount('#root')
+// // }
 
 // app frontend
 // if(document.getElementById("#root_frontend") ) {
@@ -366,13 +398,13 @@ const router = new VueRouter({
   }).$mount('#root_frontend')
 // }
 
-// if( document.getElementById("#root_login") ) {
-  const AuthLogin = new Vue({
-      // el: '#root',
-      router,
-      template: `
-      <appl></appl>
-    `,
-      components: { Appl },
-  }).$mount('#root_login')
-// }
+// // if( document.getElementById("#root_login") ) {
+//   const AuthLogin = new Vue({
+//       // el: '#root',
+//       router,
+//       template: `
+//       <appl></appl>
+//     `,
+//       components: { Appl },
+//   }).$mount('#root_login')
+// // }

@@ -4,7 +4,7 @@
   <div class="morePost row featuredPostContainer style2 globalPaddingTop ">
       <!-- this div is for demo || Please remove it when use this page -->
 
-      <h3 class="section-title style2 text-center"><span>LATEST PRODUCT</span></h3>
+      <h3 class="section-title style2 text-center"><span>LATEST PRODUCT {{getCurrent}}</span></h3>
 
       <div class="container">
           <div class="row xsResponse categoryProduct">
@@ -81,7 +81,7 @@
                             <p v-html="latestProduct.description"></p>
                           </div>
                           <span class="size">XL / XXL / S </span></div>
-                      <div class="price"><span>${{latestProduct.price}}</span></div>
+                      <div class="price"><span>{{latestProduct.price}}</span></div>
                       <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
                               class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
                   </div>
@@ -105,24 +105,29 @@
     export default {
         data() {
             return {
-                flash: Flash.state,
-                error: Flash.state,
-                error: {},
-                latestProducts: [],
-                isProcessing: false
+              flash: Flash.state,
+              error: Flash.state,
+              error: {},
+              latestProducts: [],
+              isProcessing: false,
+              getCurrent:'',
             }
         },
         components:{
-          Common
+
         },
         mounted(){
+
+        },
+        ready: function(){
 
         },
         created() {
           axios.get(`/api/latest`)
   		    .then(response => {
-            
   		      this.latestProducts = response.data['data']
+            console.log("##########################################")
+            console.log(this.latestProducts)
   		    })
   		    .catch(e => {
   		      this.errors.push(e)
@@ -132,7 +137,7 @@
            
         },
         methods: {
-           
+          
         }
     }
 </script>

@@ -4,8 +4,8 @@ export default{
 	    return value.join(' ')
 	},
 
-	functionTest: function (id) {
-		return id
+	functionTest: function (price) {
+		return price + '%%%%'
 	}	
 
 }
