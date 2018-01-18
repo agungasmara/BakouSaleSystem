@@ -31,7 +31,7 @@
                         </li>
                         <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center ">
                             <div class="thumbnail">
-                                 <router-link v-bind:to="'/account/addressform'" title="Add address">
+                                <router-link v-bind:to="'/account/addressadd'" title="Add address">
                                     <i class="fa fa-edit"> </i> Add address
                                 </router-link>
                             </div>
