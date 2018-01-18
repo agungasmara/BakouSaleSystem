@@ -25,7 +25,17 @@
                         <div class="pull-right">
                             <ul class="userMenu">
                                 <li class="dropdown">
-                                  <a href="<?php echo $account; ?>" title="<?php echo $text_account; ?>" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> 
+                                  <a href="" title="" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-flag-o"></i> 
+                                    <span class="hidden-xs hidden-sm hidden-md">Language</span> 
+                                    <span class="caret"></span>
+                                  </a>
+                                  <ul class="dropdown-menu">
+                                    <li><router-link to="/account/register">KH</router-link></li>
+                                    <li><router-link to="/account/login">EN</router-link></li>
+                                  </ul>
+                                </li>
+                                <li class="dropdown">
+                                  <a href="" title="" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> 
                                     <span class="hidden-xs hidden-sm hidden-md">My Account</span> 
                                     <span class="caret"></span>
                                   </a>
