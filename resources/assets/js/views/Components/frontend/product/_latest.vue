@@ -81,7 +81,7 @@
                             <p v-html="latestProduct.description"></p>
                           </div>
                           <span class="size">XL / XXL / S </span></div>
-                      <div class="price"><span>{{convertCurrent(latestProduct.price)}}</span></div>
+                      <div class="price"><span>{{latestProduct.price}}</span></div>
                       <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
                               class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
                   </div>
@@ -126,6 +126,8 @@
           axios.get(`/api/latest`)
   		    .then(response => {
   		      this.latestProducts = response.data['data']
+            console.log("##########################################")
+            console.log(this.latestProducts)
   		    })
   		    .catch(e => {
   		      this.errors.push(e)

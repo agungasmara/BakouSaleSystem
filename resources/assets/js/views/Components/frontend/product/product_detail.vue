@@ -51,9 +51,8 @@
                 <span class="price-sales"> ${{productInfo.price}}</span> 
                 <span class="price-standard">$95</span>
             </div>
-            <div class="details-description">
-                <p>{{productInfo.description}}. </p>
-            </div>
+            <span class="details-description" v-html="productInfo.description">
+            </span>
             <div class="color-details"><span class="selected-color"><strong>COLOR</strong></span>
                 <ul class="swatches Color">
                     <li class="selected"><a style="background-color:#f1f40e"> </a></li>
