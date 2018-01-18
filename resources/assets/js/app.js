@@ -10,7 +10,6 @@ import FSignIn from './views/Components/frontend/account/signin.vue'
 import FRegister from './views/Components/frontend/account/register.vue'
 import FLogin from './views/Components/frontend/account/login.vue'
 import Dashboard from './views/Components/frontend/account/dashboard.vue'
-
 import OrderList from './views/Components/frontend/account/order_list.vue'
 import AddressList from './views/Components/frontend/account/address_list.vue'
 import AddressForm from './views/Components/frontend/account/address_form.vue'
