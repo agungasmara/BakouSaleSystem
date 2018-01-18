@@ -1,5 +1,6 @@
 <template>
-	<div class="container main-container headerOffset">
+	<div>
+		<div class="container main-container headerOffset">
 
     <div class="row">
 
@@ -231,7 +232,11 @@
                     <ul class="pager">
                         <li class="previous pull-right"><a href=""> <i class="fa fa-home"></i> Go to Shop </a>
                         </li>
-                        <li class="next pull-left"><a href="">&larr; Back to My Address</a></li>
+                        <li class="next pull-left">
+                            <router-link v-bind:to="'/account/dashboard'" title="Orders">
+                                ← Back to My account
+                            </router-link>
+                        </li>
                     </ul>
                 </div>
 
@@ -253,6 +258,6 @@
 </div>
 <!-- /wrapper -->
 
-<!-- <div class="gap"></div> -->
-
+<div class="gap"></div>
+	</div>
 </template>

@@ -13,6 +13,11 @@ import Dashboard from './views/Components/frontend/account/dashboard.vue'
 import OrderList from './views/Components/frontend/account/order_list.vue'
 import AddressList from './views/Components/frontend/account/address_list.vue'
 import AddressForm from './views/Components/frontend/account/address_form.vue'
+import OrderStatus from './views/Components/frontend/account/order_status.vue'
+import AddressAdd from './views/Components/frontend/account/address_add.vue'
+import InformationUser from './views/Components/frontend/account/information_user.vue'
+import WishList from './views/Components/frontend/account/wishlist.vue'
+
 //***** products *****
 import Product from './views/Components/frontend/product/product.vue'
 import ProductDetail from './views/Components/frontend/product/product_detail.vue'
@@ -156,6 +161,26 @@ const router = new VueRouter({
             path: 'addresslist',
             name: 'addresslist',
             component: AddressList
+          },
+          {
+            path: 'orderstatus',
+            name: 'orderstatus',
+            component: OrderStatus
+          },
+          {
+            path: 'addressadd',
+            name: 'addressadd',
+            component: AddressAdd
+          },
+          {
+            path: 'informationuser',
+            name: 'informationuser',
+            component: InformationUser
+          },
+          {
+            path: 'wishlist',
+            name: 'wishlist',
+            component: WishList
           }
       ]
     },
