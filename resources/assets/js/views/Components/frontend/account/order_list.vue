@@ -46,11 +46,7 @@
 		                            </td>
 		                            <td><a target="_blank">-</a></td>
 		                            <td>Bank Wire</td>
-		                            <td>
-				                        <router-link v-bind:to="'/account/orderstatus'" title="Orders" class="btn btn-primary btn-sm">
-		                                 		view status
-		                                </router-link>
-		                            </td>
+		                            <td><a href="order-status.html" class="btn btn-primary btn-sm">view status</a></td>
 		                            <td>$403</td>
 		                            <td data-value="78025368997">22 Jun 2014</td>
 		                            <td data-value="3"><span class="label label-success">Done</span>
@@ -63,11 +59,7 @@
 		                            </td>
 		                            <td><a target="_blank">-</a></td>
 		                            <td>Bank Wire</td>
-		                            <td>
-		                            	 <router-link v-bind:to="'/account/orderstatus'" title="Orders" class="btn btn-primary btn-sm">
-		                                 		view status
-		                                </router-link>
-		                            </td>
+		                            <td><a href="order-status.html" class="btn btn-primary btn-sm">view status</a></td>
 		                            <td>$105</td>
 		                            <td data-value="-100297281571">28 Oct 2014</td>
 		                            <td data-value="1"><span class="label label-primary">Pending</span></td>
@@ -79,9 +71,7 @@
 		                            </td>
 		                            <td><a target="_blank">-</a></td>
 		                            <td><a target="_blank">PayPal</a></td>
-		                            <td> <router-link v-bind:to="'/account/orderstatus'" title="Orders" class="btn btn-primary btn-sm">
-		                                 		view status
-		                                </router-link></td>
+		                            <td><a href="order-status.html" class="btn btn-primary btn-sm">view status</a></td>
 		                            <td><a target="_blank">$550 </a></td>
 		                            <td data-value="370961043292">3 Oct 2014</td>
 		                            <td data-value="2"><span class="label label-success">Done</span></td>
@@ -93,9 +83,7 @@
 		                            </td>
 		                            <td><a target="_blank">-</a></td>
 		                            <td>Paypal</td>
-		                            <td> <router-link v-bind:to="'/account/orderstatus'" title="Orders" class="btn btn-primary btn-sm">
-		                                 		view status
-		                                </router-link></td>
+		                            <td><a href="order-status.html" class="btn btn-primary btn-sm">view status</a></td>
 		                            <td>$34</td>
 		                            <td data-value="-22133780420">19 Apr 2014</td>
 		                            <td data-value="1"><span class="label label-primary">Pending</span></td>
@@ -107,9 +95,7 @@
 		                            </td>
 		                            <td><a target="_blank">-</a></td>
 		                            <td>MasterCard</td>
-		                            <td> <router-link v-bind:to="'/account/orderstatus'" title="Orders" class="btn btn-primary btn-sm">
-		                                 		view status
-		                                </router-link></td>
+		                            <td><a href="order-status.html" class="btn btn-primary btn-sm">view status</a></td>
 		                            <td>$1108</td>
 		                            <td data-value="250833505574">13 Dec 2014</td>
 		                            <td data-value="3"><span class="label label-danger">Cancel</span></td>
@@ -121,9 +107,7 @@
 		                            </td>
 		                            <td><a target="_blank">-</a></td>
 		                            <td>Bank Wire</td>
-		                            <td> <router-link v-bind:to="'/account/orderstatus'" title="Orders" class="btn btn-primary btn-sm">
-		                                 		view status
-		                                </router-link></td>
+		                            <td><a href="order-status.html" class="btn btn-primary btn-sm">view status</a></td>
 		                            <td>$669</td>
 		                            <td data-value="694116650726">30 Dec 2014</td>
 		                            <td data-value="3"><span class="label label-danger">Cancel</span></td>
@@ -135,9 +119,7 @@
 		                            </td>
 		                            <td><a target="_blank">-</a></td>
 		                            <td>Bank Wire</td>
-		                            <td> <router-link v-bind:to="'/account/orderstatus'" title="Orders" class="btn btn-primary btn-sm">
-		                                 		view status
-		                                </router-link></td>
+		                            <td><a href="order-status.html" class="btn btn-primary btn-sm">view status</a></td>
 		                            <td>$400</td>
 		                            <td data-value="561440464855">17 Oct 2014</td>
 		                            <td data-value="2"><span class="label label-default">Disable</span></td>
@@ -149,9 +131,7 @@
 		                            </td>
 		                            <td><a target="_blank">-</a></td>
 		                            <td><a target="_blank">PayPal</a></td>
-		                            <td> <router-link v-bind:to="'/account/orderstatus'" title="Orders" class="btn btn-primary btn-sm">
-		                                 		view status
-		                                </router-link></td>
+		                            <td><a href="order-status.html" class="btn btn-primary btn-sm">view status</a></td>
 		                            <td>$403</td>
 		                            <td data-value="437400551390">11 Nov 2014</td>
 		                            <td data-value="3"><span class="label label-danger">Cancel</span></td>
@@ -163,9 +143,7 @@
 		                            </td>
 		                            <td><a target="_blank">-</a></td>
 		                            <td>Paypal</td>
-		                            <td> <router-link v-bind:to="'/account/orderstatus'" title="Orders" class="btn btn-primary btn-sm">
-		                                 		view status
-		                                </router-link></td>
+		                            <td><a href="order-status.html" class="btn btn-primary btn-sm">view status</a></td>
 		                            <td>$105</td>
 		                            <td data-value="-257733999319">1 Nov 2014</td>
 		                            <td data-value="3"><span class="label label-danger">Cancel</span></td>
@@ -177,9 +155,7 @@
 		                            </td>
 		                            <td><a target="_blank">-</a></td>
 		                            <td>MasterCard</td>
-		                            <td> <router-link v-bind:to="'/account/orderstatus'" title="Orders" class="btn btn-primary btn-sm">
-		                                 		view status
-		                                </router-link></td>
+		                            <td><a href="order-status.html" class="btn btn-primary btn-sm">view status</a></td>
 		                            <td><a target="_blank">$550 </a></td>
 		                            <td data-value="362134712000">23 Jun 2014</td>
 		                            <td data-value="1"><a target="_blank"><span class="label label-primary">Pending</span></a>
@@ -192,9 +168,7 @@
 		                            </td>
 		                            <td><a target="_blank">-</a></td>
 		                            <td>Bank Wire</td>
-		                            <td> <router-link v-bind:to="'/account/orderstatus'" title="Orders" class="btn btn-primary btn-sm">
-		                                 		view status
-		                                </router-link></td>
+		                            <td><a href="order-status.html" class="btn btn-primary btn-sm">view status</a></td>
 		                            <td>$34</td>
 		                            <td data-value="751149063430">20 Oct 1993</td>
 		                            <td data-value="2"><span class="label label-default">Disable</span></td>
@@ -207,9 +181,7 @@
 		                            <td><a target="_blank">-</a></td>
 		                            <td>Bank Wire</td>
 
-		                            <td> <router-link v-bind:to="'/account/orderstatus'" title="Orders" class="btn btn-primary btn-sm">
-		                                 		view status
-		                                </router-link></td>
+		                            <td><a href="order-status.html" class="btn btn-primary btn-sm">view status</a></td>
 		                            <td>$1108</td>
 		                            <td data-value="550552096836">13 Jun 1987</td>
 		                            <td data-value="3"><span class="label label-danger">Cancel</span></td>
@@ -224,11 +196,7 @@
 		                    <ul class="pager">
 		                        <li class="previous pull-right"><a href="index.html"> <i class="fa fa-home"></i> Go to Shop </a>
 		                        </li>
-		                        <li class="next pull-left">
-		                        	 <router-link v-bind:to="'/account/dashboard'" title="Orders">
-                                    	← Back to My account
-                            		</router-link>
-		                        </li>
+		                        <li class="next pull-left"><a href="account.html"> &larr; Back to My Account</a></li>
 		                    </ul>
 		                </div>
 		            </div>

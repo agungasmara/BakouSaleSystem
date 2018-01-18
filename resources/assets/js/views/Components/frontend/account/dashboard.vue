@@ -32,7 +32,7 @@
                         <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center ">
 <<<<<<< HEAD
                             <div class="thumbnail">
-                                 <router-link v-bind:to="'/account/addressadd'" title="Add address">
+                                 <router-link v-bind:to="'/account/addressform'" title="Add address">
                                     <i class="fa fa-edit"> </i> Add address
                                 </router-link>
                             </div>
@@ -42,20 +42,13 @@
 >>>>>>> 50998f9635f671539e20de36c9f66407c2ecbfc1
                         </li>
                         <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center ">
-                            <div class="thumbnail">
-                                <router-link v-bind:to="'/account/informationuser'" title="Add address">
-                                    <i class="fa fa-cog"></i>Personal information
-                                </router-link>
-                            </div>
+                            <div class="thumbnail"><a title="Personal information"
+                                                      href="user-information.html"><i class="fa fa-cog"></i>
+                                Personal information</a></div>
                         </li>
                         <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center ">
-                            <div class="thumbnail">
-                                wishlist
-                                <router-link v-bind:to="'/account/wishlist'" title="My wishlists">
-                                    <i
-                                    class="fa fa-heart"></i> My wishlists 
-                                </router-link>
-                            </div>
+                            <div class="thumbnail"><a title="My wishlists" href="wishlist.html"><i
+                                    class="fa fa-heart"></i> My wishlists </a></div>
                         </li>
                     </ul>
                     <div class="clear clearfix"></div>

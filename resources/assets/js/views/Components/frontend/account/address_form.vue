@@ -5,8 +5,8 @@
 
         <div class="breadcrumbDiv col-lg-12">
             <ul class="breadcrumb">
-                <li><a href="">Home</a></li>
-                <li><a href="">My Account</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="account.html">My Account</a></li>
                 <li class="active"> Add Address</li>
             </ul>
         </div>
@@ -229,9 +229,9 @@
                 <div class="col-lg-12 col-xs-12  clearfix ">
 
                     <ul class="pager">
-                        <li class="previous pull-right"><a href=""> <i class="fa fa-home"></i> Go to Shop </a>
+                        <li class="previous pull-right"><a href="index.html"> <i class="fa fa-home"></i> Go to Shop </a>
                         </li>
-                        <li class="next pull-left"><a href="">&larr; Back to My Address</a></li>
+                        <li class="next pull-left"><a href="my-address.html">&larr; Back to My Address</a></li>
                     </ul>
                 </div>
 
@@ -253,6 +253,6 @@
 </div>
 <!-- /wrapper -->
 
-<!-- <div class="gap"></div> -->
+<div class="gap"></div>
 
 </template>
