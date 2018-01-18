@@ -8,11 +8,10 @@
 				v-bind:breadcrumb-title="breadcrumbTitle"
 			></breadcrumb1btn>
 			<data-table 
+				v-bind:list-title="listTitle"
 		    	v-bind:data-header="headers" 
 		    	v-bind:data-value="users"
-		    	v-bind:get-api="getApiUrl"
-		    	v-bind:delete-api="deleteApiUrl"
-	    		v-bind:edit-url="urlEdit"
+	    		v-bind:url="url"
 	    		v-bind:btn-new-url="btnNewUrl"
 		    	v-on:change="fetchData">
 		    </data-table>
@@ -32,22 +31,21 @@
 		],
 		data(){
 			return{
-				getApiUrl:'/api/users/list/',
-				deleteApiUrl:'/api/users/delete/',
-				urlEdit:'/admin/users/edit/',
+				listTitle:'User List',
+				url:'/api/users/',
 				btnNewUrl:'/admin/users/add',
 				headers: [
-			        { text: 'ID',align: 'left',value: 'id'},
-			        { text: 'Username',align:'center', value: 'username' },
-			        { text: 'Group',align:'center', value: 'group' },
-			        { text: 'First Name',align:'center', value: 'firstname' },
-			        { text: 'Last Name',align:'center', value: 'lastname' },
-			        { text: 'Email',align:'center', value: 'email' },
-			        { text: 'Code',align:'center', value: 'code' },
-			        { text: 'Image',align:'center', value: 'image' },
-			        { text: 'Status',align:'center', value: 'status' },
-			        { text: 'Date',align:'center', value: 'date_added' },
-			        { text: 'Action', value: 'action',align:'center',sortable:false }
+			        { text: 'ID',align: 'center',class:'text-xs-center',value: 'id'},
+			        { text: 'Username',align:'center',class:'text-xs-left', value: 'username' },
+			        { text: 'Group',align:'center',class:'text-xs-left', value: 'group' },
+			        { text: 'First Name',align:'center',class:'text-xs-left', value: 'firstname' },
+			        { text: 'Last Name',align:'center',class:'text-xs-left', value: 'lastname' },
+			        { text: 'Email',align:'center',class:'text-xs-left', value: 'email' },
+			        { text: 'Code',align:'center',class:'text-xs-center', value: 'code' },
+			        { text: 'Image',align:'center',class:'text-xs-center', value: 'image' },
+			        { text: 'Status',align:'center',class:'text-xs-center', value: 'status' },
+			        { text: 'Date',align:'center',class:'text-xs-center', value: 'date_added' },
+			        { text: 'Action', value: 'id',class:'text-xs-center',align:'center',sortable:false }
 			    ],
 				users:[],
 				breadcrumbTitle:'Users List',
@@ -74,7 +72,7 @@
 		},
 		methods:{
 			fetchData(){
-				axios.get(this.getApiUrl).then(response=>{
+				axios.get(this.url).then(response=>{
 					this.users=response.data;
 				});
 			}

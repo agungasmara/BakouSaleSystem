@@ -22,7 +22,7 @@ class UserGroupsController extends Controller
 {
     public function index()
     {
-        //$UserGroup=UserGroup::select('user_group_id as id','name','group_type','permission')->get();
+       
         $UserGroup=UserGroup::get([
             'user_group_id as id','name','group_type'
         ]);
@@ -32,15 +32,6 @@ class UserGroupsController extends Controller
     public function getPermission()
     {
 
-    }
-    public function getUsers()
-    {
-        $users=User::select(['user_id as value','username as text'])->get();
-        $userGroup=UserGroup::select(['user_group_id as value','name as text'])->get();
-        return response()->json([
-            'users'=>$users,
-            'groups'=>$userGroup
-        ]);
     }
     public function store(Request $request)
     {
@@ -62,6 +53,14 @@ class UserGroupsController extends Controller
             'message'=>'Data successfully saved.'
         ]);
     }
+    public function update(Request $request,$id)
+    {
+
+    }
+    public function destroy($id)
+    {
+        
+    }
     public function checkIfExisted($field,$value)
     {
         //instant the object
@@ -69,16 +68,14 @@ class UserGroupsController extends Controller
         //return data json to vuejs when axios request
         return $validate->CheckDataExist('user_group',$field,$value);
     }
-    public function getUserByID($id)
+    public function getUsers()
     {
-
+        $users=User::select(['user_id as value','username as text'])->get();
+        $userGroup=UserGroup::select(['user_group_id as value','name as text'])->get();
+        return response()->json([
+            'users'=>$users,
+            'groups'=>$userGroup
+        ]);
     }
-    public function update(Request $request,$id)
-    {
-
-    }
-    public function destroy($id)
-    {
-    	
-    }
+    
 }

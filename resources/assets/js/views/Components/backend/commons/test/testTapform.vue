@@ -72,6 +72,7 @@
 				},
 				tabs:[
 					{
+						class:'',
 						name:'General', 
 						group:[
 							{	class:'xs12 sm6 md6',	 key:'language_id',	type:'text',	 Value:''	},
@@ -84,6 +85,7 @@
 						]
 					},
 					{
+						class:'',
 						name:'Data', 
 						group:[
 							{	class:'xs12 sm6 md6',	 key:'model',	type:'text',	 Value:''},
@@ -97,6 +99,7 @@
 						]
 					},
 					{
+						class:'',
 						name:'Image', 
 						group:[
 							{	class:'xs12 sm6 md6',	 key:'image',	type:'text',	 Value:''},

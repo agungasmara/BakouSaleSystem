@@ -24,6 +24,9 @@
 					{	class:'xs12 sm4 md4',	 key:'password',	type:'password',	 Value:'',count:0	},
 					{	class:'xs12 sm4 md4',	 key:'image',	type:'image',	 Value:'',count:0	}
 				],
+				data:{
+					language_id:'Hello'
+				},
 				rules:{
 					language_id:[
 				      (v) => !!v || 'Key is required',

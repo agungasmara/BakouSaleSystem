@@ -9,7 +9,7 @@ class User extends Model
 {
     protected $table='user';
     public $timestamps=false;
-    protected $primarykey='user_group_id';
+    protected $primaryKey='user_id';
     protected $fillable=[
     	'username',
     	'firstname',
@@ -29,10 +29,6 @@ class User extends Model
     public function UserGroup(){
 		return $this->belongsTo(UserGroup::class,'user_group_id');
 	}
-    static function Users($data = array())
-    {
-        return static::Users();
-    }
     static function AllUser()
     {
         $users=DB::table('user')

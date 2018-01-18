@@ -24,4 +24,9 @@ class UserGroup extends Model
             from sg_user_group')->get();
         return $UserGroup;
     }
+    static function Groups()
+    {
+        $groups=UserGroup::get(['name as text','user_group_id as value']);
+        return $groups;
+    }
 }

@@ -1,5 +1,14 @@
 <template>
 	<v-app id="inspire">
+		<!--breadcrumbs start-->
+			<breadcrumb3button
+			v-bind:breadcrumb-item="breadcrumbs"
+			v-bind:breadcrumb-title="breadcrumbTitle"
+			v-bind:submit="submit"
+			v-bind:is-valid="valid"
+			v-bind:back-url="backUrl"
+			></breadcrumb3button>
+		<!--breadcrumbs end-->
 		<v-form v-model="valid" ref="form" lazy-validation>
 	      	<v-card flat>
 	        	<v-card-text>
@@ -7,7 +16,7 @@
 	          			<v-layout wrap>
 	          				<v-flex v-for="input in formItems" :key="input.key" :class="input.class">
 		      					<div v-if="input.type=='select'">
-									<v-select :label="input.key"  :rules="formRules[input.key]" v-model="input.Value" :items="input.items" required></v-select>
+									<v-select :label="input.text"  :rules="formRules[input.key]" v-model="formDatas[input.key]" :items="selectItems[input.items]" required></v-select>
 		      					</div>
 		      					<div v-if="input.type=='image'">
 									<input type="file" id="fileInput"  style="display:none" ref="fileInput" accept="image/*" @change="onFilePicked">
@@ -29,11 +38,11 @@
 										</div>
 									</v-layout>
 								</div>
-								<div v-else-if="input.type=='password'">
-									<v-text-field  label="Confirm Password" v-model="input.Value" name="confirmpassword" :rules="formRules[input.key]" required :append-icon="e1 ? 'visibility' : 'visibility_off'" :append-icon-cb="() => (e1 = !e1)" :type="e1 ? 'password' : 'text'"></v-text-field>
+								<div v-if="input.type=='password'">
+									<v-text-field  label="Confirm Password" v-model="formDatas[input.key]" name="confirmpassword" :rules="formRules[input.key]" required :append-icon="e1 ? 'visibility' : 'visibility_off'" :append-icon-cb="() => (e1 = !e1)" :type="e1 ? 'password' : 'text'"></v-text-field>
 								</div>
-		      					<div v-else>
-									<v-text-field :label="input.key" :rules='formRules[input.key]' v-model="input.value" :counter="input.count" required></v-text-field>
+		      					<div v-if="input.type=='text'">
+									<v-text-field :label="input.text" :rules='formRules[input.key]' v-model="formDatas[input.key]" :counter="input.count" required></v-text-field>
 		      					</div>
 		      				</v-flex>
 					    </v-layout>
@@ -49,9 +58,19 @@
 	import breadcrumb3button from '../breadcrumb/breadcrumb3button.vue'
 	export default{
 		props:[
+			'id',
+			'breadcrumbTitle',
+			'breadcrumbs',
 			'formItems',
-			'formRules'
+			'formRules',
+			'formDatas',
+			'selectItems',
+			'url',
+			'backUrl'
 		],
+		components:{
+			'breadcrumb3button':breadcrumb3button
+		},
 		data(){
 			return{
 				e1:true,
@@ -64,6 +83,37 @@
 			}
 		},
 		methods:{
+			submit (opt) {
+		      	if (this.$refs.form.validate()) {
+			        // Native form submission is not yet supporte
+			        console.log(this.formDatas)
+			        if(this.id==0){
+			        	axios.post(this.url,{
+				          data:this.formDatas
+				        }).then((res)=>{
+				        	console.log(res.data)
+				        	if(res.data.success==true){
+				        		Flash.setSuccess(res.data.message)
+				        		if(opt==2){
+				        			this.$router.push(backUrl)
+				        		}
+				        	}
+				        })
+			        }else{
+			        	axios.put(this.url+this.id, {
+				          data:this.formDatas
+				        }).then((res)=>{
+				        	if(res.data.success==true){
+				        		Flash.setSuccess(res.data.message)
+				        		if(opt==2){
+				        			this.$router.push(backUrl)
+				        		}
+				        	}
+				        })
+			        }
+			        
+		      	}
+		    },
 			onPickFile() {
 				
 

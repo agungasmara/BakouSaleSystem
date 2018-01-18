@@ -100531,95 +100531,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helper_flash__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commons_breadcrumb_breadcrumb3button_vue__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commons_breadcrumb_breadcrumb3button_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__commons_breadcrumb_breadcrumb3button_vue__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commons_form_normalForm_vue__ = __webpack_require__(284);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commons_form_normalForm_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__commons_form_normalForm_vue__);
 //
 //
 //
@@ -100641,77 +100554,73 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+	components: {
+		'normalForm': __WEBPACK_IMPORTED_MODULE_2__commons_form_normalForm_vue___default.a
+	},
 	data: function data() {
 		return {
+			url: '/api/users/',
 			e1: true,
 			valid: true,
 			btnImageDisabled: false,
 			btnText: 'Upload Image',
 			imageUrl: '',
 			image: null,
-			fname: 'dga',
-			fnameRules: [function (v) {
-				return !!v || 'First Name is required';
-			}, function (v) {
-				return v && v.length <= 10 || 'First Name must be less than 10 characters';
-			}],
-
-			lname: 'dga',
-			lnameRules: [function (v) {
-				return !!v || 'Last Name is required';
-			}, function (v) {
-				return v && v.length <= 10 || 'Last Name must be less than 10 characters';
-			}],
-			username: '',
-			usernameRules: [function (v) {
-				return !!v || 'Username is required';
-			}, function (v) {
-				return v && v.length >= 4 || 'Username must be at least 4 characters';
-			}, function (v) {
-				return v && v.length <= 16 || 'Username must be less than 16 characters';
-			}],
-			password: '123',
-			passwordRules: [function (v) {
-				return !!v || 'Password is required';
-			}, function (v) {
-				return v && v.length <= 32 || 'Password must be less than 32 characters';
-			}],
-
-			confirmPassword: '123',
-			confirmPasswordRules: [function (v) {
-				return !!v || 'Confirm Password is required';
-			}, function (v) {
-				return v && v.length <= 32 || 'Confirm Password must be less than 32 characters';
-			}],
-			email: '',
-			emailRules: [function (v) {
-				return !!v || 'E-mail is required';
-			}, function (v) {
-				return (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
-				);
-			}],
-			code: '',
-			codeRules: [function (v) {
-				return !!v || 'Code is required';
-			}, function (v) {
-				return v && v.length <= 8 || 'Code must be less than 8 characters';
-			}],
-			selectStatus: 1,
-			status: [{ text: 'Active', value: 1 }, { text: 'Inactive', value: 2 }],
-			errorPassword: false,
-			errorUsername: false,
-			checkUserMessage: '',
-			validUsername: false,
-			isCheckingUsername: false,
-			errorEmail: false,
-			checkEmailMessage: '',
-			validEmail: false,
-			isCheckingEmail: false,
-			message: [],
-			select: null,
-			users: [],
-			selectGroup: null,
-			groups: [],
+			group: [{ class: 'xs12 sm6 md6', key: 'username', type: 'text', text: 'Username', count: 100 }, { class: 'xs12 sm6 md6', key: 'user_group_id', type: 'select', items: 'userGroupItems', text: 'User Group', count: 100 }, { class: 'xs12 sm6 md6', key: 'firstname', type: 'text', text: 'First Name', count: 100 }, { class: 'xs12 sm6 md6', key: 'lastname', type: 'text', text: 'Last Name', count: 100 }, { class: 'xs12 sm6 md6', key: 'password', type: 'password', text: 'Password', count: 50 }, { class: 'xs12 sm6 md6', key: 'confirmPassword', type: 'password', text: 'Confirm Password', count: 50 }, { class: 'xs12 sm3 md3', key: 'email', type: 'text', text: 'Email', count: 50 }, { class: 'xs12 sm3 md3', key: 'code', type: 'text', text: 'Code', count: 25 }, { class: 'xs12 sm3 md3', key: 'status', type: 'select', items: 'statusItems', text: 'Status', count: 100 }, { class: 'xs12 sm3 md3', key: 'image', type: 'image', Value: '', count: 0 }],
+			rules: {
+				username: [function (v) {
+					return !!v || 'Username is required';
+				}, function (v) {
+					return v && v.length <= 16 || 'Username must be less than 16 characters';
+				}],
+				firstname: [function (v) {
+					return !!v || 'First Name is required';
+				}, function (v) {
+					return v && v.length <= 10 || 'First Name must be less than 10 characters';
+				}],
+				lastname: [function (v) {
+					return !!v || 'Last Name is required';
+				}, function (v) {
+					return v && v.length <= 10 || 'Last Name must be less than 10 characters';
+				}],
+				email: [function (v) {
+					return !!v || 'E-mail is required';
+				}, function (v) {
+					return (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
+					);
+				}],
+				password: [function (v) {
+					return !!v || 'Password is required';
+				}, function (v) {
+					return v && v.length <= 32 || 'Password must be less than 32 characters';
+				}],
+				confirmPassword: [function (v) {
+					return !!v || 'Confirm Password is required';
+				}, function (v) {
+					return v && v.length <= 32 || 'Confirm Password must be less than 32 characters';
+				}],
+				code: [function (v) {
+					return !!v || 'Code is required';
+				}, function (v) {
+					return v && v.length <= 8 || 'Code must be less than 8 characters';
+				}]
+			},
+			data: {
+				username: 'dgdg',
+				firstname: 'dgadg',
+				lastname: 'dgdg',
+				email: 'dgadgad@ddgd.com',
+				password: '123',
+				confirmPassword: '123',
+				code: 'dgdag',
+				status: 0,
+				user_group_id: 1,
+				image: ''
+			},
+			select: {
+				statusItems: [{ text: 'Acitve', value: 1 }, { text: 'Inactive', value: 0 }],
+				userGroupItems: []
+			},
 			flash: __WEBPACK_IMPORTED_MODULE_0__helper_flash__["a" /* default */].state,
 			breadcrumbTitle: 'Users',
 			breadcrumbs: [{
@@ -100727,181 +100636,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			backUrl: '/admin/user/list'
 		};
 	},
-
-	components: {
-		'breadcrumb3button': __WEBPACK_IMPORTED_MODULE_2__commons_breadcrumb_breadcrumb3button_vue___default.a
-	},
 	created: function created() {
 		this.getUserGroup();
 	},
 
-	watch: {
-		confirmPassword: function confirmPassword() {
-			this.checkPasswordConfirmed();
-		},
-		password: function password() {
-			this.checkPasswordConfirmed();
-		},
-		username: function username() {
-			var _this = this;
-
-			if (this.$refs.username.validate()) {
-				if (this.username !== "") {
-					this.isCheckingUsername = true;
-					this.errorUsername = false;
-					this.validUsername = false;
-					this.checkUserMessage = 'Checking Username...';
-					__WEBPACK_IMPORTED_MODULE_1_axios___default.a.get('/api/user/checkIfExisted/username/' + this.username).then(function (res) {
-						if (res.data.Existed == true) {
-							_this.valid = false;
-							_this.errorUsername = true;
-							_this.isCheckingUsername = false;
-							_this.validUsername = false;
-							_this.checkUserMessage = 'Username already exist';
-						} else if (res.data.Existed == false) {
-							_this.valid = true;
-							_this.isCheckingUsername = false;
-							_this.errorUsername = false;
-							_this.validUsername = true;
-
-							_this.checkUserMessage = 'Username can use';
-						} else {
-							_this.isCheckingUsername = false;
-							_this.errorUsername = false;
-							_this.validUsername = false;
-						}
-					});
-				} else if (this.username == "") {
-					this.errorUsername = false;
-					this.isCheckingUsername = false;
-					this.validUsername = false;
-				}
-			} else {
-				this.valid = true;
-				this.isCheckingUsername = false;
-				this.errorUsername = false;
-				this.validuser = false;
-			}
-		},
-		email: function email() {
-			var _this2 = this;
-
-			if (this.$refs.email.validate()) {
-				if (this.email !== "") {
-					this.isCheckingEmail = true;
-					this.errorEmail = false;
-					this.validEmail = false;
-					this.checkEmailMessage = 'Email Username...';
-					__WEBPACK_IMPORTED_MODULE_1_axios___default.a.get('/api/user/checkIfExisted/email/' + this.email).then(function (res) {
-						if (res.data.Existed == true) {
-							_this2.valid = false;
-							_this2.errorEmail = true;
-							_this2.isCheckingEmail = false;
-							_this2.validEmail = false;
-							_this2.checkEmailMessage = 'Email already exist';
-						} else if (res.data.Existed == false) {
-							_this2.valid = true;
-							_this2.isCheckingEmail = false;
-							_this2.errorEmail = false;
-							_this2.validEmail = true;
-
-							_this2.checkEmailMessage = 'Email can use';
-						} else {
-							_this2.isCheckingEmail = false;
-							_this2.errorEmail = false;
-							_this2.validEmail = false;
-						}
-					});
-				} else if (this.email == "") {
-					this.errorEmail = false;
-					this.isCheckingEmail = false;
-					this.validEmail = false;
-				}
-			} else {
-				this.valid = true;
-				this.isCheckingEmail = false;
-				this.errorEmail = false;
-				this.validEmail = false;
-			}
-		}
-	},
 	methods: {
 		getUserGroup: function getUserGroup() {
-			var _this3 = this;
+			var _this = this;
 
-			__WEBPACK_IMPORTED_MODULE_1_axios___default.a.get('/api/getUsers').then(function (res) {
-				_this3.users = res.data.users;
-				_this3.groups = res.data.groups;
+			__WEBPACK_IMPORTED_MODULE_1_axios___default.a.get('/api/users_group').then(function (res) {
+				_this.select.userGroupItems = res.data;
 			});
-		},
-
-		submit: function submit(opt) {
-			var _this4 = this;
-
-			if (this.$refs.formUser.validate()) {
-				if (this.checkPasswordConfirmed() === false) {
-					// Native form submission is not yet supported
-					__WEBPACK_IMPORTED_MODULE_1_axios___default.a.post('/api/user/save', {
-						username: this.username,
-						fname: this.fname,
-						lname: this.lname,
-						userGroup: this.selectGroup,
-						email: this.email,
-						userImage: this.imageUrl,
-						password: this.password,
-						code: this.code,
-						status: this.selectStatus
-					}).then(function (res) {
-						if (res.data.success == true) {
-							__WEBPACK_IMPORTED_MODULE_0__helper_flash__["a" /* default */].setSuccess(res.data.message);
-							if (opt == 1) {
-								_this4.$refs.formUser.reset();
-								_this4.imageUrl = "";
-							} else if (opt == 2) {
-								_this4.$router.push('/admin/user/list');
-							}
-						}
-						/*console.log(res.data)*/
-					});
-				}
-			}
-		},
-		checkPasswordConfirmed: function checkPasswordConfirmed() {
-			if (this.password === this.confirmPassword) {
-				this.errorPassword = false;
-			} else {
-				if (this.confirmPassword === "") {
-					this.errorPassword = false;
-				} else {
-					this.errorPassword = true;
-				}
-			}
-			return this.errorPassword;
-		},
-		onPickFile: function onPickFile() {
-			this.btnImageDisabled = true;
-			this.btnText = "Uploading...";
-			this.$refs.fileInput.click();
-		},
-		onFilePicked: function onFilePicked(event) {
-			var _this5 = this;
-
-			var files = event.target.files;
-			var filename = files[0].name;
-			if (filename.lastIndexOf('.') <= 0) {
-				return alert('Please add a valid file!');
-			}
-			var fileReader = new FileReader();
-			fileReader.addEventListener('load', function () {
-
-				_this5.imageUrl = fileReader.result;
-				_this5.btnImageDisabled = false;
-				_this5.btnText = "Upload Image";
-			});
-			fileReader.readAsDataURL(files[0]);
-		},
-		clearImage: function clearImage() {
-			this.imageUrl = '';
 		}
 	}
 });
@@ -100918,575 +100663,19 @@ var render = function() {
     "v-app",
     { attrs: { id: "inspire" } },
     [
-      _c("breadcrumb3button", {
+      _c("normal-form", {
         attrs: {
-          "breadcrumb-item": _vm.breadcrumbs,
+          url: _vm.url,
+          id: 0,
           "breadcrumb-title": _vm.breadcrumbTitle,
-          submit: _vm.submit,
-          "is-valid": _vm.valid,
+          breadcrumbs: _vm.breadcrumbs,
+          "form-items": _vm.group,
+          "form-rules": _vm.rules,
+          "form-datas": _vm.data,
+          "select-items": _vm.select,
           "back-url": _vm.backUrl
         }
-      }),
-      _vm._v(" "),
-      _vm.flash.success
-        ? _c(
-            "div",
-            { staticClass: "flash flash__success" },
-            [
-              _c(
-                "v-alert",
-                {
-                  attrs: {
-                    color: "success",
-                    icon: "check_circle",
-                    value: "true"
-                  }
-                },
-                [
-                  _vm._v(
-                    "\r\n            \t" +
-                      _vm._s(_vm.flash.success) +
-                      "\r\n            "
-                  )
-                ]
-              )
-            ],
-            1
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _c(
-        "v-form",
-        {
-          ref: "formUser",
-          attrs: { "lazy-validation": "" },
-          model: {
-            value: _vm.valid,
-            callback: function($$v) {
-              _vm.valid = $$v
-            },
-            expression: "valid"
-          }
-        },
-        [
-          _c(
-            "v-container",
-            { attrs: { "grid-list-md": "" } },
-            [
-              _c(
-                "v-layout",
-                { attrs: { wrap: "" } },
-                [
-                  _c(
-                    "v-flex",
-                    { attrs: { xs12: "", sm6: "", md6: "" } },
-                    [
-                      _c("v-text-field", {
-                        ref: "username",
-                        attrs: {
-                          label: "Username",
-                          rules: _vm.usernameRules,
-                          counter: 16,
-                          required: ""
-                        },
-                        model: {
-                          value: _vm.username,
-                          callback: function($$v) {
-                            _vm.username = $$v
-                          },
-                          expression: "username"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "small",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: _vm.isCheckingUsername,
-                              expression: "isCheckingUsername"
-                            }
-                          ],
-                          staticStyle: { color: "green" }
-                        },
-                        [
-                          _vm._v(
-                            "\r\n\t\t\t      \t\t\t" +
-                              _vm._s(_vm.checkUserMessage) +
-                              "\r\n\t\t\t      \t\t"
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "small",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: _vm.validUsername,
-                              expression: "validUsername"
-                            }
-                          ],
-                          staticStyle: { color: "blue" }
-                        },
-                        [
-                          _vm._v(
-                            "\r\n\t\t\t      \t\t\t" +
-                              _vm._s(_vm.checkUserMessage) +
-                              "\r\n\t\t\t      \t\t"
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: _vm.errorUsername,
-                              expression: "errorUsername"
-                            }
-                          ],
-                          staticClass: "input-group__details"
-                        },
-                        [
-                          _c("div", { staticClass: "input-group__messages" }, [
-                            _c(
-                              "small",
-                              {
-                                class: _vm.errorUsername
-                                  ? "input-group__error slide-y-transition-enter-to error--text"
-                                  : "input-group__error slide-y-transition-enter-to"
-                              },
-                              [
-                                _vm._v(
-                                  "\r\n\t\t\t\t\t\t\t\t\t" +
-                                    _vm._s(_vm.checkUserMessage) +
-                                    "\r\n\t\t\t\t\t\t\t\t"
-                                )
-                              ]
-                            )
-                          ])
-                        ]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-flex",
-                    { attrs: { xs12: "", sm6: "", md6: "" } },
-                    [
-                      _c("v-select", {
-                        attrs: {
-                          label: "Select Group",
-                          items: _vm.groups,
-                          rules: [
-                            function(v) {
-                              return !!v || "Group is required"
-                            }
-                          ],
-                          required: ""
-                        },
-                        model: {
-                          value: _vm.selectGroup,
-                          callback: function($$v) {
-                            _vm.selectGroup = $$v
-                          },
-                          expression: "selectGroup"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-flex",
-                    { attrs: { xs12: "", sm6: "", md6: "" } },
-                    [
-                      _c("v-text-field", {
-                        attrs: {
-                          label: "First Name",
-                          rules: _vm.fnameRules,
-                          counter: 16,
-                          required: ""
-                        },
-                        model: {
-                          value: _vm.fname,
-                          callback: function($$v) {
-                            _vm.fname = $$v
-                          },
-                          expression: "fname"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-flex",
-                    { attrs: { xs12: "", sm6: "", md6: "" } },
-                    [
-                      _c("v-text-field", {
-                        attrs: {
-                          label: "Last Name",
-                          rules: _vm.lnameRules,
-                          counter: 16,
-                          required: ""
-                        },
-                        model: {
-                          value: _vm.lname,
-                          callback: function($$v) {
-                            _vm.lname = $$v
-                          },
-                          expression: "lname"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-flex",
-                    { attrs: { xs12: "", sm3: "", md3: "" } },
-                    [
-                      _c("v-text-field", {
-                        attrs: {
-                          label: "Password",
-                          name: "password",
-                          rules: _vm.passwordRules,
-                          counter: 10,
-                          required: "",
-                          "append-icon": _vm.e1
-                            ? "visibility"
-                            : "visibility_off",
-                          "append-icon-cb": function() {
-                            return (_vm.e1 = !_vm.e1)
-                          },
-                          type: _vm.e1 ? "password" : "text"
-                        },
-                        model: {
-                          value: _vm.password,
-                          callback: function($$v) {
-                            _vm.password = $$v
-                          },
-                          expression: "password"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-flex",
-                    { attrs: { xs12: "", sm3: "", md3: "" } },
-                    [
-                      _c("v-text-field", {
-                        attrs: {
-                          label: "Confirm Password",
-                          name: "confirmpassword",
-                          rules: _vm.confirmPasswordRules,
-                          required: "",
-                          "append-icon": _vm.e1
-                            ? "visibility"
-                            : "visibility_off",
-                          "append-icon-cb": function() {
-                            return (_vm.e1 = !_vm.e1)
-                          },
-                          type: _vm.e1 ? "password" : "text"
-                        },
-                        model: {
-                          value: _vm.confirmPassword,
-                          callback: function($$v) {
-                            _vm.confirmPassword = $$v
-                          },
-                          expression: "confirmPassword"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: _vm.errorPassword,
-                              expression: "errorPassword"
-                            }
-                          ],
-                          staticClass: "input-group__details"
-                        },
-                        [
-                          _c("div", { staticClass: "input-group__messages" }, [
-                            _c(
-                              "div",
-                              {
-                                class: _vm.errorPassword
-                                  ? "input-group__error slide-y-transition-enter-to error--text"
-                                  : "input-group__error slide-y-transition-enter-to"
-                              },
-                              [
-                                _vm._v(
-                                  "\r\n\t\t\t\t\t\t\t\t\tConfirm Password does not matched\r\n\t\t\t\t\t\t\t\t"
-                                )
-                              ]
-                            )
-                          ])
-                        ]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-flex",
-                    { attrs: { xs12: "", sm3: "", md3: "" } },
-                    [
-                      _c("v-text-field", {
-                        attrs: {
-                          label: "Code",
-                          rules: _vm.codeRules,
-                          counter: 8,
-                          required: ""
-                        },
-                        model: {
-                          value: _vm.code,
-                          callback: function($$v) {
-                            _vm.code = $$v
-                          },
-                          expression: "code"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-flex",
-                    { attrs: { xs12: "", sm3: "", md3: "" } },
-                    [
-                      _c("v-select", {
-                        attrs: {
-                          label: "Status",
-                          items: _vm.status,
-                          rules: [
-                            function(v) {
-                              return !!v || "Status is required"
-                            }
-                          ],
-                          required: ""
-                        },
-                        model: {
-                          value: _vm.selectStatus,
-                          callback: function($$v) {
-                            _vm.selectStatus = $$v
-                          },
-                          expression: "selectStatus"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-flex",
-                    { attrs: { xs12: "", sm6: "", md6: "" } },
-                    [
-                      _c("v-text-field", {
-                        ref: "email",
-                        attrs: {
-                          label: "Email*",
-                          rules: _vm.emailRules,
-                          counter: 16,
-                          required: ""
-                        },
-                        model: {
-                          value: _vm.email,
-                          callback: function($$v) {
-                            _vm.email = $$v
-                          },
-                          expression: "email"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "small",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: _vm.isCheckingEmail,
-                              expression: "isCheckingEmail"
-                            }
-                          ],
-                          staticStyle: { color: "green" }
-                        },
-                        [
-                          _vm._v(
-                            "\r\n\t\t\t      \t\t\t" +
-                              _vm._s(_vm.checkEmailMessage) +
-                              "\r\n\t\t\t      \t\t"
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "small",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: _vm.validEmail,
-                              expression: "validEmail"
-                            }
-                          ],
-                          staticStyle: { color: "blue" }
-                        },
-                        [
-                          _vm._v(
-                            "\r\n\t\t\t      \t\t\t" +
-                              _vm._s(_vm.checkEmailMessage) +
-                              "\r\n\t\t\t      \t\t"
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: _vm.errorEmail,
-                              expression: "errorEmail"
-                            }
-                          ],
-                          staticClass: "input-group__details"
-                        },
-                        [
-                          _c("div", { staticClass: "input-group__messages" }, [
-                            _c(
-                              "small",
-                              {
-                                class: _vm.errorEmail
-                                  ? "input-group__error slide-y-transition-enter-to error--text"
-                                  : "input-group__error slide-y-transition-enter-to"
-                              },
-                              [
-                                _vm._v(
-                                  "\r\n\t\t\t\t\t\t\t\t\t" +
-                                    _vm._s(_vm.checkEmailMessage) +
-                                    "\r\n\t\t\t\t\t\t\t\t"
-                                )
-                              ]
-                            )
-                          ])
-                        ]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-flex",
-                    { attrs: { xs12: "", sm6: "", md6: "" } },
-                    [
-                      _c("input", {
-                        ref: "fileInput",
-                        staticStyle: { display: "none" },
-                        attrs: { type: "file", accept: "image/*" },
-                        on: { change: _vm.onFilePicked }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "v-layout",
-                        { attrs: { "align-center": "", "justify-center": "" } },
-                        [
-                          _vm.imageUrl
-                            ? _c("v-badge", { attrs: { color: "indigo" } }, [
-                                _c(
-                                  "span",
-                                  {
-                                    staticStyle: { cursor: "pointer" },
-                                    attrs: { slot: "badge" },
-                                    on: { click: _vm.clearImage },
-                                    slot: "badge"
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\r\n\t\t\t\t\t\t\t\tx\r\n\t\t\t\t\t\t\t"
-                                    )
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c("img", {
-                                  staticStyle: {
-                                    width: "auto",
-                                    "max-width": "300px"
-                                  },
-                                  attrs: { src: _vm.imageUrl },
-                                  on: { click: _vm.onPickFile }
-                                })
-                              ])
-                            : _vm._e(),
-                          _vm._v(" "),
-                          !_vm.imageUrl
-                            ? _c(
-                                "div",
-                                {
-                                  staticStyle: {
-                                    width: "90%",
-                                    height: "100px",
-                                    cursor: "pointer"
-                                  }
-                                },
-                                [
-                                  _c(
-                                    "v-alert",
-                                    {
-                                      attrs: {
-                                        outline: "",
-                                        color: "info",
-                                        value: true
-                                      },
-                                      on: { click: _vm.onPickFile }
-                                    },
-                                    [
-                                      _vm._v(
-                                        _vm._s(_vm.btnText) +
-                                          "\r\n\t\t\t\t\t\t\t\t"
-                                      )
-                                    ]
-                                  )
-                                ],
-                                1
-                              )
-                            : _vm._e()
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          )
-        ],
-        1
-      )
+      })
     ],
     1
   )
@@ -101583,7 +100772,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -101593,11 +100781,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	props: ['id'],
 	data: function data() {
 		return {
-			getApiUrl: '/api/users/list/',
-			deleteApiUrl: '/api/users/delete/',
-			urlEdit: '/admin/users/edit/',
+			listTitle: 'User List',
+			url: '/api/users/',
 			btnNewUrl: '/admin/users/add',
-			headers: [{ text: 'ID', align: 'left', value: 'id' }, { text: 'Username', align: 'center', value: 'username' }, { text: 'Group', align: 'center', value: 'group' }, { text: 'First Name', align: 'center', value: 'firstname' }, { text: 'Last Name', align: 'center', value: 'lastname' }, { text: 'Email', align: 'center', value: 'email' }, { text: 'Code', align: 'center', value: 'code' }, { text: 'Image', align: 'center', value: 'image' }, { text: 'Status', align: 'center', value: 'status' }, { text: 'Date', align: 'center', value: 'date_added' }, { text: 'Action', value: 'action', align: 'center', sortable: false }],
+			headers: [{ text: 'ID', align: 'center', class: 'text-xs-center', value: 'id' }, { text: 'Username', align: 'center', class: 'text-xs-left', value: 'username' }, { text: 'Group', align: 'center', class: 'text-xs-left', value: 'group' }, { text: 'First Name', align: 'center', class: 'text-xs-left', value: 'firstname' }, { text: 'Last Name', align: 'center', class: 'text-xs-left', value: 'lastname' }, { text: 'Email', align: 'center', class: 'text-xs-left', value: 'email' }, { text: 'Code', align: 'center', class: 'text-xs-center', value: 'code' }, { text: 'Image', align: 'center', class: 'text-xs-center', value: 'image' }, { text: 'Status', align: 'center', class: 'text-xs-center', value: 'status' }, { text: 'Date', align: 'center', class: 'text-xs-center', value: 'date_added' }, { text: 'Action', value: 'id', class: 'text-xs-center', align: 'center', sortable: false }],
 			users: [],
 			breadcrumbTitle: 'Users List',
 			breadcrumbs: [{
@@ -101623,7 +100810,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		fetchData: function fetchData() {
 			var _this = this;
 
-			__WEBPACK_IMPORTED_MODULE_1_axios___default.a.get(this.getApiUrl).then(function (response) {
+			__WEBPACK_IMPORTED_MODULE_1_axios___default.a.get(this.url).then(function (response) {
 				_this.users = response.data;
 			});
 		}
@@ -101655,11 +100842,10 @@ var render = function() {
           _vm._v(" "),
           _c("data-table", {
             attrs: {
+              "list-title": _vm.listTitle,
               "data-header": _vm.headers,
               "data-value": _vm.users,
-              "get-api": _vm.getApiUrl,
-              "delete-api": _vm.deleteApiUrl,
-              "edit-url": _vm.urlEdit,
+              url: _vm.url,
               "btn-new-url": _vm.btnNewUrl
             },
             on: { change: _vm.fetchData }
@@ -101737,6 +100923,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helper_flash__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commons_form_normalForm_vue__ = __webpack_require__(284);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commons_form_normalForm_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__commons_form_normalForm_vue__);
 //
 //
 //
@@ -101753,138 +100941,65 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	props: ['id'],
+	components: {
+		'normalForm': __WEBPACK_IMPORTED_MODULE_2__commons_form_normalForm_vue___default.a
+	},
 	data: function data() {
 		return {
+			dataID: 0,
 			e1: true,
 			valid: true,
 			btnImageDisabled: false,
 			btnText: 'Upload Image',
 			imageUrl: '',
 			image: null,
-			fname: 'dga',
-			fnameRules: [function (v) {
-				return !!v || 'First Name is required';
-			}, function (v) {
-				return v && v.length <= 10 || 'First Name must be less than 10 characters';
-			}],
-
-			lname: 'dga',
-			lnameRules: [function (v) {
-				return !!v || 'Last Name is required';
-			}, function (v) {
-				return v && v.length <= 10 || 'Last Name must be less than 10 characters';
-			}],
-			username: '',
-			usernameRules: [function (v) {
-				return !!v || 'Username is required';
-			}, function (v) {
-				return v && v.length <= 16 || 'Username must be less than 16 characters';
-			}],
-			password: '123',
-			passwordRules: [function (v) {
-				return !!v || 'Password is required';
-			}, function (v) {
-				return v && v.length <= 32 || 'Password must be less than 32 characters';
-			}],
-
-			confirmPassword: '123',
-			confirmPasswordRules: [function (v) {
-				return !!v || 'Confirm Password is required';
-			}, function (v) {
-				return v && v.length <= 32 || 'Confirm Password must be less than 32 characters';
-			}],
-			email: '',
-			emailRules: [function (v) {
-				return !!v || 'E-mail is required';
-			}, function (v) {
-				return (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
-				);
-			}],
-			code: '',
-			codeRules: [function (v) {
-				return !!v || 'Code is required';
-			}, function (v) {
-				return v && v.length <= 8 || 'Code must be less than 8 characters';
-			}],
+			url: '/api/users/',
+			group: [{ class: 'xs12 sm6 md6', key: 'username', type: 'text', text: 'Username', count: 100 }, { class: 'xs12 sm6 md6', key: 'user_group_id', type: 'select', items: 'userGroupItems', text: 'User Group', count: 100 }, { class: 'xs12 sm6 md6', key: 'firstname', type: 'text', text: 'First Name', count: 100 }, { class: 'xs12 sm6 md6', key: 'lastname', type: 'text', text: 'Last Name', count: 100 }, { class: 'xs12 sm4 md4', key: 'email', type: 'text', text: 'Email', count: 50 }, { class: 'xs12 sm4 md4', key: 'code', type: 'text', text: 'Code', count: 25 }, { class: 'xs12 sm4 md4', key: 'status', type: 'select', items: 'statusItems', text: 'Status', count: 100 }],
+			rules: {
+				username: [function (v) {
+					return !!v || 'Username is required';
+				}, function (v) {
+					return v && v.length <= 16 || 'Username must be less than 16 characters';
+				}],
+				firstname: [function (v) {
+					return !!v || 'First Name is required';
+				}, function (v) {
+					return v && v.length <= 10 || 'First Name must be less than 10 characters';
+				}],
+				lastname: [function (v) {
+					return !!v || 'Last Name is required';
+				}, function (v) {
+					return v && v.length <= 10 || 'Last Name must be less than 10 characters';
+				}],
+				email: [function (v) {
+					return !!v || 'E-mail is required';
+				}, function (v) {
+					return (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
+					);
+				}],
+				code: [function (v) {
+					return !!v || 'Code is required';
+				}, function (v) {
+					return v && v.length <= 8 || 'Code must be less than 8 characters';
+				}]
+			},
+			data: {
+				username: 'dgdg',
+				firstname: 'dgadg',
+				lastname: 'dgdg',
+				email: 'dgadgad@ddgd.com',
+				code: 'dgdag',
+				status: 0,
+				statusItems: [{ text: 'Acitve', value: 1 }, { text: 'Inactive', value: 0 }],
+				user_group_id: 1,
+				userGroupItems: []
+			},
 			selectStatus: 1,
 			status: [{ text: 'Active', value: 1 }, { text: 'Inactive', value: 2 }],
 			error: false,
@@ -101893,20 +101008,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			items: [],
 			selectGroup: null,
 			groups: [],
+			breadcrumbTitle: 'Edit User',
 			breadcrumbs: [{
-				text: 'Adminstrator',
+				text: 'Administrator',
 				disabled: false
 			}, {
-				text: 'Setting',
+				text: 'User',
 				disabled: false
 			}, {
-				text: 'Create',
+				text: 'Edit',
 				disabled: true
 			}],
+			backUrl: '/admin/users/list',
 			flash: __WEBPACK_IMPORTED_MODULE_0__helper_flash__["a" /* default */].state
 		};
 	},
 	created: function created() {
+		this.dataID = this.id;
 		this.getUserGroup();
 		this.fetchUser(this.id);
 	},
@@ -101915,15 +101033,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		getUserGroup: function getUserGroup() {
 			var _this = this;
 
-			__WEBPACK_IMPORTED_MODULE_1_axios___default.a.get('/api/getUsers').then(function (res) {
-				_this.items = res.data.users;
-				_this.groups = res.data.groups;
+			__WEBPACK_IMPORTED_MODULE_1_axios___default.a.get('/api/users_group').then(function (res) {
+				_this.data.userGroupItems = res.data;
 			});
 		},
 		fetchUser: function fetchUser(id) {
 			var _this2 = this;
 
-			__WEBPACK_IMPORTED_MODULE_1_axios___default.a.get('/api/users/getuserbyid/' + id).then(function (res) {
+			__WEBPACK_IMPORTED_MODULE_1_axios___default.a.get('/api/users/' + id + '/edit').then(function (res) {
 				_this2.selectGroup = res.data.group;
 				_this2.username = res.data.username;
 				_this2.fname = res.data.firstname;
@@ -101933,34 +101050,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				_this2.imageUrl = res.data.image;
 				_this2.selectStatus = res.data.status;
 			});
-		},
-		saveUser: function saveUser(id, opt) {
-			var _this3 = this;
-
-			if (this.$refs.formUser.validate()) {
-				if (this.checkPasswordConfirmed() === false) {
-					// Native form submission is not yet supported
-					__WEBPACK_IMPORTED_MODULE_1_axios___default.a.put('/api/users/update/' + id, {
-						username: this.username,
-						fname: this.fname,
-						lname: this.lname,
-						userGroup: this.selectGroup,
-						email: this.email,
-						userImage: this.imageUrl,
-						password: this.password,
-						code: this.code,
-						status: this.selectStatus
-					}).then(function (res) {
-						if (res.data.success == true) {
-							__WEBPACK_IMPORTED_MODULE_0__helper_flash__["a" /* default */].setSuccess(res.data.message);
-							if (opt == 2) {
-								_this3.$router.push('/admin/users/list');
-							}
-						}
-						/*console.log(res.data)*/
-					});
-				}
-			}
 		},
 		checkPasswordConfirmed: function checkPasswordConfirmed() {
 			if (this.password === this.confirmPassword) {
@@ -101980,7 +101069,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			this.$refs.fileInput.click();
 		},
 		onFilePicked: function onFilePicked(event) {
-			var _this4 = this;
+			var _this3 = this;
 
 			var files = event.target.files;
 			var filename = files[0].name;
@@ -101990,9 +101079,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			var fileReader = new FileReader();
 			fileReader.addEventListener('load', function () {
 
-				_this4.imageUrl = fileReader.result;
-				_this4.btnImageDisabled = false;
-				_this4.btnText = "Upload Image";
+				_this3.imageUrl = fileReader.result;
+				_this3.btnImageDisabled = false;
+				_this3.btnText = "Upload Image";
 			});
 			fileReader.readAsDataURL(files[0]);
 		},
@@ -102014,501 +101103,18 @@ var render = function() {
     "v-app",
     { attrs: { id: "inspire" } },
     [
-      _c(
-        "v-card",
-        [
-          _c(
-            "v-card-title",
-            [
-              _c(
-                "v-breadcrumbs",
-                [
-                  _c(
-                    "v-icon",
-                    { attrs: { slot: "divider" }, slot: "divider" },
-                    [_vm._v("forward")]
-                  ),
-                  _vm._v(" "),
-                  _vm._l(_vm.breadcrumbs, function(item) {
-                    return _c(
-                      "v-breadcrumbs-item",
-                      { key: item.text, attrs: { disabled: item.disabled } },
-                      [
-                        _vm._v(
-                          "\r\n\t          \t\t\t" +
-                            _vm._s(item.text) +
-                            "\r\n\t        \t\t"
-                        )
-                      ]
-                    )
-                  })
-                ],
-                2
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _vm.flash.success
-            ? _c(
-                "div",
-                { staticClass: "flash flash__success" },
-                [
-                  _c(
-                    "v-alert",
-                    {
-                      attrs: {
-                        color: "success",
-                        icon: "check_circle",
-                        value: "true"
-                      }
-                    },
-                    [
-                      _vm._v(
-                        "\r\n            \t" +
-                          _vm._s(_vm.flash.success) +
-                          "\r\n            "
-                      )
-                    ]
-                  )
-                ],
-                1
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _c(
-            "v-form",
-            {
-              ref: "formUser",
-              attrs: { "lazy-validation": "" },
-              model: {
-                value: _vm.valid,
-                callback: function($$v) {
-                  _vm.valid = $$v
-                },
-                expression: "valid"
-              }
-            },
-            [
-              _c(
-                "v-container",
-                { attrs: { "grid-list-md": "" } },
-                [
-                  _c(
-                    "v-layout",
-                    { attrs: { wrap: "" } },
-                    [
-                      _c(
-                        "v-flex",
-                        { attrs: { xs12: "", sm6: "", md6: "" } },
-                        [
-                          _c("v-text-field", {
-                            attrs: {
-                              label: "Username",
-                              rules: _vm.usernameRules,
-                              counter: 16,
-                              required: ""
-                            },
-                            model: {
-                              value: _vm.username,
-                              callback: function($$v) {
-                                _vm.username = $$v
-                              },
-                              expression: "username"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-flex",
-                        { attrs: { xs12: "", sm6: "", md6: "" } },
-                        [
-                          _c("v-select", {
-                            attrs: {
-                              label: "Select Group",
-                              items: _vm.groups,
-                              rules: [
-                                function(v) {
-                                  return !!v || "Group is required"
-                                }
-                              ],
-                              required: ""
-                            },
-                            model: {
-                              value: _vm.selectGroup,
-                              callback: function($$v) {
-                                _vm.selectGroup = $$v
-                              },
-                              expression: "selectGroup"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-flex",
-                        { attrs: { xs12: "", sm6: "", md6: "" } },
-                        [
-                          _c("v-text-field", {
-                            attrs: {
-                              label: "First Name",
-                              rules: _vm.fnameRules,
-                              counter: 16,
-                              required: ""
-                            },
-                            model: {
-                              value: _vm.fname,
-                              callback: function($$v) {
-                                _vm.fname = $$v
-                              },
-                              expression: "fname"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-flex",
-                        { attrs: { xs12: "", sm6: "", md6: "" } },
-                        [
-                          _c("v-text-field", {
-                            attrs: {
-                              label: "Last Name",
-                              rules: _vm.lnameRules,
-                              counter: 16,
-                              required: ""
-                            },
-                            model: {
-                              value: _vm.lname,
-                              callback: function($$v) {
-                                _vm.lname = $$v
-                              },
-                              expression: "lname"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-flex",
-                        { attrs: { xs12: "", sm3: "", md3: "" } },
-                        [
-                          _c("v-text-field", {
-                            attrs: {
-                              label: "Password",
-                              name: "password",
-                              rules: _vm.passwordRules,
-                              counter: 10,
-                              required: "",
-                              "append-icon": _vm.e1
-                                ? "visibility"
-                                : "visibility_off",
-                              "append-icon-cb": function() {
-                                return (_vm.e1 = !_vm.e1)
-                              },
-                              type: _vm.e1 ? "password" : "text"
-                            },
-                            model: {
-                              value: _vm.password,
-                              callback: function($$v) {
-                                _vm.password = $$v
-                              },
-                              expression: "password"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-flex",
-                        { attrs: { xs12: "", sm3: "", md3: "" } },
-                        [
-                          _c("v-text-field", {
-                            attrs: {
-                              label: "Confirm Password",
-                              name: "confirmpassword",
-                              rules: _vm.confirmPasswordRules,
-                              required: "",
-                              "append-icon": _vm.e1
-                                ? "visibility"
-                                : "visibility_off",
-                              "append-icon-cb": function() {
-                                return (_vm.e1 = !_vm.e1)
-                              },
-                              type: _vm.e1 ? "password" : "text"
-                            },
-                            model: {
-                              value: _vm.confirmPassword,
-                              callback: function($$v) {
-                                _vm.confirmPassword = $$v
-                              },
-                              expression: "confirmPassword"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              directives: [
-                                {
-                                  name: "show",
-                                  rawName: "v-show",
-                                  value: _vm.error,
-                                  expression: "error"
-                                }
-                              ],
-                              staticClass: "input-group__details"
-                            },
-                            [
-                              _c(
-                                "div",
-                                { staticClass: "input-group__messages" },
-                                [
-                                  _c(
-                                    "div",
-                                    {
-                                      class: _vm.error
-                                        ? "input-group__error slide-y-transition-enter-to error--text"
-                                        : "input-group__error slide-y-transition-enter-to"
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\r\n\t\t\t\t\t\t\t\t\tConfirm Password does not matched\r\n\t\t\t\t\t\t\t\t"
-                                      )
-                                    ]
-                                  )
-                                ]
-                              )
-                            ]
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-flex",
-                        { attrs: { xs12: "", sm3: "", md3: "" } },
-                        [
-                          _c("v-text-field", {
-                            attrs: {
-                              label: "Code",
-                              rules: _vm.codeRules,
-                              counter: 8,
-                              required: ""
-                            },
-                            model: {
-                              value: _vm.code,
-                              callback: function($$v) {
-                                _vm.code = $$v
-                              },
-                              expression: "code"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-flex",
-                        { attrs: { xs12: "", sm3: "", md3: "" } },
-                        [
-                          _c("v-select", {
-                            attrs: {
-                              label: "Status",
-                              items: _vm.status,
-                              rules: [
-                                function(v) {
-                                  return !!v || "Status is required"
-                                }
-                              ],
-                              required: ""
-                            },
-                            model: {
-                              value: _vm.selectStatus,
-                              callback: function($$v) {
-                                _vm.selectStatus = $$v
-                              },
-                              expression: "selectStatus"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-flex",
-                        { attrs: { xs12: "", sm6: "", md6: "" } },
-                        [
-                          _c("v-text-field", {
-                            attrs: {
-                              label: "Email*",
-                              rules: _vm.emailRules,
-                              counter: 16,
-                              required: ""
-                            },
-                            model: {
-                              value: _vm.email,
-                              callback: function($$v) {
-                                _vm.email = $$v
-                              },
-                              expression: "email"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-flex",
-                        { attrs: { xs12: "", sm6: "", md6: "" } },
-                        [
-                          _c("input", {
-                            ref: "fileInput",
-                            staticStyle: { display: "none" },
-                            attrs: { type: "file", accept: "image/*" },
-                            on: { change: _vm.onFilePicked }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "v-layout",
-                            {
-                              attrs: {
-                                "align-center": "",
-                                "justify-center": ""
-                              }
-                            },
-                            [
-                              _vm.imageUrl
-                                ? _c(
-                                    "v-badge",
-                                    { attrs: { color: "indigo" } },
-                                    [
-                                      _c(
-                                        "span",
-                                        {
-                                          staticStyle: { cursor: "pointer" },
-                                          attrs: { slot: "badge" },
-                                          on: { click: _vm.clearImage },
-                                          slot: "badge"
-                                        },
-                                        [
-                                          _vm._v(
-                                            "\r\n\t\t\t\t\t\t\t\tx\r\n\t\t\t\t\t\t\t"
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c("img", {
-                                        staticStyle: {
-                                          width: "auto",
-                                          "max-width": "300px"
-                                        },
-                                        attrs: { src: _vm.imageUrl },
-                                        on: { click: _vm.onPickFile }
-                                      })
-                                    ]
-                                  )
-                                : _vm._e(),
-                              _vm._v(" "),
-                              !_vm.imageUrl
-                                ? _c(
-                                    "div",
-                                    {
-                                      staticStyle: {
-                                        width: "90%",
-                                        height: "100px",
-                                        cursor: "pointer"
-                                      }
-                                    },
-                                    [
-                                      _c(
-                                        "v-alert",
-                                        {
-                                          attrs: {
-                                            outline: "",
-                                            color: "info",
-                                            value: true
-                                          },
-                                          on: { click: _vm.onPickFile }
-                                        },
-                                        [
-                                          _vm._v(
-                                            _vm._s(_vm.btnText) +
-                                              "\r\n\t\t\t\t\t\t\t\t"
-                                          )
-                                        ]
-                                      )
-                                    ],
-                                    1
-                                  )
-                                : _vm._e()
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-btn",
-                        {
-                          attrs: { disabled: !_vm.valid },
-                          on: {
-                            click: function($event) {
-                              _vm.saveUser(_vm.id, 1)
-                            }
-                          }
-                        },
-                        [_vm._v("\r\n\t\t\t\t        Update\r\n\t\t\t\t    ")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-btn",
-                        {
-                          attrs: { disabled: !_vm.valid },
-                          on: {
-                            click: function($event) {
-                              _vm.saveUser(_vm.id, 2)
-                            }
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\r\n\t\t\t\t        Update & Close\r\n\t\t\t\t    "
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "router-link",
-                        { attrs: { to: "/admin/user/list" } },
-                        [
-                          _c("v-btn", [
-                            _vm._v(
-                              "\r\n\t\t\t\t\t        Cancele\r\n\t\t\t\t\t    "
-                            )
-                          ])
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          )
-        ],
-        1
-      )
+      _c("normal-form", {
+        attrs: {
+          url: _vm.url,
+          id: _vm.dataID,
+          "breadcrumb-title": _vm.breadcrumbTitle,
+          breadcrumbs: _vm.breadcrumbs,
+          "form-items": _vm.group,
+          "form-rules": _vm.rules,
+          "form-datas": _vm.data,
+          "back-url": _vm.backUrl
+        }
+      })
     ],
     1
   )
@@ -111891,6 +110497,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	data: function data() {
 		return {
 			group: [{ class: 'xs12 sm6 md6', key: 'language_id', type: 'text', Value: '', count: 10 }, { class: 'xs12 sm6 md6', key: 'description', type: 'text', Value: '', count: 15 }, { class: 'xs12 sm6 md6', key: 'tag', type: 'text', Value: '', count: 20 }, { class: 'xs12 sm6 md6', key: 'meta_title', type: 'text', Value: '', count: 25 }, { class: 'xs12 sm6 md6', key: 'meta_description', type: 'text', Value: '', count: 30 }, { class: 'xs12 sm6 md6', key: 'meta_keyword', type: 'text', Value: '', count: 35 }, { class: 'xs12 sm4 md4', key: 'name', type: 'text', Value: '', count: 40 }, { class: 'xs12 sm4 md4', key: 'password', type: 'password', Value: '', count: 0 }, { class: 'xs12 sm4 md4', key: 'image', type: 'image', Value: '', count: 0 }],
+			data: {
+				language_id: 'Hello'
+			},
 			rules: {
 				language_id: [function (v) {
 					return !!v || 'Key is required';
@@ -112046,12 +110655,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	props: ['formItems', 'formRules'],
+	props: ['id', 'breadcrumbTitle', 'breadcrumbs', 'formItems', 'formRules', 'formDatas', 'selectItems', 'url', 'backUrl'],
+	components: {
+		'breadcrumb3button': __WEBPACK_IMPORTED_MODULE_2__breadcrumb_breadcrumb3button_vue___default.a
+	},
 	data: function data() {
 		return {
 			e1: true,
@@ -112065,13 +110686,45 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	},
 
 	methods: {
+		submit: function submit(opt) {
+			var _this = this;
+
+			if (this.$refs.form.validate()) {
+				// Native form submission is not yet supporte
+				console.log(this.formDatas);
+				if (this.id == 0) {
+					__WEBPACK_IMPORTED_MODULE_1_axios___default.a.post(this.url, {
+						data: this.formDatas
+					}).then(function (res) {
+						console.log(res.data);
+						if (res.data.success == true) {
+							__WEBPACK_IMPORTED_MODULE_0__helper_flash__["a" /* default */].setSuccess(res.data.message);
+							if (opt == 2) {
+								_this.$router.push(backUrl);
+							}
+						}
+					});
+				} else {
+					__WEBPACK_IMPORTED_MODULE_1_axios___default.a.put(this.url + this.id, {
+						data: this.formDatas
+					}).then(function (res) {
+						if (res.data.success == true) {
+							__WEBPACK_IMPORTED_MODULE_0__helper_flash__["a" /* default */].setSuccess(res.data.message);
+							if (opt == 2) {
+								_this.$router.push(backUrl);
+							}
+						}
+					});
+				}
+			}
+		},
 		onPickFile: function onPickFile() {
 
 			this.btnImageDisabled = true;
 			this.btnText = "Uploading...";
 		},
 		onFilePicked: function onFilePicked(event) {
-			var _this = this;
+			var _this2 = this;
 
 			this.image = this.imageUrl;
 			var files = event.target.files;
@@ -112082,9 +110735,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			var fileReader = new FileReader();
 			fileReader.addEventListener('load', function () {
 
-				_this.imageUrl = fileReader.result;
-				_this.btnImageDisabled = false;
-				_this.btnText = "Upload Image";
+				_this2.imageUrl = fileReader.result;
+				_this2.btnImageDisabled = false;
+				_this2.btnText = "Upload Image";
 			});
 			fileReader.readAsDataURL(files[0]);
 		},
@@ -112108,6 +110761,16 @@ var render = function() {
     "v-app",
     { attrs: { id: "inspire" } },
     [
+      _c("breadcrumb3button", {
+        attrs: {
+          "breadcrumb-item": _vm.breadcrumbs,
+          "breadcrumb-title": _vm.breadcrumbTitle,
+          submit: _vm.submit,
+          "is-valid": _vm.valid,
+          "back-url": _vm.backUrl
+        }
+      }),
+      _vm._v(" "),
       _c(
         "v-form",
         {
@@ -112147,17 +110810,21 @@ var render = function() {
                                     [
                                       _c("v-select", {
                                         attrs: {
-                                          label: input.key,
+                                          label: input.text,
                                           rules: _vm.formRules[input.key],
-                                          items: input.items,
+                                          items: _vm.selectItems[input.items],
                                           required: ""
                                         },
                                         model: {
-                                          value: input.Value,
+                                          value: _vm.formDatas[input.key],
                                           callback: function($$v) {
-                                            _vm.$set(input, "Value", $$v)
+                                            _vm.$set(
+                                              _vm.formDatas,
+                                              input.key,
+                                              $$v
+                                            )
                                           },
-                                          expression: "input.Value"
+                                          expression: "formDatas[input.key]"
                                         }
                                       })
                                     ],
@@ -112298,56 +110965,70 @@ var render = function() {
                                     ],
                                     1
                                   )
-                                : input.type == "password"
-                                  ? _c(
-                                      "div",
-                                      [
-                                        _c("v-text-field", {
-                                          attrs: {
-                                            label: "Confirm Password",
-                                            name: "confirmpassword",
-                                            rules: _vm.formRules[input.key],
-                                            required: "",
-                                            "append-icon": _vm.e1
-                                              ? "visibility"
-                                              : "visibility_off",
-                                            "append-icon-cb": function() {
-                                              return (_vm.e1 = !_vm.e1)
-                                            },
-                                            type: _vm.e1 ? "password" : "text"
+                                : _vm._e(),
+                              _vm._v(" "),
+                              input.type == "password"
+                                ? _c(
+                                    "div",
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: {
+                                          label: "Confirm Password",
+                                          name: "confirmpassword",
+                                          rules: _vm.formRules[input.key],
+                                          required: "",
+                                          "append-icon": _vm.e1
+                                            ? "visibility"
+                                            : "visibility_off",
+                                          "append-icon-cb": function() {
+                                            return (_vm.e1 = !_vm.e1)
                                           },
-                                          model: {
-                                            value: input.Value,
-                                            callback: function($$v) {
-                                              _vm.$set(input, "Value", $$v)
-                                            },
-                                            expression: "input.Value"
-                                          }
-                                        })
-                                      ],
-                                      1
-                                    )
-                                  : _c(
-                                      "div",
-                                      [
-                                        _c("v-text-field", {
-                                          attrs: {
-                                            label: input.key,
-                                            rules: _vm.formRules[input.key],
-                                            counter: input.count,
-                                            required: ""
+                                          type: _vm.e1 ? "password" : "text"
+                                        },
+                                        model: {
+                                          value: _vm.formDatas[input.key],
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              _vm.formDatas,
+                                              input.key,
+                                              $$v
+                                            )
                                           },
-                                          model: {
-                                            value: input.value,
-                                            callback: function($$v) {
-                                              _vm.$set(input, "value", $$v)
-                                            },
-                                            expression: "input.value"
-                                          }
-                                        })
-                                      ],
-                                      1
-                                    )
+                                          expression: "formDatas[input.key]"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              input.type == "text"
+                                ? _c(
+                                    "div",
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: {
+                                          label: input.text,
+                                          rules: _vm.formRules[input.key],
+                                          counter: input.count,
+                                          required: ""
+                                        },
+                                        model: {
+                                          value: _vm.formDatas[input.key],
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              _vm.formDatas,
+                                              input.key,
+                                              $$v
+                                            )
+                                          },
+                                          expression: "formDatas[input.key]"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                : _vm._e()
                             ]
                           )
                         })
@@ -112526,12 +111207,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				name: '12'
 			},
 			tabs: [{
+				class: '',
 				name: 'General',
 				group: [{ class: 'xs12 sm6 md6', key: 'language_id', type: 'text', Value: '' }, { class: 'xs12 sm6 md6', key: 'description', type: 'text', Value: '' }, { class: 'xs12 sm6 md6', key: 'tag', type: 'text', Value: '' }, { class: 'xs12 sm6 md6', key: 'meta_title', type: 'text', Value: '' }, { class: 'xs12 sm6 md6', key: 'meta_description', type: 'text', Value: '' }, { class: 'xs12 sm6 md6', key: 'meta_keyword', type: 'text', Value: '' }, { class: 'xs12 sm6 md6', key: 'name', type: 'text', Value: '' }]
 			}, {
+				class: '',
 				name: 'Data',
 				group: [{ class: 'xs12 sm6 md6', key: 'model', type: 'text', Value: '' }, { class: 'xs12 sm6 md6', key: 'sku', type: 'text', Value: '' }, { class: 'xs12 sm6 md6', key: 'upc', type: 'text', Value: '' }, { class: 'xs12 sm6 md6', key: 'ean', type: 'text', Value: '' }, { class: 'xs12 sm6 md6', key: 'jan', type: 'text', Value: '' }, { class: 'xs12 sm6 md6', key: 'isbn', type: 'text', Value: '' }, { class: 'xs12 sm6 md6', key: 'mpn', type: 'text', Value: '' }, { class: 'xs12 sm6 md6', key: 'location', type: 'text', Value: '' }]
 			}, {
+				class: '',
 				name: 'Image',
 				group: [{ class: 'xs12 sm6 md6', key: 'image', type: 'text', Value: '' }]
 			}],

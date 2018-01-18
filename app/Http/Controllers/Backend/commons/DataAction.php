@@ -112,14 +112,11 @@
 	            'message'=>$message
 	        ]);
 		}
-		public function EditData($table,$field,$id)
+		public function EditData($table,$id)
 		{
-			$data=$table::get()->where($field,$id);
-			foreach ($data as $key => $value) {
-	            return response()->json([
-	            	'data'=>$value
-	            ]);
-	        }
+			//$data=$table::get()->where($field,$id);
+			$data=$table::find($id);
+			return response()->json($data);
 		}
 		public function UpdateData($table,$data,$field,$id)
 		{
