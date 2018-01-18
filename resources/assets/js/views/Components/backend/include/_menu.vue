@@ -8,7 +8,7 @@
                 <h1 class="logo-wrapper">
                   <!-- <a href="/admin" class="brand-logo darken-1"> -->
                     <router-link class="brand-logo darken-1"  to="/admin">
-                      <img src="/images/logo/materialize-logo.png" alt="materialize logo">
+                      <!-- <img src="/images/logo/materialize-logo.png" alt="materialize logo"> -->
                       <span class="logo-text hide-on-med-and-down">Bakou Store</span>
                     </router-link>
                   <!-- </a> -->
@@ -17,7 +17,7 @@
             </ul>
             <div class="header-search-wrapper hide-on-med-and-down">
               <i class="material-icons">search</i>
-              <input type="text" name="Search" class="header-search-input z-depth-2 search-box" placeholder="Explore Materialize" />
+              <input type="text" name="Search" class="header-search-input z-depth-2 search-box" placeholder="Search Product" />
             </div>
             <ul class="right hide-on-med-and-down">
               <li>

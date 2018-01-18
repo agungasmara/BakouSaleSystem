@@ -1,36 +1,3 @@
-<!-- <template>
-  <v-tabs fixed centered>
-    <v-toolbar color="cyan">
-      <v-text-field
-        solo
-        label="Search"
-        append-icon="keyboard_voice"
-        prepend-icon="search"
-      ></v-text-field>
-      <v-tabs-bar color="transparent" slot="extension" dark>
-        <v-tabs-slider color="yellow"></v-tabs-slider>
-        <v-tabs-item
-          v-for="i in 3"
-          :key="i"
-          :href="'#tab-' + i"
-        >
-          Item {{ i }}
-        </v-tabs-item>
-      </v-tabs-bar>
-    </v-toolbar>
-    <v-tabs-items>
-      <v-tabs-content
-        v-for="i in 3"
-        :key="i"
-        :id="'tab-' + i"
-      >
-        <v-card flat>
-          <v-card-text>{{ text }}</v-card-text>
-        </v-card>
-      </v-tabs-content>
-    </v-tabs-items>
-  </v-tabs>
-</template> -->
 <template>
 	<section id="content">
 		<!--breadcrumbs start-->
@@ -70,14 +37,6 @@
 			<div class="container">
 				<v-app id="inspire">
 					<v-card>
-						<!-- <v-card-title>	
-							<v-breadcrumbs>
-					        	<v-icon slot="divider">forward</v-icon>
-					        		<v-breadcrumbs-item  v-for="item in breadcrumbs" :key="item.text" :disabled="item.disabled">
-					          			{{ item.text }}
-					        		</v-breadcrumbs-item>
-					      	</v-breadcrumbs>
-						</v-card-title> -->
 						<div class="flash flash__success" v-if="flash.success">
 							<v-alert color="success" icon="check_circle" value="true">
 				            	{{flash.success}}
@@ -219,85 +178,15 @@
 
 							]
 						},
-						// {
-						// 	name:'Links', 
-						// 	group:[
-						// 		{	class:'',	 key:'',	type:'',	Value:'',	items:[]}
-						// 	]
-						// },
-						// {
-						// 	name:'Attribute', 
-						// 	group:[
-						// 		{	class:'',	 key:'',	type:'', Value:'',	}
-						// 	]
-						// },
-						// {
-						// 	name:'Option', 
-						// 	group:[
-						// 		{	class:'',	 key:'',	type:'', Value:'',	}
-						// 	]
-						// },
-						// {
-						// 	name:'Recurring', 
-						// 	group:[
-						// 		{	class:'',	 key:'',	type:'', Value:'',	}
-						// 	]
-						// },
-						// {
-						// 	name:'Discount', 
-						// 	group:[
-						// 		{	class:'',	 key:'',	type:'', Value:'',	}
-						// 	]
-						// },
-						// {
-						// 	name:'Special', 
-						// 	group:[
-						// 		{	class:'',	 key:'',	type:'', Value:'',	}
-						// 	]
-						// },
+						
 						{
 							name:'Image', 
 							group:[
 								{	class:'xs12 sm6 md6',	 key:'image',	type:'text',	 Value:''},
 							]
 						},
-						// {
-						// 	name:'Reward Points', 
-						// 	group:[
-						// 		{	class:'',	 key:'',	type:'', Value:'',	}
-						// 	]
-						// },
-						// {
-						// 	name:'SEO', 
-						// 	group:[
-						// 		{	class:'',	 key:'',	type:'', Value:'',	}
-						// 	]
-						// },
-						// {
-						// 	name:'Design', 
-						// 	group:[
-						// 		{	class:'',	 key:'',	type:'', Value:'',	}
-						// 	]
-						// },
+						
 					],
-				
-			    // code: '',
-			    // codeRules: [
-			    //   (v) => !!v || 'Code is required',
-			    //   (v) => v && v.length <= 10 || 'Code must be less than 10 characters'
-			    // ],
-			    // key: '',
-			    // keyRules: [
-			    //   (v) => !!v || 'Key is required',
-			    //   (v) => v && v.length <= 10 || 'Key must be less than 10 characters'
-			    // ],
-			    // value: '',
-			    // valueRules: [
-			    //   (v) => !!v || 'Value is required',
-			    //   (v) => v && v.length <= 10 || 'Value must be less than 10 characters'
-			    // ],
-			    // select: null,
-			    // items: [],
 			    breadcrumbs: [
 			        {
 			          text: 'Dashboard',

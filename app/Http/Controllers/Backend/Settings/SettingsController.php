@@ -23,7 +23,7 @@ class SettingsController extends Controller
     }
 
     public function show($id){
-
+        return response()->json([]);
     }
 
     public function store(Request $request)
@@ -32,10 +32,13 @@ class SettingsController extends Controller
         $data=$request->all();
 
         $condition=[
-            'key'=>$request->key
+
+            'key'=>$request->key,
+            'code'=>$request->code
+
         ];
 
-        return (new DataAction)->StoreData(Setting::class,$condition,$data);
+        return (new DataAction)->StoreData(Setting::class,[],'',$data);
 
     }
 
@@ -77,13 +80,5 @@ class SettingsController extends Controller
         return response()->json($stores);
 
     }
-    public function test()
-    {
 
-        $condition=['key'=>'testkey','code'=>'test'];
-
-        $count = DB::table('setting')->where($condition)->count();
-
-        return response()->json(['n'=>$count]);
-    }
 }

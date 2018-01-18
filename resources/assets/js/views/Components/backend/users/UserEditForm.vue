@@ -2,15 +2,14 @@
 <v-app id="inspire">
 	<v-card>
 
-		<!--breadcrumbs start-->
-			<breadcrumb3btn
-			v-bind:breadcrumb-item="breadcrumbs"
-			v-bind:breadcrumb-title="breadcrumbTitle"
-			v-bind:submit="submit"
-			v-bind:is-valid="valid"
-			v-bind:back-url="backUrl"
-			></breadcrumb3btn>
-		<!--breadcrumbs end-->
+		<v-card-title>	
+			<v-breadcrumbs>
+	        	<v-icon slot="divider">forward</v-icon>
+	        		<v-breadcrumbs-item  v-for="item in breadcrumbs" :key="item.text" :disabled="item.disabled">
+	          			{{ item.text }}
+	        		</v-breadcrumbs-item>
+	      	</v-breadcrumbs>
+		</v-card-title>
 		<div class="flash flash__success" v-if="flash.success">
 			<v-alert color="success" icon="check_circle" value="true">
             	{{flash.success}}
@@ -71,6 +70,17 @@
 							</div>
 						</v-layout>
 					</v-flex>
+			      	<v-btn @click="saveUser(id,1)" :disabled="!valid">
+				        Update
+				    </v-btn>
+				    <v-btn @click="saveUser(id,2)" :disabled="!valid">
+				        Update & Close
+				    </v-btn>
+				    <router-link to="/admin/user/list">
+					    <v-btn>
+					        Cancele
+					    </v-btn>
+				    </router-link>
 			    </v-layout>
 			</v-container>
 	    </v-form>
@@ -81,7 +91,6 @@
 <script>
 	import Flash from '../../../../helper/flash'
 	import axios from 'axios'
-	import breadcrumb3btn from '../commons/breadcrumb/breadcrumb3btn.vue'
 	export default{
 		props:['id'],
 		data(){
@@ -140,27 +149,22 @@
 			    items: [],
 			    selectGroup:null,
 			    groups:[],
-				breadcrumbTitle:'Users',
 				breadcrumbs: [
 			        {
-			          text: 'Administrator',
+			          text: 'Adminstrator',
 			          disabled: false
 			        },
 			        {
-			          text: 'Users',
+			          text: 'Setting',
 			          disabled: false
 			        },
 			        {
-			          text: 'Edit',
+			          text: 'Create',
 			          disabled: true
 			        }
-			    ],
-			    backUrl:'/admin/users/list',
+		      	],
 				flash:Flash.state
 			}
-		},
-		components:{
-			'breadcrumb3btn':breadcrumb3btn
 		},
 		created(){
 			this.getUserGroup()
@@ -174,7 +178,7 @@
 				})
 			},
 			fetchUser(id){
-				axios.get('/api/users/edit/'+id).then((res)=>{
+				axios.get('/api/users/getuserbyid/'+id).then((res)=>{
 					this.selectGroup=res.data.group
 					this.username=res.data.username
 					this.fname=res.data.firstname
@@ -185,11 +189,11 @@
 					this.selectStatus=res.data.status
 				})
 			},
-			submit:function (opt) {
+			saveUser (id,opt) {
 		      	if (this.$refs.formUser.validate()) {
 			      	if(this.checkPasswordConfirmed()===false){
 				        // Native form submission is not yet supported
-				        axios.put('/api/users/update/'+this.id, {
+				        axios.put('/api/users/update/'+id, {
 				          username: this.username,
 				          fname: this.fname,
 				          lname: this.lname,

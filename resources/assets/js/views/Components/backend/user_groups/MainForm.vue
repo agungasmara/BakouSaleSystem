@@ -3,13 +3,13 @@
 
 		<v-card>
 			<!--breadcrumbs start-->
-				<breadcrumb3btn
+				<breadcrumb3button
 				v-bind:breadcrumb-item="breadcrumbs"
 				v-bind:breadcrumb-title="breadcrumbTitle"
 				v-bind:submit="submit"
 				v-bind:is-valid="valid"
 				v-bind:back-url="backUrl"
-				></breadcrumb3btn>
+				></breadcrumb3button>
 			<!--breadcrumbs end-->
 			<div class="flash flash__success" v-if="flash.success">
 				<v-alert color="success" icon="check_circle" value="true">
@@ -37,7 +37,7 @@
 							</div> 
 				      	</v-flex>
 				      	<v-flex xs12 sm6 md6>
-				      		<v-text-field type="number" label="Group Type" v-model="groupType" :rules="groupTypeRules" :counter="1" required></v-text-field>
+				      		<v-text-field label="Group Type" v-model="groupType" :rules="groupTypeRules" :counter="100" required></v-text-field>
 				      	</v-flex>
 				      	<v-flex xs12 sm12 md12>
 				      		<v-select label="Sermissions" autocomplete :loading="loading" multiple cache-items chips required :items="states" :rules="[() => permissions.length > 0 || 'You must choose at least one']" :search-input.sync="search" v-model="permissions"></v-select>
@@ -52,7 +52,7 @@
 <script>
 	import Flash from '../../../../helper/flash'
 	import axios from 'axios'
-	import breadcrumb3btn from '../commons/breadcrumb/breadcrumb3btn.vue'
+	import breadcrumb3button from '../commons/breadcrumb/breadcrumb3button.vue'
 	export default{
 		data(){
 			return{
@@ -68,7 +68,7 @@
 			    groupType: '',
 			    groupTypeRules: [
 			      (v) => !!v || 'Group Type is required',
-			      (v) => v && v.length <= 1 || 'Group Type must be less than 1 characters'
+			      (v) => v && v.length <= 100 || 'Group Type must be less than 100 characters'
 			    ],
 			    permissions: [],
 			    breadcrumbTitle:'Users',
@@ -95,7 +95,7 @@
 			}
 		},
 		components:{
-			'breadcrumb3btn':breadcrumb3btn
+			'breadcrumb3button':breadcrumb3button
 		},
 		watch: {
 			search (val) {
