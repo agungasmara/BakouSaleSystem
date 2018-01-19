@@ -194,7 +194,9 @@
                         <div class="col-lg-12 clearfix">
                             <ul class="pager">
                                 <li class="previous pull-right">
-                                    <a href=""> <i class="fa fa-home"></i> Go to Shop</a>
+                                    <router-link v-bind:to="'/'" title="Orders">
+                                       <i class="fa fa-home"></i> Go to Shop
+                                    </router-link>
                                 </li>
                                 <li class="next pull-left">
                                     <a href="">&larr; Back to My Account</a>
