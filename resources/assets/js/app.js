@@ -16,7 +16,10 @@ import OrderStatus from './views/Components/frontend/account/order_status.vue'
 import AddressList from './views/Components/frontend/account/address_list.vue'
 import AddressAdd from './views/Components/frontend/account/address_add.vue'
 import AddressForm from './views/Components/frontend/account/address_form.vue'
+import AddressMy from './views/Components/frontend/account/address_my.vue'
 import InformationUser from './views/Components/frontend/account/information_user.vue'
+import WishList from './views/Components/frontend/account/wishlist.vue'
+
 //***** products *****
 import Product from './views/Components/frontend/product/product.vue'
 import ProductDetail from './views/Components/frontend/product/product_detail.vue'
@@ -172,6 +175,16 @@ const router = new VueRouter({
             path: 'informationuser',
             name: 'informationuser',
             component: InformationUser
+          },
+          {
+            path: 'wishlist',
+            name: 'wishlist',
+            component: WishList
+          },
+          {
+            path: 'addressmy',
+            name: 'addressmy',
+            component: AddressMy
           }
       ]
     },

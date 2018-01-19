@@ -234,8 +234,8 @@
                         <li class="previous pull-right"><a href=""> <i class="fa fa-home"></i> Go to Shop </a>
                         </li>
                         <li class="next pull-left">
-                            <router-link v-bind:to="'/account/dashboard'" title="Orders">
-                                ← Back to My account
+                            <router-link v-bind:to="'/account/addressmy'" title="Orders">
+                                ← Back to My Address
                             </router-link>
                         </li>
                     </ul>
