@@ -15,6 +15,7 @@ class ProductController extends Controller
 		$productInfo = $this->getProduct($id);	
 		// Get Discount
 		$discounts = $this->getProductDiscounts($id);
+		dd($discounts);
 		$discount_arr = array();
 		foreach ($discounts as $discount) {
 			$discount_arr[] = array(
@@ -36,9 +37,9 @@ class ProductController extends Controller
 		// 		->orderBy('priority','asc')
 		// 		->orderBy('price','asc')
 		// 		->get();
-		$query = DB::select("SELECT * FROM sg_product_discount 
-				WHERE product_id = 49
-				AND customer_group_id = 1
+		$query = DB::select("SELECT * FROM ".env('DB_PREFIX')."product_discount 
+				WHERE product_id = '".(int)$product_id."'
+				AND customer_group_id = '".config_customer_group_id."'
 				AND quantity > 1 
 				AND ((date_start = '0000-00-00' OR date_start < NOW()) 
 				AND (date_end = '0000-00-00' OR date_end > NOW())) 
