@@ -84,7 +84,10 @@
 					code: 'dgdag',
 					status:0,
 					user_group_id:1,
-					image:''
+					image:'',
+					salt:'test',
+					ip:'127',
+					date_added:'2018-01-20'
 				},
 				select:{
 					statusItems:[
@@ -109,7 +112,7 @@
 			          disabled: true
 			        }
 			    ],
-			    backUrl:'/admin/user/list',
+			    backUrl:'/admin/users/list',
 			}
 		},
 		created(){

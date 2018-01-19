@@ -24,7 +24,7 @@ class User extends Model
     	'ip',
     	'date_added'
     ]; 
-    protected $hidden=['user_group_id','password','salt','ip'];
+    //protected $hidden=['user_group_id','password','salt','ip'];
 
     public function UserGroup(){
 		return $this->belongsTo(UserGroup::class,'user_group_id');

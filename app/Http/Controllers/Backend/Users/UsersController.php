@@ -50,20 +50,19 @@ class UsersController extends Controller
       //       ->save(public_path($image));                
       // }
         
-        $data=array();
-        $condition=array();
-        foreach($request->all() as $key=>$value){
-            $data[]=$value;
-            $condition=[
-                'username'=>$value['username'],
-                'email'=>$value['email']
-            ];
-        }
-
+        // $data=array();
+        // $condition=array();
+       
+        $data=$request['data'];
+        $data=array_except($data,['confirmPassword']);
         
+        $condition=[
+            'username'=>$data['username'],
+            'email'=>$data['email']
+        ];
 
-        return (new DataAction)->StoreData(User::class,$condition,"or",$data->toArray());
-        //return response()->json($data->toArray());
+        return (new DataAction)->StoreData(User::class,$condition,"or",$data);
+        //return response()->json($data);
 
     }
     public function edit($id)
@@ -85,23 +84,10 @@ class UsersController extends Controller
      //        ->encode($mimetype, 100) 
      //        ->save(public_path($firstname));                
      //    } 
-        $data=[
-            'user_group_id'=>$request->user_group_id,
-            'username'=>$request->username,
-            'firstname'=>$request->firstname,
-            'lastname'=>$request->lastname,
-            'email'=>$request->email,
-            'password'=>bcrypt($request->password),
-            'code'=>$request->code,
-            'image'=>'',
-            'status'=>$request->status,
-            'ip'=>$request->ip(),
-            'salt'=>'xy390xz',
-            'date_added'=>date('Y-m-d H:i:s')
-        ];
-        $data=$request->all();
-
-        return (new DataAction)->UpdateData(User::class,$data,'user_id',$id);
+        
+        
+        return (new DataAction)->UpdateData(User::class,$request['data'],'user_id',$id);
+        // return response()->json($data);
     }
     public function destroy($id)
     {
