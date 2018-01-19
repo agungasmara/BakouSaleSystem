@@ -29,7 +29,7 @@
                         </li>
                         <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center ">
                             <div class="thumbnail">
-                                <router-link v-bind:to="'/account/addressadd'" title="My addresses">
+                                <router-link v-bind:to="'/account/addressmy'" title="My addresses">
                                      <i class="fa fa-map-marker"></i> My addresses
                                 </router-link>
                                
