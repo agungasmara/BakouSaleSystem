@@ -26,9 +26,10 @@
 	    </table>
 	     <div class="miniCartFooter text-right">
 	        <h3 class="text-right subtotal"> Subtotal: $ {{total}} </h3>
-	        <a class="btn btn-sm btn-danger" href="/cart"> <i class="fa fa-shopping-cart"> </i> VIEW
-	            CART </a><a
-	            class="btn btn-sm btn-primary"> CHECKOUT </a>
+	        <a class="btn btn-sm btn-danger" href="/cart"> 
+	        	<i class="fa fa-shopping-cart"> </i> VIEW CART 
+	        </a>
+	        <a class="btn btn-sm btn-primary"> CHECKOUT </a>
 	    </div>  
 	</div>
 </template>
