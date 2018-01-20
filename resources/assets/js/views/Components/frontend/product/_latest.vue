@@ -150,7 +150,8 @@
         },
         methods: {
           AddToCart(product_id,qty=1){
-            CartAction.AddToCart(product_id,qty);
+            CartAction.AddToCart(product_id,qty)
+            window.scrollTo(100,100)
           }
           
         }

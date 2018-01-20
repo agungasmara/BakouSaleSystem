@@ -113,10 +113,15 @@
 
 		                    <div class="cartFooter w100">
 		                        <div class="box-footer">
-		                            <div class="pull-left"><a href="" class="btn btn-default"> <i
-		                                    class="fa fa-arrow-left"></i> &nbsp; Continue shopping </a></div>
+		                            <div class="pull-left">
+		                            	<router-link to="/" class="btn btn-default">
+	                                     	<i class="fa fa-arrow-left"></i> 
+		                            		&nbsp; Continue shopping 
+	                                    </router-link>
+		                            </div>
 		                            <div class="pull-right">
-		                                <button type="submit" class="btn btn-default"><i class="fa fa-undo"></i> &nbsp; Update
+		                                <button type="submit" class="btn btn-default">
+		                                	<i class="fa fa-undo"></i> &nbsp; Update
 		                                    cart
 		                                </button>
 		                            </div>

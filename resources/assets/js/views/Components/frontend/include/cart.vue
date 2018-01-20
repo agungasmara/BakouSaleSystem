@@ -26,9 +26,9 @@
 	    </table>
 	     <div class="miniCartFooter text-right">
 	        <h3 class="text-right subtotal"> Subtotal: $ {{total}} </h3>
-	        <a class="btn btn-sm btn-danger" href="/cart"> 
-	        	<i class="fa fa-shopping-cart"> </i> VIEW CART 
-	        </a>
+	        <router-link to="/cart/cartview" class="btn btn-sm btn-danger">
+              <i class="fa fa-shopping-cart"> </i> VIEW CART 
+            </router-link>
 	        <a class="btn btn-sm btn-primary"> CHECKOUT </a>
 	    </div>  
 	</div>
