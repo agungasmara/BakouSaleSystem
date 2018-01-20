@@ -33,11 +33,15 @@
 		    </tr>
 	        </tbody>
 	    </table>
-	     <div v-if="CartProduct.products.TotalPrices" class="miniCartFooter text-right">
+
+	     <div class="miniCartFooter text-right">
 	        <h3 class="text-right subtotal"> Total: $ {{CartProduct.products.TotalPrices}} </h3>
-	        <a class="btn btn-sm btn-danger" href="/cart"> <i class="fa fa-shopping-cart"> </i> VIEW
-	            CART </a><a
-	            class="btn btn-sm btn-primary"> CHECKOUT </a>
+	        <router-link to="/cart/cartview" class="btn btn-sm btn-danger">
+              <i class="fa fa-shopping-cart"> </i> VIEW CART 
+            </router-link>	  
+             <router-link to="/cart/checkout" class="btn btn-sm btn-primary">
+               CHECKOUT
+            </router-link>	        
 	    </div>  
 	</div>
 </template>
