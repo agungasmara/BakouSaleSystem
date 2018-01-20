@@ -76,14 +76,24 @@
 
 
                       <div class="description">
-                          <h4><a href="product-details.html"> {{latestProduct.name}} </a></h4>
+                          <h4>
+                            <a href="product-details.html">{{latestProduct.name}} </a>
+                          </h4>
                           <div class="grid-description">
                             <p v-html="latestProduct.description"></p>
                           </div>
                           <span class="size">XL / XXL / S </span></div>
-                      <div class="price"><span>{{latestProduct.price}}</span></div>
-                      <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
-                              class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
+                      <div class="price">
+                        <span>{{latestProduct.price}}</span>
+                      </div>
+                      <div class="action-control">
+
+                        <a class="btn btn-primary" @click="AddToCart(latestProduct.product_id)"> 
+                          <span class="add2cart">
+                            <i class="glyphicon glyphicon-shopping-cart"> </i> Add to cart 
+                          </span> 
+                        </a>
+                      </div>
                   </div>
               </div>
               <!--/.item-->
@@ -101,6 +111,7 @@
     import Flash from '../../../../helper/flash'
     import Common from '../../../../helper/common'
     import {post} from '../../../../helper/api'
+    import CartAction from '../../../../helper/cart'
 
     export default {
         data() {
@@ -137,7 +148,9 @@
            
         },
         methods: {
-          
+          AddToCart(product_id,qty=1){
+            CartAction.AddToCart(product_id,qty);
+          }
         }
     }
 </script>

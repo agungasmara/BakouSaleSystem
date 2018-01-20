@@ -34,7 +34,7 @@
 </template>
 <script>
 import Flash from '../../../../helper/flash'
-import CartAction from '../../../../helper/Cart'
+import CartAction from '../../../../helper/cart'
 export default {
 	data() {
 	    return {

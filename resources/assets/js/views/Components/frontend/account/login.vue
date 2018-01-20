@@ -12,7 +12,9 @@
         </div>
 
         <div class="col-lg-9 col-md-9 col-sm-7">
-            <h1 class="section-title-inner"><span><i class="fa fa-lock"></i> Authentication</span></h1>
+            <h1 class="section-title-inner">
+                <span><i class="fa fa-lock"></i> Authentication</span>
+            </h1>
 
             <div class="row userInfo">
                 <h2 class="block-title-2"><span>Already registered?</span></h2>
@@ -20,7 +22,7 @@
                 <form role="form" class="logForm ">
                     <div class="form-group">
                         <label>Email address</label>
-                        <input type="email" class="form-control" placeholder="Enter email" v-model="email">
+                        <input type="email" class="form-control" placeholder="Enter email" v-model="email" required>
                     </div>
                     <div class="form-group">
                         <label>Password</label>

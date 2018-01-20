@@ -40,8 +40,41 @@
                                     <span class="caret"></span>
                                   </a>
                                   <ul class="dropdown-menu">
-                                    <li><router-link to="/account/register">Register</router-link></li>
-                                    <li><router-link to="/account/login">Login</router-link></li>
+                                    <li>
+                                        <a href="">
+                                            Account
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="">
+                                            Order
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="">
+                                            Transaction
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="">
+                                            Download
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="">
+                                            Logout
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <router-link to="/account/register">
+                                            Register
+                                        </router-link>
+                                    </li>
+                                    <li>
+                                        <router-link to="/account/login">
+                                            Login
+                                        </router-link>
+                                    </li>
                                   </ul>
                                 </li>
                                 <li><router-link to="/account/signin" data-toggle="modal" data-target="#ModalLogin"> <span class="hidden-xs">SignIn</span>
