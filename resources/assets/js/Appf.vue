@@ -30,8 +30,8 @@
                                     <span class="caret"></span>
                                   </a>
                                   <ul class="dropdown-menu">
-                                    <li><router-link to="/account/register">KH</router-link></li>
-                                    <li><router-link to="/account/login">EN</router-link></li>
+                                    <li><router-link to="">KH</router-link></li>
+                                    <li><router-link to="">EN</router-link></li>
                                   </ul>
                                 </li>
                                 <li class="dropdown">

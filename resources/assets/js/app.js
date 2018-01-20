@@ -25,6 +25,9 @@ import Product from './views/Components/frontend/product/product.vue'
 import ProductDetail from './views/Components/frontend/product/product_detail.vue'
 import Information from './views/Components/frontend/information/information.vue'
 import InformationDetail from './views/Components/frontend/information/information_detail.vue'
+// **** Cart ******
+import Cart from './views/Components/frontend/checkout/cart.vue'
+import CartView from './views/Components/frontend/checkout/cart_view.vue'
 // **** Footer *****
 import Footer from './views/Components/frontend/common/_footer.vue'
 
@@ -199,6 +202,16 @@ const router = new VueRouter({
           // components: { default: InformationDetail, footer: Footer },
           // props: { default: true, footer: false }
           // component: InformationDetail
+        }
+      ]
+    },
+     { 
+      path: '/cart', name:'cart',component: Cart,
+      children:[
+        {
+          path: 'cartview',
+          name:'cartview',
+          component: CartView
         }
       ]
     },

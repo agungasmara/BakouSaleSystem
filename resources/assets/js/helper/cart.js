@@ -22,7 +22,6 @@ export default{
 	},
 	MyProduct(){
 		axios.get('/api/product_cart').then(response => this.data.products=response.data);
-
 	},
 	
 	

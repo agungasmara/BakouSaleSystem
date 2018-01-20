@@ -35,8 +35,16 @@
                               <div class="carousel-inner" role="listbox">
                                   <div class="item active">
                                      <router-link v-bind:to="'/product/product_detail/'+ latestProduct.product_id">
+                                      
                                       <img v-bind:src="latestProduct.thumb" alt="img" class="img-responsive ">
                                     </router-link>
+                                   <!--  <a v-bind:href="'/product/product_detail/'+ latestProduct.product_id">
+                                      <img src="/assets/frontend/images/product/5.jpg" alt="img" class="img-responsive ">
+                                    </a>   -->
+
+                                    <!-- <a href="product-details.html"> 
+                                      <img src="/assets/frontend/images/product/5.jpg" alt="img" class="img-responsive ">
+                                    </a> -->
                                   </div>
                                   <div class="item">
                                     <router-link to="/product/product_detail/1">
@@ -108,7 +116,6 @@
     export default {
         data() {
             return {
-              latestProducts:Flash.state,
               flash: Flash.state,
               error: Flash.state,
               error: {},
@@ -136,19 +143,16 @@
   		    .catch(e => {
   		      this.errors.push(e)
   		    })
+
         },
         ready() {
            
-        },
-        beforeUpdate(product_id,qty=1){
-          var pid = this.$route.params.product_id;
-          Flash.setState(this.AddToCart(pid,qty));
-          // Flash.setState(this.AddToCart(product_id,qty));
         },
         methods: {
           AddToCart(product_id,qty=1){
             CartAction.AddToCart(product_id,qty);
           }
+          
         }
     }
 </script>
