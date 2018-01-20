@@ -2,7 +2,6 @@ import axios from 'axios'
 export default{
 	data: {
 		products:{},
-		TotalPrice:0
 	},
 	AddToCart(product_id,quantity=1){
 		

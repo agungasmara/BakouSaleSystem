@@ -4,32 +4,40 @@
 	    <table >
 	        <tbody >
 
-	        <tr v-for="product in CartProduct.products" class="miniCartProduct"  v-if="CartProduct.products.length">
-	            <td style="width:20%" class="miniCartProductThumb">
-	                <div><a href="product-details.html"> <img src="/assets/frontend/images/product/3.jpg" alt="img"> </a>
-	                </div>
-	            </td>
-	            <td style="width:20%">
-	                <div class="miniCartDescription">
-	                    <h4><a href="product-details.html"> TSHOP T shirt Black </a></h4>
-	                    <span class="size"> {{product.name}} </span>
-
-	                    <div class="price"><span>$ {{product.price}} </span></div>
-	                </div>
-	            </td>
+	        	<!-- {{CartProduct.products.data.length}} -->
+	        <tr v-for="product in CartProduct.products.data" v-if="CartProduct.products.data.length > 0"  class="miniCartProduct">
+	            <router-link v-bind:to="'/product/product_detail/'+ product.product_id">
+		            <td style="width:20%" class="miniCartProductThumb">
+		                <div><a href="product-details.html"> <img :src="product.image" alt="img"> </a>
+		                </div>
+		            </td>
+		            <td style="width:20%">
+		                <div class="miniCartDescription">
+		                    <h4>
+		                    		{{product.name}}
+		                    </h4>
+		                    <span class="size"> <!-- {{product.name}} --> </span>
+		                    <div class="price"><span>$ {{product.price*1}} </span></div>
+		                </div>
+		            </td>
+				</router-link>
 	            <td style="width:15%" class="miniCartQuantity"><a> X {{product.cart_quantity}} </a></td>
 	            <td style="width:20%" class="miniCartSubtotal"><span>$ {{product.price * product.cart_quantity}} </span></td>
 	            <td style="width:5%" class="delete"><a @click="RemoveFromCart(product.product_id)"> x </a></td>
 	        </tr>
-	        <tr v-else>Your shopping cart is empty!</tr>
+	        <tr v-if="CartProduct.products.data.length == 0">
+	        	<v-footer class="pa-3">
+				    <v-spacer></v-spacer>
+				    <center>Your shopping cart is empty!</center>
+				  </v-footer>
+		    </tr>
 	        </tbody>
 	    </table>
-	     <div class="miniCartFooter text-right">
-	        <h3 class="text-right subtotal"> Subtotal: $ {{total}} </h3>
-	        <router-link to="/cart/cartview" class="btn btn-sm btn-danger">
-              <i class="fa fa-shopping-cart"> </i> VIEW CART 
-            </router-link>
-	        <a class="btn btn-sm btn-primary"> CHECKOUT </a>
+	     <div v-if="CartProduct.products.TotalPrices" class="miniCartFooter text-right">
+	        <h3 class="text-right subtotal"> Total: $ {{CartProduct.products.TotalPrices}} </h3>
+	        <a class="btn btn-sm btn-danger" href="/cart"> <i class="fa fa-shopping-cart"> </i> VIEW
+	            CART </a><a
+	            class="btn btn-sm btn-primary"> CHECKOUT </a>
 	    </div>  
 	</div>
 </template>
@@ -40,7 +48,6 @@ export default {
 	data() {
 	    return {
 	    	CartProduct: CartAction.data,
-	    	total:0,
 	    }
 	},
 	components:{
