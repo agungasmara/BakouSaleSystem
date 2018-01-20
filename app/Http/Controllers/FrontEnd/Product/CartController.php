@@ -49,10 +49,10 @@ class CartController extends Controller
     public function ProductCart()
     {
         // dd("test");
-    	// if (Auth::check()) {
-    	// 	return $data['MyCart']=Customer::find(Auth::user()->customer_id)->Cart()->get();
-    	// }else{
-    	// 	return $data['MyCart']=SessionModel::find(session()->getId())->Cart()->get();
-    	// }
+    	if (Auth::check()) {
+    		return $data['MyCart']=Customer::find(Auth::user()->customer_id)->Cart()->get();
+    	}else{
+    		return $data['MyCart']=SessionModel::find(session()->getId())->Cart()->get();
+    	}
     }
 }
