@@ -28,8 +28,10 @@
 	        <h3 class="text-right subtotal"> Subtotal: $ {{total}} </h3>
 	        <router-link to="/cart/cartview" class="btn btn-sm btn-danger">
               <i class="fa fa-shopping-cart"> </i> VIEW CART 
-            </router-link>
-	        <a class="btn btn-sm btn-primary"> CHECKOUT </a>
+            </router-link>	  
+             <router-link to="/cart/checkout" class="btn btn-sm btn-primary">
+               CHECKOUT
+            </router-link>	        
 	    </div>  
 	</div>
 </template>

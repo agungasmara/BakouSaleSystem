@@ -28,6 +28,8 @@ import InformationDetail from './views/Components/frontend/information/informati
 // **** Cart ******
 import Cart from './views/Components/frontend/checkout/cart.vue'
 import CartView from './views/Components/frontend/checkout/cart_view.vue'
+import Checkout from './views/Components/frontend/checkout/checkout.vue'
+
 // **** Footer *****
 import Footer from './views/Components/frontend/common/_footer.vue'
 
@@ -212,6 +214,11 @@ const router = new VueRouter({
           path: 'cartview',
           name:'cartview',
           component: CartView
+        },
+        {
+          path: 'checkout',
+          name: 'checkout',
+          component: Checkout
         }
       ]
     },
