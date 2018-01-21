@@ -34,7 +34,7 @@
 	        </tbody>
 	    </table>
 
-	     <div class="miniCartFooter text-right">
+	     <div class="miniCartFooter text-right" v-if="CartProduct.products.TotalPrices">
 	        <h3 class="text-right subtotal"> Total: $ {{CartProduct.products.TotalPrices}} </h3>
 	        <router-link to="/cart/cartview" class="btn btn-sm btn-danger">
               <i class="fa fa-shopping-cart"> </i> VIEW CART 
