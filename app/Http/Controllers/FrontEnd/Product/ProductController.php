@@ -15,7 +15,7 @@ class ProductController extends Controller
 		$productInfo = $this->getProduct($id);	
 		// Get Discount
 		$discounts = $this->getProductDiscounts($id);
-		dd($discounts);
+		// dd($discounts);
 		$discount_arr = array();
 		foreach ($discounts as $discount) {
 			$discount_arr[] = array(
@@ -25,7 +25,7 @@ class ProductController extends Controller
 		}
 		return response()->json(['data' => $productInfo,'success' => true, 'message' => 'Success']);
     }
-
+    
     public function getProductDiscounts($product_id) {
 		// $query = DB::table('product_discount')
 		// 		->where('product_id',$product_id)
