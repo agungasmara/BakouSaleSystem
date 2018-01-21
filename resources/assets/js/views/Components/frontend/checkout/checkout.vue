@@ -69,7 +69,19 @@
 		                        </ul>
 		                        <!--/.orderStep end-->
 		                    </div>
+		                    <nav class="horizontal top-border block-section">
+											    <div class="col-md-20" id="tabs">
+											       <a href="#" id="overview" class="col-md-2" @click="activeTab = 'OVER'">Overview</a>
+											       <a href="#" id="aboutcompany" class="col-md-2" @click="activeTab = 'ABOUT'">About Company</a>
+											    </div>
+											  </nav>
 
+											    <div id="over" class="{show : activeTab == 'OVER', hide : activeTab != 'OVER'}">
+											        Hello world1
+											    </div>
+											    <div id="about" class="{show : activeTab == 'ABOUT', hide : activeTab != 'ABOUT'}">
+											        Hello world2
+											    </div>
 		                    <!-- Address -->
 		                    <div class="w100 clearfix" id="tab-1" v-if="displayContents(activeTabName, 'address')">
 		                        <div class="row userInfo">
@@ -526,6 +538,7 @@
         data() {
             return {
              	// List here all available tabs
+             	activeTab: "OVER",
 				      tabs: [
 				        {
 			            id : 1,
