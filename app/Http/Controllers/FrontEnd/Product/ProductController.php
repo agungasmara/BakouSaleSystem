@@ -15,7 +15,6 @@ class ProductController extends Controller
 		$productInfo = $this->getProduct($id);	
 		// Get Discount
 		$discounts = $this->getProductDiscounts($id);
-		// dd($discounts);
 		$discount_arr = array();
 		foreach ($discounts as $discount) {
 			$discount_arr[] = array(
