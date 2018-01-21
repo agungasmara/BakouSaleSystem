@@ -6,6 +6,7 @@ use App\Http\Models\FrontEnd\Cart;
 use App\Http\Models\FrontEnd\Category;
 use App\Http\Models\FrontEnd\Customer;
 use App\Http\Models\FrontEnd\Product;
+use App\Http\Models\FrontEnd\ProductDescription;
 use App\Http\Models\FrontEnd\SessionModel;
 use Illuminate\Support\Facades\Input;
 use DB;
@@ -46,13 +47,23 @@ class CartController extends Controller
     {
        return Cart::RemoveFromCart($request->all());
     }
+    public function UpdateCart(Request $request)
+    {
+        return Cart::UpdateCart($request->all());
+    }
     public function ProductCart()
     {
         // dd("test");
-    	// if (Auth::check()) {
-    	// 	return $data['MyCart']=Customer::find(Auth::user()->customer_id)->Cart()->get();
-    	// }else{
-    	// 	return $data['MyCart']=SessionModel::find(session()->getId())->Cart()->get();
-    	// }
+        $datas['TotalPrices']=0;
+    	if (Auth::check()) {
+    		$datas['data']=Customer::find(Auth::user()->customer_id)->Cart()->get();
+    	}else{
+            $datas['data']=SessionModel::find(session()->getId())->Cart()->get();
+        }
+        foreach ($datas['data'] as $key => $value) {
+            $value->name=ProductDescription::find($value->product_id)->value('name');
+            $datas['TotalPrices']+=$value->cart_quantity*$value->price;
+        }
+        return $datas;
     }
 }

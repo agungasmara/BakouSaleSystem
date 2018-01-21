@@ -21,21 +21,25 @@
 		      					<div v-if="input.type=='image'">
 									<input type="file" id="fileInput"  style="display:none" ref="fileInput" accept="image/*" @change="onFilePicked">
 									<v-layout align-center justify-center >
-										<div>
-											<v-badge color="indigo" v-if="imageUrl">
-												<span slot="badge" style="cursor:pointer;" @click="clearImage">
-													x
-												</span>
-											</v-badge>
-											<label for="fileInput">
-												<img  :src="imageUrl" height="100" style="height:100px; max-width: 300px; cursor:pointer; margin-top: -30px;" @click="onPickFile">
+										<label for="fileInput" style="width: 500px;height:auto;max-height: 300px;" >
 											
-												<div v-if="!imageUrl" height="100" style="height:100px; max-width: 300px; cursor:pointer; margin-top: -30px;">
-													<v-alert outline color="info" :value="true" @click="onPickFile">{{ btnText }}
-													</v-alert>
-												</div>
-											</label>
-										</div>
+												<v-card style="height: auto;max-height: 200px;padding: 10px;" v-if="formDatas[input.key]" @click="onPickFile">
+													<v-badge color="red" overlap v-if="formDatas[input.key]">
+														<v-btn  style="border-radius: 0px; margin-right: -20px; margin-top: -15px; height: 25px; width:50px; position: absolute; cursor: pointer; position: relative; opacity: 0.7; font-size: 8px;" @click="clearImage">
+															Remove
+														</v-btn>
+													</v-badge>
+													<v-layout align-center justify-center>
+												    	<img :src="formDatas[input.key]" style="height:auto;max-height:200px;width: auto;"  @click="onPickFile">
+													</v-layout>
+												</v-card>
+												
+												<v-card style="height: 200px;" v-if="!formDatas[input.key]" @click="onPickFile">
+													<v-layout align-center justify-center style="margin-top:75px;">
+												    	<v-icon dark color="blue" x-large>backup</v-icon>
+													</v-layout>
+												</v-card>
+										</label>
 									</v-layout>
 								</div>
 								<div v-if="input.type=='password'">
@@ -78,15 +82,18 @@
 				valid:true,
 				btnImageDisabled:false,
 				btnText:'Upload Image',
-				imageUrl:'',
+				imageUrl:'sddfdg',
 				image:null,
 			}
+		},
+		mounted(){
+			
 		},
 		methods:{
 			submit (opt) {
 		      	if (this.$refs.form.validate()) {
 			        // Native form submission is not yet supporte
-			        console.log(this.formDatas)
+			        //console.log(this.formDatas)
 			        if(this.id==0){
 			        	axios.post(this.url,{
 				          data:this.formDatas
@@ -95,7 +102,7 @@
 				        	if(res.data.success==true){
 				        		Flash.setSuccess(res.data.message)
 				        		if(opt==2){
-				        			this.$router.push(backUrl)
+				        			this.$router.push(this.backUrl)
 				        		}
 				        	}
 				        })
@@ -103,10 +110,11 @@
 			        	axios.put(this.url+this.id, {
 				          data:this.formDatas
 				        }).then((res)=>{
+				        	console.log(res.data)
 				        	if(res.data.success==true){
 				        		Flash.setSuccess(res.data.message)
 				        		if(opt==2){
-				        			this.$router.push(backUrl)
+				        			this.$router.push(this.backUrl)
 				        		}
 				        	}
 				        })
@@ -123,7 +131,7 @@
 		    },
 		    onFilePicked(event){
 		    	
-		    	this.image=this.imageUrl
+		    	
 		    	const files=event.target.files
 		    	let filename=files[0].name;
 		    	if(filename.lastIndexOf('.')<=0){
@@ -135,6 +143,8 @@
 		    		this.imageUrl=fileReader.result
 					this.btnImageDisabled=false
 		    		this.btnText="Upload Image"
+		    		this.formDatas.image=fileReader.result
+
 		    	
 		    	})
 		    	fileReader.readAsDataURL(files[0])
@@ -142,8 +152,8 @@
 		    },
 		    clearImage(){
 		    	this.imageUrl=''
-		    	const input = this.$refs.fileInput
-		    	input.reset()
+		    	this.formDatas.image=''
+		    	this.$refs.fileInput=''
 		    }
 		}
 	}

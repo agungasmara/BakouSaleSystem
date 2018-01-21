@@ -8,6 +8,7 @@
 			v-bind:form-items="group"
 			v-bind:form-rules="rules"
 			v-bind:form-datas="data"
+			v-bind:select-items="selects"
 			v-bind:back-url="backUrl"
 		></normal-form>
 	</v-card>
@@ -40,7 +41,8 @@
 					{	class:'xs12 sm6 md6',	 key:'lastname',	type:'text',	 text:'Last Name',count:100	},
 					{	class:'xs12 sm4 md4',	 key:'email',	type:'text',	 text:'Email',count:50	},
 					{	class:'xs12 sm4 md4',	 key:'code',	type:'text',	 text:'Code',count:25	},
-					{	class:'xs12 sm4 md4',	 key:'status',	type:'select',items:'statusItems',	 text:'Status',count:100	}
+					{	class:'xs12 sm4 md4',	 key:'status',	type:'select',items:'statusItems',	 text:'Status',count:100	},
+					{	class:'xs12 sm12 md12',	 key:'image',	type:'image',	 Value:'Photo',count:0	}
 					
 				],
 				rules:{
@@ -72,11 +74,14 @@
 					email:'dgadgad@ddgd.com',
 					code: 'dgdag',
 					status:0,
+					user_group_id:1,
+					image:''
+				},
+				selects:{
 					statusItems:[
 						{text:'Acitve',value:1},
 						{text:'Inactive',value:0}
 					],
-					user_group_id:1,
 					userGroupItems:[]
 				},
 			    selectStatus:1,
@@ -115,21 +120,25 @@
 			this.fetchUser(this.id)
 		},
 		methods:{
+			getImage(event){
+				console.log('data after child handle: ', event)
+			},
 			getUserGroup(){
 				axios.get('/api/users_group').then((res)=>{
-					this.data.userGroupItems=res.data
+					this.selects.userGroupItems=res.data
 				})
 			},
 			fetchUser(id){
 				axios.get('/api/users/'+id+'/edit').then((res)=>{
-					this.selectGroup=res.data.group
-					this.username=res.data.username
-					this.fname=res.data.firstname
-					this.lname=res.data.lastname
-					this.email=res.data.email
-					this.code=res.data.code
-					this.imageUrl=res.data.image
-					this.selectStatus=res.data.status
+					// this.data.user_group_id=res.data.user_group_id
+					// this.data.username=res.data.username
+					// this.data.firstname=res.data.firstname
+					// this.data.lastname=res.data.lastname
+					// this.data.email=res.data.email
+					// this.data.code=res.data.code
+					// this.data.status=res.data.status
+					// this.data.image=res.data.image
+					this.data=res.data
 				})
 			},
 			

@@ -30,8 +30,8 @@
                                     <span class="caret"></span>
                                   </a>
                                   <ul class="dropdown-menu">
-                                    <li><router-link to="/account/register">KH</router-link></li>
-                                    <li><router-link to="/account/login">EN</router-link></li>
+                                    <li><router-link to="">KH</router-link></li>
+                                    <li><router-link to="">EN</router-link></li>
                                   </ul>
                                 </li>
                                 <li class="dropdown">
@@ -40,8 +40,41 @@
                                     <span class="caret"></span>
                                   </a>
                                   <ul class="dropdown-menu">
-                                    <li><router-link to="/account/register">Register</router-link></li>
-                                    <li><router-link to="/account/login">Login</router-link></li>
+                                    <li>
+                                        <a href="">
+                                            Account
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="">
+                                            Order
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="">
+                                            Transaction
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="">
+                                            Download
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="">
+                                            Logout
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <router-link to="/account/register">
+                                            Register
+                                        </router-link>
+                                    </li>
+                                    <li>
+                                        <router-link to="/account/login">
+                                            Login
+                                        </router-link>
+                                    </li>
                                   </ul>
                                 </li>
                                 <li><router-link to="/account/signin" data-toggle="modal" data-target="#ModalLogin"> <span class="hidden-xs">SignIn</span>
@@ -136,7 +169,7 @@
                 <!--- this part will be hidden for mobile version -->
                 <div class="nav navbar-nav navbar-right hidden-xs">
                     <div class="dropdown  cartMenu "><a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i
-                            class="fa fa-shopping-cart"> </i> <span class="cartRespons"> Cart ($210.00) </span> <b
+                            class="fa fa-shopping-cart"> </i> <span class="cartRespons"> Cart ($ {{TotalPrices.products.TotalPrices}}) </span> <b
                             class="caret"> </b> </a>
 
                         <div class="dropdown-menu col-lg-4 col-xs-12 col-md-4 ">
@@ -199,12 +232,14 @@
   import axios from 'axios'
   import Flash from './helper/flash'
   import CartProduct from './views/Components/frontend/include/cart.vue'
+  import CartAction from './helper/cart'
   import FooterComponet from './views/Components/frontend/common/_footer.vue'
 
   export default{
     data(){
       return{
         posts: [],
+        TotalPrices : CartAction.data,
       }
     },
 

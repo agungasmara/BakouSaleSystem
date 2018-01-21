@@ -2,11 +2,18 @@ import axios from 'axios'
 export default{
 	data: {
 		products:{},
-		TotalPrice:0
 	},
 	AddToCart(product_id,quantity=1){
 		
 		axios.post('/AddToCart', { product_id, quantity })
+			 .then(this.MyProduct())
+			 .catch(function (error) { console.log(error); });
+				
+	},
+
+	UpdateCart(product_id,quantity){
+		
+		axios.post('/UpdateCart', { product_id, quantity })
 			 .then(this.MyProduct())
 			 .catch(function (error) { console.log(error); });
 				
@@ -22,7 +29,6 @@ export default{
 	},
 	MyProduct(){
 		axios.get('/api/product_cart').then(response => this.data.products=response.data);
-
 	},
 	
 	

@@ -42,11 +42,8 @@ if (Request::is('admin*')){
                 Route::delete('/categories/delete/{id}','Backend\Category\CategoryController@destroy');
 
                  //=====Product API=============================
-                Route::get('/product/list','Backend\Products\ProductsController@list');
-                Route::post('/product/save','Backend\Products\ProductsController@store');
-                Route::get('/product/{id}','Backend\Products\ProductsController@edit');
-                Route::put('/product/update/{id}','Backend\Products\ProductsController@update');
-                Route::delete('/product/delete/{id}','Backend\Products\ProductsController@destroy');
+                Route::resource('products', 'Backend\Products\ProductsController');
+                
 
                 Route::get('/getMenus', 'Backend\Settings\GroupRolesController@index');
             });
@@ -96,7 +93,7 @@ if (Request::is('admin*')){
 
 Route::post('/AddToCart','FrontEnd\Product\CartController@AddToCart');
 Route::post('/RemoveFromCart','FrontEnd\Product\CartController@RemoveFromCart');
-
+Route::post('/UpdateCart','FrontEnd\Product\CartController@UpdateCart');
 
 
 // // Front End Design

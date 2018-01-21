@@ -64,8 +64,17 @@ class Cart extends Model
 		}
 	}
 
-	static function CartInsert($data)
+	static function UpdateCart($data)
 	{
-		return static::insert($data);
+		if (Auth::check()) {
+			$key['customer_id']=Auth::id();
+		}else{
+			$key['session_id']=session()->getId();
+		}
+		$key['product_id']=$data['product_id'];
+		$value['option']=isset($data['option'])? : '';
+		$value['quantity']=$data['quantity'];
+		$value['date_added']=Carbon::now() ;
+		return static::updateOrCreate($key,$value);
 	}
 }
