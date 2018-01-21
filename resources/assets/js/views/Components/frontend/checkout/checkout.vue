@@ -36,13 +36,13 @@
 		                <div class="col-xs-12 col-sm-12">
 		                    <div class="w100 clearfix">
 		                        <ul class="orderStep orderStepLook2 tabs">
-		                            <li class="active" data-tab="tab-1">
-		                            	<a href=""> 
-		                            		<i class="fa fa-map-marker"></i> 
-		                            		<span> address</span>
+		                            <li data-tab="tab-1" v-for="tab in tabs" href="#" @click.prevent="setActiveTabName(tab.name)">
+		                            	<a href="#" role="tab" data-toggle="tab"> 
+		                            		<i :class="tab.iconDisplay"></i> 
+		                            		<span> {{tab.displayName}}</span>
 			                            </a>
-			                        </li>
-		                            <li data-tab="tab-2">
+			                        	</li>
+		                           <!--  <li data-tab="tab-2">
 		                            	<a href="">
 		                            		<i class="fa fa fa-envelope"></i>
 		                                <span> Billing </span>
@@ -65,13 +65,13 @@
 		                            		<i class="fa fa-check-square"></i>
 		                            		<span>Order</span>
 		                            	</a>
-		                            </li>
+		                            </li> -->
 		                        </ul>
 		                        <!--/.orderStep end-->
 		                    </div>
 
 		                    <!-- Address -->
-		                    <div class="w100 clearfix" id="tab-1">
+		                    <div class="w100 clearfix" id="tab-1" v-if="displayContents(activeTabName, 'address')">
 		                        <div class="row userInfo">
 		                            <div class="col-lg-12">
 		                                <h2 class="block-title-2"> To add a new address, please fill out the form below. </h2>
@@ -263,7 +263,7 @@
 		                        <!--/row end-->
 		                    </div>
 		                    <!-- Billing -->
-		                     <div class="w100 clearfix" id="tab-2">
+		                     <div class="w100 clearfix" id="tab-2" v-if="displayContents(activeTabName, 'billing')">
 		                        <div class="row userInfo">
 		                            <div class="col-lg-12">
 		                                <h2 class="block-title-2"> To add a billing address, please fill out the form
@@ -449,8 +449,6 @@
 		                        </div>		                        
 		                    </div>
 
-
-
 		                    <div class="cartFooter w100">
 		                        <div class="box-footer">
 		                            <div class="pull-left">
@@ -520,32 +518,71 @@
 <script type="text/javascript">
     import axios from 'axios'
     import Flash from '../../../../helper/flash'
+    import Common from '../../../../helper/common'
     import {post} from '../../../../helper/api'
+    import CartAction from '../../../../helper/cart'
 
     export default {
         data() {
             return {
-             
+             	// List here all available tabs
+				      tabs: [
+				        {
+			            id : 1,
+				          name: 'address',
+				          displayName: 'Address',	
+				          iconDisplay: 'fa fa-map-marker',								
+			            isActive: true
+				        },
+				        {
+				          id : 2,
+				          name: 'billing',
+				          displayName: 'Billing', 
+				          iconDisplay: 'fa fa fa-envelope',
+			            isActive: true
+				        },
+				        {
+				          id : 3,
+				          name: 'shipping',
+				          iconDisplay: 'fa fa-truck',
+				          displayName: 'Shipping', 
+			            isActive: true
+				        },
+				        {
+				          id : 4,
+				          name: 'payment',
+				          iconDisplay: 'fa fa-money',
+				          displayName: 'Payment', 
+			            isActive: true
+				        },
+				        {
+				        	id: 5,
+				        	name: 'order',
+				        	iconDisplay: 'fa fa-check-square',
+				        	displayName: 'Order',
+				        	isActive: true
+				        }
+				      ],
+				      activeTabName: null
             }
         },
         components:{
 
         },
         mounted(){
-
-        },
-        ready: function(){
-
-        },
-        created() {
-         
-
+        	 // The currently active tab, init as the 1st item in the tabs array
+    			this.activeTabName = this.tabs[1].name;
         },
         ready() {
            
         },
         methods: {
-          
+        	setActiveTabName(name) {
+			      this.activeTabName = name;
+			    },
+			    displayContents(name) {
+			      return this.activeTabName === name;
+			    }
         }
     }
 </script>
