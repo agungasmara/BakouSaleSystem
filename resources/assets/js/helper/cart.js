@@ -11,6 +11,14 @@ export default{
 				
 	},
 
+	UpdateCart(product_id,quantity){
+		
+		axios.post('/UpdateCart', { product_id, quantity })
+			 .then(this.MyProduct())
+			 .catch(function (error) { console.log(error); });
+				
+	},
+
 	RemoveFromCart(product_id){
 		
 		axios.post('/RemoveFromCart', { product_id })

@@ -1113,7 +1113,8 @@ legend {
 }
 
 .cartMenu table {
-    width: 100%;
+    width: 93%;
+    margin: auto;
     height: auto;
 }
 

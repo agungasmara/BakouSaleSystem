@@ -8,8 +8,7 @@
 	        <tr v-for="product in CartProduct.products.data" v-if="CartProduct.products.data.length > 0"  class="miniCartProduct">
 	            <router-link v-bind:to="'/product/product_detail/'+ product.product_id">
 		            <td style="width:20%" class="miniCartProductThumb">
-		                <div><a href="product-details.html"> <img :src="product.image" alt="img"> </a>
-		                </div>
+		                <div><a> <img :src="product.image" alt="img"> </a> </div>
 		            </td>
 		            <td style="width:20%">
 		                <div class="miniCartDescription">
@@ -23,9 +22,9 @@
 				</router-link>
 	            <td style="width:15%" class="miniCartQuantity"><a> X {{product.cart_quantity}} </a></td>
 	            <td style="width:20%" class="miniCartSubtotal"><span>$ {{product.price * product.cart_quantity}} </span></td>
-	            <td style="width:5%" class="delete"><a @click="RemoveFromCart(product.product_id)"> x </a></td>
+	            <td style="width:5%" class="delete"><a @click="RemoveFromCart(product.product_id)"><i class="glyphicon glyphicon-trash"></i></a></a></td>
 	        </tr>
-	        <tr v-if="CartProduct.products.data.length == 0">
+	        <tr v-if="!CartProduct.products.data">
 	        	<v-footer class="pa-3">
 				    <v-spacer></v-spacer>
 				    <center>Your shopping cart is empty!</center>

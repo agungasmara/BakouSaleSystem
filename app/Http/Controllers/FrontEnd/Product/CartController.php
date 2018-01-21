@@ -47,6 +47,10 @@ class CartController extends Controller
     {
        return Cart::RemoveFromCart($request->all());
     }
+    public function UpdateCart(Request $request)
+    {
+        return Cart::UpdateCart($request->all());
+    }
     public function ProductCart()
     {
         // dd("test");

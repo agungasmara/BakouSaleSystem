@@ -45,67 +45,28 @@
 		                                <td style="width:15%">Total</td>
 		                            </tr>
 
-		                            <tr class="CartProduct">
+		                            <tr v-for="product in CartProduct.products.data" class="CartProduct" v-if="CartProduct.products.data.length > 0">
 		                                <td class="CartProductThumb">
-		                                    <div><a href=""><img src="images/product/a1.jpg" alt="img"></a>
+		                                    <div><router-link v-bind:to="'/product/product_detail/'+ product.product_id"><img :src="product.image" alt="img"></router-link>
 		                                    </div>
 		                                </td>
 		                                <td>
 		                                    <div class="CartDescription">
-		                                        <h4><a href="">Denim T shirt Black </a></h4>
+		                                        <h4><router-link v-bind:to="'/product/product_detail/'+ product.product_id">{{product.name}}</router-link></h4>
 		                                        <span class="size">12 x 1.5 L</span>
 
-		                                        <div class="price"><span>$8.80</span></div>
+		                                        <div class="price"><span>$ {{product.price*1}}</span></div>
 		                                    </div>
 		                                </td>
-		                                <td class="delete"><a title="Delete"> <i
-		                                        class="glyphicon glyphicon-trash fa-2x"></i></a></td>
-		                                <td><input class="quanitySniper" type="text" value="2" name="quanitySniper"></td>
+		                                <td class="delete"><a @click="RemoveFromCart(product.product_id)" title="Delete"> <i class="glyphicon glyphicon-trash fa-2x"></i></a></td>
+		                                <td><input class="quanitySniper" type="text" v-model="product.cart_quantity" name="quanitySniper" @keyup="UpdateCart(product.product_id,product.cart_quantity)"></td>
 		                                <td>0</td>
-		                                <td class="price">$300</td>
+		                                <td class="price">$ {{product.price * product.cart_quantity}}</td>
+		                            </tr>
+		                            <tr v-if="!CartProduct.products.data">
+		                            	<td colspan="6" align="center">Your shopping cart is empty!</td>
 		                            </tr>
 
-		                            <tr class="CartProduct">
-		                                <td class="CartProductThumb">
-		                                    <div><a href=""><img src="images/product/a2.jpg" alt="img"></a>
-		                                    </div>
-		                                </td>
-		                                <td>
-		                                    <div class="CartDescription">
-		                                        <h4><a href="">Denim T shirt Red </a></h4>
-		                                        <span class="size">12 x 1.5 L</span>
-
-		                                        <div class="price"><span>$30</span></div>
-		                                    </div>
-		                                </td>
-		                                <td class="delete"><a title="Delete"> <i
-		                                        class="glyphicon glyphicon-trash fa-2x"></i></a></td>
-		                                <td><input class="quanitySniper" type="text" value="2" name="quanitySniper"></td>
-		                                <td>0</td>
-		                                <td class="price">$60</td>
-		                            </tr>
-
-		                            <tr class="CartProduct">
-		                                <td class="CartProductThumb">
-		                                    <div>
-		                                        <a href=""><img src="images/product/a5.jpg" alt="img"></a>
-		                                    </div>
-		                                </td>
-
-		                                <td>
-		                                    <div class="CartDescription">
-		                                        <h4><a href="">Denim T shirt Blue </a></h4>
-		                                        <span class="size">12 x 1.5 L</span>
-
-		                                        <div class="price"><span>$8.80</span></div>
-		                                    </div>
-		                                </td>
-		                                <td class="delete"><a title="Delete"> <i
-		                                        class="glyphicon glyphicon-trash fa-2x"></i></a></td>
-		                                <td><input class="quanitySniper" type="text" value="2" name="quanitySniper"></td>
-		                                <td>0</td>
-		                                <td class="price">$60</td>
-		                            </tr>
 		                            </tbody>
 		                        </table>
 		                    </div>
@@ -119,12 +80,12 @@
 		                            		&nbsp; Continue shopping 
 	                                    </router-link>
 		                            </div>
-		                            <div class="pull-right">
+		                            <!-- <div class="pull-right">
 		                                <button type="submit" class="btn btn-default">
 		                                	<i class="fa fa-undo"></i> &nbsp; Update
 		                                    cart
 		                                </button>
-		                            </div>
+		                            </div> -->
 		                        </div>
 		                    </div>
 		                    <!--/ cartFooter -->
@@ -147,7 +108,7 @@
 		                                <tbody>
 		                                <tr>
 		                                    <td>Total products</td>
-		                                    <td class="price">$216.51</td>
+		                                    <td class="price">$ {{CartProduct.products.TotalPrices}}</td>
 		                                </tr>
 		                                <tr style="">
 		                                    <td>Shipping</td>
@@ -155,7 +116,7 @@
 		                                </tr>
 		                                <tr class="cart-total-price ">
 		                                    <td>Total (tax excl.)</td>
-		                                    <td class="price">$216.51</td>
+		                                    <td class="price">$ {{CartProduct.products.TotalPrices}}</td>
 		                                </tr>
 		                                <tr>
 		                                    <td>Total tax</td>
@@ -163,7 +124,7 @@
 		                                </tr>
 		                                <tr>
 		                                    <td> Total</td>
-		                                    <td class=" site-color" id="total-price">$216.51</td>
+		                                    <td class=" site-color" id="total-price">$ {{CartProduct.products.TotalPrices}}</td>
 		                                </tr>
 		                                <tr>
 		                                    <td colspan="2">
@@ -195,3 +156,36 @@
 		<div class="gap"></div>
 	</div>
 </template>
+<script>
+import Flash from '../../../../helper/flash'
+import CartAction from '../../../../helper/cart'
+export default {
+	data() {
+	    return {
+	    	CartProduct: CartAction.data,
+	    }
+	},
+	components:{
+	    
+	},
+	created(){
+	    // CartAction.MyProduct();
+	    // console.log(CartAction.data);
+	},
+	methods: {
+		RemoveFromCart(product_id){
+			CartAction.RemoveFromCart(product_id);
+		},
+		AddToCart(product_id,qty=1){
+            CartAction.AddToCart(product_id,qty)
+            // window.scrollTo(100,100)
+        },
+        UpdateCart(product_id,qty){
+            CartAction.UpdateCart(product_id,qty)
+            // window.scrollTo(100,100)
+        }
+	},
+	
+  
+}
+</script>

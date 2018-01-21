@@ -93,7 +93,7 @@ if (Request::is('admin*')){
 
 Route::post('/AddToCart','FrontEnd\Product\CartController@AddToCart');
 Route::post('/RemoveFromCart','FrontEnd\Product\CartController@RemoveFromCart');
-
+Route::post('/UpdateCart','FrontEnd\Product\CartController@UpdateCart');
 
 
 // // Front End Design
