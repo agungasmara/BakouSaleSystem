@@ -29,6 +29,8 @@ import InformationDetail from './views/Components/frontend/information/informati
 import Cart from './views/Components/frontend/checkout/cart.vue'
 import CartView from './views/Components/frontend/checkout/cart_view.vue'
 import Checkout from './views/Components/frontend/checkout/checkout.vue'
+import CheckoutSuccess from './views/Components/frontend/checkout/checkout_success.vue'
+
 
 // **** Footer *****
 import Footer from './views/Components/frontend/common/_footer.vue'
@@ -219,6 +221,11 @@ const router = new VueRouter({
           path: 'checkout',
           name:'checkout',
           component: Checkout
+        },
+        {
+          path: 'checkoutsuccess',
+          name:'checkoutsuccess',
+          component: CheckoutSuccess
         }
       ]
     },

@@ -970,10 +970,10 @@
 		                            </div>
 
 
-		                            <div class="pull-right">
-		                                <a href="thanks-for-order.html" class="btn btn-primary btn-small ">
-		                                    Confirm Order &nbsp; <i class="fa fa-check"></i>
-		                                </a>
+		                            <div class="pull-right">	        
+		                                <router-link to="/cart/checkoutsuccess" class="btn btn-primary btn-small ">
+		                                	Confirm Order &nbsp; <i class="fa fa-check"></i>
+		                                </router-link>
 		                            </div>
 
 
