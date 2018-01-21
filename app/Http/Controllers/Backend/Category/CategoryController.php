@@ -7,95 +7,54 @@ use App\Http\Controllers\Controller;
 use App\Http\Models\BackEnd\Category\CategoryModel;
 class CategoryController extends Controller
 {
-    public function __construct()
+    public function index()
     {
-        
-        // $data=array(
-        //         'image'=>1234,
-        //         'parent_id'=>1234,
-        //         'top'=>1,
-        //         'column'=>1234,
-        //         'sort_order'=>1234,
-        //         'status'=>2,
-        //     );
-        // $result=CategoryModel::getAllCategories();
-
-
-        // dd($result);
-    }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function list()
-    {
-        return 'hello';
+        return CategoryModel::getAllCategories()->toArray();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function show($id){
+        return response()->json([]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        $result=CategoryModel::UpdateOrCreate($request->all());
+
+        $data=$request->all();
+
+        $condition=[
+
+            'key'=>$request->key,
+            'code'=>$request->code
+
+        ];
+
+        return (new DataAction)->StoreData(Setting::class,[],'',$data);
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        return (new DataAction)->EditData(Setting::class,'setting_id',$id);
+        
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(Request $request,$id)
     {
-        $result=CategoryModel::UpdateOrCreate($request->all(),$id);
+        
+        $data=$request->all();
+
+        return (new DataAction)->UpdateData(Setting::class,$data,'setting_id',$id);
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        $result=CategoryModel::DeleteCategory($id);
+
+        return (new DataAction)->DeleteData(Setting::class,'setting_id',$id);
+        
+    }
+    public function menu()
+    {
+        return CategoryModel::getAllCategories()->groupBy('type')->toArray();
     }
 }
