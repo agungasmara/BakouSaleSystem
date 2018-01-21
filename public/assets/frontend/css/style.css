@@ -1118,10 +1118,12 @@ legend {
     height: auto;
 }
 
-.cartMenu table tr {
+/*.cartMenu table tr {
     border-bottom: solid 1px #ddd;
+}*/
+.cartMenu table tr + tr {
+    border-top: solid 1px #ddd;
 }
-
 .cartMenu table tr td {
     padding: 5px 0;
 }
