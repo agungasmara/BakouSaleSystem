@@ -23,8 +23,9 @@ class ProductController extends Controller
 		}
 		//Get Attribute group
 		$attribute_groups = $this->getProductAttributes($id);
-		// Get Discount
+		// Get DiscountProduct
 		$discounts = $this->getProductDiscounts($id);
+		// dd($discounts);	
 		$discount_arr = array();
 		foreach ($discounts as $discount) {
 			$discount_arr[] = array(
@@ -33,52 +34,52 @@ class ProductController extends Controller
 			);
 		}
 		// Product relate
-		$data['products'] = array();
+		$products = array();
 
-				$results = $this->model_catalog_product->getProductRelated($this->request->get['product_id']);
+				$results = $this->getProductRelated($id);
 
 				foreach ($results as $result) {
-					if ($result['image']) {
-						$image = $this->model_tool_image->resize($result['image'], $this->config->get($this->config->get('config_theme') . '_image_related_width'), $this->config->get($this->config->get('config_theme') . '_image_related_height'));
-					} else {
-						$image = $this->model_tool_image->resize('placeholder.png', $this->config->get($this->config->get('config_theme') . '_image_related_width'), $this->config->get($this->config->get('config_theme') . '_image_related_height'));
-					}
+					// if ($result->image) {
+					// 	$image = $result->image;
+					// } else {
+					// 	$image = $this->model_tool_image->resize('placeholder.png', $this->config->get($this->config->get('config_theme') . '_image_related_width'), $this->config->get($this->config->get('config_theme') . '_image_related_height'));
+					// }
 
-					if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
-						$price = $this->currency->format($this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
-					} else {
-						$price = false;
-					}
+					// if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
+					// 	$price = $this->currency->format($this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+					// } else {
+					// 	$price = false;
+					// }
 
-					if ((float)$result['special']) {
-						$special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
-					} else {
-						$special = false;
-					}
+					// if ((float)$result['special']) {
+					// 	$special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+					// } else {
+					// 	$special = false;
+					// }
 
-					if ($this->config->get('config_tax')) {
-						$tax = $this->currency->format((float)$result['special'] ? $result['special'] : $result['price'], $this->session->data['currency']);
-					} else {
-						$tax = false;
-					}
+					// if ($this->config->get('config_tax')) {
+					// 	$tax = $this->currency->format((float)$result['special'] ? $result['special'] : $result['price'], $this->session->data['currency']);
+					// } else {
+					// 	$tax = false;
+					// }
 
-					if ($this->config->get('config_review_status')) {
-						$rating = (int)$result['rating'];
+					if (config_review_status) {
+						$rating = (int)$result->rating;
 					} else {
 						$rating = false;
 					}
 
-					$data['products'][] = array(
-						'product_id'  => $result['product_id'],
-						'thumb'       => $image,
-						'name'        => $result['name'],
-						'description' => utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, $this->config->get($this->config->get('config_theme') . '_product_description_length')) . '..',
-						'price'       => $price,
-						'special'     => $special,
-						'tax'         => $tax,
-						'minimum'     => $result['minimum'] > 0 ? $result['minimum'] : 1,
+					$products[] = array(
+						'product_id'  => $result->product_id,
+						'thumb'       => $result->image,
+						'name'        => $result->name,
+						'description' => html_entity_decode($result->description, ENT_QUOTES, 'UTF-8'),
+						// 'price'       => $price,
+						// 'special'     => $special,
+						// 'tax'         => $tax,
+						'minimum'     => $result->minimum > 0 ? $result->minimum : 1,
 						'rating'      => $rating,
-						'href'        => $this->url->link('product/product', 'product_id=' . $result['product_id'])
+						'href'        => 'product/product', 'product_id=' . $result->product_id
 					);
 				}
 
@@ -135,5 +136,22 @@ class ProductController extends Controller
 			);
 		}
 		return $product_attribute_group_data;
+	}
+
+	public function getProductRelated($product_id) {
+		$product_data = array();
+		$query = DB::select("SELECT * FROM ".env('DB_PREFIX')."product_related pr 
+							LEFT JOIN ".env('DB_PREFIX')."product p ON (pr.related_id = p.product_id) 
+							LEFT JOIN ".env('DB_PREFIX')."product_to_store p2s ON (p.product_id = p2s.product_id) 
+							WHERE pr.product_id = '".(int)$product_id."'
+							AND p.status = '1' 
+							AND p.date_available <= NOW() 
+							AND p2s.store_id = '".config_store_id."'
+							");
+
+		foreach ($query as $result) {
+			$product_data[$result->related_id] = $this->getProduct($result->related_id);
+		}
+		return $product_data;
 	}
 }
