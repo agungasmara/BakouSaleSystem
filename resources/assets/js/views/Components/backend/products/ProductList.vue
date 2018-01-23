@@ -60,14 +60,14 @@
 				search: '',
 				pagination: {},
 				headers: [
-					{ text: 'Product ID',align: 'center' ,value: 'product_id'},
+					{ text: 'Product ID',align: 'left' ,value: 'product_id'},
 					{ text: 'Image',align: 'left',value: 'image'},
 			        { text: 'Name',align: 'left',value: 'name'},
-			        { text: 'Model',align:'center', value: 'model' },
-			        { text: 'Price',align:'center', value: 'price' },
-			        { text: 'Quantity',align:'center', value: 'quantity' },
-			        { text: 'Sort Order',align:'center', value: 'sort_order' },
-			        { text: 'Status',align:'center', value: 'status' },
+			        { text: 'Model',align:'left', value: 'model' },
+			        { text: 'Price',align:'left', value: 'price' },
+			        { text: 'Quantity',align:'left', value: 'quantity' },
+			        { text: 'Sort Order',align:'left', value: 'sort_order' },
+			        { text: 'Status',align:'left', value: 'status' },
 			        { text: 'Action', value: 'product_id',align:'center',sortable:false }
 
 			    ],
