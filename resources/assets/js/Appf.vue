@@ -29,10 +29,9 @@
                                     <span class="hidden-xs hidden-sm hidden-md">Language</span> 
                                     <span class="caret"></span>
                                   </a>
-                                  <ul class="dropdown-menu">
-                                    <li><router-link to="">KH</router-link></li>
-                                    <li><router-link to="">EN</router-link></li>
-                                  </ul>
+                                  <template>
+                                      <TopHeader/>
+                                  </template>
                                 </li>
                                 <li class="dropdown">
                                   <a href="" title="" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> 
@@ -234,6 +233,7 @@
   import CartProduct from './views/Components/frontend/include/cart.vue'
   import CartAction from './helper/cart'
   import FooterComponet from './views/Components/frontend/common/_footer.vue'
+  import TopHeader from './views/Components/frontend/common/_top_language'
 
   export default{
     data(){
@@ -260,6 +260,7 @@
     components:{
         CartProduct,
         FooterComponet,
+        TopHeader,
     },
     methods: function() {
         
