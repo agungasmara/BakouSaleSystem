@@ -10,7 +10,7 @@ class Setting extends Model
 {
     protected $table='setting';
     public $timestamps = false;
-    protected $primaryKey='store_id';
+    protected $primaryKey='setting_id';
     protected $fillable=[
     	'store_id',
     	'code',
@@ -38,21 +38,7 @@ class Setting extends Model
             $itemsArr['key'][]=$item->key;
             $itemsArr['value'][]=$item->value;
         }
-        $settingItem=([
-            'code'=>[
-                'text'=>$itemsArr['code'],
-                'value'=>$itemsArr['code']
-            ],
-            'key'=>[
-                'text'=>$itemsArr['key'],
-                'value'=>$itemsArr['key']
-            ],
-            'value'=>[
-                'text'=>$itemsArr['value'],
-                'value'=>$itemsArr['value']
-            ]
-        ]);
 
-        return $settingItem;
+        return $itemsArr;
     }
 }

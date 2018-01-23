@@ -435,13 +435,13 @@ const router = new VueRouter({
   }).$mount('#root_frontend')
 // }
 
-// // if( document.getElementById("#root_login") ) {
-//   const AuthLogin = new Vue({
-//       // el: '#root',
-//       router,
-//       template: `
-//       <appl></appl>
-//     `,
-//       components: { Appl },
-//   }).$mount('#root_login')
-// // }
+// if( document.getElementById("#root_login") ) {
+  const AuthLogin = new Vue({
+      // el: '#root',
+      router,
+      template: `
+      <appl></appl>
+    `,
+      components: { Appl },
+  }).$mount('#root_login')
+// }

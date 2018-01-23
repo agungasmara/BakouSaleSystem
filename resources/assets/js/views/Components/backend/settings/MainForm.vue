@@ -1,91 +1,81 @@
 <template>
-		<v-app id="inspire">
-			<v-card>
-				<!--breadcrumbs start-->
-					<breadcrumb3button
-					v-bind:breadcrumb-item="breadcrumbs"
-					v-bind:breadcrumb-title="breadcrumbTitle"
-					v-bind:submit="submit"
-					v-bind:is-valid="valid"
-					v-bind:back-url="backUrl"
-					></breadcrumb3button>
-				<!--breadcrumbs end-->
-				<div class="flash flash__success" v-if="flash.success">
-					<v-alert color="success" icon="check_circle" value="true">
-		            	{{flash.success}}
-		            </v-alert>
-	          	</div>
-			    <v-form v-model="valid" ref="form" lazy-validation>
-			    	<v-container grid-list-md>
-              			<v-layout wrap>
-
-					    	<v-flex xs12 sm6 md6>
-					      		<v-select label="Select Store" v-model="select" autocomplete :items="stores" :rules="[v => !!v || 'Item is required']" required></v-select>
-					      	</v-flex>
-
-					    	<v-flex xs12 sm6 md6>
-					      		<v-text-field label="Code" v-model="code" :rules="codeRules" :counter="50" required></v-text-field>
-					      	</v-flex>
-
-					      	<v-flex xs12 sm6 md6>
-					      		<v-text-field label="Key" v-model="key" :rules="keyRules" :counter="50" required></v-text-field>
-					      	</v-flex>
-					      	<v-flex xs12 sm6 md6>
-					      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="50" required></v-text-field>
-					      	</v-flex>
-					      	
-					    </v-layout>
-					</v-container>
-			    </v-form>
-			</v-card>
-		</v-app>
+	<v-app id="inspire">
+		<normal-form
+			v-bind:url="url"
+			v-bind:id="0"
+			v-bind:breadcrumb-title="breadcrumbTitle"
+			v-bind:breadcrumbs="breadcrumbs"
+			v-bind:form-items="group"
+			v-bind:form-rules="rules"
+			v-bind:form-datas="data"
+			v-bind:select-items="select"
+			v-bind:back-url="backUrl"
+		></normal-form>
+	</v-app>
 </template>
 <script>
 	import Flash from '../../../../helper/flash'
 	import axios from 'axios'
-	import breadcrumb3button from '../commons/breadcrumb/breadcrumb3button.vue'
+	import normalForm from '../commons/form/normalForm.vue'
 	export default{
+		components:{
+			'normalForm':normalForm
+		},
 		data(){
 			return{
+				url:'/api/settings/',
+				e1:true,
 				valid: true,
-			    code: '',
-			    codeRules: [
-			      (v) => !!v || 'Code is required',
-			      (v) => v && v.length <= 50 || 'Code must be less than 50 characters'
-			    ],
-			    key: '',
-			    keyRules: [
-			      (v) => !!v || 'Key is required',
-			      (v) => v && v.length <= 50 || 'Key must be less than 50 characters'
-			    ],
-			    value: '',
-			    valueRules: [
-			      (v) => !!v || 'Value is required',
-			      (v) => v && v.length <= 50 || 'Value must be less than 50 characters'
-			    ],
-			    select: null,
-			    stores: [],
-			    breadcrumbTitle:'Settins',
-			    breadcrumbs: [
+				btnImageDisabled:false,
+				btnText:'Upload Image',
+				imageUrl:'',
+				image:null,
+			    group:[
+					{	class:'xs12 sm6 md6',	 key:'store_id',	type:'select',	 text:'Store',count:100,items:'stores',	},
+					{	class:'xs12 sm6 md6',	 key:'code',	type:'text',text:'Code',count:100	},
+					{	class:'xs12 sm6 md6',	 key:'key',	type:'text',	 text:'Key',count:100	},
+					{	class:'xs12 sm6 md6',	 key:'value',	type:'text',	 text:'key',count:100	}
+				],
+				rules:{
+					code: [
+				      (v) => !!v || 'Code is required',
+				      (v) => v && v.length <= 50 || 'Code must be less than 50 characters'
+				    ],
+				    key: [
+				      (v) => !!v || 'Key is required',
+				      (v) => v && v.length <= 50 || 'Key must be less than 50 characters'
+				    ],
+				    value: [
+				      (v) => !!v || 'Value is required',
+				      (v) => v && v.length <= 50 || 'Value must be less than 50 characters'
+				    ],
+				},
+				data:{
+					code:'dgdg',
+					key: 'dgadg',
+					value: 'dgdgddgdfgdgdgd',
+					store_id:0
+				},
+				select:{
+					stores:[]
+				},
+				breadcrumbTitle:'Settings',
+				breadcrumbs: [
 			        {
-			          text: 'Adminstrator',
+			          text: 'Administrator',
 			          disabled: false
 			        },
 			        {
-			          text: 'Setting',
+			          text: 'Settings',
 			          disabled: false
 			        },
 			        {
 			          text: 'Create',
 			          disabled: true
 			        }
-		      	],
-		      	backUrl:'/admin/settings/list',
-				flash:Flash.state
+			    ],
+			    backUrl:'/admin/settings/list',
 			}
-		},
-		components:{
-			'breadcrumb3button':breadcrumb3button
 		},
 		created(){
 			this.getStore()
@@ -93,30 +83,9 @@
 		methods:{
 			getStore(){
 				axios.get('/api/getStore').then((res)=>{
-					this.stores=res.data
+					this.select.stores=res.data
 				})
-			},
-			submit:function (opt) {
-		      if (this.$refs.form.validate()) {
-		        // Native form submission is not yet supported
-		        axios.post('/api/setting/save', {
-		          store: this.select,
-		          code: this.code,
-		          key: this.key,
-		          value: this.value
-		        }).then((res)=>{
-		        	if(res.data.success==true){
-		        		Flash.setSuccess(res.data.message)
-		        		if(opt==1){
-		        			this.$refs.form.reset()
-		        		}
-		        		else if(opt==2){
-		        			this.$router.push(this.backUrl)
-		        		}
-		        	}
-		        })
-		      }
-		    }
+			}
 		}
 	}
 </script>
