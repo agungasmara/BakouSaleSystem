@@ -68,7 +68,7 @@
 			            	}
 			            	elseif(strtolower($OrAnd)=="or")
 			            	{
-			            		$and='or';
+			            		$and=' or ';
 
 			            	}
 			            }

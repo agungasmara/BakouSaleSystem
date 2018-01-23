@@ -84,11 +84,6 @@
 					],
 					userGroupItems:[]
 				},
-			    selectStatus:1,
-			    status:[
-			    	{text:'Active',value:1},
-			    	{text:'Inactive',value:2}
-			    ],
 			    error:false,
 		    	message:[],
 			    select: null,
