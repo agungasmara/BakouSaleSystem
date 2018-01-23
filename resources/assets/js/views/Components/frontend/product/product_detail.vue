@@ -66,7 +66,8 @@
                 <div class="row">
                     <div class="col-lg-6 col-sm-6 col-xs-6">
                         <div class="filterBox">
-                            <select class="form-control">
+                            <input type="text" class="form-control" v-model="qty">
+                            <!-- <select class="form-control">
                                 <option value="strawberries" selected>Quantity</option>
                                 <option value="mango">1</option>
                                 <option value="bananas">2</option>
@@ -76,7 +77,8 @@
                                 <option value="pineapple">6</option>
                                 <option value="peaches">7</option>
                                 <option value="cherries">8</option>
-                            </select>
+                            </select> -->
+                            
                         </div>
                     </div>
                     <div class="col-lg-6 col-sm-6 col-xs-6">
@@ -98,7 +100,7 @@
             <div class="cart-actions">
                 <div class="addto row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <button onclick="productAddToCartForm.submit(this);"
+                        <button @click="AddToCart(id,qty);"
                                 class="button btn-block btn-cart cart first" title="Add to Cart" type="button">Add
                             to Cart
                         </button>
@@ -393,12 +395,13 @@
 <script>
     import Flash from '../../../../helper/flash'
     import axios from 'axios'
-
+    import CartAction from '../../../../helper/cart'
     export default{
         props:['id'],
         data(){
             return{
                 productInfo:[],
+                qty:''
             }
         },
         ready() {
@@ -453,6 +456,10 @@
                 axios.get('/api/detail/'+id).then(res=>{
                     this.productInfo=res.data['data'];
                 });
+            },
+            AddToCart(product_id,qty=1){
+                CartAction.AddToCart(product_id,qty)
+                window.scrollTo(100,100)
             }
         }
     }
