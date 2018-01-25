@@ -43,10 +43,10 @@
 				btnNewUrl:'/admin/settings/add',
 				listTitle:'Setting List',
 				headers: [
-			        { text: 'Setting ID',align: 'center',class:'text-xs-center',value: 'id'},
-			        { text: 'Store Name',align:'center',class:'text-xs-left', value: 'name' },
-			        { text: 'code',align:'center',class:'text-xs-left', value: 'code' },
-			        { text: 'Key',align:'center',class:'text-xs-left', value: 'key' },
+			        { text: 'Setting ID',align: 'left',class:'text-xs-left',value: 'id'},
+			        { text: 'Store Name',align:'left',class:'text-xs-left', value: 'name' },
+			        { text: 'code',align:'left',class:'text-xs-left', value: 'code' },
+			        { text: 'Key',align:'left',class:'text-xs-left', value: 'key' },
 			        {text: 'Action',align:'center',class:'text-xs-center',value:'id',sortable: false}
 			    ],
 				settings:[],

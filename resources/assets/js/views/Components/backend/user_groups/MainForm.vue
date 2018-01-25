@@ -1,101 +1,80 @@
 <template>
 	<v-app id="inspire">
-
-		<v-card>
-			<!--breadcrumbs start-->
-				<breadcrumb3button
-				v-bind:breadcrumb-item="breadcrumbs"
-				v-bind:breadcrumb-title="breadcrumbTitle"
-				v-bind:submit="submit"
-				v-bind:is-valid="valid"
-				v-bind:back-url="backUrl"
-				></breadcrumb3button>
-			<!--breadcrumbs end-->
-			<div class="flash flash__success" v-if="flash.success">
-				<v-alert color="success" icon="check_circle" value="true">
-	            	{{flash.success}}
-	            </v-alert>
-          	</div>
-			<v-form v-model="valid" ref="formUserGroup" lazy-validation>
-		    	<v-container grid-list-md>
-		  			<v-layout wrap>
-
-				    	<v-flex xs12 sm6 md6>
-				      		<v-text-field label="Group Name" v-model="groupName" ref="groupName" :rules="groupNameRules" :counter="16" required></v-text-field>
-				      		<small v-show="isCheckingName" style="color:green">
-				      			{{ checkNameMessage }}
-				      		</small>
-				      		<small v-show="validName" style="color:blue">
-				      			{{ checkNameMessage }}
-				      		</small>
-				      		<div class="input-group__details" v-show="errorName">
-								<div class="input-group__messages">
-									<small :class="errorName ? 'input-group__error slide-y-transition-enter-to error--text':'input-group__error slide-y-transition-enter-to'">
-										{{ checkNameMessage }}
-									</small>
-								</div>
-							</div> 
-				      	</v-flex>
-				      	<v-flex xs12 sm6 md6>
-				      		<v-text-field label="Group Type" v-model="groupType" :rules="groupTypeRules" :counter="100" required></v-text-field>
-				      	</v-flex>
-				      	<v-flex xs12 sm12 md12>
-				      		<v-select label="Sermissions" autocomplete :loading="loading" multiple cache-items chips required :items="states" :rules="[() => permissions.length > 0 || 'You must choose at least one']" :search-input.sync="search" v-model="permissions"></v-select>
-				      	</v-flex>
-				    </v-layout>
-				</v-container>
-		    </v-form>
-   	</v-card>
+		<normal-form
+			v-bind:url="url"
+			v-bind:id="0"
+			v-bind:breadcrumb-title="breadcrumbTitle"
+			v-bind:breadcrumbs="breadcrumbs"
+			v-bind:form-items="group"
+			v-bind:form-rules="rules"
+			v-bind:form-datas="data"
+			v-bind:select-items="select"
+			v-bind:back-url="backUrl"
+		></normal-form>
 </v-app>
 </template>
 
 <script>
 	import Flash from '../../../../helper/flash'
 	import axios from 'axios'
-	import breadcrumb3button from '../commons/breadcrumb/breadcrumb3button.vue'
+	import normalForm from '../commons/form/normalForm.vue'
 	export default{
+		components:{
+			'normalForm':normalForm
+		},
 		data(){
 			return{
-				valid:true,
-			    loading: false,
-		      	search: null,
-      			states: ['Product Attribute','Product Price'],
-			    groupName: '',
-			    groupNameRules: [
-			      (v) => !!v || 'Group Name is required',
-			      (v) => v && v.length <= 16 || 'Group Name must be less than 16 characters'
-			    ],
-			    groupType: '',
-			    groupTypeRules: [
-			      (v) => !!v || 'Group Type is required',
-			      (v) => v && v.length <= 100 || 'Group Type must be less than 100 characters'
-			    ],
-			    permissions: [],
-			    breadcrumbTitle:'Users',
+				url:'/api/settings/',
+				e1:true,
+				valid: true,
+				btnImageDisabled:false,
+				btnText:'Upload Image',
+				imageUrl:'',
+				image:null,
+			    group:[
+					{	class:'xs12 sm6 md6', key:'name',type:'text', text:'Group Name',count:100},
+					{	class:'xs12 sm6 md6', key:'group_type',	type:'text',text:'Group type',count:100	},
+					{	class:'xs12 sm6 md6', key:'permissions', type:'multiple',text:'Permissions',count:100,items:'permissions'}
+				],
+				rules:{
+					name: [
+				      (v) => !!v || 'Group Name is required',
+				      (v) => v && v.length <= 50 || 'Group Name must be less than 50 characters'
+				    ],
+				    group_type: [
+				      (v) => !!v || 'Group Type is required',
+				      (v) => v && v.length <= 50 || 'Group Type must be less than 50 characters'
+				    ],
+				    permissions: [
+				    	() => permissions.length > 0 || 'You must choose at least one'
+				    ],
+				},
+				data:{
+					name:'dgdg',
+					group_type: 'dgadg',
+					permissions: []
+				},
+				select:{
+					stores:[],
+					permissions: ['Product Attribute','Product Price']
+				},
+				breadcrumbTitle:'Settings',
 				breadcrumbs: [
 			        {
-			          text: 'Adminstrator',
+			          text: 'Administrator',
 			          disabled: false
 			        },
 			        {
-			          text: 'Setting',
+			          text: 'Settings',
 			          disabled: false
 			        },
 			        {
 			          text: 'Create',
 			          disabled: true
 			        }
-		      	],
-		      	backUrl:'/admin/users_group/list',
-		      	errorName:false,
-		    	checkNameMessage:'',
-		    	validName:false,
-		    	isCheckingName:false,
-				flash:Flash.state
+			    ],
+			    backUrl:'/admin/settings/list',
 			}
-		},
-		components:{
-			'breadcrumb3button':breadcrumb3button
 		},
 		watch: {
 			search (val) {
@@ -146,7 +125,7 @@
 			submit (opt) {
 		      	if (this.$refs.formUserGroup.validate()) {
 			        // Native form submission is not yet supported
-			        axios.post('/api/users_group/save', {
+			        axios.post('/api/user_groups', {
 			          groupName: this.groupName,
 			          groupType: this.groupType,
 			          permissions: '{"access":["'+this.permissions.join('","')+'"]}'

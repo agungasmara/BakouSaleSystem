@@ -12,7 +12,6 @@
                       <i class="glyphicon glyphicon-heart"></i>
                   </a>
 
-
                   <div class="imageHover">
 
                       <div class="promotion"><span class="discount">15% OFF</span></div>
@@ -65,9 +64,7 @@
                           </a>
                       </div>
 
-
                   </div>
-
 
                   <div class="description">
                       <h4><router-link v-bind:to="'/product/product_detail/'+ bestSellerProduct.product_id"> {{bestSellerProduct.name}} </router-link></h4>
@@ -81,7 +78,6 @@
               </div>
           </div>
           <!--/.item-->
-
         </div>
     </div>    
 </template>

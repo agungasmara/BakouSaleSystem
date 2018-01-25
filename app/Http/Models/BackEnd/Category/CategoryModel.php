@@ -37,7 +37,8 @@ class CategoryModel extends Model
 	}
 	public function Description()
 	{
-		return $this->hasMany(CategoryDescription::class,'category_id');
+		$language_id=1;
+		return $this->hasMany(CategoryDescription::class,'category_id')->where('language_id',$language_id);
 	}
 	static function ParentCategories($data=array())
 	{
@@ -47,11 +48,25 @@ class CategoryModel extends Model
 	{
 		return $this->hasMany(CategoryModel::class,'parent_id');
 	}
+	public function CategoryType()
+	{
+		$language_id=1;
+		return $this->hasOne(CategoryType::class,'category_type_id','category_type_id')->where('language_id',$language_id);
+	}
 	static function getAllCategories()
 	{
 		$Categorys=static::ParentCategories()->get();
-		foreach ($Categorys as $key => $Category) {
-			$Category->child=$Category->ChildCategories()->get();
+		foreach ($Categorys as $Category) {
+			$Category->type=$Category->CategoryType()->value('name');
+			$Category->name=$Category->Description()->value('name');
+			$getChild=$Category->ChildCategories()->get();
+			if ($getChild->count()) {
+				$Category->child=$getChild;
+				foreach ($Category->child as $Child) {
+					$Child->name=$Child->Description()->value('name');
+				}
+				$Category->child=$Category->child->toArray();
+			}
 		}
 		return $Categorys;
 	}

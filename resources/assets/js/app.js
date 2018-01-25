@@ -29,7 +29,8 @@ import InformationDetail from './views/Components/frontend/information/informati
 import Cart from './views/Components/frontend/checkout/cart.vue'
 import CartView from './views/Components/frontend/checkout/cart_view.vue'
 import Checkout from './views/Components/frontend/checkout/checkout.vue'
-import Billing from './views/Components/frontend/checkout/billing.vue'
+import CheckoutSuccess from './views/Components/frontend/checkout/checkout_success.vue'
+
 
 // **** Footer *****
 import Footer from './views/Components/frontend/common/_footer.vue'
@@ -94,9 +95,11 @@ import AttributeList from './views/Components/backend/attributes/AttributeList.v
 import AttributeForm from './views/Components/backend/attributes/AttributeForm.vue'
 import AttributeEdit from './views/Components/backend/attributes/AttributeEdit.vue'
 
-//***** Testing *****
-import testForm from './views/Components/backend/commons/test/testForm.vue'
-import testTapForm from './views/Components/backend/commons/test/testTapform.vue'
+//***** Language *****
+import Language from './views/Components/backend/languages/Language.vue'
+import LanguageList from './views/Components/backend/languages/LanguageList.vue'
+import LanguageForm from './views/Components/backend/languages/MainForm.vue'
+import LanguageEdit from './views/Components/backend/languages/EditForm.vue'
 
 //import router from './router'
 import VueResource from 'vue-resource'
@@ -222,9 +225,9 @@ const router = new VueRouter({
           component: Checkout
         },
         {
-          path: 'billing',
-          name: 'billing',
-          component: Billing
+          path: 'checkoutsuccess',
+          name:'checkoutsuccess',
+          component: CheckoutSuccess
         }
       ]
     },
@@ -385,13 +388,26 @@ const router = new VueRouter({
             }
         ]       
     },
-    //for testing only
-    {
-      path:'/admin/test/form',name:'testFrom',component:testForm
+    {path:'/admin/languages',name:'languages',component:Language,
+        children:[
+            {
+                path:'list',
+                name:'LanguageList',
+                component:LanguageList
+            },
+            {
+                path:'add',
+                name:'LanguageForm',
+                component:LanguageForm
+            },
+            {
+                path:'edit/:id',
+                name:'LanguageEdit',
+                component:LanguageEdit,
+                props:true
+            }
+        ]       
     },
-    {
-      path:'/admin/test/tapform',name:'testTapFrom',component:testTapForm
-    }
   ],
   scrollBehavior (to, from, savedPosition) {
     return { x: 10, y: 0 }

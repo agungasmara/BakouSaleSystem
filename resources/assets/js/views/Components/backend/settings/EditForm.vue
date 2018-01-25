@@ -1,40 +1,16 @@
 <template id="{{ $route.params.id }}">
 	<v-app id="inspire">
-		<!--breadcrumbs start-->
-			<breadcrumb3button
-			v-bind:breadcrumb-item="breadcrumbs"
+		<normal-form
+			v-bind:url="url"
+			v-bind:id="dataID"
 			v-bind:breadcrumb-title="breadcrumbTitle"
-			v-bind:submit="submit"
-			v-bind:is-valid="valid"
+			v-bind:breadcrumbs="breadcrumbs"
+			v-bind:form-items="group"
+			v-bind:form-rules="rules"
+			v-bind:form-datas="data"
+			v-bind:select-items="selects"
 			v-bind:back-url="backUrl"
-			></breadcrumb3button>
-		<!--breadcrumbs end-->
-			<div class="flash flash__success" v-if="flash.success">
-				<v-alert color="success" icon="check_circle" value="true">
-	            	{{flash.success}}
-	            </v-alert>
-          	</div>
-		    <v-form v-model="valid" ref="form" lazy-validation>
-		    	<v-container grid-list-md>
-          			<v-layout wrap>
-				    	<v-flex xs12 sm6 md6>
-				      		<v-select label="Select Store" v-model="select" autocomplete :items="stores"  :rules="[v => !!v || 'Item is required']" required></v-select>
-				      	</v-flex>
-
-				    	<v-flex xs12 sm6 md6>
-				      		<v-select label="Select Code" v-model="code" autocomplete :items="settingCode.text" ></v-select>
-				      	</v-flex>
-
-				      	<v-flex xs12 sm6 md6>
-				      		<v-select label="Select Key" v-model="key" autocomplete :items="settingKey.text" ></v-select>
-				      	</v-flex>
-
-				      	<v-flex xs12 sm6 md6>
-				      		<v-select label="Select Value" v-model="value" autocomplete :items="settingValue.text" ></v-select>
-				      	</v-flex>
-				    </v-layout>
-				</v-container>
-		    </v-form>
+		></normal-form>
 	</v-app>
 </template>
 
@@ -42,37 +18,44 @@
 	import Flash from '../../../../helper/flash'
 	import axios from 'axios'
 
-	import breadcrumb3button from '../commons/breadcrumb/breadcrumb3button.vue'
+	import normalForm from '../commons/form/normalForm.vue'
 
 	export default{
 		props:['id'],
+		components:{
+			'normalForm':normalForm
+		},
 		data(){
 			return{
-
+				url:'/api/settings/',
+				e1:true,
 				valid: true,
-			    code: '',
-			    codeRules: [
-			      (v) => !!v || 'Code is required',
-			      (v) => v && v.length <= 100 || 'Code must be less than 100 characters'
-			    ],
-			    key: '',
-			    keyRules: [
-			      (v) => !!v || 'Key is required',
-			      (v) => v && v.length <= 100 || 'Key must be less than 100 characters'
-			    ],
-			    value: '',
-			    valueRules: [
-			      (v) => !!v || 'Value is required',
-			      (v) => v && v.length <= 100 || 'Value must be less than 100 characters'
-			    ],
-				settings:[],
-				settingCode:[],
-				settingKey: [],
-				settingValue:[],
-			    select: 0,
-			    stores: [],
-				flash:Flash.state,
-				breadcrumbTitle:'Edit Settings',
+			    group:[
+					{class:'xs12 sm6 md6',key:'store_id',type:'select',text:'Store',items:'storeItems'},
+					{class:'xs12 sm6 md6',key:'code',type:'select',text:'Code',items:'codeItems'},
+					{class:'xs12 sm6 md6',key:'key',	type:'select',text:'Key',items:'keyItems'},
+					{class:'xs12 sm6 md6',key:'value',type:'select',text:'Value',items:'valueItems'}
+				],
+				rules:{
+					store_id:[v => !!v || 'Store is required'],
+					code: [v => !!v || 'Code is required'],
+				    key: [v => !!v || 'Key is required'],
+				    value: [v => !!v || 'Value is required'],
+				},
+				data:{
+					store_id:1,
+					code:'',
+					key: '',
+					value: '',
+					
+				},
+				selects:{
+					storeItems:[],
+					codeItems:[],
+					keyItems:[],
+					valueItems:[]
+				},
+				breadcrumbTitle:'Settings',
 				breadcrumbs: [
 			        {
 			          text: 'Administrator',
@@ -83,17 +66,15 @@
 			          disabled: false
 			        },
 			        {
-			          text: 'Edit',
+			          text: 'Create',
 			          disabled: true
 			        }
 			    ],
-			    backUrl:'/admin/settings/list'
+			    backUrl:'/admin/settings/list',
 			}
 		},
-		components:{
-			'breadcrumb3button':breadcrumb3button
-		},
 		created(){
+			this.dataID=this.id
 			this.fetchSettingByID(this.id)
 			this.fetchSettingItem()
 			this.getStore()
@@ -101,42 +82,26 @@
 		methods:{
 			getStore(){
 				axios.get('/api/getStore').then((res)=>{
-					this.stores=res.data
+					this.selects.storeItems=res.data
 				})
 			},
 			fetchSettingByID(id){
 				axios.get('/api/settings/'+id+'/edit').then(res=>{
-					this.code=res.data.data.code
-					this.key=res.data.data.key
-					this.value=res.data.data.value
-					this.select=res.data.data.store_id
+					this.data.store_id=res.data.store_id
+					this.data.code=res.data.code
+					this.data.key=res.data.key
+					this.data.value=res.data.value
+					// this.data=res.data
 				});
 			},
 			fetchSettingItem(){
 				axios.get('/api/settings/item/').then((res)=>{
-					this.settingCode=res.data.code
-					this.settingKey=res.data.key
-					this.settingValue=res.data.value
+					this.selects.codeItems=res.data.code
+					this.selects.keyItems=res.data.key
+					this.selects.valueItems=res.data.value
+					// console.log(res.data.code)
 				})
-			},
-			submit (opt) {
-		      if (this.$refs.form.validate()) {
-		        // Native form submission is not yet supported
-		        axios.put('/api/settings/'+this.id, {
-		          store_id: this.select,
-		          code: this.code,
-		          key: this.key,
-		          value: this.value
-		        }).then((res)=>{
-		        	if(res.data.success==true){
-		        		Flash.setSuccess(res.data.message)
-		        		if(opt==2){
-		        			this.$router.push('/admin/settings/list')
-		        		}
-		        	}
-		        })
-		      }
-		    }
+			}
 		}
 	}
 </script>

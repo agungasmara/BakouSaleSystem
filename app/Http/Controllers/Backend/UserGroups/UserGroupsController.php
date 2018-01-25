@@ -4,78 +4,110 @@ namespace App\Http\Controllers\Backend\UserGroups;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use App\Http\Models\BackEnd\User\User;
 use App\Http\Models\BackEnd\UserGroup\UserGroup;
-use Illuminate\Support\Facades\DB;
-//this controller use for create any validation function
-//currently it have one function to validate data if exist or not yet exist
-//then return the json to pass to axios.get() in veujs
+use Intervention\Image\ImageManagerStatic as Image;
+use App\Http\Controllers\Backend\commons\ImageMaker;
 /*
+    this controller use for create any validation function
+    currently it have one function to validate data if exist or not yet exist
+    then return the json to pass to axios.get() in veujs
     this function there are 3 parameter(tablename,fieldname,value)
         - tablename: table that we want to check
         - fieldname: field of that table we want to filter
         - value: value of field we want to check
 */
 use App\Http\Controllers\Backend\commons\ValidateDataController;
+/*
+    DataAction class use for any action the data from any table
+    For more detail i have comment in DataAction class in commons folder
+*/
+use App\Http\Controllers\Backend\commons\DataAction;
 
 class UserGroupsController extends Controller
 {
     public function index()
     {
-       
-        $UserGroup=UserGroup::get([
-            'user_group_id as id','name','group_type'
-        ]);
-        
-        return response()->json($UserGroup);
-    }
-    public function getPermission()
-    {
 
+        $Users = UserGroup::all();
+        return response()->json($Users);
     }
+
     public function store(Request $request)
     {
-        $success=false;
-        $saved=UserGroup::create([
-            'name'=>$request->groupName,
-            'group_type'=>$request->groupType,
-            'permission'=>$request->permissions
-        ]);
 
-        if($saved){
-            $success=true;
-        }else{
-            $success=false;
-        }
+      //$ImageMaker=new ImageMaker;
+      //$ImageMaker->base64ToImage("imagesss",$request->userImage);
+      //     if( preg_match('/data:image/', $request->userImage) ){                
+      //     preg_match('/data:image\/(?<mime>.*?)\;/', $request->userImage , $groups);
+      //     $mimetype = $groups['mime'];
+                       
+      //     $image='images/TestImage.'.$mimetype;
+      //     $image = Image::make($request->userImage)
+      //       ->fit(400, 500) 
+      //       ->encode($mimetype, 100) 
+      //       ->save(public_path($image));                
+      // }
+        
+        // $data=array();
+        // $condition=array();
+       
+        $data=$request['data'];
+        
+        $condition=[
+            'name'=>$data['name']
+        ];
 
-        return response()->json([
-            'success'=>$success,
-            'message'=>'Data successfully saved.'
-        ]);
+        return (new DataAction)->StoreData(UserGroup::class,$condition,"",$data);
+        //return response()->json($data);
+
     }
-    public function update(Request $request,$id)
+    public function edit($id)
     {
 
+        return (new DataAction)->EditData(User::class,$id);
+
+    }
+    
+    public function update(Request $request,$id)
+    {
+        // if( preg_match('/data:image/', $request->userImage) ){             
+     //      preg_match('/data:image\/(?<mime>.*?)\;/', $request->userImage , $groups);
+     //      $mimetype = $groups['mime'];
+                       
+     //      $firstname='images/testpost.'.$mimetype;
+     //      $image = Image::make($request->userImage)
+     //        // ->fit(400, 500) 
+     //        ->encode($mimetype, 100) 
+     //        ->save(public_path($firstname));                
+     //    } 
+        
+        
+        return (new DataAction)->UpdateData(User::class,$request['data'],'user_id',$id);
+        // return response()->json($data);
     }
     public function destroy($id)
     {
-        
+        return (new DataAction)->DeleteData(User::class,'user_id',$id);
     }
-    public function checkIfExisted($field,$value)
+    public function UserGroup()
     {
+        return response()->json(UserGroup::Groups());
+    }
+    public function ValidateData($field,$value){
+        
+        $existed=false;
+
         //instant the object
         $validate=new ValidateDataController;
-        //return data json to vuejs when axios request
-        return $validate->CheckDataExist('user_group',$field,$value);
+        if($field=="username"){
+            //return data json to vuejs when axios request
+            return $validate->CheckDataExist('user','username',$value);    
+        }elseif($field=="email"){
+            //return data json to vuejs when axios request
+            return $validate->CheckDataExist('user','email',$value);
+        }
+        
     }
-    public function getUsers()
-    {
-        $users=User::select(['user_id as value','username as text'])->get();
-        $userGroup=UserGroup::select(['user_group_id as value','name as text'])->get();
-        return response()->json([
-            'users'=>$users,
-            'groups'=>$userGroup
-        ]);
-    }
-    
 }

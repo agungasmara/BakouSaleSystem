@@ -31,10 +31,9 @@
                                     <span class="hidden-xs hidden-sm hidden-md">Language</span> 
                                     <span class="caret"></span>
                                   </a>
-                                  <ul class="dropdown-menu">
-                                    <li><a href="/lang/kh">KH</a></li>
-                                    <li><a href="/lang/en">EN</a></li>
-                                  </ul>
+                                  <template>
+                                      <TopHeader/>
+                                  </template>
                                 </li>
                                 <li class="dropdown">
                                   <a href="" title="" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> 
@@ -239,6 +238,8 @@
   import VueTranslate from 'vue-translate-plugin'
   import Vue from 'vue';
   Vue.use(VueTranslate);
+  import TopHeader from './views/Components/frontend/common/_top_language'
+  
   export default{
     data(){
       return{
@@ -268,6 +269,7 @@
     components:{
         CartProduct,
         FooterComponet,
+        TopHeader,
     },
     getLang(){
 
