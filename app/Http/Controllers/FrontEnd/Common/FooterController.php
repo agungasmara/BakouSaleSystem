@@ -5,6 +5,7 @@ namespace App\Http\Controllers\FrontEnd\Common;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
+use Session;
 
 class FooterController extends Controller
 {
@@ -27,7 +28,7 @@ class FooterController extends Controller
                 }
         }
 
-        return response()->json(['data' => $informations,'success' => true, 'message' => 'Success']);
+        return response()->json(['data' => $informations,'success' => true, 'message' => 'Success', 'lang'=>Session::get('applangId')]);
     }
 
     public function getInformations() {

@@ -36,7 +36,7 @@
 
 <!-- include smoothproducts // product zoom plugin  -->
 <script type="text/javascript" src="{{url('assets/frontend/plugins/smoothproducts-master/js/smoothproducts.min.js')}}"></script>
-<!-- jQuery select2 // custom select   -->
+<!-- jQuery select2 // custom `   -->
 <script src="{{url('assets/frontend/js/select2.min.js')}}"></script>
 
 <!-- include touchspin.js // touch friendly input spinner component   -->

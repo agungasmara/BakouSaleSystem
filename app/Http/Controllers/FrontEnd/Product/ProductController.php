@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Models\FrontEnd\Product;
 use DB;
 use Carbon\Carbon;
+use Session;
+
 class ProductController extends Controller
 {
 
@@ -91,7 +93,8 @@ class ProductController extends Controller
 				'href'        => 'product/product', 'product_id=' . $result->product_id
 			);
 		}
-		return response()->json(['data' => $productInfo,'images'=>$images,'attribute_groups' => $attribute_groups,'discount' => $discount_arr,'product_relate' => $product_related,'success' => true, 'message' => 'Success']);
+		return response()->json(['data' => $productInfo,'images'=>$images,'attribute_groups' => $attribute_groups,'discount' => $discount_arr,'product_relate' => $product_related,'success' => true, 'message' => 'Success', 'lang'=>Session::get('applangId')]);
+
     }
     
     public function getProductDiscounts($product_id) {

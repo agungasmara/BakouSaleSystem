@@ -84,6 +84,8 @@ if (Request::is('admin*')){
         // Account
         Route::post('account/register', 'FrontEnd\Account\RegisterController@save');
     });
+}else if (Request::is('lang*')){
+    Route::get('lang/{lang}', ['as'=>'lang.switch', 'uses'=>'FrontEnd\Language\LanguageController@switchLang']);
 }else{
     Route::get('/{any?}','FrontEnd\Product\FrontEndController@index')->where(['any'=>'.*']);
 }
@@ -148,7 +150,7 @@ Route::put('/api/update', 'FrontEnd\TestController@UpdateApi');
 // Route::put('/api/update', 'FrontEnd\TestController@UpdateApi');
 
 // authentication 
-Route::get('lang/{lang}', ['as'=>'lang.switch', 'uses'=>'FrontEnd\Language\LanguageController@switchLang']);
+
 Route::post('login', function(Illuminate\Http\Request $request) 
 {
     if (Auth::attempt(['email' => $request->get('email'), 'password' => $request->get('password')])) {

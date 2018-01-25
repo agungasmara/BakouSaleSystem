@@ -4,6 +4,7 @@ namespace App\Http\Controllers\FrontEnd\Common;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Session;
 
 class HeaderController extends Controller
 {
@@ -56,7 +57,7 @@ class HeaderController extends Controller
             );
         }
         
-        $data = array('data'=>$cateTypeArr);
+        $data = array('data'=>$cateTypeArr,'success'=>true, 'lang'=>Session::get('applangId'));
 
         return response()->json($data);
     }

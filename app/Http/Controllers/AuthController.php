@@ -32,7 +32,7 @@ class AuthController extends Controller
         return response()
 
             ->json([
-                'registered' => true
+                'registered' => true,
             ]);
     }
 
