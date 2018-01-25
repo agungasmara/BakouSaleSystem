@@ -93,7 +93,7 @@ class ProductController extends Controller
 				'href'        => 'product/product', 'product_id=' . $result->product_id
 			);
 		}
-		return response()->json(['data' => $productInfo,'images'=>$images,'attribute_groups' => $attribute_groups,'discount' => $discount_arr,'product_relate' => $product_related,'success' => true, 'message' => 'Success', 'lang'=>Session::get('applangId')]);
+		return response()->json(['data' => $productInfo,'images'=>$images,'attribute_groups' => $attribute_groups,'discount' => $discount_arr,'product_relate' => $product_related,'review_status' => $review_status,'success' => true, 'message' => 'Success', 'lang'=>Session::get('applangId')]);
 
     }
     
