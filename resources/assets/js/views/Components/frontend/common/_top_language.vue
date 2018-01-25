@@ -1,7 +1,7 @@
 <template>
     <ul class="dropdown-menu">
-        <li><router-link to="">KH</router-link></li>
-        <li><router-link to="">EN</router-link></li>
+        <li><a href="/lang/kh">KH</a></li>
+        <li><a href="/lang/en">EN</a></li>
     </ul>
 </template>
 
