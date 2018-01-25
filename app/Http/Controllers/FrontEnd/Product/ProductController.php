@@ -38,10 +38,10 @@ class ProductController extends Controller
 		} else {
 			$minimum = 1;
 		}
+		// Review
 		$review_status = config_review_status;
-		// $reviews = sprintf($this->language->get('text_reviews'), (int)$productInfo->reviews);
+		$reviews = sprintf("Review", (int)$productInfo->reviews);
 		$rating = (int)$productInfo->rating;
-		dd($review_status);
 		// Product relate
 		$product_related = array();
 
