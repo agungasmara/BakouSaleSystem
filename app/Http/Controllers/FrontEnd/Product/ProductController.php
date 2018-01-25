@@ -25,7 +25,6 @@ class ProductController extends Controller
 		$attribute_groups = $this->getProductAttributes($id);
 		// Get DiscountProduct
 		$discounts = $this->getProductDiscounts($id);
-		// dd($discounts);	
 		$discount_arr = array();
 		foreach ($discounts as $discount) {
 			$discount_arr[] = array(
@@ -33,57 +32,66 @@ class ProductController extends Controller
 				'price' => $discount->price
 			);
 		}
+		// Review
+		if ($productInfo->minimum) {
+			$minimum = $productInfo->minimum;
+		} else {
+			$minimum = 1;
+		}
+		$review_status = config_review_status;
+		// $reviews = sprintf($this->language->get('text_reviews'), (int)$productInfo->reviews);
+		$rating = (int)$productInfo->rating;
+		dd($review_status);
 		// Product relate
-		$products = array();
+		$product_related = array();
 
-				$results = $this->getProductRelated($id);
+		$results = $this->getProductRelated($id);
 
-				foreach ($results as $result) {
-					// if ($result->image) {
-					// 	$image = $result->image;
-					// } else {
-					// 	$image = $this->model_tool_image->resize('placeholder.png', $this->config->get($this->config->get('config_theme') . '_image_related_width'), $this->config->get($this->config->get('config_theme') . '_image_related_height'));
-					// }
+		foreach ($results as $result) {
+			// if ($result->image) {
+			// 	$image = $result->image;
+			// } else {
+			// 	$image = $this->model_tool_image->resize('placeholder.png', $this->config->get($this->config->get('config_theme') . '_image_related_width'), $this->config->get($this->config->get('config_theme') . '_image_related_height'));
+			// }
 
-					// if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
-					// 	$price = $this->currency->format($this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
-					// } else {
-					// 	$price = false;
-					// }
+			// if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
+			// 	$price = $this->currency->format($this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+			// } else {
+			// 	$price = false;
+			// }
 
-					// if ((float)$result['special']) {
-					// 	$special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
-					// } else {
-					// 	$special = false;
-					// }
+			// if ((float)$result['special']) {
+			// 	$special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+			// } else {
+			// 	$special = false;
+			// }
 
-					// if ($this->config->get('config_tax')) {
-					// 	$tax = $this->currency->format((float)$result['special'] ? $result['special'] : $result['price'], $this->session->data['currency']);
-					// } else {
-					// 	$tax = false;
-					// }
+			// if ($this->config->get('config_tax')) {
+			// 	$tax = $this->currency->format((float)$result['special'] ? $result['special'] : $result['price'], $this->session->data['currency']);
+			// } else {
+			// 	$tax = false;
+			// }
 
-					if (config_review_status) {
-						$rating = (int)$result->rating;
-					} else {
-						$rating = false;
-					}
+			if (config_review_status) {
+				$rating = (int)$result->rating;
+			} else {
+				$rating = false;
+			}
 
-					$products[] = array(
-						'product_id'  => $result->product_id,
-						'thumb'       => $result->image,
-						'name'        => $result->name,
-						'description' => html_entity_decode($result->description, ENT_QUOTES, 'UTF-8'),
-						// 'price'       => $price,
-						// 'special'     => $special,
-						// 'tax'         => $tax,
-						'minimum'     => $result->minimum > 0 ? $result->minimum : 1,
-						'rating'      => $rating,
-						'href'        => 'product/product', 'product_id=' . $result->product_id
-					);
-				}
-
-		return response()->json(['data' => $productInfo,'images'=>$images,'attribute_groups' => $attribute_groups,'discount' => $discount_arr,'success' => true, 'message' => 'Success']);
+			$product_related[] = array(
+				'product_id'  => $result->product_id,
+				'thumb'       => $result->image,
+				'name'        => $result->name,
+				'description' => html_entity_decode($result->description, ENT_QUOTES, 'UTF-8'),
+				// 'price'       => $price,
+				// 'special'     => $special,
+				// 'tax'         => $tax,
+				'minimum'     => $result->minimum > 0 ? $result->minimum : 1,
+				'rating'      => $rating,
+				'href'        => 'product/product', 'product_id=' . $result->product_id
+			);
+		}
+		return response()->json(['data' => $productInfo,'images'=>$images,'attribute_groups' => $attribute_groups,'discount' => $discount_arr,'product_relate' => $product_related,'success' => true, 'message' => 'Success']);
     }
     
     public function getProductDiscounts($product_id) {

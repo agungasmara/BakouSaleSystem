@@ -47,9 +47,18 @@
                         Write a review</a></span>
                 </p>
             </div>
-            <div class="product-price">
-                <span class="price-sales"> ${{productInfo.price}}</span> 
-                <span class="price-standard">$95</span>
+            <div class="product-price" v-if="productInfo.special != ''">
+                <span class="price-sales">
+                    ${{productInfo.price}}
+                </span> 
+            </div>
+            <div class="product-price" v-else>
+                <span class="price-sales">
+                    ${{productInfo.price}}
+                </span> 
+                <span class="price-standard">
+                    ${{productInfo.special}}
+                </span>
             </div>
             <span class="details-description" v-html="productInfo.description">
             </span>
@@ -122,7 +131,7 @@
             <div class="product-tab w100 clearfix">
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#details" data-toggle="tab">Details</a></li>
-                    <li><a href="#size" data-toggle="tab">Size</a></li>
+                    <li><a href="#size" data-toggle="tab">Specification</a></li>
                     <li><a href="#shipping" data-toggle="tab">Shipping</a></li>
                 </ul>
 
