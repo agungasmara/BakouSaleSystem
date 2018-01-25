@@ -107,6 +107,30 @@ import CurrencyList from './views/Components/backend/currency/CurrencyList.vue'
 import CurrencyForm from './views/Components/backend/currency/MainForm.vue'
 import CurrencyEdit from './views/Components/backend/currency/EditForm.vue'
 
+//***** Stock Status *****
+import StockStatus from './views/Components/backend/stocks/StockStatus.vue'
+import StockStatusList from './views/Components/backend/stocks/StockStatusList.vue'
+import StockStatusForm from './views/Components/backend/stocks/MainForm.vue'
+import StockStatusEdit from './views/Components/backend/stocks/EditForm.vue'
+
+//***** Order Status *****
+import OrderStatusB from './views/Components/backend/order_status/OrderStatus.vue'
+import OrderStatusList from './views/Components/backend/order_status/OrderStatusList.vue'
+import OrderStatusForm from './views/Components/backend/order_status/MainForm.vue'
+import OrderStatusEdit from './views/Components/backend/order_status/EditForm.vue'
+
+//***** Credit Type *****
+import CreditType from './views/Components/backend/credit_option/CreditType.vue'
+import CreditTypeList from './views/Components/backend/credit_option/CreditTypeList.vue'
+import CreditTypeForm from './views/Components/backend/credit_option/MainForm.vue'
+import CreditTypeEdit from './views/Components/backend/credit_option/EditForm.vue'
+
+//***** Credit Type Value *****
+import CreditTypeValue from './views/Components/backend/credit_option/CreditTypeValue.vue'
+import CreditTypeValueList from './views/Components/backend/credit_option/CreditTypeValueList.vue'
+import CreditTypeValueForm from './views/Components/backend/credit_option/CreditTypeValueForm.vue'
+import CreditTypeValueEdit from './views/Components/backend/credit_option/CreditTypeValueEditForm.vue'
+
 //import router from './router'
 import VueResource from 'vue-resource'
 import Vuetify from 'vuetify'
@@ -430,6 +454,86 @@ const router = new VueRouter({
                 path:'edit/:id',
                 name:'CurrencyEdit',
                 component:CurrencyEdit,
+                props:true
+            }
+        ]       
+    },
+    {path:'/admin/stock_status',name:'stock_status',component:StockStatus,
+        children:[
+            {
+                path:'list',
+                name:'StockStatusList',
+                component:StockStatusList
+            },
+            {
+                path:'add',
+                name:'StockStatusForm',
+                component:StockStatusForm
+            },
+            {
+                path:'edit/:id',
+                name:'StockStatusEdit',
+                component:StockStatusEdit,
+                props:true
+            }
+        ]       
+    },
+    {path:'/admin/order_status',name:'order_status',component:OrderStatusB,
+        children:[
+            {
+                path:'list',
+                name:'OrderStatusList',
+                component:OrderStatusList
+            },
+            {
+                path:'add',
+                name:'OrderStatusForm',
+                component:OrderStatusForm
+            },
+            {
+                path:'edit/:id',
+                name:'OrderStatusEdit',
+                component:OrderStatusEdit,
+                props:true
+            }
+        ]       
+    },
+    {path:'/admin/credit_type',name:'credit_type',component:CreditType,
+        children:[
+            {
+                path:'list',
+                name:'CreditTypeList',
+                component:CreditTypeList
+            },
+            {
+                path:'add',
+                name:'CreditTypeForm',
+                component:CreditTypeForm
+            },
+            {
+                path:'edit/:id',
+                name:'CreditTypeEdit',
+                component:CreditTypeEdit,
+                props:true
+            }
+        ]       
+    },
+    {path:'/admin/credit_type_value',name:'credit_type_value',component:CreditTypeValue,
+        children:[
+            {
+                path:'list',
+                name:'CreditTypeValueList',
+                component:CreditTypeValueList
+            },
+            {
+                path:'add',
+                name:'CreditTypeValueForm',
+                component:CreditTypeValueForm
+            },
+            {
+                path:'edit/:id',
+                name:'CreditTypeValueEdit',
+                component:CreditTypeValueEdit,
                 props:true
             }
         ]       

@@ -112,7 +112,7 @@
 		created(){
 			this.dataID=this.id
 			this.getUserGroup()
-			this.fetchUser(this.id)
+			this.fetchData(this.id)
 		},
 		methods:{
 			getImage(event){
@@ -123,7 +123,7 @@
 					this.selects.userGroupItems=res.data
 				})
 			},
-			fetchUser(id){
+			fetchData(id){
 				axios.get('/api/users/'+id+'/edit').then((res)=>{
 					// this.data.user_group_id=res.data.user_group_id
 					// this.data.username=res.data.username

@@ -97,10 +97,10 @@
 		},
 		created(){
 			this.dataID=this.id
-			this.fetchLanguageByID(this.id)
+			this.fetchData(this.id)
 		},
 		methods:{
-			fetchLanguageByID(id){
+			fetchData(id){
 				axios.get('/api/languages/'+id+'/edit').then(res=>{
 					this.data=res.data
 					console.log(res.data)

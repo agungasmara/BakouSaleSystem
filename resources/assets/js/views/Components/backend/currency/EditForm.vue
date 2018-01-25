@@ -25,7 +25,7 @@
 		},
 		data(){
 			return{
-				url:'/api/languages/',
+				url:'/api/currencies/',
 				e1:true,
 				valid: true,
 				btnImageDisabled:false,
@@ -33,43 +33,46 @@
 				imageUrl:'',
 				image:null,
 			    group:[
-					{	class:'xs12 sm6 md6',	 key:'name',	type:'text',	 text:'Name',count:100	},
-					{	class:'xs12 sm6 md6',	 key:'code',	type:'text',text:'Code',count:100	},
-					{	class:'xs12 sm6 md6',	 key:'locale',	type:'text',	 text:'Local',count:100	},
-					{	class:'xs12 sm6 md6',	 key:'image',	type:'image',	 text:'Image',count:0,value:''	},
-					{	class:'xs12 sm6 md6',	 key:'directory',	type:'text',	 text:'Directory',count:0,value:''	},
-					{	class:'xs12 sm6 md6',	 key:'status',	type:'select',	 text:'Status',count:0,items:'statusItems'	}
+					{	class:'xs12 sm6 md6',	 key:'title',type:'text',text:'Title',count:100	},
+					{	class:'xs12 sm6 md6',	 key:'code',type:'text',text:'Code',count:100},
+					{	class:'xs12 sm6 md6',	 key:'symbol_left',	type:'text',text:'Symbol Left',count:100	},
+					{	class:'xs12 sm6 md6',	 key:'symbol_right',type:'text',text:'Symbol Right',count:50},
+					{	class:'xs12 sm6 md6',	 key:'decimal_place',type:'text',text:'Decimal Place',count:50},
+					{	class:'xs12 sm6 md6',	 key:'value',type:'text',text:'Value',count:50},
+					{	class:'xs12 sm6 md6',	 key:'status',type:'select',text:'Status',count:0,items:'statusItems'	},
+					{	class:'xs12 sm6 md6',	 key:'date_modified',type:'text',text:'Date Modified',count:20	}
 				],
 				rules:{
-					name: [
-				      (v) => !!v || 'Name is required',
-				      (v) => v && v.length <= 50 || 'Name must be less than 50 characters'
+					title: [
+				      (v) => !!v || 'Title is required',
+				      (v) => v && v.length <= 50 || 'Title must be less than 50 characters'
 				    ],
 				    code: [
 				      (v) => !!v || 'Code is required',
 				      (v) => v && v.length <= 50 || 'Code must be less than 50 characters'
 				    ],
-				    locale: [
-				      (v) => !!v || 'Local is required',
-				      (v) => v && v.length <= 50 || 'Local must be less than 50 characters'
+					decimal_place: [
+				      (v) => !!v || 'Decimal Place is required',
+				      (v) => v && v.length <= 50 || 'Decimal Place must be less than 50 characters'
 				    ],
-					directory: [
-				      (v) => !!v || 'Directory is required',
-				      (v) => v && v.length <= 50 || 'Directory must be less than 50 characters'
+				    value: [
+				      (v) => !!v || 'Value is required',
+				      (v) => v && v.length <= 50 || 'Value must be less than 50 characters'
 				    ],
-				    sort_order: [
-				      (v) => !!v || 'Sort Order is required',
-				      (v) => v && v.length <= 50 || 'Key must be less than 50 characters'
+				    date_modified:[
+				      (v) => !!v || 'Date Requied is required',
+				      (v) => v && v.length <= 20 || 'Value must be less than 50 characters'
 				    ]
 				},
 				data:{
-					name:'',
+					title:'',
 					code:'',
-					locale: '',
-					image: '',
-					directory:'',
-					sort_order:0,
-					status:1
+					symbol_left: '',
+					symbol_right: '',
+					decimal_place:'',
+					value:0,
+					status:0,
+					date_modified:''
 				},
 				select:{
 					statusItems:[
@@ -77,14 +80,14 @@
 						{text:'Inactive',value:0}
 					]
 				},
-				breadcrumbTitle:'Settings',
+				breadcrumbTitle:'Currency',
 				breadcrumbs: [
 			        {
 			          text: 'Administrator',
 			          disabled: false
 			        },
 			        {
-			          text: 'Settings',
+			          text: 'Currency',
 			          disabled: false
 			        },
 			        {
@@ -92,16 +95,16 @@
 			          disabled: true
 			        }
 			    ],
-			    backUrl:'/admin/languages/list',
+			    backUrl:'/admin/currencies/list',
 			}
 		},
 		created(){
 			this.dataID=this.id
-			this.fetchLanguageByID(this.id)
+			this.fetchData(this.id)
 		},
 		methods:{
-			fetchLanguageByID(id){
-				axios.get('/api/languages/'+id+'/edit').then(res=>{
+			fetchData(id){
+				axios.get('/api/currencies/'+id+'/edit').then(res=>{
 					this.data=res.data
 					console.log(res.data)
 				});

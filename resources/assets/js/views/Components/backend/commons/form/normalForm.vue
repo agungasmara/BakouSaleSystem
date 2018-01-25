@@ -14,7 +14,7 @@
 			<v-alert color="success" value='true' v-if="flash.success">
 	          	{{flash.success}}
 	      	</v-alert>
-	      	<v-alert color="warning" value='true' v-if="flash.error">
+	      	<v-alert color="error" value='true' v-if="flash.error">
 	          	{{flash.error}}
 	      	</v-alert>
 	      	<v-card flat>
@@ -112,10 +112,11 @@
 			submit (opt) {
 		      	if (this.$refs.form.validate()) {
 			        // Native form submission is not yet supporte
-			        //console.log(this.formDatas)
+			        
 			        if(this.id==0){
 			        	axios.post(this.url,{
 				          data:this.formDatas
+
 				        }).then((res)=>{
 				        	if(res.data.success==true){
 				        		Flash.setSuccess(res.data.message)
@@ -127,6 +128,7 @@
 				        	}
 				        })
 			        }else{
+			        	console.log(this.formDatas)
 			        	axios.put(this.url+this.id, {
 				          data:this.formDatas
 				        }).then((res)=>{

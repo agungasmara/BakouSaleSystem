@@ -23,7 +23,7 @@
 		},
 		data(){
 			return{
-				url:'/api/languages/',
+				url:'/api/currencies/',
 				e1:true,
 				valid: true,
 				btnImageDisabled:false,
@@ -36,7 +36,7 @@
 					{	class:'xs12 sm6 md6',	 key:'symbol_left',	type:'text',	 text:'Symbol Left',count:100	},
 					{	class:'xs12 sm6 md6',	 key:'symbol_right',	type:'text',	 text:'Symbol Right',count:0,value:''	},
 					{	class:'xs12 sm6 md6',	 key:'decimal_place',	type:'text',	 text:'Decimal Place',count:0,value:''	},
-					{	class:'xs12 sm6 md6',	 key:'value',	type:'text',	 text:'Value',count:5	},
+					{	class:'xs12 sm6 md6',	 key:'value',	type:'text',	 text:'Value',count:50	},
 					{	class:'xs12 sm6 md6',	 key:'status',	type:'select',	 text:'Status',count:0,items:'statusItems'	},
 					{	class:'xs12 sm6 md6',	 key:'date_modified',	type:'text',	 text:'Date Modified',count:20	}
 				],
@@ -63,14 +63,14 @@
 				    ]
 				},
 				data:{
-					title:'',
-					code:'',
-					symbol_left: '',
+					title:'US Dollars',
+					code:'USSD',
+					symbol_left: '$',
 					symbol_right: '',
-					decimal_place:'',
-					value:0,
+					decimal_place:'2',
+					value:'1.00',
 					status:1,
-					date_modified:''
+					date_modified:'2018-01-25'
 				},
 				select:{
 					statusItems:[

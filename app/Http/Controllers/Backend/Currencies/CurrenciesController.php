@@ -26,6 +26,7 @@ class CurrenciesController extends Controller
         ];
 
         return (new DataAction)->StoreData(Currency::class,$condition,"",$data);
+        //return response()->json($data);
     }
     public function show($id)
     {
