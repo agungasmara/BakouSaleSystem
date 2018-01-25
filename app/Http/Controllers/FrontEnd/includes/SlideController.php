@@ -4,6 +4,7 @@ namespace App\Http\Controllers\FrontEnd\Includes;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Session;
 
 class SlideController extends Controller
 {
@@ -33,7 +34,7 @@ class SlideController extends Controller
         }
 
         $module = $module++;
-        $data = array('data'=>$banners);
+        $data = array('data'=>$banners,'lang'=>Session::get('applangId'));
         return response()->json($data);
     }
 

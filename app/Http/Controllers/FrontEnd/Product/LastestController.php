@@ -4,6 +4,7 @@ namespace App\Http\Controllers\FrontEnd\Product;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Session;
 
 class LastestController extends Controller
 {
@@ -15,7 +16,6 @@ class LastestController extends Controller
 
     public function index()
     {
-
         $filter_data = array(
             'sort'  => 'p.date_added',
             'order' => 'DESC',
@@ -48,6 +48,6 @@ class LastestController extends Controller
 
         }
         // dd($products);
-        return response()->json(['data' => $products,'success' => true, 'message' => 'Success']);
+        return response()->json(['data' => $products,'success' => true, 'message' => 'Success', 'lang'=>Session::get('applangId')]);
     }
 }

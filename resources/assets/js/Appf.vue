@@ -12,7 +12,9 @@
                         <div class="pull-left ">
                             <ul class="userMenu ">
                                 <li><a href="#"> <span class="hidden-xs">Helps</span><i
-                                        class="glyphicon glyphicon-info-sign hide visible-xs "></i> </a></li>
+                                        class="glyphicon glyphicon-info-sign hide visible-xs "></i> 
+
+                                    </a></li>
                                 <li class="phone-number">
                                     <a href="callto:+12025550151">
                                         <span> <i class="glyphicon glyphicon-phone-alt "></i></span>
@@ -30,19 +32,19 @@
                                     <span class="caret"></span>
                                   </a>
                                   <ul class="dropdown-menu">
-                                    <li><router-link to="">KH</router-link></li>
-                                    <li><router-link to="">EN</router-link></li>
+                                    <li><a href="/lang/kh">KH</a></li>
+                                    <li><a href="/lang/en">EN</a></li>
                                   </ul>
                                 </li>
                                 <li class="dropdown">
                                   <a href="" title="" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> 
-                                    <span class="hidden-xs hidden-sm hidden-md">My Account</span> 
+                                    <span class="hidden-xs hidden-sm hidden-md">{{ t('entry_account') }}</span> 
                                     <span class="caret"></span>
                                   </a>
                                   <ul class="dropdown-menu">
                                     <li>
                                         <a href="">
-                                            Account
+                                            <span v-translate>entry_account</span>
                                         </a>
                                     </li>
                                     <li>
@@ -234,7 +236,9 @@
   import CartProduct from './views/Components/frontend/include/cart.vue'
   import CartAction from './helper/cart'
   import FooterComponet from './views/Components/frontend/common/_footer.vue'
-
+  import VueTranslate from 'vue-translate-plugin'
+  import Vue from 'vue';
+  Vue.use(VueTranslate);
   export default{
     data(){
       return{
@@ -247,25 +251,32 @@
         axios.get(`/api/header`)
         .then(response => {
           this.posts = response.data['data']
+          this.$translate.setLang(response.data['lang'])
         })
         .catch(e => {
           this.errors.push(e)
         })
-
-        let recaptchaScript = document.createElement('script')
-        recaptchaScript.setAttribute('src', 'https://www.google.com/recaptcha/api.js')
-        document.head.appendChild(recaptchaScript)
     },
-
+    locales: {
+        en: {
+            'entry_account': 'My Account',
+        },
+        kh: {
+            'entry_account': 'គណនី'
+        }
+    },
     components:{
         CartProduct,
         FooterComponet,
     },
+    getLang(){
+
+    },
     methods: function() {
-        
         // window.location = "#/login";
     },
     mounted: function(){
+        // this.$translate.setLang('en')
         // window.location = "#/home";
     },
   }

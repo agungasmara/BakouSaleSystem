@@ -5,6 +5,7 @@ namespace App\Http\Controllers\FrontEnd\Information;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
+use Session;
 
 class InformationController extends Controller
 {
@@ -24,7 +25,8 @@ class InformationController extends Controller
         // dd($information_info);
         $data = array(
             'title'=>$information_info->title,
-            'description'=>html_entity_decode($information_info->description, ENT_QUOTES, 'UTF-8')
+            'description'=>html_entity_decode($information_info->description, ENT_QUOTES, 'UTF-8'),
+            'lang'=>Session::get('applangId')
         );
         
         // if ($information_info) {
@@ -37,7 +39,7 @@ class InformationController extends Controller
         //         );
         //     }
 
-        //     return response()->json(['data' => $informationInfor_arr,'success' => true, 'message' => 'Success']);
+        //     return response()->json(['data' => $informationInfor_arr,'success' => true, 'message' => 'Success', 'lang'=>Session::get('applangId')]);
         // }
         return response()->json($data);
     }

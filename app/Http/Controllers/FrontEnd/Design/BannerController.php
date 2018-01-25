@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Models\FrontEnd\Design\Banner;
 use App\Http\Models\FrontEnd\Design\BannerImage;
 use DB;
+use Session;
+
 class BannerController extends Controller
 {
     //
@@ -16,7 +18,7 @@ class BannerController extends Controller
     	// ***** Carosel Sliders Parameter = 7 for getting slider data*****
     	$getSliders = $this->getDesign(7);
     	// ***** response results  *****
-    	return response()->json(['brands' => $getBrands,'sliders'=>$getSliders,'success' => true, 'message' => 'Success']);
+    	return response()->json(['brands' => $getBrands,'sliders'=>$getSliders,'success' => true, 'message' => 'Success', 'lang'=>Session::get('applangId')]);
     }
 
     // getDesign

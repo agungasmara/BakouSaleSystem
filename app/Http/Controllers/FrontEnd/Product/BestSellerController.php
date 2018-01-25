@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use DB;
+use Session;
+
 class BestSellerController extends Controller
 {
     /**
@@ -38,7 +40,7 @@ class BestSellerController extends Controller
     		}
     	}
 
-    	return response()->json(['data'=>$products,'success' => true, 'message' => 'Success']);
+    	return response()->json(['data'=>$products,'success' => true, 'message' => 'Success', 'lang'=>Session::get('applangId')]);
 
     }
 

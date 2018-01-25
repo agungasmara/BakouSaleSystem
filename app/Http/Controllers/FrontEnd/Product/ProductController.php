@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Models\FrontEnd\Product;
 use DB;
 use Carbon\Carbon;
+use Session;
+
 class ProductController extends Controller
 {
 
@@ -22,7 +24,7 @@ class ProductController extends Controller
 				'price' => $discount->price
 			);
 		}
-		return response()->json(['data' => $productInfo,'success' => true, 'message' => 'Success']);
+		return response()->json(['data' => $productInfo,'success' => true, 'message' => 'Success', 'lang'=>Session::get('applangId')]);
     }
     
     public function getProductDiscounts($product_id) {

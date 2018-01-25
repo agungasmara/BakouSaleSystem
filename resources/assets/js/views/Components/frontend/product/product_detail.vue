@@ -406,43 +406,153 @@
             // }
         },
         mounted(){
-            // alert("testing");
-            // getScript('http://localhost:8000/assets/frontend/js/jquery/jquery-2.1.3.min.js');
-            // getScript('http://localhost:8000/assets/frontend/bootstrap/js/bootstrap.min.js');
-            // getScript('http://localhost:8000/assets/frontend/js/footable.js');
-            // getScript('http://localhost:8000/assets/frontend/js/footable.sortable.js');
-            // getScript('http://localhost:8000/assets/frontend/js/jquery.cycle2.min.js');
-            // getScript('http://localhost:8000/assets/frontend/js/jquery.easing.1.3.js');
-            // getScript('http://localhost:8000/assets/frontend/js/jquery.parallax-1.1.js');
-            // getScript('http://localhost:8000/assets/frontend/js/helper-plugins/jquery.mousewheel.min.js');
-            // getScript('http://localhost:8000/assets/frontend/js/jquery.mCustomScrollbar.js');
-            // getScript('http://localhost:8000/assets/frontend/plugins/icheck-1.x/icheck.min.js');
-            // getScript('http://localhost:8000/assets/frontend/plugins/jquery-match-height-master/dist/jquery.matchHeight-min.js');
-            // getScript('http://localhost:8000/assets/frontend/js/grids.js');
-            // getScript('http://localhost:8000/assets/frontend/js/owl.carousel.min.js');
-            // getScript('http://localhost:8000/assets/frontend/plugins/smoothproducts-master/js/smoothproducts.min.js');
-            // getScript('http://localhost:8000/assets/frontend/js/select2.min.js');
-            // getScript('http://localhost:8000/assets/frontend/js/bootstrap.touchspin.js');
-            // getScript('http://localhost:8000/assets/frontend/js/home.js');
-            // getScript('http://localhost:8000/assets/frontend/js/grids.js');
-            // getScript('http://localhost:8000/assets/frontend/js/enquire.min.js');
+            // switch color
+            $(".swatches li").click(function () {
+                $(".swatches li.selected").removeClass("selected");
+                $(this).addClass('selected');
+            });
 
-            // paceOptions = {
-            //     elements: true
-            // };
+            $(".product-color a").click(function () {
+                $(".product-color a").removeClass("active");
+                $(this).addClass('active');
 
-            // $.getScript('assets/frontend/js/pace.min.js');
-            // $('.footable').footable();
+            });
 
-            // $('#modalAds').modal('show');
-            //     $('#modalAds').removeClass('hide');
-            //             $(document).ready(function() {
-             
-            //               $("#owl-example").owlCarousel();
-                         
-            //             });
+            // select
+            $('select.form-control').select2();
 
-            //             // $(window).load(function () {
+
+            function customPager() {
+
+                $.each(this.owl.userItems, function (i) {
+
+                    var pagination1 = $('.owl-controls .owl-pagination > div:first-child');
+                    var pagination = $('.owl-controls .owl-pagination');
+                    $(pagination[i]).append("<div class=' owl-has-nav owl-next'><i class='fa fa-angle-right'></i>  </div>");
+                    $(pagination1[i]).before("<div class=' owl-has-nav owl-prev'><i class='fa fa-angle-left'></i> </div>");
+
+
+                });
+
+            }
+
+            var latestProductSlider = $("#productslider");
+            latestProductSlider.owlCarousel({
+                navigation: false, // Show next and prev buttons
+                items: 4,
+                itemsTablet: [768, 2],
+                afterInit: customPager,
+                afterUpdate: customPager
+            });
+
+
+            // Custom Navigation Events
+            $(".owl-next").click(function () {
+                latestProductSlider.trigger('owl.next');
+            })
+            $(".owl-prev").click(function () {
+                latestProductSlider.trigger('owl.prev');
+            })
+
+
+            // BRAND  carousel
+            var owl = $(".brand-carousel");
+
+            owl.owlCarousel({
+                //navigation : true, // Show next and prev buttons
+                navigation: false,
+                pagination: false,
+                items: 8,
+                itemsTablet: [768, 4],
+                itemsMobile: [400, 2]
+
+
+            });
+
+            // Custom Navigation Events
+            $("#nextBrand").click(function () {
+                owl.trigger('owl.next');
+            })
+            $("#prevBrand").click(function () {
+                owl.trigger('owl.prev');
+            })
+
+            // YOU MAY ALSO LIKE  carousel
+
+            $("#SimilarProductSlider").owlCarousel({
+                navigation: false, // Show next and prev buttons
+                afterInit: customPager,
+                afterUpdate: customPager
+            });
+
+
+            var SimilarProductSlider = $("#SimilarProductSlider");
+            SimilarProductSlider.owlCarousel({
+                navigation: false, // Show next and prev buttons
+                afterInit: customPager,
+                afterUpdate: customPager
+            });
+
+            // Custom Navigation Events
+            $("#SimilarProductSlider .owl-next").click(function () {
+                SimilarProductSlider.trigger('owl.next');
+            })
+
+            $("#SimilarProductSlider .owl-prev").click(function () {
+                SimilarProductSlider.trigger('owl.prev');
+            })
+
+
+            // Home Look 2 || Single product showcase 
+
+            // productShowCase  carousel
+            var pshowcase = $("#productShowCase");
+
+            pshowcase.owlCarousel({
+                autoPlay: 4000,
+                stopOnHover: true,
+                navigation: false,
+                paginationSpeed: 1000,
+                goToFirstSpeed: 2000,
+                singleItem: true,
+                autoHeight: true
+
+
+            });
+
+            // Custom Navigation Events
+            $("#ps-next").click(function () {
+                pshowcase.trigger('owl.next');
+            })
+            $("#ps-prev").click(function () {
+                pshowcase.trigger('owl.prev');
+            })
+
+
+            // Home Look 3 || image Slider
+
+            // imageShowCase  carousel
+            var imageShowCase = $("#imageShowCase");
+
+            imageShowCase.owlCarousel({
+                autoPlay: 4000,
+                stopOnHover: true,
+                navigation: false,
+                pagination: false,
+                paginationSpeed: 1000,
+                goToFirstSpeed: 2000,
+                singleItem: true,
+                autoHeight: true
+            });
+
+            // Custom Navigation Events
+            $("#ps-next").click(function () {
+                imageShowCase.trigger('owl.next');
+            })
+            $("#ps-prev").click(function () {
+                imageShowCase.trigger('owl.prev');
+            })
+
             $('.sp-wrap').smoothproducts();
         },
         created(){

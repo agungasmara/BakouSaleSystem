@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Models\FrontEnd\Account\Customer;
 use DB;
 use Carbon\Carbon;
+use Session;
 
 class RegisterController extends Controller
 {
@@ -63,7 +64,8 @@ class RegisterController extends Controller
         }
         return response()->json([
             'success'=>$success,
-            'message'=>$msg
+            'message'=>$msg,
+            'lang'=>Session::get('applangId')
         ]);
     }
 

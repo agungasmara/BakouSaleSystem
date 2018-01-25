@@ -60,6 +60,7 @@ class TestController extends Controller
 
     public function getTest()
     {
+        // dd(Session::get('applangId'));
         // $Test = Test::all();
 
         // $tests = Test::paginate(5);
@@ -82,7 +83,7 @@ class TestController extends Controller
 
     public function UpdateApi(Request $request){
         Test::Where('id',$request->get('id'))->update(['name'=>$request->get('name')]);
-        return response()->json(['request'=>$request->all(),'success' => true, 'message' => 'Updated successfully'], 200);
+        return response()->json(['request'=>$request->all(),'success' => true, 'message' => 'Updated successfully','lang'=>Session::get('applangId')], 200);
     }
 
     /**

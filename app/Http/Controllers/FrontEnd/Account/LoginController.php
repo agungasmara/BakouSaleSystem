@@ -8,6 +8,7 @@ use App\Http\Models\FrontEnd\Account\Customer;
 use Illuminate\Support\Facades\Hash;
 use DB;
 use Carbon\Carbon;
+use Session;
 
 class LoginController extends Controller
 {
@@ -39,7 +40,8 @@ class LoginController extends Controller
         return response()->json([
             'success'=>$success,
             'message'=> $msg,
-            'param'=> $input['email']
+            'param'=> $input['email'],
+            'lang'=>Session::get('applangId')
         ]);
     }
     public function getPassword($email){
@@ -69,7 +71,8 @@ class LoginController extends Controller
         }
         return response()->json([
             'success'=>$success,
-            'message'=> $msg
+            'message'=> $msg,
+            'lang'=>Session::get('applangId')
         ]);
     }
 
