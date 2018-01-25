@@ -8,11 +8,10 @@
 				v-bind:breadcrumb-title="breadcrumbTitle"
 			></breadcrumb1btn>
 			<data-table 
+				v-bind:list-title="listTitle"
 		    	v-bind:data-header="headers" 
 		    	v-bind:data-value="groups"
-		    	v-bind:get-api="getApiUrl"
-		    	v-bind:delete-api="deleteApiUrl"
-	    		v-bind:edit-url="urlEdit"
+	    		v-bind:url="url"
 	    		v-bind:btn-new-url="btnNewUrl"
 		    	v-on:change="fetchData">
 		    </data-table>
@@ -28,29 +27,28 @@
 	import breadcrumb1btn from '../commons/breadcrumb/breadcrumb1btn.vue'
 	export default{
 		props:[
-			'id'//this use to pass id of record to data table component
+			'id'
 		],
 		data(){
 			return{
-				getApiUrl:'/api/users_group/list/',
-				deleteApiUrl:'/api/users_group/delete/',
-				urlEdit:'/admin/users_group/edit/',
+				listTitle:'User Group List',
+				url:'/api/user_groups/',
 				btnNewUrl:'/admin/users_group/add',
 				headers: [
-			        { text: 'Group ID',align: 'center',value: 'id'},
-			        { text: 'Group Name',align:'center', value: 'name' },
-			        { text: 'Group Type',align:'center', value: 'group_type' },
-			        { text: 'Action',align:'center', sortable:false }
+					{ text: 'Group ID',align: 'left',class:'text-xs-left',value: 'user_group_id'},
+			        { text: 'Group Name',align:'left',class:'text-xs-left', value: 'name' },
+			        { text: 'Group Type',align:'left',class:'text-xs-left', value: 'group_type' },
+			        { text: 'Action',align:'center',value:'user_group_id',class:'text-xs-center', sortable:false }
 			    ],
 				groups:[],
-				breadcrumbTitle:'Users List',
+				breadcrumbTitle:'User Group List',
 				breadcrumbs: [
 			        {
 			          text: 'Administrator',
 			          disabled: false
 			        },
 			        {
-			          text: 'Groups',
+			          text: 'User Group',
 			          disabled: false
 			        },
 			        {
@@ -67,8 +65,9 @@
 		},
 		methods:{
 			fetchData(){
-				axios.get(this.getApiUrl).then(response=>{
+				axios.get(this.url).then(response=>{
 					this.groups=response.data;
+					console.log(response.data)
 				});
 			}
 		}

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Users;
+namespace App\Http\Controllers\Backend\UserGroups;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -25,12 +25,12 @@ use App\Http\Controllers\Backend\commons\ValidateDataController;
 */
 use App\Http\Controllers\Backend\commons\DataAction;
 
-class UsersController extends Controller
+class UserGroupsController extends Controller
 {
     public function index()
     {
 
-        $Users = User::AllUser();
+        $Users = UserGroup::all();
         return response()->json($Users);
     }
 
@@ -54,14 +54,12 @@ class UsersController extends Controller
         // $condition=array();
        
         $data=$request['data'];
-        $data=array_except($data,['confirmPassword']);
         
         $condition=[
-            'username'=>$data['username'],
-            'email'=>$data['email']
+            'name'=>$data['name']
         ];
 
-        return (new DataAction)->StoreData(User::class,$condition,"or",$data);
+        return (new DataAction)->StoreData(UserGroup::class,$condition,"",$data);
         //return response()->json($data);
 
     }

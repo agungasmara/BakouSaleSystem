@@ -40,18 +40,12 @@ Route::Resource('/settings','Backend\Settings\SettingsController');
 Route::get('/getUsers','Backend\UserGroups\UserGroupsController@getUsers');
 Route::get('/permission','Backend\UserGroups\UserGroupsController@getPermission');
 Route::get('/users_group/checkIfExisted/{field}/{value}','Backend\UserGroups\UserGroupsController@ValidateData');
-Route::post('/users_group/save','Backend\UserGroups\UserGroupsController@store');
-Route::get('/users_group/list','Backend\UserGroups\UserGroupsController@index');
-Route::delete('/users_group/delete/{id}','Backend\UserGroups\UserGroupsController@destroy');
-Route::get('/users_group/edit/{id}','Backend\UserGroups\UserGroupsController@edit');
-Route::put('/users_group/update/{id}','Backend\UserGroups\UserGroupsController@update');
+Route::Resource('/user_groups','Backend\UserGroups\UserGroupsController');
 
 //=====User API
 Route::get('/users_group','Backend\Users\UsersController@UserGroup');
 Route::get('/user/checkIfExisted/{field}/{value}','Backend\Users\UsersController@ValidateData');
 Route::Resource('/users','Backend\Users\UsersController');
-// Route::get('/userslist','Backend\Users\UsersController@list');
-// Route::post('/user/save','Backend\Users\UsersController@store');
-// Route::delete('/user/delete/{id}','Backend\Users\UsersController@destroy');
-// Route::get('/user/getuserbyid/{id}','Backend\Users\UsersController@getUserByID');
-// Route::put('/user/update/{id}','Backend\Users\UsersController@update');
+
+//======Language API
+Route::Resource('/languages','Backend\Languages\LanguagesController');

@@ -38,10 +38,10 @@
 					{	class:'xs12 sm6 md6',	 key:'lastname',	type:'text',	 text:'Last Name',count:100	},
 					{	class:'xs12 sm6 md6',	 key:'password',	type:'password',	 text:'Password',count:50	},
 					{	class:'xs12 sm6 md6',	 key:'confirmPassword',	type:'password',	 text:'Confirm Password',count:50	},
-					{	class:'xs12 sm3 md3',	 key:'email',	type:'text',	 text:'Email',count:50	},
-					{	class:'xs12 sm3 md3',	 key:'code',	type:'text',	 text:'Code',count:25	},
-					{	class:'xs12 sm3 md3',	 key:'status',	type:'select',items:'statusItems',	 text:'Status',count:100	},
-					{	class:'xs12 sm3 md3',	 key:'image',	type:'image',	 Value:'',count:0	}
+					{	class:'xs12 sm4 md4',	 key:'email',	type:'text',	 text:'Email',count:50	},
+					{	class:'xs12 sm4 md4',	 key:'code',	type:'text',	 text:'Code',count:25	},
+					{	class:'xs12 sm4 md4',	 key:'status',	type:'select',items:'statusItems',	 text:'Status',count:100	},
+					{	class:'xs12 sm12 md12',	 key:'image',	type:'image',	 Value:'',count:0	}
 					
 				],
 				rules:{
