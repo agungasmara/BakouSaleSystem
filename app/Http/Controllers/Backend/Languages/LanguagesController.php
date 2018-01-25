@@ -45,11 +45,12 @@ class LanguagesController extends Controller
     }
     public function edit($id)
     {
-
+        return (new DataAction)->EditData(Language::class,$id);
     }
     public function update(Request $request,$id)
     {
-
+         $data=$request['data'];
+         return (new DataAction)->UpdateData(Language::class,$data,'language_id',$id);
     }
     public function destroy($id)
     {

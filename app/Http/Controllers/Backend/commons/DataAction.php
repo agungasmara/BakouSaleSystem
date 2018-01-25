@@ -72,11 +72,11 @@
 
 			            	}
 			            }
-			            $col=$col.$and.$key;
+			            $col= ucfirst($col).$and.ucfirst($key);
 			            $n=$n+1;
 			        }
 		         	$success=false;
-		         	$message=$col.' already exist!';
+		         	$message=ucfirst($col).' already exist!';
 		        }
 		        else
 		        {
@@ -121,23 +121,12 @@
 		public function UpdateData($table,$data,$field,$id)
 		{
 
-			$success=false;
-
 			$update=$table::where($field,$id)->update($data);
 
-			if($update){
-
-	            $success=true;
-
-	        }else{
-
-	            $success=false;
-
-	        }
 
 	        return response()->json([
 
-	            'success'=>$success,
+	            'success'=>true,
 	            'message'=>'Data successfully updated.'
 
 	        ]);

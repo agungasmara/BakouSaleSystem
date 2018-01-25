@@ -101,6 +101,12 @@ import LanguageList from './views/Components/backend/languages/LanguageList.vue'
 import LanguageForm from './views/Components/backend/languages/MainForm.vue'
 import LanguageEdit from './views/Components/backend/languages/EditForm.vue'
 
+//***** Currency *****
+import Currency from './views/Components/backend/currency/Currency.vue'
+import CurrencyList from './views/Components/backend/currency/CurrencyList.vue'
+import CurrencyForm from './views/Components/backend/currency/MainForm.vue'
+import CurrencyEdit from './views/Components/backend/currency/EditForm.vue'
+
 //import router from './router'
 import VueResource from 'vue-resource'
 import Vuetify from 'vuetify'
@@ -408,6 +414,26 @@ const router = new VueRouter({
             }
         ]       
     },
+    {path:'/admin/currencies',name:'currencies',component:Currency,
+        children:[
+            {
+                path:'list',
+                name:'CurrencyList',
+                component:CurrencyList
+            },
+            {
+                path:'add',
+                name:'CurrencyForm',
+                component:CurrencyForm
+            },
+            {
+                path:'edit/:id',
+                name:'CurrencyEdit',
+                component:CurrencyEdit,
+                props:true
+            }
+        ]       
+    }
   ],
   scrollBehavior (to, from, savedPosition) {
     return { x: 10, y: 0 }

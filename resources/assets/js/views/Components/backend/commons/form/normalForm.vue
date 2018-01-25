@@ -9,15 +9,14 @@
 			v-bind:back-url="backUrl"
 			></breadcrumb3button>
 		<!--breadcrumbs end-->
-		<v-flex xs12 sm12 md12 v-if="flash.success || flash.error">
-			<v-alert class="success" value='true' v-if="flash.success">
+		
+		<v-form v-model="valid" ref="form" lazy-validation>
+			<v-alert color="success" value='true' v-if="flash.success">
 	          	{{flash.success}}
 	      	</v-alert>
-	      	<v-alert class="danger" value='true' v-if="flash.error">
+	      	<v-alert color="warning" value='true' v-if="flash.error">
 	          	{{flash.error}}
 	      	</v-alert>
-	    </v-flex>
-		<v-form v-model="valid" ref="form" lazy-validation>
 	      	<v-card flat>
 	        	<v-card-text>
 	        		<v-container grid-list-md offset-s3>

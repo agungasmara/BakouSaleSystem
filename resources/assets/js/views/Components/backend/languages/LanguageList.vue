@@ -39,7 +39,7 @@
 			return{
 				url:'/api/languages/',
 				btnNewUrl:'/admin/languages/add',
-				listTitle:'Setting List',
+				listTitle:'Languages List',
 				headers: [
 			        { text: 'Languages ID',align: 'left',class:'text-xs-left',value: 'language_id'},
 			        { text: 'Name',align:'left',class:'text-xs-left', value: 'name' },

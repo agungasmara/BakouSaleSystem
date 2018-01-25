@@ -49,3 +49,6 @@ Route::Resource('/users','Backend\Users\UsersController');
 
 //======Language API
 Route::Resource('/languages','Backend\Languages\LanguagesController');
+
+//======Language API
+Route::Resource('/currencies','Backend\Currencies\CurrenciesController');
