@@ -73,7 +73,7 @@
 		},
 		methods:{
 			fetchData(id){
-				axios.get('/api/credit_type/'+id+'/edit').then(res=>{
+				axios.get(this.url+id+'/edit').then(res=>{
 					this.data=res.data
 				});
 			},

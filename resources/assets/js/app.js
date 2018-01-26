@@ -131,6 +131,30 @@ import CreditTypeValueList from './views/Components/backend/credit_option/Credit
 import CreditTypeValueForm from './views/Components/backend/credit_option/CreditTypeValueForm.vue'
 import CreditTypeValueEdit from './views/Components/backend/credit_option/CreditTypeValueEditForm.vue'
 
+//***** Tax Class *****
+import TaxClass from './views/Components/backend/tax/tax_class/TaxClass.vue'
+import TaxClassList from './views/Components/backend/tax/tax_class/TaxClassList.vue'
+import TaxClassForm from './views/Components/backend/tax/tax_class/MainForm.vue'
+import TaxClassEdit from './views/Components/backend/tax/tax_class/EditForm.vue'
+
+//***** Tax Rate *****
+import TaxRate from './views/Components/backend/tax/tax_rate/TaxRate.vue'
+import TaxRateList from './views/Components/backend/tax/tax_rate/TaxRateList.vue'
+import TaxRateForm from './views/Components/backend/tax/tax_rate/MainForm.vue'
+import TaxRateEdit from './views/Components/backend/tax/tax_rate/EditForm.vue'
+
+//***** Tax Rule *****
+import TaxRule from './views/Components/backend/tax/tax_rule/TaxRule.vue'
+import TaxRuleList from './views/Components/backend/tax/tax_rule/TaxRuleList.vue'
+import TaxRuleForm from './views/Components/backend/tax/tax_rule/MainForm.vue'
+import TaxRuleEdit from './views/Components/backend/tax/tax_rule/EditForm.vue'
+
+//***** Tax Rate To Customer Group *****
+import TaxRateCustomerGroup from './views/Components/backend/tax/tax_rate_to_customer_group/TaxRateToCustomerGroup.vue'
+import TaxRateCustomerGroupList from './views/Components/backend/tax/tax_rate_to_customer_group/TaxRateToCustomerGroupList.vue'
+import TaxRateCustomerGroupForm from './views/Components/backend/tax/tax_rate_to_customer_group/MainForm.vue'
+import TaxRateCustomerGroupEdit from './views/Components/backend/tax/tax_rate_to_customer_group/EditForm.vue'
+
 //import router from './router'
 import VueResource from 'vue-resource'
 import Vuetify from 'vuetify'
@@ -534,6 +558,86 @@ const router = new VueRouter({
                 path:'edit/:id',
                 name:'CreditTypeValueEdit',
                 component:CreditTypeValueEdit,
+                props:true
+            }
+        ]       
+    },
+    {path:'/admin/tax_class',name:'tax_class',component:TaxClass,
+        children:[
+            {
+                path:'list',
+                name:'TaxClassList',
+                component:TaxClassList
+            },
+            {
+                path:'add',
+                name:'TaxClassForm',
+                component:TaxClassForm
+            },
+            {
+                path:'edit/:id',
+                name:'TaxClassEdit',
+                component:TaxClassEdit,
+                props:true
+            }
+        ]       
+    },
+    {path:'/admin/tax_rule',name:'tax_rule',component:TaxRule,
+        children:[
+            {
+                path:'list',
+                name:'TaxRuleList',
+                component:TaxRuleList
+            },
+            {
+                path:'add',
+                name:'TaxRuleForm',
+                component:TaxRuleForm
+            },
+            {
+                path:'edit/:id',
+                name:'TaxRuleEdit',
+                component:TaxRuleEdit,
+                props:true
+            }
+        ]       
+    },
+    {path:'/admin/tax_rate',name:'tax_rate',component:TaxRate,
+        children:[
+            {
+                path:'list',
+                name:'TaxRuleList',
+                component:TaxRateList
+            },
+            {
+                path:'add',
+                name:'TaxRuleForm',
+                component:TaxRateForm
+            },
+            {
+                path:'edit/:id',
+                name:'TaxRulesEdit',
+                component:TaxRateEdit,
+                props:true
+            }
+        ]       
+    },
+    {path:'/admin/tax_rate_customer_group',name:'tax_rate_customer_group',component:TaxRateCustomerGroup,
+        children:[
+            {
+                path:'list',
+                name:'TaxRageCustomerGroupList',
+                component:TaxRateCustomerGroupList
+            },
+            {
+                path:'add',
+                name:'TaxRageCustomerGroupForm',
+                component:TaxRateCustomerGroupForm
+            },
+            {
+                path:'edit/:id',
+                name:'TaxRageCustomerGroupEdit',
+                component:TaxRateCustomerGroupEdit,
                 props:true
             }
         ]       

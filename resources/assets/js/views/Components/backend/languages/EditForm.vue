@@ -101,7 +101,7 @@
 		},
 		methods:{
 			fetchData(id){
-				axios.get('/api/languages/'+id+'/edit').then(res=>{
+				axios.get(this.url+id+'/edit').then(res=>{
 					this.data=res.data
 					console.log(res.data)
 				});

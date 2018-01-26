@@ -23,4 +23,36 @@ class CommonsController extends Controller
         return response()->json($creditType);
 
     }
+    public function getGeoZone()
+    {
+
+        $GeoZone=DB::table('geo_zone')->select(['geo_zone_id as value','name as text'])->get();
+
+        return response()->json($GeoZone);
+
+    }
+    public function getTaxRate()
+    {
+
+        $TaxRate=DB::table('tax_rate')->select(['tax_rate_id as value','name as text'])->get();
+
+        return response()->json($TaxRate);
+
+    }
+    public function getTaxClass()
+    {
+
+        $TaxClass=DB::table('tax_class')->select(['tax_class_id as value','title as text'])->get();
+
+        return response()->json($TaxClass);
+
+    }
+    public function getCustomerGroup()
+    {
+
+        $TaxClass=DB::table('customer_group_description')->select(['customer_group_id as value','name as text'])->get();
+
+        return response()->json($TaxClass);
+
+    }
 }

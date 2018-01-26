@@ -77,7 +77,7 @@
 		},
 		methods:{
 			fetchData(id){
-				axios.get('/api/stock_status/'+id+'/edit').then(res=>{
+				axios.get(this.url+id+'/edit').then(res=>{
 					this.data=res.data
 				});
 			},

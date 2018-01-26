@@ -86,7 +86,7 @@
 				})
 			},
 			fetchData(id){
-				axios.get('/api/settings/'+id+'/edit').then(res=>{
+				axios.get(this.url+id+'/edit').then(res=>{
 					this.data.store_id=res.data.store_id
 					this.data.code=res.data.code
 					this.data.key=res.data.key

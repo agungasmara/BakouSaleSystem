@@ -31,6 +31,10 @@ Route::get('/customer/get','FrontEnd\Account\LoginController@getPasswordCustomer
 //=====Commons=======================
 Route::get('/getLanguage','Backend\commons\CommonsController@getLanguage');
 Route::get('/getCreditType','Backend\commons\CommonsController@getCreditType');
+Route::get('/getGeoZone','Backend\commons\CommonsController@getGeoZone');
+Route::get('/getTaxClass','Backend\commons\CommonsController@getTaxClass');
+Route::get('/getTaxRate','Backend\commons\CommonsController@getTaxRate');
+Route::get('/getCustomerGroup','Backend\commons\CommonsController@getCustomerGroup');
 
 
 //=====Setting API=============================
@@ -69,3 +73,9 @@ Route::Resource('/credit_type','Backend\CreditOptions\CreditTypesController');
 
 //======Credit Type Value API
 Route::Resource('/credit_type_value','Backend\CreditOptions\CreditTypeValuesController');
+
+//======Tax API
+Route::Resource('/tax_class','Backend\Taxs\TaxClass\TaxClassController');
+Route::Resource('/tax_rule','Backend\Taxs\TaxRule\TaxRuleController');
+Route::Resource('/tax_rate','Backend\Taxs\TaxRate\TaxRateController');
+Route::Resource('/tax_rate_to_customer_group','Backend\Taxs\TaxRateToCustomerGroup\TaxRateToCustomerGroupController');

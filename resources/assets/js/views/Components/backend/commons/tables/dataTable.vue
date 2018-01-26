@@ -18,7 +18,7 @@
 			<td v-for="index in dataHeader" :class="index.class">
 
 
-				<img v-if="index.value=='image'" :src="props.item.image" width="50" height="50">
+				<img v-if="index.value=='image'" :src="props.item.image ? props.item.image:'/images/icon/no-image.png'" style="width: auto;max-width: 50px;height: auto;max-height: 50px;">
 
 				<div v-else-if="index.text=='Action'">
 					<span style="cursor:pointer;color:blue;" @click="editData(props.item[index.value])"">

@@ -31,7 +31,7 @@
 		      					<div v-if="input.type=='image'">
 									<input type="file" id="fileInput"  style="display:none" ref="fileInput" accept="image/*" @change="onFilePicked">
 									<v-layout align-center justify-center >
-										<label for="fileInput" style="width: 500px;height:auto;max-height: 300px;" >
+										<label for="fileInput" style="width: auto;min-width:200px;max-width:500px;min-height:200px;height:auto;max-height: 300px;" >
 											
 												<v-card style="height: auto;max-height: 200px;padding: 10px;" v-if="formDatas[input.key]" @click="onPickFile">
 													<v-badge color="red" overlap v-if="formDatas[input.key]">
@@ -40,7 +40,7 @@
 														</v-btn>
 													</v-badge>
 													<v-layout align-center justify-center>
-												    	<img :src="formDatas[input.key]" style="height:auto;max-height:200px;width: auto;"  @click="onPickFile">
+												    	<img :src="formDatas[input.key]" style="height:auto;max-height:200px;width: auto;margin-right:-110px;margin-top:-10px;"  @click="onPickFile">
 													</v-layout>
 												</v-card>
 												
@@ -54,6 +54,39 @@
 								</div>
 								<div v-if="input.type=='password'">
 									<v-text-field  label="Confirm Password" v-model="formDatas[input.key]" name="confirmpassword" :rules="formRules[input.key]" required :append-icon="e1 ? 'visibility' : 'visibility_off'" :append-icon-cb="() => (e1 = !e1)" :type="e1 ? 'password' : 'text'"></v-text-field>
+								</div>
+								<div v-if="input.type=='textarea'">
+									<v-text-field textarea :placeholder="input.text" v-model="formDatas[input.key]" :rules='formRules[input.key]' :label="input.text" color="light-blue"></v-text-field>
+								</div>
+								<div v-if="input.type=='date'">
+									<v-menu
+							          lazy
+							          :close-on-content-click="false"
+							          v-model="selectItems[input.menu]"
+							          transition="scale-transition"
+							          offset-y
+							          full-width
+							          :nudge-right="40"
+							          max-width="290px"
+							          min-width="290px"
+							        >
+							          <v-text-field
+							            slot="activator"
+							            label="Picker in menu"
+							            v-model="formDatas[input.key]"
+							            prepend-icon="event"
+							            readonly
+							          ></v-text-field>
+							          <v-date-picker v-model="formDatas[input.key]" no-title scrollable actions>
+							            <template slot-scope="{ save, cancel }">
+							              <v-card-actions>
+							                <v-spacer></v-spacer>
+							                <v-btn flat color="primary" @click="cancel">Cancel</v-btn>
+							                <v-btn flat color="primary" @click="save">OK</v-btn>
+							              </v-card-actions>
+							            </template>
+							          </v-date-picker>
+							        </v-menu>
 								</div>
 		      					<div v-if="input.type=='text'">
 		      						<v-text-field v-if="formRules[input.key]" :label="input.text" :rules='formRules[input.key]' v-model="formDatas[input.key]" :counter="input.count" required></v-text-field>

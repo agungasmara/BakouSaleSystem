@@ -124,7 +124,7 @@
 				})
 			},
 			fetchData(id){
-				axios.get('/api/users/'+id+'/edit').then((res)=>{
+				axios.get(this.url+id+'/edit').then((res)=>{
 					// this.data.user_group_id=res.data.user_group_id
 					// this.data.username=res.data.username
 					// this.data.firstname=res.data.firstname
