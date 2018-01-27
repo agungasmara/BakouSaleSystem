@@ -39,10 +39,11 @@
 			return{
 				url:'/api/languages/',
 				btnNewUrl:'/admin/languages/add',
-				listTitle:'Setting List',
+				listTitle:'Languages List',
 				headers: [
 			        { text: 'Languages ID',align: 'left',class:'text-xs-left',value: 'language_id'},
 			        { text: 'Name',align:'left',class:'text-xs-left', value: 'name' },
+			        { text: 'Image',align:'left',class:'text-xs-left', value: 'image' },
 			        { text: 'code',align:'left',class:'text-xs-left', value: 'code' },
 			        { text: 'Locale',align:'left',class:'text-xs-left', value: 'locale' },
 			        { text: 'Directory',align:'left',class:'text-xs-left', value: 'directory' },

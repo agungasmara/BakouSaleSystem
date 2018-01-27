@@ -28,6 +28,15 @@ Route::get('/customer/get','FrontEnd\Account\LoginController@getPasswordCustomer
 
 //BackEnd
 
+//=====Commons=======================
+Route::get('/getLanguage','Backend\commons\CommonsController@getLanguage');
+Route::get('/getCreditType','Backend\commons\CommonsController@getCreditType');
+Route::get('/getGeoZone','Backend\commons\CommonsController@getGeoZone');
+Route::get('/getTaxClass','Backend\commons\CommonsController@getTaxClass');
+Route::get('/getTaxRate','Backend\commons\CommonsController@getTaxRate');
+Route::get('/getCustomerGroup','Backend\commons\CommonsController@getCustomerGroup');
+
+
 //=====Setting API=============================
 Route::get('/getStore','Backend\Settings\SettingsController@getStore');
 Route::get('/settings/item/','Backend\Settings\SettingsController@item');//use to get all config item to put into dropdown list in setting edit form 
@@ -49,3 +58,24 @@ Route::Resource('/users','Backend\Users\UsersController');
 
 //======Language API
 Route::Resource('/languages','Backend\Languages\LanguagesController');
+
+//======Currency API
+Route::Resource('/currencies','Backend\Currencies\CurrenciesController');
+
+//======Stock Status API
+Route::Resource('/stock_status','Backend\Stocks\StocksController');
+
+//======Order Status API
+Route::Resource('/order_status','Backend\OrderStatus\OrderStatusController');
+
+//======Credit Type API
+Route::Resource('/credit_type','Backend\CreditOptions\CreditTypesController');
+
+//======Credit Type Value API
+Route::Resource('/credit_type_value','Backend\CreditOptions\CreditTypeValuesController');
+
+//======Tax API
+Route::Resource('/tax_class','Backend\Taxs\TaxClass\TaxClassController');
+Route::Resource('/tax_rule','Backend\Taxs\TaxRule\TaxRuleController');
+Route::Resource('/tax_rate','Backend\Taxs\TaxRate\TaxRateController');
+Route::Resource('/tax_rate_to_customer_group','Backend\Taxs\TaxRateToCustomerGroup\TaxRateToCustomerGroupController');

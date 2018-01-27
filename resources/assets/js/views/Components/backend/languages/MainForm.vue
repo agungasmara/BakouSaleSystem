@@ -33,7 +33,7 @@
 			    group:[
 					{	class:'xs12 sm6 md6',	 key:'name',	type:'text',	 text:'Name',count:100	},
 					{	class:'xs12 sm6 md6',	 key:'code',	type:'text',text:'Code',count:100	},
-					{	class:'xs12 sm6 md6',	 key:'local',	type:'text',	 text:'Local',count:100	},
+					{	class:'xs12 sm6 md6',	 key:'locale',	type:'text',	 text:'Local',count:100	},
 					{	class:'xs12 sm6 md6',	 key:'image',	type:'image',	 text:'Image',count:0,value:''	},
 					{	class:'xs12 sm6 md6',	 key:'directory',	type:'text',	 text:'Directory',count:0,value:''	},
 					{	class:'xs12 sm6 md6',	 key:'status',	type:'select',	 text:'Status',count:0,items:'statusItems'	}
@@ -61,11 +61,11 @@
 				    ]
 				},
 				data:{
-					name:'aa',
-					code:'dgdg',
-					locale: 'dgadg',
-					image: 'dgdgddgdfgdgdgd',
-					directory:'a',
+					name:'',
+					code:'',
+					locale: '',
+					image: '',
+					directory:'',
 					sort_order:0,
 					status:1
 				},
@@ -93,15 +93,8 @@
 			    backUrl:'/admin/languages/list',
 			}
 		},
-		created(){
-			this.getStore()
-		},
 		methods:{
-			getStore(){
-				axios.get('/api/getStore').then((res)=>{
-					this.select.stores=res.data
-				})
-			}
+			
 		}
 	}
 </script>

@@ -101,6 +101,60 @@ import LanguageList from './views/Components/backend/languages/LanguageList.vue'
 import LanguageForm from './views/Components/backend/languages/MainForm.vue'
 import LanguageEdit from './views/Components/backend/languages/EditForm.vue'
 
+//***** Currency *****
+import Currency from './views/Components/backend/currency/Currency.vue'
+import CurrencyList from './views/Components/backend/currency/CurrencyList.vue'
+import CurrencyForm from './views/Components/backend/currency/MainForm.vue'
+import CurrencyEdit from './views/Components/backend/currency/EditForm.vue'
+
+//***** Stock Status *****
+import StockStatus from './views/Components/backend/stocks/StockStatus.vue'
+import StockStatusList from './views/Components/backend/stocks/StockStatusList.vue'
+import StockStatusForm from './views/Components/backend/stocks/MainForm.vue'
+import StockStatusEdit from './views/Components/backend/stocks/EditForm.vue'
+
+//***** Order Status *****
+import OrderStatusB from './views/Components/backend/order_status/OrderStatus.vue'
+import OrderStatusList from './views/Components/backend/order_status/OrderStatusList.vue'
+import OrderStatusForm from './views/Components/backend/order_status/MainForm.vue'
+import OrderStatusEdit from './views/Components/backend/order_status/EditForm.vue'
+
+//***** Credit Type *****
+import CreditType from './views/Components/backend/credit_option/CreditType.vue'
+import CreditTypeList from './views/Components/backend/credit_option/CreditTypeList.vue'
+import CreditTypeForm from './views/Components/backend/credit_option/MainForm.vue'
+import CreditTypeEdit from './views/Components/backend/credit_option/EditForm.vue'
+
+//***** Credit Type Value *****
+import CreditTypeValue from './views/Components/backend/credit_option/CreditTypeValue.vue'
+import CreditTypeValueList from './views/Components/backend/credit_option/CreditTypeValueList.vue'
+import CreditTypeValueForm from './views/Components/backend/credit_option/CreditTypeValueForm.vue'
+import CreditTypeValueEdit from './views/Components/backend/credit_option/CreditTypeValueEditForm.vue'
+
+//***** Tax Class *****
+import TaxClass from './views/Components/backend/tax/tax_class/TaxClass.vue'
+import TaxClassList from './views/Components/backend/tax/tax_class/TaxClassList.vue'
+import TaxClassForm from './views/Components/backend/tax/tax_class/MainForm.vue'
+import TaxClassEdit from './views/Components/backend/tax/tax_class/EditForm.vue'
+
+//***** Tax Rate *****
+import TaxRate from './views/Components/backend/tax/tax_rate/TaxRate.vue'
+import TaxRateList from './views/Components/backend/tax/tax_rate/TaxRateList.vue'
+import TaxRateForm from './views/Components/backend/tax/tax_rate/MainForm.vue'
+import TaxRateEdit from './views/Components/backend/tax/tax_rate/EditForm.vue'
+
+//***** Tax Rule *****
+import TaxRule from './views/Components/backend/tax/tax_rule/TaxRule.vue'
+import TaxRuleList from './views/Components/backend/tax/tax_rule/TaxRuleList.vue'
+import TaxRuleForm from './views/Components/backend/tax/tax_rule/MainForm.vue'
+import TaxRuleEdit from './views/Components/backend/tax/tax_rule/EditForm.vue'
+
+//***** Tax Rate To Customer Group *****
+import TaxRateCustomerGroup from './views/Components/backend/tax/tax_rate_to_customer_group/TaxRateToCustomerGroup.vue'
+import TaxRateCustomerGroupList from './views/Components/backend/tax/tax_rate_to_customer_group/TaxRateToCustomerGroupList.vue'
+import TaxRateCustomerGroupForm from './views/Components/backend/tax/tax_rate_to_customer_group/MainForm.vue'
+import TaxRateCustomerGroupEdit from './views/Components/backend/tax/tax_rate_to_customer_group/EditForm.vue'
+
 //import router from './router'
 import VueResource from 'vue-resource'
 import Vuetify from 'vuetify'
@@ -408,6 +462,186 @@ const router = new VueRouter({
             }
         ]       
     },
+    {path:'/admin/currencies',name:'currencies',component:Currency,
+        children:[
+            {
+                path:'list',
+                name:'CurrencyList',
+                component:CurrencyList
+            },
+            {
+                path:'add',
+                name:'CurrencyForm',
+                component:CurrencyForm
+            },
+            {
+                path:'edit/:id',
+                name:'CurrencyEdit',
+                component:CurrencyEdit,
+                props:true
+            }
+        ]       
+    },
+    {path:'/admin/stock_status',name:'stock_status',component:StockStatus,
+        children:[
+            {
+                path:'list',
+                name:'StockStatusList',
+                component:StockStatusList
+            },
+            {
+                path:'add',
+                name:'StockStatusForm',
+                component:StockStatusForm
+            },
+            {
+                path:'edit/:id',
+                name:'StockStatusEdit',
+                component:StockStatusEdit,
+                props:true
+            }
+        ]       
+    },
+    {path:'/admin/order_status',name:'order_status',component:OrderStatusB,
+        children:[
+            {
+                path:'list',
+                name:'OrderStatusList',
+                component:OrderStatusList
+            },
+            {
+                path:'add',
+                name:'OrderStatusForm',
+                component:OrderStatusForm
+            },
+            {
+                path:'edit/:id',
+                name:'OrderStatusEdit',
+                component:OrderStatusEdit,
+                props:true
+            }
+        ]       
+    },
+    {path:'/admin/credit_type',name:'credit_type',component:CreditType,
+        children:[
+            {
+                path:'list',
+                name:'CreditTypeList',
+                component:CreditTypeList
+            },
+            {
+                path:'add',
+                name:'CreditTypeForm',
+                component:CreditTypeForm
+            },
+            {
+                path:'edit/:id',
+                name:'CreditTypeEdit',
+                component:CreditTypeEdit,
+                props:true
+            }
+        ]       
+    },
+    {path:'/admin/credit_type_value',name:'credit_type_value',component:CreditTypeValue,
+        children:[
+            {
+                path:'list',
+                name:'CreditTypeValueList',
+                component:CreditTypeValueList
+            },
+            {
+                path:'add',
+                name:'CreditTypeValueForm',
+                component:CreditTypeValueForm
+            },
+            {
+                path:'edit/:id',
+                name:'CreditTypeValueEdit',
+                component:CreditTypeValueEdit,
+                props:true
+            }
+        ]       
+    },
+    {path:'/admin/tax_class',name:'tax_class',component:TaxClass,
+        children:[
+            {
+                path:'list',
+                name:'TaxClassList',
+                component:TaxClassList
+            },
+            {
+                path:'add',
+                name:'TaxClassForm',
+                component:TaxClassForm
+            },
+            {
+                path:'edit/:id',
+                name:'TaxClassEdit',
+                component:TaxClassEdit,
+                props:true
+            }
+        ]       
+    },
+    {path:'/admin/tax_rule',name:'tax_rule',component:TaxRule,
+        children:[
+            {
+                path:'list',
+                name:'TaxRuleList',
+                component:TaxRuleList
+            },
+            {
+                path:'add',
+                name:'TaxRuleForm',
+                component:TaxRuleForm
+            },
+            {
+                path:'edit/:id',
+                name:'TaxRuleEdit',
+                component:TaxRuleEdit,
+                props:true
+            }
+        ]       
+    },
+    {path:'/admin/tax_rate',name:'tax_rate',component:TaxRate,
+        children:[
+            {
+                path:'list',
+                name:'TaxRuleList',
+                component:TaxRateList
+            },
+            {
+                path:'add',
+                name:'TaxRuleForm',
+                component:TaxRateForm
+            },
+            {
+                path:'edit/:id',
+                name:'TaxRulesEdit',
+                component:TaxRateEdit,
+                props:true
+            }
+        ]       
+    },
+    {path:'/admin/tax_rate_customer_group',name:'tax_rate_customer_group',component:TaxRateCustomerGroup,
+        children:[
+            {
+                path:'list',
+                name:'TaxRageCustomerGroupList',
+                component:TaxRateCustomerGroupList
+            },
+            {
+                path:'add',
+                name:'TaxRageCustomerGroupForm',
+                component:TaxRateCustomerGroupForm
+            },
+            {
+                path:'edit/:id',
+                name:'TaxRageCustomerGroupEdit',
+                component:TaxRateCustomerGroupEdit,
+                props:true
+            }
+        ]       
+    }
   ],
   scrollBehavior (to, from, savedPosition) {
     return { x: 10, y: 0 }
