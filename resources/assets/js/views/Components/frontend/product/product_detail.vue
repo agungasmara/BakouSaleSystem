@@ -37,13 +37,25 @@
             <h3 class="product-code">Product Code : {{productInfo.sku}}</h3>
             <div class="rating" v-if="reviewStatus">
                 <p>.
+                    <span v-for="n in 5">
+                        <span v-if="productInfo.rating < n">
+                            <i class="fa fa-star-o "></i>
+                        </span>
+                        <span v-else>
+                            <i class="fa fa-star"></i>
+                        </span> 
+                    </span> 
+                    <!-- <span><i class="fa fa-star"></i></span> 
                     <span><i class="fa fa-star"></i></span> 
-                    <span><i class="fa fa-star"></i></span> 
-                    <span><i class="fa fa-star"></i></span> 
-                    <span><i class="fa fa-star-o "></i></span> 
-                    <span class="ratingInfo"> <span>/</span> 
-                    <a data-target="#modal-review" data-toggle="modal"> 
-                        Write a review</a></span>
+                    <span><i class="fa fa-star-o "></i></span>  -->
+                    <span class="ratingInfo">
+                        <a href="" data-target="#modal-review" data-toggle="modal">{{reviews}}
+                        </a>
+                        <span>/</span> 
+                        <a data-target="#modal-review" data-toggle="modal"> 
+                            Write a review
+                        </a>
+                    </span>
                 </p>
             </div>
             <div class="product-price" v-if="productInfo.special != ''">
@@ -109,20 +121,28 @@
                 <div class="addto row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <button @click="AddToCart(id,qty);"
-                                class="button btn-block btn-cart cart first" title="Add to Cart" type="button">Add
-                            to Cart
+                                class="button btn-block btn-cart cart first" title="Add to Cart" type="button">
+                                Add to Cart
                         </button>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"><a class="link-wishlist wishlist btn-block ">Add
-                        to Wishlist</a></div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <a class="link-wishlist wishlist btn-block ">
+                            Add to Wishlist
+                        </a>
+                    </div>
                 </div>
                 <div style="clear:both"></div>
-                <h3 class="incaps"><i class="fa fa fa-check-circle-o color-in"></i> In stock</h3>
-
-                <h3 style="display:none" class="incaps"><i class="fa fa-minus-circle color-out"></i> Out of stock
+                <h3 class="incaps">
+                    <i class="fa fa fa-check-circle-o color-in"></i> In stock
                 </h3>
 
-                <h3 class="incaps"><i class="glyphicon glyphicon-lock"></i> Secure online ordering</h3>
+                <h3 style="display:none" class="incaps">
+                    <i class="fa fa-minus-circle color-out"></i> Out of stock
+                </h3>
+
+                <h3 class="incaps">
+                    <i class="glyphicon glyphicon-lock"></i> Secure online ordering
+                </h3>
             </div>
             <!--/.cart-actions-->
 
@@ -309,10 +329,60 @@
             <!--/.item-->
         </div>
         <!--/.recommended-->
-
     </div>
     <div style="clear:both"></div>
+
+<!-- Modal review start -->
+<div class="modal  fade" id="modal-review" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times;</button>
+                <h3 class="modal-title-site text-center">PRODUCT REVIEW </h3>
+            </div>
+            <div class="modal-body">
+
+                <h3 class="reviewtitle uppercase">You're reviewing: Lorem ipsum dolor sit amet</h3>
+
+                <form>
+                    <div class="form-group">
+                        <label>
+                            How do you rate this product? </label> <br>
+
+                        <div class="rating-here">
+                            <input type="hidden" class="rating-tooltip-manual" data-filled="fa fa-star fa-2x"
+                                   data-empty="fa fa-star-o fa-2x" data-fractions="3"/>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="rtext">Name</label>
+                        <input type="text" class="form-control" id="rtext" placeholder="Your name" required>
+                    </div>
+
+                    <div class="form-group ">
+                        <label>Review</label>
+                        <textarea class="form-control" rows="3" placeholder="Your Review" required></textarea>
+
+                    </div>
+
+
+                    <button type="submit" class="btn btn-success">Submit Review</button>
+                </form>
+
+
+            </div>
+
+        </div>
+        <!-- /.modal-content -->
+
+    </div>
+    <!-- /.modal-dialog -->
 </div>
+<!-- /.Modal review -->
+</div>
+
+
 <!-- /main-container -->
 
 <!-- <div class="gap"></div> -->
@@ -371,6 +441,7 @@
 <script src="{{url('assets/frontend/js/script.js')}}"></script>
 
 
+
 <!-- include pace script for automatic web page progress bar  -->
 
 <script>
@@ -400,6 +471,7 @@
         $('.sp-wrap').smoothproducts();
     });
 </script>
+
 <script>
     import Flash from '../../../../helper/flash'
     import axios from 'axios'
@@ -566,6 +638,30 @@
             })
 
             $('.sp-wrap').smoothproducts();
+
+
+
+            // rating start
+            $('.rating-tooltip-manual').rating({
+                extendSymbol: function () {
+                    var title;
+                    $(this).tooltip({
+                        container: 'body',
+                        placement: 'bottom',
+                        trigger: 'manual',
+                        title: function () {
+                            return title;
+                        }
+                    });
+                    $(this).on('rating.rateenter', function (e, rate) {
+                        title = rate;
+                        $(this).tooltip('show');
+                    })
+                        .on('rating.rateleave', function () {
+                            $(this).tooltip('hide');
+                        });
+                }
+            });
         },
         created(){
             this.productDetails(this.id);
@@ -575,6 +671,7 @@
                 axios.get('/api/detail/'+id).then(res=>{
                     this.productInfo=res.data['data']
                     this.reviewStatus =res.data['review_status']
+                    this.reviews =res.data['reviews']
                 });
             },
             AddToCart(product_id,qty=1){

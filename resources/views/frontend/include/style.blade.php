@@ -16,3 +16,5 @@
      <link href="assets/css/ion.checkRadio.css" rel="stylesheet">
     <link href="assets/css/ion.checkRadio.cloudy.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="assets/css/jquery.minimalect.min.css" media="screen"/>
+    <!-- Rating -->
+    <link rel="stylesheet" type="text/css" href="{{url('assets/frontend/plugins/rating/bootstrap-rating.css')}}">
