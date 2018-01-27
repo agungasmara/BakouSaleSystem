@@ -35,8 +35,7 @@
             <h1 class="product-title">{{productInfo.name}}</h1>
 
             <h3 class="product-code">Product Code : {{productInfo.sku}}</h3>
-
-            <div class="rating">
+            <div class="rating" v-if="reviewStatus">
                 <p>.
                     <span><i class="fa fa-star"></i></span> 
                     <span><i class="fa fa-star"></i></span> 
@@ -410,6 +409,7 @@
         data(){
             return{
                 productInfo:[],
+                reviewStatus:[],
                 qty:''
             }
         },
@@ -573,7 +573,8 @@
         methods:{
             productDetails(id){
                 axios.get('/api/detail/'+id).then(res=>{
-                    this.productInfo=res.data['data'];
+                    this.productInfo=res.data['data']
+                    this.reviewStatus =res.data['review_status']
                 });
             },
             AddToCart(product_id,qty=1){
