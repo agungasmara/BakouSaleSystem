@@ -88,6 +88,10 @@
 							          </v-date-picker>
 							        </v-menu>
 								</div>
+								<div v-if="input.type=='number'">
+		      						<v-text-field type="number" v-if="formRules[input.key]" :label="input.text" :rules='formRules[input.key]' v-model="formDatas[input.key]" :counter="input.count" required></v-text-field>
+									<v-text-field v-else :label="input.text" v-model="formDatas[input.key]" :counter="input.count"></v-text-field>
+		      					</div>
 		      					<div v-if="input.type=='text'">
 		      						<v-text-field v-if="formRules[input.key]" :label="input.text" :rules='formRules[input.key]' v-model="formDatas[input.key]" :counter="input.count" required></v-text-field>
 									<v-text-field v-else :label="input.text" v-model="formDatas[input.key]" :counter="input.count"></v-text-field>
@@ -151,8 +155,10 @@
 				          data:this.formDatas
 
 				        }).then((res)=>{
+				        	console.log(res.data)
 				        	if(res.data.success==true){
 				        		Flash.setSuccess(res.data.message)
+				        		this.$refs.form.reset()
 				        		if(opt==2){
 				        			this.$router.push(this.backUrl)
 				        		}
@@ -160,6 +166,12 @@
 				        		Flash.setError(res.data.message)
 				        	}
 				        })
+				        .catch((err) => {
+	                      	if(err.response.status === 422) {
+	                          	this.error = err.response.message
+							}
+							Flash.setError('Error while saving data')
+	                  	})
 			        }else{
 			        	console.log(this.formDatas)
 			        	axios.put(this.url+this.id, {
@@ -175,6 +187,12 @@
 				        		Flash.setError(res.data.message)
 				        	}
 				        })
+				        .catch((err) => {
+	                      	if(err.response.status === 422) {
+	                          	this.error = err.response.message
+							}
+							Flash.setError('Error while updateing data')
+	                  	})
 			        }
 			        
 		      	}
