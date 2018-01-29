@@ -66,11 +66,6 @@
                       <span class="size">XL / XXL / S </span></div>
                   <div class="price"><span>{{bestSellerProduct.price}}</span></div>
                   <div class="action-control">
-                    <!-- <router-link to="" class="btn btn-primary"> 
-                      <span class="add2cart">
-                        <i class="glyphicon glyphicon-shopping-cart"> </i>Add to cart 
-                      </span> 
-                    </router-link> -->
                    <a class="btn btn-primary" @click="AddToCart(bestSellerProduct.product_id)"> 
                       <span class="add2cart">
                         <i class="glyphicon glyphicon-shopping-cart"> </i> Add to cart 
