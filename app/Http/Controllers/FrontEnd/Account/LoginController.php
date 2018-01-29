@@ -4,6 +4,7 @@ namespace App\Http\Controllers\FrontEnd\Account;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Jobs\ChangeLocale;
 use App\Http\Models\FrontEnd\Account\Customer;
 use Illuminate\Support\Facades\Hash;
 use DB;
@@ -19,6 +20,15 @@ class LoginController extends Controller
      */
 
     public function AuthLogin(Request $request){
+        session_start();
+        $_SESSION["account_id"] = "855";
+
+        // // remove all session variables
+        // session_unset();
+
+        // // destroy the session
+        // session_destroy(); 
+
         $success=false;
         $msg = '';
         $input = $request->all();             
@@ -37,6 +47,7 @@ class LoginController extends Controller
         //     $msg = "Data not successfully Login!";
         // }
 
+        
         return response()->json([
             'success'=>$success,
             'message'=> $msg,
@@ -52,6 +63,34 @@ class LoginController extends Controller
         return $row;
 
     }   
+    
+    public function AuthLogout(){
+        // dd("testing");
+        session_start();
+        session_unset();
+        session_destroy();
+        return response()->json([
+            'success'=>true,
+            'message'=> "Logout successfully",
+            'lang'=>Session::get('applangId')
+        ]); 
+    }
+
+    public function checkAccountAuthorize(){
+        session_start();
+        if(isset($_SESSION["account_id"])){
+            return response()->json([
+                'success'=>true,
+                'message'=> "Logout successfully"
+            ]);
+        }else{
+            return response()->json([
+                'success'=>false,
+                'message'=> "unauthorization"
+            ]); 
+        }
+    }
+
     public function store(Request $request)
     {
         $success=false;

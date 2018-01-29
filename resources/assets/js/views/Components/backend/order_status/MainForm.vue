@@ -31,7 +31,7 @@
 				imageUrl:'',
 				image:null,
 			    group:[
-					{	class:'xs12 sm6 md6',	 key:'language_id',	type:'select',	 text:'Store',count:100,items:'languages',	},
+					{	class:'xs12 sm6 md6',	 key:'language_id',	type:'select',	 text:'Language',count:100,items:'languages',	},
 					{	class:'xs12 sm6 md6',	 key:'name',	type:'text',text:'Status Name',count:100	}
 				],
 				rules:{

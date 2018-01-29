@@ -44,42 +44,42 @@
           <!--Basic Form-->
           <!--<div id="basic-form" class="section">
             <div class="row">-->
-              <v-app id="inspire">
-              <v-flex xs12 offset-xs0 sm6 offset-sm3 md6 offset-md3>
-                <v-card>
-                  <!--<div class="flash flash__success" v-if="flash.success">
-                    {{flash.success}}
-                  </div>-->
-                  <v-form v-model="valid" ref="form" lazy-validation @submit.prevent="login">
-                          <v-alert class="success" value='true' v-if="flash.success">
-                              <v-icon>home</v-icon> {{flash.success}}
-                          </v-alert>
-                          <v-alert class="danger" value='true' v-if="flash.error">
-                              {{ flash.error }}
-                          </v-alert>
-                          <!--<v-badge class="badge--left" value='true'><span class="badge__badge primary">6<span></span></span></v-badge>-->
-                          <v-alert class="info" value='true' v-if="!flash.success && !flash.error">
-                              <v-icon>home</v-icon> Sign In
-                          </v-alert>
-                          <!-- <div class="flash flash-success" v-if="flash.success">
-                              {{ flash.success }}
-                          </div> -->
-                          
-                          <v-flex xs10 offset-xs1 sm10 offset-sm1 md10 offset-md1>
-                              <v-text-field label="Email" v-model="credential.email" :rules="credential.emailRules" required></v-text-field>
-                              <small class="error__control" v-if="error.email">{{error.email[0]}}</small>
-                          </v-flex>
-                          <v-flex xs10 offset-xs1 sm10 offset-sm1 md10 offset-md1>
-                              <v-text-field type="password" label="Password" v-model="credential.password" :rules="credential.passwordRules" required></v-text-field>
-                              <small class="error__control" v-if="error.password">{{error.password[0]}}</small>
-                          </v-flex>
-                          <v-flex xs6 offset-xs8 sm6 offset-sm8 md6 offset-md8>
-                              <v-btn type="submit" class="btn primary" :disabled="isProcessing">Login</v-btn>
-                          </v-flex>
-                      <!-- <div v-tabs>asf</div> -->   
-                  </v-form>
-                </v-card>
-              </v-flex>
+              <v-app id="inspire" style="marign-top:100px">
+                <v-flex xs12 offset-xs0 sm4 offset-sm4 md4 offset-md4>
+                  <v-card>
+                    <!--<div class="flash flash__success" v-if="flash.success">
+                      {{flash.success}}
+                    </div>-->
+                    <v-form v-model="valid" ref="form" lazy-validation @submit.prevent="login">
+                            <v-alert class="success" value='true' v-if="flash.success">
+                                <v-icon>home</v-icon> {{flash.success}}
+                            </v-alert>
+                            <v-alert class="danger" value='true' v-if="flash.error">
+                                {{ flash.error }}
+                            </v-alert>
+                            <!--<v-badge class="badge--left" value='true'><span class="badge__badge primary">6<span></span></span></v-badge>-->
+                            <v-alert class="info" value='true' v-if="!flash.success && !flash.error">
+                                <v-icon>home</v-icon> Sign In
+                            </v-alert>
+                            <!-- <div class="flash flash-success" v-if="flash.success">
+                                {{ flash.success }}
+                            </div> -->
+                            
+                            <v-flex xs10 offset-xs1 sm10 offset-sm1 md10 offset-md1>
+                                <v-text-field label="Email" v-model="credential.email" :rules="credential.emailRules" required></v-text-field>
+                                <small class="error__control" v-if="error.email">{{error.email[0]}}</small>
+                            </v-flex>
+                            <v-flex xs10 offset-xs1 sm10 offset-sm1 md10 offset-md1>
+                                <v-text-field type="password" label="Password" v-model="credential.password" :rules="credential.passwordRules" required></v-text-field>
+                                <small class="error__control" v-if="error.password">{{error.password[0]}}</small>
+                            </v-flex>
+                            <v-flex xs6 offset-xs8 sm6 offset-sm8 md6 offset-md8>
+                                <v-btn type="submit" class="btn primary" :disabled="isProcessing">Login</v-btn>
+                            </v-flex>
+                        <!-- <div v-tabs>asf</div> -->   
+                    </v-form>
+                  </v-card>
+                </v-flex>
               </v-app>
             <!--</div>
           </div>

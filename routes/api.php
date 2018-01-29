@@ -24,6 +24,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/customer/register','FrontEnd\Account\RegisterController@store');
 Route::get('/customer/test','FrontEnd\Account\LoginController@test');
 Route::post('/customer/login','FrontEnd\Account\LoginController@AuthLogin');
+Route::get('/account/logout','FrontEnd\Account\LoginController@AuthLogout');
 Route::get('/customer/get','FrontEnd\Account\LoginController@getPasswordCustomer');
 
 //BackEnd
@@ -79,3 +80,6 @@ Route::Resource('/tax_class','Backend\Taxs\TaxClass\TaxClassController');
 Route::Resource('/tax_rule','Backend\Taxs\TaxRule\TaxRuleController');
 Route::Resource('/tax_rate','Backend\Taxs\TaxRate\TaxRateController');
 Route::Resource('/tax_rate_to_customer_group','Backend\Taxs\TaxRateToCustomerGroup\TaxRateToCustomerGroupController');
+
+//======Weight API
+Route::Resource('/weights','Backend\Weights\WeightsController');

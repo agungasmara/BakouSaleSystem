@@ -6,14 +6,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 
         <title>Bakou System Login</title>
-        <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
-        <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet">
+        <!-- <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet"> -->
+        <!-- <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet"> -->
         <!-- Styles -->
         {{-- <link rel="stylesheet" type="text/css" href="{{mix('css/app.css')}}"> --}}
         <link href="/css/themes/horizontal-menu/materialize.css" type="text/css" rel="stylesheet">
         <link href="/css/themes/horizontal-menu/style.css" type="text/css" rel="stylesheet">
+        <link href="/css/vuetify.min.css" rel="stylesheet"> 
         <!-- Custome CSS-->
         <link href="/css/custom/custom.css" type="text/css" rel="stylesheet">
+        <!-- <link href="/css/layouts/page-center.css" type="text/css" rel="stylesheet"> -->
         <!-- CSS style Horizontal Nav-->
         <link href="/css/layouts/style-horizontal.css" type="text/css" rel="stylesheet">
         <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->

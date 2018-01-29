@@ -32,13 +32,13 @@
 				image:null,
 			    group:[
 					{	class:'xs12 sm6 md6',	 key:'title',	type:'text',	 text:'Title',count:100	},
-					{	class:'xs12 sm6 md6',	 key:'code',	type:'text',text:'Code',count:100	},
+					{	class:'xs12 sm6 md6',	 key:'code',	type:'text',text:'Code',count:3	},
 					{	class:'xs12 sm6 md6',	 key:'symbol_left',	type:'text',	 text:'Symbol Left',count:100	},
 					{	class:'xs12 sm6 md6',	 key:'symbol_right',	type:'text',	 text:'Symbol Right',count:0,value:''	},
 					{	class:'xs12 sm6 md6',	 key:'decimal_place',	type:'text',	 text:'Decimal Place',count:0,value:''	},
-					{	class:'xs12 sm6 md6',	 key:'value',	type:'text',	 text:'Value',count:50	},
+					{	class:'xs12 sm6 md6',	 key:'value',	type:'number',	 text:'Value',count:50	},
 					{	class:'xs12 sm6 md6',	 key:'status',	type:'select',	 text:'Status',count:0,items:'statusItems'	},
-					{	class:'xs12 sm6 md6',	 key:'date_modified',	type:'text',	 text:'Date Modified',count:20	}
+					{	class:'xs12 sm6 md6',	 key:'date_modified',	type:'date',	 text:'Date Modified',count:20	}
 				],
 				rules:{
 					title: [
@@ -47,7 +47,7 @@
 				    ],
 				    code: [
 				      (v) => !!v || 'Code is required',
-				      (v) => v && v.length <= 50 || 'Code must be less than 50 characters'
+				      (v) => v && v.length <= 3 || 'Code must be less than 3 characters'
 				    ],
 					decimal_place: [
 				      (v) => !!v || 'Decimal Place is required',
@@ -58,17 +58,16 @@
 				      (v) => v && v.length <= 50 || 'Value must be less than 50 characters'
 				    ],
 				    date_modified:[
-				      (v) => !!v || 'Date Requied is required',
-				      (v) => v && v.length <= 50 || 'Value must be less than 50 characters'
+				      (v) => !!v || 'Date Requied is required'
 				    ]
 				},
 				data:{
-					title:'US Dollars',
-					code:'USSD',
-					symbol_left: '$',
+					title:'',
+					code:'',
+					symbol_left: '',
 					symbol_right: '',
-					decimal_place:'2',
-					value:'1.00',
+					decimal_place:'',
+					value:'',
 					status:1,
 					date_modified:'2018-01-25'
 				},

@@ -72,6 +72,6 @@
     <div style="clear:both"></div>
 </div>
 <!-- /wrapper -->
-<div class="gap"></div>
+<!-- <div class="gap"></div> -->
     </div>
 </template>
