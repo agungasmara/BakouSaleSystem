@@ -55,11 +55,12 @@ class CartController extends Controller
     {
         // dd("test");
         $datas['TotalPrices']=0;
-    	if (Auth::check()) {
-    		$datas['data']=Customer::find(Auth::user()->customer_id)->Cart()->get();
-    	}else{
-            $datas['data']=SessionModel::find(session()->getId())->Cart()->get();
-        }
+    	// if (Auth::check()) {
+    	// 	$datas['data']=Customer::find(Auth::user()->customer_id)->Cart()->get();
+    	// }else{
+     //        $datas['data']=SessionModel::find(session()->getId())->Cart()->get();
+     //    }
+        $datas['data']=SessionModel::find(session()->getId())->Cart()->get();
         foreach ($datas['data'] as $key => $value) {
             $value->name=ProductDescription::find($value->product_id)->value('name');
             $datas['TotalPrices']+=$value->cart_quantity*$value->price;

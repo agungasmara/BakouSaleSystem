@@ -41,10 +41,22 @@
                                     <span class="caret"></span>
                                   </a>
                                   <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="">
+                                    <li v-for="data in data_list">
+                                        <template v-if="data.action">
+                                            <a @click="logout()" href="javascript:void(0);">{{data.name}}</a>
+                                        </template>
+                                        <template v-else>
+                                            <router-link v-bind:to="data.link">
+                                                <span v-translate>{{data.name}}</span>
+                                            </router-link>
+                                            
+                                        </template>
+                                        
+                                    </li>
+                                    <!-- <li>
+                                        <router-link to="/account/dashboard">
                                             <span v-translate>entry_account</span>
-                                        </a>
+                                        </router-link>
                                     </li>
                                     <li>
                                         <a href="">
@@ -62,20 +74,18 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="">
-                                            Logout
-                                        </a>
-                                    </li>
-                                    <li>
                                         <router-link to="/account/register">
-                                            Register
+                                            <span v-translate>entry_register</span>
                                         </router-link>
                                     </li>
                                     <li>
                                         <router-link to="/account/login">
-                                            Login
+                                            <span v-translate>entry_login</span>
                                         </router-link>
                                     </li>
+                                    <li>
+                                        <a @click="logout()" href="javascript:void(0);">Logout</a>
+                                    </li> -->
                                   </ul>
                                 </li>
                                 <li><router-link to="/account/signin" data-toggle="modal" data-target="#ModalLogin"> <span class="hidden-xs">SignIn</span>
@@ -88,7 +98,6 @@
                     </div>
                 </div>
             </div>
-
 
         </div>
         <!--/.navbar-top-->
@@ -245,9 +254,38 @@
       return{
         posts: [],
         TotalPrices : CartAction.data,
+        data_list:[],
+        account_data: [
+            {
+              name: 'My Account',
+              link: '/account/dashboard'
+            },
+            {
+              name: 'Order',
+              link: '/account/login'
+            },
+            {
+              name: 'Transaction',
+              link: '/account/login'
+            },
+            {
+              name: 'Logout',
+              action:'logout',
+              link: '/account/login'
+            }
+        ],
+        account_auth: [
+            {
+              name: 'Login',
+              link: '/account/login'
+            },
+            {
+              name: 'Register',
+              link: '/account/login'
+            }
+        ],
       }
     },
-
     created() {
         axios.get(`/api/header`)
         .then(response => {
@@ -261,9 +299,13 @@
     locales: {
         en: {
             'entry_account': 'My Account',
+            'entry_login': 'Login',
+            'entry_register': 'Register'
         },
         kh: {
-            'entry_account': 'គណនី'
+            'entry_account': 'គណនី',
+            'entry_login': 'ចូល',
+            'entry_register': 'ចុះឈ្មោះ'
         }
     },
     components:{
@@ -274,12 +316,35 @@
     getLang(){
 
     },
-    methods: function() {
-        // window.location = "#/login";
+    methods: {
+        logout () {
+            axios.get(`/api/account/logout`)
+            .then(response => {
+              var checkAuthenticationAccount = response.data['success']
+              if(checkAuthenticationAccount==true){
+                // this.$router.push('/account/login')
+                window.location = '/account/login'
+              }
+            })
+            .catch(e => {
+              this.errors.push(e)
+            })
+        },
     },
     mounted: function(){
-        // this.$translate.setLang('en')
-        // window.location = "#/home";
+        console.log("====================================")
+        axios.get(`/api/account/check_authorize`)
+        .then(response => {
+          var checkAuthenticationAccount = response.data['success']
+          if(checkAuthenticationAccount==false){
+            this.data_list = this.account_auth
+          }else{
+            this.data_list = this.account_data
+          }
+        })
+        .catch(e => {
+          this.errors.push(e)
+        })
     },
   }
 </script>

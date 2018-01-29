@@ -27,6 +27,17 @@ Route::post('login', function(Illuminate\Http\Request $request)
     return response()->json(['success' => false, 'message' => 'Unable to login'], 401);
 });
 
+Route::post('account/login', function(Illuminate\Http\Request $request) 
+{
+    if (Auth::attempt(['email' => $request->get('email'), 'password' => $request->get('password')])) {
+        return response()->json(['success' => true, 'message' => 'Login successfully performed'], 200);
+    }
+    return response()->json(['success' => false, 'message' => 'Unable to login'], 401);
+});
+
+
+Route::get('api/account/check_authorize','FrontEnd\Account\LoginController@checkAccountAuthorize');
+
 if (Request::is('admin*')){
     
     Route::middleware(['auth'])->prefix('admin')->group(function () {
@@ -72,6 +83,19 @@ if (Request::is('admin*')){
         // return response()->json(['success' => true, 'message' => 'You logout with success'], 200);
     })->name('login');
     // dd(Request::path());
+}else if(Request::is('account_auth*')){
+    Route::post('auth/login', 'Auth\LoginController@login');
+
+    Route::get('auth/login', 'Auth\LoginController@showLoginForm');
+
+    Route::get('auth/logout', 'Auth\AuthController@getLogout');
+
+    Route::get('auth/logout', function()
+    {
+        Auth::logout();
+        return redirect("auth/login");
+        // return response()->json(['success' => true, 'message' => 'You logout with success'], 200);
+    })->name('login');
 }else if (Request::is('api*')){
     Route::middleware([])->prefix('api')->group(function () {
 

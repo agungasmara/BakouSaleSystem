@@ -14,8 +14,20 @@ class LastestController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    public function __construct()
+    {
+        
+    } 
+
     public function index()
     {
+        session_start();
+        // if(isset($_SESSION["account_id"])){
+        //     dd("see it");
+        // }else{
+        //   dd("dont see it");  
+        // }
+        
         $filter_data = array(
             'sort'  => 'p.date_added',
             'order' => 'DESC',
@@ -47,6 +59,7 @@ class LastestController extends Controller
             }
 
         }
+        
         // dd($products);
         return response()->json(['data' => $products,'success' => true, 'message' => 'Success', 'lang'=>Session::get('applangId')]);
     }

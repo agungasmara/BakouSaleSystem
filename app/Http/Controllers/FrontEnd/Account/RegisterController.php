@@ -18,7 +18,6 @@ class RegisterController extends Controller
      */
     public function index(){
         $get = Customer::get();
-        dd($get);
     }
     public function store(Request $request)
     {
@@ -65,7 +64,7 @@ class RegisterController extends Controller
         return response()->json([
             'success'=>$success,
             'message'=>$msg,
-            'lang'=>Session::get('applangId')
+            'lang'=>Session::get('applangId')?Session::get('applangId'):config_language
         ]);
     }
 

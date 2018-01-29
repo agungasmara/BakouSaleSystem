@@ -73,12 +73,12 @@
                 email: '',
                 password: '',
                 flash:Flash.state
-
             }
         },
         methods: {
             submit () {
                 axios.post('/api/customer/login', {
+                // axios.post('/account/login', {
                   email: this.email,
                   password: this.password,
                 }).then((res)=>{
@@ -90,7 +90,7 @@
             },
         },
         // wait a look have this field user show button co
-         watch:{
+        watch:{
             firstname(){
                 if(this.firstname.length > 0)
                     this.not_working=false

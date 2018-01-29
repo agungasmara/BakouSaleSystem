@@ -24,6 +24,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/customer/register','FrontEnd\Account\RegisterController@store');
 Route::get('/customer/test','FrontEnd\Account\LoginController@test');
 Route::post('/customer/login','FrontEnd\Account\LoginController@AuthLogin');
+Route::get('/account/logout','FrontEnd\Account\LoginController@AuthLogout');
 Route::get('/customer/get','FrontEnd\Account\LoginController@getPasswordCustomer');
 
 //BackEnd
