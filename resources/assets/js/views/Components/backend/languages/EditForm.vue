@@ -2,13 +2,13 @@
 	<v-app id="inspire">
 		<normal-form
 			v-bind:url="url"
-			v-bind:id="dataID"
+			v-bind:id="id"
 			v-bind:breadcrumb-title="breadcrumbTitle"
 			v-bind:breadcrumbs="breadcrumbs"
 			v-bind:form-items="group"
 			v-bind:form-rules="rules"
 			v-bind:form-datas="data"
-			v-bind:select-items="selects"
+			v-bind:select-items="select"
 			v-bind:back-url="backUrl"
 		></normal-form>
 	</v-app>
@@ -17,9 +17,7 @@
 <script>
 	import Flash from '../../../../helper/flash'
 	import axios from 'axios'
-
 	import normalForm from '../commons/form/normalForm.vue'
-
 	export default{
 		props:['id'],
 		components:{
@@ -27,33 +25,57 @@
 		},
 		data(){
 			return{
-				url:'/api/settings/',
+				url:'/api/languages/',
 				e1:true,
 				valid: true,
+				btnImageDisabled:false,
+				btnText:'Upload Image',
+				imageUrl:'',
+				image:null,
 			    group:[
-					{class:'xs12 sm6 md6',key:'store_id',type:'select',text:'Store',items:'storeItems'},
-					{class:'xs12 sm6 md6',key:'code',type:'select',text:'Code',items:'codeItems'},
-					{class:'xs12 sm6 md6',key:'key',	type:'select',text:'Key',items:'keyItems'},
-					{class:'xs12 sm6 md6',key:'value',type:'select',text:'Value',items:'valueItems'}
+					{	class:'xs12 sm6 md6',	 key:'name',	type:'text',	 text:'Name',count:100	},
+					{	class:'xs12 sm6 md6',	 key:'code',	type:'text',text:'Code',count:100	},
+					{	class:'xs12 sm6 md6',	 key:'locale',	type:'text',	 text:'Local',count:100	},
+					{	class:'xs12 sm6 md6',	 key:'image',	type:'image',	 text:'Image',count:0,value:''	},
+					{	class:'xs12 sm6 md6',	 key:'directory',	type:'text',	 text:'Directory',count:0,value:''	},
+					{	class:'xs12 sm6 md6',	 key:'status',	type:'select',	 text:'Status',count:0,items:'statusItems'	}
 				],
 				rules:{
-					store_id:[v => !!v || 'Store is required'],
-					code: [v => !!v || 'Code is required'],
-				    key: [v => !!v || 'Key is required'],
-				    value: [v => !!v || 'Value is required'],
+					name: [
+				      (v) => !!v || 'Name is required',
+				      (v) => v && v.length <= 50 || 'Name must be less than 50 characters'
+				    ],
+				    code: [
+				      (v) => !!v || 'Code is required',
+				      (v) => v && v.length <= 50 || 'Code must be less than 50 characters'
+				    ],
+				    locale: [
+				      (v) => !!v || 'Local is required',
+				      (v) => v && v.length <= 50 || 'Local must be less than 50 characters'
+				    ],
+					directory: [
+				      (v) => !!v || 'Directory is required',
+				      (v) => v && v.length <= 50 || 'Directory must be less than 50 characters'
+				    ],
+				    sort_order: [
+				      (v) => !!v || 'Sort Order is required',
+				      (v) => v && v.length <= 50 || 'Key must be less than 50 characters'
+				    ]
 				},
 				data:{
-					store_id:1,
+					name:'',
 					code:'',
-					key: '',
-					value: '',
-					
+					locale: '',
+					image: '',
+					directory:'',
+					sort_order:0,
+					status:1
 				},
-				selects:{
-					storeItems:[],
-					codeItems:[],
-					keyItems:[],
-					valueItems:[]
+				select:{
+					statusItems:[
+						{text:'Active',value:1},
+						{text:'Inactive',value:0}
+					]
 				},
 				breadcrumbTitle:'Settings',
 				breadcrumbs: [
@@ -70,37 +92,19 @@
 			          disabled: true
 			        }
 			    ],
-			    backUrl:'/admin/settings/list',
+			    backUrl:'/admin/languages/list',
 			}
 		},
 		created(){
 			this.dataID=this.id
-			this.fetchSettingByID(this.id)
-			this.fetchSettingItem()
-			this.getStore()
+			this.fetchData(this.id)
 		},
 		methods:{
-			getStore(){
-				axios.get('/api/getStore').then((res)=>{
-					this.selects.storeItems=res.data
-				})
-			},
-			fetchSettingByID(id){
-				axios.get('/api/settings/'+id+'/edit').then(res=>{
-					this.data.store_id=res.data.store_id
-					this.data.code=res.data.code
-					this.data.key=res.data.key
-					this.data.value=res.data.value
-					// this.data=res.data
+			fetchData(id){
+				axios.get(this.url+id+'/edit').then(res=>{
+					this.data=res.data
+					console.log(res.data)
 				});
-			},
-			fetchSettingItem(){
-				axios.get('/api/settings/item/').then((res)=>{
-					this.selects.codeItems=res.data.code
-					this.selects.keyItems=res.data.key
-					this.selects.valueItems=res.data.value
-					// console.log(res.data.code)
-				})
 			}
 		}
 	}

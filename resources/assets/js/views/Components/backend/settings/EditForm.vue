@@ -75,7 +75,7 @@
 		},
 		created(){
 			this.dataID=this.id
-			this.fetchSettingByID(this.id)
+			this.fetchData(this.id)
 			this.fetchSettingItem()
 			this.getStore()
 		},
@@ -85,8 +85,8 @@
 					this.selects.storeItems=res.data
 				})
 			},
-			fetchSettingByID(id){
-				axios.get('/api/settings/'+id+'/edit').then(res=>{
+			fetchData(id){
+				axios.get(this.url+id+'/edit').then(res=>{
 					this.data.store_id=res.data.store_id
 					this.data.code=res.data.code
 					this.data.key=res.data.key

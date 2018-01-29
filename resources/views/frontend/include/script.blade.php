@@ -50,7 +50,6 @@
 <!-- include custom script for site  -->
 <script src="{{url('assets/frontend/js/script.js')}}"></script>
 
-
 <!-- include pace script for automatic web page progress bar  -->
 
 <script>
@@ -78,5 +77,34 @@
     /* wait for images to load */
     $(window).load(function () {
         $('.sp-wrap').smoothproducts();
+    });
+</script>
+
+<!-- Rating -->
+<script type="text/javascript" src="{{url('assets/frontend/plugins/rating/bootstrap-rating.min.js')}}"></script>
+<script>
+    $(function () {
+
+        $('.rating-tooltip-manual').rating({
+            extendSymbol: function () {
+                var title;
+                $(this).tooltip({
+                    container: 'body',
+                    placement: 'bottom',
+                    trigger: 'manual',
+                    title: function () {
+                        return title;
+                    }
+                });
+                $(this).on('rating.rateenter', function (e, rate) {
+                    title = rate;
+                    $(this).tooltip('show');
+                })
+                    .on('rating.rateleave', function () {
+                        $(this).tooltip('hide');
+                    });
+            }
+        });
+
     });
 </script>

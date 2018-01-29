@@ -40,10 +40,11 @@ class ProductController extends Controller
 		} else {
 			$minimum = 1;
 		}
+		// Review
 		$review_status = config_review_status;
-		// $reviews = sprintf($this->language->get('text_reviews'), (int)$productInfo->reviews);
+		//$reviews = sprintf("Review", ((int)$productInfo->reviews));
+		$reviews = ((int)$productInfo->reviews)." "."Review";
 		$rating = (int)$productInfo->rating;
-		dd($review_status);
 		// Product relate
 		$product_related = array();
 
@@ -93,7 +94,7 @@ class ProductController extends Controller
 				'href'        => 'product/product', 'product_id=' . $result->product_id
 			);
 		}
-		return response()->json(['data' => $productInfo,'images'=>$images,'attribute_groups' => $attribute_groups,'discount' => $discount_arr,'product_relate' => $product_related,'success' => true, 'message' => 'Success', 'lang'=>Session::get('applangId')]);
+		return response()->json(['data' => $productInfo,'images'=>$images,'attribute_groups' => $attribute_groups,'discount' => $discount_arr,'product_relate' => $product_related,'review_status' => $review_status,'reviews' => $reviews,'success' => true, 'message' => 'Success', 'lang'=>Session::get('applangId')]);
 
     }
     
