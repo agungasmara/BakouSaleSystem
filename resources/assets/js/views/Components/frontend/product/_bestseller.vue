@@ -71,7 +71,7 @@
                         <i class="glyphicon glyphicon-shopping-cart"> </i>Add to cart 
                       </span> 
                     </router-link> -->
-                    <a class="btn btn-primary" @click="AddToCart(bestSellerProduct.product_id)">
+                   <a class="btn btn-primary" @click="AddToCart(bestSellerProduct.product_id)"> 
                       <span class="add2cart">
                         <i class="glyphicon glyphicon-shopping-cart"> </i> Add to cart 
                       </span> 
