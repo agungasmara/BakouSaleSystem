@@ -162,7 +162,8 @@
                         fringilla viverra.<br>
                         100% Cotton<br>
                     </div>
-                    <div class="tab-pane" id="size"> 16" waist<br>
+                    <div class="tab-pane" id="size"> 
+                       <!--  16" waist<br>
                         34" inseam<br>
                         10.5" front rise<br>
                         8.5" knee<br>
@@ -170,7 +171,14 @@
                         <br>
                         Measurements taken from size 30<br>
                         Model wears size 31. Model is 6'2 <br>
-                        <br>
+                        <br> -->
+                        <!--  -->
+                        <div v-for="attg of attributeGroups">
+                            <span>{{attg.name}}</span>
+                            <div v-for="att of attg['attribute']">
+                                <span>{{att.name}}</span>
+                            </div>
+                        </div>
                     </div>
                     <div class="tab-pane" id="shipping">
                         <table>
@@ -229,104 +237,42 @@
     <div class="row recommended">
         <h1> YOU MAY ALSO LIKE </h1>
 
-        <div id="SimilarProductSlider">
-            <div class="item">
-                <div class="product"><a class="product-image"> <img src="/assets/frontend/images/product/a1.jpg" alt="img"> </a>
+        <div id="_SimilarProductSlider" style="padding-top:20px;">
+            <template>
+                <div v-for="productRelate of productRelates" class="item col-sm-2">
+                    <div class="product">
+                        <router-link v-bind:to="'/product/product_detail/'+ productRelate.product_id">
+                          <img v-bind:src="productRelate.thumb" alt="img" class="img-responsive ">
+                        </router-link>
+
+                        <div class="description">
+                            <h4>
+                                <a href="san-remo-spaghetti" v-html="productRelate.name">
+                                    
+                                </a>
+                            </h4>
+
+                            <div class="price">
+                                <span>$44</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+            <!-- <div class="item" v-for="productRelate of productRelates">
+                <div class="product">
+                    <a class="product-image"> 
+                        <img src="/assets/frontend/images/product/a1.jpg" alt="img"> 
+                    </a>
 
                     <div class="description">
-                        <h4><a href="san-remo-spaghetti">YOUR LIFE</a></h4>
+                        <h4><a href="san-remo-spaghetti">{{productRelate.minimum}}</a></h4>
 
                         <div class="price"><span>$57</span></div>
                     </div>
                 </div>
-            </div>
-            <!--/.item-->
-
-            <div class="item">
-                <div class="product"><a class="product-image"> <img src="/assets/frontend/images/product/a2.jpg" alt="img"> </a>
-
-                    <div class="description">
-                        <h4><a href="san-remo-spaghetti">RED CROWN</a></h4>
-
-                        <div class="price"><span>$44</span></div>
-                    </div>
-                </div>
-            </div>
-            <!--/.item-->
-
-            <div class="item">
-                <div class="product"><a class="product-image"> <img src="/assets/frontend/images/product/a3.jpg" alt="img"> </a>
-
-                    <div class="description">
-                        <h4><a href="san-remo-spaghetti">WHITE GOLD</a></h4>
-
-                        <div class="price"><span>$35</span></div>
-                    </div>
-                </div>
-            </div>
-            <!--/.item-->
-
-            <div class="item">
-                <div class="product"><a class="product-image"> <img src="/assets/frontend/images/product/a4.jpg" alt="img"> </a>
-
-                    <div class="description">
-                        <h4><a href="san-remo-spaghetti">DENIM 4240</a></h4>
-
-                        <div class="price"> $<span>55</span></div>
-                    </div>
-                </div>
-            </div>
-            <!--/.item-->
-
-            <div class="item">
-                <div class="product"><a class="product-image"> <img src="/assets/frontend/images/product/30.jpg" alt="img"> </a>
-
-                    <div class="description">
-                        <h4><a href="san-remo-spaghetti">CROWN ROCK</a></h4>
-
-                        <div class="price"><span>$500</span></div>
-                    </div>
-                </div>
-            </div>
-            <!--/.item-->
-
-            <div class="item">
-                <div class="product"><a class="product-image"> <img src="/assets/frontend/images/product/a5.jpg" alt="img"> </a>
-
-                    <div class="description">
-                        <h4><a href="san-remo-spaghetti">SLIM ROCK</a></h4>
-
-                        <div class="price"><span>$50 </span></div>
-                    </div>
-                </div>
-            </div>
-            <!--/.item-->
-
-            <div class="item">
-                <div class="product"><a class="product-image"> <img src="/assets/frontend/images/product/36.jpg" alt="img"> </a>
-
-                    <div class="description">
-                        <h4><a href="san-remo-spaghetti">ROCK T-Shirts </a></h4>
-
-                        <div class="price"><span>$130</span></div>
-                    </div>
-                </div>
-            </div>
-            <!--/.item-->
-
-            <div class="item">
-                <div class="product">
-                    <a class="product-image"> 
-                        <img src="/assets/frontend/images/product/13.jpg" alt="img"> 
-                    </a>
-                    <div class="description">
-                        <h4><a href="san-remo-spaghetti">Denim T-Shirts </a></h4>
-
-                        <div class="price"><span>$43</span></div>
-                    </div>
-                </div>
-            </div>
-            <!--/.item-->
+            </div> -->
+            
         </div>
         <!--/.recommended-->
     </div>
@@ -342,8 +288,8 @@
             </div>
             <div class="modal-body">
 
-                <h3 class="reviewtitle uppercase">You're reviewing: Lorem ipsum dolor sit amet</h3>
-
+               <!--  <h3 class="reviewtitle uppercase">You're reviewing: Lorem ipsum dolor sit amet</h3>
+ -->
                 <form>
                     <div class="form-group">
                         <label>
@@ -388,62 +334,6 @@
 <!-- <div class="gap"></div> -->
 </template>
 
-
-<!-- Le javascript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="{{url('assets/frontend/js/jquery/jquery-2.1.3.min.js')}}"></script>
-<script src="{{url('assets/frontend/bootstrap/js/bootstrap.min.js')}}"></script>
-<!-- include footable plugin -->
-<script src="{{url('assets/frontend/js/footable.js')}}" type="text/javascript"></script>
-<script src="{{url('assets/frontend/js/footable.sortable.js')}}" type="text/javascript"></script>
-
-<!-- include jqueryCycle plugin -->
-<script src="{{url('assets/frontend/js/jquery.cycle2.min.js')}}"></script>
-
-<!-- include easing plugin -->
-<script src="{{url('assets/frontend/js/jquery.easing.1.3.js')}}"></script>
-
-<!-- include  parallax plugin -->
-<script type="text/javascript" src="{{url('assets/frontend/js/jquery.parallax-1.1.js')}}"></script>
-
-<!-- optionally include helper plugins -->
-<script type="text/javascript" src="{{url('assets/frontend/js/helper-plugins/jquery.mousewheel.min.js')}}"></script>
-
-<!-- include mCustomScrollbar plugin //Custom Scrollbar  -->
-
-<script type="text/javascript" src="{{url('assets/frontend/js/jquery.mCustomScrollbar.js')}}"></script>
-
-<!-- include icheck plugin // customized checkboxes and radio buttons   -->
-<script type="text/javascript" src="{{url('assets/frontend/plugins/icheck-1.x/icheck.min.js')}}"></script>
-
-<!-- include grid.js // for equal Div height  -->
-<script src="{{url('assets/frontend/plugins/jquery-match-height-master/dist/jquery.matchHeight-min.js')}}"></script>
-<script src="{{url('assets/frontend/js/grids.js')}}"></script>
-
-<!-- include carousel slider plugin  -->
-<script src="{{url('assets/frontend/js/owl.carousel.min.js')}}"></script>
-
-<!-- include smoothproducts // product zoom plugin  -->
-<script type="text/javascript" src="{{url('assets/frontend/plugins/smoothproducts-master/js/smoothproducts.min.js')}}"></script>
-<!-- jQuery select2 // custom select   -->
-<script src="{{url('assets/frontend/js/select2.min.js')}}"></script>
-
-<!-- include touchspin.js // touch friendly input spinner component   -->
-<script src="{{url('assets/frontend/js/bootstrap.touchspin.js')}}"></script>
-
-<!-- include custom script for only homepage  -->
-<script src="{{url('assets/frontend/js/home.js')}}"></script>
-
-<script src="{{url('assets/frontend/js/grids.js')}}"></script>
-<script src="{{url('assets/frontend/js/enquire.min.js')}}"></script>
-<!-- include custom script for site  -->
-<script src="{{url('assets/frontend/js/script.js')}}"></script>
-
-
-
-<!-- include pace script for automatic web page progress bar  -->
-
 <script>
     paceOptions = {
         elements: true
@@ -482,6 +372,7 @@
             return{
                 productInfo:[],
                 reviewStatus:[],
+                attributeGroups:[],
                 qty:''
             }
         },
@@ -672,6 +563,9 @@
                     this.productInfo=res.data['data']
                     this.reviewStatus =res.data['review_status']
                     this.reviews =res.data['reviews']
+                    this.productRelates =res.data['product_relate']
+                    this.attributeGroups =res.data['attribute_groups']
+                    console.log(res.data['attribute_groups'])
                 });
             },
             AddToCart(product_id,qty=1){
