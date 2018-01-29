@@ -28,16 +28,8 @@
                           <div class="carousel-inner" role="listbox">
                               <div class="item active">
                                  <router-link v-bind:to="'/product/product_detail/'+ bestSellerProduct.product_id">
-                                  
                                   <img v-bind:src="bestSellerProduct.thumb" alt="img" class="img-responsive ">
                                 </router-link>
-                               <!--  <a v-bind:href="'/product/product_detail/'+ bestSellerProduct.product_id">
-                                  <img src="/assets/frontend/images/product/5.jpg" alt="img" class="img-responsive ">
-                                </a>   -->
-
-                                <!-- <a href="product-details.html"> 
-                                  <img src="/assets/frontend/images/product/5.jpg" alt="img" class="img-responsive ">
-                                </a> -->
                               </div>
                               <div class="item">
                                 <router-link v-bind:to="'/product/product_detail/'+ bestSellerProduct.product_id">
@@ -69,12 +61,22 @@
                   <div class="description">
                       <h4><router-link v-bind:to="'/product/product_detail/'+ bestSellerProduct.product_id"> {{bestSellerProduct.name}} </router-link></h4>
                       <div class="grid-description">
-                        <!-- <span v-html="bestSellerProduct.description"></span> -->
+                        <span v-html="bestSellerProduct.description"></span>
                       </div>
                       <span class="size">XL / XXL / S </span></div>
                   <div class="price"><span>{{bestSellerProduct.price}}</span></div>
-                  <div class="action-control"><router-link to="" class="btn btn-primary"> <span class="add2cart"><i
-                          class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </router-link></div>
+                  <div class="action-control">
+                    <!-- <router-link to="" class="btn btn-primary"> 
+                      <span class="add2cart">
+                        <i class="glyphicon glyphicon-shopping-cart"> </i>Add to cart 
+                      </span> 
+                    </router-link> -->
+                   <a class="btn btn-primary" @click="AddToCart(bestSellerProduct.product_id)"> 
+                      <span class="add2cart">
+                        <i class="glyphicon glyphicon-shopping-cart"> </i> Add to cart 
+                      </span> 
+                    </a>
+                  </div>
               </div>
           </div>
           <!--/.item-->
@@ -85,6 +87,7 @@
     import axios from 'axios'
     import Flash from '../../../../helper/flash'
     import {post} from '../../../../helper/api'
+    import CartAction from '../../../../helper/cart'
 
     export default {
         data() {
@@ -109,7 +112,10 @@
            
         },
         methods: {
-           
+          AddToCart(product_id,qty=1){
+            CartAction.AddToCart(product_id,qty)
+            window.scrollTo(100,100)
+          }
         }
     }
 </script>
