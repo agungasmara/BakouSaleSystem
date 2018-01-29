@@ -608,6 +608,8 @@ export default {
 
     },
     mounted(){
+    	// render dom select
+    	// $('select.form-control').select2();
     	 // The currently active tab, init as the 1st item in the tabs array
 			this.activeTabName = this.tabs[1].name;
     },

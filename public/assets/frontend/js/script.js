@@ -582,7 +582,7 @@ $(document).ready(function () {
     // $("select").minimalect(); // REMOVED with  selct2.min.js
 
     $(document).ready(function () {
-        $('select.form-control').select2();
+        //$('select.form-control').select2();
     });
 
     // cart quantity changer sniper

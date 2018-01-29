@@ -78,6 +78,9 @@ class CartController extends Controller
     }
     public function Checkout(Request $request)
     {
+        $request['firstname']='sineth';
+        $request['lastname']='sineth';
+        $request['email']='simsineth855@gmail.com';
         $request['invoice_no']='00001';
         $request['invoice_prefix']='cc_';
         $request['store_id']=0;

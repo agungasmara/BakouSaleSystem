@@ -176,3 +176,39 @@
 
 	</div>
 </template>
+
+
+<!-- frontEnd App -->
+<script type="text/javascript">
+
+  import axios from 'axios'
+  import Flash from '../../../../helper/flash'
+  import VueTranslate from 'vue-translate-plugin'
+  import Vue from 'vue';
+  Vue.use(VueTranslate);
+  
+  export default{
+    data(){
+      return{
+      }
+    },
+    created() {
+        
+    },
+    locales: {
+        en: {
+            'entry_account': 'My Account',
+            'entry_login': 'Login',
+            'entry_register': 'Register'
+        },
+        kh: {
+            'entry_account': 'គណនី',
+            'entry_login': 'ចូល',
+            'entry_register': 'ចុះឈ្មោះ'
+        }
+    },
+    mounted: function(){
+
+    }
+  }
+</script>
