@@ -29,7 +29,7 @@
 				e1:true,
 				valid: true,
 			    group:[
-					{	class:'xs12 sm6 md6',	 key:'value',	type:'number',	 text:'value',count:10	},
+					{	class:'xs12 sm6 md6',	 key:'value',	type:'number',	 text:'value',count:50	},
 					{	class:'xs12 sm6 md6',	 key:'unit',	type:'text',text:'Unit',count:5	},
 					{	class:'xs12 sm6 md6',	 key:'language_id',	type:'select',	 text:'Language',count:0,items:'languageItems'	},
 					{	class:'xs12 sm6 md6',	 key:'title',	type:'text',	 text:'Description',count:100	}
@@ -41,7 +41,7 @@
 				    ],
 				    value: [
 				      (v) => !!v || 'Value is required',
-				      (v) => v && v.length <= 10 || 'Value must be less than 10 characters'
+				      (v) => v && v.length <= 50 || 'Value must be less than 50 characters'
 				    ],
 				    unit: [
 				      (v) => !!v || 'Unit is required',

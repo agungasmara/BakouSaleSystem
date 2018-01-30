@@ -53,7 +53,7 @@ class WeightsController extends Controller
     }
     public function update(Request $request,$id)
     {
-         $data=$request['data'];
+        $data=$request['data'];
         $weighDesc=$request['data'];
         $weighDesc=array_except($weighDesc,['value']);
         $weight=[
@@ -64,6 +64,7 @@ class WeightsController extends Controller
     } 
     public function destroy($id)
     {
-        return (new DataAction)->DeleteData(Weight::class,'weight_class_id',$id);
+        (new DataAction)->DeleteData(Weight::class,'weight_class_id',$id);
+        return (new DataAction)->DeleteData(WeightDescription::class,'weight_class_id',$id);
     }
 }

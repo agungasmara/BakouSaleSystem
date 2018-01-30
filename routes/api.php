@@ -83,3 +83,6 @@ Route::Resource('/tax_rate_to_customer_group','Backend\Taxs\TaxRateToCustomerGro
 
 //======Weight API
 Route::Resource('/weights','Backend\Weights\WeightsController');
+
+//======Length API
+Route::Resource('/lengths','Backend\Lengths\LengthsController');

@@ -154,12 +154,18 @@ import TaxRateCustomerGroup from './views/Components/backend/tax/tax_rate_to_cus
 import TaxRateCustomerGroupList from './views/Components/backend/tax/tax_rate_to_customer_group/TaxRateToCustomerGroupList.vue'
 import TaxRateCustomerGroupForm from './views/Components/backend/tax/tax_rate_to_customer_group/MainForm.vue'
 import TaxRateCustomerGroupEdit from './views/Components/backend/tax/tax_rate_to_customer_group/EditForm.vue'
+
 //***** Weight*****
 import Weight from './views/Components/backend/weight/Weight.vue'
 import WeightList from './views/Components/backend/weight/WeightList.vue'
 import WeightForm from './views/Components/backend/weight/MainForm.vue'
 import WeightEdit from './views/Components/backend/weight/EditForm.vue'
 
+//***** Length*****
+import Length from './views/Components/backend/length/Length.vue'
+import LengthList from './views/Components/backend/length/LengthList.vue'
+import LengthForm from './views/Components/backend/length/MainForm.vue'
+import LengthEdit from './views/Components/backend/length/EditForm.vue'
 
 //import router from './router'
 import VueResource from 'vue-resource'
@@ -664,6 +670,26 @@ const router = new VueRouter({
                 path:'edit/:id',
                 name:'EditForm',
                 component:WeightEdit,
+                props:true
+            }
+        ]       
+    },
+    {path:'/admin/lengths',name:'lengths',component:Length,
+        children:[
+            {
+                path:'list',
+                name:'MainList',
+                component:LengthList
+            },
+            {
+                path:'add',
+                name:'MainForm',
+                component:LengthForm
+            },
+            {
+                path:'edit/:id',
+                name:'EditForm',
+                component:LengthEdit,
                 props:true
             }
         ]       
