@@ -173,6 +173,18 @@ import ManufacturerList from './views/Components/backend/manufacurere/Manufactur
 import ManufacturerForm from './views/Components/backend/manufacurere/MainForm.vue'
 import ManufacturerEdit from './views/Components/backend/manufacurere/EditForm.vue'
 
+//***** Download*****
+import Download from './views/Components/backend/download/Download.vue'
+import DownloadList from './views/Components/backend/download/DownloadList.vue'
+import DownloadForm from './views/Components/backend/download/MainForm.vue'
+import DownloadEdit from './views/Components/backend/download/EditForm.vue'
+
+//***** Previews*****
+import Preview from './views/Components/backend/preview/Preview.vue'
+import PreviewList from './views/Components/backend/preview/PreviewList.vue'
+import PreviewForm from './views/Components/backend/preview/MainForm.vue'
+import PreviewEdit from './views/Components/backend/preview/EditForm.vue'
+
 //import router from './router'
 import VueResource from 'vue-resource'
 import Vuetify from 'vuetify'
@@ -716,6 +728,46 @@ const router = new VueRouter({
                 path:'edit/:id',
                 name:'EditForm',
                 component:ManufacturerEdit,
+                props:true
+            }
+        ]       
+    },
+    {path:'/admin/downloads',name:'downloads',component:Download,
+        children:[
+            {
+                path:'list',
+                name:'DownloadList',
+                component:DownloadList
+            },
+            {
+                path:'add',
+                name:'MainForm',
+                component:DownloadForm
+            },
+            {
+                path:'edit/:id',
+                name:'EditForm',
+                component:DownloadEdit,
+                props:true
+            }
+        ]       
+    },
+    {path:'/admin/previews',name:'previews',component:Preview,
+        children:[
+            {
+                path:'list',
+                name:'PreviewsList',
+                component:PreviewsList
+            },
+            {
+                path:'add',
+                name:'MainForm',
+                component:PreviewsForm
+            },
+            {
+                path:'edit/:id',
+                name:'EditForm',
+                component:PreviewsEdit,
                 props:true
             }
         ]       
