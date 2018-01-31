@@ -13,13 +13,12 @@
 		    <div class="row">
 		        <div class="col-lg-9 col-md-9 col-sm-7">
 		            <h1 class="section-title-inner"><span><i
-		                    class="glyphicon glyphicon-user"></i> My personal information </span></h1>
+		                    class="glyphicon glyphicon-user"></i> {{ t('entry_personal_information') }} </span></h1>
 		            <div class="row userInfo">
 		                <div class="col-lg-12">
-		                    <h2 class="block-title-2"> Please be sure to update your personal information if it has
-		                        changed. </h2>
+		                    <h2 class="block-title-2"> {{t('entry_text_update_information')}} </h2>
 
-		                    <p class="required"><sup>*</sup> Required field</p>
+		                    <p class="required"><sup>*</sup> {{t('entry_require_field')}}</p>
 		                </div>
 		                <form>
 		                    <div class="col-xs-12 col-sm-6">
@@ -33,11 +32,18 @@
 		                        </div>
 		                        <div class="form-group">
 		                            <label for="InputEmail"> Email </label>
-		                            <input type="email" class="form-control" id="InputEmail" placeholder="gtanim@gmail.com">
+		                            <input type="email" class="form-control" id="InputEmail" placeholder="E-Mail">
+		                        </div>
+		                        <div class="form-group">
+		                            <label for="InputEmail"> Phone </label>
+		                            <input type="email" class="form-control" id="InputEmail" placeholder="Phone">
+		                        </div>
+		                        <div class="form-group">
+		                            <label for="InputEmail"> Fax </label>
+		                            <input type="email" class="form-control" id="InputEmail" placeholder="Fax">
 		                        </div>
 		                        <div class="form-group">
 		                            <label>Date of Birth</label>
-
 		                            <div class="row">
 		                                <div class="col-xs-4">
 		                                    <select class="form-control" id="days" name="days">
@@ -277,3 +283,58 @@
 		<div class="gap"></div>
 	</div>
 </template>
+
+
+<!-- frontEnd App -->
+<script type="text/javascript">
+
+  import axios from 'axios'
+  import Flash from '../../../../helper/flash'
+  import VueTranslate from 'vue-translate-plugin'
+  import Vue from 'vue';
+  Vue.use(VueTranslate);
+  
+  export default{
+    data(){
+      return{
+        loaded: false,
+        response: null,
+      }
+    },
+    created() {
+        axios.get(`/api/address`)
+        .then(response => {
+            this.response = response.data['data']
+            console.log(response.data['data'])
+            this.loaded = true
+        })
+        .catch(e => {
+          this.errors.push(e)
+        })
+    },
+    render() {
+        
+    },
+    locales: {
+        en: {
+            'entry_personal_information': 'My personal information',
+            'entry_text_update_information': 'Please be sure to update your personal information if it has​​​​ changed.',
+            'entry_require_field': 'Required Field'
+        },
+        kh: {
+            'entry_personal_information': 'ពត៌មានផ្ទាល់ខ្លួន',
+            'entry_text_update_information': 'Please be sure to update your personal information if it has​​​​ changed.',
+            'entry_require_field': 'Required Field'
+        }
+    },
+    mounted: function(){
+        if (!this.loaded) {
+          return this.$slots.loading[0]
+        }
+
+        // return this.$scopedSlots.default({
+        //   response: this.response.data['data']
+        // })
+    }
+  }
+</script>

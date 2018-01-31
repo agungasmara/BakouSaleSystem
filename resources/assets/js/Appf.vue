@@ -332,7 +332,6 @@
         },
     },
     mounted: function(){
-        console.log("====================================")
         axios.get(`/api/account/check_authorize`)
         .then(response => {
           var checkAuthenticationAccount = response.data['success']

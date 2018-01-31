@@ -130,6 +130,10 @@ Route::post('/checkout','FrontEnd\Product\CartController@Checkout');
 Route::resource('/', 'FrontEnd\Product\CartController');
 Route::get('my_account', 'FrontEnd\Product\CartController@index');
 Route::get('signin', 'FrontEnd\Product\CartController@index');
+// Account Customer
+Route::get('/api/address', 'FrontEnd\Account\AddressController@index');
+Route::get('/api/wishlist', 'FrontEnd\Account\WishlistController@index');
+
 
 // Front End API
 Route::get('/api/getTest', 'FrontEnd\TestController@getTest');
