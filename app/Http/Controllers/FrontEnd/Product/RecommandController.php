@@ -16,7 +16,8 @@ class RecommandController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-    	 $filter_data = array(
+    	session_start();
+    	$filter_data = array(
             'sort'  => 'p.date_added',
             'order' => 'DESC',
             'start' => 0,
@@ -24,7 +25,25 @@ class RecommandController extends Controller
         );
 
         $results = $this->getRecommandProducts($filter_data);
-        dd($results);
+        $productRecommanded = array();
+        if($results){
+            foreach ($results as $p) {
+                $productRecommanded[] = array(
+                    'product_id'  => $p->product_id,
+                    'thumb'       => $p->image,
+                    'name'        => $p->name,
+                    'description' => html_entity_decode($p->description, ENT_QUOTES, 'UTF-8'),
+                    'price'       => $p->price,
+                    'special'     => $p->special,
+                    // 'tax'         => $p->tax,
+                    'rating'      => $p->rating,
+                    'href'        => 'product/product', 'product_id=' . $p->product_id
+                );                
+            }
+
+        }
+        
+        return response()->json(['data' => $productRecommanded,'success' => true, 'message' => 'Success', 'lang'=>Session::get('applangId')]);
     }
 
     public function getRecommandProducts($data = array()) {

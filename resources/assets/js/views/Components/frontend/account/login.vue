@@ -84,7 +84,8 @@
                 }).then((res)=>{
                     if(res.data.success==true){
                         Flash.setSuccess(res.data.message)
-                        this.$router.push('/account/dashboard')
+                        window.location.href='/account/dashboard'
+                        // this.$router.push('/account/dashboard')
                     }
                 })
             },

@@ -17,9 +17,13 @@
         <div class="col-lg-6 col-md-6 col-sm-6">
             <!-- product Image and Zoom -->
             <div class="main-image sp-wrap col-lg-12 no-padding">
-                <a href="/assets/frontend/images/product_details/hi-res-croped/1.jpg">
+                <!-- <a href="/assets/frontend/images/product_details/hi-res-croped/1.jpg">
                     <img src="/assets/frontend/images/product_details/low-res-white/1.jpg" class="img-responsive" alt="img">
-                </a>
+                    <img v-bind:src="productInfo.image" alt="img" class="img-responsive ">
+                </a> -->
+                 <router-link v-bind:to="productInfo.image">
+                 <img v-bind:src="productInfo.image" alt="img" class="img-responsive ">
+                </router-link>
                 <a href="/assets/frontend/images/product_details/hi-res-croped/2.jpg">
                     <img src="/assets/frontend/images/product_details/low-res-white/2.jpg" class="img-responsive" alt="img">
                 </a>
@@ -381,6 +385,7 @@
             // }
         },
         mounted(){
+            // prdouct detail
             // switch color
             $(".swatches li").click(function () {
                 $(".swatches li.selected").removeClass("selected");
@@ -553,6 +558,7 @@
                         });
                 }
             });
+
         },
         created(){
             this.productDetails(this.id);

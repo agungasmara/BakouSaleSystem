@@ -133,6 +133,11 @@ Route::resource('/', 'FrontEnd\Product\CartController');
 Route::get('my_account', 'FrontEnd\Product\CartController@index');
 Route::get('signin', 'FrontEnd\Product\CartController@index');
 
+// Account Customer
+Route::get('/api/address', 'FrontEnd\Account\AddressController@index');
+Route::get('/api/wishlist', 'FrontEnd\Account\WishlistController@index');
+Route::resource('/api/order', 'FrontEnd\Account\OrderController');
+
 // Front End API
 Route::get('/api/getTest', 'FrontEnd\TestController@getTest');
 Route::get('/api/show/{id}', 'FrontEnd\TestController@getShow');
