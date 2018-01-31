@@ -37,22 +37,6 @@ class UsersController extends Controller
     public function store(Request $request)
     {
 
-      //$ImageMaker=new ImageMaker;
-      //$ImageMaker->base64ToImage("imagesss",$request->userImage);
-      //     if( preg_match('/data:image/', $request->userImage) ){                
-      //     preg_match('/data:image\/(?<mime>.*?)\;/', $request->userImage , $groups);
-      //     $mimetype = $groups['mime'];
-                       
-      //     $image='images/TestImage.'.$mimetype;
-      //     $image = Image::make($request->userImage)
-      //       ->fit(400, 500) 
-      //       ->encode($mimetype, 100) 
-      //       ->save(public_path($image));                
-      // }
-        
-        // $data=array();
-        // $condition=array();
-       
         $data=$request['data'];
         $data=array_except($data,['confirmPassword']);
         
@@ -60,7 +44,7 @@ class UsersController extends Controller
             'username'=>$data['username'],
             'email'=>$data['email']
         ];
-
+        $data['image']=(new ImageMaker)->base64ToImage('images\\icon',$data['image']);
         return (new DataAction)->StoreData(User::class,$condition,"or",$data);
         //return response()->json($data);
 
@@ -74,19 +58,9 @@ class UsersController extends Controller
     
     public function update(Request $request,$id)
     {
-        // if( preg_match('/data:image/', $request->userImage) ){             
-     //      preg_match('/data:image\/(?<mime>.*?)\;/', $request->userImage , $groups);
-     //      $mimetype = $groups['mime'];
-                       
-     //      $firstname='images/testpost.'.$mimetype;
-     //      $image = Image::make($request->userImage)
-     //        // ->fit(400, 500) 
-     //        ->encode($mimetype, 100) 
-     //        ->save(public_path($firstname));                
-     //    } 
-        
-        
-        return (new DataAction)->UpdateData(User::class,$request['data'],'user_id',$id);
+        $data=$request['data'];
+        $data['image']=(new ImageMaker)->base64ToImage('images\\icon',$data['image']);
+        return (new DataAction)->UpdateData(User::class,$data,'user_id',$id);
         // return response()->json($data);
     }
     public function destroy($id)

@@ -3,7 +3,7 @@
 		<!--breadcrumbs start-->
 		<breadcrumb1btn 
 			v-bind:breadcrumb-item="breadcrumbs"
-			v-bind:btn-new-url="addNew"
+			v-bind:btn-new-url="btnNewUrl"
 			v-bind:breadcrumb-title="breadcrumbTitle"
 		></breadcrumb1btn>
 
@@ -22,9 +22,11 @@
 			    </v-breadcrumbs> -->
 
 				<data-table 
+		    	v-bind:list-title="listTitle"
 		    	v-bind:data-header="headers" 
-		    	v-bind:data-value="settings"
-		    	v-bind:url='url'
+		    	v-bind:data-value="products"
+		    	v-bind:url="url"
+	    		v-bind:btn-new-url="btnNewUrl"
 		    	v-on:change="fetchData">
 		    </data-table>
 		    	<!-- v-bind:get-api="getApiUrl"
@@ -43,7 +45,7 @@
 	import dataTable from '../commons/tables/dataTable.vue'
 	import breadcrumb1btn from '../commons/breadcrumb/breadcrumb1btn.vue'
 	export default{
-		props:['settingid'],
+		props:['id'],
 		data(){
 			return{
 				// getApiUrl:'/api/user/list/',
@@ -52,8 +54,8 @@
 				// btnNewUrl:'/admin/user/add',
 				url:'/admin/api/products/',
 				deleteMessage:'',
-				settingName:'',
-				settingID:'',
+				productsName:'',
+				productsID:'',
 				dialog:false,
 				max25chars: (v) => v.length <= 25 || 'Input too long!',
 				tmp: '',
@@ -71,9 +73,10 @@
 			        { text: 'Action', value: 'product_id',align:'center',sortable:false }
 
 			    ],
-				settings:[],
-			    addNew:'/admin/products/add',
+				products:[],
+			    btnNewUrl:'/admin/products/add',
 				breadcrumbTitle:'Products List',
+				listTitle:'Products',
 				breadcrumbs: [
 			        {
 			          text: 'Dashboard',
@@ -93,19 +96,19 @@
 		components:{'dataTable':dataTable,'breadcrumb1btn':breadcrumb1btn},
 		created(){
 			this.fetchData()
-			document.title = 'Attributes';
+			document.title = 'Products List';
 		},
 		methods:{
 			fetchData(){
 				axios.get('/admin/api/products').then(response=>{
-					this.settings=response.data;
+					this.products=response.data;
 				});
 			},
 			confirmDel(id,name){
 				this.deleteMessage='Are you sure you want to delete product with ID:'
 				this.dialog=true;
-				this.settingName=name
-				this.settingID=id
+				this.productsName=name
+				this.productsID=id
 			},
 			deleteItem(id,opt){
 				if(opt==1){

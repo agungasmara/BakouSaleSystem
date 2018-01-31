@@ -43,7 +43,6 @@
 				headers: [
 			        { text: 'Manufacturer ID',align: 'left',class:'text-xs-left',value: 'manufacturer_id'},
 			        { text: 'Name',align:'left',class:'text-xs-left', value: 'name' },
-			        { text: 'Store',align:'left',class:'text-xs-left', value: 'store' },
 			        { text: 'Image',align:'left',class:'text-xs-left', value: 'image' },
 			        {text: 'Action',align:'center',class:'text-xs-center',value:'manufacturer_id',sortable: false}
 			    ],

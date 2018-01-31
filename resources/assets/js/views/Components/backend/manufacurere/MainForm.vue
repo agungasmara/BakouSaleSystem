@@ -27,45 +27,36 @@
 				e1:true,
 				valid: true,
 			    group:[
-					{	class:'xs12 sm6 md6',	 key:'value',	type:'number',	 text:'value',count:10	},
-					{	class:'xs12 sm6 md6',	 key:'unit',	type:'text',text:'Unit',count:5	},
-					{	class:'xs12 sm6 md6',	 key:'language_id',	type:'select',	 text:'Language',count:0,items:'languageItems'	},
-					{	class:'xs12 sm6 md6',	 key:'title',	type:'text',	 text:'Description',count:100	}
+					{	class:'xs12 sm4 md4',	 key:'name',	type:'text',	 text:'Name',count:100	},
+					{	class:'xs12 sm4 md4',	 key:'sort_order',	type:'number',text:'Sort Order',count:5	},
+					{	class:'xs12 sm4 md4',	 key:'image',	type:'image',	 text:'Image'	}
 				],
 				rules:{
-					title: [
-				      (v) => !!v || 'Title is required',
-				      (v) => v && v.length <= 100 || 'Title must be less than 100 characters'
+					name: [
+				      (v) => !!v || 'Name is required',
+				      (v) => v && v.length <= 100 || 'Name must be less than 100 characters'
 				    ],
-				    value: [
-				      (v) => !!v || 'Value is required',
-				      (v) => v && v.length <= 10 || 'Value must be less than 10 characters'
-				    ],
-				    unit: [
-				      (v) => !!v || 'Unit is required',
-				      (v) => v && v.length <= 5 || 'Unit must be less than 5 characters'
-				    ],
-				    language_id:[
-				      (v) => !!v || 'Language Requied is required'
+				    sort_order: [
+				      (v) => !!v || 'Sort Order is required',
+				      (v) => v && v.length <= 10 || 'Sort Order must be less than 10 characters'
 				    ]
 				},
 				data:{
-					title:' ',
-					language_id:'',
-					unit: '',
-					value:0.0000,
+					name:'',
+					sort_order:'',
+					image: ''
 				},
 				select:{
-					languageItems:[]
+					
 				},
-				breadcrumbTitle:'Weights',
+				breadcrumbTitle:'Manufacturers',
 				breadcrumbs: [
 			        {
 			          text: 'Administrator',
 			          disabled: false
 			        },
 			        {
-			          text: 'Weights',
+			          text: 'Manufacturers',
 			          disabled: false
 			        },
 			        {
@@ -73,18 +64,14 @@
 			          disabled: true
 			        }
 			    ],
-			    backUrl:'/admin/weights/list',
+			    backUrl:'/admin/manufacturers/list',
 			}
 		},
 		created(){
-			this.getLanguage()
+			
 		},
 		methods:{
-			getLanguage(){
-				axios.get('/api/getLanguage').then((res)=>{
-					this.select.languageItems=res.data
-				})
-			}
+			
 		}
 	}
 </script>

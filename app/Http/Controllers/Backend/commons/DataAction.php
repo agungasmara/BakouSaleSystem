@@ -4,6 +4,7 @@
 	use Illuminate\Http\Request;
 	use App\Http\Controllers\Controller;
 	use Illuminate\Support\Facades\DB;
+	use App\Http\Controllers\Backend\commons\ImageMaker;
 	/*
 	    DataAction class use for any action the data from any table
 	    currently i have create function and parameter as below:
@@ -120,9 +121,10 @@
 		}
 		public function UpdateData($table,$data,$field,$id)
 		{
-
+			$image = $table::find($id);
+        	$imageDelete=(new ImageMaker)->deleteFile(@$image->image);//delete old image after update data
 			$update=$table::where($field,$id)->update($data);
-
+			
 
 	        return response()->json([
 
@@ -143,6 +145,8 @@
 	        if($delete){
 
 	            $deleted=true;
+	            $image = $table::find($id);
+        		$imageDelete=(new ImageMaker)->deleteFile(@$image->image);//delete old image after update data
 
 	        }else{
 
