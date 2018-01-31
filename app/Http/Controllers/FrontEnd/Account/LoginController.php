@@ -21,6 +21,8 @@ class LoginController extends Controller
 
     public function AuthLogin(Request $request){
         session_start();
+        $_SESSION["account_id"] = "855";
+
         // // remove all session variables
         // session_unset();
 
@@ -35,7 +37,6 @@ class LoginController extends Controller
         if(!empty($getPassword) && password_verify(trim($input['password']),$getPassword->password))
         {
             $success=true;
-            $_SESSION["account_id"] = $getPassword->customer_id;
             $msg = "Data successfully Login";
         }else{
             $success=false;
@@ -45,6 +46,7 @@ class LoginController extends Controller
         //     $success=false;
         //     $msg = "Data not successfully Login!";
         // }
+
         
         return response()->json([
             'success'=>$success,
@@ -54,7 +56,7 @@ class LoginController extends Controller
         ]);
     }
     public function getPassword($email){
-        $row = Customer::select('customer_id','password')
+        $row = Customer::select('password')
                             ->where('email',$email)
                             ->first();
 

@@ -31,8 +31,8 @@
                 </div>
 
                 <div class="w100 clearfix">
-                    <!-- <div slot="loading">Loading repositories...</div> -->
-                    <div v-for="data in response" class="col-xs-12 col-sm-6 col-md-4">
+
+                    <div class="col-xs-12 col-sm-6 col-md-4">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h3 class="panel-title"><strong>My Address</strong></h3>
@@ -41,25 +41,25 @@
                                 <ul>
                                     <li>
                                     	<span class="address-name"> 
-                                    		<strong>{{data.firstname}} {{data.lastname}}</strong>
+                                    		<strong>Tanim Ahmed</strong>
                                     	</span>
                                     </li>
                                     <li>
                                     	<span class="address-company"> 
-                                    		{{data.company}} 
+                                    		TanimDesign & Development 
                                     	</span>
                                     </li>
                                     <li>
                                     	<span class="address-line1"> 
-                                    		{{data.address1}} 
+                                    		Gulshan 2 , Road 50, House FO12EO 
                                     	</span>
                                     </li>
                                     <li>
                                     	<span class="address-line2"> 
-                                    		{{data.address2}} 
+                                    		Dhaka, Bangladesh 
                                     	</span>
                                     </li>
-                                    <!-- <li>
+                                    <li>
                                     	<span> 
                                     		<strong>Mobile</strong> : 01670531352 
                                     	</span>
@@ -68,7 +68,7 @@
                                     	<span> 
                                     		<strong>Phone</strong> : 020904 - 85882 
                                     	</span>
-                                    </li> -->
+                                    </li>
                                 </ul>
                             </div>
                             <div class="panel-footer panel-footer-address">
@@ -82,7 +82,7 @@
                         </div>
                     </div>
 
-                    <!-- <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="col-xs-12 col-sm-6 col-md-4">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h3 class="panel-title"><strong>My Address 2</strong></h3>
@@ -132,7 +132,7 @@
                             	</a>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
 
                 </div>
                 <!--/.w100-->
@@ -190,22 +190,9 @@
   export default{
     data(){
       return{
-        loaded: false,
-        response: null,
       }
     },
     created() {
-        axios.get(`/api/address`)
-        .then(response => {
-            this.response = response.data['data']
-            console.log(response.data['data'])
-            this.loaded = true
-        })
-        .catch(e => {
-          this.errors.push(e)
-        })
-    },
-    render() {
         
     },
     locales: {
@@ -221,13 +208,7 @@
         }
     },
     mounted: function(){
-        if (!this.loaded) {
-          return this.$slots.loading[0]
-        }
 
-        // return this.$scopedSlots.default({
-        //   response: this.response.data['data']
-        // })
     }
   }
 </script>
