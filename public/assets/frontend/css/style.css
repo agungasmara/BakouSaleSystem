@@ -1636,14 +1636,14 @@ h1.bolder-style.dark, h1.bolder-style.dark a {
         background-image: url("../img/loading.gif");
         /*background-image: url("http://loadinggif.com/images/image-selection/3.gif");*/
         background-size: 50px 50px;
-
-        background-position: center; 
+        z-index: 9999999;
+        background-position: 50% 30%;
+        /*background-position: center; */
         background-repeat: no-repeat;
         /*background-attachment: fixed;*/
 
         /*background-position:left center;
         background-position:right center;*/
-        background-repeat: no-repeat;
 }
 .remove_loading{display: none;}
 

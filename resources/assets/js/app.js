@@ -12,7 +12,7 @@ import FLogin from './views/Components/frontend/account/login.vue'
 import Dashboard from './views/Components/frontend/account/dashboard.vue'
 
 import OrderList from './views/Components/frontend/account/order_list.vue'
-import OrderStatus from './views/Components/frontend/account/order_status.vue'
+import OrderInfo from './views/Components/frontend/account/order_info.vue'
 import AddressList from './views/Components/frontend/account/address_list.vue'
 import AddressAdd from './views/Components/frontend/account/address_add.vue'
 import AddressForm from './views/Components/frontend/account/address_form.vue'
@@ -238,9 +238,9 @@ const router = new VueRouter({
             component: OrderList
           },
           {
-            path: 'orderstatus',
-            name: 'orderstatus',
-            component: OrderStatus
+            path: 'order_info/:id',
+            name: 'orderinfo',
+            component: OrderInfo,props:true
           },
           {
             path: 'addresslist',

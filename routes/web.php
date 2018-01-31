@@ -136,6 +136,7 @@ Route::get('signin', 'FrontEnd\Product\CartController@index');
 // Account Customer
 Route::get('/api/address', 'FrontEnd\Account\AddressController@index');
 Route::get('/api/wishlist', 'FrontEnd\Account\WishlistController@index');
+Route::resource('/api/order', 'FrontEnd\Account\OrderController');
 
 // Front End API
 Route::get('/api/getTest', 'FrontEnd\TestController@getTest');

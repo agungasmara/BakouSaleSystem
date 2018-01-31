@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div v-bind:class="{ active: isActive }" class="loading">
 		<div class="container main-container headerOffset">
 		    <div class="row">
 		        <div class="breadcrumbDiv col-lg-12">
@@ -32,30 +32,30 @@
 		                            <th data-hide="phone,tablet" data-sort-ignore="true">Invoice</th>
 		                            <th data-hide="phone,tablet"><strong>Payment Method</strong></th>
 		                            <th data-hide="phone,tablet"><strong></strong></th>
-		                            <th data-hide="default"> Price</th>
+		                            <th data-hide="default"> Total</th>
 		                            <th data-hide="default" data-type="numeric"> Date</th>
 		                            <th data-hide="phone" data-type="numeric"> Status</th>
 		                        </tr>
 		                        </thead>
 		                        <tbody>
-		                        <tr>
-		                            <td>#028DE</td>
-		                            <td>5
+		                        <tr v-for="data in response">
+		                            <td>#{{data.order_id}}</td>
+		                            <td>{{data.total_product}}
 		                                <small>item(s)</small>
 		                            </td>
 		                            <td><a target="_blank">-</a></td>
 		                            <td>Bank Wire</td>
 		                            <td>
-		                            	<router-link v-bind:to="'/account/orderstatus'" class="btn btn-primary btn-sm">
-		                            		view status
+		                            	<router-link v-bind:to="'/account/order_info/'+ data.order_id" class="btn btn-primary btn-sm">
+		                            		view detail
                                 		</router-link>
 		                            </td>
-		                            <td>$403</td>
-		                            <td data-value="78025368997">22 Jun 2014</td>
-		                            <td data-value="3"><span class="label label-success">Done</span>
+		                            <td>{{data.currency_code}} {{data.total}}</td>
+		                            <td data-value="78025368997">{{data.date_added}}</td>
+		                            <td data-value="3"><span class="label label-success">{{data.status}}</span>
 		                            </td>
 		                        </tr>
-		                        <tr>
+		                        <!-- <tr>
 		                            <td>#045YU</td>
 		                            <td>2
 		                                <small>item(s)</small>
@@ -64,14 +64,14 @@
 		                            <td>Bank Wire</td>
 		                           <td>
 		                            	<router-link v-bind:to="'/account/orderstatus'" class="btn btn-primary btn-sm">
-		                            		view status
+		                            		view detail
                                 		</router-link>
 		                            </td>
 		                            <td>$105</td>
 		                            <td data-value="-100297281571">28 Oct 2014</td>
 		                            <td data-value="1"><span class="label label-primary">Pending</span></td>
-		                        </tr>
-		                        <tr>
+		                        </tr> -->
+		                        <!-- <tr>
 		                            <td>#08UJL</td>
 		                            <td>6
 		                                <small>item(s)</small>
@@ -80,7 +80,7 @@
 		                            <td><a target="_blank">PayPal</a></td>
 		                           <td>
 		                            	<router-link v-bind:to="'/account/orderstatus'" class="btn btn-primary btn-sm">
-		                            		view status
+		                            		view detail
                                 		</router-link>
 		                            </td>
 		                            <td><a target="_blank">$550 </a></td>
@@ -96,7 +96,7 @@
 		                            <td>Paypal</td>
 		                           <td>
 		                            	<router-link v-bind:to="'/account/orderstatus'" class="btn btn-primary btn-sm">
-		                            		view status
+		                            		view detail
                                 		</router-link>
 		                            </td>
 		                            <td>$34</td>
@@ -112,7 +112,7 @@
 		                            <td>MasterCard</td>
 		                           <td>
 		                            	<router-link v-bind:to="'/account/orderstatus'" class="btn btn-primary btn-sm">
-		                            		view status
+		                            		view detail
                                 		</router-link>
 		                            </td>
 		                            <td>$1108</td>
@@ -128,7 +128,7 @@
 		                            <td>Bank Wire</td>
 		                           <td>
 		                            	<router-link v-bind:to="'/account/orderstatus'" class="btn btn-primary btn-sm">
-		                            		view status
+		                            		view detail
                                 		</router-link>
 		                            </td>
 		                            <td>$669</td>
@@ -144,7 +144,7 @@
 		                            <td>Bank Wire</td>
 		                           <td>
 		                            	<router-link v-bind:to="'/account/orderstatus'" class="btn btn-primary btn-sm">
-		                            		view status
+		                            		view detail
                                 		</router-link>
 		                            </td>
 		                            <td>$400</td>
@@ -160,7 +160,7 @@
 		                            <td><a target="_blank">PayPal</a></td>
 		                           <td>
 		                            	<router-link v-bind:to="'/account/orderstatus'" class="btn btn-primary btn-sm">
-		                            		view status
+		                            		view detail
                                 		</router-link>
 		                            </td>
 		                            <td>$403</td>
@@ -176,7 +176,7 @@
 		                            <td>Paypal</td>
 		                           <td>
 		                            	<router-link v-bind:to="'/account/orderstatus'" class="btn btn-primary btn-sm">
-		                            		view status
+		                            		view detail
                                 		</router-link>
 		                            </td>
 		                            <td>$105</td>
@@ -192,7 +192,7 @@
 		                            <td>MasterCard</td>
 		                           <td>
 		                            	<router-link v-bind:to="'/account/orderstatus'" class="btn btn-primary btn-sm">
-		                            		view status
+		                            		view detail
                                 		</router-link>
 		                            </td>
 		                            <td><a target="_blank">$550 </a></td>
@@ -209,7 +209,7 @@
 		                            <td>Bank Wire</td>
 		                           <td>
 		                            	<router-link v-bind:to="'/account/orderstatus'" class="btn btn-primary btn-sm">
-		                            		view status
+		                            		view detail
                                 		</router-link>
 		                            </td>
 		                            <td>$34</td>
@@ -226,13 +226,13 @@
 
 		                           <td>
 		                            	<router-link v-bind:to="'/account/orderstatus'" class="btn btn-primary btn-sm">
-		                            		view status
+		                            		view detail
                                 		</router-link>
 		                            </td>
 		                            <td>$1108</td>
 		                            <td data-value="550552096836">13 Jun 1987</td>
 		                            <td data-value="3"><span class="label label-danger">Cancel</span></td>
-		                        </tr>
+		                        </tr> -->
 		                        </tbody>
 		                    </table>
 		                </div>
@@ -267,3 +267,54 @@
 		<div class="gap"></div>
 	</div>
 </template>
+
+<script type="text/javascript">
+
+  import axios from 'axios'
+  import Flash from '../../../../helper/flash'
+  import VueTranslate from 'vue-translate-plugin'
+  import Vue from 'vue';
+  Vue.use(VueTranslate);
+  
+  export default{
+    data(){
+      return{
+        isActive: true,
+        loading:true,
+        response: null,
+      }
+    },
+    created() {
+    	this.loading = true
+        axios.get(`/api/order`)
+        .then(response => {
+            this.response = response.data['data']
+            this.isActive = !this.isActive
+        })
+        .catch(e => {
+          this.errors.push(e)
+        })
+
+    },
+    locales: {
+        en: {
+            'entry_personal_information': 'My personal information',
+            'entry_text_update_information': 'Please be sure to update your personal information if it has​​​​ changed.',
+            'entry_require_field': 'Required Field'
+        },
+        kh: {
+            'entry_personal_information': 'ពត៌មានផ្ទាល់ខ្លួន',
+            'entry_text_update_information': 'Please be sure to update your personal information if it has​​​​ changed.',
+            'entry_require_field': 'Required Field'
+        }
+    },
+    mounted: function(){
+
+        // this.loading = true;
+
+        // return this.$scopedSlots.default({
+        //   response: this.response.data['data']
+        // })
+    }
+  }
+</script>
