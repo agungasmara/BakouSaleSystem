@@ -1,6 +1,5 @@
 <template>
-  <div>    
-
+  <div>
     <!-- Fixed navbar start -->
     <div class="navbar navbar-tshop navbar-fixed-top megamenu" role="navigation">
         <div class="navbar-top">
@@ -253,6 +252,7 @@
     data(){
       return{
         posts: [],
+        loading:true,
         TotalPrices : CartAction.data,
         data_list:[],
         account_data: [

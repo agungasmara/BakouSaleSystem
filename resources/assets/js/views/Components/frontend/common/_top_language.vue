@@ -1,8 +1,8 @@
 <template>
-    <ul class="dropdown-menu">
-        <li><a href="/lang/kh">KH</a></li>
-        <li><a href="/lang/en">EN</a></li>
-    </ul>
+  <ul class="dropdown-menu">
+    <li><a href="/lang/kh">KH</a></li>
+    <li><a href="/lang/en">EN</a></li>
+  </ul>
 </template>
 
 <script type="text/javascript">
