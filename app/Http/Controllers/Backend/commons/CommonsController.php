@@ -55,4 +55,13 @@ class CommonsController extends Controller
         return response()->json($TaxClass);
 
     }
+    
+    public function getStore()
+    {
+
+        $stores=DB::table('store')->select(['store_id as value','name as text'])->get();
+
+        return response()->json($stores);
+
+    }
 }
