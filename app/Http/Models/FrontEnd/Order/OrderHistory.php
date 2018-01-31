@@ -15,4 +15,5 @@ class OrderHistory extends Model
 							'comment',
 							'date_added'
 						];
+	public $timestamps = false;
 }

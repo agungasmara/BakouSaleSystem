@@ -17,4 +17,5 @@ class OrderOption extends Model
 							'value',
 							'type',
 						];
+	public $timestamps = false;
 }

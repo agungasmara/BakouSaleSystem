@@ -64,8 +64,8 @@
 		                            		
 		                            		<div class="form-group required" v-if="form.type=='select'">
 		                                        <label :for="form.label">{{form.label}}</label>
-		                                        <select v-model="data[form.key]" class="form-control" required aria-required="true" :id="form.label" :name="form.label">
-		                                            <option v-for="(name,value) in selectItem[form.item]" :value="value">{{name}}</option>
+		                                        <select v-model="data[form.key]" class="form-control" required aria-required="true" :id="form.label" :name="form.label" @change="onchange(form.change,data[form.key])">
+		                                            <option v-for="(option,value) in selectItem[form.item]" :value="option.value">{{option.name}}</option>
 		                                        </select>
 		                                    </div>
 		                                    <div class="form-group" v-else-if="form.type=='textarea'">
@@ -96,8 +96,8 @@
 		                            		
 		                            		<div class="form-group required" v-if="form.type=='select'">
 		                                        <label :for="form.label">{{form.label}}</label>
-		                                        <select v-model="data[form.key]" class="form-control" required aria-required="true" :id="form.label" :name="form.label">
-		                                            <option v-for="(name,value) in selectItem[form.item]" :value="value">{{name}}</option>
+		                                        <select v-model="data[form.key]" class="form-control" required aria-required="true" :id="form.label" :name="form.label" @change="onchange(form.change,data[form.key])">
+		                                            <option v-for="(option,value) in selectItem[form.item]" :value="option.value">{{option.name}}</option>
 		                                        </select>
 		                                    </div>
 		                                    <div class="form-group" v-else-if="form.type=='textarea'">
@@ -120,38 +120,26 @@
 		                    <div class="w100 clearfix" v-show='activeTab==2'>
 		                        <div class="row userInfo">
 		                            <div class="col-xs-12 col-sm-12">
-		                                <div class="w100 row">
-		                                    <div class="form-group col-lg-12 col-sm-12 col-md-12 -col-xs-12">
+		                                
 		                                        <table style="width:100%" class="table-bordered table tablelook2">
 		                                            <tbody>
 		                                            <tr>
 		                                                <td> Carrier</td>
 		                                                <td>Method</td>
-		                                                <td>Information</td>
-		                                                <td>Price!</td>
+		                                                
 		                                            </tr>
-		                                            <tr>
-		                                                <td><label class="radio">
-		                                                    <input type="radio" v-model="data.shipping_method" name="optionsRadios" id="optionsRadios1"
-		                                                           value="1" checked>
-		                                                    <i class="fa  fa-plane fa-2x"></i> </label></td>
-		                                                <td> By Road</td>
-		                                                <td>Pick up in-store</td>
-		                                                <td>Free!</td>
-		                                            </tr>
-		                                            <tr>
+		                                            
+		                                            <tr v-for="shipping in shippingList">
 		                                                <td><label class="radio">
 		                                                    <input type="radio" v-model="data.shipping_method" name="optionsRadios" id="optionsRadios2"
-		                                                           value="2">
+		                                                           :value="shipping.value">
 		                                                    <i class="fa fa-truck fa-2x"></i> </label></td>
-		                                                <td>By Air</td>
-		                                                <td>Delivery next day!</td>
-		                                                <td>Free!</td>
+		                                                
+		                                                <td>{{shipping.label}}</td>
 		                                            </tr>
 		                                            </tbody>
 		                                        </table>
-		                                    </div>
-		                                </div>
+		                                    
 
 		                                <!--/row-->
 
@@ -390,64 +378,12 @@ export default {
     data() {
         return {
              	CartProduct: CartAction.data,
+             	shippingList:{},
              	activeTab: 0,
              	selectItem:{
-             		country:[
- 	             		'Choose',
- 						'Alabama',
- 						'Alaska',
- 						'Arizona',
- 						'Arkansas',
- 						'California',
- 						'Colorado',
- 						'Connecticut',
- 						'Delaware',
- 						'District of Columbia',
- 						'Florida',
- 						'Georgia',
- 						'Hawaii',
- 						'Idaho',
- 						'Illinois',
- 						'Indiana',
- 						'Iowa',
- 						'Kansas',
- 						'Kentucky',
- 						'Louisiana',
- 						'Maine',
- 						'Maryland',
- 						'Massachusetts',
- 						'Michigan',
- 						'Minnesota',
- 						'Mississippi',
- 						'Missouri',
- 						'Montana',
- 						'Nebraska',
- 						'Nevada',
- 						'New Hampshire',
- 						'New Jersey',
- 						'New Mexico',
- 						'New York',
- 						'North Carolina',
- 						'North Dakota',
- 						'Ohio',
- 						'Oklahoma',
- 						'Oregon',
- 						'Pennsylvania',
- 						'Puerto Rico',
- 						'Rhode Island',
- 						'South Carolina',
- 						'South Dakota',
- 						'Tennessee',
- 						'Texas',
- 						'US Virgin Islands',
- 						'Utah',
- 						'Vermont',
- 						'Virginia',
- 						'Washington',
- 						'West Virginia',
- 						'Wisconsin',
- 						'Wyoming',
-             	    ],
+             		country:{},
+             		shipping_zone:{},
+             		payment_zone:{},
              	},
              	data:{
      //         		firstname:'',
@@ -521,7 +457,7 @@ export default {
 					description:'TO ADD A NEW ADDRESS, PLEASE FILL OUT THE FORM BELOW.',
 					button:'Customer address',
 					class:'',
-					iconDisplay:'fa fa fa-envelope',
+					iconDisplay:'fa fa-map-marker',
 					group:[{
 							class:'col-xs-12 col-sm-6',
 							data:[
@@ -538,9 +474,9 @@ export default {
 							class:'col-xs-12 col-sm-6',
 
 							data:[
-								{key:'payment_country',type:'select',label:'Country',value:'Select Country',item:'country'},
+								{key:'payment_country_id',type:'select',label:'Country',value:'Select Country',item:'country',change:'payment_zone'},
 								{key:'payment_city',type:'select',label:'City',value:'Select City',item:'country'},
-								{key:'payment_zone',type:'select',label:'State',value:'Select State',item:'country'},
+								{key:'payment_zone_id',type:'select',label:'State',value:'Select State',item:'payment_zone'},
 								{key:'payment_postcode',type:'text',label:'Zip / Postal Code',Value:'Zip / Postal Code'},
 								{key:'payment_custom_field',type:'textarea',label:'Additional information',Value:'Additional information'},
 								{key:'payment_address_format',type:'text',label:'Please assign an address title for future reference.',Value:'My address'},
@@ -553,7 +489,7 @@ export default {
 					description:'To add a billing address, please fill out the form below.',
 					button:'Billing address',
 					class:'',
-					iconDisplay:'fa fa fa-envelope',
+					iconDisplay:'fa fa-envelope',
 					group:[{
 							class:'col-xs-12 col-sm-6',
 							data:[
@@ -569,9 +505,9 @@ export default {
 						{
 							class:'col-xs-12 col-sm-6',
 							data:[
-								{key:'shipping_country',type:'select',label:'Country',value:'Select Country',item:'country'},
+								{key:'shipping_country',type:'select',label:'Country',value:'Select Country',item:'country',change:'shipping_zone'},
 								{key:'shipping_city',type:'select',label:'City',value:'Select City',item:'country'},
-								{key:'shipping_zone',type:'select',label:'State',value:'Select State',item:'country'},
+								{key:'shipping_zone',type:'select',label:'State',value:'Select State',item:'shipping_zone'},
 								{key:'shipping_postcode',type:'text',label:'Zip / Postal Code',Value:'Zip / Postal Code'},
 								{key:'shipping_custom_field',type:'textarea',label:'Additional information',Value:'Additional information'},
 								{key:'shipping_address_format',type:'text',label:'Please assign an address title for future reference.',Value:'My address'},
@@ -608,6 +544,8 @@ export default {
 
     },
     mounted(){
+    	axios.get('/api/getLocations/').then(response => this.selectItem.country=response.data);
+    	axios.get('/api/getShipping/').then(response => this.shippingList=response.data);
     	// render dom select
     	// $('select.form-control').select2();
     	 // The currently active tab, init as the 1st item in the tabs array
@@ -619,10 +557,18 @@ export default {
     methods: {
     	Submit() {
 	      axios.post('/checkout',this.data)
-			 // .then(this.MyProduct())
 			 .catch(function (error) { console.log(error); });
 	    },
+	    onchange(item,id){
+	    	if (item) {
+		    	axios.get('/api/getLocations/'+id).then(response => this.selectItem[item]=response.data);
+	    	}
+	    },
+	    test(t){
+	    	alert(t)
+	    }
 	    
-    }
+    },
+    
 }
 </script>

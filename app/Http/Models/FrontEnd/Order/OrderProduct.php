@@ -19,5 +19,6 @@ class OrderProduct extends Model
 							'tax',
 							'reward',
 						];
+	public $timestamps = false;
 
 }
