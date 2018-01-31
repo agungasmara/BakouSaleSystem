@@ -14,7 +14,7 @@ use Session;
 
 class LanguageController extends Controller {
 
-    public function switchLang($lang='en',
+    public function switchLang($lang,
         ChangeLocale $changeLocale){
         // $languages = Language::Lists('id','code');
         // if (array_key_exists($lang, $languages)) {

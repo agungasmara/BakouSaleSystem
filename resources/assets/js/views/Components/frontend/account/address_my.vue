@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div v-bind:class="{ active: isActive }" class="loading">
         <div class="container main-container headerOffset">
             <div class="row">
                 <div class="breadcrumbDiv col-lg-12">
@@ -118,6 +118,7 @@
     data(){
       return{
         loaded: false,
+        isActive: true,
         response: null,
       }
     },
@@ -125,8 +126,7 @@
         axios.get(`/api/address`)
         .then(response => {
             this.response = response.data['data']
-            console.log(response.data['data'])
-            this.loaded = true
+            this.isActive = !this.isActive
         })
         .catch(e => {
           this.errors.push(e)
