@@ -14,5 +14,6 @@ class OrderShipment extends Model
 							'shipping_courier_id',
 							'tracking_number',
 						];
+	public $timestamps = false;
 
 }

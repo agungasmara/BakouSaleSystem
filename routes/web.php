@@ -100,6 +100,8 @@ if (Request::is('admin*')){
     Route::middleware([])->prefix('api')->group(function () {
 
         Route::get('product_cart', 'FrontEnd\Product\CartController@ProductCart');
+        Route::get('getLocations/{country_id?}', 'FrontEnd\Product\CartController@getLocations');
+        Route::get('getShipping/{id?}', 'FrontEnd\Product\CartController@getShipping');
         Route::get('get_product/{num}', 'FrontEnd\Product\ProductController@GetProduct');
         Route::get('footer', 'FrontEnd\Common\FooterController@getFooter');
 
@@ -145,6 +147,7 @@ Route::get('/api/header','FrontEnd\Common\HeaderController@index');
 Route::get('/api/slide','FrontEnd\Includes\SlideController@index');
 Route::get('/api/latest','FrontEnd\Product\LastestController@index');
 Route::get('/api/bestSeller','FrontEnd\Product\BestSellerController@index');
+Route::get('/api/recommandProduct','FrontEnd\Product\RecommandController@index');
 Route::get('/api/detail/{id}','FrontEnd\Product\ProductController@index');
 
 /*--| Api Request Banner--*/

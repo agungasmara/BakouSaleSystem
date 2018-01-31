@@ -15,5 +15,6 @@ class OrderTotal extends Model
 							'value',
 							'sort_order',
 						];
+	public $timestamps = false;
 
 }

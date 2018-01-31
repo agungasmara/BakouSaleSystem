@@ -30,6 +30,7 @@ Route::get('/customer/get','FrontEnd\Account\LoginController@getPasswordCustomer
 //BackEnd
 
 //=====Commons=======================
+Route::get('/getStore','Backend\commons\CommonsController@getStore');
 Route::get('/getLanguage','Backend\commons\CommonsController@getLanguage');
 Route::get('/getCreditType','Backend\commons\CommonsController@getCreditType');
 Route::get('/getGeoZone','Backend\commons\CommonsController@getGeoZone');
@@ -39,7 +40,7 @@ Route::get('/getCustomerGroup','Backend\commons\CommonsController@getCustomerGro
 
 
 //=====Setting API=============================
-Route::get('/getStore','Backend\Settings\SettingsController@getStore');
+
 Route::get('/settings/item/','Backend\Settings\SettingsController@item');//use to get all config item to put into dropdown list in setting edit form 
 Route::Resource('/settings','Backend\Settings\SettingsController');
 
@@ -83,3 +84,9 @@ Route::Resource('/tax_rate_to_customer_group','Backend\Taxs\TaxRateToCustomerGro
 
 //======Weight API
 Route::Resource('/weights','Backend\Weights\WeightsController');
+
+//======Length API
+Route::Resource('/lengths','Backend\Lengths\LengthsController');
+
+//======Manufacturer API
+Route::Resource('/manufacturers','Backend\Manufacturers\ManufacturersController');

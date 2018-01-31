@@ -15,6 +15,12 @@ use App\Http\Models\FrontEnd\Order\OrderProduct;
 use App\Http\Models\FrontEnd\Order\OrderShipment;
 use App\Http\Models\FrontEnd\Order\OrderStatus;
 use App\Http\Models\FrontEnd\Order\OrderTotal;
+use App\Http\Models\FrontEnd\Order\ShippingCourier;
+use App\http\models\commons\Location\Country;
+use App\http\models\commons\Location\GeoZone;
+use App\http\models\commons\Location\Zone;
+use App\http\models\commons\Location\ZoneToGeoZone;
+
 use Illuminate\Support\Facades\Input;
 use DB;
 use App\user;
@@ -76,6 +82,28 @@ class CartController extends Controller
         $datas['data']=$datas['data']->toArray();
         return $datas;
     }
+
+    public function getLocations($country_id='')
+    {
+        if ($country_id) {
+            $data=Zone::select('country_id','name','zone_id as value')->where('country_id',$country_id)->where('status',1)->get()->toArray();
+        }else{
+            $data=Country::select('name','country_id as value')->where('status',1)->get()->toArray();
+        }
+        // dd($data);
+        return $data;
+    }
+    public function getShipping($id='')
+    {
+        $data=ShippingCourier::select('shipping_courier_name as label','shipping_courier_code','shipping_courier_id as value');
+        if (!$id) {
+            $data=$data->get()->toArray();
+        }else{
+            $data=$data->where('shipping_courier_id',$id)->first()->toArray();
+        }
+        // dd($data);
+        return $data;
+    }
     public function Checkout(Request $request)
     {
         $request['firstname']='sineth';
@@ -98,14 +126,13 @@ class CartController extends Controller
         $request['currency_code']='$';
         $request['currency_value']='2';
         $request['name']='test';
-        $request['comment']='test';
+        $request['accept_language']=2;
+        $request['reward']='8438';
         $request['ip']=$request->ip();
         $request['forwarded_ip']=$request->ip();
         $request['user_agent']=$request->server('HTTP_USER_AGENT');
-        $request['accept_language']=2;
         $request['date_added']=date('Y-m-d');
         $request['date_modified']=date('Y-m-d');
-        $request['reward']='8438';
         $request['total']=$this->ProductCart()['TotalPrices'];
 
 

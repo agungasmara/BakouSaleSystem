@@ -12,5 +12,6 @@ class OrderStatus extends Model
 							'language_id',
 							'name',
 						];
+	public $timestamps = false;
 
 }

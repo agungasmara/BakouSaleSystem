@@ -74,6 +74,7 @@ class OrderModel extends Model
 							'date_added',
 							'date_modified',
 							];
+	public $timestamps = false;
 	static function filldata($data)
 	{
 		foreach ($fillable as $key) {
