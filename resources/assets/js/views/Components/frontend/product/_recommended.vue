@@ -4,7 +4,8 @@
 
 	      <div class="container">
 	          <div class="row xsResponse equalHeightCategoryProduct">
-	              <div class="item col-lg-3 col-md-3 col-sm-4 col-xs-6">
+
+	              <div class="item col-lg-3 col-md-3 col-sm-4 col-xs-6" v-for="productRecommanded of productRecommandeds">
 	                  <div class="product">
 	                      <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
 	                         data-placement="left">
@@ -16,25 +17,43 @@
 	                              <a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product"
 	                                 data-target="#productSetailsModalAjax">Quick View </a>
 	                          </div>
-	                          <router-link to="/product/product_detail/1">
-	                          	<img src="/assets/frontend/images/product/30.jpg" alt="img" class="img-responsive">
-	                          </router-link>
+	                          <router-link v-bind:to="'/product/product_detail/'+ productRecommanded.product_id">
+	                          	 <img v-bind:src="productRecommanded.thumb" alt="img" class="img-responsive">
+								</router-link>
 
-	                          <div class="promotion"><span class="new-product"> NEW</span> <span
-	                                  class="discount">15% OFF</span></div>
+	                          <div class="promotion">
+	                          	<span class="new-product"> NEW</span>
+	                          	<span class="discount">15% OFF</span>
+	                          </div>
 	                      </div>
 	                      <div class="description">
-	                          <h4><a href="product-details.html">aliquam erat volutpat</a></h4>
+	                          <h4>
+	                          	<router-link v-bind:to="'/product/product_detail/'+ productRecommanded.product_id">
+	                          		{{productRecommanded.name}}
+								</router-link>
+	                          </h4>
 
-	                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+	                          <p v-html="productRecommanded.description">.</p>
 	                          <span class="size">XL / XXL / S </span></div>
-	                      <div class="price"><span>$25</span> <span class="old-price">$75</span></div>
-	                      <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
-	                              class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
+	                      <div class="price" v-if="productRecommanded.special != ''">
+	                      	<span>  ${{productRecommanded.price}}</span> 
+	                      </div>
+	                      <div class="price" v-else>
+	                      	<span>  ${{productRecommanded.price}}</span> 
+	                      	<span class="old-price"> ${{productRecommanded.special}}</span>
+	                      </div>
+	                      <div class="action-control">
+	                      	<a class="btn btn-primary" @click="AddToCart(productRecommanded.product_id)"> 
+	                          <span class="add2cart">
+	                            <i class="glyphicon glyphicon-shopping-cart"> </i> 
+	                            Add to cart 
+	                          </span> 
+	                        </a>
+	                      </div>
 	                  </div>
 	              </div>
 	              <!--/.item-->
-	              <div class="item col-lg-3 col-md-3 col-sm-4 col-xs-6">
+	              <!-- <div class="item col-lg-3 col-md-3 col-sm-4 col-xs-6">
 	                  <div class="product">
 	                      <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
 	                         data-placement="left">
@@ -60,9 +79,9 @@
 	                      <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
 	                              class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
 	                  </div>
-	              </div>
+	              </div> -->
 	              <!--/.item-->
-	              <div class="item col-lg-3 col-md-3 col-sm-4 col-xs-6">
+	             <!--  <div class="item col-lg-3 col-md-3 col-sm-4 col-xs-6">
 	                  <div class="product">
 	                      <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
 	                         data-placement="left">
@@ -88,9 +107,9 @@
 	                      <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
 	                              class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
 	                  </div>
-	              </div>
+	              </div> -->
 	              <!--/.item-->
-	              <div class="item col-lg-3 col-md-3 col-sm-4 col-xs-6">
+	             <!--  <div class="item col-lg-3 col-md-3 col-sm-4 col-xs-6">
 	                  <div class="product">
 	                      <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
 	                         data-placement="left">
@@ -113,9 +132,9 @@
 	                      <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
 	                              class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
 	                  </div>
-	              </div>
+	              </div> -->
 	              <!--/.item-->
-	              <div class="item col-lg-3 col-md-3 col-sm-4 col-xs-6">
+	             <!--  <div class="item col-lg-3 col-md-3 col-sm-4 col-xs-6">
 	                  <div class="product">
 	                      <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
 	                         data-placement="left">
@@ -138,9 +157,9 @@
 	                      <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
 	                              class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
 	                  </div>
-	              </div>
+	              </div> -->
 	              <!--/.item-->
-	              <div class="item col-lg-3 col-md-3 col-sm-4 col-xs-6">
+	             <!--  <div class="item col-lg-3 col-md-3 col-sm-4 col-xs-6">
 	                  <div class="product">
 	                      <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
 	                         data-placement="left">
@@ -163,9 +182,9 @@
 	                      <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
 	                              class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
 	                  </div>
-	              </div>
+	              </div> -->
 	              <!--/.item-->
-	              <div class="item col-lg-3 col-md-3 col-sm-4 col-xs-6">
+	              <!-- <div class="item col-lg-3 col-md-3 col-sm-4 col-xs-6">
 	                  <div class="product">
 	                      <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
 	                         data-placement="left">
@@ -188,9 +207,9 @@
 	                      <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
 	                              class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
 	                  </div>
-	              </div>
+	              </div> -->
 	              <!--/.item-->
-	              <div class="item col-lg-3 col-md-3 col-sm-4 col-xs-6">
+	              <!-- <div class="item col-lg-3 col-md-3 col-sm-4 col-xs-6">
 	                  <div class="product">
 	                      <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
 	                         data-placement="left">
@@ -213,9 +232,9 @@
 	                      <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
 	                              class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
 	                  </div>
-	              </div>
+	              </div> -->
 	              <!--/.item-->
-	              <div class="item col-lg-3 col-md-3 col-sm-4 col-xs-6">
+	              <!-- <div class="item col-lg-3 col-md-3 col-sm-4 col-xs-6">
 	                  <div class="product">
 	                      <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
 	                         data-placement="left">
@@ -238,9 +257,9 @@
 	                      <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
 	                              class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
 	                  </div>
-	              </div>
+	              </div> -->
 	              <!--/.item-->
-	              <div class="item col-lg-3 col-md-3 col-sm-4 col-xs-6">
+	              <!-- <div class="item col-lg-3 col-md-3 col-sm-4 col-xs-6">
 	                  <div class="product">
 	                      <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
 	                         data-placement="left">
@@ -267,9 +286,9 @@
 	                      <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
 	                              class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
 	                  </div>
-	              </div>
+	              </div> -->
 	              <!--/.item-->
-	              <div class="item col-lg-3 col-md-3 col-sm-4 col-xs-6">
+	              <!-- <div class="item col-lg-3 col-md-3 col-sm-4 col-xs-6">
 	                  <div class="product">
 	                      <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
 	                         data-placement="left">
@@ -295,9 +314,9 @@
 	                      <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
 	                              class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
 	                  </div>
-	              </div>
+	              </div> -->
 	              <!--/.item-->
-	              <div class="item col-lg-3 col-md-3 col-sm-4 col-xs-6">
+	              <!-- <div class="item col-lg-3 col-md-3 col-sm-4 col-xs-6">
 	                  <div class="product">
 	                      <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
 	                         data-placement="left">
@@ -323,7 +342,7 @@
 	                      <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
 	                              class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
 	                  </div>
-	              </div>
+	              </div> -->
 	              <!--/.item-->
 	          </div>
 	          <!-- /.row -->
@@ -341,32 +360,34 @@
     import axios from 'axios'
     import Flash from '../../../../helper/flash'
     import {post} from '../../../../helper/api'
-
+    import CartAction from '../../../../helper/cart'
     export default {
         data() {
             return {
                 flash: Flash.state,
                 error: Flash.state,
                 error: {},
-                latestProducts: [],
+                productRecommandeds: [],
                 isProcessing: false
             }
         },
         created() {
-      //       axios.get(`/api/latest`)
-		    // .then(response => {
-          
-		    //   this.latestProducts = response.data['data']
-		    // })
-		    // .catch(e => {
-		    //   this.errors.push(e)
-		    // })
+      		axios.get(`/api/recommandProduct`)
+            .then(response => {
+              this.productRecommandeds = response.data['data']
+            })
+            .catch(e => {
+              this.errors.push(e)
+            })
         },
         ready() {
            
         },
         methods: {
-           
+          AddToCart(product_id,qty=1){
+            CartAction.AddToCart(product_id,qty)
+            window.scrollTo(100,100)
+          }
         }
     }
 </script>
