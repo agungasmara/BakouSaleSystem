@@ -277,3 +277,56 @@
 		<div class="gap"></div>
 	</div>
 </template>
+
+<script type="text/javascript">
+
+  import axios from 'axios'
+  import Flash from '../../../../helper/flash'
+  import VueTranslate from 'vue-translate-plugin'
+  import Vue from 'vue';
+  Vue.use(VueTranslate);
+  
+  export default{
+    data(){
+      return{
+        loaded: false,
+        response: null,
+      }
+    },
+    created() {
+        axios.get(`/api/address`)
+        .then(response => {
+            this.response = response.data['data']
+            console.log(response.data['data'])
+            this.loaded = true
+        })
+        .catch(e => {
+          this.errors.push(e)
+        })
+    },
+    render() {
+        
+    },
+    locales: {
+        en: {
+            'entry_personal_information': 'My personal information',
+            'entry_text_update_information': 'Please be sure to update your personal information if it has​​​​ changed.',
+            'entry_require_field': 'Required Field'
+        },
+        kh: {
+            'entry_personal_information': 'ពត៌មានផ្ទាល់ខ្លួន',
+            'entry_text_update_information': 'Please be sure to update your personal information if it has​​​​ changed.',
+            'entry_require_field': 'Required Field'
+        }
+    },
+    mounted: function(){
+        if (!this.loaded) {
+          return this.$slots.loading[0]
+        }
+
+        // return this.$scopedSlots.default({
+        //   response: this.response.data['data']
+        // })
+    }
+  }
+</script>

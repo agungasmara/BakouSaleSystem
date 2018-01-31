@@ -1,5 +1,6 @@
 <template>
-	<div>
+	<div id="loading">
+		<i v-show="loading" style="font-size:70px;position:absolute;left:50%;top:20%" class="fa fa-spinner fa-spin"></i>
 		<div class="container main-container headerOffset">
 		    <div class="row">
 		        <div class="breadcrumbDiv col-lg-12">
@@ -22,121 +23,121 @@
 		                <div class="col-xs-12 col-sm-12">
 		                    <table>
 		                        <tbody>
-		                        <tr class="CartProduct">
-		                            <td style="width:10%" class="CartProductThumb">
-		                                <div><a href="product-details.html"><img src="images/product/9.jpg" alt="img"></a></div>
-		                            </td>
-		                            <td style="width:40%">
-		                                <div class="CartDescription">
-		                                    <h4><a href="product-details.html">Denim T shirt Black </a></h4>
-		                                    <span class="size">12 x 1.5 L</span>
+			                        <tr v-for="data in response" class="CartProduct">
+			                            <td style="width:15%" class="CartProductThumb">
+			                                <div><a href="product-details.html"><img v-bind:src="data.image" v-bind:alt="data.name"></a></div>
+			                            </td>
+			                            <td style="width:40%">
+			                                <div class="CartDescription">
+			                                    <h4><a href="">{{data.name}}</a></h4>
+			                                    <span class="size">12 x 1.5 L</span>
 
-		                                    <div class="price"><span>$85</span></div>
-		                                </div>
-		                            </td>
-		                            <td style="width:15%">
-		                                <a class="btn btn-primary">
-		                                    <span class="add2cart"><i class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span>
-		                                </a>
-		                            </td>
-		                            <td style="width:40%" class="delete"><a title="Delete"> <i
-		                                    class="glyphicon glyphicon-trash fa-2x"></i> </a></td>
-		                        </tr>
+			                                    <div class="price"><span>${{data.price}}</span></div>
+			                                </div>
+			                            </td>
+			                            <td style="width:15%">
+			                                <a class="btn btn-primary">
+			                                    <span class="add2cart"><i class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span>
+			                                </a>
+			                            </td>
+			                            <td style="width:40%" class="delete"><a title="Delete"> <i
+			                                    class="glyphicon glyphicon-trash fa-2x"></i> </a></td>
+			                        </tr>
 
-		                        <tr class="CartProduct">
-		                            <td style="width:10%" class="CartProductThumb">
-		                                <div><a href="product-details.html">
-		                                    <img src="images/product/11.jpg" alt="img"></a></div>
-		                            </td>
-		                            <td style="width:40%">
-		                                <div class="CartDescription">
-		                                    <h4><a href="product-details.html">Denim T shirt Black </a></h4>
-		                                    <span class="size">12 x 1.5 L</span>
+			                        <!-- <tr class="CartProduct">
+			                            <td style="width:10%" class="CartProductThumb">
+			                                <div><a href="product-details.html">
+			                                    <img src="images/product/11.jpg" alt="img"></a></div>
+			                            </td>
+			                            <td style="width:40%">
+			                                <div class="CartDescription">
+			                                    <h4><a href="product-details.html">Denim T shirt Black </a></h4>
+			                                    <span class="size">12 x 1.5 L</span>
 
-		                                    <div class="price"><span>$80</span></div>
-		                                </div>
-		                            </td>
-		                            <td style="width:15%"><a class="btn btn-primary"> <span class="add2cart"><i
-		                                    class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></td>
-		                            <td style="width:40%" class="delete"><a title="Delete"> <i
-		                                    class="glyphicon glyphicon-trash fa-2x"></i> </a></td>
-		                        </tr>
+			                                    <div class="price"><span>$80</span></div>
+			                                </div>
+			                            </td>
+			                            <td style="width:15%"><a class="btn btn-primary"> <span class="add2cart"><i
+			                                    class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></td>
+			                            <td style="width:40%" class="delete"><a title="Delete"> <i
+			                                    class="glyphicon glyphicon-trash fa-2x"></i> </a></td>
+			                        </tr>
 
-		                        <tr class="CartProduct">
-		                            <td style="width:10%" class="CartProductThumb">
-		                                <div><a href="product-details.html">
-		                                    <img src="images/product/a2.jpg" alt="img"></a></div>
-		                            </td>
-		                            <td style="width:40%">
-		                                <div class="CartDescription">
-		                                    <h4><a href="product-details.html">Denim T shirt Black </a></h4>
-		                                    <span class="size">12 x 1.5 L</span>
+			                        <tr class="CartProduct">
+			                            <td style="width:10%" class="CartProductThumb">
+			                                <div><a href="product-details.html">
+			                                    <img src="images/product/a2.jpg" alt="img"></a></div>
+			                            </td>
+			                            <td style="width:40%">
+			                                <div class="CartDescription">
+			                                    <h4><a href="product-details.html">Denim T shirt Black </a></h4>
+			                                    <span class="size">12 x 1.5 L</span>
 
-		                                    <div class="price"><span>$88</span></div>
-		                                </div>
-		                            </td>
-		                            <td style="width:15%"><a class="btn btn-primary"> <span class="add2cart"><i
-		                                    class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></td>
-		                            <td style="width:40%" class="delete"><a title="Delete"> <i
-		                                    class="glyphicon glyphicon-trash fa-2x"></i> </a></td>
-		                        </tr>
+			                                    <div class="price"><span>$88</span></div>
+			                                </div>
+			                            </td>
+			                            <td style="width:15%"><a class="btn btn-primary"> <span class="add2cart"><i
+			                                    class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></td>
+			                            <td style="width:40%" class="delete"><a title="Delete"> <i
+			                                    class="glyphicon glyphicon-trash fa-2x"></i> </a></td>
+			                        </tr>
 
-		                        <tr class="CartProduct">
-		                            <td style="width:10%" class="CartProductThumb">
-		                                <div><a href="product-details.html">
-		                                    <img src="images/product/a5.jpg" alt="img"></a></div>
-		                            </td>
-		                            <td style="width:40%">
-		                                <div class="CartDescription">
-		                                    <h4><a href="product-details.html">Denim T shirt Black </a></h4>
-		                                    <span class="size">12 x 1.5 L</span>
+			                        <tr class="CartProduct">
+			                            <td style="width:10%" class="CartProductThumb">
+			                                <div><a href="product-details.html">
+			                                    <img src="images/product/a5.jpg" alt="img"></a></div>
+			                            </td>
+			                            <td style="width:40%">
+			                                <div class="CartDescription">
+			                                    <h4><a href="product-details.html">Denim T shirt Black </a></h4>
+			                                    <span class="size">12 x 1.5 L</span>
 
-		                                    <div class="price"><span>$70</span></div>
-		                                </div>
-		                            </td>
-		                            <td style="width:15%"><a class="btn btn-primary"> <span class="add2cart"><i
-		                                    class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></td>
-		                            <td style="width:40%" class="delete"><a title="Delete"> <i
-		                                    class="glyphicon glyphicon-trash fa-2x"></i> </a></td>
-		                        </tr>
+			                                    <div class="price"><span>$70</span></div>
+			                                </div>
+			                            </td>
+			                            <td style="width:15%"><a class="btn btn-primary"> <span class="add2cart"><i
+			                                    class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></td>
+			                            <td style="width:40%" class="delete"><a title="Delete"> <i
+			                                    class="glyphicon glyphicon-trash fa-2x"></i> </a></td>
+			                        </tr>
 
-		                        <tr class="CartProduct">
-		                            <td style="width:10%" class="CartProductThumb">
-		                                <div><a href="product-details.html">
-		                                    <img src="images/product/a4.jpg" alt="img"></a></div>
-		                            </td>
-		                            <td style="width:40%">
-		                                <div class="CartDescription">
-		                                    <h4><a href="product-details.html">Denim T shirt Black </a></h4>
-		                                    <span class="size">12 x 1.5 L</span>
+			                        <tr class="CartProduct">
+			                            <td style="width:10%" class="CartProductThumb">
+			                                <div><a href="product-details.html">
+			                                    <img src="images/product/a4.jpg" alt="img"></a></div>
+			                            </td>
+			                            <td style="width:40%">
+			                                <div class="CartDescription">
+			                                    <h4><a href="product-details.html">Denim T shirt Black </a></h4>
+			                                    <span class="size">12 x 1.5 L</span>
 
-		                                    <div class="price"><span>$55</span></div>
-		                                </div>
-		                            </td>
-		                            <td style="width:15%"><a class="btn btn-primary"> <span class="add2cart"><i
-		                                    class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></td>
-		                            <td style="width:40%" class="delete"><a title="Delete"> <i
-		                                    class="glyphicon glyphicon-trash fa-2x"></i> </a></td>
-		                        </tr>
+			                                    <div class="price"><span>$55</span></div>
+			                                </div>
+			                            </td>
+			                            <td style="width:15%"><a class="btn btn-primary"> <span class="add2cart"><i
+			                                    class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></td>
+			                            <td style="width:40%" class="delete"><a title="Delete"> <i
+			                                    class="glyphicon glyphicon-trash fa-2x"></i> </a></td>
+			                        </tr>
 
-		                        <tr class="CartProduct">
-		                            <td style="width:10%" class="CartProductThumb">
-		                                <div><a href="product-details.html">
-		                                    <img src="images/product/a3.jpg" alt="img"></a></div>
-		                            </td>
-		                            <td style="width:40%">
-		                                <div class="CartDescription">
-		                                    <h4><a href="product-details.html">Denim T shirt Black </a></h4>
-		                                    <span class="size">12 x 1.5 L</span>
+			                        <tr class="CartProduct">
+			                            <td style="width:10%" class="CartProductThumb">
+			                                <div><a href="product-details.html">
+			                                    <img src="images/product/a3.jpg" alt="img"></a></div>
+			                            </td>
+			                            <td style="width:40%">
+			                                <div class="CartDescription">
+			                                    <h4><a href="product-details.html">Denim T shirt Black </a></h4>
+			                                    <span class="size">12 x 1.5 L</span>
 
-		                                    <div class="price"><span>$60</span></div>
-		                                </div>
-		                            </td>
-		                            <td style="width:15%"><a class="btn btn-primary"> <span class="add2cart"><i
-		                                    class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></td>
-		                            <td style="width:40%" class="delete"><a title="Delete"> <i
-		                                    class="glyphicon glyphicon-trash fa-2x"></i> </a></td>
-		                        </tr>
+			                                    <div class="price"><span>$60</span></div>
+			                                </div>
+			                            </td>
+			                            <td style="width:15%"><a class="btn btn-primary"> <span class="add2cart"><i
+			                                    class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></td>
+			                            <td style="width:40%" class="delete"><a title="Delete"> <i
+			                                    class="glyphicon glyphicon-trash fa-2x"></i> </a></td>
+			                        </tr> -->
 
 		                        </tbody>
 		                    </table>
@@ -171,3 +172,52 @@
 		<div class="gap"></div>
 	</div>
 </template>
+
+
+<script type="text/javascript">
+
+  import axios from 'axios'
+  import Flash from '../../../../helper/flash'
+  import VueTranslate from 'vue-translate-plugin'
+  import Vue from 'vue';
+  Vue.use(VueTranslate);
+  
+  export default{
+    data(){
+      return{
+        loaded: true,
+        response: null,
+      }
+    },
+    created() {
+    	this.loading = true
+        axios.get(`/api/wishlist`)
+        .then(response => {
+            this.response = response.data['data']  
+            this.loading = false
+        })
+        .catch(e => {
+          this.errors.push(e)
+        })
+    },
+    locales: {
+        en: {
+            'entry_personal_information': 'My personal information',
+            'entry_text_update_information': 'Please be sure to update your personal information if it has​​​​ changed.',
+            'entry_require_field': 'Required Field'
+        },
+        kh: {
+            'entry_personal_information': 'ពត៌មានផ្ទាល់ខ្លួន',
+            'entry_text_update_information': 'Please be sure to update your personal information if it has​​​​ changed.',
+            'entry_require_field': 'Required Field'
+        }
+    },
+    mounted: function(){
+        // this.loading = true;
+
+        // return this.$scopedSlots.default({
+        //   response: this.response.data['data']
+        // })
+    }
+  }
+</script>
