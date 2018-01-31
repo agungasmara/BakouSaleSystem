@@ -381,6 +381,7 @@
             // }
         },
         mounted(){
+            // prdouct detail
             // switch color
             $(".swatches li").click(function () {
                 $(".swatches li.selected").removeClass("selected");
