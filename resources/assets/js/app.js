@@ -752,22 +752,22 @@ const router = new VueRouter({
             }
         ]       
     },
-    {path:'/admin/previews',name:'previews',component:Preview,
+    {path:'/admin/previews',name:'preview',component:Preview,
         children:[
             {
                 path:'list',
-                name:'PreviewsList',
-                component:PreviewsList
+                name:'PreviewList',
+                component:PreviewList
             },
             {
                 path:'add',
                 name:'MainForm',
-                component:PreviewsForm
+                component:PreviewForm
             },
             {
                 path:'edit/:id',
                 name:'EditForm',
-                component:PreviewsEdit,
+                component:PreviewEdit,
                 props:true
             }
         ]       
