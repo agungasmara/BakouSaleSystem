@@ -752,7 +752,7 @@ const router = new VueRouter({
             }
         ]       
     },
-    {path:'/admin/previews',name:'previews',component:Preview,
+    {path:'/admin/previews',name:'preview',component:Preview,
         children:[
             {
                 path:'list',
