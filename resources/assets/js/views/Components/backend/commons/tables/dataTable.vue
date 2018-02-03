@@ -21,6 +21,11 @@
 				<img v-if="index.value=='image'" :src="props.item.image ? props.item.image:'/images/icon/no-image.png'" style="width: auto;max-width: 30px;height: auto;max-height: 30px;">
 
 				<div v-else-if="index.text=='Action'">
+
+					<span style="cursor:pointer;color:blue;" @click="changeStatus(props.item[index.value])"">
+						<v-checkbox @click.native="tile='!tile'" value="left" label="Left"></v-checkbox>
+					</span>
+					&nbsp;
 					<span style="cursor:pointer;color:blue;" @click="editData(props.item[index.value])"">
 						<i class="material-icons">edit</i>
 					</span>
@@ -82,6 +87,7 @@
 		],
 		data(){
 			return{
+				tile:true,
 				tbloading:true,
 				refreshTable:[],
 				Message:'Are you sure you want to delete item with ID=',
@@ -136,6 +142,11 @@
 				//this.components.push(id)
 
 				this.$router.push('edit/'+id)
+			},
+			changeStatus(id){
+				axios.get(this.url+id).then((res)=>{
+					this.tile=res.data.store_id
+				})
 			}
 		}
 	}

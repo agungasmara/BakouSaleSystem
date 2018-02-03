@@ -14,7 +14,7 @@
 		    <data-table 
 		    	v-bind:list-title="listTitle"
 		    	v-bind:data-header="headers" 
-		    	v-bind:data-value="manufacturers"
+		    	v-bind:data-value="downloads"
 		    	v-bind:url="url"
 	    		v-bind:btn-new-url="btnNewUrl"
 		    	v-on:change="fetchData">
@@ -37,16 +37,19 @@
 		],
 		data(){
 			return{
-				url:'/api/manufacturers/',
-				btnNewUrl:'/admin/manufacturers/add',
+				url:'/api/downloads/',
+				btnNewUrl:'/admin/downloads/add',
 				listTitle:'Weights List',
 				headers: [
-			        { text: 'Manufacturer ID',align: 'left',class:'text-xs-left',value: 'manufacturer_id'},
-			        { text: 'Name',align:'left',class:'text-xs-left', value: 'name' },
-			        { text: 'Image',align:'left',class:'text-xs-left', value: 'image' },
-			        {text: 'Action',align:'center',class:'text-xs-center',value:'manufacturer_id',sortable: false}
+			        { text: 'Download ID',align: 'left',class:'text-xs-left',value: 'download_id'},
+			        { text: 'Filename',align:'left',class:'text-xs-left', value: 'filename' },
+			        { text: 'Mask',align:'left',class:'text-xs-left', value: 'mask' },
+			        { text: 'Language',align:'left',class:'text-xs-left', value: 'language' },
+			        { text: 'Description',align:'left',class:'text-xs-left', value: 'description' },
+			        { text: 'Date Added',align:'left',class:'text-xs-left', value: 'date_added' },
+			        {text: 'Action',align:'center',class:'text-xs-center',value:'download_id',sortable: false}
 			    ],
-				manufacturers:[],
+				downloads:[],
 				breadcrumbTitle:'Manufacturer List',
 				breadcrumbs: [
 			        {
@@ -72,7 +75,7 @@
 		methods:{
 			fetchData(){
 				axios.get(this.url).then(response=>{
-					this.manufacturers=response.data;
+					this.downloads=response.data;
 				});
 			}
 		}
