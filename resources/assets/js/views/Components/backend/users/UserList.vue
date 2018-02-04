@@ -13,7 +13,9 @@
 		    	v-bind:data-value="users"
 	    		v-bind:url="url"
 	    		v-bind:btn-new-url="btnNewUrl"
-		    	v-on:change="fetchData">
+		    	v-on:change="fetchData"
+		    	v-bind:del="true"
+		    	v-bind:eye="true">
 		    </data-table>
 
 		</v-app>
@@ -45,7 +47,7 @@
 			        { text: 'Image',align:'left',class:'text-xs-left', value: 'image' },
 			        { text: 'Status',align:'left',class:'text-xs-left', value: 'status' },
 			        { text: 'Date',align:'left',class:'text-xs-left', value: 'date_added' },
-			        { text: 'Action', value: 'id',class:'text-xs-center',align:'center',sortable:false }
+			        { text: 'Action', value: 'id',status:'status',class:'text-xs-center',align:'center',sortable:false }
 			    ],
 				users:[],
 				breadcrumbTitle:'Users List',

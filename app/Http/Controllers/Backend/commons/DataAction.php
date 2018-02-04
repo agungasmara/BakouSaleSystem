@@ -41,7 +41,7 @@
 	*/
 	class DataAction extends Controller{
 		
-		public function StoreData($table,$condition=[],$OrAnd="",$data)
+		public function StoreData($table,$condition=[],$OrAnd="",$data,$id="")
 		{
 
 			$success=false;
@@ -86,6 +86,7 @@
 		        	if($saved){
 			            $success=true;
 			            $message='Data successfully saved.';
+
 			        }
 			        else
 			        {
@@ -108,10 +109,16 @@
 		            $message='Failed to save data!';
 		        }
 	        }
-	        return response()->json([
-	            'success'=>$success,
-	            'message'=>$message
-	        ]);
+	         if($id==""){
+
+	        	return array('success'=>$success,'message'=>$message);
+
+	         }else{
+	        	
+	         	return array('success'=>$success,'message'=>$message,'data'=>$table::orderBy($id,'desc')->first());
+
+	         }
+	        
 		}
 		public function EditData($table,$id)
 		{

@@ -19,17 +19,20 @@
 
 
 				<img v-if="index.value=='image'" :src="props.item.image ? props.item.image:'/images/icon/no-image.png'" style="width: auto;max-width: 30px;height: auto;max-height: 30px;">
-
 				<div v-else-if="index.text=='Action'">
+					<span v-if="eye" style="cursor:pointer;" :style="props.item[index.status]>0 ? 'color:green;':'color:red;'" @click="changeStatus(props.item[index.value],props.item[index.status],index.status)">
+						<i class="material-icons">remove_red_eye</i>
+					</span>
 					<span style="cursor:pointer;color:blue;" @click="editData(props.item[index.value])"">
 						<i class="material-icons">edit</i>
 					</span>
 					&nbsp;
-					<span style="cursor:pointer;color:red;" v-on:click="confirmDel(props.item[index.value],props.item.name)">
+					<span v-if="del" style="cursor:pointer;color:red;" v-on:click="confirmDel(props.item[index.value],props.item.name)">
 						<i class="material-icons">delete_forever</i>
 					</span>
 				</div>
 				<span v-else>{{ props.item[index.value] }}</span>
+
 			</td>
 			
 		</template>
@@ -78,7 +81,9 @@
 			'dataHeader',//data table header(column name)
 			'dataValue',//fetch record and pass to data table component
 			'url',//resource url laravel
-			'btnNewUrl'
+			'btnNewUrl',
+			'del',
+			'eye'
 		],
 		data(){
 			return{
@@ -94,12 +99,21 @@
 				tmp: '',
 				search: '',
 				pagination: {},
+				data:{},
+				status:null,
+				dataStatus:{}
 			}
 		},
 		mounted(){
 			this.tbloading=false
 		},
+		watch:{
+			status:function(status){
 
+				alert(status)
+				this.status=status
+			}
+		},
 		methods:{
 			fetchData(){
 				axios.get(this.url).then(response=>{
@@ -134,14 +148,34 @@
 				
 			},
 			editData(id){
-				//this.components.push(id)
-
 				this.$router.push('edit/'+id)
 			},
-			changeStatus(id){
-				axios.get(this.url+id).then((res)=>{
-					this.tile=res.data.store_id
-				})
+			changeStatus(id,value,field){
+				var progress='progressing'+id
+				this.data[progress]=true
+				if(value==1){
+					value=0
+				}else if(value==0){
+					value=1
+				}
+				this.dataStatus[field]=value
+				axios.put(this.url+id, {
+		          data:this.dataStatus
+		        }).then((res)=>{
+		        	console.log(res.data)
+		        	if(res.data.success==true){
+		        		Flash.setSuccess(res.data.message)
+		        		this.fetchData()
+		        	}else{
+		        		Flash.setError(res.data.message)
+		        	}
+		        })
+		        .catch((err) => {
+                  	if(err.response.status === 422) {
+                      	this.error = err.response.message
+					}
+					Flash.setError('Error while updateing data')
+              	})
 			}
 		}
 	}
