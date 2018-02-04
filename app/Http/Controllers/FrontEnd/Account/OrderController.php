@@ -27,7 +27,8 @@ class OrderController extends Controller
 
     public function show($id){
         $Order = $this->getOrder($id);
-        return response()->json(['data'=>$Order,'success' => true, 'message' => 'Success', 'lang'=>Session::get('applangId')]);
+        $OrderProducts = $this->getOrderProducts($id);
+        return response()->json(['data'=>$Order,'order_product'=>$OrderProducts,'success' => true, 'message' => 'Success', 'lang'=>Session::get('applangId')]);
     }
 
     public function getOrders($customer_id,$config_store_id){
@@ -175,8 +176,33 @@ class OrderController extends Controller
         return $data;
     }
 
+    public function getOrderProducts($order_id){
+        $OrderProducts = DB::table("order_product as op")
+                         ->select('op.*','p.image')
+                         ->join('product as p','p.product_id','=','op.product_id')
+                         ->where('op.order_id',$order_id)
+                         ->get();
+        $data = array();
+        foreach ($OrderProducts as $OrderProduct) {
+            $data[] = array(
+                        'product_id'=>$OrderProduct->product_id,
+                        'name'=>$OrderProduct->name,
+                        'image'=>$OrderProduct->image,
+                        'model'=>$OrderProduct->model,
+                        'quantity'=>$OrderProduct->quantity,
+                        'price'=>$OrderProduct->price,
+                        'total'=>$OrderProduct->total,
+                        'tax'=>$OrderProduct->tax,
+                        'reward'=>$OrderProduct->reward
+                      );
+        }
+
+        return $data;
+    }
+
     public function getTotalOrderProducts($order_id){
         $TotalOrderProducts = DB::table('order_product')->Where('order_id',$order_id)->count();
         return $TotalOrderProducts;
     }
 }   
+    

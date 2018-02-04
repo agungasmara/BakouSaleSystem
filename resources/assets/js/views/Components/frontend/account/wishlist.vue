@@ -94,7 +94,7 @@
       }
     },
     created() {
-    	this.loading = true
+    	
         axios.get(`/api/wishlist`)
         .then(response => {
             this.response = response.data['data']
