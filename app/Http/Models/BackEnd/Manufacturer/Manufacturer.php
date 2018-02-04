@@ -9,7 +9,9 @@ class Manufacturer extends Model
     protected $table='manufacturer';
     protected $primaryKey='manufacturer_id';
     protected $fillable=[
-    	'value'
+    	'name',
+    	'sort_order',
+    	'image'
     ];
     public $timestamps=false;
     static function AllManufacturers()

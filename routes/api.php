@@ -90,3 +90,9 @@ Route::Resource('/lengths','Backend\Lengths\LengthsController');
 
 //======Manufacturer API
 Route::Resource('/manufacturers','Backend\Manufacturers\ManufacturersController');
+
+//======Download API
+Route::Resource('/downloads','Backend\Downloads\DownloadsController');
+
+//======Preview API
+Route::Resource('/previews','Backend\Previews\PreviewsController');

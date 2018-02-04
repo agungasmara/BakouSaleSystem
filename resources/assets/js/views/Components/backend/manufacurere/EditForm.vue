@@ -29,9 +29,9 @@
 				e1:true,
 				valid: true,
 			    group:[
-			    	{	class:'xs12 sm6 md6',	 key:'store_id',	type:'select',	 text:'Store',count:0,items:'storesItems'	},
-					{	class:'xs12 sm6 md6',	 key:'name',	type:'text',	 text:'Name',count:50	},
-					{	class:'xs12 sm6 md6',	 key:'image',	type:'image',text:'Image'	}
+					{	class:'xs12 sm4 md4',	 key:'name',	type:'text',	 text:'Name',count:100	},
+					{	class:'xs12 sm4 md4',	 key:'sort_order',	type:'number',text:'Sort Order',count:5	},
+					{	class:'xs12 sm4 md4',	 key:'image',	type:'image',	 text:'Image'	}
 				],
 				rules:{
 					name: [
@@ -44,7 +44,7 @@
 				},
 				data:{
 					name:' ',
-					store_id:'',
+					sort_order:'',
 					image: ''
 				},
 				select:{

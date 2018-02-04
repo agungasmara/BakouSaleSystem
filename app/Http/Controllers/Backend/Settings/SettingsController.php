@@ -23,7 +23,7 @@ class SettingsController extends Controller
     }
 
     public function show($id){
-        return response()->json([]);
+        return response()->json(Setting::find($id));
     }
 
     public function store(Request $request)

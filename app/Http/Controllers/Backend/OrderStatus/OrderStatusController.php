@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Models\BackEnd\OrderStatus\OrderStatus;
 use App\Http\Models\Backend\Language\Language;
-use Illuminate\Support\Facades\DB;
 /*
     DataAction class use for any action the data from any table
     For more detail i have comment in DataAction class in commons folder
