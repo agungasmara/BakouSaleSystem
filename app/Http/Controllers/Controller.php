@@ -24,9 +24,10 @@ class Controller extends BaseController
     */
 	public function getCategories($parent_id = 0,$cat_type = 0) {
 		$query = DB::table('category')
+				->select('category.*','category_description.name as name')
 				->leftJoin('category_description' ,'category.category_id','=' ,'category_description.category_id')
 				->leftJoin('category_to_store' , 'category.category_id', '=', 'category_to_store.category_id')
-				->where('category_description.category_id',$cat_type)
+				->where('category.category_type_id',$cat_type)
 				->where('category.parent_id',$parent_id)
 				->where('category_to_store.store_id',0)
 				->where('category.status',1)

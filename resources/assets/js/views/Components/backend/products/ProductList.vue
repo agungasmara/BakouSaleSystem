@@ -27,7 +27,8 @@
 		    	v-bind:data-value="products"
 		    	v-bind:url="url"
 	    		v-bind:btn-new-url="btnNewUrl"
-		    	v-on:change="fetchData">
+		    	v-on:change="fetchData"
+		    	v-bind:del="true">
 		    </data-table>
 		    	<!-- v-bind:get-api="getApiUrl"
 		    	v-bind:delete-api="deleteApiUrl"

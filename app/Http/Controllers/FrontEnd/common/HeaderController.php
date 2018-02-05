@@ -27,7 +27,7 @@ class HeaderController extends Controller
                 if ($category->top) {
                     // Level 2
                     $children_data = array();
-                    $children = $this->getCategories($category->category_id,$ctype->category_type_id);
+                    $children = $this->getCategories($category->category_id,$category->category_type_id);
                     foreach ($children as $child) {
                         $filter_data = array(
                             'filter_category_id'  => $child->category_id,

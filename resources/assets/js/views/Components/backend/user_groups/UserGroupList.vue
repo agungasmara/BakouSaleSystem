@@ -13,7 +13,8 @@
 		    	v-bind:data-value="groups"
 	    		v-bind:url="url"
 	    		v-bind:btn-new-url="btnNewUrl"
-		    	v-on:change="fetchData">
+		    	v-on:change="fetchData"
+		    	v-bind:del="false">
 		    </data-table>
 
 		</v-app>

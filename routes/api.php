@@ -37,7 +37,7 @@ Route::get('/getGeoZone','Backend\commons\CommonsController@getGeoZone');
 Route::get('/getTaxClass','Backend\commons\CommonsController@getTaxClass');
 Route::get('/getTaxRate','Backend\commons\CommonsController@getTaxRate');
 Route::get('/getCustomerGroup','Backend\commons\CommonsController@getCustomerGroup');
-
+Route::get('/getAttributeGroup','Backend\commons\CommonsController@getAttributeGroup');
 
 //=====Setting API=============================
 
@@ -96,3 +96,9 @@ Route::Resource('/downloads','Backend\Downloads\DownloadsController');
 
 //======Preview API
 Route::Resource('/previews','Backend\Previews\PreviewsController');
+
+//======Preview API
+Route::Resource('/product_attribute','Backend\Products\Attributes\AttributeController');
+
+//======Preview API
+Route::Resource('/product_attribute_group','Backend\Products\AttributeGroups\AttributeGroupController');

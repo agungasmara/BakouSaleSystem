@@ -17,7 +17,9 @@
 		    	v-bind:data-value="languages"
 		    	v-bind:url="url"
 	    		v-bind:btn-new-url="btnNewUrl"
-		    	v-on:change="fetchData">
+		    	v-on:change="fetchData"
+		    	v-bind:del="false"
+		    	v-bind:eye="true">
 		    </data-table>
 
 		    <!--End of data table-->
@@ -48,7 +50,7 @@
 			        { text: 'Locale',align:'left',class:'text-xs-left', value: 'locale' },
 			        { text: 'Directory',align:'left',class:'text-xs-left', value: 'directory' },
 			        { text: 'Status',align:'left',class:'text-xs-left', value: 'status' },
-			        {text: 'Action',align:'center',class:'text-xs-center',value:'language_id',sortable: false}
+			        {text: 'Action',align:'center',class:'text-xs-center',value:'language_id',status:'status',sortable: false}
 			    ],
 				languages:[],
 				breadcrumbTitle:'Languages List',

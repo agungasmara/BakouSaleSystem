@@ -64,4 +64,12 @@ class CommonsController extends Controller
         return response()->json($stores);
 
     }
+    public function getAttributeGroup()
+    {
+
+        $atrributeGroup=DB::table('attribute_group_description')->select(['attribute_group_id as value','name as text'])->get();
+
+        return response()->json($atrributeGroup);
+
+    }
 }
