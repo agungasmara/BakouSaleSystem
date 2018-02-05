@@ -19,9 +19,9 @@
 			    <div class="col s2 m6 l6">
 			    	<router-link :to="backUrl" replace><v-btn color="primary" class="btn dropdown-settings breadcrumbs-btn right">Cancel</v-btn></router-link>
 
-			    	<v-btn @click.prevent="submit(2)" :disabled="!isValid" color="success" class="btn dropdown-settings breadcrumbs-btn right"	>
+			    	<!-- <v-btn @click.prevent="submit(2)" :disabled="!isValid" color="success" class="btn dropdown-settings breadcrumbs-btn right"	>
 				        Save & Close
-				    </v-btn>
+				    </v-btn> -->
 			     	<v-btn @click.prevent="submit(1)" :disabled="!isValid" class="btn dropdown-settings waves-effect waves-light breadcrumbs-btn right" color="success">
 			     		Save
 			     	</v-btn>

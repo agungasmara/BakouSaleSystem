@@ -30,14 +30,14 @@ class LengthsController extends Controller
             'value'=>$data['value']
         ];
         
-        $saveWeight = (new DataAction)->StoreData(Length::class,$lenCond,"",$length);
+        $saveLength = (new DataAction)->StoreData(Length::class,$lenCond,"",$length,"length_class_id");
 
-    	$lengthID=Length::where('value',$data['value'])->get(['length_class_id']);
-    	foreach($lengthID as $key=>$value){
-        	$lengthDesc['length_class_id']=$value->length_class_id;
+        if($saveLength['success']==true){
+            $lengthDesc['length_class_id'] = $saveLength['data']['length_class_id'];
+            return (new DataAction)->StoreData(LengthDescription::class,[],"",$lengthDesc); 
+        }else{
+            return $saveLength;
         }
-    	return (new DataAction)->StoreData(LengthDescription::class,[],"",$lengthDesc);  
-
     }
     public function show($id)
     {

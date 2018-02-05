@@ -59,7 +59,9 @@ class UsersController extends Controller
     public function update(Request $request,$id)
     {
         $data=$request['data'];
-        $data['image']=(new ImageMaker)->base64ToImage('images\\icon',$data['image']);
+        if(@$data['image']){
+            $data['image']=(new ImageMaker)->base64ToImage('images\\icon',$data['image']);    
+        }
         return (new DataAction)->UpdateData(User::class,$data,'user_id',$id);
         // return response()->json($data);
     }

@@ -185,6 +185,18 @@ import PreviewList from './views/Components/backend/preview/PreviewList.vue'
 import PreviewForm from './views/Components/backend/preview/MainForm.vue'
 import PreviewEdit from './views/Components/backend/preview/EditForm.vue'
 
+//***** ProductAttribute*****
+import ProductAttribute from './views/Components/backend/products/attributes/ProductAttribute.vue'
+import ProductAttributeList from './views/Components/backend/products/attributes/ProductAttributeList.vue'
+import ProductAttributeForm from './views/Components/backend/products/attributes/ProductAttributeForm.vue'
+import ProductAttributeEdit from './views/Components/backend/products/attributes/ProductAttributeEditForm.vue'
+
+//***** Product Attribute Group*****
+import ProductAttributeGroup from './views/Components/backend/products/attribute_groups/ProductAttributeGroup.vue'
+import ProductAttributeGroupList from './views/Components/backend/products/attribute_groups/ProductAttributeGroupList.vue'
+import ProductAttributeGroupForm from './views/Components/backend/products/attribute_groups/ProductAttributeGroupForm.vue'
+import ProductAttributeGroupEdit from './views/Components/backend/products/attribute_groups/ProductAttributeGroupEditForm.vue'
+
 //import router from './router'
 import VueResource from 'vue-resource'
 import Vuetify from 'vuetify'
@@ -636,17 +648,17 @@ const router = new VueRouter({
         children:[
             {
                 path:'list',
-                name:'TaxRuleList',
+                name:'TaxRateList',
                 component:TaxRateList
             },
             {
                 path:'add',
-                name:'TaxRuleForm',
+                name:'TaxRateForm',
                 component:TaxRateForm
             },
             {
                 path:'edit/:id',
-                name:'TaxRulesEdit',
+                name:'TaxRateEdit',
                 component:TaxRateEdit,
                 props:true
             }
@@ -681,12 +693,12 @@ const router = new VueRouter({
             },
             {
                 path:'add',
-                name:'MainForm',
+                name:'WeightForm',
                 component:WeightForm
             },
             {
                 path:'edit/:id',
-                name:'EditForm',
+                name:'WeightEdit',
                 component:WeightEdit,
                 props:true
             }
@@ -701,12 +713,12 @@ const router = new VueRouter({
             },
             {
                 path:'add',
-                name:'MainForm',
+                name:'LengthForm',
                 component:LengthForm
             },
             {
                 path:'edit/:id',
-                name:'EditForm',
+                name:'LengthEdit',
                 component:LengthEdit,
                 props:true
             }
@@ -721,12 +733,12 @@ const router = new VueRouter({
             },
             {
                 path:'add',
-                name:'MainForm',
+                name:'ManufacturerForm',
                 component:ManufacturerForm
             },
             {
                 path:'edit/:id',
-                name:'EditForm',
+                name:'ManufacturerEdit',
                 component:ManufacturerEdit,
                 props:true
             }
@@ -741,12 +753,12 @@ const router = new VueRouter({
             },
             {
                 path:'add',
-                name:'MainForm',
+                name:'DownloadForm',
                 component:DownloadForm
             },
             {
                 path:'edit/:id',
-                name:'EditForm',
+                name:'DownloadEdit',
                 component:DownloadEdit,
                 props:true
             }
@@ -761,13 +773,53 @@ const router = new VueRouter({
             },
             {
                 path:'add',
-                name:'MainForm',
+                name:'PreviewForm',
                 component:PreviewForm
             },
             {
                 path:'edit/:id',
-                name:'EditForm',
+                name:'PreviewEdit',
                 component:PreviewEdit,
+                props:true
+            }
+        ]       
+    },
+    {path:'/admin/product_attributes',name:'product_attributes',component:ProductAttribute,
+        children:[
+            {
+                path:'list',
+                name:'ProductAttributeList',
+                component:ProductAttributeList
+            },
+            {
+                path:'add',
+                name:'ProductAttributeForm',
+                component:ProductAttributeForm
+            },
+            {
+                path:'edit/:id',
+                name:'ProductAttributeEdit',
+                component:ProductAttributeEdit,
+                props:true
+            }
+        ]       
+    },
+    {path:'/admin/product_attribute_groups',name:'product_attributes_groups',component:ProductAttributeGroup,
+        children:[
+            {
+                path:'list',
+                name:'ProductAttributeGroupList',
+                component:ProductAttributeGroupList
+            },
+            {
+                path:'add',
+                name:'ProductAttributeGroupForm',
+                component:ProductAttributeGroupForm
+            },
+            {
+                path:'edit/:id',
+                name:'ProductAttributeGroupEdit',
+                component:ProductAttributeGroupEdit,
                 props:true
             }
         ]       

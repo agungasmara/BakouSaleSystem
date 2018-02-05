@@ -36,7 +36,7 @@ class LanguagesController extends Controller
         $condition=[
             'name'=>$data['name']
         ];
-
+        $data['image']=(new ImageMaker)->base64ToImage('images\\icon',$data['image']);
         return (new DataAction)->StoreData(Language::class,$condition,"",$data);
     }
     public function show($id)
@@ -49,8 +49,11 @@ class LanguagesController extends Controller
     }
     public function update(Request $request,$id)
     {
-         $data=$request['data'];
-         return (new DataAction)->UpdateData(Language::class,$data,'language_id',$id);
+        $data=$request['data'];
+        if(@$data['image']){
+            $data['image']=(new ImageMaker)->base64ToImage('images\\icon',$data['image']);    
+        }
+        return (new DataAction)->UpdateData(Language::class,$data,'language_id',$id);
     }
     public function destroy($id)
     {
