@@ -121,7 +121,6 @@ Route::post('/RemoveFromCart','FrontEnd\Product\CartController@RemoveFromCart');
 Route::post('/UpdateCart','FrontEnd\Product\CartController@UpdateCart');
 Route::post('/checkout','FrontEnd\Product\CartController@Checkout');
 
-
 // // Front End Design
 // // Route::resource('/', 'FrontEnd\TestController');
 // // Route::get('/', function () {
@@ -176,7 +175,6 @@ Route::put('/api/update', 'FrontEnd\TestController@UpdateApi');
 // Route::get('customer/address', 'FrontEnd\Product\FrontEndController@customer_address');
 // Route::get('account', 'FrontEnd\Product\FrontEndController@account');
 
-
 // Route::resource('test/', 'FrontEnd\TestController');
 // Route::get('/api/getTest', 'FrontEnd\TestController@getTest');
 // Route::get('/api/show/{id}', 'FrontEnd\TestController@getShow');
@@ -208,7 +206,7 @@ Route::group(['middleware' => 'auth'], function() {
 
     //         return response()->json(['success' => 'true', 'message' => 'Loading users', 'data' => ['users' => $users->toJson()]], 200);
 
-//         return response()->json(['success' => 'true', 'message' => 'Loading users', 'data' => ['users' => $users->toJson()]], 200);
+    //         return response()->json(['success' => 'true', 'message' => 'Loading users', 'data' => ['users' => $users->toJson()]], 200);
         
     });
 
