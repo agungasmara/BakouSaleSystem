@@ -25,7 +25,7 @@
 		      		</v-breadcrumbs>
 			    </div>
 			    <div class="col s2 m6 l6">
-			      	<router-link to="/admin/attributes/add" replace><v-btn class="btn dropdown-settings waves-effect waves-light breadcrumbs-btn right" color="primary">Create New</v-btn></router-link>
+			      	<router-link to="/admin/categories/add" replace><v-btn class="btn dropdown-settings waves-effect waves-light breadcrumbs-btn right" color="primary">Create New</v-btn></router-link>
 			    </div>
 			  </div>
 			</div>
@@ -49,26 +49,62 @@
 			      <v-card-title>
 			        <v-spacer>
 			        	<div>
-			                Attribute List
+			                Categories List
 			            </div>
 			        </v-spacer>
 			        <v-text-field append-icon="search" label="Search" single-line hide-details v-model="search"></v-text-field>
 			      </v-card-title>
-				    <v-data-table v-bind:headers="headers" :items="settings" v-bind:search="search" class="elevation-1" >
+				    <v-data-table v-bind:headers="headers" :items="categories" v-bind:search="search" class="elevation-1" >
 						<template slot="items" slot-scope="props">
-							<td class="">{{ props.item.id }}</td>
-							<td class="text-xs-left">{{ props.item.name }}</td>
-							<!-- <td class="text-xs-left">{{ props.item.code }}</td>
-							<td class="text-xs-left">{{ props.item.key }}</td>
-							<td class="text-xs-left">{{ props.item.value }}</td>
-							<td class="text-xs-left">{{ props.item.serialized }}</td> -->
-							<td class="text-xs-center">
-								<span style="cursor:pointer;" @click="editSetting(props.item.setting_id)"">
-									<i class="material-icons">edit</i>
-								</span>
-								<span style="cursor:pointer;" v-on:click="confirmDel(props.item.setting_id,props.item.name)"><i class="material-icons">delete_forever</i></span>
+							<td v-for="index in headers" :class="index.class">
+								<img v-if="index.value=='image'" :src="props.item.image ? props.item.image:'/images/icon/no-image.png'" style="width: auto;max-width: 30px;height: auto;max-height: 30px;">
+								<div v-else-if="index.text=='Status'">
+									<span>
+										{{ active[props.item[index.value]] }}
+									</span>
+								</div>
+								<div v-else-if="index.text=='Action'">
+									<span style="cursor:pointer;color:blue;" @click="editData(props.item[index.value])"">
+										<i class="material-icons">edit</i>
+									</span>
+									&nbsp;
+									<span style="cursor:pointer;color:red;" v-on:click="confirmDel(props.item[index.value],props.item.name)">
+										<i class="material-icons">delete_forever</i>
+									</span>
+								</div>
+								<div v-else>
+									<span v-if="props.item[index.parent]">
+										{{props.item[index.parent]}} ->
+									</span>
+									<span>
+										{{ props.item[index.value] }}
+									</span>
+								</div>
 							</td>
 						</template>
+						<!-- <template slot="items" slot-scope="props">
+							<td v-for="index in headers" :class="index.class">
+								<img v-if="index.value=='image'" :src="props.item.image ? props.item.image:'/images/icon/no-image.png'" style="width: auto;max-width: 30px;height: auto;max-height: 30px;">
+
+								<div v-else-if="index.text=='Action'">
+									<span style="cursor:pointer;color:blue;" @click="editData(props.item[index.value])"">
+										<i class="material-icons">edit</i>
+									</span>
+									&nbsp;
+									<span style="cursor:pointer;color:red;" v-on:click="confirmDel(props.item[index.value],props.item.name)">
+										<i class="material-icons">delete_forever</i>
+									</span>
+								</div>
+								<div v-else>
+									<span v-if="props.item[index.parent]">
+										{{props.item[index.parent]}} =>
+									</span>
+									<span>
+										{{ props.item[index.value] }}
+									</span>
+								</div>
+							</td>
+						</template> -->
 						<template slot="pageText" slot-scope="{ pageStart, pageStop }">
 				          From {{ pageStart }} to {{ pageStop }}
 				        </template>
@@ -98,7 +134,6 @@
 	import Flash from '../../../../helper/flash'
 	import axios from 'axios'
 	export default{
-		props:['settingid'],
 		data(){
 			return{
 				deleteMessage:'',
@@ -110,18 +145,21 @@
 				search: '',
 				pagination: {},
 				headers: [
-			        { text: 'Category ID',align: 'left',value: 'setting_id'},
-			        { text: 'Category Name',align:'center', value: 'name' },
-			        // { text: 'code',align:'center', value: 'code' },
-			        // { text: 'Key',align:'center', value: 'key' },
-			        // { text: 'Value',align:'center', value: 'value' },
-			        // { text: 'Serialized',align:'center', value: 'serialized' },
-			        { text: 'Action', value: 'action',align:'center',sortable:false }
+			        { text: 'Category ID',align: 'left',value: 'category_id'},
+			        { text: 'Category Name',align:'left', value: 'name',parent:'parent_name'},
+			        { text: 'Type',align:'left', value: 'type' },
+			        { text: 'Status',align:'left', value: 'status' },
+			        { text: 'Sort Order',align:'left', value: 'sort_order' },
+			        { text: 'Action', value: 'category_id',align:'center',sortable:false }
 			    ],
-				settings:[],
+			    active:[
+					'Inactive',
+					'Acitve',
+				],
+				categories:[],
 				breadcrumbs: [
 			        {
-			          text: 'Dashboard',
+			          text: 'Administrator',
 			          disabled: false
 			        },
 			        {
@@ -141,8 +179,8 @@
 		},
 		methods:{
 			fetchSettings(){
-				axios.get('/api/setting/list').then(response=>{
-					this.settings=response.data;
+				axios.get('/admin/api/categories').then(response=>{
+					this.categories=response.data;
 				});
 			},
 			confirmDel(id,name){
@@ -154,7 +192,7 @@
 			deleteItem(id,opt){
 				if(opt==1){
 					this.deleteMessage='Deleting...'
-					axios.delete('/api/setting/delete/'+id).then((res)=>{
+					axios.delete('/admin/api/categories/'+id).then((res)=>{
 						
 						if(res.data.deleted==true){
 							this.deleteMessage='Delete Successfully'

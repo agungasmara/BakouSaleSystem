@@ -1,165 +1,140 @@
 <template>
-	<section id="content">
-		<!--breadcrumbs start-->
-		<div id="breadcrumbs-wrapper">
-			<!-- Search for small screen -->
-			<div class="header-search-wrapper grey lighten-2 hide-on-large-only">
-			  <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize">
-			</div>
-			<div class="container">
-			  <div class="row">
-			    <div class="col s10 m6 l6">
-			      <h5 class="breadcrumbs-title">Forms</h5>
-			      <!-- <ol class="breadcrumbs">
-			        <li><a href="index.html">Dashboard</a>
-			        </li>
-			        <li><a href="#">Forms</a>
-			        </li>
-			        <li class="active">Forms Layouts</li>
-			      </ol> -->
-			      	<v-breadcrumbs>
-			        	<v-icon slot="divider">/</v-icon>
-		        		<v-breadcrumbs-item  v-for="item in breadcrumbs" :key="item.text" :disabled="item.disabled">
-		          			{{ item.text }}
-		        		</v-breadcrumbs-item>
-		      		</v-breadcrumbs>
-			    </div>
-			    <div class="col s2 m6 l6">
-			    	<router-link to="/admin/attributes/list" replace><v-btn color="primary" class="btn dropdown-settings breadcrumbs-btn right">Cancel</v-btn></router-link>
-
-			     	<router-link to="/admin/attributes/list" replace><v-btn @click="submit(1)" class="btn dropdown-settings waves-effect waves-light breadcrumbs-btn right" color="success">Save</v-btn></router-link>
-			    </div>
-			  </div>
-			</div>
-		</div>
-		<!--breadcrumbs end-->
-		<div id="basic-form" class="section">
-			<div class="container">
-				<v-app id="inspire">
-					<v-card>
-						<!-- <v-card-title>	
-							<v-breadcrumbs>
-					        	<v-icon slot="divider">forward</v-icon>
-					        		<v-breadcrumbs-item  v-for="item in breadcrumbs" :key="item.text" :disabled="item.disabled">
-					          			{{ item.text }}
-					        		</v-breadcrumbs-item>
-					      	</v-breadcrumbs>
-						</v-card-title> -->
-						<div class="flash flash__success" v-if="flash.success">
-							<v-alert color="success" icon="check_circle" value="true">
-				            	{{flash.success}}
-				            </v-alert>
-			          	</div>
-					    <v-form v-model="valid" ref="form" lazy-validation>
-					    	<v-container grid-list-md offset-s3>
-		              			<v-layout wrap>
-							    	<v-flex xs12 sm6 md6>
-							      		<v-select label="Select Store" v-model="select" :items="items" :rules="[v => !!v || 'Item is required']" required></v-select>
-							      	</v-flex>
-
-							    	<!-- <v-flex xs12 sm6 md6>
-							      		<v-text-field label="Code" v-model="code" :rules="codeRules" :counter="10" required></v-text-field>
-							      	</v-flex> -->
-
-							      	<v-flex xs12 sm6 md6>
-							      		<v-text-field label="Key" v-model="key" :rules="keyRules" :counter="10" required></v-text-field>
-							      	</v-flex>
-
-							      	<v-flex xs12 sm6 md6>
-							      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="10" required></v-text-field>
-							      	</v-flex>
-
-							      	<!-- <v-btn @click="submit(1)" :disabled="!valid">
-								        Save & New
-								    </v-btn>
-								    <v-btn @click="submit(2)" :disabled="!valid">
-								        Save & Close
-								    </v-btn>
-								    <router-link to="/admin/settings/list">
-									    <v-btn>
-									        Cancele
-									    </v-btn>
-								    </router-link> -->
-							    </v-layout>
-							</v-container>
-					    </v-form>
-					</v-card>
-				</v-app>
-			</div>
-		</div>
-	</section>
+<v-app id="inspire">
+	<normal-form
+		v-bind:url="url"
+		v-bind:id="0"
+		v-bind:breadcrumb-title="breadcrumbTitle"
+		v-bind:breadcrumbs="breadcrumbs"
+		v-bind:form-items="group"
+		v-bind:form-rules="rules"
+		v-bind:form-datas="data"
+		v-bind:select-items="select"
+		v-bind:back-url="backUrl"
+	></normal-form>
+</v-app>
 </template>
+	
 <script>
 	import Flash from '../../../../helper/flash'
 	import axios from 'axios'
+	import normalForm from '../commons/form/normalForm.vue'
 	export default{
+		components:{
+			'normalForm':normalForm
+		},
 		data(){
-			return{
+			return {
+				url:'/admin/api/categories/',
+				e1:true,
 				valid: true,
-			    code: '',
-			    codeRules: [
-			      (v) => !!v || 'Code is required',
-			      (v) => v && v.length <= 10 || 'Code must be less than 10 characters'
-			    ],
-			    key: '',
-			    keyRules: [
-			      (v) => !!v || 'Key is required',
-			      (v) => v && v.length <= 10 || 'Key must be less than 10 characters'
-			    ],
-			    value: '',
-			    valueRules: [
-			      (v) => !!v || 'Value is required',
-			      (v) => v && v.length <= 10 || 'Value must be less than 10 characters'
-			    ],
-			    select: null,
-			    items: [],
-			    breadcrumbs: [
+				btnImageDisabled:false,
+				btnText:'Upload Image',
+				imageUrl:'',
+				image:null,
+			    group:[
+					{	class:'xs12 sm6 md6',	 key:'category_type_id',	type:'select',	text:'Choose Category Type',	items:'categoryType',	count:100,	},
+					{	class:'xs12 sm6 md6',	 key:'parent_id',	type:'select',	items:'categoryParent',	text:'Choose Parent Category',count:100	},
+					{	class:'xs12 sm6 md6',	 key:'sort_order',	type:'text',	 text:'Sort Order',count:100	},
+					{	class:'xs12 sm6 md6',	 key:'status',	type:'text',	 text:'Status',count:100	},
+					{	class:'xs12 sm6 md6',	 key:'column',	type:'text',	 text:'Column',count:50	},
+					{	class:'xs12 sm6 md6',	 key:'top',	type:'text',	 text:'Top',count:100	},
+					{	class:'xs12 sm6 md6',	 key:'language_id',	type:'text',	 text:'Choose Language',count:100	},
+					{	class:'xs12 sm6 md6',	 key:'name',	type:'text',	 text:'Name',count:50	},
+					{	class:'xs12 sm6 md6',	 key:'description',	type:'text',	 text:'description',count:50	},
+					{	class:'xs12 sm4 md4',	 key:'meta_title',	type:'text',	 text:'Meta Title',count:50	},
+					{	class:'xs12 sm4 md4',	 key:'meta_keyword',	type:'text',	 text:'Meta Keyword',count:25	},
+					{	class:'xs12 sm4 md4',	 key:'meta_description',	type:'text',	 text:'Meta Description',count:100	},
+					{	class:'xs12 sm12 md12',	 key:'image',	type:'image',	 Value:'',count:0	}
+					
+				],
+				rules:{
+					// username: [
+				 //      (v) => !!v || 'Username is required',
+				 //      (v) => v && v.length <= 16 || 'Username must be less than 16 characters'
+				 //    ],
+					// firstname: [
+				 //      (v) => !!v || 'First Name is required',
+				 //      (v) => v && v.length <= 10 || 'First Name must be less than 10 characters'
+				 //    ],
+				 //    lastname: [
+				 //      (v) => !!v || 'Last Name is required',
+				 //      (v) => v && v.length <= 10 || 'Last Name must be less than 10 characters'
+				 //    ],
+				 //    email: [
+				 //      (v) => !!v || 'E-mail is required',
+				 //      (v) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
+				 //    ],
+				 //    password: [
+				 //      (v) => !!v || 'Password is required',
+				 //      (v) => v && v.length <= 32 || 'Password must be less than 32 characters'
+				 //    ],
+				 //    confirmPassword: [
+				 //      (v) => !!v || 'Confirm Password is required',
+				 //      (v) => v && v.length <= 32 || 'Confirm Password must be less than 32 characters'
+				 //    ],
+				 //    code: [
+				 //      (v) => !!v || 'Code is required',
+				 //      (v) => v && v.length <= 8 || 'Code must be less than 8 characters'
+				 //    ]
+				},
+				data:{
+					category_type_id:'',
+					image:'',
+					parent_id:'',
+					top:'',
+					column:'',
+					sort_order:'',
+					status:'',
+					language_id:'',
+					name:'',
+					description:'',
+					meta_title:'',
+					meta_description:'',
+					meta_keyword:'',
+				},
+				select:{
+					statusItems:[
+						{text:'Acitve',value:1},
+						{text:'Inactive',value:0}
+					],
+					categoryType:[],
+					categoryParent:[],
+				},
+				flash:Flash.state,
+				breadcrumbTitle:'Categories',
+				breadcrumbs: [
 			        {
-			          text: 'Dashboard',
+			          text: 'Administrator',
 			          disabled: false
 			        },
 			        {
-			          text: 'Attributes',
+			          text: 'Categories',
 			          disabled: false
 			        },
 			        {
-			          text: 'Form',
+			          text: 'Create',
 			          disabled: true
 			        }
-		      	],
-				flash:Flash.state
+			    ],
+			    backUrl:'/admin/categories/list',
 			}
 		},
 		created(){
-			this.getStore()
+			this.categoryType()
+			this.categoryParent()
+			
 		},
 		methods:{
-			getStore(){
-				axios.get('/api/getStore').then((res)=>{
-					this.items=res.data
+			categoryType(){
+				axios.get('/admin/api/category_type').then((res)=>{
+					this.select.categoryType=res.data
 				})
 			},
-			submit (opt) {
-		      if (this.$refs.form.validate()) {
-		        // Native form submission is not yet supported
-		        axios.post('/api/setting/save', {
-		          store: this.select,
-		          code: this.code,
-		          key: this.key,
-		          value: this.value
-		        }).then((res)=>{
-		        	if(res.data.success==true){
-		        		Flash.setSuccess(res.data.message)
-		        		if(opt==1){
-		        			this.$refs.form.reset()
-		        		}
-		        		else if(opt==2){
-		        			this.$router.push('/admin/settings/list')
-		        		}
-		        	}
-		        })
-		      }
-		    }
+			categoryParent(){
+				axios.get('/admin/api/category_parent').then((res)=>{
+					this.select.categoryParent=res.data
+				})
+			}
 		}
 	}
 </script>
