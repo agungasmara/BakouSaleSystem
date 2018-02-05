@@ -20,22 +20,36 @@ class LengthsController extends Controller
     }
     public function store(Request $request)
     {
+        //data for length value
         $length=(new Length)->getFillable();
         $length=$request->only($length);
+
+        //Data for length description
         $lengthDesc=(new LengthDescription)->getFillable();
         $lengthDesc=$request->only($lengthDesc);
         
+        //condition to check if length value is already existed
         $lenCond=[
             'value'=>$length['value']
         ];
         
+        //save length value and return length_class_id to insert to length description
         $saveLength = (new DataAction)->StoreData(Length::class,$lenCond,"",$length,"length_class_id");
 
-        if($saveLength['success']==true){//check if data save success
-            $lengthDesc['length_class_id'] = $saveLength['length_class_id'];//get id from from child array(data)
+        //if length value is insert successfull
+        if($saveLength['success']){
+            
+            //get id from child array(data)
+            $lengthDesc['length_class_id'] = $saveLength['length_class_id'];
+
+            //return success message if data have been successfully save to database
             return (new DataAction)->StoreData(LengthDescription::class,[],"",$lengthDesc); 
+
         }else{
+
+            //if data doesn't saved to database this will return success false and message why data not save
             return $saveLength;
+
         }
     }
     public function show($id)
