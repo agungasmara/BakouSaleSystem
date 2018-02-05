@@ -20,20 +20,19 @@ class LengthsController extends Controller
     }
     public function store(Request $request)
     {
-        $data=$request['data'];
-        $lengthDesc=$request['data'];
-        $lengthDesc=array_except($lengthDesc,['value']);
-        $length=[
-        	'value'=>$data['value']
-        ];
+        $length=(new Length)->getFillable();
+        $length=$request->only($length);
+        $lengthDesc=(new LengthDescription)->getFillable();
+        $lengthDesc=$request->only($lengthDesc);
+        
         $lenCond=[
-            'value'=>$data['value']
+            'value'=>$length['value']
         ];
         
         $saveLength = (new DataAction)->StoreData(Length::class,$lenCond,"",$length,"length_class_id");
 
-        if($saveLength['success']==true){
-            $lengthDesc['length_class_id'] = $saveLength['data']['length_class_id'];
+        if($saveLength['success']==true){//check if data save success
+            $lengthDesc['length_class_id'] = $saveLength['length_class_id'];//get id from from child array(data)
             return (new DataAction)->StoreData(LengthDescription::class,[],"",$lengthDesc); 
         }else{
             return $saveLength;
