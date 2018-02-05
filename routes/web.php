@@ -47,8 +47,8 @@ if (Request::is('admin*')){
                 //=====Categories API=============================
                 // Route::get('/categories/list','FrontEnd\Common\HeaderController@index');
                 Route::resource('categories', 'Backend\Category\CategoryController');
-                
-
+                Route::get('category_type', 'Backend\Category\CategoryController@getCategoriesType');
+                Route::get('category_parent', 'Backend\Category\CategoryController@getCategoriesParent');
                  //=====Product API=============================
                 Route::resource('products', 'Backend\Products\ProductsController');
                 
