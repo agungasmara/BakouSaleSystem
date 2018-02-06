@@ -21,6 +21,7 @@ import InformationUser from './views/Components/frontend/account/information_use
 import WishList from './views/Components/frontend/account/wishlist.vue'
 
 //***** products *****
+import FCategory from './views/Components/frontend/product/category.vue'
 import Product from './views/Components/frontend/product/product.vue'
 import ProductDetail from './views/Components/frontend/product/product_detail.vue'
 import Information from './views/Components/frontend/information/information.vue'
@@ -231,6 +232,11 @@ const router = new VueRouter({
               path: 'product_detail/:id',
               name: ProductDetail,
               component: ProductDetail,props:true
+            },
+            {
+              path: 'category_product/:id',
+              name: FCategory,
+              component: FCategory,props:true
             }
         ]
     },

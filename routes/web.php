@@ -145,6 +145,8 @@ Route::put('/api/update', 'FrontEnd\TestController@UpdateApi');
 Route::get('/api/header','FrontEnd\Common\HeaderController@index');
 /*--| Api Request Slide--*/
 Route::get('/api/slide','FrontEnd\Includes\SlideController@index');
+/*--| Api Request Product--*/
+Route::get('/api/category{id}','FrontEnd\Product\CategoryController@index');
 Route::get('/api/latest','FrontEnd\Product\LastestController@index');
 Route::get('/api/bestSeller','FrontEnd\Product\BestSellerController@index');
 Route::get('/api/recommandProduct','FrontEnd\Product\RecommandController@index');

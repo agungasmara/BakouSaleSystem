@@ -36,7 +36,8 @@ class HeaderController extends Controller
 
                         $children_data[] = array(
                             'name'  => $child->name,
-                            'href'  => 'product/category', 'path=' . $category->category_id . '_' . $child->category_id
+                            'href'  => '/product/category_product/'.$child->category_id
+                            // 'path=' . $category->category_id . '_' . $child->category_id
                         );
                     }
 
@@ -46,7 +47,7 @@ class HeaderController extends Controller
                         'children' => $children_data,
                         'column'   => $category->column ? $category->column: 1,
                         //'href'     => $this->url->link('product/category', 'path=' . $category->category_id)
-                        'href'     => 'product/category/' . $category->category_id
+                        'href'     => '/product/category_product/' . $category->category_id
                     );
                 }
             }

@@ -12,10 +12,13 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
         //
-        return view('frontend.category');
+        // return view('frontend.category');
+        $category_id = 0;
+        $category_info = $this->getCategory($category_id);
+        dd("Hello world");
     }
 
     /**
