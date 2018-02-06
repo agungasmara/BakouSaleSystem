@@ -20,23 +20,33 @@ class WeightsController extends Controller
     }
     public function store(Request $request)
     {
-        $data=$request['data'];
-        $weighDesc=$request['data'];
-        $weighDesc=array_except($weighDesc,['value']);
-        $weight=[
-        	'value'=>$data['value']
-        ];
+        $weight=(new Weight)->getFillable();
+        $weight=$request->only($weight);
+
+        $weighDesc=(new WeightDescription)->getFillable();
+        $weighDesc=$request->only($weighDesc);
+
         $weiCond=[
-            'value'=>$data['value']
+            'value'=>$weight['value']
         ];
         
-        $saveWeight = (new DataAction)->StoreData(Weight::class,$weiCond,"",$weight);
+        $saveWeight = (new DataAction)->StoreData(Weight::class,$weiCond,"",$weight,"weight_class_id");
 
-    	$weightID=Weight::where('value',$data['value'])->get(['weight_class_id']);
-    	foreach($weightID as $key=>$value){
-        	$weighDesc['weight_class_id']=$value->weight_class_id;
+    	//if length value is insert successfull
+        if($saveWeight['success']){
+            
+            //get id from child array(data)
+            $weighDesc['weight_class_id'] = $saveWeight['weight_class_id'];
+
+            //return success message if data have been successfully save to database
+            return (new DataAction)->StoreData(WeightDescription::class,[],"",$weighDesc); 
+
+        }else{
+
+            //if data doesn't saved to database this will return success false and message why data not save
+            return $weighDesc;
+
         }
-    	return (new DataAction)->StoreData(WeightDescription::class,[],"",$weighDesc);  
 
     }
     public function show($id)

@@ -31,7 +31,8 @@ class LanguagesController extends Controller
     }
     public function store(Request $request)
     {
-        $data=$request['data'];
+        $data=(new Language)->getFillable();
+        $data=$request->only($data);
         
         $condition=[
             'name'=>$data['name']
@@ -49,7 +50,8 @@ class LanguagesController extends Controller
     }
     public function update(Request $request,$id)
     {
-        $data=$request['data'];
+        $data=(new Language)->getFillable();
+        $data=$request->only($data);
         if(@$data['image']){
             $data['image']=(new ImageMaker)->base64ToImage('images\\icon',$data['image']);    
         }

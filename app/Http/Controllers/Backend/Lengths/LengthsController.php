@@ -30,7 +30,7 @@ class LengthsController extends Controller
         
         //condition to check if length value is already existed
         $lenCond=[
-            'value'=>$length['value']
+            'value'=>$request->value
         ];
         
         //save length value and return length_class_id to insert to length description
@@ -66,14 +66,19 @@ class LengthsController extends Controller
     }
     public function update(Request $request,$id)
     {
-        $data=$request['data'];
-        $LengthDesc=$request['data'];
-        $LengthDesc=array_except($LengthDesc,['value']);
-        $Length=[
-        	'value'=>$data['value']
+        //data for length value
+        $length=(new Length)->getFillable();
+        $length=$request->only($length);
+
+        //Data for length description
+        $lengthDesc=(new LengthDescription)->getFillable();
+        $lengthDesc=$request->only($lengthDesc);
+
+        $length=[
+        	'value'=>$length['value']
         ];
-        $saveLength = (new DataAction)->UpdateData(Length::class,$Length,'length_class_id',$id);
-    	return (new DataAction)->UpdateData(LengthDescription::class,$LengthDesc,'length_class_id',$id);
+        $saveLength = (new DataAction)->UpdateData(Length::class,$length,'length_class_id',$id);
+    	return (new DataAction)->UpdateData(LengthDescription::class,$lengthDesc,'length_class_id',$id);
     } 
     public function destroy($id)
     {

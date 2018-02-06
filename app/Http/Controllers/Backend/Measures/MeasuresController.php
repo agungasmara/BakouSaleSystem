@@ -19,7 +19,8 @@ class MeasuresController extends Controller
     }
     public function store(Request $request)
     {
-        $data=$request['data'];
+        $data=(new Measure)->getFillable();
+        $data=$request->only($data);
         
         $condition=[
             'title'=>$data['title']
@@ -38,8 +39,9 @@ class MeasuresController extends Controller
     }
     public function update(Request $request,$id)
     {
-         $data=$request['data'];
-         return (new DataAction)->UpdateData(Measure::class,$data,'measure_id',$id);
+        $data=(new Measure)->getFillable();
+        $data=$request->only($data);
+        return (new DataAction)->UpdateData(Measure::class,$data,'measure_id',$id);
     }
     public function destroy($id)
     {

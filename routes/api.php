@@ -97,8 +97,12 @@ Route::Resource('/downloads','Backend\Downloads\DownloadsController');
 //======Preview API
 Route::Resource('/previews','Backend\Previews\PreviewsController');
 
-//======Preview API
+//======Product Attribute API
 Route::Resource('/product_attribute','Backend\Products\Attributes\AttributeController');
 
-//======Preview API
+//======Product Attribute Group API
 Route::Resource('/product_attribute_group','Backend\Products\AttributeGroups\AttributeGroupController');
+
+//======Attribute API
+Route::Resource('/attribute','Backend\Attributes\AttributesController');
+Route::Resource('/attribute_group','Backend\Products\AttributeGroups\AttributeGroupController');

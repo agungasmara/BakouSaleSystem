@@ -27,7 +27,8 @@ class TaxRuleController extends Controller
     public function store(Request $request)
     {
 
-        $data=$request['data'];
+        $data=(new TaxRule)->getFillable();
+        $data=$request->only($data);
 
         $condition=[
         	'tax_class_id'=>$data['tax_class_id'],
@@ -48,7 +49,8 @@ class TaxRuleController extends Controller
     public function update(Request $request,$id)
     {
         
-        $data=$request['data'];
+        $data=(new TaxRule)->getFillable();
+        $data=$request->only($data);
 
         return (new DataAction)->UpdateData(TaxRule::class,$data,'tax_rule_id',$id);
 
