@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Models\BackEnd\Category\CategoryModel;
+use Auth;
 use App\Http\Models\BackEnd\Category\CategoryDescription;
 use App\Http\Models\BackEnd\Category\CategoryType;
 use App\Http\Controllers\Backend\commons\DataAction;
@@ -13,6 +14,9 @@ class CategoryController extends Controller
 {
     public function index()
     {
+        // dd(Auth::user()->id);
+        // return CategoryModel::getAllCategories()->toArray();
+
         $data=CategoryModel::all();
         foreach ($data as $value) {
             $value->type=$value->CategoryType()->value('name');
@@ -23,6 +27,7 @@ class CategoryController extends Controller
         }
         // dd($data->toArray());
         return $data->toArray();
+        
     }
 
     public function show($id){
