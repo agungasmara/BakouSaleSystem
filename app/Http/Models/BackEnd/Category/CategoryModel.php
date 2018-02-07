@@ -51,6 +51,15 @@ class CategoryModel extends Model
 		$language_id=1;
 		return $this->hasMany(CategoryDescription::class,'category_id')->where('language_id',$language_id);
 	}
+	public function scopeActive($query)
+    {
+        return $query->where('status', 1);
+    }
+	public function scopeParent($query)
+	{
+		return $query->where('parent_id',0);
+	}
+	
 	static function ParentCategories($data=array())
 	{
 		return static::where('parent_id',0)->where('status',1);
