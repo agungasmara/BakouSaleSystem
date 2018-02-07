@@ -28,7 +28,8 @@ class TaxRateController extends Controller
     public function store(Request $request)
     {
 
-        $data=$request['data'];
+        $data=(new TaxRate)->getFillable();
+        $data=$request->only($data);
 
         $condition=[
             'name'=>$data['name']
@@ -47,7 +48,8 @@ class TaxRateController extends Controller
     public function update(Request $request,$id)
     {
         
-        $data=$request['data'];
+        $data=(new TaxRate)->getFillable();
+        $data=$request->only($data);
 
         return (new DataAction)->UpdateData(TaxRate::class,$data,'tax_rate_id',$id);
 

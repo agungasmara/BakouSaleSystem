@@ -30,7 +30,8 @@ class StocksController extends Controller
     public function store(Request $request)
     {
 
-        $data=$request['data'];
+        $data=(new Stock)->getFillable();
+        $data=$request->only($data);
 
         $condition=[
             'name'=>$data['name']
@@ -49,7 +50,8 @@ class StocksController extends Controller
     public function update(Request $request,$id)
     {
         
-        $data=$request['data'];
+        $data=(new Stock)->getFillable();
+        $data=$request->only($data);
 
         return (new DataAction)->UpdateData(Stock::class,$data,'stock_status_id',$id);
 

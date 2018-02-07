@@ -21,7 +21,8 @@ class ManufacturersController extends Controller
     public function store(Request $request)
     {
 
-    	$data=$request['data'];
+    	$data=(new Manufacturer)->getFillable();
+        $data=$request->only($data);
         $data['image']=(new ImageMaker)->base64ToImage('images\\icon',$data['image']);
         $condition=[
             'name'=>$data['name']
@@ -40,7 +41,8 @@ class ManufacturersController extends Controller
     }
     public function update(Request $request,$id)
     {
-        $data=$request['data'];
+        $data=(new Manufacturer)->getFillable();
+        $data=$request->only($data);
         $data['image']=(new ImageMaker)->base64ToImage('images\\icon',$data['image']);
         
         return (new DataAction)->UpdateData(Manufacturer::class,$data,'manufacturer_id',$id);

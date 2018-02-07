@@ -27,7 +27,8 @@ class TaxRateToCustomerGroupController extends Controller
     public function store(Request $request)
     {
 
-        $data=$request['data'];
+        $data=(new TaxRateToCustomerGroup)->getFillable();
+        $data=$request->only($data);
 
         $condition=[
         	'tax_rate_id'=>$data['tax_rate_id'],
@@ -47,7 +48,8 @@ class TaxRateToCustomerGroupController extends Controller
     public function update(Request $request,$id)
     {
         
-        $data=$request['data'];
+        $data=(new TaxRateToCustomerGroup)->getFillable();
+        $data=$request->only($data);
 
         return (new DataAction)->UpdateData(TaxRateToCustomerGroup::class,$data,'tax_rate_id',$id);
 

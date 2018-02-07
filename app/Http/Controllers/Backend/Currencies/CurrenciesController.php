@@ -19,7 +19,8 @@ class CurrenciesController extends Controller
     }
     public function store(Request $request)
     {
-        $data=$request['data'];
+        $data=(new Currency)->getFillable();
+        $data=$request->only($data);
         
         $condition=[
             'title'=>$data['title']
@@ -38,7 +39,8 @@ class CurrenciesController extends Controller
     }
     public function update(Request $request,$id)
     {
-         $data=$request['data'];
+         $data=(new Currency)->getFillable();
+        $data=$request->only($data);
          return (new DataAction)->UpdateData(Currency::class,$data,'currency_id',$id);
     }
     public function destroy($id)

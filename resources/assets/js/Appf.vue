@@ -146,7 +146,7 @@
 
                     <!-- <li class="active"><a href="/"> nAME </a></li> -->
                    
-                    <li v-for="post of posts" class="dropdown megamenu-fullwidth">
+                    <li v-for="post of posts" class="dropdown megamenu-fullwidth" v-if="post['categories']">
                         <router-link data-toggle="dropdown" class="dropdown-toggle" to="/">
                         {{post.name}} 
                         <span><b class="caret"> </b> </span>
@@ -163,15 +163,19 @@
                                         <p><strong> {{cat.name}} </strong></p>
                                     </li>
                                     <li v-for="child of cat['children']">
-                                        <a href="index.html"> {{child.name}}</a>
+                                        <router-link v-bind:to="child.href">
+                                          {{child.name}}
+                                        </router-link>
                                     </li>
+
                                 </ul>
 
                             </li>
                         </ul>
-
                     </li>
-
+                    <li v-else>
+                        <a href="">{{post.name}}</a>
+                    </li>
                 </ul>
 
 

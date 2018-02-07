@@ -27,7 +27,8 @@ class TaxClassController extends Controller
     public function store(Request $request)
     {
 
-        $data=$request['data'];
+        $data=(new TaxClass)->getFillable();
+        $data=$request->only($data);
 
         $condition=[
             'title'=>$data['title']
@@ -46,7 +47,8 @@ class TaxClassController extends Controller
     public function update(Request $request,$id)
     {
         
-        $data=$request['data'];
+        $data=(new TaxClass)->getFillable();
+        $data=$request->only($data);
 
         return (new DataAction)->UpdateData(TaxClass::class,$data,'tax_class_id',$id);
 

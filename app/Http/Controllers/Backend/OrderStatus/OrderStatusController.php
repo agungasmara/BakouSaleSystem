@@ -28,7 +28,8 @@ class OrderStatusController extends Controller
     public function store(Request $request)
     {
 
-        $data=$request['data'];
+        $data=(new OrderStatus)->getFillable();
+        $data=$request->only($data);
 
         $condition=[
             'name'=>$data['name']
@@ -47,7 +48,8 @@ class OrderStatusController extends Controller
     public function update(Request $request,$id)
     {
         
-        $data=$request['data'];
+        $data=(new OrderStatus)->getFillable();
+        $data=$request->only($data);
 
         return (new DataAction)->UpdateData(OrderStatus::class,$data,'order_status_id',$id);
 

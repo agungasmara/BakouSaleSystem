@@ -27,19 +27,32 @@
 				e1:true,
 				valid: true,
 			    group:[
-					{	class:'xs12 sm6 md6',	 key:'language_id',	type:'select',	 text:'Store',count:100,items:'languages',	},
-					{	class:'xs12 sm6 md6',	 key:'name',	type:'text',text:'Name',count:100	}
+			    {	class:'xs12 sm6 md6',	 key:'name',	type:'text',text:'Name',count:100	},
+			    {	class:'xs12 sm6 md6',	 key:'type',	type:'text',text:'type',count:100	},
+			    {	class:'xs12 sm6 md6',	 key:'value',	type:'text',text:'value',count:100	},
+					{	class:'xs12 sm6 md6',	 key:'language_id',	type:'select',	 text:'Language',count:100,items:'languages',	},
+					
 				],
 				rules:{
 					name: [
 				      (v) => !!v || 'Name is required',
 				      (v) => v && v.length <= 100 || 'Name must be less than 100 characters'
 				    ],
+				    type: [
+				      (v) => !!v || 'Type is required',
+				      (v) => v && v.length <= 100 || 'Type must be less than 100 characters'
+				    ],
+				    value: [
+				      (v) => !!v || 'Value is required',
+				      (v) => v && v.length <= 100 || 'Value must be less than 100 characters'
+				    ],
 				    language_id:[v => !!v || 'Item is required']
 				},
 				data:{
-					name:'',
-					language_id: null
+					name:'test',
+					type:'tt',
+					value:'uu',
+					language_id: 1
 				},
 				select:{
 					languages:[]

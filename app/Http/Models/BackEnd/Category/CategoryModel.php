@@ -10,6 +10,17 @@ class CategoryModel extends Model
     protected $table = 'category';
 	protected $primaryKey='category_id';
 	protected $guarded = ['category_id']; 
+    protected $fillable=[
+    	'category_type_id',
+		'image',
+		'parent_id',
+		'top',
+		'column',
+		'sort_order',
+		'status',
+		'date_added',
+		'date_modified',
+    ];
 	public $timestamps = false;
 	static function UpdateOrCreate($data,$category_id='')
 	{

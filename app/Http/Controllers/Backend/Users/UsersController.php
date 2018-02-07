@@ -37,8 +37,8 @@ class UsersController extends Controller
     public function store(Request $request)
     {
 
-        $data=$request['data'];
-        $data=array_except($data,['confirmPassword']);
+        $data=(new User)->getFillable();
+        $data=$request->only($data);
         
         $condition=[
             'username'=>$data['username'],
@@ -58,7 +58,8 @@ class UsersController extends Controller
     
     public function update(Request $request,$id)
     {
-        $data=$request['data'];
+        $data=(new User)->getFillable();
+        $data=$request->only($data);
         if(@$data['image']){
             $data['image']=(new ImageMaker)->base64ToImage('images\\icon',$data['image']);    
         }

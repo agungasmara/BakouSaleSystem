@@ -151,10 +151,9 @@
 			        // Native form submission is not yet supporte
 			        
 			        if(this.id==0){
-			        	axios.post(this.url,{
-				          data:this.formDatas
-
-				        }).then((res)=>{
+			        	axios.post(this.url,
+				          this.formDatas
+				        ).then((res)=>{
 				        	console.log(res.data)
 				        	if(res.data.success==true){
 				        		Flash.setSuccess(res.data.message)
@@ -174,9 +173,9 @@
 	                  	})
 			        }else{
 			        	console.log(this.formDatas)
-			        	axios.put(this.url+this.id, {
-				          data:this.formDatas
-				        }).then((res)=>{
+			        	axios.put(this.url+this.id,
+				          	this.formDatas
+				        ).then((res)=>{
 				        	console.log(res.data)
 				        	if(res.data.success==true){
 				        		Flash.setSuccess(res.data.message)

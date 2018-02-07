@@ -106,8 +106,8 @@ if (Request::is('admin*')){
                 //=====Categories API=============================
                 // Route::get('/categories/list','FrontEnd\Common\HeaderController@index');
                 Route::resource('categories', 'Backend\Category\CategoryController');
-                
-
+                Route::get('category_type', 'Backend\Category\CategoryController@getCategoriesType');
+                Route::get('category_parent', 'Backend\Category\CategoryController@getCategoriesParent');
                  //=====Product API=============================
                 Route::resource('products', 'Backend\Products\ProductsController');
                 
@@ -184,6 +184,8 @@ Route::put('/api/update', 'FrontEnd\TestController@UpdateApi');
 Route::get('/api/header','FrontEnd\Common\HeaderController@index');
 /*--| Api Request Slide--*/
 Route::get('/api/slide','FrontEnd\Includes\SlideController@index');
+/*--| Api Request Product--*/
+Route::get('/api/category{id}','FrontEnd\Product\CategoryController@index');
 Route::get('/api/latest','FrontEnd\Product\LastestController@index');
 Route::get('/api/bestSeller','FrontEnd\Product\BestSellerController@index');
 Route::get('/api/recommandProduct','FrontEnd\Product\RecommandController@index');

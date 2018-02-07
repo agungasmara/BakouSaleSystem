@@ -47,7 +47,7 @@
 			$success=false;
 			$message='';
 			$count=0;
-
+			$saved=0;
 			if(!empty($condition))
 			{
 				if(strtolower($OrAnd)=="and" or $OrAnd==""){
@@ -81,44 +81,22 @@
 		        }
 		        else
 		        {
-		        	$dataSave=new $table($data);
-		        	$saved=$dataSave->save();
-		        	if($saved){
-			            $success=true;
-			            $message='Data successfully saved.';
-
-			        }
-			        else
-			        {
-			            $success=false;
-			            $message='Failed to save data!';
-			        }
+		        	$saved=$table::insertGetId($data);
+		            $success=true;
+		            $message='Data successfully saved.';
 		        }
 			}
 			else
 	        {
-	        	$dataSave=new $table($data);
-		        $saved=$dataSave->save();
-		        if($saved){
-		            $success=true;
-		            $message='Data successfully saved.';
-		        }
-		        else
-		        {
-		            $success=false;
-		            $message='Failed to save data!';
-		        }
+	        	$saved=$table::insertGetId($data);
+	            $success=true;
+	            $message='Data successfully saved.';
 	        }
-	         if($id==""){
-
+	        if($id==""){
 	        	return array('success'=>$success,'message'=>$message);
-
-	         }else{
-	        	
-	         	return array('success'=>$success,'message'=>$message,'data'=>$table::orderBy($id,'desc')->first());
-
-	         }
-	        
+	        }else{
+	         	return array('success'=>$success,'message'=>$message,$id=>$saved);
+	        }
 		}
 		public function EditData($table,$id)
 		{

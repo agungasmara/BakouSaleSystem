@@ -20,23 +20,36 @@ class LengthsController extends Controller
     }
     public function store(Request $request)
     {
-        $data=$request['data'];
-        $lengthDesc=$request['data'];
-        $lengthDesc=array_except($lengthDesc,['value']);
-        $length=[
-        	'value'=>$data['value']
-        ];
+        //data for length value
+        $length=(new Length)->getFillable();
+        $length=$request->only($length);
+
+        //Data for length description
+        $lengthDesc=(new LengthDescription)->getFillable();
+        $lengthDesc=$request->only($lengthDesc);
+        
+        //condition to check if length value is already existed
         $lenCond=[
-            'value'=>$data['value']
+            'value'=>$request->value
         ];
         
+        //save length value and return length_class_id to insert to length description
         $saveLength = (new DataAction)->StoreData(Length::class,$lenCond,"",$length,"length_class_id");
 
-        if($saveLength['success']==true){
-            $lengthDesc['length_class_id'] = $saveLength['data']['length_class_id'];
+        //if length value is insert successfull
+        if($saveLength['success']){
+            
+            //get id from child array(data)
+            $lengthDesc['length_class_id'] = $saveLength['length_class_id'];
+
+            //return success message if data have been successfully save to database
             return (new DataAction)->StoreData(LengthDescription::class,[],"",$lengthDesc); 
+
         }else{
+
+            //if data doesn't saved to database this will return success false and message why data not save
             return $saveLength;
+
         }
     }
     public function show($id)
@@ -53,14 +66,19 @@ class LengthsController extends Controller
     }
     public function update(Request $request,$id)
     {
-        $data=$request['data'];
-        $LengthDesc=$request['data'];
-        $LengthDesc=array_except($LengthDesc,['value']);
-        $Length=[
-        	'value'=>$data['value']
+        //data for length value
+        $length=(new Length)->getFillable();
+        $length=$request->only($length);
+
+        //Data for length description
+        $lengthDesc=(new LengthDescription)->getFillable();
+        $lengthDesc=$request->only($lengthDesc);
+
+        $length=[
+        	'value'=>$length['value']
         ];
-        $saveLength = (new DataAction)->UpdateData(Length::class,$Length,'length_class_id',$id);
-    	return (new DataAction)->UpdateData(LengthDescription::class,$LengthDesc,'length_class_id',$id);
+        $saveLength = (new DataAction)->UpdateData(Length::class,$length,'length_class_id',$id);
+    	return (new DataAction)->UpdateData(LengthDescription::class,$lengthDesc,'length_class_id',$id);
     } 
     public function destroy($id)
     {

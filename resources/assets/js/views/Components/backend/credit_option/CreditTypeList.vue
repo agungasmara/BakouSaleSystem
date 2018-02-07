@@ -18,7 +18,8 @@
 		    	v-bind:url="url"
 	    		v-bind:btn-new-url="btnNewUrl"
 		    	v-on:change="fetchData"
-		    	v-bind:del="false">
+		    	v-bind:del="false"
+		    	v-bind:eye="false">
 		    </data-table>
 
 		    <!--End of data table-->
@@ -44,6 +45,8 @@
 				headers: [
 			        { text: 'Credit Type ID',align: 'left',class:'text-xs-left',value: 'credit_type_id'},
 			        { text: 'Name',align:'left',class:'text-xs-left', value: 'name' },
+			        { text: 'Type',align:'left',class:'text-xs-left', value: 'type' },
+			        { text: 'Value',align:'left',class:'text-xs-left', value: 'value' },
 			        { text: 'Language',align:'left',class:'text-xs-left', value: 'language' },
 			        {text: 'Action',align:'center',class:'text-xs-center',value:'credit_type_id',sortable: false}
 			    ],
