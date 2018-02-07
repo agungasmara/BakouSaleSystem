@@ -234,17 +234,22 @@ const router = new VueRouter({
             }
         ]
     },
+    {
+      path: '/login',
+      name:'login_account',
+      component: FLogin
+    },
+    {
+      path: '/customer/register',
+      name:'register',
+      component: FRegister
+    },
     { path: '/account', name:'account', component: Account,
       children: [
           {
             path: 'signin',
             name:'signin',
             component: FSignIn
-          },
-          {
-            path: 'register',
-            name:'register',
-            component: FRegister
           },
           {
             path: 'login',
@@ -290,6 +295,21 @@ const router = new VueRouter({
             path: 'addressmy',
             name: 'addressmy',
             component: AddressMy
+          },
+          {
+            path: 'cartview',
+            name:'cartview',
+            component: CartView
+          },
+          {
+            path: 'checkout',
+            name:'checkout',
+            component: Checkout
+          },
+          {
+            path: 'checkoutsuccess',
+            name:'checkoutsuccess',
+            component: CheckoutSuccess
           }
       ]
     },
@@ -307,26 +327,26 @@ const router = new VueRouter({
         }
       ]
     },
-     { 
-      path: '/cart', name:'cart',component: Cart,
-      children:[
-        {
-          path: 'cartview',
-          name:'cartview',
-          component: CartView
-        },
-        {
-          path: 'checkout',
-          name:'checkout',
-          component: Checkout
-        },
-        {
-          path: 'checkoutsuccess',
-          name:'checkoutsuccess',
-          component: CheckoutSuccess
-        }
-      ]
-    },
+    //  { 
+    //   path: '/cart', name:'cart',component: Cart,
+    //   children:[
+    //     {
+    //       path: 'cartview',
+    //       name:'cartview',
+    //       component: CartView
+    //     },
+    //     {
+    //       path: 'checkout',
+    //       name:'checkout',
+    //       component: Checkout
+    //     },
+    //     {
+    //       path: 'checkoutsuccess',
+    //       name:'checkoutsuccess',
+    //       component: CheckoutSuccess
+    //     }
+    //   ]
+    // },
     // {
     //   path: '/information/information_detail/:id', name:'information',component: Information,
     //   components: { default: Information, footer: Footer },

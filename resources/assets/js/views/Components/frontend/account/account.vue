@@ -38,9 +38,9 @@
             axios.get(`/api/account/check_authorize`)
   		    .then(response => {
   		      var checkAuthenticationAccount = response.data['success']
-  		      if(checkAuthenticationAccount==false){
-  		      	this.$router.push('/account/login')
-  		      }
+  		      // if(checkAuthenticationAccount==false){
+  		      // 	this.$router.push('/account/login')
+  		      // }
   		    })
   		    .catch(e => {
   		      this.errors.push(e)
@@ -50,9 +50,9 @@
         	axios.get(`/api/account/check_authorize`)
   		    .then(response => {
   		      var checkAuthenticationAccount = response.data['success']
-  		      if(checkAuthenticationAccount==false){
-  		      	this.$router.push('/account/login')
-  		      }
+  		      // if(checkAuthenticationAccount==false){
+  		      // 	this.$router.push('/account/login')
+  		      // }
   		    })
   		    .catch(e => {
   		      this.errors.push(e)

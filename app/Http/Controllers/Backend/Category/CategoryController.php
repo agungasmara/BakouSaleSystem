@@ -5,10 +5,13 @@ namespace App\Http\Controllers\Backend\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Models\BackEnd\Category\CategoryModel;
+use Auth;
+
 class CategoryController extends Controller
 {
     public function index()
     {
+        // dd(Auth::user()->id);
         return CategoryModel::getAllCategories()->toArray();
     }
 

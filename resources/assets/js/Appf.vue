@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="-display:none;">
     <!-- Fixed navbar start -->
     <div class="navbar navbar-tshop navbar-fixed-top megamenu" role="navigation">
         <div class="navbar-top">
@@ -87,10 +87,10 @@
                                     </li> -->
                                   </ul>
                                 </li>
-                                <li><router-link to="/account/signin" data-toggle="modal" data-target="#ModalLogin"> <span class="hidden-xs">SignIn</span>
+                                <li><router-link to="/account/login" data-toggle="modal" data-target="#ModalLogin"> <span class="hidden-xs">SignIn</span>
                                     <i class="glyphicon glyphicon-log-in hide visible-xs "></i> </router-link></li>
                                 <li class="hidden-xs">
-                                    <router-link to="/account/register" data-toggle="modal" data-target="#ModalSignup">Create Account</router-link>
+                                    <router-link to="/customer/register" data-toggle="modal" data-target="#ModalSignup">Create Account</router-link>
                                 </li>
                             </ul>
                         </div>
@@ -238,113 +238,130 @@
 <!-- frontEnd App -->
 <script type="text/javascript">
 
-  import axios from 'axios'
-  import Flash from './helper/flash'
-  import CartProduct from './views/Components/frontend/include/cart.vue'
-  import CartAction from './helper/cart'
-  import FooterComponet from './views/Components/frontend/common/_footer.vue'
-  import VueTranslate from 'vue-translate-plugin'
-  import Vue from 'vue';
-  Vue.use(VueTranslate);
-  import TopHeader from './views/Components/frontend/common/_top_language'
-  
-  export default{
-    data(){
-      return{
-        posts: [],
-        loading:true,
-        TotalPrices : CartAction.data,
-        data_list:[],
-        account_data: [
-            {
-              name: 'My Account',
-              link: '/account/dashboard'
-            },
-            {
-              name: 'Order',
-              link: '/account/login'
-            },
-            {
-              name: 'Transaction',
-              link: '/account/login'
-            },
-            {
-              name: 'Logout',
-              action:'logout',
-              link: '/account/login'
-            }
-        ],
-        account_auth: [
-            {
-              name: 'Login',
-              link: '/account/login'
-            },
-            {
-              name: 'Register',
-              link: '/account/login'
-            }
-        ],
-      }
-    },
-    created() {
-        axios.get(`/api/header`)
-        .then(response => {
-          this.posts = response.data['data']
-          this.$translate.setLang(response.data['lang'])
-        })
-        .catch(e => {
-          this.errors.push(e)
-        })
-    },
-    locales: {
-        en: {
-            'entry_account': 'My Account',
-            'entry_login': 'Login',
-            'entry_register': 'Register'
-        },
-        kh: {
-            'entry_account': 'គណនី',
-            'entry_login': 'ចូល',
-            'entry_register': 'ចុះឈ្មោះ'
-        }
-    },
-    components:{
-        CartProduct,
-        FooterComponet,
-        TopHeader,
-    },
-    getLang(){
+    import axios from 'axios'
+    import Flash from './helper/flash'
+    import CartProduct from './views/Components/frontend/include/cart.vue'
+    import CartAction from './helper/cart'
+    import FooterComponet from './views/Components/frontend/common/_footer.vue'
+    import VueTranslate from 'vue-translate-plugin'
+    import TopHeader from './views/Components/frontend/common/_top_language'
+    import Vue from 'vue'
+    Vue.use(VueTranslate)
+    var VueCookie = require('vue-cookie')
+    Vue.use(VueCookie)
+    var randomstring = require("randomstring")
 
-    },
-    methods: {
-        logout () {
-            axios.get(`/api/account/logout`)
+    export default{
+        data(){
+          return{
+            posts: [],
+            loading:true,
+            session_id : this.$cookie.get('session_id'),
+            TotalPrices : CartAction.data,
+            random: Math.floor(Math.random()),
+            data_list:[],
+            account_data: [
+                {
+                  name: 'My Account',
+                  link: '/account/dashboard'
+                },
+                {
+                  name: 'Order',
+                  link: '/account/orderlist'
+                },
+                {
+                  name: 'My Wishlists',
+                  link: '/account/wishlist'
+                },
+                {
+                  name: 'Logout',
+                  action:'logout',
+                  link: '/logout'
+                }
+            ],
+            account_auth: [
+                {
+                  name: 'My Account',
+                  link: '/account/login'
+                },
+                {
+                  name: 'Order',
+                  link: '/account/login'
+                },
+                {
+                  name: 'My Wishlists',
+                  link: '/logout'
+                }
+            ],
+          }
+        },
+        created() {
+            // To delete a cookie use
+            // this.$cookie.delete('cookie');
+            // alert(randomstring.generate())
+            var session_id = this.session_id
+            if(session_id==null){
+                this.$cookie.set('session_id', randomstring.generate(), 168)
+            }
+            axios.get('/api/header?session_id='+session_id)
+            .then(response => {
+              this.posts = response.data['data']
+              this.$translate.setLang(response.data['lang'])
+            })
+            .catch(e => {
+              this.errors.push(e)
+            })
+        },
+        locales: {
+            en: {
+                'entry_account': 'My Account',
+                'entry_login': 'Login',
+                'entry_register': 'Register'
+            },
+            kh: {
+                'entry_account': 'គណនី',
+                'entry_login': 'ចូល',
+                'entry_register': 'ចុះឈ្មោះ'
+            }
+        },
+        components:{
+            CartProduct,
+            FooterComponet,
+            TopHeader,
+        },
+        getLang(){
+
+        },
+        methods: {
+            logout () {
+                window.location = '/logout'
+                // axios.get(`/api/account/logout`)
+                // .then(response => {
+                //   var checkAuthenticationAccount = response.data['success']
+                //   // if(checkAuthenticationAccount==true){
+                //   this.$router.push('/account/login')
+                //   //   window.location = '/account/login'
+                //   // }
+                // })
+                // .catch(e => {
+                //   this.errors.push(e)
+                // })
+            },
+        },
+        mounted: function(){
+            console.log("====================================")
+            axios.get(`/api/account/check_authorize`)
             .then(response => {
               var checkAuthenticationAccount = response.data['success']
-              if(checkAuthenticationAccount==true){
-                // this.$router.push('/account/login')
-                window.location = '/account/login'
+              if(checkAuthenticationAccount==false){
+                this.data_list = this.account_auth
+              }else{
+                this.data_list = this.account_data
               }
             })
             .catch(e => {
               this.errors.push(e)
             })
         },
-    },
-    mounted: function(){
-        console.log("====================================")
-        axios.get(`/api/account/check_authorize`)
-        .then(response => {
-          var checkAuthenticationAccount = response.data['success']
-          if(checkAuthenticationAccount==false){
-            this.data_list = this.account_auth
-          }else{
-            this.data_list = this.account_data
-          }
-        })
-        .catch(e => {
-          this.errors.push(e)
-        })
-    },
-  }
+    }
 </script>

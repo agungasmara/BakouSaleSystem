@@ -19,14 +19,22 @@
             <div class="row userInfo">
                 <h2 class="block-title-2"><span>Already registered?</span></h2>
 
-                <form role="form" class="logForm ">
-                    <div class="form-group">
-                        <label>Email address</label>
-                        <input type="email" class="form-control" placeholder="Enter email" v-model="email" required>
+                <form role="form" class="logForm" @submit.prevent="login">
+                    <template>
+                      <div v-if="flash.error" class="alert alert-danger"><i class="fa fa-wa fa-info-circle"></i> {{ flash.error }}</div>
+                    </template>
+                    <template>
+                      <div v-if="flash.success" class="alert alert-success"><i class="fa fa-wa fa-check"></i> {{flash.success}}</div>
+                    </template>
+                    
+                    <input type="hidden" v-model="credential.is_account" value="1">
+                    <div class="form-group required">
+                        <label class="control-label text-right">Email</label>
+                        <input type="email" class="form-control" placeholder="Enter email" v-model="credential.email" required>
                     </div>
-                    <div class="form-group">
-                        <label>Password</label>
-                        <input type="password" class="form-control" placeholder="Password" v-model="password"> 
+                    <div class="form-group required">
+                        <label class="control-label text-right">Password</label>
+                        <input type="password" class="form-control" placeholder="Password" v-model="credential.password"> 
                     </div>
                     <div class="checkbox">
                         <label>
@@ -36,13 +44,13 @@
                     </div>
                     <div class="form-group">
                         <p>
-                            <a title="Recover your forgotten password" href="forgot-password.html">
+                            <a title="Recover your forgotten password" href="javascript:void(0);">
                                 Forgot your password? 
                             </a>
                         </p>
                     </div>
 
-                    <input @click="submit()" type="button" value="Sign In" class="btn btn-primary" />
+                    <input type="submit" value="Sign In" class="btn btn-primary" />
                     
                    <!--  <router-link v-bind:to="'/account/dashboard/'" class="btn btn-primary">
                         <i class="fa fa-sign-in"></i> Sign In
@@ -64,31 +72,77 @@
 
 <script type="text/javascript">
     import Flash from '../../../../helper/flash'
-    import axios from 'axios'
+    import {post} from '../../../../helper/api'
+    import Vue from 'vue'
+    var VueCookie = require('vue-cookie')
+    Vue.use(VueCookie)
 
     export default {
         data() {
             return {
                 valid: true,
-                email: '',
-                password: '',
-                flash:Flash.state
+                credential: {
+                    email: '',
+                    password: '',
+                    is_account:1,
+                    emailRules: [
+                      (v) => !!v || 'E-mail is required',
+                      (v) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
+                    ],
+                    passwordRules: [
+                      (v) => !!v || 'password is required',
+                      (v) => v && v.length <= 32 || 'Code must be less than 32 characters'
+                    ]
+                },
+                session_id : this.$cookie.get('session_id'),
+                flash: Flash.state,
+                error: Flash.state,
+                isProcessing: false
             }
         },
+        ready() {
+          this.credential.email    = credential.email;
+          this.credential.password = credential.password;
+          this.credential.is_account = credential.is_account;
+          this.login();
+        },
         methods: {
-            submit () {
-                axios.post('/api/customer/login', {
-                // axios.post('/account/login', {
-                  email: this.email,
-                  password: this.password,
-                }).then((res)=>{
-                    if(res.data.success==true){
-                        Flash.setSuccess(res.data.message)
-                        window.location.href='/account/dashboard'
-                        // this.$router.push('/account/dashboard')
-                    }
-                })
-            },
+            login() {
+              // if (this.$refs.form.validate()) {
+                  this.isProcessing = true
+                  this.error = {}
+                  // post('http://localhost:8000/login', this.credential, function (data, status, request) {
+                  //     window.location = "#/register";
+                  //     this.$dispatch('login:success');
+                  //     storage.saveArray('credential', this.credential);
+                  //     $.snackbar({content: data.message, style: 'toast', toggle: 'snackbar'});
+
+                  //   }).error(function (data, status, request) {
+
+                  //     $.snackbar({content: data.message, style: 'toast', toggle: 'snackbar'});
+
+                  //   });
+                  post('/login', this.credential)
+                      .then((res) => {
+                          console.log(res);
+                      if(res.data.success) {
+                          Flash.setSuccess('Congratulations! You have now successfully login.')
+                          window.location.href="/account/dashboard"
+                          // this.$router.push('/admin')
+                      }else{
+                          Flash.setError('You enter wrong username or password!')
+                      }
+                      this.isProcessing = false
+                  })
+                  .catch((err) => {
+                      if(err.response.status === 422) {
+                          this.error = err.response.data
+                      }
+                      Flash.setError(' Error while trying tologin.')
+                      this.isProcessing = false
+                  })
+              // }
+            }
         },
         // wait a look have this field user show button co
         watch:{
