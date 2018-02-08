@@ -115,7 +115,7 @@
 						
 					],
 					data:{
-
+						image:''
 					},
 				breadcrumbTitle:'Products',
 			    breadcrumbs: [
@@ -145,27 +145,27 @@
 					this.items=res.data
 				})
 			},
-			submit (opt) {
-		      if (this.$refs.form.validate()) {
-		        // Native form submission is not yet supported
-		        axios.post('/api/setting/save', {
-		          store: this.select,
-		          code: this.code,
-		          key: this.key,
-		          value: this.value
-		        }).then((res)=>{
-		        	if(res.data.success==true){
-		        		Flash.setSuccess(res.data.message)
-		        		if(opt==1){
-		        			this.$refs.form.reset()
-		        		}
-		        		else if(opt==2){
-		        			this.$router.push('/admin/settings/list')
-		        		}
-		        	}
-		        })
-		      }
-		    }
+			// submit (opt) {
+		 //      if (this.$refs.form.validate()) {
+		 //        // Native form submission is not yet supported
+		 //        axios.post('/api/setting/save', {
+		 //          store: this.select,
+		 //          code: this.code,
+		 //          key: this.key,
+		 //          value: this.value
+		 //        }).then((res)=>{
+		 //        	if(res.data.success==true){
+		 //        		Flash.setSuccess(res.data.message)
+		 //        		if(opt==1){
+		 //        			this.$refs.form.reset()
+		 //        		}
+		 //        		else if(opt==2){
+		 //        			this.$router.push('/admin/settings/list')
+		 //        		}
+		 //        	}
+		 //        })
+		 //      }
+		 //    }
 		}
 	}
 </script>

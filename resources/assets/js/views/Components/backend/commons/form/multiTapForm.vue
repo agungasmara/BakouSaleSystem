@@ -35,7 +35,7 @@
 				              			<v-layout wrap>
 				              				<v-flex v-for="input in i.group" :key="input.key" :class="input.class">
 				              					<div v-if="input.type=='select'">
-													<v-select :label="input.text"  :rules="formRules[input.key]" v-model="formDatas[input.key]" :items="selectItems[input.items]" required></v-select>
+													<v-select :label="input.text" item-value="value" :rules="formRules[input.key]" v-model="formDatas[input.key]" :items="selectItems[input.items]" required></v-select>
 						      					</div>
 						      					<div v-if="input.type=='multiple'">
 						      						<v-select :label="input.text"  :rules="formRules[input.key]" v-model="formDatas[input.key]" :items="selectItems[input.items]" autocomplete :loading="loading" multiple cache-items chips required :search-input.sync="search"></v-select>
@@ -125,6 +125,7 @@
 
 <script>
 	import breadcrumb3button from '../breadcrumb/breadcrumb3button.vue'
+	import axios from 'axios'
 	export default{
 		
 		props:[
