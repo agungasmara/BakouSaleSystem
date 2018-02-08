@@ -124,7 +124,6 @@
                   //   });
                   post('/login', this.credential)
                       .then((res) => {
-                          console.log(res);
                       if(res.data.success) {
                           Flash.setSuccess('Congratulations! You have now successfully login.')
                           window.location.href="/account/dashboard"

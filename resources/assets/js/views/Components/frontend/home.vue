@@ -5,14 +5,14 @@
       <SlideComponent/>
     </template>
     <!-- {searchResults}} -->
-    <div v-if="searchResults">
+    <!-- <div v-if="searchResults">
       <div v-for="item of searchResults['elasticdata']">
         {{item._source.name}}<br/>
       </div>
-    </div>
+    </div> -->
     <!-- elastic search -->
-    <br/>
-    <center><input style="width:300px" placeholder="Search, Branch, Shop, ..." v-model="q" type="text" @keyup="search" name=""/></center>
+    <!-- <br/> -->
+    <!-- <center><input style="width:300px" placeholder="Search, Branch, Shop, ..." v-model="q" type="text" @keyup="search" name=""/></center> -->
 
     <div class="container main-container">
 

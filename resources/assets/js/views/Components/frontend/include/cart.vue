@@ -5,11 +5,12 @@
 	        <tbody>
 
 	        	<!-- {{CartProduct.products.data.length}} -->
-	        <tr v-if="!CartProduct.products.data.length">
+	        <!-- <tr v-if="!CartProduct.products.data.length"> -->
+	        <tr v-if="!CartProduct.products.TotalPrices>0">
 	        	<v-footer class="pa-3">
 				    <v-spacer></v-spacer>
 				    <center>Your shopping cart is empty!</center>
-				  </v-footer>
+				</v-footer>
 		    </tr>
 	        <tr v-for="product in CartProduct.products.data" v-else  class="miniCartProduct">
 	            <router-link v-bind:to="'/product/product_detail/'+ product.product_id">

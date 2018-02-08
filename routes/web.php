@@ -132,6 +132,10 @@ if (Request::is('admin*')){
     Route::post('auth/login', 'Auth\LoginController@login');
 
     Route::get('auth/login', 'Auth\LoginController@showLoginForm');
+    // Route::get('auth/login',array('as'=>'login',function(){
+    //     // return view('auth.customer_login');
+    //     return view('index');
+    // }));
 
     Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
@@ -185,7 +189,7 @@ Route::get('/api/header','FrontEnd\Common\HeaderController@index');
 /*--| Api Request Slide--*/
 Route::get('/api/slide','FrontEnd\Includes\SlideController@index');
 /*--| Api Request Product--*/
-Route::get('/api/category{id}','FrontEnd\Product\CategoryController@index');
+Route::resource('/api/category','FrontEnd\Product\CategoryController');
 Route::get('/api/latest','FrontEnd\Product\LastestController@index');
 Route::get('/api/bestSeller','FrontEnd\Product\BestSellerController@index');
 Route::get('/api/recommandProduct','FrontEnd\Product\RecommandController@index');

@@ -160,7 +160,6 @@
                 this.error = {}
                 post('/api/register', this.credential)
                     .then((res) => {
-                    console.log(res);
                     if(res.data.registered) {
                     Flash.setSuccess('Congratulations! You have now successfully registered.')
                     this.$router.push('/login')

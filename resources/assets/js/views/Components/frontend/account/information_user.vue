@@ -297,7 +297,6 @@
         axios.get(`/api/address`)
         .then(response => {
             this.response = response.data['data']
-            console.log(response.data['data'])
             this.loaded = true
         })
         .catch(e => {

@@ -156,7 +156,7 @@
         methods: {
           AddToCart(product_id,qty=1){
             CartAction.AddToCart(product_id,qty,this.session_id)
-            window.scrollTo(100,100)
+            window.scrollTo(100,0)
           }
           
         }

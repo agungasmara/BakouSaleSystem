@@ -117,7 +117,7 @@
                 <!-- this part for mobile -->
                 <div class="search-box pull-right hidden-lg hidden-md hidden-sm">
                     <div class="input-group">
-                        <button class="btn btn-nobg getFullSearch" type="button"><i class="fa fa-search"> </i></button>
+                        <button @click="getFullSearch" class="btn btn-nobg getFullSearch" type="button"><i class="fa fa-search"> </i></button>
                     </div>
                     <!-- /input-group -->
 
@@ -201,7 +201,7 @@
 
                     <div class="search-box">
                         <div class="input-group">
-                            <button class="btn btn-nobg getFullSearch" type="button"><i class="fa fa-search"> </i></button>
+                            <button @click="getFullSearch" class="btn btn-nobg getFullSearch" type="button"><i class="fa fa-search"> </i></button>
                         </div>
                         <!-- /input-group -->
 
@@ -215,14 +215,43 @@
         </div>
         <!--/.container -->
 
-        <div class="search-full text-right"><a class="pull-right search-close"> <i class=" fa fa-times-circle"> </i> </a>
+        <div class="search-full text-right"><a @click="initCloseSearch" class="pull-right search-close"> <i class=" fa fa-times-circle"> </i> </a>
 
             <div class="searchInputBox pull-right">
-                <input type="search" data-searchurl="search?=" name="q" placeholder="start typing and hit enter to search"
-                       class="search-input">
+                <input type="search" v-model="q" @click="initClickSearch" @keyup="search" autocomplete="off" data-searchurl="search?=" name="q" placeholder="Search Product, Brand, Category,..." class="search-input">
                 <button class="btn-nobg search-btn" type="submit"><i class="fa fa-search"> </i></button>
             </div>
+
+            <template v-if="searchResults">
+                <div id="search-list" class="container-fluid" style="display:none;">
+                    <div style="position: absolute;width: 100%;background-color: rgb(255, 255, 255);top: 52px;padding: 15px 60px 15px;left: 0;text-align:left;box-shadow: 1px 1px #e3e3e3;">
+                        <!-- <div>Popular Search</div>
+                        <hr/>
+                        <ul class="popular-product">
+                            <li v-for="item of searchResults['elasticdata']"><img v-bind:src="item._source.imageUrl"/> {{item._source.name}}</li>
+                        </ul>
+                        <br/> -->
+                        <div>Popular Products</div>
+                        <hr/>
+                        <ul class="popular-product">
+                            <li v-for="item of searchResults['elasticdata']">
+                                <router-link v-bind:to="'/product/product_detail/'+ item._source.id">
+                                    <div class="pull-left product-img"><img width="30px" v-bind:src="item._source.imageUrl"/> </div>
+                                    <div class="pull-left">{{item._source.name}}
+                                        <div>
+                                            <span class="original-price">{{item._source.crawlPrice}}</span>
+                                            <span class="special-price">{{item._source.crawlPrice}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </router-link>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </template>
         </div>
+        
         <!--/.search-full-->
     </div>
     <!-- /.Fixed navbar  -->
@@ -238,6 +267,17 @@
      <!-- ***** template component End Footer ***** -->
   </div>
 </template>
+
+<style type="text/css">
+    span.special-price{/*color:#4ec67f;*/color:#000;padding-left: 10px;}
+    span.original-price{color:#f00;text-decoration: line-through;}
+    .product-img{padding-right: 10px;}
+    ul.popular-product li{
+        font-size:14px;
+        padding-bottom: 10px;
+        /*line-height: 40px;*/
+    }
+</style>
 
 <!-- frontEnd App -->
 <script type="text/javascript">
@@ -255,9 +295,19 @@
     Vue.use(VueCookie)
     var randomstring = require("randomstring")
 
+    const es_host = 'http://localhost';
+    const es_port = 9200;
+    var es = require('elasticsearch');
+    var client = new es.Client({
+    host: 'localhost:9200',
+    log: 'trace',
+    });
+
     export default{
         data(){
           return{
+            q:'',
+            searchResults:Flash.state,
             posts: [],
             loading:true,
             session_id : this.$cookie.get('session_id'),
@@ -299,6 +349,9 @@
             ],
           }
         },
+        ready() {
+          this.q = q;
+        },
         created() {
             // To delete a cookie use
             // this.$cookie.delete('cookie');
@@ -336,7 +389,67 @@
         getLang(){
 
         },
+        beforeUpdate(){
+            
+        },
         methods: {
+            // onLostFocus:function(){
+            //     $('#search-list').slideUp(100)
+            //     $('.search-full').hide(100)
+            // },
+            initCloseSearch:function(){
+                $('.search-full').hide(100)
+            },
+            getFullSearch:function(){
+                $('.search-full').show(100)
+            },
+            _onLostFocus: function(){
+                $('#search-list').slideUp(1000)
+                $('.search-full').hide(100)
+            },
+            initClickSearch: function(){
+                $("#search-list").show(10)
+            },
+            search: function() {    
+                var searchText = this.q
+                client.search({
+                  index: "store",
+                  type: "product",
+                  body: {
+                            "size": 5,
+                              "sort": [
+                            {"popular": {"order": "desc"}}
+                        ],
+                        "query": {
+                              "query_string": {
+                              "query": (searchText == '' || searchText == ' ')? '*' : searchText+"*",
+                              "fields": ["name"]
+                          }
+                        }
+                        ,
+                        "aggs": {
+                            "categories": {
+                                "terms": {
+                                    "field": "categories.cat_id",
+                                    "size": 5 // limit number result distinct
+                                },
+                                "aggs": {
+                                    "tops": {
+                                        "top_hits": {
+                                            "size": 5
+                                        }
+                                    }
+                                }
+                            }
+                        }// end aggs
+                  }// end body
+                }).then(function (resp) {
+                    // return hits = resp.hits.hits;
+                    Flash.setState(resp['hits']['hits']);
+                }, function (err) {
+                  console.trace(err.message);
+                });
+            },
             logout () {
                 window.location = '/logout'
                 // axios.get(`/api/account/logout`)

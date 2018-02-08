@@ -235,7 +235,7 @@ const router = new VueRouter({
             },
             {
               path: 'category_product/:id',
-              name: FCategory,
+              name: "ProductCategory",
               component: FCategory,props:true
             }
         ]
@@ -359,7 +359,8 @@ const router = new VueRouter({
     //   props: { default: true, footer: false }
     // },
     // routing Backend
-    { path: '/auth/login', name:'login',component: Login },
+    { path: '/auth/login', name:'AuthLogin',component: Login },
+    
     { path: '/admin', name:'ahome',component: Home },
     { path: '/admin/list', name:'floo',component: List },
     { path: '/register', name:'foo',component: Register },

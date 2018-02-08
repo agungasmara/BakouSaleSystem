@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div v-bind:class="{ active: isActive }" class="loading">
 		<div class="container main-container headerOffset">
 
 		    <!-- Main component call to action -->
@@ -369,39 +369,39 @@
 		            <div class="w100 clearfix category-top">
 		                <h2> MEN COLLECTION </h2>
 
-		                <div class="categoryImage"><img src="images/site/category.jpg" class="img-responsive" alt="img"></div>
+		                <div class="categoryImage"><img src="/images/site/category.jpg" class="img-responsive" alt="img"></div>
 		            </div>
 		            <!--/.category-top-->
 
 		            <div class="row subCategoryList clearfix">
 		                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center ">
 		                    <div class="thumbnail"><a class="subCategoryThumb" href="sub-category.html"><img
-		                            src="images/product/3.jpg" class="img-rounded " alt="img"> </a> <a class="subCategoryTitle"><span> T shirt </span></a>
+		                            src="/images/product/3.jpg" class="img-rounded " alt="img"> </a> <a class="subCategoryTitle"><span> T shirt </span></a>
 		                    </div>
 		                </div>
 		                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center">
 		                    <div class="thumbnail"><a class="subCategoryThumb" href="sub-category.html"><img
-		                            src="images/site/casual.jpg" class="img-rounded " alt="img"> </a> <a
+		                            src="/images/site/casual.jpg" class="img-rounded " alt="img"> </a> <a
 		                            class="subCategoryTitle"><span> Shirt </span></a></div>
 		                </div>
 		                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center">
 		                    <div class="thumbnail"><a class="subCategoryThumb" href="sub-category.html"><img
-		                            src="images/site/shoe.jpg" class="img-rounded " alt="img"> </a> <a class="subCategoryTitle"><span> shoes </span></a>
+		                            src="/images/site/shoe.jpg" class="img-rounded " alt="img"> </a> <a class="subCategoryTitle"><span> shoes </span></a>
 		                    </div>
 		                </div>
 		                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center">
 		                    <div class="thumbnail"><a class="subCategoryThumb" href="sub-category.html"><img
-		                            src="images/site/jewelry.jpg" class="img-rounded " alt="img"> </a> <a
+		                            src="/images/site/jewelry.jpg" class="img-rounded " alt="img"> </a> <a
 		                            class="subCategoryTitle"><span> Accessories </span></a></div>
 		                </div>
 		                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center">
 		                    <div class="thumbnail"><a class="subCategoryThumb" href="sub-category.html"><img
-		                            src="images/site/winter.jpg" class="img-rounded  " alt="img"> </a> <a
+		                            src="/images/site/winter.jpg" class="img-rounded  " alt="img"> </a> <a
 		                            class="subCategoryTitle"><span> Winter Collection </span></a></div>
 		                </div>
 		                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center">
 		                    <div class="thumbnail"><a class="subCategoryThumb" href="sub-category.html"><img
-		                            src="images/site/Male-Fragrances.jpg" class="img-rounded " alt="img"> </a> <a
+		                            src="/images/site/Male-Fragrances.jpg" class="img-rounded " alt="img"> </a> <a
 		                            class="subCategoryTitle"><span> Fragrances </span></a></div>
 		                </div>
 		            </div>
@@ -428,7 +428,7 @@
 		            </div>
 		            <!--/.productFilter-->
 		            <div class="row  categoryProduct xsResponse clearfix">
-		                <div class="item col-sm-4 col-lg-4 col-md-4 col-xs-6">
+		                <div v-for="product in response" class="item col-sm-4 col-lg-4 col-md-4 col-xs-6">
 		                    <div class="product">
 		                        <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
 		                           data-placement="left">
@@ -441,14 +441,14 @@
 		                                   data-target="#productSetailsModalAjax">Quick View </a>
 
 		                            </div>
-		                            <a href="product-details.html"><img src="images/product/30.jpg" alt="img"
-		                                                                class="img-responsive"></a>
+		                            <router-link v-bind:to="'/product/product_detail/'+ product.product_id"><img v-bind:src="product.image" v-bind:alt="product.name"
+		                                                                class="img-responsive"></router-link>
 
 		                            <div class="promotion"><span class="new-product"> NEW</span> <span
 		                                    class="discount">15% OFF</span></div>
 		                        </div>
 		                        <div class="description">
-		                            <h4><a href="product-details.html">aliquam erat volutpat</a></h4>
+		                            <h4><router-link v-bind:to="'/product/product_detail/'+ product.product_id">{{product.name}}</router-link></h4>
 
 		                            <div class="grid-description">
 		                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
@@ -468,7 +468,7 @@
 		                    </div>
 		                </div>
 		                <!--/.item-->
-		                <div class="item col-sm-4 col-lg-4 col-md-4 col-xs-6">
+		                <!-- <div class="item col-sm-4 col-lg-4 col-md-4 col-xs-6">
 		                    <div class="product">
 		                        <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
 		                           data-placement="left">
@@ -480,7 +480,7 @@
 		                                <a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product.html"
 		                                   data-target="#productSetailsModalAjax">Quick View </a>
 		                            </div>
-		                            <a href="product-details.html"><img src="images/product/31.jpg" alt="img"
+		                            <a href="product-details.html"><img src="/images/product/31.jpg" alt="img"
 		                                                                class="img-responsive"></a>
 
 		                            <div class="promotion"><span class="discount">15% OFF</span></div>
@@ -504,9 +504,9 @@
 		                        <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
 		                                class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
 		                    </div>
-		                </div>
+		                </div> -->
 		                <!--/.item-->
-		                <div class="item col-sm-4 col-lg-4 col-md-4 col-xs-6">
+		                <!-- <div class="item col-sm-4 col-lg-4 col-md-4 col-xs-6">
 		                    <div class="product">
 		                        <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
 		                           data-placement="left">
@@ -518,7 +518,7 @@
 		                                <a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product.html"
 		                                   data-target="#productSetailsModalAjax">Quick View </a>
 		                            </div>
-		                            <a href="product-details.html"><img src="images/product/34.jpg" alt="img"
+		                            <a href="product-details.html"><img src="/images/product/34.jpg" alt="img"
 		                                                                class="img-responsive"></a>
 
 		                            <div class="promotion"><span class="new-product"> NEW</span></div>
@@ -542,9 +542,9 @@
 		                        <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
 		                                class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
 		                    </div>
-		                </div>
+		                </div> -->
 		                <!--/.item-->
-		                <div class="item col-sm-4 col-lg-4 col-md-4 col-xs-6">
+		                <!-- <div class="item col-sm-4 col-lg-4 col-md-4 col-xs-6">
 		                    <div class="product">
 		                        <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
 		                           data-placement="left">
@@ -556,7 +556,7 @@
 		                                <a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product.html"
 		                                   data-target="#productSetailsModalAjax">Quick View </a>
 		                            </div>
-		                            <a href="product-details.html"><img src="images/product/35.jpg" alt="img"
+		                            <a href="product-details.html"><img src="/images/product/35.jpg" alt="img"
 		                                                                class="img-responsive"></a></div>
 		                        <div class="description">
 		                            <h4><a href="product-details.html">humanitatis per</a></h4>
@@ -577,9 +577,9 @@
 		                        <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
 		                                class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
 		                    </div>
-		                </div>
+		                </div> -->
 		                <!--/.item-->
-		                <div class="item col-sm-4 col-lg-4 col-md-4 col-xs-6">
+		                <!-- <div class="item col-sm-4 col-lg-4 col-md-4 col-xs-6">
 		                    <div class="product">
 		                        <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
 		                           data-placement="left">
@@ -591,7 +591,7 @@
 		                                <a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product.html"
 		                                   data-target="#productSetailsModalAjax">Quick View </a>
 		                            </div>
-		                            <a href="product-details.html"><img src="images/product/33.jpg" alt="img"
+		                            <a href="product-details.html"><img src="/images/product/33.jpg" alt="img"
 		                                                                class="img-responsive"></a></div>
 		                        <div class="description">
 		                            <h4><a href="product-details.html">Eodem modo typi</a></h4>
@@ -612,9 +612,9 @@
 		                        <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
 		                                class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
 		                    </div>
-		                </div>
+		                </div> -->
 		                <!--/.item-->
-		                <div class="item col-sm-4 col-lg-4 col-md-4 col-xs-6">
+		                <!-- <div class="item col-sm-4 col-lg-4 col-md-4 col-xs-6">
 		                    <div class="product">
 		                        <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
 		                           data-placement="left">
@@ -626,7 +626,7 @@
 		                                <a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product.html"
 		                                   data-target="#productSetailsModalAjax">Quick View </a>
 		                            </div>
-		                            <a href="product-details.html"><img src="images/product/10.jpg" alt="img"
+		                            <a href="product-details.html"><img src="/images/product/10.jpg" alt="img"
 		                                                                class="img-responsive"></a></div>
 		                        <div class="description">
 		                            <h4><a href="product-details.html">sequitur mutationem </a></h4>
@@ -647,9 +647,9 @@
 		                        <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
 		                                class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
 		                    </div>
-		                </div>
+		                </div> -->
 		                <!--/.item-->
-		                <div class="item col-sm-4 col-lg-4 col-md-4 col-xs-6">
+		                <!-- <div class="item col-sm-4 col-lg-4 col-md-4 col-xs-6">
 		                    <div class="product">
 		                        <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
 		                           data-placement="left">
@@ -661,7 +661,7 @@
 		                                <a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product.html"
 		                                   data-target="#productSetailsModalAjax">Quick View </a>
 		                            </div>
-		                            <a href="product-details.html"><img src="images/product/37.jpg" alt="img"
+		                            <a href="product-details.html"><img src="/images/product/37.jpg" alt="img"
 		                                                                class="img-responsive"></a></div>
 		                        <div class="description">
 		                            <h4><a href="product-details.html">consuetudium lectorum.</a></h4>
@@ -682,9 +682,9 @@
 		                        <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
 		                                class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
 		                    </div>
-		                </div>
+		                </div> -->
 		                <!--/.item-->
-		                <div class="item col-sm-4 col-lg-4 col-md-4 col-xs-6">
+		                <!-- <div class="item col-sm-4 col-lg-4 col-md-4 col-xs-6">
 		                    <div class="product">
 		                        <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
 		                           data-placement="left">
@@ -696,7 +696,7 @@
 		                                <a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product.html"
 		                                   data-target="#productSetailsModalAjax">Quick View </a>
 		                            </div>
-		                            <a href="product-details.html"><img src="images/product/16.jpg" alt="img"
+		                            <a href="product-details.html"><img src="/images/product/16.jpg" alt="img"
 		                                                                class="img-responsive"></a></div>
 		                        <div class="description">
 		                            <h4><a href="product-details.html">parum claram</a></h4>
@@ -717,9 +717,9 @@
 		                        <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
 		                                class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
 		                    </div>
-		                </div>
+		                </div> -->
 		                <!--/.item-->
-		                <div class="item col-sm-4 col-lg-4 col-md-4 col-xs-6">
+		                <!-- <div class="item col-sm-4 col-lg-4 col-md-4 col-xs-6">
 		                    <div class="product">
 		                        <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
 		                           data-placement="left">
@@ -731,7 +731,7 @@
 		                                <a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product.html"
 		                                   data-target="#productSetailsModalAjax">Quick View </a>
 		                            </div>
-		                            <a href="product-details.html"><img src="images/product/19.jpg" alt="img"
+		                            <a href="product-details.html"><img src="/images/product/19.jpg" alt="img"
 		                                                                class="img-responsive"></a></div>
 		                        <div class="description">
 		                            <h4><a href="product-details.html">duis dolore </a></h4>
@@ -752,9 +752,9 @@
 		                        <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
 		                                class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
 		                    </div>
-		                </div>
+		                </div> -->
 		                <!--/.item-->
-		                <div class="item col-sm-4 col-lg-4 col-md-4 col-xs-6">
+		                <!-- <div class="item col-sm-4 col-lg-4 col-md-4 col-xs-6">
 		                    <div class="product">
 		                        <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
 		                           data-placement="left">
@@ -766,7 +766,7 @@
 		                                <a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product.html"
 		                                   data-target="#productSetailsModalAjax">Quick View </a>
 		                            </div>
-		                            <a href="product-details.html"><img src="images/product/15.jpg" alt="img"
+		                            <a href="product-details.html"><img src="/images/product/15.jpg" alt="img"
 		                                                                class="img-responsive"></a>
 
 		                            <div class="promotion"><span class="new-product"> NEW</span> <span
@@ -791,9 +791,9 @@
 		                        <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
 		                                class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
 		                    </div>
-		                </div>
+		                </div> -->
 		                <!--/.item-->
-		                <div class="item col-sm-4 col-lg-4 col-md-4 col-xs-6">
+		                <!-- <div class="item col-sm-4 col-lg-4 col-md-4 col-xs-6">
 		                    <div class="product">
 		                        <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
 		                           data-placement="left">
@@ -805,7 +805,7 @@
 		                                <a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product.html"
 		                                   data-target="#productSetailsModalAjax">Quick View </a>
 		                            </div>
-		                            <a href="product-details.html"><img src="images/product/14.jpg" alt="img"
+		                            <a href="product-details.html"><img src="/images/product/14.jpg" alt="img"
 		                                                                class="img-responsive"></a>
 
 		                            <div class="promotion"><span class="discount">15% OFF</span></div>
@@ -829,9 +829,9 @@
 		                        <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
 		                                class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
 		                    </div>
-		                </div>
+		                </div> -->
 		                <!--/.item-->
-		                <div class="item col-sm-4 col-lg-4 col-md-4 col-xs-6">
+		                <!-- <div class="item col-sm-4 col-lg-4 col-md-4 col-xs-6">
 		                    <div class="product">
 		                        <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
 		                           data-placement="left">
@@ -843,7 +843,7 @@
 		                                <a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product.html"
 		                                   data-target="#productSetailsModalAjax">Quick View </a>
 		                            </div>
-		                            <a href="product-details.html"><img src="images/product/17.jpg" alt="img"
+		                            <a href="product-details.html"><img src="/images/product/17.jpg" alt="img"
 		                                                                class="img-responsive"></a>
 
 		                            <div class="promotion"><span class="new-product"> NEW</span></div>
@@ -867,7 +867,7 @@
 		                        <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
 		                                class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
 		                    </div>
-		                </div>
+		                </div> -->
 		                <!--/.item-->
 		            </div>
 		            <!--/.categoryProduct || product content end-->
@@ -899,3 +899,56 @@
 		<div class="gap"></div>
 	</div>
 </template>
+
+
+<script type="text/javascript">
+
+  import axios from 'axios'
+  import Flash from '../../../../helper/flash'
+  import VueTranslate from 'vue-translate-plugin'
+  import Vue from 'vue';
+  Vue.use(VueTranslate);
+  
+  export default{
+  	props:['id'],
+    data(){
+      return{
+        isActive: true,
+        loading:true,
+        response: null,
+      }
+    },
+    created() {
+    	this.loading = true
+        axios.get(`/api/category/`+this.id)
+        .then(response => {
+            this.response = response.data['data']
+            this.isActive = !this.isActive
+        })
+        .catch(e => {
+          this.errors.push(e)
+        })
+
+    },
+    locales: {
+        en: {
+            'entry_personal_information': 'My personal information',
+            'entry_text_update_information': 'Please be sure to update your personal information if it has​​​​ changed.',
+            'entry_require_field': 'Required Field'
+        },
+        kh: {
+            'entry_personal_information': 'ពត៌មានផ្ទាល់ខ្លួន',
+            'entry_text_update_information': 'Please be sure to update your personal information if it has​​​​ changed.',
+            'entry_require_field': 'Required Field'
+        }
+    },
+    mounted: function(){
+
+        // this.loading = true;
+
+        // return this.$scopedSlots.default({
+        //   response: this.response.data['data']
+        // })
+    }
+  }
+</script>
