@@ -17,8 +17,9 @@ class BannerController extends Controller
     	$getBrands = $this->getDesign(6);
     	// ***** Carosel Sliders Parameter = 7 for getting slider data*****
     	$getSliders = $this->getDesign(7);
+        $getProductCategory = $this->getDesign(8);
     	// ***** response results  *****
-    	return response()->json(['brands' => $getBrands,'sliders'=>$getSliders,'success' => true, 'message' => 'Success', 'lang'=>Session::get('applangId')]);
+    	return response()->json(['brands' => $getBrands,'sliders'=>$getSliders,'getProductCategory'=>$getProductCategory,'success' => true, 'message' => 'Success', 'lang'=>Session::get('applangId')]);
     }
 
     // getDesign

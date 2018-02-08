@@ -19,7 +19,7 @@
                       </li>
                     </span> -->
                     <li v-for="b of data['BannerImageArray']">
-                      <img src="/assets/frontend/images/brand/2.png" alt="img"/>
+                      <img v-bind:src="b.image" alt="img"/>
                     </li>
                     <li><img src="/assets/frontend/images/brand/0.png" alt="img" style="display: none;"></li>
                     <!-- <li><img src="/assets/frontend/images/brand/4.png" alt="img"></li> -->
