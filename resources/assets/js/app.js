@@ -96,6 +96,12 @@ import AttributeList from './views/Components/backend/attributes/AttributeList.v
 import AttributeForm from './views/Components/backend/attributes/AttributeForm.vue'
 import AttributeEdit from './views/Components/backend/attributes/AttributeEdit.vue'
 
+//***** Attribute Group *****
+import AttributeGroup from './views/Components/backend/attributes/attribute_group/AttributeGroup.vue'
+import AttributeGroupList from './views/Components/backend/attributes/attribute_group/AttributeGroupList.vue'
+import AttributeGroupForm from './views/Components/backend/attributes/attribute_group/AttributeGroupForm.vue'
+import AttributeGroupEdit from './views/Components/backend/attributes/attribute_group/AttributeGroupEdit.vue'
+
 //***** Language *****
 import Language from './views/Components/backend/languages/Language.vue'
 import LanguageList from './views/Components/backend/languages/LanguageList.vue'
@@ -360,6 +366,25 @@ const router = new VueRouter({
           path: 'edit/:id',
           name:'AttributeEdit',
           component: AttributeEdit,props:true
+        }
+      ]
+    },
+    { path: '/admin/attributes_group', name:'attributes_group',component: AttributeGroup,
+      children: [
+        {
+          path: 'list',
+          name:'AttributeGroupList',
+          component: AttributeGroupList
+        },
+        {
+          path: 'add',
+          name:'AttributeGroupForm',
+          component: AttributeGroupForm
+        },
+        {
+          path: 'edit/:id',
+          name:'AttributeGroupEdit',
+          component: AttributeGroupEdit,props:true
         }
       ]
     },

@@ -102,7 +102,11 @@ Route::Resource('/product_attribute','Backend\Products\Attributes\AttributeContr
 
 //======Product Attribute Group API
 Route::Resource('/product_attribute_group','Backend\Products\AttributeGroups\AttributeGroupController');
+Route::Resource('/attribute_group','Backend\Products\AttributeGroups\AttributeGroupController');
 
 //======Attribute API
 Route::Resource('/attribute','Backend\Attributes\AttributesController');
-Route::Resource('/attribute_group','Backend\Products\AttributeGroups\AttributeGroupController');
+
+
+//======Attribute Group API
+Route::Resource('/attribute_group','Backend\Attributes\AttributeGroupController');
