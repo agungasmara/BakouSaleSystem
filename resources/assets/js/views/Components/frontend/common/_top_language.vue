@@ -35,8 +35,6 @@
           axios.get(`/api/latest`)
             .then(response => {
               this.latestProducts = response.data['data']
-            console.log("##########################################")
-            console.log(this.latestProducts)
             })
             .catch(e => {
               this.errors.push(e)

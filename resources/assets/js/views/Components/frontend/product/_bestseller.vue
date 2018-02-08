@@ -1,4 +1,5 @@
 <template>
+  <div v-bind:class="{ active: isActive }" class="loading">
     <div class="row featuredPostContainer globalPadding style2">
         <h3 class="section-title style2 text-center"><span>BEST SELLER</span></h3>
         <!-- <div v-for="bestSellerProduct of bestSellerProducts">{{bestSellerProduct.product_id}}</div> -->
@@ -77,27 +78,34 @@
           <!--/.item-->
         </div>
     </div>    
+  </div>
 </template>
 <script type="text/javascript">
     import axios from 'axios'
     import Flash from '../../../../helper/flash'
     import {post} from '../../../../helper/api'
     import CartAction from '../../../../helper/cart'
+    import Vue from 'vue';
+    var VueCookie = require('vue-cookie')
+    Vue.use(VueCookie)
 
     export default {
         data() {
             return {
+                isActive: true,
                 flash: Flash.state,
                 error: Flash.state,
                 error: {},
                 bestSellerProducts: [],
-                isProcessing: false
+                isProcessing: false,
+                session_id : this.$cookie.get('session_id')
             }
         },
         created() {
             axios.get(`/api/bestSeller`)
             .then(response => {
               this.bestSellerProducts = response.data['data']
+              this.isActive = !this.isActive
             })
             .catch(e => {
               this.errors.push(e)
@@ -108,8 +116,8 @@
         },
         methods: {
           AddToCart(product_id,qty=1){
-            CartAction.AddToCart(product_id,qty)
-            window.scrollTo(100,100)
+            CartAction.AddToCart(product_id,qty,this.session_id)
+            window.scrollTo(100,0)
           }
         }
     }

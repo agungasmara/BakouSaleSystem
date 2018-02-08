@@ -5,16 +5,29 @@ namespace App\Http\Controllers\FrontEnd\Common;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Session;
+use Auth;
+use DB;
 
 class HeaderController extends Controller
 {
+    public function __construct()
+    {
+        
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $input = $request->all();
+        $session_id=$input['session_id'];
+        if (Auth::guard('account')->id()) {
+            $customer_id=Auth::guard('account')->id();
+            DB::table('cart')->where('session_id',$session_id)->update(['customer_id'=>Auth::guard('account')->id()]);
+        }
+        // dd($this->data['customer_id']);
         //Menu
         // $this->load->model('catalog/category');
         // $this->load->model('catalog/product');

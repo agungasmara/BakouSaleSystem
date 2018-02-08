@@ -5,14 +5,14 @@
       <SlideComponent/>
     </template>
     <!-- {searchResults}} -->
-    <div v-if="searchResults">
+    <!-- <div v-if="searchResults">
       <div v-for="item of searchResults['elasticdata']">
         {{item._source.name}}<br/>
       </div>
-    </div>
+    </div> -->
     <!-- elastic search -->
-    <br/>
-    <center><input style="width:300px" placeholder="Search, Branch, Shop, ..." v-model="q" type="text" @keyup="search" name=""/></center>
+    <!-- <br/> -->
+    <!-- <center><input style="width:300px" placeholder="Search, Branch, Shop, ..." v-model="q" type="text" @keyup="search" name=""/></center> -->
 
     <div class="container main-container">
 
@@ -62,12 +62,25 @@
       <RecommendProductComponent/>
     </template>
     <!--/.featuredPostContainer-->
-    <!-- Banner Product -->
-    <hr class="no-margin-top">
-    <template>
-      <BannerProductComponent/>
-    </template>
 
+    <hr class="no-margin-top">
+    <div class="width100 section-block ">
+        <div class="row featureImg">
+            <div class="col-md-3 col-sm-3 col-xs-6"><a href="category.html"><img src="/assets/frontend/images/site/new-collection-1.jpg"
+                                                                                 class="img-responsive" alt="img"></a>
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-6"><a href="category.html"><img src="/assets/frontend/images/site/new-collection-2.jpg"
+                                                                                 class="img-responsive" alt="img"></a>
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-6"><a href="category.html"><img src="/assets/frontend/images/site/new-collection-3.jpg"
+                                                                                 class="img-responsive" alt="img"></a>
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-6"><a href="category.html"><img src="/assets/frontend/images/site/new-collection-4.jpg"
+                                                                                 class="img-responsive" alt="img"></a>
+            </div>
+        </div>
+        <!--/.row-->
+    </div>
     <!--/.section-block-->
 
     <!-- ***** template component Carousel ***** -->
@@ -126,7 +139,6 @@
   import LatestProductComponent from './../../Components/frontend/product/_latest.vue'
   import RecommendProductComponent from './../../Components/frontend/product/_recommended.vue'
   import BestSellerProductComponent from './../../Components/frontend/product/_bestseller.vue'
-  import BannerProductComponent from './../../Components/frontend/include/banner_product.vue'
   // ***** design component *****
   import CarouselDesignComponent from './../../Components/frontend/desgin/_carousel.vue'
   // import { search } from './helper/elasticsearch'
@@ -243,7 +255,6 @@
       LatestProductComponent,
       BestSellerProductComponent,
       RecommendProductComponent,
-      BannerProductComponent,
       CarouselDesignComponent,
     },
     // Fetches posts when the component is created.

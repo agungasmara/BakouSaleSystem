@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Models\FrontEnd\Account\Address;
 use Carbon\Carbon;
 use DB;
+use Auth;
 use Session;
 
 class WishlistController extends Controller
@@ -17,9 +18,8 @@ class WishlistController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-    	session_start();
-    	if(isset($_SESSION["account_id"])){
-            $Address = Address::where('customer_id',$_SESSION["account_id"])->get();
+    	if(Auth::guard('account')->id()){
+            $Address = Address::where('customer_id',Auth::guard('account')->id())->get();
 
             $Products = DB::table('product')
                     ->select('product.*','product_description.*')
@@ -27,6 +27,7 @@ class WishlistController extends Controller
                     ->Join('customer_wishlist','customer_wishlist.product_id','=','product.product_id')
                     ->Join('product_to_store','product.product_id','=','product_to_store.product_id')
                     ->where('product_description.language_id',1)
+                    ->where('customer_wishlist.customer_id',Auth::guard('account')->id())
                     // ->where('product.status',1)
                     ->where('product_to_store.store_id',0)
                     // ->groupBy('product_description.name')

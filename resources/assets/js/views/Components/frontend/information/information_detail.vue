@@ -1,15 +1,14 @@
 <template>
-	
-<!-- /.Fixed navbar  -->
-<div class="container main-container headerOffset">
-    <div class="row">
-        <h1>{{StateData.title}}</h1>
-        <span v-html="StateData.description"></span>
-    </div>
-</div>
-<!-- /main-container -->
-
-<!-- <div class="gap"></div> -->
+    <div v-bind:class="{ active: isActive }" class="loading">
+        <!-- /.Fixed navbar  -->
+        <div class="container main-container headerOffset">
+            <div class="row">
+                <h1>{{StateData.title}}</h1>
+                <span v-html="StateData.description"></span>
+            </div>
+        </div>
+    </div>  
+    <!-- /main-container -->
 </template>
 
 <script>
@@ -21,6 +20,7 @@
         props:['id'],
         data(){
             return{
+                isActive: true,
                 StateData:Flash.state,
                 // informationInfo:[],
             }
@@ -36,16 +36,17 @@
             
         },
         created(){
-            this.productDetails(this.id);
+            this.InformationDetails(this.id);
         },
         beforeUpdate(){
-            var pid = this.$route.params.id;
-            Flash.setState(this.productDetails(pid));
+            // var pid = this.$route.params.id;
+            // Flash.setState(this.InformationDetails(pid));
         },
         methods:{
-            productDetails(id){
+            InformationDetails(id){
                 axios.get('/api/information/'+id).then(res=>{
-                    this.StateData=res.data;
+                    this.StateData=res.data
+                    this.isActive = !this.isActive
                 });
             }
         }

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="-display:none;">
     <!-- Fixed navbar start -->
     <div class="navbar navbar-tshop navbar-fixed-top megamenu" role="navigation">
         <div class="navbar-top">
@@ -87,10 +87,10 @@
                                     </li> -->
                                   </ul>
                                 </li>
-                                <li><router-link to="/account/signin" data-toggle="modal" data-target="#ModalLogin"> <span class="hidden-xs">SignIn</span>
+                                <li><router-link to="/account/login" data-toggle="modal" data-target="#ModalLogin"> <span class="hidden-xs">SignIn</span>
                                     <i class="glyphicon glyphicon-log-in hide visible-xs "></i> </router-link></li>
                                 <li class="hidden-xs">
-                                    <router-link to="/account/register" data-toggle="modal" data-target="#ModalSignup">Create Account</router-link>
+                                    <router-link to="/customer/register" data-toggle="modal" data-target="#ModalSignup">Create Account</router-link>
                                 </li>
                             </ul>
                         </div>
@@ -117,7 +117,7 @@
                 <!-- this part for mobile -->
                 <div class="search-box pull-right hidden-lg hidden-md hidden-sm">
                     <div class="input-group">
-                        <button class="btn btn-nobg getFullSearch" type="button"><i class="fa fa-search"> </i></button>
+                        <button @click="getFullSearch" class="btn btn-nobg getFullSearch" type="button"><i class="fa fa-search"> </i></button>
                     </div>
                     <!-- /input-group -->
 
@@ -201,7 +201,7 @@
 
                     <div class="search-box">
                         <div class="input-group">
-                            <button class="btn btn-nobg getFullSearch" type="button"><i class="fa fa-search"> </i></button>
+                            <button @click="getFullSearch" class="btn btn-nobg getFullSearch" type="button"><i class="fa fa-search"> </i></button>
                         </div>
                         <!-- /input-group -->
 
@@ -215,14 +215,43 @@
         </div>
         <!--/.container -->
 
-        <div class="search-full text-right"><a class="pull-right search-close"> <i class=" fa fa-times-circle"> </i> </a>
+        <div class="search-full text-right"><a @click="initCloseSearch" class="pull-right search-close"> <i class=" fa fa-times-circle"> </i> </a>
 
             <div class="searchInputBox pull-right">
-                <input type="search" data-searchurl="search?=" name="q" placeholder="start typing and hit enter to search"
-                       class="search-input">
+                <input type="search" v-model="q" @click="initClickSearch" @keyup="search" autocomplete="off" data-searchurl="search?=" name="q" placeholder="Search Product, Brand, Category,..." class="search-input">
                 <button class="btn-nobg search-btn" type="submit"><i class="fa fa-search"> </i></button>
             </div>
+
+            <template v-if="searchResults">
+                <div id="search-list" class="container-fluid" style="display:none;">
+                    <div style="position: absolute;width: 100%;background-color: rgb(255, 255, 255);top: 52px;padding: 15px 60px 15px;left: 0;text-align:left;box-shadow: 1px 1px #e3e3e3;">
+                        <!-- <div>Popular Search</div>
+                        <hr/>
+                        <ul class="popular-product">
+                            <li v-for="item of searchResults['elasticdata']"><img v-bind:src="item._source.imageUrl"/> {{item._source.name}}</li>
+                        </ul>
+                        <br/> -->
+                        <div>Popular Products</div>
+                        <hr/>
+                        <ul class="popular-product">
+                            <li v-for="item of searchResults['elasticdata']">
+                                <router-link v-bind:to="'/product/product_detail/'+ item._source.id">
+                                    <div class="pull-left product-img"><img width="30px" v-bind:src="item._source.imageUrl"/> </div>
+                                    <div class="pull-left">{{item._source.name}}
+                                        <div>
+                                            <span class="original-price">{{item._source.crawlPrice}}</span>
+                                            <span class="special-price">{{item._source.crawlPrice}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </router-link>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </template>
         </div>
+        
         <!--/.search-full-->
     </div>
     <!-- /.Fixed navbar  -->
@@ -239,116 +268,217 @@
   </div>
 </template>
 
+<style type="text/css">
+    span.special-price{/*color:#4ec67f;*/color:#000;padding-left: 10px;}
+    span.original-price{color:#f00;text-decoration: line-through;}
+    .product-img{padding-right: 10px;}
+    ul.popular-product li{
+        font-size:14px;
+        padding-bottom: 10px;
+        /*line-height: 40px;*/
+    }
+</style>
+
 <!-- frontEnd App -->
 <script type="text/javascript">
 
-  import axios from 'axios'
-  import Flash from './helper/flash'
-  import CartProduct from './views/Components/frontend/include/cart.vue'
-  import CartAction from './helper/cart'
-  import FooterComponet from './views/Components/frontend/common/_footer.vue'
-  import VueTranslate from 'vue-translate-plugin'
-  import Vue from 'vue';
-  Vue.use(VueTranslate);
-  import TopHeader from './views/Components/frontend/common/_top_language'
-  
-  export default{
-    data(){
-      return{
-        posts: [],
-        loading:true,
-        TotalPrices : CartAction.data,
-        data_list:[],
-        account_data: [
-            {
-              name: 'My Account',
-              link: '/account/dashboard'
-            },
-            {
-              name: 'Order',
-              link: '/account/login'
-            },
-            {
-              name: 'Transaction',
-              link: '/account/login'
-            },
-            {
-              name: 'Logout',
-              action:'logout',
-              link: '/account/login'
-            }
-        ],
-        account_auth: [
-            {
-              name: 'Login',
-              link: '/account/login'
-            },
-            {
-              name: 'Register',
-              link: '/account/login'
-            }
-        ],
-      }
-    },
-    created() {
-        axios.get(`/api/header`)
-        .then(response => {
-          this.posts = response.data['data']
-          this.$translate.setLang(response.data['lang'])
-        })
-        .catch(e => {
-          this.errors.push(e)
-        })
-    },
-    locales: {
-        en: {
-            'entry_account': 'My Account',
-            'entry_login': 'Login',
-            'entry_register': 'Register'
-        },
-        kh: {
-            'entry_account': 'គណនី',
-            'entry_login': 'ចូល',
-            'entry_register': 'ចុះឈ្មោះ'
-        }
-    },
-    components:{
-        CartProduct,
-        FooterComponet,
-        TopHeader,
-    },
-    getLang(){
+    import axios from 'axios'
+    import Flash from './helper/flash'
+    import CartProduct from './views/Components/frontend/include/cart.vue'
+    import CartAction from './helper/cart'
+    import FooterComponet from './views/Components/frontend/common/_footer.vue'
+    import VueTranslate from 'vue-translate-plugin'
+    import TopHeader from './views/Components/frontend/common/_top_language'
+    import Vue from 'vue'
+    Vue.use(VueTranslate)
+    var VueCookie = require('vue-cookie')
+    Vue.use(VueCookie)
+    var randomstring = require("randomstring")
 
-    },
-    methods: {
-        logout () {
-            axios.get(`/api/account/logout`)
+    const es_host = 'http://localhost';
+    const es_port = 9200;
+    var es = require('elasticsearch');
+    var client = new es.Client({
+    host: 'localhost:9200',
+    log: 'trace',
+    });
+
+    export default{
+        data(){
+          return{
+            q:'',
+            searchResults:Flash.state,
+            posts: [],
+            loading:true,
+            session_id : this.$cookie.get('session_id'),
+            TotalPrices : CartAction.data,
+            random: Math.floor(Math.random()),
+            data_list:[],
+            account_data: [
+                {
+                  name: 'My Account',
+                  link: '/account/dashboard'
+                },
+                {
+                  name: 'Order',
+                  link: '/account/orderlist'
+                },
+                {
+                  name: 'My Wishlists',
+                  link: '/account/wishlist'
+                },
+                {
+                  name: 'Logout',
+                  action:'logout',
+                  link: '/logout'
+                }
+            ],
+            account_auth: [
+                {
+                  name: 'My Account',
+                  link: '/account/login'
+                },
+                {
+                  name: 'Order',
+                  link: '/account/login'
+                },
+                {
+                  name: 'My Wishlists',
+                  link: '/logout'
+                }
+            ],
+          }
+        },
+        ready() {
+          this.q = q;
+        },
+        created() {
+            // To delete a cookie use
+            // this.$cookie.delete('cookie');
+            // alert(randomstring.generate())
+            var session_id = this.session_id
+            if(session_id==null){
+                this.$cookie.set('session_id', randomstring.generate(), 168)
+            }
+            axios.get('/api/header?session_id='+session_id)
+            .then(response => {
+              this.posts = response.data['data']
+              this.$translate.setLang(response.data['lang'])
+            })
+            .catch(e => {
+              this.errors.push(e)
+            })
+        },
+        locales: {
+            en: {
+                'entry_account': 'My Account',
+                'entry_login': 'Login',
+                'entry_register': 'Register'
+            },
+            kh: {
+                'entry_account': 'គណនី',
+                'entry_login': 'ចូល',
+                'entry_register': 'ចុះឈ្មោះ'
+            }
+        },
+        components:{
+            CartProduct,
+            FooterComponet,
+            TopHeader,
+        },
+        getLang(){
+
+        },
+        beforeUpdate(){
+            
+        },
+        methods: {
+            // onLostFocus:function(){
+            //     $('#search-list').slideUp(100)
+            //     $('.search-full').hide(100)
+            // },
+            initCloseSearch:function(){
+                $('.search-full').hide(100)
+            },
+            getFullSearch:function(){
+                $('.search-full').show(100)
+            },
+            _onLostFocus: function(){
+                $('#search-list').slideUp(1000)
+                $('.search-full').hide(100)
+            },
+            initClickSearch: function(){
+                $("#search-list").show(10)
+            },
+            search: function() {    
+                var searchText = this.q
+                client.search({
+                  index: "store",
+                  type: "product",
+                  body: {
+                            "size": 5,
+                              "sort": [
+                            {"popular": {"order": "desc"}}
+                        ],
+                        "query": {
+                              "query_string": {
+                              "query": (searchText == '' || searchText == ' ')? '*' : searchText+"*",
+                              "fields": ["name"]
+                          }
+                        }
+                        ,
+                        "aggs": {
+                            "categories": {
+                                "terms": {
+                                    "field": "categories.cat_id",
+                                    "size": 5 // limit number result distinct
+                                },
+                                "aggs": {
+                                    "tops": {
+                                        "top_hits": {
+                                            "size": 5
+                                        }
+                                    }
+                                }
+                            }
+                        }// end aggs
+                  }// end body
+                }).then(function (resp) {
+                    // return hits = resp.hits.hits;
+                    Flash.setState(resp['hits']['hits']);
+                }, function (err) {
+                  console.trace(err.message);
+                });
+            },
+            logout () {
+                window.location = '/logout'
+                // axios.get(`/api/account/logout`)
+                // .then(response => {
+                //   var checkAuthenticationAccount = response.data['success']
+                //   // if(checkAuthenticationAccount==true){
+                //   this.$router.push('/account/login')
+                //   //   window.location = '/account/login'
+                //   // }
+                // })
+                // .catch(e => {
+                //   this.errors.push(e)
+                // })
+            },
+        },
+        mounted: function(){
+            console.log("====================================")
+            axios.get(`/api/account/check_authorize`)
             .then(response => {
               var checkAuthenticationAccount = response.data['success']
-              if(checkAuthenticationAccount==true){
-                // this.$router.push('/account/login')
-                window.location = '/account/login'
+              if(checkAuthenticationAccount==false){
+                this.data_list = this.account_auth
+              }else{
+                this.data_list = this.account_data
               }
             })
             .catch(e => {
               this.errors.push(e)
             })
         },
-    },
-    mounted: function(){
-        console.log("====================================")
-        axios.get(`/api/account/check_authorize`)
-        .then(response => {
-          var checkAuthenticationAccount = response.data['success']
-          if(checkAuthenticationAccount==false){
-            this.data_list = this.account_auth
-          }else{
-            this.data_list = this.account_data
-          }
-        })
-        .catch(e => {
-          this.errors.push(e)
-        })
-    },
-  }
+    }
 </script>

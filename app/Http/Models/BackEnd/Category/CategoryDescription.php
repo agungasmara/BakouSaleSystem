@@ -17,5 +17,4 @@ class CategoryDescription extends Model
 		'meta_description',
 		'meta_keyword',
     ];
-    public $timestamps = false;
 }

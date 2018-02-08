@@ -8,6 +8,7 @@ use App\Jobs\ChangeLocale;
 use App\Http\Models\FrontEnd\Account\Customer;
 use Illuminate\Support\Facades\Hash;
 use DB;
+use Auth;
 use Carbon\Carbon;
 use Session;
 
@@ -48,7 +49,6 @@ class LoginController extends Controller
         //     $msg = "Data not successfully Login!";
         // }
 
-        
         return response()->json([
             'success'=>$success,
             'message'=> $msg,
@@ -78,8 +78,7 @@ class LoginController extends Controller
     }
 
     public function checkAccountAuthorize(){
-        session_start();
-        if(isset($_SESSION["account_id"])){
+        if(Auth::guard('account')->id()){
             return response()->json([
                 'success'=>true,
                 'message'=> "Logout successfully"

@@ -96,12 +96,6 @@ import AttributeList from './views/Components/backend/attributes/AttributeList.v
 import AttributeForm from './views/Components/backend/attributes/AttributeForm.vue'
 import AttributeEdit from './views/Components/backend/attributes/AttributeEdit.vue'
 
-//***** Attribute Group *****
-import AttributeGroup from './views/Components/backend/attributes/attribute_group/AttributeGroup.vue'
-import AttributeGroupList from './views/Components/backend/attributes/attribute_group/AttributeGroupList.vue'
-import AttributeGroupForm from './views/Components/backend/attributes/attribute_group/AttributeGroupForm.vue'
-import AttributeGroupEdit from './views/Components/backend/attributes/attribute_group/AttributeGroupEdit.vue'
-
 //***** Language *****
 import Language from './views/Components/backend/languages/Language.vue'
 import LanguageList from './views/Components/backend/languages/LanguageList.vue'
@@ -241,10 +235,20 @@ const router = new VueRouter({
             },
             {
               path: 'category_product/:id',
-              name: FCategory,
+              name: "ProductCategory",
               component: FCategory,props:true
             }
         ]
+    },
+    {
+      path: '/login',
+      name:'login_account',
+      component: FLogin
+    },
+    {
+      path: '/customer/register',
+      name:'register',
+      component: FRegister
     },
     { path: '/account', name:'account', component: Account,
       children: [
@@ -252,11 +256,6 @@ const router = new VueRouter({
             path: 'signin',
             name:'signin',
             component: FSignIn
-          },
-          {
-            path: 'register',
-            name:'register',
-            component: FRegister
           },
           {
             path: 'login',
@@ -302,6 +301,21 @@ const router = new VueRouter({
             path: 'addressmy',
             name: 'addressmy',
             component: AddressMy
+          },
+          {
+            path: 'cartview',
+            name:'cartview',
+            component: CartView
+          },
+          {
+            path: 'checkout',
+            name:'checkout',
+            component: Checkout
+          },
+          {
+            path: 'checkoutsuccess',
+            name:'checkoutsuccess',
+            component: CheckoutSuccess
           }
       ]
     },
@@ -319,33 +333,34 @@ const router = new VueRouter({
         }
       ]
     },
-     { 
-      path: '/cart', name:'cart',component: Cart,
-      children:[
-        {
-          path: 'cartview',
-          name:'cartview',
-          component: CartView
-        },
-        {
-          path: 'checkout',
-          name:'checkout',
-          component: Checkout
-        },
-        {
-          path: 'checkoutsuccess',
-          name:'checkoutsuccess',
-          component: CheckoutSuccess
-        }
-      ]
-    },
+    //  { 
+    //   path: '/cart', name:'cart',component: Cart,
+    //   children:[
+    //     {
+    //       path: 'cartview',
+    //       name:'cartview',
+    //       component: CartView
+    //     },
+    //     {
+    //       path: 'checkout',
+    //       name:'checkout',
+    //       component: Checkout
+    //     },
+    //     {
+    //       path: 'checkoutsuccess',
+    //       name:'checkoutsuccess',
+    //       component: CheckoutSuccess
+    //     }
+    //   ]
+    // },
     // {
     //   path: '/information/information_detail/:id', name:'information',component: Information,
     //   components: { default: Information, footer: Footer },
     //   props: { default: true, footer: false }
     // },
     // routing Backend
-    { path: '/auth/login', name:'login',component: Login },
+    { path: '/auth/login', name:'AuthLogin',component: Login },
+    
     { path: '/admin', name:'ahome',component: Home },
     { path: '/admin/list', name:'floo',component: List },
     { path: '/register', name:'foo',component: Register },
@@ -366,25 +381,6 @@ const router = new VueRouter({
           path: 'edit/:id',
           name:'AttributeEdit',
           component: AttributeEdit,props:true
-        }
-      ]
-    },
-    { path: '/admin/attributes_group', name:'attributes_group',component: AttributeGroup,
-      children: [
-        {
-          path: 'list',
-          name:'AttributeGroupList',
-          component: AttributeGroupList
-        },
-        {
-          path: 'add',
-          name:'AttributeGroupForm',
-          component: AttributeGroupForm
-        },
-        {
-          path: 'edit/:id',
-          name:'AttributeGroupEdit',
-          component: AttributeGroupEdit,props:true
         }
       ]
     },

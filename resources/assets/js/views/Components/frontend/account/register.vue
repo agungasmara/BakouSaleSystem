@@ -31,33 +31,39 @@
                 </div>
                
                 <form role="form" class="regForm">
+                    <template>
+                      <div v-if="flash.error" class="alert alert-danger"><i class="fa fa-wa fa-info-circle"></i> {{ flash.error }}</div>
+                    </template>
+                    <template>
+                      <div v-if="flash.success" class="alert alert-success"><i class="fa fa-wa fa-check"></i> {{flash.success}}</div>
+                    </template>
 
                     <fieldset id="account">
                       <legend>Your Personal Details</legend>
                       <div class="form-group required">
-                        <label class="col-sm-2 control-label text-right" for="input-firstname">First Name</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-3 control-label text-right" for="input-firstname">First Name</label>
+                        <div class="col-sm-9">
                           <input type="text" name="firstname" value="<?php echo $firstname; ?>" placeholder="First Name" id="input-firstname" class="form-control" v-model="firstname" :rules="firstnameRules" :counter="50" required />
                           <div class="text-danger"></div>                          
                         </div>
                       </div>
                       <div class="form-group required">
-                        <label class="col-sm-2 control-label text-right" for="input-lastname">Last Name</label>
-                        <div class="col-sm-10">
-                          <input type="text" name="lastname" value="<?php echo $lastname; ?>" placeholder="Last Name" id="input-lastname" class="form-control" v-model="lastname" title="Please enter your username (at least 3 characters)"/>
+                        <label class="col-sm-3 control-label text-right" for="input-lastname">Last Name</label>
+                        <div class="col-sm-9">
+                          <input type="text" required name="lastname" value="<?php echo $lastname; ?>" placeholder="Last Name" id="input-lastname" class="form-control" v-model="lastname" title="Please enter your username (at least 3 characters)"/>
                           <div class="text-danger"></div>
                         </div>
                       </div>
                       <div class="form-group required">
-                        <label class="col-sm-2 control-label text-right" for="input-email">E-mail</label>
-                        <div class="col-sm-10">
-                          <input type="email" name="email" value="<?php echo $email; ?>" placeholder="E-mail" id="input-email" class="form-control" v-model="email" />
+                        <label class="col-sm-3 control-label text-right" for="input-email">E-mail</label>
+                        <div class="col-sm-9">
+                          <input type="email" required name="email" value="<?php echo $email; ?>" placeholder="E-mail" id="input-email" class="form-control" v-model="email" />
                           <div class="text-danger"></div>
                         </div>
                       </div>
-                      <div class="form-group required">
-                        <label class="col-sm-2 control-label text-right" for="input-telephone">Telephone</label>
-                        <div class="col-sm-10">
+                      <div class="form-group">
+                        <label class="col-sm-3 control-label text-right" for="input-telephone">Telephone</label>
+                        <div class="col-sm-9">
                           <input type="tel" name="telephone" value="<?php echo $telephone; ?>" placeholder="Telephone" id="input-telephone" class="form-control" v-model="telephone" />
                           <div class="text-danger"></div>
                         </div>
@@ -65,8 +71,8 @@
                       </div>
 
                       <div class="form-group">
-                        <label class="col-sm-2 control-label text-right" for="input-fax">Fax</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-3 control-label text-right" for="input-fax">Fax</label>
+                        <div class="col-sm-9">
                           <input type="text" name="fax" value="<?php echo $fax; ?>" placeholder="Fax" id="input-fax" class="form-control" v-model="fax"/>
                         </div>
                         <div class="text-danger"></div>
@@ -76,41 +82,41 @@
                     <!-- <fieldset id="address">
                       <legend>Your address</legend>
                       <div class="form-group">
-                        <label class="col-sm-2 control-label text-right" for="input-company">Company</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-3 control-label text-right" for="input-company">Company</label>
+                        <div class="col-sm-9">
                           <input type="text" name="company" value="<?php echo $company; ?>" placeholder="Company" id="input-company" class="form-control" />
                         </div>
                       </div>
                       <div class="form-group required">
-                        <label class="col-sm-2 control-label text-right" for="input-address-1">Address 1</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-3 control-label text-right" for="input-address-1">Address 1</label>
+                        <div class="col-sm-9">
                           <input type="text" name="address_1" value="<?php echo $address_1; ?>" placeholder="Address 1" id="input-address-1" class="form-control" />
                           <div class="text-danger"></div>
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="col-sm-2 control-label text-right" for="input-address-2">Address 2</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-3 control-label text-right" for="input-address-2">Address 2</label>
+                        <div class="col-sm-9">
                           <input type="text" name="address_2" value="<?php echo $address_2; ?>" placeholder="Address 2" id="input-address-2" class="form-control" />
                         </div>
                       </div>
                       <div class="form-group required">
-                        <label class="col-sm-2 control-label text-right" for="input-city">City</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-3 control-label text-right" for="input-city">City</label>
+                        <div class="col-sm-9">
                           <input type="text" name="city" value="<?php echo $city; ?>" placeholder="City" id="input-city" class="form-control" />
                           <div class="text-danger"></div>
                         </div>
                       </div>
                       <div class="form-group required">
-                        <label class="col-sm-2 control-label text-right" for="input-postcode">Post Code</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-3 control-label text-right" for="input-postcode">Post Code</label>
+                        <div class="col-sm-9">
                           <input type="text" name="postcode" value="<?php echo $postcode; ?>" placeholder="Post Code" id="input-postcode" class="form-control" />
                           <div class="text-danger"></div>
                         </div>
                       </div>
                       <div class="form-group required">
-                        <label class="col-sm-2 control-label text-right" for="input-country">Country</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-3 control-label text-right" for="input-country">Country</label>
+                        <div class="col-sm-9">
                           <select name="country_id" id="input-country" class="form-control">
                             <option value=""><?php echo $text_select; ?></option>
                             <?php foreach ($countries as $country) { ?>
@@ -125,8 +131,8 @@
                         </div>
                       </div>
                       <div class="form-group required">
-                        <label class="col-sm-2 control-label text-right" for="input-zone">Region / State</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-3 control-label text-right" for="input-zone">Region / State</label>
+                        <div class="col-sm-9">
                           <select name="zone_id" id="input-zone" class="form-control">
                           </select>
                           <div class="text-danger"></div>
@@ -137,15 +143,15 @@
                     <fieldset>
                       <legend>Your Password</legend>
                       <div class="form-group required">
-                        <label class="col-sm-2 control-label text-right" for="input-password">Password</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-3 control-label text-right" for="input-password">Password</label>
+                        <div class="col-sm-9">
                           <input type="password" name="password" value="" placeholder="Password" id="input-password" class="form-control" v-model="password" />
                           <div class="text-danger"></div>
                         </div>
                       </div>
                       <div class="form-group required">
-                        <label class="col-sm-2 control-label text-right" for="input-confirm">Password Confirm</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-3 control-label text-right" for="input-confirm">Password Confirm</label>
+                        <div class="col-sm-9">
                           <input type="password" name="confirm" value="" placeholder="Password Confirm" id="input-confirm" class="form-control" v-model="confirm"/>
                           <div class="text-danger"></div>
                         </div>
@@ -155,8 +161,8 @@
                     <!-- <fieldset>
                       <legend>Newsletter</legend>
                       <div class="form-group">
-                        <label class="col-sm-2 control-label text-right">Subscribe</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-3 control-label text-right">Subscribe</label>
+                        <div class="col-sm-9">
                             <label class="radio-inline">
                                 <input type="radio" name="newsletter" value="1" checked="checked" />Yes
                             </label>
@@ -242,7 +248,8 @@
                 fax: '',
                 password: '',
                 confirm: '',
-                flash:Flash.state
+                flash: Flash.state,
+                error: Flash.state,
 
             }
         },
@@ -258,12 +265,10 @@
                   confirm: this.confirm,
                 }).then((res)=>{
                     if(res.data.success==true){
-                        //Flash.setSuccess(res.data.message)
-                        //this.$router.replace('/account/login');
+                      Flash.setSuccess('Congratulations! You have now successfully registered.')
                         this.$router.push('/account/login');
                     }else{
-                        // Flash.setSuccess(res.data.message)
-                        alert("Email already exist!xx");
+                      Flash.setError('You enter wrong username or password!')
                     }
                 })
             },

@@ -64,8 +64,7 @@
         created() {
           axios.get(`/api/banner`)
           .then(response => {
-            this.data = response.data['brands'][0];
-            console.log(response.data['brands'][0]);
+            this.data = response.data['brands'][0]
           })
           .catch(e => {
             this.errors.push(e)

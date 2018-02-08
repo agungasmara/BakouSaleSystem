@@ -1,13 +1,6 @@
-<style>
-  ul.temp-nav li ul.sub-temp-nav li{
-    display:inline;
-    margin-top:100px;
-    padding:0 10px 0 10px;
-  }
-</style>
-
 <template>
-    <div>
+    <section class="app-layout">
+      <div>
         <!-- Start Page Loading -->
         <div id="loader-wrapper">
           <div id="loader"></div>
@@ -33,8 +26,7 @@
         <!-- START MAIN -->
         <div id="main">
           <div class="wrapper">
-
-            <router-view></router-view>
+            <router-view/></router-view>
             <!-- aside -->
             <aside id="left-sidebar-nav hide-on-large-only">
               <ul id="slide-out" class="side-nav leftside-navigation">
@@ -72,9 +64,17 @@
           </div>
         </footer>
         <!-- <router-view class="view"></router-view> -->
-    </div>
+      </div>
+    </section>
 </template>
 
+<style>
+  ul.temp-nav li ul.sub-temp-nav li{
+    display:inline;
+    margin-top:100px;
+    padding:0 10px 0 10px;
+  }
+</style>
 
 <script type="text/javascript">
     import Flash from './helper/flash'

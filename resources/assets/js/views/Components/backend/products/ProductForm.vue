@@ -152,7 +152,11 @@
 								{	class:'xs12 sm6 md6',	 key:'model',	type:'text',	 Value:''},
 								{	class:'xs12 sm6 md6',	 key:'manufacturer_id',	type:'select',	 Value:''	,items:this.manufacturer},
 								{	class:'xs12 sm6 md6',	 key:'sku',	type:'text',	 Value:''},
-								
+								{	class:'xs12 sm6 md6',	 key:'upc',	type:'text',	 Value:''},
+								{	class:'xs12 sm6 md6',	 key:'ean',	type:'text',	 Value:''},
+								{	class:'xs12 sm6 md6',	 key:'jan',	type:'text',	 Value:''},
+								{	class:'xs12 sm6 md6',	 key:'isbn',	type:'text',	 Value:''},
+								{	class:'xs12 sm6 md6',	 key:'mpn',	type:'text',	 Value:''},
 								{	class:'xs12 sm6 md6',	 key:'location',	type:'text',	 Value:''},
 								{	class:'xs12 sm6 md6',	 key:'quantity',	type:'text',	 Value:''},
 								{	class:'xs12 sm6 md6',	 key:'stock_status_id',	type:'select',	 Value:'',	items:this.stock_status},

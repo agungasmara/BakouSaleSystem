@@ -37,8 +37,8 @@ class RegisterController extends Controller
             'firstname'=>$data['firstname'],
             'lastname'=>$data['lastname'],
             'email'=>$mailCol,
-            'telephone'=>$data['telephone'],
-            'fax'=>$data['fax'],
+            'telephone'=>$data['telephone']?$data['telephone']:0,
+            'fax'=>$data['fax']?$data['fax']:0,
             'password'=>bcrypt($data['password']),
             'salt'=>1,
             'cart'=>1,
@@ -63,8 +63,7 @@ class RegisterController extends Controller
         }
         return response()->json([
             'success'=>$success,
-            'message'=>$msg,
-            'lang'=>Session::get('applangId')?Session::get('applangId'):config_language
+            'message'=>$msg
         ]);
     }
 

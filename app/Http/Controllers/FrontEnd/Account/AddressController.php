@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Models\FrontEnd\Account\Address;
 use Carbon\Carbon;
 use DB;
+use Auth;
 use Session;
 
 class AddressController extends Controller
@@ -17,9 +18,8 @@ class AddressController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-    	session_start();
-    	if(isset($_SESSION["account_id"])){
-            $Address = Address::where('customer_id',$_SESSION["account_id"])->get();
+    	if(Auth::guard('account')->id()){
+            $Address = Address::where('customer_id',Auth::guard('account')->id())->get();
     		return response()->json(['data'=>$Address,'success' => true, 'message' => 'Success', 'lang'=>Session::get('applangId')]);
         }else{
           	return response()->json(['success' => false, 'message' => 'Unauthorise']);

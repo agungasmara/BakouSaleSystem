@@ -65,7 +65,7 @@
                                 <p><a title="Recover your forgotten password" href="forgot-password.html">Forgot your
                                     password? </a></p>
                             </div>
-                            <a class="btn btn-primary" href="account.html"><i class="fa fa-sign-in"></i> Sign In</a>
+                            <a class="btn btn-primary" href="javascript:void(0);"><i class="fa fa-sign-in"></i> Sign In</a>
 
 
                         </form>
@@ -116,7 +116,6 @@
                 this.error = {}
                 post('/api/register', this.credential)
                     .then((res) => {
-                    console.log(res);
                     if(res.data.registered) {
                     Flash.setSuccess('Congratulations! You have now successfully registered.')
                     this.$router.push('/login')

@@ -64,7 +64,7 @@
 									</span>
 								</div>
 								<div v-else-if="index.text=='Action'">
-									<span style="cursor:pointer;color:blue;" @click="editData(props.item[index.value])">
+									<span style="cursor:pointer;color:blue;" @click="editData(props.item[index.value])"">
 										<i class="material-icons">edit</i>
 									</span>
 									&nbsp;
@@ -205,9 +205,9 @@
 					this.dialog=false
 				}
 			},
-			editData(id){
+			editSetting(id){
 				//this.components.push(id)
-				this.$router.push('/admin/categories/edit/'+id)
+				this.$router.push('/admin/attributes/edit/'+id)
 			}
 		}
 	}
