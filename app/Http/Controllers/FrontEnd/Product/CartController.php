@@ -64,9 +64,8 @@ class CartController extends Controller
     {
         return Cart::UpdateCart($request->all());
     }
-    public function ProductCart(Request $request)
+    public function ProductCart()
     {
-        $input = $request->all();
         // dd("test");
         $datas['TotalPrices']=0;
     	// if (Auth::check()) {
@@ -74,23 +73,7 @@ class CartController extends Controller
     	// }else{
      //        $datas['data']=SessionModel::find(session()->getId())->Cart()->get();
      //    }
-        // dd($input['session_id']);
-        $datas['session_id']=$input['session_id'];
-        // $datas['data']=SessionModel::find(session()->getId())->Cart()->get();
-        if (Auth::guard('account')->id()) {
-            $datas['data']=DB::table('cart')
-                            ->select('product.*','cart.quantity as cart_quantity')
-                            ->join('product','product.product_id','=','cart.product_id')
-                            ->where('cart.customer_id',Auth::guard('account')->id())
-                            ->get();
-        }else{
-            $datas['data']=DB::table('cart')
-                            ->select('product.*','cart.quantity as cart_quantity')
-                            ->join('product','product.product_id','=','cart.product_id')
-                            ->where('cart.session_id',$input['session_id'])
-                            ->get();
-        }
-
+        $datas['data']=SessionModel::find(session()->getId())->Cart()->get();
         foreach ($datas['data'] as $key => $value) {
             $value->name=ProductDescription::find($value->product_id)->value('name');
 

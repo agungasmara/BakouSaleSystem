@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\Customer as Authenticatable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Customer extends Authenticatable
 {
@@ -14,7 +14,7 @@ class Customer extends Authenticatable
      *
      * @var array
      */
-    protected $guard = 'customer';
+
     protected $table = 'customer';
     protected $primaryKey = 'customer_id';
 

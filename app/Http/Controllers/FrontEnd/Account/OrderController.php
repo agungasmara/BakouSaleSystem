@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use DB;
-use Auth;
 use Session;
 
 class OrderController extends Controller
@@ -17,8 +16,9 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-    	if(Auth::guard('account')->id()){
-            $Orders = $this->getOrders((int)Auth::guard('account')->id(),config_store_id);
+    	session_start();
+    	if(isset($_SESSION["account_id"])){
+            $Orders = $this->getOrders((int)$_SESSION["account_id"],config_store_id);
     		return response()->json(['data'=>$Orders,'success' => true, 'message' => 'Success', 'lang'=>Session::get('applangId')]);
         }else{
           	return response()->json(['success' => false, 'message' => 'Unauthorise']);

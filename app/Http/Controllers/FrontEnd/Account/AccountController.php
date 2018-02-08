@@ -16,25 +16,6 @@
          *
          * @return \Illuminate\Http\Response
          */
-
-        public function __construct(){
-            $this->middleware('auth:account');
-            // $this->middleware('auth:customer', ['except' => ['logout']]);
-        }
-
-        public function customer(){
-            return view('frontend.index');
-            // return redirect("/account/login");
-        }
-
-        public function customers(){
-            echo "testtest";
-        }
-
-        public function login(){
-            echo "login";
-        }
-
         public function index(){
             
             return response()->json(['data'=>$products,'success' => true, 'message' => 'Success', 'lang'=>Session::get('applangId')]);

@@ -1,5 +1,5 @@
 <template>
-    <div v-bind:class="{ active: isActive }" class="loading">
+    <div>
       <div class="banner">
         <div class="full-container">
             <div class="slider-content">
@@ -116,7 +116,6 @@
     export default {
         data() {
             return {
-                isActive: true,
                 credential: {
                     name: '',
                     email: '',
@@ -134,7 +133,6 @@
             axios.get(`/api/slide`)
             .then(response => {
               this.posts = response.data['data']
-              this.isActive = !this.isActive
             })
             .catch(e => {
               this.errors.push(e)

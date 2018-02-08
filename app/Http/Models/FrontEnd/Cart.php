@@ -22,11 +22,10 @@ class Cart extends Model
 	public $timestamps = false;
 	static function AddToCart($data)
 	{
-		if (Auth::guard('account')->id()) {
-			$key['customer_id']=Auth::guard('account')->id();
-			$key['session_id']=$data['session_id'];
+		if (Auth::check()) {
+			$key['customer_id']=Auth::id();
 		}else{
-			$key['session_id']=$data['session_id'];
+			$key['session_id']=session()->getId();
 		}
 		$key['product_id']=$data['product_id'];
 		$value['option']=isset($data['option'])? : '';
@@ -44,11 +43,11 @@ class Cart extends Model
   	}
 	static function RemoveFromCart($data)
 	{
-		if (Auth::guard('account')->id()) {
-			$key['customer_id']=Auth::guard('account')->id();
+		if (Auth::check()) {
+			$key['customer_id']=Auth::id();
 			$key['product_id']=$data['product_id'];
 		}else{
-			$key['session_id']=$data['session_id'];
+			$key['session_id']=session()->getId();
 			$key['product_id']=$data['product_id'];
 		}
 		
@@ -58,8 +57,8 @@ class Cart extends Model
 	static function MyCart()
 	{	
 		// $key= Auth::user()!== null ? 'customer_id':'session_id';
-		if (Auth::guard('account')->id()) {
-			$key['customer_id']=Auth::guard('account')->id();
+		if (Auth::check()) {
+			$key['customer_id']=Auth::id();
 		}else{
 			$key['session_id']=session()->getId();
 		}
@@ -67,8 +66,8 @@ class Cart extends Model
 
 	static function UpdateCart($data)
 	{
-		if (Auth::guard('account')->id()) {
-			$key['customer_id']=Auth::guard('account')->id();
+		if (Auth::check()) {
+			$key['customer_id']=Auth::id();
 		}else{
 			$key['session_id']=session()->getId();
 		}

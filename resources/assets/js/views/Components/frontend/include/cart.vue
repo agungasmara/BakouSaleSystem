@@ -1,8 +1,8 @@
 <template>
-	<div v-bind:class="{ active: isActive }" class="loading">
+	<div>
 		
-	    <table>
-	        <tbody>
+	    <table >
+	        <tbody >
 
 	        	<!-- {{CartProduct.products.data.length}} -->
 	        <tr v-if="!CartProduct.products.data.length">
@@ -18,7 +18,9 @@
 		            </td>
 		            <td style="width:20%">
 		                <div class="miniCartDescription">
-		                    <h4 v-html="product.name"></h4>
+		                    <h4>
+		                    		{{product.name}}
+		                    </h4>
 		                    <span class="size"> <!-- {{product.name}} --> </span>
 		                    <div class="price"><span>$ {{product.price*1}} </span></div>
 		                </div>
@@ -34,42 +36,37 @@
 
 	     <div class="miniCartFooter text-right" v-if="CartProduct.products.TotalPrices">
 	        <h3 class="text-right subtotal"> Total: $ {{CartProduct.products.TotalPrices}} </h3>
-	        <a href="/account/cartview" class="btn btn-sm btn-danger">
+	        <router-link to="/cart/cartview" class="btn btn-sm btn-danger">
               <i class="fa fa-shopping-cart"> </i> VIEW CART 
-            </a>	  
-             <a href="/account/checkout" class="btn btn-sm btn-primary">
+            </router-link>	  
+             <router-link to="/cart/checkout" class="btn btn-sm btn-primary">
                CHECKOUT
-            </a>	        
+            </router-link>	        
 	    </div>  
 	</div>
 </template>
 <script>
-
 import Flash from '../../../../helper/flash'
 import CartAction from '../../../../helper/cart'
-import Vue from 'vue'
-var VueCookie = require('vue-cookie')
-Vue.use(VueCookie)
 export default {
 	data() {
 	    return {
-	    	isActive: true,
 	    	CartProduct: CartAction.data,
-	    	session_id : this.$cookie.get('session_id')
 	    }
 	},
 	components:{
 	    
 	},
 	created(){
-	    CartAction.MyProduct(this.session_id)
-	    this.isActive = !this.isActive
+	    CartAction.MyProduct();
 	    // console.log(CartAction.data);
 	},
 	methods: {
 		RemoveFromCart(product_id){
-			CartAction.RemoveFromCart(product_id,this.session_id);
+			CartAction.RemoveFromCart(product_id);
 		}
-	}, 
+	},
+
+  
 }
 </script>

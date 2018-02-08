@@ -1,5 +1,5 @@
 <template>
-	<div v-bind:class="{ active: isActive }" class="loading">
+	<div>
 		<div class="container main-container headerOffset">
 		    <div class="row">
 		        <div class="breadcrumbDiv col-lg-12">
@@ -162,7 +162,6 @@ import CartAction from '../../../../helper/cart'
 export default {
 	data() {
 	    return {
-	    	isActive: false,
 	    	CartProduct: CartAction.data,
 	    }
 	},
@@ -175,7 +174,7 @@ export default {
 	},
 	methods: {
 		RemoveFromCart(product_id){
-			CartAction.RemoveFromCart(product_id)
+			CartAction.RemoveFromCart(product_id);
 		},
 		AddToCart(product_id,qty=1){
             CartAction.AddToCart(product_id,qty)
