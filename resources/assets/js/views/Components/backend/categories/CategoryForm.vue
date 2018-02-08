@@ -22,6 +22,7 @@
 		components:{
 			'normalForm':normalForm
 		},
+		props:['id'],
 		data(){
 			return {
 				url:'/admin/api/categories/',
@@ -35,7 +36,7 @@
 					{	class:'xs12 sm6 md6',	 key:'category_type_id',	type:'select',	text:'Choose Category Type',	items:'categoryType',	count:100,	},
 					{	class:'xs12 sm6 md6',	 key:'parent_id',	type:'select',	items:'categoryParent',	text:'Choose Parent Category',count:100	},
 					{	class:'xs12 sm6 md6',	 key:'sort_order',	type:'text',	 text:'Sort Order',count:100	},
-					{	class:'xs12 sm6 md6',	 key:'status',	type:'text',	 text:'Status',count:100	},
+					{	class:'xs12 sm6 md6',	 key:'status',	type:'select',items:'statusItems',	 text:'Status',count:100	},
 					{	class:'xs12 sm6 md6',	 key:'column',	type:'text',	 text:'Column',count:50	},
 					{	class:'xs12 sm6 md6',	 key:'top',	type:'text',	 text:'Top',count:100	},
 					{	class:'xs12 sm6 md6',	 key:'language_id',	type:'text',	 text:'Choose Language',count:100	},
@@ -78,19 +79,19 @@
 				 //    ]
 				},
 				data:{
-					category_type_id:'',
-					image:'',
-					parent_id:'',
-					top:'',
-					column:'',
-					sort_order:'',
-					status:'',
-					language_id:'',
-					name:'',
-					description:'',
-					meta_title:'',
-					meta_description:'',
-					meta_keyword:'',
+					// category_type_id:'',
+					// image:'',
+					// parent_id:'',
+					// top:'',
+					// column:'',
+					// sort_order:'',
+					// status:'',
+					// language_id:'',
+					// name:'',
+					// description:'',
+					// meta_title:'',
+					// meta_description:'',
+					// meta_keyword:'',
 				},
 				select:{
 					statusItems:[
@@ -120,11 +121,16 @@
 			}
 		},
 		created(){
+			this.id ? this.fetchData(this.id) : ''
 			this.categoryType()
 			this.categoryParent()
-			
 		},
 		methods:{
+			fetchData(id){
+				axios.get(this.url+id+'/edit').then(res=>{
+					this.data=res.data
+				});
+			},
 			categoryType(){
 				axios.get('/admin/api/category_type').then((res)=>{
 					this.select.categoryType=res.data

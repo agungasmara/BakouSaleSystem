@@ -1,22 +1,16 @@
 <?php
-
 namespace App\Http\Controllers\Backend\Category;
-
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Models\BackEnd\Category\CategoryModel;
-use Auth;
 use App\Http\Models\BackEnd\Category\CategoryDescription;
 use App\Http\Models\BackEnd\Category\CategoryType;
 use App\Http\Controllers\Backend\commons\DataAction;
-
+use App\Http\Controllers\Backend\commons\ImageMaker;
 class CategoryController extends Controller
 {
     public function index()
     {
-        // dd(Auth::user()->id);
-        // return CategoryModel::getAllCategories()->toArray();
-
         $data=CategoryModel::all();
         foreach ($data as $value) {
             $value->type=$value->CategoryType()->value('name');
@@ -27,40 +21,47 @@ class CategoryController extends Controller
         }
         // dd($data->toArray());
         return $data->toArray();
-        
     }
-
     public function show($id){
         return response()->json([]);
     }
-
     public function store(Request $request)
     {
         $data = (new CategoryModel)->getFillable();
-        return $request['data']->all();
+        $request['image']=(new ImageMaker)->base64ToImage('images\\icon',$request['image']);
+        $request['date_added']=date('Y-m-d');
+        $request['date_modified']=date('Y-m-d');
         $data = $request->only($data);
-        $request['category_id']=CategoryModel::insertGetId($data);
-        $data = (new CategoryDescription)->getFillable();
-        $data = $request->only($data);
-        return (new DataAction)->StoreData(CategoryDescription::class,[],'',$data);
-
+        if ($request->has('category_id')) {
+            CategoryModel::find($request['category_id'])->update($data);
+            $data = (new CategoryDescription)->getFillable();
+            $data = $request->only($data);
+            return (new DataAction)->UpdateData(CategoryDescription::class,$data,'category_id',$request['category_id']);
+        }else{
+            $request['category_id']=CategoryModel::insertGetId($data); 
+            $data = (new CategoryDescription)->getFillable();
+            $data = $request->only($data);
+            return (new DataAction)->StoreData(CategoryDescription::class,[],'',$data);
+        }
     }
-
     public function edit($id)
     {
-        return (new DataAction)->EditData(CategoryModel::class,'setting_id',$id);
+        $data=CategoryModel::find($id)->toArray();
+        $description=CategoryModel::find($id)->Description()->first()->toArray();
+        foreach ($description as $key=>$value) {
+            $data[$key]=$value;
+        }
+        // dd($data);
+        return $data;
         
     }
-
     public function update(Request $request,$id)
     {
         
         $data=$request->all();
-
-        return (new DataAction)->UpdateData(CategoryModel::class,$data,'setting_id',$id);
-
+        return $data;
+        return (new DataAction)->UpdateData(CategoryModel::class,$data,'category_id',$id);
     }
-
     public function destroy($id)
     {
         CategoryModel::where('parent_id',$id)->update(['parent_id'=>0]);
@@ -73,7 +74,7 @@ class CategoryController extends Controller
     }
     public function getCategoriesParent()
     {
-        $data=CategoryModel::select('category_id')->get();
+        $data=CategoryModel::select('category_id')->Parent()->Active()->get();
         foreach ($data as $value) {
             $value->text=$value->Description()->value('name');
             $value->value=$value->category_id;

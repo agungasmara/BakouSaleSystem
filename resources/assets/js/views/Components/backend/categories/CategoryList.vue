@@ -36,11 +36,8 @@
 			<v-app id="inspire">
 				<!-- <v-breadcrumbs>
 			        <v-icon slot="divider">chevron_right</v-icon>
-
 		        	<v-breadcrumbs-item v-for="item in items" :key="item.text" :disabled="item.disabled">
-
 		          		{{ item.text }}
-
 		        	</v-breadcrumbs-item>
 			    </v-breadcrumbs> -->
 
@@ -64,7 +61,7 @@
 									</span>
 								</div>
 								<div v-else-if="index.text=='Action'">
-									<span style="cursor:pointer;color:blue;" @click="editData(props.item[index.value])"">
+									<span style="cursor:pointer;color:blue;" @click="editData(props.item[index.value])">
 										<i class="material-icons">edit</i>
 									</span>
 									&nbsp;
@@ -85,7 +82,6 @@
 						<!-- <template slot="items" slot-scope="props">
 							<td v-for="index in headers" :class="index.class">
 								<img v-if="index.value=='image'" :src="props.item.image ? props.item.image:'/images/icon/no-image.png'" style="width: auto;max-width: 30px;height: auto;max-height: 30px;">
-
 								<div v-else-if="index.text=='Action'">
 									<span style="cursor:pointer;color:blue;" @click="editData(props.item[index.value])"">
 										<i class="material-icons">edit</i>
@@ -175,7 +171,7 @@
 		},
 		created(){
 			this.fetchSettings()
-			document.title = 'Attributes';
+			document.title = 'Categories';
 		},
 		methods:{
 			fetchSettings(){
@@ -205,9 +201,9 @@
 					this.dialog=false
 				}
 			},
-			editSetting(id){
+			editData(id){
 				//this.components.push(id)
-				this.$router.push('/admin/attributes/edit/'+id)
+				this.$router.push('/admin/categories/edit/'+id)
 			}
 		}
 	}
