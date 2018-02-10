@@ -35,7 +35,7 @@ class ProductModel extends Model
 		'subtract',
 		'minimum',
 		'sort_order',
-		'STATUS',
+		'status',
 		'viewed',
 		'date_added',
 		'date_modified',

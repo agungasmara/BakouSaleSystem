@@ -61,7 +61,28 @@ class ProductsController extends Controller
     }
     public function update(Request $request,$id)
     {
-        $result=ProductModel::UpdateOrCreate($request->all(),$id);
+         $fill = (new ProductModel)->getFillable();
+        $data=array_only($request['data'],$fill);
+        $dir='/images/product';
+        $image=$request['data']['image'];
+        if ($image) {
+            $data['image']=$this->ImageMaker($dir,$image);
+        }
+        $data['date_modified']=date('Y-m-d h:i:s');
+        ProductModel::find($id)->update($data);
+
+
+
+
+
+        // insert product description
+        $fill=(new ProductDescription)->getFillable();
+        $data=array_only($request['general'],$fill);
+        $data['product_id']=$id;
+        $data['language_id']=1;
+        $key['product_id']=$id;
+        $key['language_id']=1;
+        return ProductDescription::where($key)->update($data);
     }
     public function destroy($id)
     {

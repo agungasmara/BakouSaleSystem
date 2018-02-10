@@ -343,7 +343,7 @@
 			        }else{
 			        	console.log(this.formDatas)
 			        	axios.put(this.url+this.id,
-				          	this.formDatas
+				          	this.data
 				        ).then((res)=>{
 				        	console.log(res.data)
 				        	if(res.data.success==true){
