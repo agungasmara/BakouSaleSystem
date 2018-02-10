@@ -1,11 +1,37 @@
 <template>
 	<section id="content">
 		<!--breadcrumbs start-->
-		<breadcrumb1btn 
+		<!-- <breadcrumb1btn 
 			v-bind:breadcrumb-item="breadcrumbs"
 			v-bind:btn-new-url="btnNewUrl"
 			v-bind:breadcrumb-title="breadcrumbTitle"
-		></breadcrumb1btn>
+		></breadcrumb1btn> -->
+		<!--breadcrumbs start-->
+		<div id="breadcrumbs-wrapper">
+			<!-- Search for small screen -->
+			<div class="header-search-wrapper grey lighten-2 hide-on-large-only">
+			  <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize">
+			</div>
+			<div class="row container">
+			  <div class="container">
+			    <div class="col s10 m6 l6">
+			      <h5 class="breadcrumbs-title">Products</h5>
+			      	<v-breadcrumbs>
+			        	<v-icon slot="divider">/</v-icon>
+		        		<v-breadcrumbs-item  v-for="item in breadcrumbs" :key="item.text" :disabled="item.disabled">
+		          			{{ item.text }}
+		        		</v-breadcrumbs-item>
+		      		</v-breadcrumbs>
+			    </div>
+			    <div class="col s2 m6 l6">
+			    	<router-link to="/admin/Products/add_sample" replace><v-btn color="primary" class="btn dropdown-settings breadcrumbs-btn right">Create Sample</v-btn></router-link>
+
+			    	<router-link to="/admin/Products/add" replace><v-btn color="primary" class="btn dropdown-settings breadcrumbs-btn right">Create</v-btn></router-link>
+			    </div>
+			  </div>
+			</div>
+		</div>
+		<!--breadcrumbs end-->
 
 		<!--Data table component-->
 

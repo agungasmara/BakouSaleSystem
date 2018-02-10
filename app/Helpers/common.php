@@ -86,8 +86,8 @@
 							->WHERE('m.parent_id',$parent_menu->parent_menu_id)
 							->WHERE('md.language_id',$language_id)
 							->SELECT('m.menu_code as menu_code','m.menu_link as c_menu_link','md.name as child_menu_name')
-							// ->OrderBy('m.ordering')
-							->OrderBy('md.name')
+							->OrderBy('m.ordering')
+							// ->OrderBy('md.name')
 							->get(); 
 
 				foreach ($children as $child) {

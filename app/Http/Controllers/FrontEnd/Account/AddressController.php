@@ -17,6 +17,12 @@ class AddressController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct(){
+        $this->middleware('auth:account');
+        // $this->middleware('auth:customer', ['except' => ['logout']]);
+    }
+        
     public function index(){
     	if(Auth::guard('account')->id()){
             $Address = Address::where('customer_id',Auth::guard('account')->id())->get();

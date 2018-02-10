@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div v-bind:class="{ active: isActive }" class="loading">
 		<div class="container main-container headerOffset">
 		    <div class="row">
 		        <div class="breadcrumbDiv col-lg-12">
@@ -25,15 +25,15 @@
 		                    <div class="col-xs-12 col-sm-6">
 		                        <div class="form-group required">
 		                            <label for="InputName">First Name <sup>*</sup> </label>
-		                            <input required type="text" class="form-control" id="InputName" placeholder="First Name">
+		                            <input required type="text" v-bind:value="customer_info.firstname" class="form-control" id="InputName" placeholder="First Name">
 		                        </div>
 		                        <div class="form-group required">
 		                            <label for="InputLastName">Last Name <sup>*</sup> </label>
-		                            <input required type="text" class="form-control" id="InputLastName" placeholder="Last Name">
+		                            <input required type="text" v-bind:value="customer_info.lastname" class="form-control" id="InputLastName" placeholder="Last Name">
 		                        </div>
 		                        <div class="form-group">
 		                            <label for="InputEmail"> Email </label>
-		                            <input type="email" class="form-control" id="InputEmail" placeholder="gtanim@gmail.com">
+		                            <input type="email" v-bind:value="customer_info.email" class="form-control" id="InputEmail" placeholder="gtanim@gmail.com">
 		                        </div>
 		                        <div class="form-group">
 		                            <label>Date of Birth</label>
@@ -289,19 +289,27 @@
   export default{
     data(){
       return{
+      	isActive: true,
         loaded: false,
         response: null,
+        customer_info: [],
       }
     },
     created() {
-        axios.get(`/api/address`)
-        .then(response => {
-            this.response = response.data['data']
-            this.loaded = true
-        })
-        .catch(e => {
-          this.errors.push(e)
-        })
+        this.CustomerInfo()
+    },
+
+    methods: {
+        CustomerInfo() {
+            axios.get(`/api/customer_info`)
+	        .then(response => {
+	            this.customer_info = response.data['data']
+	            this.isActive = !this.isActive
+	        })
+	        .catch(e => {
+	          this.errors.push(e)
+	        })
+        }
     },
     render() {
         
@@ -319,10 +327,6 @@
         }
     },
     mounted: function(){
-        if (!this.loaded) {
-          return this.$slots.loading[0]
-        }
-
         // return this.$scopedSlots.default({
         //   response: this.response.data['data']
         // })

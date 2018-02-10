@@ -315,9 +315,6 @@
 		                        </div>
 		                    </div>
 
-
-
-
 		                </div>
 		            </div>
 		            <!--/row end-->
@@ -380,6 +377,7 @@ export default {
              	CartProduct: CartAction.data,
              	shippingList:{},
              	activeTab: 0,
+             	customer_info:[],
              	selectItem:{
              		country:{},
              		shipping_zone:{},
@@ -548,13 +546,26 @@ export default {
     	axios.get('/api/getShipping/').then(response => this.shippingList=response.data);
     	// render dom select
     	// $('select.form-control').select2();
-    	 // The currently active tab, init as the 1st item in the tabs array
-			this.activeTabName = this.tabs[1].name;
+    	// The currently active tab, init as the 1st item in the tabs array
+		this.activeTabName = this.tabs[1].name;
     },
     ready() {
        
     },
+    created() {
+    	this.CustomerInfo()
+    },
     methods: {
+    	CustomerInfo() {
+            axios.get(`/api/customer_info`)
+	        .then(response => {
+	            this.customer_info = response.data['data']
+	            this.isActive = !this.isActive
+	        })
+	        .catch(e => {
+	          this.errors.push(e)
+	        })
+        },
     	Submit() {
 	      axios.post('/checkout',this.data)
 			 .catch(function (error) { console.log(error); });

@@ -53,11 +53,35 @@ import SettingEditForm from './views/Components/backend/settings/EditForm.vue'
 //end setting####################
 
 //User and user Group########################
-
 import User from './views/Components/backend/users/User.vue'
 import UserForm from './views/Components/backend/users/MainForm.vue'
 import UserList from './views/Components/backend/users/UserList.vue'
 import UserEditForm from './views/Components/backend/users/UserEditForm.vue'
+
+//Reseller ########################
+import Reseller from './views/Components/backend/resellers/Reseller.vue'
+import ResellerList from './views/Components/backend/resellers/ResellerList.vue'
+import ResellerEditForm from './views/Components/backend/resellers/ResellerEditForm.vue'
+
+//Carriers ########################
+import Carrier from './views/Components/backend/carriers/Carrier.vue'
+import CarrierList from './views/Components/backend/carriers/CarrierList.vue'
+import CarrierEditForm from './views/Components/backend/carriers/CarrierEditForm.vue'
+
+//Shipment ########################
+import Shipment from './views/Components/backend/shipment/Shipment.vue'
+import ShipmentList from './views/Components/backend/shipment/ShipmentList.vue'
+import ShipmentEditForm from './views/Components/backend/shipment/ShipmentEditForm.vue'
+
+//Delivery ########################
+import Delivery from './views/Components/backend/delivery/Delivery.vue'
+import DeliveryList from './views/Components/backend/delivery/DeliveryList.vue'
+import DeliveryEditForm from './views/Components/backend/delivery/DeliveryEditForm.vue'
+
+//SaleOrder ########################
+import SaleOrder from './views/Components/backend/sale_orders/SaleOrder.vue'
+import SaleOrderList from './views/Components/backend/sale_orders/SaleOrderList.vue'
+import SaleOrderEditForm from './views/Components/backend/sale_orders/SaleOrderEditForm.vue'
 
 //User group#########################
 // import UserGroupForm from './views/Components/backend/groups/MainForm.vue'
@@ -87,6 +111,7 @@ import CategoryEdit from './views/Components/backend/categories/CategoryEdit.vue
 import Products from './views/Components/backend/products/Product.vue'
 import ProductList from './views/Components/backend/products/ProductList.vue'
 import ProductForm from './views/Components/backend/products/ProductForm.vue'
+import ProductFormSample from './views/Components/backend/products/ProductFormSample.vue'
 import ProductEdit from './views/Components/backend/products/ProductEdit.vue'
 //***** End products *****
 
@@ -416,6 +441,11 @@ const router = new VueRouter({
           component: ProductForm
         },
         {
+          path: 'add_sample',
+          name:'ProductFormSample',
+          component: ProductFormSample
+        },
+        {
           path: 'edit/:id',
           name:'ProductEdit',
           component: ProductEdit,props:true
@@ -461,6 +491,111 @@ const router = new VueRouter({
                 path:'edit/:id',
                 name:'UserEdit',
                 component:UserEditForm,
+                props:true
+            }
+        ]       
+    },
+    //Reseller 
+    {path:'/admin/reseller',name:'reseller',component:Reseller,
+        children:[
+            {
+                path:'list',
+                name:'ResellerList',
+                component:ResellerList
+            },
+            {
+                path:'add',
+                name:'ResellerEditForm',
+                component:ResellerEditForm
+            },
+            {
+                path:'edit/:id',
+                name:'ResellerEdit',
+                component:ResellerEditForm,
+                props:true
+            }
+        ]       
+    },
+    //Carriers 
+    {path:'/admin/carrier',name:'carriers',component:Carrier,
+        children:[
+            {
+                path:'list',
+                name:'CarrierList',
+                component:CarrierList
+            },
+            {
+                path:'add',
+                name:'CarrierEditForm',
+                component:CarrierEditForm
+            },
+            {
+                path:'edit/:id',
+                name:'CarrierEdit',
+                component:CarrierEditForm,
+                props:true
+            }
+        ]       
+    },
+    //Shipment 
+    {path:'/admin/shipment',name:'shipments',component:Shipment,
+        children:[
+            {
+                path:'list',
+                name:'ShipmentList',
+                component:ShipmentList
+            },
+            {
+                path:'add',
+                name:'ShipmentEditForm',
+                component:ShipmentEditForm
+            },
+            {
+                path:'edit/:id',
+                name:'ShipmentEdit',
+                component:ShipmentEditForm,
+                props:true
+            }
+        ]       
+    },
+    //Delivery 
+    {path:'/admin/delivery',name:'deliverys',component:Delivery,
+        children:[
+            {
+                path:'list',
+                name:'DeliveryList',
+                component:DeliveryList
+            },
+            {
+                path:'add',
+                name:'DeliveryEditForm',
+                component:DeliveryEditForm
+            },
+            {
+                path:'edit/:id',
+                name:'DeliveryEdit',
+                component:DeliveryEditForm,
+                props:true
+            }
+        ]       
+    },
+    //SaleOrder 
+    {path:'/admin/sale_order',name:'SaleOrder',component:SaleOrder,
+        children:[
+            {
+                path:'list',
+                name:'SaleOrderList',
+                component:SaleOrderList
+            },
+            {
+                path:'add',
+                name:'SaleOrderEditForm',
+                component:SaleOrderEditForm
+            },
+            {
+                path:'edit/:id',
+                name:'SaleOrderEdit',
+                component:SaleOrderEditForm,
                 props:true
             }
         ]       

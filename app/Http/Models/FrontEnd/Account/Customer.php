@@ -9,6 +9,7 @@ class Customer extends Model
     protected $table = 'customer';
     protected $primarykey='customer_id';
 	protected $fillable = [
+						'customer_id',
 						'customer_group_id',
 						'store_id',
 						'language_id',
@@ -31,5 +32,12 @@ class Customer extends Model
 						'code',
 						'date_added'
 					];
+
+	public function address(){
+		return $this->belongsTo(Address::class,'address_id');
+		// return $this->hasMany(Address::class)->addSelect('*');
+		// return $this->belongsTo('App\Http\Models\FrontEnd\Account\Address','address_id');
+	}
+
 	public $timestamps = false;	
 }
