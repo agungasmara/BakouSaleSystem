@@ -121,6 +121,12 @@ import AttributeList from './views/Components/backend/attributes/AttributeList.v
 import AttributeForm from './views/Components/backend/attributes/AttributeForm.vue'
 import AttributeEdit from './views/Components/backend/attributes/AttributeEdit.vue'
 
+//***** Attribute Group *****
+import AttributeGroup from './views/Components/backend/attributes/attribute_group/AttributeGroup.vue'
+import AttributeGroupList from './views/Components/backend/attributes/attribute_group/AttributeGroupList.vue'
+import AttributeGroupForm from './views/Components/backend/attributes/attribute_group/AttributeGroupForm.vue'
+import AttributeGroupEdit from './views/Components/backend/attributes/attribute_group/AttributeGroupEdit.vue'
+
 //***** Language *****
 import Language from './views/Components/backend/languages/Language.vue'
 import LanguageList from './views/Components/backend/languages/LanguageList.vue'
@@ -211,17 +217,34 @@ import PreviewList from './views/Components/backend/preview/PreviewList.vue'
 import PreviewForm from './views/Components/backend/preview/MainForm.vue'
 import PreviewEdit from './views/Components/backend/preview/EditForm.vue'
 
-//***** ProductAttribute*****
-import ProductAttribute from './views/Components/backend/products/attributes/ProductAttribute.vue'
-import ProductAttributeList from './views/Components/backend/products/attributes/ProductAttributeList.vue'
-import ProductAttributeForm from './views/Components/backend/products/attributes/ProductAttributeForm.vue'
-import ProductAttributeEdit from './views/Components/backend/products/attributes/ProductAttributeEditForm.vue'
+//***** Filter*****
+import Filter from './views/Components/backend/filters/Filter.vue'
+import FilterList from './views/Components/backend/filters/FilterList.vue'
+import FilterForm from './views/Components/backend/filters/FilterForm.vue'
+import FilterEdit from './views/Components/backend/filters/FilterEdit.vue'
+//***** Filter Group
+import FilterGroup from './views/Components/backend/filters/filter_group/FilterGroup.vue'
+import FilterGroupList from './views/Components/backend/filters/filter_group/FilterGroupList.vue'
+import FilterGroupForm from './views/Components/backend/filters/filter_group/FilterGroupForm.vue'
+import FilterGroupEdit from './views/Components/backend/filters/filter_group/FilterGroupEdit.vue'
 
-//***** Product Attribute Group*****
-import ProductAttributeGroup from './views/Components/backend/products/attribute_groups/ProductAttributeGroup.vue'
-import ProductAttributeGroupList from './views/Components/backend/products/attribute_groups/ProductAttributeGroupList.vue'
-import ProductAttributeGroupForm from './views/Components/backend/products/attribute_groups/ProductAttributeGroupForm.vue'
-import ProductAttributeGroupEdit from './views/Components/backend/products/attribute_groups/ProductAttributeGroupEditForm.vue'
+//***** Backend information*****
+import BackendInformation from './views/Components/backend/informations/Information.vue'
+import BackendInformationList from './views/Components/backend/informations/InformationList.vue'
+import BackendInformationForm from './views/Components/backend/informations/InformationForm.vue'
+import BackendInformationEdit from './views/Components/backend/informations/InformationEdit.vue'
+
+// //***** ProductAttribute*****
+// import ProductAttribute from './views/Components/backend/products/attributes/ProductAttribute.vue'
+// import ProductAttributeList from './views/Components/backend/products/attributes/ProductAttributeList.vue'
+// import ProductAttributeForm from './views/Components/backend/products/attributes/ProductAttributeForm.vue'
+// import ProductAttributeEdit from './views/Components/backend/products/attributes/ProductAttributeEditForm.vue'
+
+// //***** Product Attribute Group*****
+// import ProductAttributeGroup from './views/Components/backend/products/attribute_groups/ProductAttributeGroup.vue'
+// import ProductAttributeGroupList from './views/Components/backend/products/attribute_groups/ProductAttributeGroupList.vue'
+// import ProductAttributeGroupForm from './views/Components/backend/products/attribute_groups/ProductAttributeGroupForm.vue'
+// import ProductAttributeGroupEdit from './views/Components/backend/products/attribute_groups/ProductAttributeGroupEditForm.vue'
 
 //import router from './router'
 import VueResource from 'vue-resource'
@@ -406,6 +429,25 @@ const router = new VueRouter({
           path: 'edit/:id',
           name:'AttributeEdit',
           component: AttributeEdit,props:true
+        }
+      ]
+    },
+    { path: '/admin/attributes_group', name:'attributes_group',component: AttributeGroup,
+      children: [
+        {
+          path: 'list',
+          name:'AttributeGroupList',
+          component: AttributeGroupList
+        },
+        {
+          path: 'add',
+          name:'AttributeGroupForm',
+          component: AttributeGroupForm
+        },
+        {
+          path: 'edit/:id',
+          name:'AttributeGroupEdit',
+          component: AttributeGroupEdit,props:true
         }
       ]
     },
@@ -946,42 +988,62 @@ const router = new VueRouter({
             }
         ]       
     },
-    {path:'/admin/product_attributes',name:'product_attributes',component:ProductAttribute,
+    {path:'/admin/filters',name:'filters',component:Filter,
         children:[
             {
                 path:'list',
-                name:'ProductAttributeList',
-                component:ProductAttributeList
+                name:'FilterList',
+                component:FilterList
             },
             {
                 path:'add',
-                name:'ProductAttributeForm',
-                component:ProductAttributeForm
+                name:'FilterForm',
+                component:FilterForm
             },
             {
                 path:'edit/:id',
-                name:'ProductAttributeEdit',
-                component:ProductAttributeEdit,
+                name:'FilterEdit',
+                component:FilterEdit,
                 props:true
             }
         ]       
     },
-    {path:'/admin/product_attribute_groups',name:'product_attributes_groups',component:ProductAttributeGroup,
+    {path:'/admin/filters_group',name:'filters_group',component:FilterGroup,
         children:[
             {
                 path:'list',
-                name:'ProductAttributeGroupList',
-                component:ProductAttributeGroupList
+                name:'FilterGroupList',
+                component:FilterGroupList
             },
             {
                 path:'add',
-                name:'ProductAttributeGroupForm',
-                component:ProductAttributeGroupForm
+                name:'FilterGroupForm',
+                component:FilterGroupForm
             },
             {
                 path:'edit/:id',
-                name:'ProductAttributeGroupEdit',
-                component:ProductAttributeGroupEdit,
+                name:'FilterGroupEdit',
+                component:FilterGroupEdit,
+                props:true
+            }
+        ]       
+    },
+    {path:'/admin/informations',name:'informations',component:BackendInformation,
+        children:[
+            {
+                path:'list',
+                name:'BackendInformationList',
+                component:BackendInformationList
+            },
+            {
+                path:'add',
+                name:'BackendInformationForm',
+                component:BackendInformationForm
+            },
+            {
+                path:'edit/:id',
+                name:'BackendInformationEdit',
+                component:BackendInformationEdit,
                 props:true
             }
         ]       

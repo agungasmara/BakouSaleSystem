@@ -72,4 +72,20 @@ class CommonsController extends Controller
         return response()->json($atrributeGroup);
 
     }
+    public function getFilterGroup()
+    {
+
+        $filterGroup=DB::table('filter_group_description')->select(['filter_group_id as value','name as text'])->get();
+
+        return response()->json($filterGroup);
+
+    }
+    public function getLayout()
+    {
+
+        $filterGroup=DB::table('layout')->select(['layout_id as value','name as text'])->get();
+
+        return response()->json($filterGroup);
+
+    }
 }

@@ -23,7 +23,7 @@
 		},
 		data(){
 			return{
-				url:'/api/attribute_group/',
+				url:'/api/filters_group/',
 				e1:true,
 				valid: true,
 			    group:[
@@ -33,7 +33,7 @@
 				],
 				rules:{
 					name: [
-				      (v) => !!v || 'Attribute Name is required',
+				      (v) => !!v || 'Filter Name is required',
 				      (v) => v && v.length <= 100 || 'Title must be less than 100 characters'
 				    ],
 				    language_id:[
@@ -48,14 +48,14 @@
 				select:{
 					languages:[]
 				},
-				breadcrumbTitle:'Attributes Group',
+				breadcrumbTitle:'Filter Group',
 				breadcrumbs: [
 			        {
 			          text: 'Administrator',
 			          disabled: false
 			        },
 			        {
-			          text: 'Attributes Group',
+			          text: 'Filter Group',
 			          disabled: false
 			        },
 			        {
@@ -63,7 +63,7 @@
 			          disabled: true
 			        }
 			    ],
-			    backUrl:'/admin/attributes_group/list',
+			    backUrl:'/admin/filters_group/list',
 			}
 		},
 		created(){
