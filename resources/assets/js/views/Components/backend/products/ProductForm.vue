@@ -136,7 +136,7 @@
 		data(){
 			return{
 				back:'/admin/Products/list',
-				url:'/admin/api/products',
+				url:'/admin/api/products/',
 				valid:true,
 				breadcrumbs: [
 			        {
@@ -227,15 +227,17 @@
 					],
 					data:[
 						{	class:'xs12 sm6',	 text:'Price',	key:'price',	type:'text',	 Value:''},
+						{	class:'xs12 sm6',	 text:'Tax Class',	key:'tax_class_id',	type:'select',	 Value:'',	items:'tax_class'},
 						{	class:'xs12 sm6',	 text:'Select Model',	key:'model',	type:'text',	 Value:''},
+						{	class:'xs12 sm6',	 text:'Manufacturer',	key:'manufacturer_id',	type:'select',	 Value:''	,items:'manufacturer'},
 						{	class:'xs12 sm6',	 text:'SKU',	key:'sku',	type:'text',	 Value:''},
 						{	class:'xs12 sm6',	 text:'UPC',	key:'upc',	type:'text',	 Value:''},
 						{	class:'xs12 sm6',	 text:'JAN',	key:'jan',	type:'text',	 Value:''},
-						{	class:'xs12 sm6',	 text:'Tax Class',	key:'tax_class_id',	type:'select',	 Value:'',	items:'tax_class'},
-						{	class:'xs12 sm6',	 text:'Quantity',	key:'quantity',	type:'text',	 Value:''},
 						{	class:'xs12 sm6',	 text:'Minimum',	key:'minimum',	type:'text',	 Value:''},
-						{	class:'xs12 sm6',	 text:'Shipping',	key:'shipping',	type:'text',	 Value:''},
+						{	class:'xs12 sm6',	 text:'Quantity',	key:'quantity',	type:'text',	 Value:''},
+						{	class:'xs12 sm6',	 text:'StockStatus',	key:'stock_status_id',	type:'select',	 Value:'',	items:'stock_status'},
 						{	class:'xs12 sm6',	 text:'Date Available',	key:'date_available',	type:'date',	 Value:''},
+						{	class:'xs12 sm6',	 text:'Shipping',	key:'shipping',	type:'text',	 Value:''},
 						// {	class:'xs12 sm6',	 text:'Weight',	key:'weight',	type:'text',	 Value:''},
 						// {	class:'xs12 sm6',	 text:'Weight Class',	key:'weight_class_id',	type:'select',	 Value:'',	items:'weight_class'},
 						// {	class:'xs4 sm2',	 text:'Length',	key:'length',	type:'text',	 Value:''},
@@ -243,18 +245,16 @@
 						// {	class:'xs4 sm2',	 text:'Height',	key:'height',	type:'text',	 Value:''},
 						// {	class:'xs12 sm6',	 text:'Length Class',	key:'length_class_id',	type:'select',	 Value:'',	items:'length_class'},
 						// {	class:'xs12 sm6',	 text:'Location',	key:'location',	type:'text',	 Value:''},
-						// {	class:'xs12 sm6',	 text:'StockStatus',	key:'stock_status_id',	type:'select',	 Value:'',	items:'stock_status'},
 						// {	class:'xs12 sm6',	 text:'Subtract',	key:'subtract',	type:'text',	 Value:''},
 						// {	class:'xs12 sm6',	 text:'Points',	key:'points',	type:'text',	 Value:''},
 						{	class:'xs12 sm6',	 text:'Sort Order',	key:'sort_order',	type:'text',	 Value:''},
 						{	class:'xs12 sm6',	 text:'Status',	key:'status',	type:'select',	Value:'',	items:'status'	},
 					],
 					links:[
-						{	class:'xs12 sm6',	 text:'Manufacturer',	key:'manufacturer_id',	type:'select',	 Value:''	,items:'manufacturer'},
 						{	class:'xs12 sm6',	 text:'Categories',	key:'category_id',	type:'select',	 Value:''	,items:'categories'},
 						{	class:'xs12 sm6',	 text:'Filter',	key:'filter_id',	type:'select',	 Value:''	,items:'aaaa'},
 						{	class:'xs12 sm6',	 text:'Store',	key:'store_is',	type:'select',	 Value:''	,items:'aaaa'},
-						{	class:'xs12 sm12',	 text:'Downloads',	key:'downloads',	type:'select',	 Value:''	,items:'aaaa'},
+						{	class:'xs12 sm6',	 text:'Downloads',	key:'downloads',	type:'select',	 Value:''	,items:'aaaa'},
 						{	class:'xs12 sm12',	 text:'Related Product',	key:'related_product',	type:'select',	 Value:''	,items:'aaaa'},
 
 					],
@@ -290,14 +290,14 @@
 				},
 			}
 		},
-
+		mounted(){
+			if(this.id){
+			 	this.fetchData(this.id)
+			}
+		},
 		created(){
-			
 			this.getCategories()
 			this.getManufacturers()
-			 if(!this.id){
-			 	this.fetchData(this.id)
-			 }
 		},
 		methods:{
 			getCategories(){

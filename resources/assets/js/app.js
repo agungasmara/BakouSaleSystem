@@ -490,7 +490,7 @@ const router = new VueRouter({
         {
           path: 'edit/:id',
           name:'ProductEdit',
-          component: ProductEdit,props:true
+          component: ProductForm,props:true
         }
       ]
     },
