@@ -32,7 +32,7 @@ class ProductsController extends Controller
         // insert product
         $fill = (new ProductModel)->getFillable();
         $data=array_only($request['data'],$fill);
-        $dir='images/product';
+        $dir='/images/product';
         $image=$request['data']['image'];
         $data['image']=$this->ImageMaker($dir,$image);
         $data['date_added']=date('Y-m-d h:i:s');
