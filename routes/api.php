@@ -39,8 +39,10 @@ Route::get('/getTaxRate','Backend\commons\CommonsController@getTaxRate');
 Route::get('/getCustomerGroup','Backend\commons\CommonsController@getCustomerGroup');
 Route::get('/getAttributeGroup','Backend\commons\CommonsController@getAttributeGroup');
 
-//=====Setting API=============================
+//=====Shipment=============================
+Route::resource('/getShipment','Backend\Shipment\ShipmentController');
 
+//=====Setting API=============================
 Route::get('/settings/item/','Backend\Settings\SettingsController@item');//use to get all config item to put into dropdown list in setting edit form 
 Route::Resource('/settings','Backend\Settings\SettingsController');
 

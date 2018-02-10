@@ -110,8 +110,6 @@ if (Request::is('admin*')){
                 Route::get('category_parent', 'Backend\Category\CategoryController@getCategoriesParent');
                  //=====Product API=============================
                 Route::resource('products', 'Backend\Products\ProductsController');
-                
-
                 Route::get('/getMenus', 'Backend\Settings\GroupRolesController@index');
             });
 

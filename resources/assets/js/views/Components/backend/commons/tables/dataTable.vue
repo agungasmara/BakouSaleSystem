@@ -19,7 +19,7 @@
 
 
 				<img v-if="index.value=='image'" :src="props.item.image ? props.item.image:'/images/icon/no-image.png'" style="width: auto;max-width: 30px;height: auto;max-height: 30px;">
-				<div v-else-if="index.text=='Action'">
+				<div v-else-if="index.text=='Action' && !index.flag">
 					<span v-if="eye" style="cursor:pointer;" :style="props.item[index.status]>0 ? 'color:green;':'color:red;'" @click="changeStatus(props.item[index.value],props.item[index.status],index.status)">
 						<i class="material-icons">remove_red_eye</i>
 					</span>
@@ -31,6 +31,20 @@
 						<i class="material-icons">delete_forever</i>
 					</span>
 				</div>
+
+				<div v-else-if="index.text=='Action' && index.flag=='1'">
+					<span v-if="eye" style="cursor:pointer;" :style="props.item[index.status]>0 ? 'color:green;':'color:red;'" @click="changeStatus(props.item[index.value],props.item[index.status],index.status)">
+						<i class="material-icons">remove_red_eye</i>
+					</span>
+					<span style="cursor:pointer;color:green;" @click="editData(props.item[index.value])"">
+						<i class="material-icons">assignment</i>
+					</span>
+					&nbsp;
+					<span v-if="del" style="cursor:pointer;color:red;" v-on:click="confirmDel(props.item[index.value],props.item.name)">
+						<i class="material-icons">delete_forever</i>
+					</span>
+				</div>
+
 				<span v-else>{{ props.item[index.value] }}</span>
 
 			</td>
@@ -90,7 +104,7 @@
 				tile:true,
 				tbloading:true,
 				refreshTable:[],
-				Message:'Are you sure you want to delete item with ID=',
+				Message:'Are you sure you want to delete with ID=',
 				deleteMessage:'',
 				dataName:'',
 				dataID:'',

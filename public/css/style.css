@@ -3,7 +3,17 @@
   background-color: #e51c23 !important;
 }
 .layout.row.wrap{padding-top:30px;}
-  .text-left{float: left;padding-top:5px;}
+.text-left{float: left;padding-top:5px;}
+
+.loading.active {
+  background-color: #ffffff;
+  background-image: url("../img/loading.gif");
+  background-size: 50px 50px;
+  z-index: 99;
+  background-position: 50% 30%;
+  background-repeat: no-repeat;
+}
+
 .materialize-red-text {
   color: #e51c23 !important;
 }
