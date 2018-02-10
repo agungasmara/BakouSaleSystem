@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Backend\Products;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Models\BackEnd\Product\ProductModel;
-
+use App\Http\Models\BackEnd\Product\ProductDescription;
+// use App\Http\Controllers\Backend\commons\ImageMaker;
+use Intervention\Image\ImageManagerStatic as Image;
+use App\Http\Controllers\Backend\commons\DataAction;
 class ProductsController extends Controller
 {
     public function __construct()
@@ -26,12 +29,26 @@ class ProductsController extends Controller
    
     public function store(Request $request)
     {
-         
-        $input=$request->all();
-       // return $request->all();
-        $input=$request->except(['language_id','description','tag','meta_title','meta_description','meta_keyword','name']);
-    return $result=ProductModel::Create($input);
+        // insert product
+        $fill = (new ProductModel)->getFillable();
+        $data=array_only($request['data'],$fill);
+        $dir='images/product';
+        $image=$request['data']['image'];
+        $data['image']=$this->ImageMaker($dir,$image);
+        $data['date_added']=date('Y-m-d h:i:s');
+        $data['date_modified']=date('Y-m-d h:i:s');
+        $product_id=ProductModel::insertGetId($data);
 
+
+
+
+
+        // insert product description
+        $fill=(new ProductDescription)->getFillable();
+        $data=array_only($request['general'],$fill);
+        $data['product_id']=$product_id;
+        $data['language_id']=1;
+        return (new DataAction)->StoreData(ProductDescription::class,[],'',$data);
     }
     public function edit($id)
     {
@@ -47,5 +64,21 @@ class ProductsController extends Controller
     public function destroy($id)
     {
         return ProductModel::DeleteProduct($id);
+    }
+    public function ImageMaker($dir,$image)
+    {
+        if( preg_match('/data:image/', $image) ){                
+            preg_match('/data:image\/(?<mime>.*?)\;/', $image , $groups);
+            $mimetype = $groups['mime'];
+            $file_name = uniqid().'.'.$mimetype;          
+            $file_name=preg_replace('/\s/','', $file_name);
+            $filepath = "$dir/$file_name";    
+            $image = Image::make($image)->resize(400, null, function ($constraint) {
+                                $constraint->aspectRatio();
+                            });
+            $image->save(public_path($filepath));     
+            return $filepath;
+        } 
+        return false;
     }
 }

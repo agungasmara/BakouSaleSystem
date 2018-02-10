@@ -68,6 +68,11 @@ class CategoryController extends Controller
         return (new DataAction)->DeleteData(CategoryModel::class,'category_id',$id);
         
     }
+    public function getCategoriesList()
+    {
+        $language_id=1;
+        return CategoryDescription::select('category_id as value','name as text')->where('language_id',$language_id)->get();
+    }
     public function getCategoriesType()
     {
         return CategoryType::select('category_type_id as value','name as text')->get();

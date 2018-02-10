@@ -8,7 +8,38 @@ class ProductModel extends Model
 {
     protected $table = 'product';
 	protected $primaryKey='product_id';
-	protected $guarded = ['product_id']; 
+	protected $fillable=[
+    	'model',
+		'sku',
+		'upc',
+		'ean',
+		'jan',
+		'isbn',
+		'mpn',
+		'location',
+		'quantity',
+		'stock_status_id',
+		'image',
+		'manufacturer_id',
+		'shipping',
+		'price',
+		'points',
+		'tax_class_id',
+		'date_available',
+		'weight',
+		'weight_class_id',
+		'length',
+		'width',
+		'height',
+		'length_class_id',
+		'subtract',
+		'minimum',
+		'sort_order',
+		'STATUS',
+		'viewed',
+		'date_added',
+		'date_modified',
+    ];
 	public $timestamps = false;
 	static function UpdateOrCreate($data,$product_id='')
 	{

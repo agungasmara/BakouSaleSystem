@@ -54,4 +54,8 @@ class ManufacturersController extends Controller
         return (new DataAction)->DeleteData(Manufacturer::class,'manufacturer_id',$id);
         //return response()->json(['image'=>$file,'filename'=>$filename]);
     }
+    public function getManufacturers()
+    {
+        return Manufacturer::select('name as text','manufacturer_id as value')->orderBy('sort_order')->get();
+    }
 }
