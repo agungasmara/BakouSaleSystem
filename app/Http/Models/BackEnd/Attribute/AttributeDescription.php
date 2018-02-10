@@ -3,7 +3,7 @@
 namespace App\Http\Models\BackEnd\Attribute;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Support\Facades\DB;
 class AttributeDescription extends Model
 {
   protected $table='attribute_description';
@@ -14,4 +14,5 @@ class AttributeDescription extends Model
   	'language_id'
   ];
   public $timestamps=false;
+  
 }

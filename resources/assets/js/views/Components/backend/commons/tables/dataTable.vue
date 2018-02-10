@@ -159,9 +159,9 @@
 					value=1
 				}
 				this.dataStatus[field]=value
-				axios.put(this.url+id, {
-		          data:this.dataStatus
-		        }).then((res)=>{
+				axios.put(this.url+id, 
+		          this.dataStatus
+		        ).then((res)=>{
 		        	console.log(res.data)
 		        	if(res.data.success==true){
 		        		Flash.setSuccess(res.data.message)

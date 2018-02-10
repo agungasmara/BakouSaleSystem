@@ -38,6 +38,9 @@ Route::get('/getTaxClass','Backend\commons\CommonsController@getTaxClass');
 Route::get('/getTaxRate','Backend\commons\CommonsController@getTaxRate');
 Route::get('/getCustomerGroup','Backend\commons\CommonsController@getCustomerGroup');
 Route::get('/getAttributeGroup','Backend\commons\CommonsController@getAttributeGroup');
+Route::get('/getFilterGroup','Backend\commons\CommonsController@getFilterGroup');
+Route::get('/getLayout','Backend\commons\CommonsController@getLayout');
+
 
 //=====Setting API=============================
 
@@ -105,4 +108,11 @@ Route::Resource('/product_attribute_group','Backend\Products\AttributeGroups\Att
 
 //======Attribute API
 Route::Resource('/attribute','Backend\Attributes\AttributesController');
-Route::Resource('/attribute_group','Backend\Products\AttributeGroups\AttributeGroupController');
+Route::Resource('/attribute_group','Backend\Attributes\AttributeGroupController');
+
+//======Attribute API
+Route::Resource('/filters','Backend\Filter\FiltersController');
+Route::Resource('/filters_group','Backend\Filter\FilterGroupController');
+
+//======Attribute API
+Route::Resource('/informations','Backend\Informations\InformationsController');
