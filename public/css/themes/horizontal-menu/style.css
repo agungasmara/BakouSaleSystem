@@ -5,13 +5,12 @@
 
 .loading.active {
   background-color: #ffffff;
-  background-image: url("../img/loading.gif");
+  background-image: url("../../../images/loading.gif");
   background-size: 50px 50px;
-  z-index: 99;
+  z-index: 9999;
   background-position: 50% 30%;
   background-repeat: no-repeat;
 }
-
 .materialize-red-text {
   color: #e51c23 !important;
 }

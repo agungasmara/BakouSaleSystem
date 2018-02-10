@@ -59,15 +59,7 @@
               </li>
               <li>
                 <a href="#!" class="grey-text text-darken-1">
-                  <i class="flag-icon flag-icon-fr"></i> French</a>
-              </li>
-              <li>
-                <a href="#!" class="grey-text text-darken-1">
-                  <i class="flag-icon flag-icon-cn"></i> Chinese</a>
-              </li>
-              <li>
-                <a href="#!" class="grey-text text-darken-1">
-                  <i class="flag-icon flag-icon-de"></i> German</a>
+                  <i class="flag-icon flag-icon-kh"></i> Khmer</a>
               </li>
             </ul>
             <!-- notifications-dropdown -->
@@ -107,14 +99,15 @@
             <!-- profile-dropdown -->
             <ul id="profile-dropdown" class="dropdown-content">
               <li>
-                <a href="#" class="grey-text text-darken-1">
-                  <i class="material-icons">face</i> Profile</a>
+                <router-link to="/admin/users/edit/1" class="grey-text text-darken-1">
+                  <i class="material-icons">face</i> Profile
+                </router-link>
               </li>
               <li>
-                <a href="#" class="grey-text text-darken-1">
-                  <i class="material-icons">settings</i> Settings</a>
+                <router-link to="/admin/settings/list" class="grey-text text-darken-1">
+                  <i class="material-icons">settings</i> Settings</router-link>
               </li>
-              <li>
+              <!-- <li>
                 <a href="#" class="grey-text text-darken-1">
                   <i class="material-icons">live_help</i> Help</a>
               </li>
@@ -122,7 +115,7 @@
               <li>
                 <a href="#" class="grey-text text-darken-1">
                   <i class="material-icons">lock_outline</i> Lock</a>
-              </li>
+              </li> -->
               <li>
                 <a href="/auth/logout" class="grey-text text-darken-1">
                   <i class="material-icons">keyboard_tab</i> Logout</a>

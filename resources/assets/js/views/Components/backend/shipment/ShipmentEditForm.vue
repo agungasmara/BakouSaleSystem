@@ -68,35 +68,35 @@
 					                      		<div class="divider"></div>
 											    <v-layout row wrap>
 											    	<v-flex xs6 sm6 md6>
-											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Order Number</span>
+											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Track No: <b>{{data.tracking_number}}</b></span>
 											      	</v-flex>
 
 											    	<v-flex xs6 sm6 md6>
-											      		<span><i style="float: left;" class="material-icons">local_shipping</i> &nbsp;Shipping Number</span>
+											      		<span><i style="float: left;" class="material-icons">local_shipping</i> &nbsp;Shipping Code: <b>{{data.shipping_code}}</b></span>
 											      	</v-flex>
 
 											    	<v-flex xs6 sm6 md6>
-											      		<span><i style="float: left;" class="material-icons">local_shipping</i> &nbsp;Courier Express Delivery</span>
+											      		<span><i style="float: left;" class="material-icons">local_shipping</i> &nbsp;Courier: <b>{{data.shipping_courier_name}}</b></span>
 											      	</v-flex>
 
 											    	<v-flex xs6 sm6 md6>
-											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Normal</span>
+											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Service: <b>Normal</b></span>
 											      	</v-flex>
 
 											      	<v-flex xs6 sm6 md6>
-											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Rate Shipping</span>
+											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Rate Shipping: <b>$22.00</b></span>
 											      	</v-flex>
 
 											      	<v-flex xs6 sm6 md6>
-											      		<span><i style="float: left;" class="material-icons">date_range</i> &nbsp;2 to 3 days</span>
+											      		<span><i style="float: left;" class="material-icons">date_range</i> &nbsp;Shipping Day: <b>2 to 3 days</b></span>
 											      	</v-flex>
 
 											      	<v-flex xs6 sm6 md6>
-											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Bus</span>
+											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Delivery Vehicle: <b>Bus</b></span>
 											      	</v-flex>
 
 											      	<v-flex xs6 sm6 md6>
-											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;33</span>
+											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Transfer Fee: <b>$33.00</b></span>
 											      	</v-flex>
 											    </v-layout>
 											</v-container>
@@ -125,19 +125,19 @@
 					                      		<div class="divider"></div>
 											    <v-layout row wrap>
 											    	<v-flex xs6 sm6 md6>
-											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Height : 12	</span>
+											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Height : <b>12</b></span>
 											      	</v-flex>
 
 											    	<v-flex xs6 sm6 md6>
-											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Width : 12	</span>
+											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Width : <b>12</b></span>
 											      	</v-flex>
 
 											    	<v-flex xs6 sm6 md6>
-											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Length : 12	</span>
+											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Length : <b>12</b></span>
 											      	</v-flex>
 
 											      	<v-flex xs6 sm6 md6>
-											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Total Volumetric : 12	</span>
+											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Total Volumetric : <b>12</b></span>
 											      	</v-flex>
 
 											    </v-layout>
@@ -167,19 +167,19 @@
 					                      		<div class="divider"></div>
 											    <v-layout row wrap>
 											    	<v-flex xs6 sm6 md6>
-											      		<span><i style="float: left;" class="material-icons">business_center</i> &nbsp;Bakou Sale System</span>
+											      		<span><i style="float: left;" class="material-icons">business_center</i> &nbsp;Company: <b>Bakou Sale System</b></span>
 											      	</v-flex>
 
 											    	<v-flex xs6 sm6 md6>
-											      		<span><i style="float: left;" class="material-icons">date_range</i> &nbsp;27/12/2017</span>
+											      		<span><i style="float: left;" class="material-icons">date_range</i> &nbsp;Order Date: <b>27/12/2017</b></span>
 											      	</v-flex>
 
 											      	<v-flex xs6 sm6 md6>
-											      		<span><i style="float: left;" class="material-icons">local_shipping</i> &nbsp;Cash Delivery</span>
+											      		<span><i style="float: left;" class="material-icons">local_shipping</i> &nbsp;Payment Method: <b>Cash Delivery</b></span>
 											      	</v-flex>
 
 											      	<v-flex xs6 sm6 md6>
-											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Flat Shipping Rate</span>
+											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Delivery Type: <b>Flat Shipping Rate</b></span>
 											      	</v-flex>
 											    </v-layout>
 											</v-container>
@@ -208,19 +208,19 @@
 					                      		<div class="divider"></div>
 											    <v-layout row wrap>
 											    	<v-flex xs6 sm6 md6>
-											      		<span><i style="float: left;" class="material-icons">account_circle</i> &nbsp;Khove Mengtek</span>
+											      		<span><i style="float: left;" class="material-icons">account_circle</i> &nbsp;Name: <b>{{data.customer_firstname}} {{$data.customer_lastname}}</b></span>
 											      	</v-flex>
 
 											    	<v-flex xs6 sm6 md6>
-											      		<span><i style="float: left;" class="material-icons">supervisor_account</i> &nbsp;Default</span>
+											      		<span><i style="float: left;" class="material-icons">supervisor_account</i> &nbsp;Customer Group: <b>{{data.customer_group}}</b></span>
 											      	</v-flex>
 
 											      	<v-flex xs6 sm6 md6>
-											      		<span><i style="float: left;" class="material-icons">mail</i> &nbsp;email@gmail.com</span>
+											      		<span><i style="float: left;" class="material-icons">mail</i> &nbsp;Email: <b>{{data.customer_email}}</b></span>
 											      	</v-flex>
 
 											      	<v-flex xs6 sm6 md6>
-											      		<span><i style="float: left;" class="material-icons">phone_iphone</i> &nbsp;(+855)81 988 222</span>
+											      		<span><i style="float: left;" class="material-icons">phone_iphone</i> &nbsp;Contact: <b>{{data.customer_telephone}}</b></span>
 											      	</v-flex>
 											    </v-layout>
 											</v-container>
@@ -249,19 +249,19 @@
 					                      		<div class="divider"></div>
 											    <v-layout row wrap>
 											    	<v-flex xs6 sm6 md6>
-											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Bakou Sale System</span>
+											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Company: <b>{{data.payment_company}}</b></span>
 											      	</v-flex>
 
 											    	<v-flex xs6 sm6 md6>
-											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;27/12/2017</span>
+											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Order Date: <b>{{data.date_added}}</b></span>
 											      	</v-flex>
 
 											      	<v-flex xs6 sm6 md6>
-											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Cash Delivery</span>
+											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Payment Method: <b>{{data.payment_method}}</b></span>
 											      	</v-flex>
 
 											      	<v-flex xs6 sm6 md6>
-											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Flat Shipping Rate</span>
+											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Shipping Method: <b>{{data.shipping_method}}</b></span>
 											      	</v-flex>
 											    </v-layout>
 											</v-container>
@@ -290,19 +290,19 @@
 					                      		<div class="divider"></div>
 											    <v-layout row wrap>
 											    	<v-flex xs6 sm6 md6>
-											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Bakou Sale System</span>
+											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Company: <b>{{data.payment_company}}</b></span>
 											      	</v-flex>
 
 											    	<v-flex xs6 sm6 md6>
-											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;27/12/2017</span>
+											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Order Date: <b>{{data.order_date}}</b></span>
 											      	</v-flex>
 
 											      	<v-flex xs6 sm6 md6>
-											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Cash Delivery</span>
+											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Payment Method: <b>{{data.payment_method}}</b></span>
 											      	</v-flex>
 
 											      	<v-flex xs6 sm6 md6>
-											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Flat Shipping Rate</span>
+											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Shipping Method: <b>{{data.shipping_method}}</b></span>
 											      	</v-flex>
 											    </v-layout>
 											</v-container>
@@ -331,19 +331,19 @@
 					                      		<div class="divider"></div>
 											    <v-layout row wrap>
 											    	<v-flex xs6 sm6 md6>
-											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Bakou Sale System</span>
+											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Company: <b>{{data.shipping_company}}</b></span>
 											      	</v-flex>
 
 											    	<v-flex xs6 sm6 md6>
-											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;27/12/2017</span>
+											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Order Date: <b>{{data.order_date}}</b></span>
 											      	</v-flex>
 
 											      	<v-flex xs6 sm6 md6>
-											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Cash Delivery</span>
+											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Payment Method: <b>{{data.shipping_method}}</b></span>
 											      	</v-flex>
 
 											      	<v-flex xs6 sm6 md6>
-											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Flat Shipping Rate</span>
+											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Shipping Method: <b>{{data.shipping_method}}</b></span>
 											      	</v-flex>
 											    </v-layout>
 											</v-container>
@@ -369,40 +369,19 @@
 						                        </tr>
 						                      </thead>
 						                      <tbody>
-						                        <tr>
-						                          <td>Alvin</td>
-						                          <td>Eclair</td>
-						                          <td>$0.87</td>
-						                          <td>$0.87</td>
-						                          <td>$0.87</td>
-						                        </tr>
-						                        <tr>
-						                          <td>Alan</td>
-						                          <td>Jellybean</td>
-						                          <td>$3.76</td>
-						                          <td>$0.87</td>
-						                          <td>$0.87</td>
-						                        </tr>
-						                        <tr>
-						                          <td>Jonathan</td>
-						                          <td>Lollipop</td>
-						                          <td>$7.00</td>
-						                          <td>$0.87</td>
-						                          <td>$0.87</td>
-						                        </tr>
-						                        <tr>
-						                          <td>Shannon</td>
-						                          <td>KitKat</td>
-						                          <td>$9.99</td>
-						                          <td>$0.87</td>
-						                          <td>$0.87</td>
+						                        <tr v-for="product in order_product">
+						                          <td>{{product.name}}</td>
+						                          <td>{{product.model}}</td>
+						                          <td>{{product.quantity}}</td>
+						                          <td>${{product.price}}</td>
+						                          <td>${{product.total}}</td>
 						                        </tr>
 						                      </tbody>
 						                      <tfoot style="border-top:1px solid #d0d0d0;">
 						                      	<tr>
 						                      		<td colspan="3">&nbsp;</td>
 						                      		<td><b>Sub Total</b></td>
-						                      		<td>$0.122</td>
+						                      		<td>$122.00</td>
 						                      	</tr>
 						                      	<tr>
 						                      		<td colspan="3">&nbsp;</td>
@@ -415,7 +394,6 @@
 						                </div>
 						              </div>
 			                    	<!-- .*/end -->
-
 
 			                    </v-form>
 			                  </div>
@@ -525,6 +503,7 @@
 			          disabled: true
 			        }
 			    ],
+			    order_product:[],
 			    backUrl:'/admin/shipment/list',
 				flash:Flash.state
 			}
@@ -539,8 +518,9 @@
 			},
 			fetchData(id){
 				axios.get(this.url+id).then((res)=>{
-					this.data=res.data
-					//this.isActive = !this.isActive
+					this.data=res.data['shipment']
+					this.order_product=res.data['order_product']
+					this.isActive = !this.isActive
 				})
 			},
 			

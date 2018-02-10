@@ -54,11 +54,11 @@
                     <div class="col-lg-3  col-md-2 col-sm-4 col-xs-6">
                         <h3> My Account</h3>
                         <ul>
-                            <li><a href="account.html"> My Account </a></li>
-                            <li><a href="/customer/address"> My Address </a></li>
-                            <li><a href="/whish/lists"> Wish List </a></li>
-                            <li><a href="/order/lists"> Order list </a></li>
-                            <li><a href="/order/status"> Order Status </a></li>
+                            <li><router-link to="/account/dashboard"> My Account </router-link></li>
+                            <li><router-link to="/account/addressmy"> My Address </router-link></li>
+                            <li><router-link to="/account/wishlist"> Wish List </router-link></li>
+                            <li><router-link to="/account/orderlist"> Order list </router-link></li>
+                            <li><router-link to="/account/wishlist"> Wishlists </router-link></li>
                         </ul>
                     </div>
 
@@ -112,7 +112,7 @@
 
         <div class="footer-bottom">
             <div class="container">
-                <p class="pull-left"> &copy; TSHOP 2014. All right reserved. </p>
+                <p class="pull-left"> &copy; TSHOP 2018. All right reserved. </p>
 
                 <div class="pull-right paymentMethodImg">
                     <img height="30" class="pull-right" src="/assets/frontend/images/site/payment/master_card.png" alt="img"> 
