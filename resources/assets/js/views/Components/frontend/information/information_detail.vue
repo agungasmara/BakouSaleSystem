@@ -39,8 +39,8 @@
             this.InformationDetails(this.id);
         },
         beforeUpdate(){
-            // var pid = this.$route.params.id;
-            // Flash.setState(this.InformationDetails(pid));
+            var pid = this.$route.params.id;
+            Flash.setState(this.InformationDetails(pid));
         },
         methods:{
             InformationDetails(id){

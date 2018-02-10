@@ -29,7 +29,6 @@ class UsersController extends Controller
 {
     public function index()
     {
-
         $Users = User::AllUser();
         return response()->json($Users);
     }

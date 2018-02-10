@@ -58,8 +58,8 @@
         <footer class="page-footer">
           <div class="footer-copyright">
             <div class="container">
-              <span>Copyright ©<a class="grey-text text-lighten-4" href="#" target="_blank">PIXINVENT</a> All rights reserved.</span>
-              <span class="right hide-on-small-only"> Design and Developed by <a class="grey-text text-lighten-4" href="#">PIXINVENT</a></span>
+              <span>Copyright ©<a class="grey-text text-lighten-4" href="#" target="_blank">Bakou System</a> All rights reserved.</span>
+              <span class="right hide-on-small-only"> Design and Developed by <a class="grey-text text-lighten-4" href="#">SgKhmer Team.</a></span>
             </div>
           </div>
         </footer>

@@ -2,7 +2,8 @@
 .materialize-red {
   background-color: #e51c23 !important;
 }
-
+.layout.row.wrap{padding-top:30px;}
+  .text-left{float: left;padding-top:5px;}
 .materialize-red-text {
   color: #e51c23 !important;
 }

@@ -40,7 +40,7 @@
 			From {{ pageStart }} to {{ pageStop }}
 		</template>
 	</v-data-table>
-		<v-layout row justify-center>
+		<v-layout -row -justify-center>
 			<v-dialog v-model="dialog" persistent max-width="500px">
 				<v-card>
 					<v-card-title class="headline">

@@ -60,6 +60,8 @@ Route::Resource('/user_groups','Backend\UserGroups\UserGroupsController');
 Route::get('/users_group','Backend\Users\UsersController@UserGroup');
 Route::get('/user/checkIfExisted/{field}/{value}','Backend\Users\UsersController@ValidateData');
 Route::Resource('/users','Backend\Users\UsersController');
+Route::Resource('/resellers','Backend\Users\ResellerController');
+Route::Resource('/carriers','Backend\Users\CarriersController');
 
 //======Language API
 Route::Resource('/languages','Backend\Languages\LanguagesController');
