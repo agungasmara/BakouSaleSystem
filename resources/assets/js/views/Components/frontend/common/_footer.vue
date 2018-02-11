@@ -7,11 +7,10 @@
                         <h3> Support </h3>
                         <ul>
                             <li class="supportLi">
-                                <p> Lorem ipsum dolor sit amet, consectetur </p>
-                                <h4><a class="inline" href="callto:+12025550151"> <strong> <i class="fa fa-phone"> </i>
-                                    +1-202-555-0151 </strong> </a></h4>
-                                <h4><a class="inline" href="mailto:help@yourweb.com"> <i class="fa fa-envelope-o"> </i>
-                                    help@yourweb.com </a></h4>
+                                <p> Bakou Systems is one of the fast growing solution company, provides full service of Converged ICT and ELV systems, we have been delivering quality products, professional services yet cost effective to our customer. </p><br/>
+                                <h4><a class="inline" href="callto:+855 87 575 787"> <strong> <i class="fa fa-phone"> </i>
+                                    (+855)87 575 787 </strong> </a></h4>
+                                <h4><a class="inline" href="mailto:info@bakousystems.com"> <i class="fa fa-envelope-o"> </i>info@bakousystems.com </a></h4>
                             </li>
                         </ul>
                     </div>
@@ -54,11 +53,11 @@
                     <div class="col-lg-3  col-md-2 col-sm-4 col-xs-6">
                         <h3> My Account</h3>
                         <ul>
-                            <li><a href="account.html"> My Account </a></li>
-                            <li><a href="/customer/address"> My Address </a></li>
-                            <li><a href="/whish/lists"> Wish List </a></li>
-                            <li><a href="/order/lists"> Order list </a></li>
-                            <li><a href="/order/status"> Order Status </a></li>
+                            <li><router-link to="/account/dashboard"> My Account </router-link></li>
+                            <li><router-link to="/account/addressmy"> My Address </router-link></li>
+                            <li><router-link to="/account/wishlist"> Wish List </router-link></li>
+                            <li><router-link to="/account/orderlist"> Order list </router-link></li>
+                            <li><router-link to="/account/wishlist"> Wishlists </router-link></li>
                         </ul>
                     </div>
 
@@ -140,6 +139,7 @@
             return {
                 flash: Flash.state,
                 error: Flash.state,
+                //StateData:Flash.state,
                 error: {},
                 footers: [],
                 isProcessing: false
@@ -159,7 +159,6 @@
            
         },
         methods: {
-           
         }
     }
 </script>

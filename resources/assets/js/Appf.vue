@@ -2,6 +2,10 @@
   <div style="-display:none;">
     <!-- Fixed navbar start -->
     <div class="navbar navbar-tshop navbar-fixed-top megamenu" role="navigation">
+
+        <!-- <div style="height:500px">
+            <button @click="initInsertElastic">Click me to insert elastic search</button>
+        </div> -->
         <div class="navbar-top">
             
             <div class="container">
@@ -17,7 +21,7 @@
                                 <li class="phone-number">
                                     <a href="callto:+12025550151">
                                         <span> <i class="glyphicon glyphicon-phone-alt "></i></span>
-                                        <span class="hidden-xs" style="margin-left:5px"> +1-202-555-0151 </span> </a></li>
+                                        <span class="hidden-xs" style="margin-left:5px"> (+855)87 575 787, (+855)92 755 767 </span> </a></li>
                             </ul>
                         </div>
                     </div>
@@ -142,41 +146,45 @@
             <!--/.navbar-cart-->
 
             <div class="navbar-collapse collapse">
-                <ul v-if="posts && posts.length" class="nav navbar-nav">
+                <template v-if="posts && posts.length">
+                    <ul class="nav navbar-nav">
 
-                    <!-- <li class="active"><a href="/"> nAME </a></li> -->
-                   
-                    <li v-for="post of posts" class="dropdown megamenu-fullwidth" v-if="post['categories']">
-                        <router-link data-toggle="dropdown" class="dropdown-toggle" to="/">
-                        {{post.name}} 
-                        <span><b class="caret"> </b> </span>
-                        </router-link>
-                        <ul  v-for="cat of post['categories']" class="dropdown-menu">
-                            <li class="megamenu-content ProductDetailsList">
-                                <!-- <h3 class="promo-1 no-margin hidden-xs">60 + HTML PAGES || AVAILABLE ONLY AT WRAP
-                                    BOOTSTRAP </h3>
+                        <!-- <li class="active"><a href="/"> nAME </a></li> -->
+                       
+                        <li v-for="post of posts" class="dropdown megamenu-fullwidth" v-if="post['categories']">
+                            <router-link data-toggle="dropdown" class="dropdown-toggle" to="/">
+                            {{post.name}} 
+                            <span><b class="caret"> </b> </span>
+                            </router-link>
+                            
+                            <ul class="dropdown-menu">
+                                <li class="megamenu-content ProductDetailsList">
+                                    <template v-for="cat of post['categories']">
+                                    <!-- <h3 class="promo-1 no-margin hidden-xs">60 + HTML PAGES || AVAILABLE ONLY AT WRAP
+                                        BOOTSTRAP </h3>
 
-                                <h3 class="promo-1sub hidden-xs"> Complete Parallax E-Commerce Boostrap Template, Responsive
-                                    on any Device, 10+ color Theme + Parallax Effect </h3> -->
-                                <ul class="col-lg-2  col-sm-2 col-md-2 unstyled">
-                                    <li class="no-border">
-                                        <p><strong> {{cat.name}} </strong></p>
-                                    </li>
-                                    <li v-for="child of cat['children']">
-                                        <router-link v-bind:to="child.href">
-                                          {{child.name}}
-                                        </router-link>
-                                    </li>
+                                    <h3 class="promo-1sub hidden-xs"> Complete Parallax E-Commerce Boostrap Template, Responsive
+                                        on any Device, 10+ color Theme + Parallax Effect </h3> -->
+                                        <ul class="col-lg-2  col-sm-2 col-md-2 unstyled">
+                                            <li class="no-border">
+                                                <p><strong> {{cat.name}} </strong></p>
+                                            </li>
+                                            <li v-for="child of cat['children']">
+                                                <router-link v-bind:to="child.href">
+                                                  {{child.name}}
+                                                </router-link>
+                                            </li>
 
-                                </ul>
-
-                            </li>
-                        </ul>
-                    </li>
-                    <li v-else>
-                        <a href="">{{post.name}}</a>
-                    </li>
-                </ul>
+                                        </ul>
+                                    </template>
+                                </li>
+                            </ul>
+                        </li>
+                        <li v-else>
+                            <a href="">{{post.name}}</a>
+                        </li>
+                    </ul>
+                </template>
 
 
                 <!--- this part will be hidden for mobile version -->
@@ -231,21 +239,38 @@
                             <li v-for="item of searchResults['elasticdata']"><img v-bind:src="item._source.imageUrl"/> {{item._source.name}}</li>
                         </ul>
                         <br/> -->
-                        <div>Popular Products</div>
+                        <div>Best Seller Store</div>
                         <hr/>
                         <ul class="popular-product">
-                            <li v-for="item of searchResults['elasticdata']">
-                                <router-link v-bind:to="'/product/product_detail/'+ item._source.id">
-                                    <div class="pull-left product-img"><img width="30px" v-bind:src="item._source.imageUrl"/> </div>
-                                    <div class="pull-left">{{item._source.name}}
-                                        <div>
-                                            <span class="original-price">{{item._source.crawlPrice}}</span>
-                                            <span class="special-price">{{item._source.crawlPrice}}</span>
-                                        </div>
-                                    </div>
+                            <li v-for="item of fetchStore['fetchStore']">
+                                <router-link v-bind:to="'/store/taobao/'+ item._source.store.store_id">
+                                    <div class="pull-left product-img"><img width="120px" v-bind:src="item._source.store.image"/> </div>
+                                    <!-- <div class="pull-left">{{item._source.store.storename}}</div> -->
                                     <div class="clearfix"></div>
                                 </router-link>
                             </li>
+                        </ul>
+                        <br/>
+                        <div>Popular Products</div>
+                        <hr/>
+                        <ul class="popular-product">
+                            <template v-if="searchResults['elasticdata'].length>0">
+                                <li v-for="item of searchResults['elasticdata']">
+                                    <router-link v-bind:to="'/product/product_detail/'+ item._source.id">
+                                        <div class="pull-left product-img"><img width="30px" v-bind:src="item._source.imageUrl"/> </div>
+                                        <div class="pull-left">{{item._source.name}}
+                                            <div>
+                                                <span class="original-price">{{item._source.crawlPrice}}</span>
+                                                <span class="special-price">{{item._source.crawlPrice}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </router-link>
+                                </li>
+                            </template>
+                            <template v-else>
+                                <li>There is no product found!</li>
+                            </template>
                         </ul>
                     </div>
                 </div>
@@ -283,6 +308,7 @@
 <script type="text/javascript">
 
     import axios from 'axios'
+    import {post} from './helper/api'
     import Flash from './helper/flash'
     import CartProduct from './views/Components/frontend/include/cart.vue'
     import CartAction from './helper/cart'
@@ -290,9 +316,14 @@
     import VueTranslate from 'vue-translate-plugin'
     import TopHeader from './views/Components/frontend/common/_top_language'
     import Vue from 'vue'
+    import VueRouter from 'vue-router'
+    import VueResource from 'vue-resource'
+    import Vuetify from 'vuetify'
+
     Vue.use(VueTranslate)
     var VueCookie = require('vue-cookie')
     Vue.use(VueCookie)
+
     var randomstring = require("randomstring")
 
     const es_host = 'http://localhost';
@@ -308,6 +339,7 @@
           return{
             q:'',
             searchResults:Flash.state,
+            fetchStore:Flash.state,
             posts: [],
             loading:true,
             session_id : this.$cookie.get('session_id'),
@@ -393,6 +425,12 @@
             
         },
         methods: {
+            initInsertElastic(){
+                post(''+es_host+':'+es_port+'/store/product/3333', {id: '3333',name: 'myiphone12'}).then(response => {
+                    alert("success")
+                },{headers: {'Content-Type': 'application/json','Accept': 'application/json','Access-Control-Allow-Origin': '*','Access-Control-Allow-Headers': 'Origin, Accept, Content-Type, Authorization, Access-Control-Allow-Origin'}}, response => {
+                })
+            },
             // onLostFocus:function(){
             //     $('#search-list').slideUp(100)
             //     $('.search-full').hide(100)
@@ -412,6 +450,7 @@
             },
             search: function() {    
                 var searchText = this.q
+                // fetchProduct
                 client.search({
                   index: "store",
                   type: "product",
@@ -436,7 +475,7 @@
                                 "aggs": {
                                     "tops": {
                                         "top_hits": {
-                                            "size": 5
+                                            "size": 1
                                         }
                                     }
                                 }
@@ -445,10 +484,48 @@
                   }// end body
                 }).then(function (resp) {
                     // return hits = resp.hits.hits;
-                    Flash.setState(resp['hits']['hits']);
+                    Flash.setState(resp['hits']['hits'])
                 }, function (err) {
-                  console.trace(err.message);
-                });
+                  console.trace(err.message)
+                })
+                // fetchStore
+                client.search({
+                  index: "store",
+                  type: "product",
+                  body: {
+                            "size": 1,
+                              "sort": [
+                            {"popular": {"order": "desc"}}
+                        ],
+                        "query": {
+                              "query_string": {
+                              "query": (searchText == '' || searchText == ' ')? '*' : searchText+"*",
+                              "fields": ["store.storename"]
+                          }
+                        }
+                        ,
+                        "aggs": {
+                            "store": {
+                                "terms": {
+                                    "field": "store.storename",
+                                    "size": 1 // limit number result distinct
+                                },
+                                "aggs": {
+                                    "tops": {
+                                        "top_hits": {
+                                            "size": 1
+                                        }
+                                    }
+                                }
+                            }
+                        }// end aggs
+                  }// end body
+                }).then(function (resp) {
+                    // return hits = resp.hits.hits;
+                    this.fetchStore = Flash.fetchStore(resp['hits']['hits'])
+                }, function (err) {
+                  console.trace(err.message)
+                })
             },
             logout () {
                 window.location = '/logout'

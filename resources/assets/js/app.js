@@ -31,6 +31,8 @@ import Cart from './views/Components/frontend/checkout/cart.vue'
 import CartView from './views/Components/frontend/checkout/cart_view.vue'
 import Checkout from './views/Components/frontend/checkout/checkout.vue'
 import CheckoutSuccess from './views/Components/frontend/checkout/checkout_success.vue'
+// **** Store *****
+import Store from './views/Components/frontend/store/store.vue'
 
 
 // **** Footer *****
@@ -61,7 +63,13 @@ import UserEditForm from './views/Components/backend/users/UserEditForm.vue'
 //Reseller ########################
 import Reseller from './views/Components/backend/resellers/Reseller.vue'
 import ResellerList from './views/Components/backend/resellers/ResellerList.vue'
+import ResellerForm from './views/Components/backend/resellers/ResellerForm.vue'
 import ResellerEditForm from './views/Components/backend/resellers/ResellerEditForm.vue'
+
+//Supplier ########################
+import Supplier from './views/Components/backend/suppliers/Supplier.vue'
+import SupplierList from './views/Components/backend/suppliers/SupplierList.vue'
+import SupplierEditForm from './views/Components/backend/suppliers/SupplierEditForm.vue'
 
 //Carriers ########################
 import Carrier from './views/Components/backend/carriers/Carrier.vue'
@@ -77,6 +85,17 @@ import ShipmentEditForm from './views/Components/backend/shipment/ShipmentEditFo
 import Delivery from './views/Components/backend/delivery/Delivery.vue'
 import DeliveryList from './views/Components/backend/delivery/DeliveryList.vue'
 import DeliveryEditForm from './views/Components/backend/delivery/DeliveryEditForm.vue'
+
+//Undelivery ########################
+import Undelivery from './views/Components/backend/undelivery/Undelivery.vue'
+import UndeliveryList from './views/Components/backend/undelivery/UndeliveryList.vue'
+import UndeliveryEditForm from './views/Components/backend/undelivery/UndeliveryEditForm.vue'
+
+//Pickup ########################
+import Pickups from './views/Components/backend/pickups/Pickups.vue'
+import PickupsList from './views/Components/backend/pickups/PickupsList.vue'
+import PickupsEditForm from './views/Components/backend/pickups/PickupsEditForm.vue'
+
 
 //SaleOrder ########################
 import SaleOrder from './views/Components/backend/sale_orders/SaleOrder.vue'
@@ -381,6 +400,7 @@ const router = new VueRouter({
         }
       ]
     },
+    { path: '/store/:name/:id', name:'Store',component: Store,props:true},
     //  { 
     //   path: '/cart', name:'cart',component: Cart,
     //   children:[
@@ -408,7 +428,6 @@ const router = new VueRouter({
     // },
     // routing Backend
     { path: '/auth/login', name:'AuthLogin',component: Login },
-    
     { path: '/admin', name:'ahome',component: Home },
     { path: '/admin/list', name:'floo',component: List },
     { path: '/register', name:'foo',component: Register },
@@ -490,7 +509,7 @@ const router = new VueRouter({
         {
           path: 'edit/:id',
           name:'ProductEdit',
-          component: ProductEdit,props:true
+          component: ProductForm,props:true
         }
       ]
     },
@@ -547,13 +566,34 @@ const router = new VueRouter({
             },
             {
                 path:'add',
-                name:'ResellerEditForm',
-                component:ResellerEditForm
+                name:'ResellerForm',
+                component:ResellerForm
             },
             {
                 path:'edit/:id',
                 name:'ResellerEdit',
                 component:ResellerEditForm,
+                props:true
+            }
+        ]       
+    },
+    //Supplier 
+    {path:'/admin/supplier',name:'supplier',component:Supplier,
+        children:[
+            {
+                path:'list',
+                name:'SupplierList',
+                component:SupplierList
+            },
+            {
+                path:'add',
+                name:'SupplierEditForm',
+                component:SupplierEditForm
+            },
+            {
+                path:'edit/:id',
+                name:'SupplierEdit',
+                component:SupplierEditForm,
                 props:true
             }
         ]       
@@ -617,6 +657,48 @@ const router = new VueRouter({
                 path:'edit/:id',
                 name:'DeliveryEdit',
                 component:DeliveryEditForm,
+                props:true
+            }
+        ]       
+    },
+    //Undelivery 
+    {path:'/admin/undelivery',name:'undeliverys',component:Undelivery,
+        children:[
+            {
+                path:'list',
+                name:'UndeliveryList',
+                component:DeliveryList
+            },
+            {
+                path:'add',
+                name:'UndeliveryEditForm',
+                component:UndeliveryEditForm
+            },
+            {
+                path:'edit/:id',
+                name:'UndeliveryEdit',
+                component:UndeliveryEditForm,
+                props:true
+            }
+        ]       
+    },
+    //Pickups 
+    {path:'/admin/pickups',name:'pickups',component:Pickups,
+        children:[
+            {
+                path:'list',
+                name:'PickupsList',
+                component:DeliveryList
+            },
+            {
+                path:'add',
+                name:'PickupsEditForm',
+                component:PickupsEditForm
+            },
+            {
+                path:'edit/:id',
+                name:'PickupsEdit',
+                component:PickupsEditForm,
                 props:true
             }
         ]       

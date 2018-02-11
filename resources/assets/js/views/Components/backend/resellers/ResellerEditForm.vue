@@ -1,4 +1,4 @@
-<template id="{{ $route.params.id }}">
+<!-- <template id="{{ $route.params.id }}">
 	<v-app id="inspire">
 		<normal-form
 			v-bind:url="url"
@@ -13,6 +13,235 @@
 		></normal-form>
 	</v-card>
 </v-app>
+</template> -->
+<template id="{{ $route.params.id }}">
+	<v-app id="inspire">
+		<!-- <normal-form
+			v-bind:url="url"
+			v-bind:id="dataID"
+			v-bind:breadcrumb-title="breadcrumbTitle"
+			v-bind:breadcrumbs="breadcrumbs"
+			v-bind:form-items="group"
+			v-bind:form-rules="rules"
+			v-bind:form-datas="data"
+			v-bind:select-items="selects"
+			v-bind:back-url="backUrl"
+		></normal-form> -->
+	
+		<section id="_content">
+			<!--breadcrumbs start-->
+			<div id="breadcrumbs-wrapper">
+				<!-- Search for small screen -->
+				<div class="header-search-wrapper grey lighten-2 hide-on-large-only">
+				  <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize">
+				</div>
+				<div class="row container">
+				  <div class="container">
+				    <div class="col s10 m6 l6">
+				      <h5 class="breadcrumbs-title">Resellers</h5>
+				      	<v-breadcrumbs>
+				        	<v-icon slot="divider">/</v-icon>
+			        		<v-breadcrumbs-item  v-for="item in breadcrumbs" :key="item.text" :disabled="item.disabled">
+			          			{{ item.text }}
+			        		</v-breadcrumbs-item>
+			      		</v-breadcrumbs>
+				    </div>
+				    <div class="col s2 m6 l6">
+				     	<router-link to="/admin/reseller/list" replace><v-btn class="btn dropdown-settings waves-effect waves-light breadcrumbs-btn right" color="success">Back</v-btn></router-link>
+				    	<router-link to="/admin/reseller/list" replace><v-btn color="primary" class="btn dropdown-settings breadcrumbs-btn right">Save</v-btn></router-link>
+				    </div>
+				  </div>
+				</div>
+			</div>
+			<!--breadcrumbs end-->
+			<div id="basic-form" class="section">
+	            <div class="row col s12">
+	            	<div class="container">
+		              <!-- Form with placeholder -->
+		              <div class="col s12 m12 l12">
+		                <div class="_card-panel">
+		                  
+		                  <div class="container">
+		                    <v-form v-model="valid" ref="form" lazy-validation>
+		                    	<!-- /start -->
+		                    	<div class="row">
+			                    	<div class="col s12 m12 l3">
+			                    		<div class="row">
+				                    		<h4 class="header">Store</h4>
+				                    		<div>
+				                    			This store in available for owner and has full priviledge.
+				                    		</div>
+			                    		</div>
+			                    	</div>
+			                    	<div class="col s12 m12 l6">
+				                      
+				                      <div class="row">
+				                      	<v-container grid-list-md>
+				                      		<h4 class="header"><i class="material-icons text-left">info_outline</i> &nbsp; Reseller Information</h4>
+				                      		<div class="divider"></div>
+										    <v-layout row wrap>
+										    	<v-flex xs6 sm6 md6>
+										      		<v-text-field label="First Name" v-model="resellerInfo.firstname"/></v-text-field>
+										      	</v-flex>
+
+										    	<v-flex xs6 sm6 md6>
+										      		<v-text-field label="Last Name" v-model="resellerInfo.lastname"/></v-text-field>
+										      	</v-flex>
+
+										      	<v-flex xs6 sm6 md6>
+										      		<v-text-field label="Owner" v-model="resellerInfo.owner"/></v-text-field>
+										      	</v-flex>
+
+										      	<v-flex xs6 sm6 md6>
+										      		<v-text-field label="Company" v-model="resellerInfo.company"/></v-text-field>
+										      	</v-flex>
+
+										      	<v-flex xs6 sm6 md6>
+										      		<v-text-field label="Primary Email" v-model="resellerInfo.email"/></v-text-field>
+										      	</v-flex>
+
+										      	<v-flex xs6 sm6 md6>
+										      		<v-text-field label="Secondary Email" v-model="resellerInfo.email_2"/></v-text-field>
+										      	</v-flex>
+
+										      	<v-flex xs6 sm6 md6>
+										      		<v-text-field label="Website" v-model="resellerInfo.website"/></v-text-field>
+										      	</v-flex>
+
+										      	<v-flex xs6 sm6 md6>
+										      		<v-text-field label="Telephone 1" v-model="resellerInfo.telephone_1"/></v-text-field>
+										      	</v-flex>
+
+										      	<v-flex xs6 sm6 md6>
+										      		<v-text-field label="Telephone 2" v-model="resellerInfo.telephone_2"/></v-text-field>
+										      	</v-flex>
+
+										      	<v-flex xs6 sm6 md6>
+										      		<v-select label="Country" v-model="resellerInfo.country" required></v-select>
+										      	</v-flex>
+
+										      	<v-flex xs6 sm6 md6>
+										      		<v-select label="Province" v-model="resellerInfo.province" required></v-select>
+										      	</v-flex>
+
+										      	<v-flex xs6 sm6 md6>
+										      		<v-select label="City" v-model="resellerInfo.city" required></v-select>
+										      	</v-flex>
+
+										      	<v-flex xs6 sm6 md6>
+										      		<v-text-field label="Code" v-model="resellerInfo.code"/></v-text-field>
+										      	</v-flex>
+
+										      	<v-flex xs12 sm12 md12>
+										      		<v-text-field label="Address 1" v-model="resellerInfo.address_1"/></v-text-field>
+										      	</v-flex>
+
+										      	<v-flex xs12 sm12 md12>
+										      		<v-text-field label="Address 2" v-model="resellerInfo.address_2"/></v-text-field>
+										      	</v-flex>
+										      	
+										    </v-layout>
+										</v-container>
+				                      </div>
+				                    </div>
+				                    <div class="col s12 m12 l3">
+				                    	<!-- <img src="/images/NoPicture.png"/> -->
+				                    	<input type="file" id="fileInput"  style="display:none" ref="fileInput" accept="image/*" @change="onFilePicked">
+				                    </div>
+				                </div>
+		                      	<div class="clearfix"></div>
+		                    	<!-- */end  -->
+
+		                    	<!-- /start -->
+		                    	<div class="row">
+			                    	<div class="col s12 m12 l3">
+			                    		<div class="row">
+				                    		<h4 class="header"></h4>
+			                    		</div>
+			                    	</div>
+			                    	<div class="col s12 m12 l6">
+				                      
+				                      <div class="row">
+				                      	<v-container grid-list-md>
+				                      		<h4 class="header"><i class="material-icons text-left">info_outline</i> &nbsp; Store Owner Login</h4>
+				                      		<div class="divider"></div>
+										    <v-layout row wrap>
+										    	<v-flex xs12 sm12 md12>
+										      		<v-text-field label="Email" v-model="resellerInfo.email"/></v-text-field>
+										      	</v-flex>
+
+										    	<v-flex xs6 sm6 md6>
+										      		<v-text-field label="Password" v-model="resellerInfo.password"/></v-text-field>
+										      	</v-flex>
+
+										      	<v-flex xs6 sm6 md6>
+										      		<v-text-field label="Confirm Password" v-model="resellerInfo.password"/></v-text-field>
+										      	</v-flex>
+
+										    </v-layout>
+										</v-container>
+				                      </div>
+				                    </div>
+				                    <div class="col s12 m12 l3"></div>
+				                </div>
+		                      	<div class="clearfix"></div>
+		                    	<!-- */end  -->
+
+
+		                    	<!-- /start -->
+		                    	<div class="row">
+			                    	<div class="col s12 m12 l3">
+			                    		<div class="row">
+				                    		<h4 class="header"></h4>
+			                    		</div>
+			                    	</div>
+			                    	<div class="col s12 m12 l6">
+				                      
+				                      <div class="row">
+				                      	<v-container grid-list-md>
+				                      		<h4 class="header"><i class="material-icons text-left">info_outline</i> &nbsp; Configuration Store</h4>
+				                      		<div class="divider"></div>
+										    <v-layout row wrap>
+										    	<v-flex xs6 sm6 md6>
+										      		<v-text-field label="Store Name" v-model="storeInfo.config_name"/></v-text-field>
+										      	</v-flex>
+										      	<v-flex xs6 sm6 md6>
+										      		<v-text-field label="Currency" v-model="storeInfo.config_currency"/></v-text-field>
+										      	</v-flex>
+										    	<v-flex xs6 sm6 md6>
+										      		<v-text-field label="Display Price With Tax"/></v-text-field>
+										      	</v-flex>
+
+										      	<v-flex xs6 sm6 md6>
+										      		<v-text-field label="Use Store Tax Address"/></v-text-field>
+										      	</v-flex>
+
+										      	<v-flex xs6 sm6 md6>
+										      		<v-text-field label="Use Customer Tax Address"/></v-text-field>
+										      	</v-flex>
+
+										      	<!-- <v-flex xs12 sm12 md12>
+										      		<v-checkbox :label="`Checkbox 1: ${checkbox.toString()}`"
+												      v-model="checkbox"></v-checkbox>
+										      	</v-flex> -->
+										    </v-layout>
+										</v-container>
+				                      </div>
+				                    </div>
+				                    <div class="col s12 m12 l3"></div>
+				                </div>
+		                      	<div class="clearfix"></div>
+		                    	<!-- */end  -->
+
+		                    </v-form>
+		                  </div>
+		                </div>
+		              </div>
+		            </div>
+	            </div>
+	        </div>
+		</section>
+	</v-app>
 </template>
 	
 <script>
@@ -77,6 +306,8 @@
 					user_group_id:1,
 					image:''
 				},
+				resellerInfo:'',
+				storeInfo:'',
 				selects:{
 					statusItems:[
 						{text:'Acitve',value:1},
@@ -125,18 +356,10 @@
 			},
 			fetchData(id){
 				axios.get(this.url+id+'/edit').then((res)=>{
-					// this.data.user_group_id=res.data.user_group_id
-					// this.data.username=res.data.username
-					// this.data.firstname=res.data.firstname
-					// this.data.lastname=res.data.lastname
-					// this.data.email=res.data.email
-					// this.data.code=res.data.code
-					// this.data.status=res.data.status
-					// this.data.image=res.data.image
-					this.data=res.data
+					this.resellerInfo = res.data['resellerData']
+					this.storeInfo = res.data['store']
 				})
 			},
-			
 		    checkPasswordConfirmed(){
 	    		if(this.password===this.confirmPassword){
 		        	this.error=false

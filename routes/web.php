@@ -106,11 +106,14 @@ if (Request::is('admin*')){
                 //=====Categories API=============================
                 // Route::get('/categories/list','FrontEnd\Common\HeaderController@index');
                 Route::resource('categories', 'Backend\Category\CategoryController');
-                Route::get('category_type', 'Backend\Category\CategoryController@getCategoriesType');
-                Route::get('category_parent', 'Backend\Category\CategoryController@getCategoriesParent');
+                Route::get('getCategories', 'Backend\Category\CategoryController@getCategoriesList');
+                Route::get('getCategories_type', 'Backend\Category\CategoryController@getCategoriesType');
+                Route::get('getCategories_parent', 'Backend\Category\CategoryController@getCategoriesParent');
                  //=====Product API=============================
                 Route::resource('products', 'Backend\Products\ProductsController');
-                
+
+                Route::get('/getManufacturers','Backend\Manufacturers\ManufacturersController@getManufacturers');
+
 
                 Route::get('/getMenus', 'Backend\Settings\GroupRolesController@index');
             });
@@ -185,6 +188,8 @@ Route::resource('/api/order', 'FrontEnd\Account\OrderController');
 Route::get('/api/getTest', 'FrontEnd\TestController@getTest');
 Route::get('/api/show/{id}', 'FrontEnd\TestController@getShow');
 Route::put('/api/update', 'FrontEnd\TestController@UpdateApi');
+// =====Store
+Route::get('/api/store/getStoreData/{id}', 'FrontEnd\Store\StoreController@show');
 /*|Api Request Header--*/
 Route::get('/api/header','FrontEnd\Common\HeaderController@index');
 /*--| Api Request Slide--*/

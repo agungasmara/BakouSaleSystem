@@ -132,12 +132,12 @@
 				});
 			},
 			categoryType(){
-				axios.get('/admin/api/category_type').then((res)=>{
+				axios.get('/admin/api/getCategories_type').then((res)=>{
 					this.select.categoryType=res.data
 				})
 			},
 			categoryParent(){
-				axios.get('/admin/api/category_parent').then((res)=>{
+				axios.get('/admin/api/getCategories_parent').then((res)=>{
 					this.select.categoryParent=res.data
 				})
 			}

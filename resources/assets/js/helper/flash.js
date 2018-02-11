@@ -1,7 +1,10 @@
+import axios from 'axios'
 export default{
 	state: {
 		success: null,
 		elasticdata : '',
+		fetchInfo : '',
+		fetchStore : '',
 		error: null,
 		StateData:[]
 	},
@@ -10,6 +13,12 @@ export default{
 	},
 	setState(message){
 		this.state.elasticdata = message
+	},
+	fetchInformation(id){
+		axios.get('/api/information/'+id).then(response => this.state.fetchInfo=response.data)
+	},
+	fetchStore(data){
+		this.state.fetchStore = data
 	},
 	setSuccess(message){
 		this.state.success = message

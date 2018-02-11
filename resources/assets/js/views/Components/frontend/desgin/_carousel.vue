@@ -18,12 +18,12 @@
                         <a><img v-bind:src="b.image" alt="img"></a>
                       </li>
                     </span> -->
-                    <li v-for="b of data['BannerImageArray']">
+                    <!-- <li v-for="b of data['BannerImageArray']">
                       <img v-bind:src="b.image" alt="img"/>
                     </li>
-                    <li><img src="/assets/frontend/images/brand/0.png" alt="img" style="display: none;"></li>
+                    <li><img src="/assets/frontend/images/brand/0.png" alt="img" style="display: none;"></li> -->
                     <!-- <li><img src="/assets/frontend/images/brand/4.png" alt="img"></li> -->
-                    <!-- <li><img src="/assets/frontend/images/brand/5.png" alt="img"></li>
+                    <li><img src="/assets/frontend/images/brand/5.png" alt="img"></li>
                     <li><img src="/assets/frontend/images/brand/6.png" alt="img"></li>
                     <li><img src="/assets/frontend/images/brand/7.png" alt="img"></li>
                     <li><img src="/assets/frontend/images/brand/8.png" alt="img"></li>
@@ -34,7 +34,7 @@
                     <li><img src="/assets/frontend/images/brand/5.png" alt="img"></li>
                     <li><img src="/assets/frontend/images/brand/6.png" alt="img"></li>
                     <li><img src="/assets/frontend/images/brand/7.png" alt="img"></li>
-                    <li><img src="/assets/frontend/images/brand/8.png" alt="img"></li> -->
+                    <li><img src="/assets/frontend/images/brand/8.png" alt="img"></li>
                 </ul>
             </div>
         </div>

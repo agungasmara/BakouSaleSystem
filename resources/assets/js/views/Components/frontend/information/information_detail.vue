@@ -25,7 +25,7 @@
                 // informationInfo:[],
             }
         },
-        ready: function () {
+        ready: function () {    
             // alert("testig");
             // alert($route.params.id);
         },
@@ -40,13 +40,14 @@
         },
         beforeUpdate(){
             var pid = this.$route.params.id;
-            Flash.setState(this.InformationDetails(pid));
+            //Flash.setState(this.InformationDetails(pid));
         },
         methods:{
             InformationDetails(id){
                 axios.get('/api/information/'+id).then(res=>{
                     this.StateData=res.data
                     this.isActive = !this.isActive
+                    return false
                 });
             }
         }
