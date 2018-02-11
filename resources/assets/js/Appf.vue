@@ -2,6 +2,10 @@
   <div style="-display:none;">
     <!-- Fixed navbar start -->
     <div class="navbar navbar-tshop navbar-fixed-top megamenu" role="navigation">
+
+        <!-- <div style="height:500px">
+            <button @click="initInsertElastic">Click me to insert elastic search</button>
+        </div> -->
         <div class="navbar-top">
             
             <div class="container">
@@ -234,6 +238,23 @@
                             <li v-for="item of searchResults['elasticdata']"><img v-bind:src="item._source.imageUrl"/> {{item._source.name}}</li>
                         </ul>
                         <br/> -->
+                        <div>Best Seller Store</div>
+                        <hr/>
+                        <ul class="popular-product">
+                            <li v-for="item of searchResults['elasticdata']">
+                                <router-link v-bind:to="'/store/taobao/'+ item._source.id">
+                                    <div class="pull-left product-img"><img width="30px" v-bind:src="item._source.imageUrl"/> </div>
+                                    <div class="pull-left">{{item._source.store.storename}}
+                                        <div>
+                                            <span class="original-price">{{item._source.crawlPrice}}</span>
+                                            <span class="special-price">{{item._source.crawlPrice}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </router-link>
+                            </li>
+                        </ul>
+
                         <div>Popular Products</div>
                         <hr/>
                         <ul class="popular-product">
@@ -286,6 +307,7 @@
 <script type="text/javascript">
 
     import axios from 'axios'
+    import {post} from './helper/api'
     import Flash from './helper/flash'
     import CartProduct from './views/Components/frontend/include/cart.vue'
     import CartAction from './helper/cart'
@@ -293,9 +315,34 @@
     import VueTranslate from 'vue-translate-plugin'
     import TopHeader from './views/Components/frontend/common/_top_language'
     import Vue from 'vue'
+    import VueRouter from 'vue-router'
+    import VueResource from 'vue-resource'
+    import Vuetify from 'vuetify'
+
+    Vue.use(Vuetify)
+    Vue.use(VueResource);
+    Vue.use(VueRouter)
+
+    Vue.http.options.credentials = true;
+
+    Vue.http.options.xhr = {
+      withCredentials: true
+    }
+    Vue.http.options.emulateJSON = true
+    Vue.http.options.emulateHTTP = true
+    Vue.http.options.crossOrigin = true
+
+    Vue.http.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:9200'
+    Vue.http.headers.common['Access-Control-Request-Method'] = '*'
+    Vue.http.headers.common['Content-Type'] = 'application/x-www-form-urlencoded'
+    Vue.http.headers.common['Accept'] = 'application/json, text/plain, */*'
+    Vue.http.headers.common['Access-Control-Allow-Headers'] = 'Origin, Accept, Content-Type, Authorization, Access-Control-Allow-Origin'
+
+
     Vue.use(VueTranslate)
     var VueCookie = require('vue-cookie')
     Vue.use(VueCookie)
+
     var randomstring = require("randomstring")
 
     const es_host = 'http://localhost';
@@ -396,6 +443,12 @@
             
         },
         methods: {
+            initInsertElastic(){
+                post(''+es_host+':'+es_port+'/store/product/3333', {id: '3333',name: 'myiphone12'}).then(response => {
+                    alert("success")
+                },{headers: {'Content-Type': 'application/json','Accept': 'application/json','Access-Control-Allow-Origin': '*','Access-Control-Allow-Headers': 'Origin, Accept, Content-Type, Authorization, Access-Control-Allow-Origin'}}, response => {
+                })
+            },
             // onLostFocus:function(){
             //     $('#search-list').slideUp(100)
             //     $('.search-full').hide(100)
@@ -415,7 +468,7 @@
             },
             search: function() {    
                 var searchText = this.q
-                client.search({
+                var productSearch = client.search({
                   index: "store",
                   type: "product",
                   body: {
@@ -450,8 +503,8 @@
                     // return hits = resp.hits.hits;
                     Flash.setState(resp['hits']['hits']);
                 }, function (err) {
-                  console.trace(err.message);
-                });
+                  console.trace(err.message)
+                })
             },
             logout () {
                 window.location = '/logout'
