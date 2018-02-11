@@ -1,75 +1,49 @@
 <template>
-	<v-app id="inspire">
-		<section>
+	<div>
+		<v-app id="inspire">
 			<!--breadcrumbs start-->
-			<!-- <breadcrumb1btn 
+			<breadcrumb1btn 
 				v-bind:breadcrumb-item="breadcrumbs"
 				v-bind:btn-new-url="btnNewUrl"
 				v-bind:breadcrumb-title="breadcrumbTitle"
-			></breadcrumb1btn> -->
-			<!--breadcrumbs start-->
-			<div id="breadcrumbs-wrapper">
-				<!-- Search for small screen -->
-				<div class="header-search-wrapper grey lighten-2 hide-on-large-only">
-					<input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize">
-				</div>
-				<div class="row container">
-				  <div class="container">
-				    <div class="col s10 m6 l6">
-				      <h5 class="breadcrumbs-title">Orders</h5>
-				      	<v-breadcrumbs>
-				        	<v-icon slot="divider">/</v-icon>
-			        		<v-breadcrumbs-item  v-for="item in breadcrumbs" :key="item.text" :disabled="item.disabled">
-			          			{{ item.text }}
-			        		</v-breadcrumbs-item>
-			      		</v-breadcrumbs>
-				    </div>
-				    <div class="col s2 m6 l6">
-				     	<router-link to="/admin/sale_order/add" replace><v-btn class="btn dropdown-settings waves-effect waves-light breadcrumbs-btn right" color="primary">New Order</v-btn></router-link>
-				    	<router-link to="/admin/sale_order/list" replace><v-btn color="primary" class="btn dropdown-settings breadcrumbs-btn right"><i class="material-icons">print</i> &nbsp;Print</v-btn></router-link>
-				    	<router-link to="/admin/sale_order/list" replace><v-btn color="primary" class="btn dropdown-settings breadcrumbs-btn right"><i class="material-icons">print</i> &nbsp;Print Shipping</v-btn></router-link>
-				    </div>
-				  </div>
-				</div>
-			</div>
-			<!--breadcrumbs end-->
+			></breadcrumb1btn>
 
-			<v-form ref="form" lazy-validation>
+			<v-form v-model="valid" ref="form" lazy-validation>
 		    	<v-container grid-list-md>
           			<v-layout wrap>
-
-          				<v-flex xs12 sm3 md3>
-				      		<v-text-field label="Tracking No"></v-text-field>
-				      	</v-flex>
-
 				    	<v-flex xs12 sm3 md3>
-				      		<v-text-field label="Order No"></v-text-field>
+				      		<v-text-field label="Code" v-model="code" :rules="codeRules"></v-text-field>
 				      	</v-flex>
 
 				      	<v-flex xs12 sm3 md3>
-				      		<v-text-field label="Resellers"></v-text-field>
+				      		<v-text-field label="Code" v-model="code" :rules="codeRules"></v-text-field>
 				      	</v-flex>
 
 				      	<v-flex xs12 sm3 md3>
-				      		<v-text-field label="Customers"></v-text-field>
+				      		<v-text-field label="Code" v-model="code" :rules="codeRules"></v-text-field>
 				      	</v-flex>
 
 				      	<v-flex xs12 sm3 md3>
-				      		<v-text-field label="Date Added"></v-text-field>
+				      		<v-text-field label="Code" v-model="code" :rules="codeRules"></v-text-field>
 				      	</v-flex>
 
 				      	<v-flex xs12 sm3 md3>
-				      		<v-text-field label="Order Status"></v-text-field>
+				      		<v-text-field label="Code" v-model="code" :rules="codeRules"></v-text-field>
 				      	</v-flex>
 
 				      	<v-flex xs12 sm3 md3>
-				      		<v-text-field label="Shipping ID"></v-text-field>
+				      		<v-text-field label="Code" v-model="code" :rules="codeRules"></v-text-field>
 				      	</v-flex>
 
-				      	<v-flex xs12 sm12 md12 p-right>
-				      		<v-btn color="primary" class="btn dropdown-settings breadcrumbs-btn right">Filter</v-btn>
+				      	<v-flex xs12 sm3 md3>
+				      		<v-text-field label="Code" v-model="code" :rules="codeRules"></v-text-field>
 				      	</v-flex>
-				      	
+
+				      	<v-flex xs12 sm3 md3>
+				      		<v-text-field label="Code" v-model="code" :rules="codeRules"></v-text-field>
+				      	</v-flex>
+
+				      	<v-btn color="primary" class="btn dropdown-settings breadcrumbs-btn right">Filter</v-btn>
 				    </v-layout>
 				</v-container>
 			</v-form>
@@ -85,8 +59,9 @@
 		    	v-bind:del="true"
 		    	v-bind:eye="true">
 		    </data-table>
-		</section>
-	</v-app>
+
+		</v-app>
+	</div>
 </template>
 
 <script> 
@@ -102,7 +77,7 @@
 			return{
 				listTitle:'Resellers List',
 				url:'/api/carriers/',
-				btnNewUrl:'/admin/sale_order/add',
+				btnNewUrl:'/admin/shipment/add',
 				headers: [
 			        { text: 'ID',align: 'left',class:'text-xs-left',value: 'id'},
 			        { text: 'Username',align:'left',class:'text-xs-left', value: 'username' },
@@ -142,7 +117,7 @@
 			          disabled: false
 			        },
 			        {
-			          text: 'Sale Orders',
+			          text: 'Resellers',
 			          disabled: false
 			        },
 			        {

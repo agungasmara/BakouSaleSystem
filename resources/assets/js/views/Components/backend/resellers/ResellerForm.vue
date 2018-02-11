@@ -130,8 +130,7 @@
 				                      </div>
 				                    </div>
 				                    <div class="col s12 m12 l3">
-				                    	<!-- <img src="/images/NoPicture.png"/> -->
-				                    	<input type="file" id="fileInput"  style="display:none" ref="fileInput" accept="image/*" @change="onFilePicked">
+				                    	<img src="/images/NoPicture.png"/>
 				                    </div>
 				                </div>
 		                      	<div class="clearfix"></div>

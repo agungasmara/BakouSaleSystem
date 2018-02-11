@@ -18,7 +18,7 @@ class ProductsController extends Controller
     public function index()
     {
 
-        $Products = ProductModel::select('product_id','model','image','price','quantity','sort_order','status')->get();
+        $Products = ProductModel::select('product_id','model','image','price','quantity','sort_order','status')->OrderBy('product_id','desc')->get();
         foreach ($Products as $Product) {
             $Product->name=$Product->Description()->value('name');
             $Product->id=$Product->product_id;
@@ -34,7 +34,7 @@ class ProductsController extends Controller
         $data=array_only($request['data'],$fill);
         $dir='/images/product';
         $image=$request['data']['image'];
-        $data['image']=$this->ImageMaker($dir,$image);
+        //$data['image']=$this->ImageMaker($dir,$image);
         $data['date_added']=date('Y-m-d h:i:s');
         $data['date_modified']=date('Y-m-d h:i:s');
         $product_id=ProductModel::insertGetId($data);
