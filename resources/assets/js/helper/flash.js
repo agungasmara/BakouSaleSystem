@@ -2,6 +2,7 @@ export default{
 	state: {
 		success: null,
 		elasticdata : '',
+		fetchStore : '',
 		error: null,
 		StateData:[]
 	},
@@ -10,6 +11,9 @@ export default{
 	},
 	setState(message){
 		this.state.elasticdata = message
+	},
+	fetchStore(data){
+		this.state.fetchStore = data
 	},
 	setSuccess(message){
 		this.state.success = message

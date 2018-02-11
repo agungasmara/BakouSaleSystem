@@ -188,6 +188,8 @@ Route::resource('/api/order', 'FrontEnd\Account\OrderController');
 Route::get('/api/getTest', 'FrontEnd\TestController@getTest');
 Route::get('/api/show/{id}', 'FrontEnd\TestController@getShow');
 Route::put('/api/update', 'FrontEnd\TestController@UpdateApi');
+// =====Store
+Route::get('/api/store/getStoreData/{id}', 'FrontEnd\Store\StoreController@show');
 /*|Api Request Header--*/
 Route::get('/api/header','FrontEnd\Common\HeaderController@index');
 /*--| Api Request Slide--*/

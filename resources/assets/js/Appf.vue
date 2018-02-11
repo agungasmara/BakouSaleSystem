@@ -242,35 +242,35 @@
                         <div>Best Seller Store</div>
                         <hr/>
                         <ul class="popular-product">
-                            <li v-for="item of searchResults['elasticdata']">
-                                <router-link v-bind:to="'/store/taobao/'+ item._source.id">
-                                    <div class="pull-left product-img"><img width="30px" v-bind:src="item._source.imageUrl"/> </div>
-                                    <div class="pull-left">{{item._source.store.storename}}
-                                        <div>
-                                            <span class="original-price">{{item._source.crawlPrice}}</span>
-                                            <span class="special-price">{{item._source.crawlPrice}}</span>
-                                        </div>
-                                    </div>
+                            <li v-for="item of fetchStore['fetchStore']">
+                                <router-link v-bind:to="'/store/taobao/'+ item._source.store.store_id">
+                                    <div class="pull-left product-img"><img width="120px" v-bind:src="item._source.store.image"/> </div>
+                                    <!-- <div class="pull-left">{{item._source.store.storename}}</div> -->
                                     <div class="clearfix"></div>
                                 </router-link>
                             </li>
                         </ul>
-
+                        <br/>
                         <div>Popular Products</div>
                         <hr/>
                         <ul class="popular-product">
-                            <li v-for="item of searchResults['elasticdata']">
-                                <router-link v-bind:to="'/product/product_detail/'+ item._source.id">
-                                    <div class="pull-left product-img"><img width="30px" v-bind:src="item._source.imageUrl"/> </div>
-                                    <div class="pull-left">{{item._source.name}}
-                                        <div>
-                                            <span class="original-price">{{item._source.crawlPrice}}</span>
-                                            <span class="special-price">{{item._source.crawlPrice}}</span>
+                            <template v-if="searchResults['elasticdata'].length>0">
+                                <li v-for="item of searchResults['elasticdata']">
+                                    <router-link v-bind:to="'/product/product_detail/'+ item._source.id">
+                                        <div class="pull-left product-img"><img width="30px" v-bind:src="item._source.imageUrl"/> </div>
+                                        <div class="pull-left">{{item._source.name}}
+                                            <div>
+                                                <span class="original-price">{{item._source.crawlPrice}}</span>
+                                                <span class="special-price">{{item._source.crawlPrice}}</span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </router-link>
-                            </li>
+                                        <div class="clearfix"></div>
+                                    </router-link>
+                                </li>
+                            </template>
+                            <template v-else>
+                                <li>There is no product found!</li>
+                            </template>
                         </ul>
                     </div>
                 </div>
@@ -320,26 +320,6 @@
     import VueResource from 'vue-resource'
     import Vuetify from 'vuetify'
 
-    Vue.use(Vuetify)
-    Vue.use(VueResource);
-    Vue.use(VueRouter)
-
-    Vue.http.options.credentials = true;
-
-    Vue.http.options.xhr = {
-      withCredentials: true
-    }
-    Vue.http.options.emulateJSON = true
-    Vue.http.options.emulateHTTP = true
-    Vue.http.options.crossOrigin = true
-
-    Vue.http.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:9200'
-    Vue.http.headers.common['Access-Control-Request-Method'] = '*'
-    Vue.http.headers.common['Content-Type'] = 'application/x-www-form-urlencoded'
-    Vue.http.headers.common['Accept'] = 'application/json, text/plain, */*'
-    Vue.http.headers.common['Access-Control-Allow-Headers'] = 'Origin, Accept, Content-Type, Authorization, Access-Control-Allow-Origin'
-
-
     Vue.use(VueTranslate)
     var VueCookie = require('vue-cookie')
     Vue.use(VueCookie)
@@ -359,6 +339,7 @@
           return{
             q:'',
             searchResults:Flash.state,
+            fetchStore:Flash.state,
             posts: [],
             loading:true,
             session_id : this.$cookie.get('session_id'),
@@ -469,7 +450,8 @@
             },
             search: function() {    
                 var searchText = this.q
-                var productSearch = client.search({
+                // fetchProduct
+                client.search({
                   index: "store",
                   type: "product",
                   body: {
@@ -493,7 +475,7 @@
                                 "aggs": {
                                     "tops": {
                                         "top_hits": {
-                                            "size": 5
+                                            "size": 1
                                         }
                                     }
                                 }
@@ -502,7 +484,45 @@
                   }// end body
                 }).then(function (resp) {
                     // return hits = resp.hits.hits;
-                    Flash.setState(resp['hits']['hits']);
+                    Flash.setState(resp['hits']['hits'])
+                }, function (err) {
+                  console.trace(err.message)
+                })
+                // fetchStore
+                client.search({
+                  index: "store",
+                  type: "product",
+                  body: {
+                            "size": 1,
+                              "sort": [
+                            {"popular": {"order": "desc"}}
+                        ],
+                        "query": {
+                              "query_string": {
+                              "query": (searchText == '' || searchText == ' ')? '*' : searchText+"*",
+                              "fields": ["store.storename"]
+                          }
+                        }
+                        ,
+                        "aggs": {
+                            "store": {
+                                "terms": {
+                                    "field": "store.storename",
+                                    "size": 1 // limit number result distinct
+                                },
+                                "aggs": {
+                                    "tops": {
+                                        "top_hits": {
+                                            "size": 1
+                                        }
+                                    }
+                                }
+                            }
+                        }// end aggs
+                  }// end body
+                }).then(function (resp) {
+                    // return hits = resp.hits.hits;
+                    this.fetchStore = Flash.fetchStore(resp['hits']['hits'])
                 }, function (err) {
                   console.trace(err.message)
                 })
