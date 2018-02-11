@@ -67,9 +67,9 @@
 					                      		<h4 class="header"><i class="material-icons text-left"> {{item.icon}} </i> {{item.title}} </h4>
 					                      		<div class="divider"></div>
 											    <v-layout row wrap>
-											    	<v-flex v-for="list in lists[item.form]" :class="list.class">
-											      		<span><i style="float: left;" class="material-icons">{{list.icon}}</i> {{list.key}}</span>
-											      	</v-flex>
+											    	<!-- <v-flex v-for="column in rows[item.form]" :class="column.class">
+											      		<span><i style="float: left;" class="material-icons">{{column.icon}}</i> {{column.key}}</span>
+											      	</v-flex> -->
 
 											    </v-layout>
 											    	<!-- <form-group
@@ -253,7 +253,7 @@
 					
 
 				],
-				lists:{
+				rows:{
 					order:[
 						{	class:'xs6 sm6',	key:'name',		icon:'info_outline'},
 						{	class:'xs6 sm6',	key:'name',		icon:'schedule'},
