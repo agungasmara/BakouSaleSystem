@@ -30,8 +30,19 @@
 
         public function show($id){
             $StoreData = DB::table('setting')->Where('store_id',$id)->get();
-            return response()->json($StoreData);
+            $data = [];
+            $str = '';
+            foreach ($StoreData as $key => $value) {
+                define('store_'.$value->key, $value->value);
+            }
+            $store = array(
+                'config_image'=>store_config_image,
+                'config_email'=>store_config_email,
+                'config_url'=>store_config_url
+            );
+            return response()->json($store);
         }
+
 
         public function edit($id){
 

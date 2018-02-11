@@ -2,7 +2,7 @@
 	<div v-bind:class="{ active: isActive }" class="loading">
 		<div class="container main-container headerOffset">
 			<center>
-				<img src="/images/store/taobao.jpg"/>
+				<img v-bind:src="storeData.config_image"/>
 			</center>
 		    <!-- Main component call to action -->
 
@@ -10,7 +10,7 @@
 		        <div class="breadcrumbDiv col-lg-12">
 		            <ul class="breadcrumb">
 		                <li><a href="index.html">Home</a></li>
-		                <li class="active">MEN COLLECTION</li>
+		                <li class="active">Headphones & Headsets</li>
 		            </ul>
 		        </div>
 		    </div>
@@ -369,7 +369,7 @@
 		        <!--right column-->
 		        <div class="col-lg-9 col-md-9 col-sm-12">
 		            <div class="w100 clearfix category-top">
-		                <h2> MEN COLLECTION </h2>
+		                <h2> Headphones & Headsets </h2>
 
 		                <div class="categoryImage"><img src="/images/site/category.jpg" class="img-responsive" alt="img"></div>
 		            </div>
@@ -377,33 +377,33 @@
 
 		            <div class="row subCategoryList clearfix">
 		                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center ">
-		                    <div class="thumbnail"><a class="subCategoryThumb" href="sub-category.html"><img
-		                            src="/images/product/3.jpg" class="img-rounded " alt="img"> </a> <a class="subCategoryTitle"><span> T shirt </span></a>
+		                    <div class="thumbnail"><a class="subCategoryThumb" href="sub-category.html">
+		                    	<img src="/images/catalog/demo/headset/headset.jpg" class="img-rounded " alt="img"> </a> <a class="subCategoryTitle"><span> T shirt </span></a>
 		                    </div>
 		                </div>
 		                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center">
 		                    <div class="thumbnail"><a class="subCategoryThumb" href="sub-category.html"><img
-		                            src="/images/site/casual.jpg" class="img-rounded " alt="img"> </a> <a
+		                            src="/images/catalog/demo/headset/headset1.jpg" class="img-rounded " alt="img"> </a> <a
 		                            class="subCategoryTitle"><span> Shirt </span></a></div>
 		                </div>
 		                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center">
 		                    <div class="thumbnail"><a class="subCategoryThumb" href="sub-category.html"><img
-		                            src="/images/site/shoe.jpg" class="img-rounded " alt="img"> </a> <a class="subCategoryTitle"><span> shoes </span></a>
+		                            src="/images/catalog/demo/headset/headset2.jpg" class="img-rounded " alt="img"> </a> <a class="subCategoryTitle"><span> shoes </span></a>
 		                    </div>
 		                </div>
 		                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center">
 		                    <div class="thumbnail"><a class="subCategoryThumb" href="sub-category.html"><img
-		                            src="/images/site/jewelry.jpg" class="img-rounded " alt="img"> </a> <a
+		                            src="/images/catalog/demo/headset/headset3.jpg" class="img-rounded " alt="img"> </a> <a
 		                            class="subCategoryTitle"><span> Accessories </span></a></div>
 		                </div>
 		                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center">
 		                    <div class="thumbnail"><a class="subCategoryThumb" href="sub-category.html"><img
-		                            src="/images/site/winter.jpg" class="img-rounded  " alt="img"> </a> <a
+		                            src="/images/catalog/demo/headset/headset4.jpg" class="img-rounded  " alt="img"> </a> <a
 		                            class="subCategoryTitle"><span> Winter Collection </span></a></div>
 		                </div>
 		                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center">
 		                    <div class="thumbnail"><a class="subCategoryThumb" href="sub-category.html"><img
-		                            src="/images/site/Male-Fragrances.jpg" class="img-rounded " alt="img"> </a> <a
+		                            src="/images/catalog/demo/headset/headset5.jpg" class="img-rounded " alt="img"> </a> <a
 		                            class="subCategoryTitle"><span> Fragrances </span></a></div>
 		                </div>
 		            </div>
@@ -453,7 +453,7 @@
 		                            <h4><router-link v-bind:to="'/product/product_detail/'+ product.product_id">{{product.name}}</router-link></h4>
 
 		                            <div class="grid-description">
-		                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+		                                <p v-html="product.description">.</p>
 		                            </div>
 		                            <div class="list-description">
 		                                <p> Sed sed rutrum purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -464,7 +464,7 @@
 		                                    sit amet placerat elit. </p>
 		                            </div>
 		                            <span class="size">XL / XXL / S </span></div>
-		                        <div class="price"><span>$25</span></div>
+		                        <div class="price"><span>${{product.price}}</span></div>
 		                        <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
 		                                class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
 		                    </div>
@@ -916,27 +916,11 @@
     data(){
       return{
         isActive: true,
-        loading:true,
+        loading:false,
         response: null,
+        storeData:null,
       }
     },
-    created() {
-    	this.loading = true
-        axios.get(`/api/category/`+this.id)
-        .then(response => {
-            this.response = response.data['data']
-            this.isActive = !this.isActive
-        })
-        .catch(e => {
-          this.errors.push(e)
-        })
-
-    },
-    beforeUpdate(){
-        $('#search-list').slideUp(100)
-        $('.search-full').hide(100)
-    },
-
     locales: {
         en: {
             'entry_personal_information': 'My personal information',
@@ -949,13 +933,36 @@
             'entry_require_field': 'Required Field'
         }
     },
+    beforeUpdate(){
+        $('#search-list').slideUp(100)
+        $('.search-full').hide(100)
+    },
     mounted: function(){
-
-        // this.loading = true;
-
-        // return this.$scopedSlots.default({
-        //   response: this.response.data['data']
-        // })
+    	
+    },
+    created() {
+    	this.getStoreData(this.id);
+    	this.getPrductCategory(1);
+    },
+    methods: {
+		getStoreData(id){
+			axios.get('/api/store/getStoreData/'+id).then(res=>{
+			    this.storeData=res.data
+			    this.isActive = !this.isActive
+			})
+		},
+		getPrductCategory(id){
+			this.loading = true
+	        axios.get(`/api/category/`+this.id)
+	        .then(response => {
+	            this.response = response.data['data']
+	            //this.isActive = !this.isActive
+	        })
+	        .catch(e => {
+	          this.errors.push(e)
+	        })
+		}
     }
+    
   }
 </script>

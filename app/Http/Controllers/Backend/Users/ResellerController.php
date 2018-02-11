@@ -48,10 +48,35 @@ class ResellerController extends Controller
         //return response()->json($data);
 
     }
-    public function edit($id)
+    public function show($id)
     {
 
         return (new DataAction)->EditData(User::class,$id);
+
+    }
+
+    public function edit($id)
+    {
+
+        $resellerData = DB::table('users')
+                ->join('store','store.owner_id','=','users.id')
+                ->where('id',$id)
+                ->first();
+        $StoreData = DB::table('setting')->Where('store_id',$resellerData->store_id)->get();
+            $data = [];
+            $str = '';
+            foreach ($StoreData as $key => $value) {
+                define('store_'.$value->key, $value->value);
+            }
+            $store = array(
+                'config_image'=>store_config_image,
+                'config_email'=>store_config_email,
+                'config_url'=>store_config_url,
+                'config_name'=>store_config_name,
+                'config_address'=>store_config_address,
+                'config_currency'=>store_config_currency
+            );
+        return response()->json(['store'=>$store,'resellerData'=>$resellerData]);
 
     }
     

@@ -400,7 +400,7 @@ const router = new VueRouter({
         }
       ]
     },
-    { path: '/store/:name/:id', name:'Store',component: Store},
+    { path: '/store/:name/:id', name:'Store',component: Store,props:true},
     //  { 
     //   path: '/cart', name:'cart',component: Cart,
     //   children:[
@@ -683,7 +683,7 @@ const router = new VueRouter({
         ]       
     },
     //Pickups 
-    {path:'/admin/pickups',name:'undeliverys',component:Pickups,
+    {path:'/admin/pickups',name:'pickups',component:Pickups,
         children:[
             {
                 path:'list',

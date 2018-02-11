@@ -21,7 +21,7 @@
                                 <li class="phone-number">
                                     <a href="callto:+12025550151">
                                         <span> <i class="glyphicon glyphicon-phone-alt "></i></span>
-                                        <span class="hidden-xs" style="margin-left:5px"> +1-202-555-0151 </span> </a></li>
+                                        <span class="hidden-xs" style="margin-left:5px"> (+855)87 575 787, (+855)92 755 767 </span> </a></li>
                             </ul>
                         </div>
                     </div>

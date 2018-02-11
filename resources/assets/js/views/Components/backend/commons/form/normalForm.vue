@@ -113,6 +113,7 @@
 	    </v-form>
 	</v-app>
 </template>
+
 <script>
 	import Flash from '../../../../../helper/flash'
 	import axios from 'axios'

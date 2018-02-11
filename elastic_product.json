@@ -1,0 +1,607 @@
+PUT store/product/28
+{
+  "id": "28",
+  "name": "Headphones & Headsets - In-Ear Headphones",
+  "price": "11",
+  "status": 1,
+  "description": "description product",
+  "isCrawler": false,
+  "imageUrl": "http://localhost:8000/images/catalog/demo/headset/headset6.jpg",
+  "crawlPrice": "$.332",
+  "crawlpriceSpecial": "211",
+  "crawldiscountRate": "23",
+  "sourceWebsite": "http://www.google.com",
+  "productLink": "http://localhost:8000/product/product_detail/42",
+  "categories": {
+    "cat_id": "1",
+    "cat_name": "Headphones & Headsets",
+    "cat_alias": "Headphones & Headsets"
+  },
+  "brand": {
+    "brandname": "Petro",
+    "image": "http://localhost:8000/images/store/taobao.jpg",
+    "brand_id": 1
+  },
+  "store": {
+    "store_id":2,
+    "storename": "Bakou Store",
+    "image": "http://localhost:8000/images/store/bakou.png"
+  },
+  "popular": 1
+}
+
+PUT store/product/29
+{
+  "id": "29",
+  "name": "Headphones & Headsets - Over-The-Ear Headphones",
+  "price": "11",
+  "status": 1,
+  "description": "description product",
+  "isCrawler": false,
+  "imageUrl": "http://localhost:8000/images/catalog/demo/headset/headset7.jpg",
+  "crawlPrice": "$.332",
+  "crawlpriceSpecial": "211",
+  "crawldiscountRate": "23",
+  "sourceWebsite": "http://www.google.com",
+  "productLink": "http://localhost:8000/product/product_detail/42",
+  "categories": {
+    "cat_id": "1",
+    "cat_name": "Headphones & Headsets",
+    "cat_alias": "Headphones & Headsets"
+  },
+  "brand": {
+    "brandname": "Petro",
+    "image": "http://localhost:8000/images/store/taobao.jpg",
+    "brand_id": 1
+  },
+  "store": {
+    "store_id":2,
+    "storename": "Bakou Store",
+    "image": "http://localhost:8000/images/store/bakou.png"
+  },
+  "popular": 1
+}
+
+PUT store/product/30
+{
+  "id": "30",
+  "name": "Wireless Earbuds",
+  "price": "11",
+  "status": 1,
+  "description": "description product",
+  "isCrawler": false,
+  "imageUrl": "http://localhost:8000/images/catalog/demo/headset/headset8.jpg",
+  "crawlPrice": "$.332",
+  "crawlpriceSpecial": "211",
+  "crawldiscountRate": "23",
+  "sourceWebsite": "http://www.google.com",
+  "productLink": "http://localhost:8000/product/product_detail/42",
+  "categories": {
+    "cat_id": "1",
+    "cat_name": "Headphones & Headsets",
+    "cat_alias": "Headphones & Headsets"
+  },
+  "brand": {
+    "brandname": "Petro",
+    "image": "http://localhost:8000/images/store/taobao.jpg",
+    "brand_id": 1
+  },
+  "store": {
+    "store_id":2,
+    "storename": "Bakou Store",
+    "image": "http://localhost:8000/images/store/bakou.png"
+  },
+  "popular": 1
+}
+
+PUT store/product/31
+{
+  "id": "31",
+  "name": "On-ear Headphones",
+  "price": "11",
+  "status": 1,
+  "description": "description product",
+  "isCrawler": false,
+  "imageUrl": "http://localhost:8000/images/catalog/demo/headset/headset9.jpg",
+  "crawlPrice": "$.332",
+  "crawlpriceSpecial": "211",
+  "crawldiscountRate": "23",
+  "sourceWebsite": "http://www.google.com",
+  "productLink": "http://localhost:8000/product/product_detail/42",
+  "categories": {
+    "cat_id": "1",
+    "cat_name": "Headphones & Headsets",
+    "cat_alias": "Headphones & Headsets"
+  },
+  "brand": {
+    "brandname": "Petro",
+    "image": "http://localhost:8000/images/store/taobao.jpg",
+    "brand_id": 1
+  },
+  "store": {
+    "store_id":2,
+    "storename": "Bakou Store",
+    "image": "http://localhost:8000/images/store/bakou.png"
+  },
+  "popular": 1
+}
+
+PUT store/product/32
+{
+  "id": "32",
+  "name": "iPod Touch",
+  "price": "11",
+  "status": 1,
+  "description": "description product",
+  "isCrawler": false,
+  "imageUrl": "http://localhost:8000/images/catalog/demo/headset/headset10.jpg",
+  "crawlPrice": "$.332",
+  "crawlpriceSpecial": "211",
+  "crawldiscountRate": "23",
+  "sourceWebsite": "http://www.google.com",
+  "productLink": "http://localhost:8000/product/product_detail/42",
+  "categories": {
+    "cat_id": "1",
+    "cat_name": "Headphones & Headsets",
+    "cat_alias": "Headphones & Headsets"
+  },
+  "brand": {
+    "brandname": "Petro",
+    "image": "http://localhost:8000/images/store/taobao.jpg",
+    "brand_id": 1
+  },
+  "store": {
+    "store_id":1,
+    "storename": "Taobao Store",
+    "image": "http://localhost:8000/images/store/taobao.jpg"
+  },
+  "popular": 1
+}
+
+PUT store/product/33
+{
+  "id": "33",
+  "name": "Samsung SyncMaster 941BW",
+  "price": "11",
+  "status": 1,
+  "description": "description product",
+  "isCrawler": false,
+  "imageUrl": "http://localhost:8000/images/catalog/demo/headset/headset11.jpg",
+  "crawlPrice": "$.332",
+  "crawlpriceSpecial": "211",
+  "crawldiscountRate": "23",
+  "sourceWebsite": "http://www.google.com",
+  "productLink": "http://localhost:8000/product/product_detail/42",
+  "categories": {
+    "cat_id": "1",
+    "cat_name": "Headphones & Headsets",
+    "cat_alias": "Headphones & Headsets"
+  },
+  "brand": {
+    "brandname": "Petro",
+    "image": "http://localhost:8000/images/store/taobao.jpg",
+    "brand_id": 1
+  },
+  "store": {
+    "store_id":1,
+    "storename": "Taobao Store",
+    "image": "http://localhost:8000/images/store/taobao.jpg"
+  },
+  "popular": 1
+}
+
+PUT store/product/34
+{
+  "id": "34",
+  "name": "iPod Shuffle",
+  "price": "11",
+  "status": 1,
+  "description": "description product",
+  "isCrawler": false,
+  "imageUrl": "http://localhost:8000/images/catalog/demo/headset/headset18.jpg",
+  "crawlPrice": "$.332",
+  "crawlpriceSpecial": "211",
+  "crawldiscountRate": "23",
+  "sourceWebsite": "http://www.google.com",
+  "productLink": "http://localhost:8000/product/product_detail/42",
+  "categories": {
+    "cat_id": "1",
+    "cat_name": "Headphones & Headsets",
+    "cat_alias": "Headphones & Headsets"
+  },
+  "brand": {
+    "brandname": "Petro",
+    "image": "http://localhost:8000/images/store/taobao.jpg",
+    "brand_id": 1
+  },
+  "store": {
+    "store_id":1,
+    "storename": "Taobao Store",
+    "image": "http://localhost:8000/images/store/taobao.jpg"
+  },
+  "popular": 1
+}
+
+PUT store/product/35
+{
+  "id": "35",
+  "name": "Product 8",
+  "price": "11",
+  "status": 1,
+  "description": "description product",
+  "isCrawler": false,
+  "imageUrl": "http://localhost:8000/images/catalog/demo/headset/headset13.jpg",
+  "crawlPrice": "$.332",
+  "crawlpriceSpecial": "211",
+  "crawldiscountRate": "23",
+  "sourceWebsite": "http://www.google.com",
+  "productLink": "http://localhost:8000/product/product_detail/42",
+  "categories": {
+    "cat_id": "1",
+    "cat_name": "Headphones & Headsets",
+    "cat_alias": "Headphones & Headsets"
+  },
+  "brand": {
+    "brandname": "Petro",
+    "image": "http://localhost:8000/images/store/taobao.jpg",
+    "brand_id": 1
+  },
+  "store": {
+    "store_id":1,
+    "storename": "Taobao Store",
+    "image": "http://localhost:8000/images/store/taobao.jpg"
+  },
+  "popular": 1
+}
+
+PUT store/product/36
+{
+  "id": "36",
+  "name": "iPod Nano",
+  "price": "11",
+  "status": 1,
+  "description": "description product",
+  "isCrawler": false,
+  "imageUrl": "http://localhost:8000/images/catalog/demo/headset/headset17.jpg",
+  "crawlPrice": "$.332",
+  "crawlpriceSpecial": "211",
+  "crawldiscountRate": "23",
+  "sourceWebsite": "http://www.google.com",
+  "productLink": "http://localhost:8000/product/product_detail/42",
+  "categories": {
+    "cat_id": "1",
+    "cat_name": "Headphones & Headsets",
+    "cat_alias": "Headphones & Headsets"
+  },
+  "brand": {
+    "brandname": "Petro",
+    "image": "http://localhost:8000/images/store/taobao.jpg",
+    "brand_id": 1
+  },
+  "store": {
+    "store_id":1,
+    "storename": "Taobao Store",
+    "image": "http://localhost:8000/images/store/taobao.jpg"
+  },
+  "popular": 1
+}
+
+PUT store/product/40
+{
+  "id": "40",
+  "name": "iPhone",
+  "price": "11",
+  "status": 1,
+  "description": "description product",
+  "isCrawler": false,
+  "imageUrl": "http://localhost:8000/images/catalog/demo/headset/headset16.jpg",
+  "crawlPrice": "$.332",
+  "crawlpriceSpecial": "211",
+  "crawldiscountRate": "23",
+  "sourceWebsite": "http://www.google.com",
+  "productLink": "http://localhost:8000/product/product_detail/42",
+  "categories": {
+    "cat_id": "1",
+    "cat_name": "Headphones & Headsets",
+    "cat_alias": "Headphones & Headsets"
+  },
+  "brand": {
+    "brandname": "Petro",
+    "image": "http://localhost:8000/images/store/taobao.jpg",
+    "brand_id": 1
+  },
+  "store": {
+    "store_id":1,
+    "storename": "Taobao Store",
+    "image": "http://localhost:8000/images/store/taobao.jpg"
+  },
+  "popular": 1
+}
+
+PUT store/product/41
+{
+  "id": "41",
+  "name": "iMac",
+  "price": "11",
+  "status": 1,
+  "description": "description product",
+  "isCrawler": false,
+  "imageUrl": "http://localhost:8000/images/catalog/demo/headset/headset14.jpg",
+  "crawlPrice": "$.332",
+  "crawlpriceSpecial": "211",
+  "crawldiscountRate": "23",
+  "sourceWebsite": "http://www.google.com",
+  "productLink": "http://localhost:8000/product/product_detail/42",
+  "categories": {
+    "cat_id": "1",
+    "cat_name": "Headphones & Headsets",
+    "cat_alias": "Headphones & Headsets"
+  },
+  "brand": {
+    "brandname": "Petro",
+    "image": "http://localhost:8000/images/store/taobao.jpg",
+    "brand_id": 1
+  },
+  "store": {
+    "store_id":1,
+    "storename": "Taobao Store",
+    "image": "http://localhost:8000/images/store/taobao.jpg"
+  },
+  "popular": 1
+}
+
+PUT store/product/42
+{
+  "id": "42",
+  "name": "Sony 90",
+  "price": "11",
+  "status": 1,
+  "description": "description product",
+  "isCrawler": false,
+  "imageUrl": "http://localhost:8000/images/catalog/demo/headset/headset15.jpg",
+  "crawlPrice": "$.332",
+  "crawlpriceSpecial": "211",
+  "crawldiscountRate": "23",
+  "sourceWebsite": "http://www.google.com",
+  "productLink": "http://localhost:8000/product/product_detail/42",
+  "categories": {
+    "cat_id": "1",
+    "cat_name": "Headphones & Headsets",
+    "cat_alias": "Headphones & Headsets"
+  },
+  "brand": {
+    "brandname": "Petro",
+    "image": "http://localhost:8000/images/store/taobao.jpg",
+    "brand_id": 1
+  },
+  "store": {
+    "store_id":1,
+    "storename": "Taobao Store",
+    "image": "http://localhost:8000/images/store/taobao.jpg"
+  },
+  "popular": 1
+}
+
+PUT store/product/43
+{
+  "id": "43",
+  "name": "MacBook",
+  "price": "11",
+  "status": 1,
+  "description": "description product",
+  "isCrawler": false,
+  "imageUrl": "http://localhost:8000/images/catalog/demo/headset/headset19.jpg",
+  "crawlPrice": "$.332",
+  "crawlpriceSpecial": "211",
+  "crawldiscountRate": "23",
+  "sourceWebsite": "http://www.google.com",
+  "productLink": "http://localhost:8000/product/product_detail/42",
+  "categories": {
+    "cat_id": "1",
+    "cat_name": "Headphones & Headsets",
+    "cat_alias": "Headphones & Headsets"
+  },
+  "brand": {
+    "brandname": "Petro",
+    "image": "http://localhost:8000/images/store/taobao.jpg",
+    "brand_id": 1
+  },
+  "store": {
+    "store_id":1,
+    "storename": "Taobao Store",
+    "image": "http://localhost:8000/images/store/taobao.jpg"
+  },
+  "popular": 1
+}
+
+PUT store/product/44
+{
+  "id": "44",
+  "name": "MacBook Air",
+  "price": "11",
+  "status": 1,
+  "description": "description product",
+  "isCrawler": false,
+  "imageUrl": "http://localhost:8000/images/catalog/demo/headset/headset20.jpg",
+  "crawlPrice": "$.332",
+  "crawlpriceSpecial": "211",
+  "crawldiscountRate": "23",
+  "sourceWebsite": "http://www.google.com",
+  "productLink": "http://localhost:8000/product/product_detail/42",
+  "categories": {
+    "cat_id": "1",
+    "cat_name": "Headphones & Headsets",
+    "cat_alias": "Headphones & Headsets"
+  },
+  "brand": {
+    "brandname": "Petro",
+    "image": "http://localhost:8000/images/store/taobao.jpg",
+    "brand_id": 1
+  },
+  "store": {
+    "store_id":1,
+    "storename": "Taobao Store",
+    "image": "http://localhost:8000/images/store/taobao.jpg"
+  },
+  "popular": 1
+}
+
+PUT store/product/45
+{
+  "id": "45",
+  "name": "MacBook Pro",
+  "price": "11",
+  "status": 1,
+  "description": "description product",
+  "isCrawler": false,
+  "imageUrl": "http://localhost:8000/images/catalog/demo/headset/headset21.jpg",
+  "crawlPrice": "$.332",
+  "crawlpriceSpecial": "211",
+  "crawldiscountRate": "23",
+  "sourceWebsite": "http://www.google.com",
+  "productLink": "http://localhost:8000/product/product_detail/42",
+  "categories": {
+    "cat_id": "1",
+    "cat_name": "Headphones & Headsets",
+    "cat_alias": "Headphones & Headsets"
+  },
+  "brand": {
+    "brandname": "Petro",
+    "image": "http://localhost:8000/images/store/taobao.jpg",
+    "brand_id": 1
+  },
+  "store": {
+    "store_id":1,
+    "storename": "Taobao Store",
+    "image": "http://localhost:8000/images/store/taobao.jpg"
+  },
+  "popular": 1
+}
+
+PUT store/product/46
+{
+  "id": "46",
+  "name": "Sony VAIO",
+  "price": "11",
+  "status": 1,
+  "description": "description product",
+  "isCrawler": false,
+  "imageUrl": "http://localhost:8000/images/catalog/demo/headset/headset6.jpg",
+  "crawlPrice": "$.332",
+  "crawlpriceSpecial": "211",
+  "crawldiscountRate": "23",
+  "sourceWebsite": "http://www.google.com",
+  "productLink": "http://localhost:8000/product/product_detail/42",
+  "categories": {
+    "cat_id": "1",
+    "cat_name": "Headphones & Headsets",
+    "cat_alias": "Headphones & Headsets"
+  },
+  "brand": {
+    "brandname": "Petro",
+    "image": "http://localhost:8000/images/store/taobao.jpg",
+    "brand_id": 1
+  },
+  "store": {
+    "store_id":1,
+    "storename": "Taobao Store",
+    "image": "http://localhost:8000/images/store/taobao.jpg"
+  },
+  "popular": 1
+}
+
+PUT store/product/47
+{
+  "id": "47",
+  "name": "HP LP3065",
+  "price": "11",
+  "status": 1,
+  "description": "description product",
+  "isCrawler": false,
+  "imageUrl": "http://localhost:8000/images/catalog/demo/headset/headset16.jpg",
+  "crawlPrice": "$.332",
+  "crawlpriceSpecial": "211",
+  "crawldiscountRate": "23",
+  "sourceWebsite": "http://www.google.com",
+  "productLink": "http://localhost:8000/product/product_detail/42",
+  "categories": {
+    "cat_id": "1",
+    "cat_name": "Headphones & Headsets",
+    "cat_alias": "Headphones & Headsets"
+  },
+  "brand": {
+    "brandname": "Petro",
+    "image": "http://localhost:8000/images/store/taobao.jpg",
+    "brand_id": 1
+  },
+  "store": {
+    "store_id":1,
+    "storename": "Taobao Store",
+    "image": "http://localhost:8000/images/store/taobao.jpg"
+  },
+  "popular": 1
+}
+
+PUT store/product/48
+{
+  "id": "48",
+  "name": "iPod Classic",
+  "price": "11",
+  "status": 1,
+  "description": "description product",
+  "isCrawler": false,
+  "imageUrl": "http://localhost:8000/images/catalog/demo/headset/headset22.jpg",
+  "crawlPrice": "$.332",
+  "crawlpriceSpecial": "211",
+  "crawldiscountRate": "23",
+  "sourceWebsite": "http://www.google.com",
+  "productLink": "http://localhost:8000/product/product_detail/42",
+  "categories": {
+    "cat_id": "1",
+    "cat_name": "Headphones & Headsets",
+    "cat_alias": "Headphones & Headsets"
+  },
+  "brand": {
+    "brandname": "Petro",
+    "image": "http://localhost:8000/images/store/taobao.jpg",
+    "brand_id": 1
+  },
+  "store": {
+    "store_id":1,
+    "storename": "Taobao Store",
+    "image": "http://localhost:8000/images/store/taobao.jpg"
+  },
+  "popular": 1
+}
+
+PUT store/product/49
+{
+  "id": "49",
+  "name": "Apple AirPods",
+  "price": "11",
+  "status": 1,
+  "description": "description product",
+  "isCrawler": false,
+  "imageUrl": "http://localhost:8000/images/catalog/demo/headset/headset12.jpg",
+  "crawlPrice": "$.332",
+  "crawlpriceSpecial": "211",
+  "crawldiscountRate": "23",
+  "sourceWebsite": "http://www.google.com",
+  "productLink": "http://localhost:8000/product/product_detail/42",
+  "categories": {
+    "cat_id": "1",
+    "cat_name": "Headphones & Headsets",
+    "cat_alias": "Headphones & Headsets"
+  },
+  "brand": {
+    "brandname": "Petro",
+    "image": "http://localhost:8000/images/store/taobao.jpg",
+    "brand_id": 1
+  },
+  "store": {
+    "store_id":1,
+    "storename": "Taobao Store",
+    "image": "http://localhost:8000/images/store/taobao.jpg"
+  },
+  "popular": 1
+}
