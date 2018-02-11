@@ -55,6 +55,184 @@
 		                            <td data-value="3"><span class="label label-success">{{data.status}}</span>
 		                            </td>
 		                        </tr>
+		                        <!-- <tr>
+		                            <td>#045YU</td>
+		                            <td>2
+		                                <small>item(s)</small>
+		                            </td>
+		                            <td><a target="_blank">-</a></td>
+		                            <td>Bank Wire</td>
+		                           <td>
+		                            	<router-link v-bind:to="'/account/orderstatus'" class="btn btn-primary btn-sm">
+		                            		view detail
+                                		</router-link>
+		                            </td>
+		                            <td>$105</td>
+		                            <td data-value="-100297281571">28 Oct 2014</td>
+		                            <td data-value="1"><span class="label label-primary">Pending</span></td>
+		                        </tr> -->
+		                        <!-- <tr>
+		                            <td>#08UJL</td>
+		                            <td>6
+		                                <small>item(s)</small>
+		                            </td>
+		                            <td><a target="_blank">-</a></td>
+		                            <td><a target="_blank">PayPal</a></td>
+		                           <td>
+		                            	<router-link v-bind:to="'/account/orderstatus'" class="btn btn-primary btn-sm">
+		                            		view detail
+                                		</router-link>
+		                            </td>
+		                            <td><a target="_blank">$550 </a></td>
+		                            <td data-value="370961043292">3 Oct 2014</td>
+		                            <td data-value="2"><span class="label label-success">Done</span></td>
+		                        </tr>
+		                        <tr>
+		                            <td>#09ydo</td>
+		                            <td>1
+		                                <small>item(s)</small>
+		                            </td>
+		                            <td><a target="_blank">-</a></td>
+		                            <td>Paypal</td>
+		                           <td>
+		                            	<router-link v-bind:to="'/account/orderstatus'" class="btn btn-primary btn-sm">
+		                            		view detail
+                                		</router-link>
+		                            </td>
+		                            <td>$34</td>
+		                            <td data-value="-22133780420">19 Apr 2014</td>
+		                            <td data-value="1"><span class="label label-primary">Pending</span></td>
+		                        </tr>
+		                        <tr>
+		                            <td>#EC089</td>
+		                            <td>8
+		                                <small>item(s)</small>
+		                            </td>
+		                            <td><a target="_blank">-</a></td>
+		                            <td>MasterCard</td>
+		                           <td>
+		                            	<router-link v-bind:to="'/account/orderstatus'" class="btn btn-primary btn-sm">
+		                            		view detail
+                                		</router-link>
+		                            </td>
+		                            <td>$1108</td>
+		                            <td data-value="250833505574">13 Dec 2014</td>
+		                            <td data-value="3"><span class="label label-danger">Cancel</span></td>
+		                        </tr>
+		                        <tr>
+		                            <td>#OH746</td>
+		                            <td>4
+		                                <small>item(s)</small>
+		                            </td>
+		                            <td><a target="_blank">-</a></td>
+		                            <td>Bank Wire</td>
+		                           <td>
+		                            	<router-link v-bind:to="'/account/orderstatus'" class="btn btn-primary btn-sm">
+		                            		view detail
+                                		</router-link>
+		                            </td>
+		                            <td>$669</td>
+		                            <td data-value="694116650726">30 Dec 2014</td>
+		                            <td data-value="3"><span class="label label-danger">Cancel</span></td>
+		                        </tr>
+		                        <tr>
+		                            <td>#04628J</td>
+		                            <td>11
+		                                <small>item(s)</small>
+		                            </td>
+		                            <td><a target="_blank">-</a></td>
+		                            <td>Bank Wire</td>
+		                           <td>
+		                            	<router-link v-bind:to="'/account/orderstatus'" class="btn btn-primary btn-sm">
+		                            		view detail
+                                		</router-link>
+		                            </td>
+		                            <td>$400</td>
+		                            <td data-value="561440464855">17 Oct 2014</td>
+		                            <td data-value="2"><span class="label label-default">Disable</span></td>
+		                        </tr>
+		                        <tr>
+		                            <td>#046738</td>
+		                            <td>2
+		                                <small>item(s)</small>
+		                            </td>
+		                            <td><a target="_blank">-</a></td>
+		                            <td><a target="_blank">PayPal</a></td>
+		                           <td>
+		                            	<router-link v-bind:to="'/account/orderstatus'" class="btn btn-primary btn-sm">
+		                            		view detail
+                                		</router-link>
+		                            </td>
+		                            <td>$403</td>
+		                            <td data-value="437400551390">11 Nov 2014</td>
+		                            <td data-value="3"><span class="label label-danger">Cancel</span></td>
+		                        </tr>
+		                        <tr>
+		                            <td>#08CRIS</td>
+		                            <td>3
+		                                <small>item(s)</small>
+		                            </td>
+		                            <td><a target="_blank">-</a></td>
+		                            <td>Paypal</td>
+		                           <td>
+		                            	<router-link v-bind:to="'/account/orderstatus'" class="btn btn-primary btn-sm">
+		                            		view detail
+                                		</router-link>
+		                            </td>
+		                            <td>$105</td>
+		                            <td data-value="-257733999319">1 Nov 2014</td>
+		                            <td data-value="3"><span class="label label-danger">Cancel</span></td>
+		                        </tr>
+		                        <tr>
+		                            <td>#1939HI</td>
+		                            <td>5
+		                                <small>item(s)</small>
+		                            </td>
+		                            <td><a target="_blank">-</a></td>
+		                            <td>MasterCard</td>
+		                           <td>
+		                            	<router-link v-bind:to="'/account/orderstatus'" class="btn btn-primary btn-sm">
+		                            		view detail
+                                		</router-link>
+		                            </td>
+		                            <td><a target="_blank">$550 </a></td>
+		                            <td data-value="362134712000">23 Jun 2014</td>
+		                            <td data-value="1"><a target="_blank"><span class="label label-primary">Pending</span></a>
+		                            </td>
+		                        </tr>
+		                        <tr>
+		                            <td>#518JOK</td>
+		                            <td>1
+		                                <small>item(s)</small>
+		                            </td>
+		                            <td><a target="_blank">-</a></td>
+		                            <td>Bank Wire</td>
+		                           <td>
+		                            	<router-link v-bind:to="'/account/orderstatus'" class="btn btn-primary btn-sm">
+		                            		view detail
+                                		</router-link>
+		                            </td>
+		                            <td>$34</td>
+		                            <td data-value="751149063430">20 Oct 1993</td>
+		                            <td data-value="2"><span class="label label-default">Disable</span></td>
+		                        </tr>
+		                        <tr>
+		                            <td>Isidra</td>
+		                            <td>12
+		                                <small>item(s)</small>
+		                            </td>
+		                            <td><a target="_blank">-</a></td>
+		                            <td>Bank Wire</td>
+
+		                           <td>
+		                            	<router-link v-bind:to="'/account/orderstatus'" class="btn btn-primary btn-sm">
+		                            		view detail
+                                		</router-link>
+		                            </td>
+		                            <td>$1108</td>
+		                            <td data-value="550552096836">13 Jun 1987</td>
+		                            <td data-value="3"><span class="label label-danger">Cancel</span></td>
+		                        </tr> -->
 		                        </tbody>
 		                    </table>
 		                </div>
