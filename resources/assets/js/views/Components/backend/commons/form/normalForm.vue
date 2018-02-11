@@ -58,6 +58,10 @@
 								<div v-if="input.type=='textarea'">
 									<v-text-field v-if="formRules[input.key]" textarea v-model="formDatas[input.key]" :rules='formRules[input.key]' :label="input.text" color="light-blue" required></v-text-field>
 									<v-text-field v-else textarea v-model="formDatas[input.key]" :rules='formRules[input.key]' :label="input.text" color="light-blue"></v-text-field>
+									
+								</div>
+								<div v-if="input.type=='editor'">
+									<vue-editor v-model="formDatas[input.key]"></vue-editor>
 								</div>
 								<div v-if="input.type=='date'">
 									<v-menu
@@ -132,7 +136,8 @@
 			'backUrl'
 		],
 		components:{
-			'breadcrumb3button':breadcrumb3button
+			'breadcrumb3button':breadcrumb3button,
+			//VueEditor
 		},
 		data(){
 			return{
