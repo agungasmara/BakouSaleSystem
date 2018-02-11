@@ -99,9 +99,9 @@
 		            <div class="contentBox">
 		                <div class="w100 costDetails">
 		                    <div class="table-block" id="order-detail-content">
-		                    	<a class="btn btn-primary btn-lg btn-block " title="checkout" href="checkout-0.html" style="margin-bottom:20px"> 
+		                    	<router-link class="btn btn-primary btn-lg btn-block " title="checkout" to="/account/checkout" style="margin-bottom:20px"> 
 		                    		Proceed to checkout &nbsp; <i class="fa fa-arrow-right"></i>
-		                    	</a>
+		                    	</router-link>
 
 		                        <div class="w100 cartMiniTable">
 		                            <table id="cart-summary" class="std table">

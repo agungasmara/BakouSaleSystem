@@ -64,32 +64,31 @@ class CartController extends Controller
     {
         return Cart::UpdateCart($request->all());
     }
-    public function ProductCart(Request $request)
+    public function ProductCart()
     {
-        $input = $request->all();
-        // dd("test");
+      
         $datas['TotalPrices']=0;
-    	// if (Auth::check()) {
-    	// 	$datas['data']=Customer::find(Auth::user()->customer_id)->Cart()->get();
-    	// }else{
-     //        $datas['data']=SessionModel::find(session()->getId())->Cart()->get();
-     //    }
-        // dd($input['session_id']);
-        $datas['session_id']=$input['session_id'];
-        // $datas['data']=SessionModel::find(session()->getId())->Cart()->get();
-        if (Auth::guard('account')->id()) {
-            $datas['data']=DB::table('cart')
-                            ->select('product.*','cart.quantity as cart_quantity')
-                            ->join('product','product.product_id','=','cart.product_id')
-                            ->where('cart.customer_id',Auth::guard('account')->id())
-                            ->get();
-        }else{
-            $datas['data']=DB::table('cart')
-                            ->select('product.*','cart.quantity as cart_quantity')
-                            ->join('product','product.product_id','=','cart.product_id')
-                            ->where('cart.session_id',$input['session_id'])
-                            ->get();
+    	if (Auth::guard('account')->check()) {
+    		$datas['data']=Customer::find(Auth::guard('account')->id())->Cart()->get();
+    	}else{
+            $datas['data']=SessionModel::find(session()->getId())->Cart()->get();
         }
+        // dd($input['session_id']);
+        // $datas['session_id']=$input['session_id'];
+        // $datas['data']=SessionModel::find(session()->getId())->Cart()->get();
+        // if (Auth::guard('account')->id()) {
+        //     $datas['data']=DB::table('cart')
+        //                     ->select('product.*','cart.quantity as cart_quantity')
+        //                     ->join('product','product.product_id','=','cart.product_id')
+        //                     ->where('cart.customer_id',Auth::guard('account')->id())
+        //                     ->get();
+        // }else{
+        //     $datas['data']=DB::table('cart')
+        //                     ->select('product.*','cart.quantity as cart_quantity')
+        //                     ->join('product','product.product_id','=','cart.product_id')
+        //                     ->where('cart.session_id',$input['session_id'])
+        //                     ->get();
+        // }
 
         foreach ($datas['data'] as $key => $value) {
             $value->name=ProductDescription::find($value->product_id)->value('name');
@@ -151,7 +150,19 @@ class CartController extends Controller
         $request['date_added']=date('Y-m-d');
         $request['date_modified']=date('Y-m-d');
         $request['total']=$this->ProductCart()['TotalPrices'];
-
+        if (isset($request['payment_country_id']) && $request['payment_country_id']) {
+            $request['payment_country']=Country::find($request['payment_country_id'])->value('name');
+        }
+        if (isset($request['payment_zone_id']) && $request['payment_zone_id']) {
+            $request['payment_zone']=Zone::find($request['payment_zone_id'])->value('name');
+        }
+        if (isset($request['shipping_country_id']) && $request['shipping_country_id']) {
+            $request['shipping_country']=Country::find($request['shipping_country_id'])->value('name');
+        }
+        if (isset($request['shipping_zone_id']) && $request['shipping_zone_id']) {
+            $request['shipping_zone']=Zone::find($request['shipping_zone_id'])->value('name');
+        }
+        
 
         // return $request;
 

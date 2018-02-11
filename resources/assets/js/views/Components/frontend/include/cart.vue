@@ -35,12 +35,12 @@
 
 	     <div class="miniCartFooter text-right" v-if="CartProduct.products.TotalPrices">
 	        <h3 class="text-right subtotal"> Total: $ {{CartProduct.products.TotalPrices}} </h3>
-	        <router-link to="/account/cartview" class="btn btn-sm btn-danger">
+	        <a href="/account/cartview" class="btn btn-sm btn-danger">
               <i class="fa fa-shopping-cart"> </i> VIEW CART 
-            </router-link>	  
-             <router-link to="/account/checkout" class="btn btn-sm btn-primary">
+            </a>	  
+             <a href="/account/checkout" class="btn btn-sm btn-primary">
                CHECKOUT
-            </router-link>	        
+            </a>	        
 	    </div>  
 	</div>
 </template>

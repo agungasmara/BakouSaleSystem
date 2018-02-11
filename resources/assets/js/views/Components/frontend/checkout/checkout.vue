@@ -473,7 +473,7 @@ export default {
 
 							data:[
 								{key:'payment_country_id',type:'select',label:'Country',value:'Select Country',item:'country',change:'payment_zone'},
-								{key:'payment_city',type:'select',label:'City',value:'Select City',item:'country'},
+								{key:'payment_city',type:'text',label:'City',value:'City'},
 								{key:'payment_zone_id',type:'select',label:'State',value:'Select State',item:'payment_zone'},
 								{key:'payment_postcode',type:'text',label:'Zip / Postal Code',Value:'Zip / Postal Code'},
 								{key:'payment_custom_field',type:'textarea',label:'Additional information',Value:'Additional information'},
@@ -504,7 +504,7 @@ export default {
 							class:'col-xs-12 col-sm-6',
 							data:[
 								{key:'shipping_country',type:'select',label:'Country',value:'Select Country',item:'country',change:'shipping_zone'},
-								{key:'shipping_city',type:'select',label:'City',value:'Select City',item:'country'},
+								{key:'shipping_city',type:'text',label:'City',value:'City'},
 								{key:'shipping_zone',type:'select',label:'State',value:'Select State',item:'shipping_zone'},
 								{key:'shipping_postcode',type:'text',label:'Zip / Postal Code',Value:'Zip / Postal Code'},
 								{key:'shipping_custom_field',type:'textarea',label:'Additional information',Value:'Additional information'},
