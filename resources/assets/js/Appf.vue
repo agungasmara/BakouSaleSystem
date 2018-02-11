@@ -146,41 +146,45 @@
             <!--/.navbar-cart-->
 
             <div class="navbar-collapse collapse">
-                <ul v-if="posts && posts.length" class="nav navbar-nav">
+                <template v-if="posts && posts.length">
+                    <ul class="nav navbar-nav">
 
-                    <!-- <li class="active"><a href="/"> nAME </a></li> -->
-                   
-                    <li v-for="post of posts" class="dropdown megamenu-fullwidth" v-if="post['categories']">
-                        <router-link data-toggle="dropdown" class="dropdown-toggle" to="/">
-                        {{post.name}} 
-                        <span><b class="caret"> </b> </span>
-                        </router-link>
-                        <ul  v-for="cat of post['categories']" class="dropdown-menu">
-                            <li class="megamenu-content ProductDetailsList">
-                                <!-- <h3 class="promo-1 no-margin hidden-xs">60 + HTML PAGES || AVAILABLE ONLY AT WRAP
-                                    BOOTSTRAP </h3>
+                        <!-- <li class="active"><a href="/"> nAME </a></li> -->
+                       
+                        <li v-for="post of posts" class="dropdown megamenu-fullwidth" v-if="post['categories']">
+                            <router-link data-toggle="dropdown" class="dropdown-toggle" to="/">
+                            {{post.name}} 
+                            <span><b class="caret"> </b> </span>
+                            </router-link>
+                            
+                            <ul class="dropdown-menu">
+                                <li class="megamenu-content ProductDetailsList">
+                                    <template v-for="cat of post['categories']">
+                                    <!-- <h3 class="promo-1 no-margin hidden-xs">60 + HTML PAGES || AVAILABLE ONLY AT WRAP
+                                        BOOTSTRAP </h3>
 
-                                <h3 class="promo-1sub hidden-xs"> Complete Parallax E-Commerce Boostrap Template, Responsive
-                                    on any Device, 10+ color Theme + Parallax Effect </h3> -->
-                                <ul class="col-lg-2  col-sm-2 col-md-2 unstyled">
-                                    <li class="no-border">
-                                        <p><strong> {{cat.name}} </strong></p>
-                                    </li>
-                                    <li v-for="child of cat['children']">
-                                        <router-link v-bind:to="child.href">
-                                          {{child.name}}
-                                        </router-link>
-                                    </li>
+                                    <h3 class="promo-1sub hidden-xs"> Complete Parallax E-Commerce Boostrap Template, Responsive
+                                        on any Device, 10+ color Theme + Parallax Effect </h3> -->
+                                        <ul class="col-lg-2  col-sm-2 col-md-2 unstyled">
+                                            <li class="no-border">
+                                                <p><strong> {{cat.name}} </strong></p>
+                                            </li>
+                                            <li v-for="child of cat['children']">
+                                                <router-link v-bind:to="child.href">
+                                                  {{child.name}}
+                                                </router-link>
+                                            </li>
 
-                                </ul>
-
-                            </li>
-                        </ul>
-                    </li>
-                    <li v-else>
-                        <a href="">{{post.name}}</a>
-                    </li>
-                </ul>
+                                        </ul>
+                                    </template>
+                                </li>
+                            </ul>
+                        </li>
+                        <li v-else>
+                            <a href="">{{post.name}}</a>
+                        </li>
+                    </ul>
+                </template>
 
 
                 <!--- this part will be hidden for mobile version -->
