@@ -73,12 +73,17 @@
 				<v-text-field v-else :label="input.text" v-model="formDatas[input.key]" :counter="input.count"></v-text-field>
 			</div>
 			<div v-if="input.type=='checkbox'">
-				<v-checkbox
-		        :label="input.text"
-		        v-model="formDatas[input.key]"
-		        :rules="formRules[input.key]"
-		        required
-		    ></v-checkbox>
+				<v-checkbox v-if="formRules[input.key]"
+			        :label="input.text"
+			        v-model="formDatas[input.key]"
+			        :rules="formRules[input.key]"
+			        required
+			    ></v-checkbox>
+			    <v-checkbox v-else
+			        :label="input.text"
+			        v-model="formDatas[input.key]"
+			        :rules="formRules[input.key]"
+			    ></v-checkbox>
 			</div>
 			<div v-if="input.type=='text'">
 				<v-text-field v-if="formRules[input.key]" :label="input.text" :rules='formRules[input.key]' v-model="formDatas[input.key]" :counter="input.count" required></v-text-field>

@@ -11,7 +11,11 @@ class InformationDescription extends Model
 	protected $fillable=[
 		'information_id',
 		'language_id',
-		'name'
+		'title',
+		'meta_title',
+		'description',
+		'meta_description',
+		'meta_keyword'
 	];
 	public $timestamps=false;
 }

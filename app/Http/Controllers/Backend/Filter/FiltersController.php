@@ -29,7 +29,7 @@ class FiltersController extends Controller
         $FilterDesc=$request->only($FilterDesc);
         
         //condition to check if Filter value is already existed
-        $filterGroup=[
+        $FilterDescCond=[
             'name'=>$request->name
         ];
         
@@ -43,7 +43,7 @@ class FiltersController extends Controller
             $FilterDesc['filter_id'] = $saveFilter['filter_id'];
 
             //return success message if data have been successfully save to database
-            return (new DataAction)->StoreData(FilterDescription::class,[],"",$FilterDesc); 
+            return (new DataAction)->StoreData(FilterDescription::class,$FilterDescCond,"",$FilterDesc); 
 
         }else{
 

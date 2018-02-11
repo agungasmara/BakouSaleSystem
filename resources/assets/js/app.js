@@ -253,8 +253,9 @@ import BackendInformationList from './views/Components/backend/informations/Info
 import BackendInformationForm from './views/Components/backend/informations/InformationForm.vue'
 import BackendInformationEdit from './views/Components/backend/informations/InformationEdit.vue'
 
+
 // //***** ProductAttribute*****
-// import ProductAttribute from './views/Components/backend/products/attributes/ProductAttribute.vue'
+import productAttr from './views/Components/backend/products/attribute_groups/ProductAttribute.vue'
 // import ProductAttributeList from './views/Components/backend/products/attributes/ProductAttributeList.vue'
 // import ProductAttributeForm from './views/Components/backend/products/attributes/ProductAttributeForm.vue'
 // import ProductAttributeEdit from './views/Components/backend/products/attributes/ProductAttributeEditForm.vue'
@@ -1129,6 +1130,9 @@ const router = new VueRouter({
                 props:true
             }
         ]       
+    },
+    {
+      path:'/admin/test',name:'test',component:productAttr
     }
   ],
   scrollBehavior (to, from, savedPosition) {

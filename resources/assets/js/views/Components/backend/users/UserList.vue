@@ -43,7 +43,6 @@
 			        { text: 'First Name',align:'left',class:'text-xs-left', value: 'firstname' },
 			        { text: 'Last Name',align:'left',class:'text-xs-left', value: 'lastname' },
 			        { text: 'Email',align:'left',class:'text-xs-left', value: 'email' },
-			        { text: 'Code',align:'left',class:'text-xs-left', value: 'code' },
 			        { text: 'Image',align:'left',class:'text-xs-left', value: 'image' },
 			        { text: 'Status',align:'left',class:'text-xs-left', value: 'status' },
 			        { text: 'Date',align:'left',class:'text-xs-left', value: 'date_added' },
