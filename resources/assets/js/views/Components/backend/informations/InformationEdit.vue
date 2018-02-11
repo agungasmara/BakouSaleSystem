@@ -25,49 +25,68 @@
 		},
 		data(){
 			return{
-				url:'/api/weights/',
+				url:'/api/informations/',
 				e1:true,
 				valid: true,
 			    group:[
-					{	class:'xs12 sm6 md6',	 key:'value',	type:'number',	 text:'value',count:50	},
-					{	class:'xs12 sm6 md6',	 key:'unit',	type:'text',text:'Unit',count:5	},
-					{	class:'xs12 sm6 md6',	 key:'language_id',	type:'select',	 text:'Language',count:0,items:'languageItems'	},
-					{	class:'xs12 sm6 md6',	 key:'title',	type:'text',	 text:'Description',count:100	}
+			    	{	class:'xs12 sm3 md3',	 key:'language_id',	type:'select',	 text:'Language',count:0,items:'languageItems'	},
+					{	class:'xs12 sm9 md9',	 key:'title',	type:'text',	 text:'Information Title',count:100	},
+					{	class:'xs12 sm12 md12',	 key:'description',	type:'textarea',text:'Description',count:1000	},
+					{	class:'xs12 sm12 md12',	 key:'meta_title',	type:'text',	 text:'Meta Tag Title',count:100	},
+					{	class:'xs12 sm12 md12',	 key:'meta_description',	type:'textarea',text:'Meta Tag Description'	},
+					{	class:'xs12 sm12 md12',	 key:'meta_keyword',	type:'textarea',text:'Meta Tag Keyword'	},
+					{	class:'xs12 sm12 md12',	 key:'store_id',	type:'checkbox',	 text:'Dfault Store',count:0	},
+					{	class:'xs12 sm12 md12',	 key:'bottom',	type:'checkbox',	 text:'Bottom',count:0	},
+					{	class:'xs12 sm6 md6',	 key:'status',	type:'select',	 text:'Status',count:0,items:'statusItem'	},
+					{	class:'xs12 sm6 md6',	 key:'sort_order',	type:'text',	 text:'Sort Order',count:100	},
+					{	class:'xs12 sm12 md12',	 key:'keyword',	type:'text',	 text:'Keyword',count:100	},
+					{	class:'xs12 sm12 md12',	 key:'layout_id',	type:'select',	 text:'Layout',count:0,items:'layoutItem'	},
 				],
 				rules:{
 					title: [
 				      (v) => !!v || 'Title is required',
 				      (v) => v && v.length <= 100 || 'Title must be less than 100 characters'
 				    ],
-				    value: [
-				      (v) => !!v || 'Value is required',
-				      (v) => v && v.length <= 50 || 'Value must be less than 50 characters'
+				    description: [
+				      (v) => !!v || 'Description is required',
+				      (v) => v && v.length <= 1000 || 'Description must be less than 10 characters'
 				    ],
-				    unit: [
-				      (v) => !!v || 'Unit is required',
-				      (v) => v && v.length <= 5 || 'Unit must be less than 5 characters'
+				    meta_title: [
+				      (v) => !!v || 'Meta Tag Title is required',
+				      (v) => v && v.length <= 5 || 'Meta Tag Title must be less than 5 characters'
 				    ],
 				    language_id:[
 				      (v) => !!v || 'Language Requied is required'
 				    ]
 				},
 				data:{
-					title:' ',
-					language_id:'',
-					unit: '',
-					value:'',
+					store_id:0,
+					status:1,
+					title:'test',
+					language_id:1,
+					description:'test',
+					meta_description:'desc',
+					meta_keyword:'key',
+					meta_title:'test',
+					bottom:1
 				},
 				select:{
-					languageItems:[]
+					languageItems:[],
+					layoutItem:[],
+					statusItem:[
+						{value:0,text:'Inactive'},
+						{value:1,text:'Active'}
+					]
+
 				},
-				breadcrumbTitle:'Weights',
+				breadcrumbTitle:'Information',
 				breadcrumbs: [
 			        {
 			          text: 'Administrator',
 			          disabled: false
 			        },
 			        {
-			          text: 'Weights',
+			          text: 'Information',
 			          disabled: false
 			        },
 			        {
@@ -75,13 +94,14 @@
 			          disabled: true
 			        }
 			    ],
-			    backUrl:'/admin/weights/list',
+			    backUrl:'/admin/informations/list',
 			}
 		},
 		created(){
 			this.dataID=this.id
 			this.fetchData(this.id)
 			this.getLanguage()
+			this.getLayout()
 		},
 		methods:{
 			fetchData(id){
@@ -93,6 +113,11 @@
 			getLanguage(){
 				axios.get('/api/getLanguage').then((res)=>{
 					this.select.languageItems=res.data
+				})
+			},
+			getLayout(){
+				axios.get('/api/getLayout').then((res)=>{
+					this.select.layoutItem=res.data
 				})
 			}
 		}

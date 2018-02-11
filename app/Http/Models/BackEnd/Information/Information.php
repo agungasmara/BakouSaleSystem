@@ -45,10 +45,12 @@ class Information extends Model
                 ->select(
                 	'inf.information_id',
                 	'desc.title',
-                	'language.name as language',
+                	'language.language_id',
                 	'inf.sort_order',
                 	'inf.bottom',
                 	'inf.status',
+                	'store.store_id',
+                	'inflayout.layout_id',
                 	'desc.description',
                 	'desc.meta_title',
                 	'desc.meta_description',

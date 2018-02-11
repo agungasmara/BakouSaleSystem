@@ -125,14 +125,6 @@
 			},
 			fetchData(id){
 				axios.get(this.url+id+'/edit').then((res)=>{
-					// this.data.user_group_id=res.data.user_group_id
-					// this.data.username=res.data.username
-					// this.data.firstname=res.data.firstname
-					// this.data.lastname=res.data.lastname
-					// this.data.email=res.data.email
-					// this.data.code=res.data.code
-					// this.data.status=res.data.status
-					// this.data.image=res.data.image
 					this.data=res.data
 				})
 			},

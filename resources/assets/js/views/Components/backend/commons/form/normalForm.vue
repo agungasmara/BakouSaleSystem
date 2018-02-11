@@ -9,112 +9,151 @@
 			v-bind:back-url="backUrl"
 			></breadcrumb3button>
 		<!--breadcrumbs end-->
+		<div id="basic-form" class="section">
+            <div class="row col s12">
+            	<div class="container">
+					<!-- Form with placeholder -->
+					<div class="col s12 m12 l12">
+	                	<div class="_card-panel">
+	                  		<div class="container">
+
+	                  			<v-form v-model="valid" ref="form" lazy-validation>
+									<v-alert color="success" value='true' v-if="flash.success">
+							          	{{flash.success}}
+							      	</v-alert>
+							      	<v-alert color="error" value='true' v-if="flash.error">
+							          	{{flash.error}}
+							      	</v-alert>
+							      	<div class="row">
+					        			<v-container grid-list-md>
+					          			
+					          				<div class="col s12 m12 l3">
+					                    		<div class="row">
+						                    		<h4  class="header"> {{ breadcrumbTitle }} </h4>
+						                    		<div>
+						                    			Set up your {{breadcrumbTitle.replace('Edit','')}} here
+						                    		</div>
+					                    		</div>
+					                    	</div>
+					                    	<div class="col s12 m12 l6">
+					                    		<v-layout row wrap>
+						          				<v-flex v-for="input in formItems" :key="input.key" :class="input.class">
+							      					<div v-if="input.type=='select'">
+														<v-select :label="input.text"  :rules="formRules[input.key]" v-model="formDatas[input.key]" :items="selectItems[input.items]" required></v-select>
+							      					</div>
+							      					<div v-if="input.type=='multiple'">
+							      						<v-select :label="input.text"  :rules="formRules[input.key]" v-model="formDatas[input.key]" :items="selectItems[input.items]" autocomplete :loading="loading" multiple cache-items chips required :search-input.sync="search"></v-select>
+							      					</div>
+							      					
+													<div v-if="input.type=='password'">
+														<v-text-field  label="Confirm Password" v-model="formDatas[input.key]" name="confirmpassword" :rules="formRules[input.key]" required :append-icon="e1 ? 'visibility' : 'visibility_off'" :append-icon-cb="() => (e1 = !e1)" :type="e1 ? 'password' : 'text'"></v-text-field>
+													</div>
+													<div v-if="input.type=='textarea'">
+														<v-text-field v-if="formRules[input.key]" textarea v-model="formDatas[input.key]" :rules='formRules[input.key]' :label="input.text" color="light-blue" required></v-text-field>
+														<v-text-field v-else textarea v-model="formDatas[input.key]" :rules='formRules[input.key]' :label="input.text" color="light-blue"></v-text-field>
+														
+													</div>
+													<!-- <div v-if="input.type=='editor'">
+														<vue-editor v-model="formDatas[input.key]"></vue-editor>
+													</div> -->
+													<div v-if="input.type=='date'">
+														<v-menu
+												          lazy
+												          :close-on-content-click="false"
+												          v-model="selectItems[input.menu]"
+												          transition="scale-transition"
+												          offset-y
+												          full-width
+												          :nudge-right="40"
+												          max-width="290px"
+												          min-width="290px"
+												        >
+												          <v-text-field
+												            slot="activator"
+												            label="Picker in menu"
+												            v-model="formDatas[input.key]"
+												            prepend-icon="event"
+												            readonly
+												          ></v-text-field>
+												          <v-date-picker v-model="formDatas[input.key]" no-title scrollable actions>
+												            <template slot-scope="{ save, cancel }">
+												              <v-card-actions>
+												                <v-spacer></v-spacer>
+												                <v-btn flat color="primary" @click="cancel">Cancel</v-btn>
+												                <v-btn flat color="primary" @click="save">OK</v-btn>
+												              </v-card-actions>
+												            </template>
+												          </v-date-picker>
+												        </v-menu>
+													</div>
+													<div v-if="input.type=='number'">
+							      						<v-text-field type="number" v-if="formRules[input.key]" :label="input.text" :rules='formRules[input.key]' v-model="formDatas[input.key]" :counter="input.count" required></v-text-field>
+														<v-text-field v-else :label="input.text" v-model="formDatas[input.key]" :counter="input.count"></v-text-field>
+							      					</div>
+							      					<div v-if="input.type=='checkbox'">
+							      						<v-checkbox v-if="formRules[input.key]"
+													        :label="input.text"
+													        v-model="formDatas[input.key]"
+													        :rules="formRules[input.key]"
+													        required
+													    ></v-checkbox>
+													    <v-checkbox v-else
+													        :label="input.text"
+													        v-model="formDatas[input.key]"
+													        :rules="formRules[input.key]"
+													    ></v-checkbox>
+							      					</div>
+							      					<div v-if="input.type=='text'">
+							      						<v-text-field v-if="formRules[input.key]" :label="input.text" :rules='formRules[input.key]' v-model="formDatas[input.key]" :counter="input.count" required></v-text-field>
+														<v-text-field v-else :label="input.text" v-model="formDatas[input.key]" :counter="input.count"></v-text-field>
+							      					</div>
+							      				</v-flex>
+							      			</v-layout>
+							      			</div>
+									    	<div class="col s12 m12 l3" v-for="input in formItems" :key="input.key" v-if="input.type=='image'">
+					                    	
+					                    		<div class="row">
+						                    		<h4 class="header">
+							                    	<center> Upload Image </center>
+							                    	</h4>
+							                    		
+								                    	<div >
+															<input type="file" id="fileInput"  style="display:none" ref="fileInput" accept="image/*" @change="onFilePicked">
+															<v-layout align-center justify-center >
+																<label for="fileInput" style="width: auto;min-width:200px;max-width:500px;min-height:200px;height:auto;max-height: 300px;" >
+																	
+																		<v-card style="height: auto;max-height: 200px;padding: 10px;" v-if="formDatas[input.key]" @click="onPickFile">
+																			<v-badge color="red" overlap v-if="formDatas[input.key]">
+																				<v-btn  style="border-radius: 0px; margin-right: -20px; margin-top: -15px; height: 25px; width:50px; position: absolute; cursor: pointer; position: relative; opacity: 0.7; font-size: 8px;" @click="clearImage">
+																					Remove
+																				</v-btn>
+																			</v-badge>
+																			<v-layout align-center justify-center>
+																				<img :src="formDatas[input.key]" style="height:auto;max-height:200px;width: auto;margin-right:-110px;margin-top:-10px;"  @click="onPickFile">
+																			</v-layout>
+																		</v-card>
+																		
+																		<v-card style="height: 200px;" v-if="!formDatas[input.key]" @click="onPickFile">
+																			<v-layout align-center justify-center style="margin-top:75px;">
+																				<v-icon dark color="blue" x-large>backup</v-icon>
+																			</v-layout>
+																		</v-card>
+																</label>
+															</v-layout>
+														</div>
+						                    	</div>
+						                    </div>
+										</v-container>
+									</div>
+							    </v-form>
+
+	                  		</div>
+	                    </div>
+	                </div>
+	            </div>
+            </div>
+        </div>
 		
-		<v-form v-model="valid" ref="form" lazy-validation>
-			<v-alert color="success" value='true' v-if="flash.success">
-	          	{{flash.success}}
-	      	</v-alert>
-	      	<v-alert color="error" value='true' v-if="flash.error">
-	          	{{flash.error}}
-	      	</v-alert>
-	      	<v-card flat>
-	        	<v-card-text>
-	        		<v-container grid-list-md offset-s3>
-	          			<v-layout wrap>
-	          				<v-flex v-for="input in formItems" :key="input.key" :class="input.class">
-		      					<div v-if="input.type=='select'">
-									<v-select :label="input.text"  :rules="formRules[input.key]" v-model="formDatas[input.key]" :items="selectItems[input.items]" required></v-select>
-		      					</div>
-		      					<div v-if="input.type=='multiple'">
-		      						<v-select :label="input.text"  :rules="formRules[input.key]" v-model="formDatas[input.key]" :items="selectItems[input.items]" autocomplete :loading="loading" multiple cache-items chips required :search-input.sync="search"></v-select>
-		      					</div>
-		      					<div v-if="input.type=='image'">
-									<input type="file" id="fileInput"  style="display:none" ref="fileInput" accept="image/*" @change="onFilePicked">
-									<v-layout align-center justify-center >
-										<label for="fileInput" style="width: auto;min-width:200px;max-width:500px;min-height:200px;height:auto;max-height: 300px;" >
-											
-												<v-card style="height: auto;max-height: 200px;padding: 10px;" v-if="formDatas[input.key]" @click="onPickFile">
-													<v-badge color="red" overlap v-if="formDatas[input.key]">
-														<v-btn  style="border-radius: 0px; margin-right: -20px; margin-top: -15px; height: 25px; width:50px; position: absolute; cursor: pointer; position: relative; opacity: 0.7; font-size: 8px;" @click="clearImage">
-															Remove
-														</v-btn>
-													</v-badge>
-													<v-layout align-center justify-center>
-												    	<img :src="formDatas[input.key]" style="height:auto;max-height:200px;width: auto;margin-right:-110px;margin-top:-10px;"  @click="onPickFile">
-													</v-layout>
-												</v-card>
-												
-												<v-card style="height: 200px;" v-if="!formDatas[input.key]" @click="onPickFile">
-													<v-layout align-center justify-center style="margin-top:75px;">
-												    	<v-icon dark color="blue" x-large>backup</v-icon>
-													</v-layout>
-												</v-card>
-										</label>
-									</v-layout>
-								</div>
-								<div v-if="input.type=='password'">
-									<v-text-field  label="Confirm Password" v-model="formDatas[input.key]" name="confirmpassword" :rules="formRules[input.key]" required :append-icon="e1 ? 'visibility' : 'visibility_off'" :append-icon-cb="() => (e1 = !e1)" :type="e1 ? 'password' : 'text'"></v-text-field>
-								</div>
-								<div v-if="input.type=='textarea'">
-									<v-text-field v-if="formRules[input.key]" textarea v-model="formDatas[input.key]" :rules='formRules[input.key]' :label="input.text" color="light-blue" required></v-text-field>
-									<v-text-field v-else textarea v-model="formDatas[input.key]" :rules='formRules[input.key]' :label="input.text" color="light-blue"></v-text-field>
-									
-								</div>
-								<div v-if="input.type=='editor'">
-									<vue-editor v-model="formDatas[input.key]"></vue-editor>
-								</div>
-								<div v-if="input.type=='date'">
-									<v-menu
-							          lazy
-							          :close-on-content-click="false"
-							          v-model="selectItems[input.menu]"
-							          transition="scale-transition"
-							          offset-y
-							          full-width
-							          :nudge-right="40"
-							          max-width="290px"
-							          min-width="290px"
-							        >
-							          <v-text-field
-							            slot="activator"
-							            label="Picker in menu"
-							            v-model="formDatas[input.key]"
-							            prepend-icon="event"
-							            readonly
-							          ></v-text-field>
-							          <v-date-picker v-model="formDatas[input.key]" no-title scrollable actions>
-							            <template slot-scope="{ save, cancel }">
-							              <v-card-actions>
-							                <v-spacer></v-spacer>
-							                <v-btn flat color="primary" @click="cancel">Cancel</v-btn>
-							                <v-btn flat color="primary" @click="save">OK</v-btn>
-							              </v-card-actions>
-							            </template>
-							          </v-date-picker>
-							        </v-menu>
-								</div>
-								<div v-if="input.type=='number'">
-		      						<v-text-field type="number" v-if="formRules[input.key]" :label="input.text" :rules='formRules[input.key]' v-model="formDatas[input.key]" :counter="input.count" required></v-text-field>
-									<v-text-field v-else :label="input.text" v-model="formDatas[input.key]" :counter="input.count"></v-text-field>
-		      					</div>
-		      					<div v-if="input.type=='checkbox'">
-		      						<v-checkbox
-								        :label="input.text"
-								        v-model="formDatas[input.key]"
-								        :rules="formRules[input.key]"
-								        required
-								    ></v-checkbox>
-		      					</div>
-		      					<div v-if="input.type=='text'">
-		      						<v-text-field v-if="formRules[input.key]" :label="input.text" :rules='formRules[input.key]' v-model="formDatas[input.key]" :counter="input.count" required></v-text-field>
-									<v-text-field v-else :label="input.text" v-model="formDatas[input.key]" :counter="input.count"></v-text-field>
-		      					</div>
-		      				</v-flex>
-					    </v-layout>
-					</v-container>
-	        	</v-card-text>
-	      	</v-card>
-	    </v-form>
 	</v-app>
 </template>
 
