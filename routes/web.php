@@ -169,6 +169,11 @@ if (Request::is('admin*')){
     Route::get('/{any?}','FrontEnd\Product\FrontEndController@index')->where(['any'=>'.*']);
 }
 
+// Backend
+//=====Shipment=============================
+Route::resource('/api/getShipment','Backend\Shipment\ShipmentController');
+
+// Front End
 Route::post('/AddToCart','FrontEnd\Product\CartController@AddToCart');
 Route::post('/RemoveFromCart','FrontEnd\Product\CartController@RemoveFromCart');
 Route::post('/UpdateCart','FrontEnd\Product\CartController@UpdateCart');

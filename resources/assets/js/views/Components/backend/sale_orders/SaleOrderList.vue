@@ -11,7 +11,7 @@
 			<div id="breadcrumbs-wrapper">
 				<!-- Search for small screen -->
 				<div class="header-search-wrapper grey lighten-2 hide-on-large-only">
-				  <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize">
+					<input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize">
 				</div>
 				<div class="row container">
 				  <div class="container">
@@ -25,7 +25,7 @@
 			      		</v-breadcrumbs>
 				    </div>
 				    <div class="col s2 m6 l6">
-				     	<router-link to="/admin/sale_order/add" replace><v-btn class="btn dropdown-settings waves-effect waves-light breadcrumbs-btn right" color="success">Test Edit</v-btn></router-link>
+				     	<router-link to="/admin/sale_order/add" replace><v-btn class="btn dropdown-settings waves-effect waves-light breadcrumbs-btn right" color="primary">New Order</v-btn></router-link>
 				    	<router-link to="/admin/sale_order/list" replace><v-btn color="primary" class="btn dropdown-settings breadcrumbs-btn right"><i class="material-icons">print</i> &nbsp;Print</v-btn></router-link>
 				    	<router-link to="/admin/sale_order/list" replace><v-btn color="primary" class="btn dropdown-settings breadcrumbs-btn right"><i class="material-icons">print</i> &nbsp;Print Shipping</v-btn></router-link>
 				    </div>
@@ -34,42 +34,42 @@
 			</div>
 			<!--breadcrumbs end-->
 
-			<v-form v-model="valid" ref="form" lazy-validation>
+			<v-form ref="form" lazy-validation>
 		    	<v-container grid-list-md>
           			<v-layout wrap>
+
+          				<v-flex xs12 sm3 md3>
+				      		<v-text-field label="Tracking No"></v-text-field>
+				      	</v-flex>
+
 				    	<v-flex xs12 sm3 md3>
-				      		<v-text-field label="Code" v-model="code" :rules="codeRules"></v-text-field>
+				      		<v-text-field label="Order No"></v-text-field>
 				      	</v-flex>
 
 				      	<v-flex xs12 sm3 md3>
-				      		<v-text-field label="Code" v-model="code" :rules="codeRules"></v-text-field>
+				      		<v-text-field label="Resellers"></v-text-field>
 				      	</v-flex>
 
 				      	<v-flex xs12 sm3 md3>
-				      		<v-text-field label="Code" v-model="code" :rules="codeRules"></v-text-field>
+				      		<v-text-field label="Customers"></v-text-field>
 				      	</v-flex>
 
 				      	<v-flex xs12 sm3 md3>
-				      		<v-text-field label="Code" v-model="code" :rules="codeRules"></v-text-field>
+				      		<v-text-field label="Date Added"></v-text-field>
 				      	</v-flex>
 
 				      	<v-flex xs12 sm3 md3>
-				      		<v-text-field label="Code" v-model="code" :rules="codeRules"></v-text-field>
+				      		<v-text-field label="Order Status"></v-text-field>
 				      	</v-flex>
 
 				      	<v-flex xs12 sm3 md3>
-				      		<v-text-field label="Code" v-model="code" :rules="codeRules"></v-text-field>
+				      		<v-text-field label="Shipping ID"></v-text-field>
 				      	</v-flex>
 
-				      	<v-flex xs12 sm3 md3>
-				      		<v-text-field label="Code" v-model="code" :rules="codeRules"></v-text-field>
+				      	<v-flex xs12 sm12 md12 p-right>
+				      		<v-btn color="primary" class="btn dropdown-settings breadcrumbs-btn right">Filter</v-btn>
 				      	</v-flex>
-
-				      	<v-flex xs12 sm3 md3>
-				      		<v-text-field label="Code" v-model="code" :rules="codeRules"></v-text-field>
-				      	</v-flex>
-
-				      	<v-btn color="primary" class="btn dropdown-settings breadcrumbs-btn right">Filter</v-btn>
+				      	
 				    </v-layout>
 				</v-container>
 			</v-form>

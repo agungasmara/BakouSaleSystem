@@ -49,7 +49,7 @@ class SettingConfig
         foreach ($SettingConfig as $key => $value) {
             define($value->key, $value->value);
         }
-
+        
         if(!Session::get('applangId')){
             session(['applangId' => config_language]);
         }

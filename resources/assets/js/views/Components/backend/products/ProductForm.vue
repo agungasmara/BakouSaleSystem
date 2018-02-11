@@ -327,9 +327,9 @@
 				        	if(res.data.success==true){
 				        		Flash.setSuccess(res.data.message)
 				        		this.$refs.form.reset()
-				        		if(opt==2){
-				        			this.$router.push(this.backUrl)
-				        		}
+				        		// if(opt==2){
+				        			this.$router.push(this.back)
+				        		// }
 				        	}else{
 				        		Flash.setError(res.data.message)
 				        	}
@@ -348,9 +348,9 @@
 				        	console.log(res.data)
 				        	if(res.data.success==true){
 				        		Flash.setSuccess(res.data.message)
-				        		if(opt==2){
-				        			this.$router.push(this.backUrl)
-				        		}
+				        		// if(opt==2){
+				        			this.$router.push(this.back)
+				        		// }
 				        	}else{
 				        		Flash.setError(res.data.message)
 				        	}
