@@ -49,8 +49,8 @@
 		                  
 		                  <div class="container">
 		                    <v-form v-model="valid" ref="form" lazy-validation>
-			                    <div v-for="item in section">
-			                    	<!-- /start -->
+			                    <!-- <div v-for="item in section">
+			                    	
 			                    	<div class="row">
 				                    	<div class="col s12 m12 l3">
 				                    		<div class="row">
@@ -67,19 +67,12 @@
 					                      		<h4 class="header"><i class="material-icons text-left"> {{item.icon}} </i> {{item.title}} </h4>
 					                      		<div class="divider"></div>
 											    <v-layout row wrap>
-											    	<!-- <v-flex v-for="column in rows[item.form]" :class="column.class">
+											    	 <v-flex v-for="column in rows[item.form]" :class="column.class">
 											      		<span><i style="float: left;" class="material-icons">{{column.icon}}</i> {{column.key}}</span>
-											      	</v-flex> -->
+											      	</v-flex>
 
 											    </v-layout>
-											    	<!-- <form-group
-				
-														v-bind:form-items="group[item.form]"
-														v-bind:form-rules="rules"
-														v-bind:form-datas="data[item.form]"
-														v-bind:select-items="select"
-														
-													></form-group> -->
+											    	
 											    	
 											      	
 											    
@@ -89,8 +82,211 @@
 					                    
 					                </div>
 			                      	<div class="clearfix"></div>
-			                    	<!-- */end  -->
-		                    	</div>
+			                    	
+		                    	</div> -->
+		                    	
+		                    	<div class="row">
+			                    	<div class="col s12 m12 l3">
+			                    		<div class="row">
+				                    		<h4 class="header">Order Details</h4>
+				                    		<div>
+				                    			Change general information for this product. 
+				                    		</div>
+			                    		</div>
+			                    	</div>
+			                    	<div class="col s12 m12 l6">
+				                      
+				                      <div class="row">
+				                      	<v-container grid-list-md>
+				                      		<h4 class="header"><i class="material-icons text-left">shopping_cart</i> &nbsp; Order Information</h4>
+				                      		<div class="divider"></div>
+										    <v-layout row wrap>
+										    	<v-flex xs6 sm6 md6>
+										      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Bakou Sale System</span>
+										      	</v-flex>
+
+										    	<v-flex xs6 sm6 md6>
+										      		<span><i style="float: left;" class="material-icons">schedule</i> &nbsp;27/12/2017</span>
+										      	</v-flex>
+
+										      	<v-flex xs6 sm6 md6>
+										      		<span><i style="float: left;" class="material-icons">local_shipping</i> &nbsp;Cash Delivery</span>
+										      	</v-flex>
+
+										      	<v-flex xs6 sm6 md6>
+										      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Flat Shipping Rate</span>
+										      	</v-flex>
+										    </v-layout>
+										</v-container>
+				                      </div>
+				                    </div>
+				                    <div class="col s12 m12 l3"></div>
+				                </div>
+		                      	<div class="clearfix"></div>
+		                    	
+
+		                    	
+		                    	<div class="row">
+			                    	<div class="col s12 m12 l3">
+			                    		<div class="row">
+				                    		<h4 class="header"> Customer Detail</h4>
+				                    		<div>
+				                    			Change general information for this product. 
+				                    		</div>
+			                    		</div>
+			                    	</div>
+			                    	<div class="col s12 m12 l6">
+				                      
+				                      <div class="row">
+				                      	<v-container grid-list-md>
+				                      		<h4 class="header"><i class="material-icons text-left">supervisor_account</i> &nbsp; Customers Information</h4>
+				                      		<div class="divider"></div>
+										    <v-layout row wrap>
+										    	<v-flex xs6 sm6 md6>
+										      		<span><i style="float: left;" class="material-icons">account_circle</i> &nbsp;Khove Mengtek</span>
+										      	</v-flex>
+
+										    	<v-flex xs6 sm6 md6>
+										      		<span><i style="float: left;" class="material-icons">supervisor_account</i> &nbsp;Default</span>
+										      	</v-flex>
+
+										      	<v-flex xs6 sm6 md6>
+										      		<span><i style="float: left;" class="material-icons">mail</i> &nbsp;email@gmail.com</span>
+										      	</v-flex>
+
+										      	<v-flex xs6 sm6 md6>
+										      		<span><i style="float: left;" class="material-icons">phone_iphone</i> &nbsp;(+855)81 988 222</span>
+										      	</v-flex>
+										    </v-layout>
+										</v-container>
+				                      </div>
+				                    </div>
+				                    <div class="col s12 m12 l3"></div>
+				                </div>
+		                      	<div class="clearfix"></div>
+		                    	
+
+		                    	
+		                    	<div class="row">
+			                    	<div class="col s12 m12 l3">
+			                    		<div class="row">
+				                    		<h4 class="header">Generate Invoice</h4>
+				                    		<div>
+				                    			Change general information for this product. 
+				                    		</div>
+			                    		</div>
+			                    	</div>
+			                    	<div class="col s12 m12 l6">
+				                      
+				                      <div class="row">
+				                      	<v-container grid-list-md>
+				                      		<h4 class="header"><i class="material-icons text-left">assignment</i> &nbsp; Options</h4>
+				                      		<div class="divider"></div>
+										    <v-layout row wrap>
+										    	<v-flex xs6 sm6 md6>
+										      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Bakou Sale System</span>
+										      	</v-flex>
+
+										    	<v-flex xs6 sm6 md6>
+										      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;27/12/2017</span>
+										      	</v-flex>
+
+										      	<v-flex xs6 sm6 md6>
+										      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Cash Delivery</span>
+										      	</v-flex>
+
+										      	<v-flex xs6 sm6 md6>
+										      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Flat Shipping Rate</span>
+										      	</v-flex>
+										    </v-layout>
+										</v-container>
+				                      </div>
+				                    </div>
+				                    <div class="col s12 m12 l3"></div>
+				                </div>
+		                      	<div class="clearfix"></div>
+		                    	
+
+		                    	
+		                    	<div class="row">
+			                    	<div class="col s12 m12 l3">
+			                    		<div class="row">
+				                    		<h4 class="header"></h4>
+				                    		<div>
+				                    			<!-- Change general information for this product.  -->
+				                    		</div>
+			                    		</div>
+			                    	</div>
+			                    	<div class="col s12 m12 l6">
+				                      
+				                      <div class="row">
+				                      	<v-container grid-list-md>
+				                      		<h4 class="header"><i class="material-icons text-left">location_on</i> &nbsp; Payment Address</h4>
+				                      		<div class="divider"></div>
+										    <v-layout row wrap>
+										    	<v-flex xs6 sm6 md6>
+										      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Bakou Sale System</span>
+										      	</v-flex>
+
+										    	<v-flex xs6 sm6 md6>
+										      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;27/12/2017</span>
+										      	</v-flex>
+
+										      	<v-flex xs6 sm6 md6>
+										      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Cash Delivery</span>
+										      	</v-flex>
+
+										      	<v-flex xs6 sm6 md6>
+										      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Flat Shipping Rate</span>
+										      	</v-flex>
+										    </v-layout>
+										</v-container>
+				                      </div>
+				                    </div>
+				                    <div class="col s12 m12 l3"></div>
+				                </div>
+		                      	<div class="clearfix"></div>
+		                    	
+
+		                    	
+		                    	<div class="row">
+			                    	<div class="col s12 m12 l3">
+			                    		<div class="row">
+				                    		<h4 class="header"></h4>
+				                    		<div>
+				                    			<!-- Change general information for this product.  -->
+				                    		</div>
+			                    		</div>
+			                    	</div>
+			                    	<div class="col s12 m12 l6">
+				                      
+				                      <div class="row">
+				                      	<v-container grid-list-md>
+				                      		<h4 class="header"><i class="material-icons text-left">attach_money</i> &nbsp; Shipping Address</h4>
+				                      		<div class="divider"></div>
+										    <v-layout row wrap>
+										    	<v-flex xs6 sm6 md6>
+										      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Bakou Sale System</span>
+										      	</v-flex>
+
+										    	<v-flex xs6 sm6 md6>
+										      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;27/12/2017</span>
+										      	</v-flex>
+
+										      	<v-flex xs6 sm6 md6>
+										      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Cash Delivery</span>
+										      	</v-flex>
+
+										      	<v-flex xs6 sm6 md6>
+										      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Flat Shipping Rate</span>
+										      	</v-flex>
+										    </v-layout>
+										</v-container>
+				                      </div>
+				                    </div>
+				                    <div class="col s12 m12 l3"></div>
+				                </div>
+		                      	<div class="clearfix"></div>
 		                    	
 		                    	<div class="clearfix"></div>
 		                    	<!-- list order products -->
@@ -127,7 +323,7 @@
 					                  </div>
 					                </div>
 					              </div>
-		                    	<!-- .*/end -->
+		                    	
 
 		                    	<div class="clearfix"></div>
 		                    	<!-- list order products -->
@@ -191,7 +387,8 @@
 					                  </div>
 					                </div>
 					              </div>
-		                    	<!-- .*/end -->
+		                    	
+		                    	
 		                    </v-form>
 		                  </div>
 		                </div>
