@@ -170,11 +170,11 @@
 										      	</v-flex>
 
 										    	<v-flex xs6 sm6 md6>
-										      		<v-text-field label="Password" v-model="resellerInfo.password"/></v-text-field>
+										      		<v-text-field label="Password"/></v-text-field>
 										      	</v-flex>
 
 										      	<v-flex xs6 sm6 md6>
-										      		<v-text-field label="Confirm Password" v-model="resellerInfo.password"/></v-text-field>
+										      		<v-text-field label="Confirm Password"/></v-text-field>
 										      	</v-flex>
 
 										    </v-layout>

@@ -24,7 +24,7 @@
 		      		</v-breadcrumbs>
 			    </div>
 			    <div class="col s2 m6 l6">
-			    	<router-link to="/admin/Products/add_sample" replace><v-btn color="primary" class="btn dropdown-settings breadcrumbs-btn right">Create Sample</v-btn></router-link>
+			    	<!-- <router-link to="/admin/Products/add_sample" replace><v-btn color="primary" class="btn dropdown-settings breadcrumbs-btn right">Create Sample</v-btn></router-link> -->
 
 			    	<router-link to="/admin/Products/add" replace><v-btn color="primary" class="btn dropdown-settings breadcrumbs-btn right">Create</v-btn></router-link>
 			    </div>
