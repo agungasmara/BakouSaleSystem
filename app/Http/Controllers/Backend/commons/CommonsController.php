@@ -72,6 +72,14 @@ class CommonsController extends Controller
         return response()->json($atrributeGroup);
 
     }
+    public function getAttribute()
+    {
+
+        $atrribute=DB::table('attribute_description')->select(['attribute_id as value','name as text'])->get();
+
+        return response()->json($atrribute);
+
+    }
     public function getFilterGroup()
     {
 

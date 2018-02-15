@@ -29,23 +29,20 @@
 				e1:true,
 				valid: true,
 			    group:[
-					{	class:'xs12 sm6 md6',	 key:'value',	type:'number',	 text:'value',count:50	},
-					{	class:'xs12 sm6 md6',	 key:'unit',	type:'text',text:'Unit',count:5	},
-					{	class:'xs12 sm6 md6',	 key:'language_id',	type:'select',	 text:'Language',count:0,items:'languageItems'	},
-					{	class:'xs12 sm6 md6',	 key:'title',	type:'text',	 text:'Description',count:100	}
+					{	class:'xs12 sm6 md6',	 key:'value',	type:'number',	 text:'value'	},
+					{	class:'xs12 sm6 md6',	 key:'unit',	type:'text',text:'Unit'	},
+					{	class:'xs12 sm6 md6',	 key:'language_id',	type:'select',	 text:'Language',items:'languageItems'	},
+					{	class:'xs12 sm6 md6',	 key:'title',	type:'text',	 text:'Description'	}
 				],
 				rules:{
 					title: [
-				      (v) => !!v || 'Title is required',
-				      (v) => v && v.length <= 100 || 'Title must be less than 100 characters'
+				      (v) => !!v || 'Title is required'
 				    ],
 				    value: [
-				      (v) => !!v || 'Value is required',
-				      (v) => v && v.length <= 50 || 'Value must be less than 50 characters'
+				      (v) => !!v || 'Value is required'
 				    ],
 				    unit: [
-				      (v) => !!v || 'Unit is required',
-				      (v) => v && v.length <= 5 || 'Unit must be less than 5 characters'
+				      (v) => !!v || 'Unit is required'
 				    ],
 				    language_id:[
 				      (v) => !!v || 'Language Requied is required'

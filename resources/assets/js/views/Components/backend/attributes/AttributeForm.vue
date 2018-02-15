@@ -27,21 +27,20 @@
 				e1:true,
 				valid: true,
 			    group:[
-					{	class:'xs12 sm6 md6',	 key:'name',	type:'text',	 text:'Attribute Name',count:100	},
-					{	class:'xs12 sm6 md6',	 key:'attribute_group_id',	type:'select',text:'Attribute Group',count:0,items:'attributeGroups'	},
-					{	class:'xs12 sm6 md6',	 key:'sort_order',	type:'number',	 text:'Sort Order',count:100	},
-					{	class:'xs12 sm6 md6',	 key:'language_id',	type:'select',	 text:'Language',count:100,items:'languages'	}
+					{	class:'xs12 sm6 md6',	 key:'name',	type:'text',	 text:'Attribute Name'	},
+					{	class:'xs12 sm6 md6',	 key:'attribute_group_id',	type:'select',text:'Attribute Group',items:'attributeGroups'	},
+					{	class:'xs12 sm6 md6',	 key:'sort_order',	type:'number',	 text:'Sort Order'	},
+					{	class:'xs12 sm6 md6',	 key:'language_id',	type:'select',	 text:'Language',items:'languages'	}
 				],
 				rules:{
 					name: [
 				      (v) => !!v || 'Attribute Name is required',
-				      (v) => v && v.length <= 100 || 'Title must be less than 100 characters'
 				    ],
 				    attribute_group_id:[
-				      (v) => !!v || 'Language Requied is required'
+				      (v) => !!v || 'Group is required'
 				    ],
 				    language_id:[
-				      (v) => !!v || 'Language Requied is required'
+				      (v) => !!v || 'Language is required'
 				    ]
 				},
 				data:{

@@ -29,27 +29,23 @@
 				e1:true,
 				valid: true,
 			    group:[
-					{	class:'xs12 sm4 md4',	 key:'title',	type:'text',	 text:'Title',count:100	},
-					{	class:'xs12 sm4 md4',	 key:'date_added',	type:'date',	 text:'Date Added',count:100,menu:'date_added'	},
-					{	class:'xs12 sm4 md4',	 key:'date_modified',	type:'date',	 text:'Date Modified',count:0,value:'',menu:'date_modified'	},
-					{	class:'xs12 sm12 md12',	 key:'description',	type:'textarea',text:'Description',count:1000	}
+					{	class:'xs12 sm4 md4',	 key:'title',	type:'text',	 text:'Title'	},
+					{	class:'xs12 sm4 md4',	 key:'date_added',	type:'date',	 text:'Date Added',menu:'date_added'	},
+					{	class:'xs12 sm4 md4',	 key:'date_modified',	type:'date',	 text:'Date Modified',value:'',menu:'date_modified'	},
+					{	class:'xs12 sm12 md12',	 key:'description',	type:'textarea',text:'Description'	}
 				],
 				rules:{
 					title: [
-				      (v) => !!v || 'Title is required',
-				      (v) => v && v.length <= 50 || 'Title must be less than 50 characters'
+				      (v) => !!v || 'Title is required'
 				    ],
 				    description: [
-				      (v) => !!v || 'Description is required',
-				      (v) => v && v.length <= 1000 || 'Description must be less than 1000 characters'
+				      (v) => !!v || 'Description is required'
 				    ],
 					date_added: [
-				      (v) => !!v || 'Date Added is required',
-				      (v) => v && v.length <= 50 || 'Date Added must be less than 50 characters'
+				      (v) => !!v || 'Date Added is required'
 				    ],
 				    date_modified: [
-				      (v) => !!v || 'Date Modeified is required',
-				      (v) => v && v.length <= 50 || 'Date Modeified must be less than 50 characters'
+				      (v) => !!v || 'Date Modeified is required'
 				    ]
 				},
 				data:{

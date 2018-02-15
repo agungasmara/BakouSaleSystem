@@ -29,8 +29,8 @@
 				e1:true,
 				valid: true,
 			    group:[
-			    	{	class:'xs12 sm6 md6',	 key:'customer_group_id',	type:'select',	 text:'Customer Group',count:100,items:'customer_group',	},
-			    	{	class:'xs12 sm6 md6',	 key:'tax_rate_id',	type:'select',	 text:'Tax Rate',count:100,items:'tax_rate',	}
+			    	{	class:'xs12 sm6 md6',	 key:'customer_group_id',	type:'select',	 text:'Customer Group',items:'customer_group',	},
+			    	{	class:'xs12 sm6 md6',	 key:'tax_rate_id',	type:'select',	 text:'Tax Rate',items:'tax_rate',	}
 				],
 				rules:{
 				    customer_group_id: [v => !!v || 'Item is required'],

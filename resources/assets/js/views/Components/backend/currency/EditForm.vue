@@ -33,27 +33,24 @@
 				imageUrl:'',
 				image:null,
 			    group:[
-					{	class:'xs12 sm6 md6',	 key:'title',type:'text',text:'Title',count:100	},
+					{	class:'xs12 sm6 md6',	 key:'title',type:'text',text:'Title'	},
 					{	class:'xs12 sm6 md6',	 key:'code',type:'text',text:'Code',count:3},
-					{	class:'xs12 sm6 md6',	 key:'symbol_left',	type:'text',text:'Symbol Left',count:100	},
-					{	class:'xs12 sm6 md6',	 key:'symbol_right',type:'text',text:'Symbol Right',count:50},
-					{	class:'xs12 sm6 md6',	 key:'decimal_place',type:'text',text:'Decimal Place',count:50},
-					{	class:'xs12 sm6 md6',	 key:'value',type:'number',text:'Value',count:50},
-					{	class:'xs12 sm6 md6',	 key:'status',type:'select',text:'Status',count:0,items:'statusItems'	},
-					{	class:'xs12 sm6 md6',	 key:'date_modified',type:'date',text:'Date Modified',count:20	}
+					{	class:'xs12 sm6 md6',	 key:'symbol_left',	type:'text',text:'Symbol Left'	},
+					{	class:'xs12 sm6 md6',	 key:'symbol_right',type:'text',text:'Symbol Right'},
+					{	class:'xs12 sm6 md6',	 key:'decimal_place',type:'text',text:'Decimal Place'},
+					{	class:'xs12 sm6 md6',	 key:'value',type:'number',text:'Value'},
+					{	class:'xs12 sm6 md6',	 key:'status',type:'select',text:'Status',items:'statusItems'	},
+					{	class:'xs12 sm6 md6',	 key:'date_modified',type:'date',text:'Date Modified'	}
 				],
 				rules:{
 					title: [
-				      (v) => !!v || 'Title is required',
-				      (v) => v && v.length <= 50 || 'Title must be less than 50 characters'
+				      (v) => !!v || 'Title is required'
 				    ],
 				    code: [
-				      (v) => !!v || 'Code is required',
-				      (v) => v && v.length <= 3 || 'Code must be less than 3 characters'
+				      (v) => !!v || 'Code is required'
 				    ],
 					decimal_place: [
-				      (v) => !!v || 'Decimal Place is required',
-				      (v) => v && v.length <= 50 || 'Decimal Place must be less than 50 characters'
+				      (v) => !!v || 'Decimal Place is required'
 				    ],
 				    value: [
 				      (v) => !!v || 'Value is required'

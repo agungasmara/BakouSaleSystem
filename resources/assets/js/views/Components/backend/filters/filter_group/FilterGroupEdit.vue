@@ -29,14 +29,13 @@
 				e1:true,
 				valid: true,
 			    group:[
-			    	{	class:'xs12 sm4 md4',	 key:'language_id',	type:'select',	 text:'Language',count:100,items:'languages'	},
-					{	class:'xs12 sm4 md4',	 key:'name',	type:'text',	 text:'Group Name',count:100	},
-					{	class:'xs12 sm4 md4',	 key:'sort_order',	type:'number',	 text:'Sort Order',count:100	}
+			    	{	class:'xs12 sm4 md4',	 key:'language_id',	type:'select',	 text:'Language',items:'languages'	},
+					{	class:'xs12 sm4 md4',	 key:'name',	type:'text',	 text:'Group Name'	},
+					{	class:'xs12 sm4 md4',	 key:'sort_order',	type:'number',	 text:'Sort Order'	}
 				],
 				rules:{
 					name: [
-				      (v) => !!v || 'Group Name is required',
-				      (v) => v && v.length <= 100 || 'Group must be less than 100 characters'
+				      (v) => !!v || 'Group Name is required'
 				    ],
 				    language_id:[
 				      (v) => !!v || 'Language Requied is required'

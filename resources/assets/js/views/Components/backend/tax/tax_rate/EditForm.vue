@@ -29,34 +29,29 @@
 				e1:true,
 				valid: true,
 			    group:[
-					{	class:'xs12 sm6 md6',	 key:'geo_zone_id',	type:'select',	 text:'Geo Zone',count:100,items:'geo_zone',	},
-					{	class:'xs12 sm6 md6',	 key:'name',	type:'text',	 text:'Name',count:100	},
-					{	class:'xs12 sm6 md6',	 key:'rate',	type:'text',	 text:'Rate',count:100	},
-					{	class:'xs12 sm6 md6',	 key:'type',	type:'text',	 text:'Type',count:100	},
-					{	class:'xs12 sm6 md6',	 key:'date_added',	type:'date',	 text:'Date Added',count:100,menu:'date_added'	},
-					{	class:'xs12 sm6 md6',	 key:'date_modified',	type:'date',	 text:'Date Modified',count:0,value:'',menu:'date_modified'	}
+					{	class:'xs12 sm6 md6',	 key:'geo_zone_id',	type:'select',	 text:'Geo Zone',items:'geo_zone',	},
+					{	class:'xs12 sm6 md6',	 key:'name',	type:'text',	 text:'Name'	},
+					{	class:'xs12 sm6 md6',	 key:'rate',	type:'text',	 text:'Rate'	},
+					{	class:'xs12 sm6 md6',	 key:'type',	type:'text',	 text:'Type'	},
+					{	class:'xs12 sm6 md6',	 key:'date_added',	type:'date',	 text:'Date Added',menu:'date_added'	},
+					{	class:'xs12 sm6 md6',	 key:'date_modified',	type:'date',	 text:'Date Modified',value:'',menu:'date_modified'	}
 				],
 				rules:{
 					name: [
-				      (v) => !!v || 'Name is required',
-				      (v) => v && v.length <= 50 || 'Name must be less than 50 characters'
+				      (v) => !!v || 'Name is required'
 				    ],
 				    rate: [
-				      (v) => !!v || 'Rate is required',
-				      (v) => v && v.length <= 1000 || 'Rate must be less than 1000 characters'
+				      (v) => !!v || 'Rate is required'
 				    ],
 				    type: [
-				      (v) => !!v || 'Type is required',
-				      (v) => v && v.length <= 1000 || 'Type must be less than 1000 characters'
+				      (v) => !!v || 'Type is required'
 				    ],
 				    geo_zone_id: [v => !!v || 'Item is required'],
 					date_added: [
-				      (v) => !!v || 'Date Added is required',
-				      (v) => v && v.length <= 50 || 'Date Added must be less than 50 characters'
+				      (v) => !!v || 'Date Added is required'
 				    ],
 				    date_modified: [
-				      (v) => !!v || 'Date Modeified is required',
-				      (v) => v && v.length <= 50 || 'Date Modeified must be less than 50 characters'
+				      (v) => !!v || 'Date Modeified is required'
 				    ]
 				},
 				data:{

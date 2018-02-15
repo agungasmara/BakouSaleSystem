@@ -31,13 +31,12 @@
 				imageUrl:'',
 				image:null,
 			    group:[
-					{	class:'xs12 sm6 md6',	 key:'language_id',	type:'select',	 text:'Language',count:100,items:'languages',	},
-					{	class:'xs12 sm6 md6',	 key:'name',	type:'text',text:'Status Name',count:100	}
+					{	class:'xs12 sm6 md6',	 key:'language_id',	type:'select',	 text:'Language',items:'languages',	},
+					{	class:'xs12 sm6 md6',	 key:'name',	type:'text',text:'Status Name',	}
 				],
 				rules:{
 					name: [
-				      (v) => !!v || 'Status Name is required',
-				      (v) => v && v.length <= 100 || 'Status Name must be less than 100 characters'
+				      (v) => !!v || 'Status Name is required'
 				    ],
 				    language_id:[v => !!v || 'Item is required']
 				},

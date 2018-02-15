@@ -27,15 +27,14 @@
 				e1:true,
 				valid: true,
 			    group:[
-					{	class:'xs12 sm6 md6',	 key:'name',	type:'text',	 text:'Filter Name',count:100	},
-					{	class:'xs12 sm6 md6',	 key:'filter_group_id',	type:'select',text:'Filter Group',count:0,items:'filterGroups'	},
-					{	class:'xs12 sm6 md6',	 key:'sort_order',	type:'number',	 text:'Sort Order',count:100	},
-					{	class:'xs12 sm6 md6',	 key:'language_id',	type:'select',	 text:'Language',count:100,items:'languages'	}
+					{	class:'xs12 sm6 md6',	 key:'name',	type:'text',	 text:'Filter Name'	},
+					{	class:'xs12 sm6 md6',	 key:'filter_group_id',	type:'select',text:'Filter Group',items:'filterGroups'	},
+					{	class:'xs12 sm6 md6',	 key:'sort_order',	type:'number',	 text:'Sort Order'	},
+					{	class:'xs12 sm6 md6',	 key:'language_id',	type:'select',	 text:'Language',items:'languages'	}
 				],
 				rules:{
 					name: [
-				      (v) => !!v || 'Filter Name is required',
-				      (v) => v && v.length <= 100 || 'Filter must be less than 100 characters'
+				      (v) => !!v || 'Filter Name is required'
 				    ],
 				    filter_group_id:[
 				      (v) => !!v || 'Language Requied is required'

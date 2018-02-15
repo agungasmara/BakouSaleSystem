@@ -27,18 +27,16 @@
 				e1:true,
 				valid: true,
 			    group:[
-					{	class:'xs12 sm4 md4',	 key:'name',	type:'text',	 text:'Name',count:100	},
-					{	class:'xs12 sm4 md4',	 key:'sort_order',	type:'number',text:'Sort Order',count:5	},
+					{	class:'xs12 sm4 md4',	 key:'name',	type:'text',	 text:'Name'	},
+					{	class:'xs12 sm4 md4',	 key:'sort_order',	type:'number',text:'Sort Order'	},
 					{	class:'xs12 sm4 md4',	 key:'image',	type:'image',	 text:'Image'	}
 				],
 				rules:{
 					name: [
-				      (v) => !!v || 'Name is required',
-				      (v) => v && v.length <= 100 || 'Name must be less than 100 characters'
+				      (v) => !!v || 'Name is required'
 				    ],
 				    sort_order: [
-				      (v) => !!v || 'Sort Order is required',
-				      (v) => v && v.length <= 10 || 'Sort Order must be less than 10 characters'
+				      (v) => !!v || 'Sort Order is required'
 				    ]
 				},
 				data:{

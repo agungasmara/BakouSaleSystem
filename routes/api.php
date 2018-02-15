@@ -38,6 +38,7 @@ Route::get('/getTaxClass','Backend\commons\CommonsController@getTaxClass');
 Route::get('/getTaxRate','Backend\commons\CommonsController@getTaxRate');
 Route::get('/getCustomerGroup','Backend\commons\CommonsController@getCustomerGroup');
 Route::get('/getAttributeGroup','Backend\commons\CommonsController@getAttributeGroup');
+Route::get('/getAttribute','Backend\commons\CommonsController@getAttribute');
 Route::get('/getFilterGroup','Backend\commons\CommonsController@getFilterGroup');
 Route::get('/getLayout','Backend\commons\CommonsController@getLayout');
 

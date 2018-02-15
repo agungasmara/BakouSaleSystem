@@ -36,7 +36,10 @@
 					                    		</div>
 					                    	</div>
 					                    	<div class="col s12 m12 l6">
+					                    		<h4 class="header"><i class="material-icons text-left"> info_outline </i> Please Input Required Field </h4>
+					                      		<div class="divider"></div>
 					                    		<v-layout row wrap>
+
 						          				<v-flex v-for="input in formItems" :key="input.key" :class="input.class">
 							      					<div v-if="input.type=='select'">
 														<v-select :label="input.text"  :rules="formRules[input.key]" v-model="formDatas[input.key]" :items="selectItems[input.items]" required></v-select>
@@ -53,9 +56,9 @@
 														<v-text-field v-else textarea v-model="formDatas[input.key]" :rules='formRules[input.key]' :label="input.text" color="light-blue"></v-text-field>
 														
 													</div>
-													<!-- <div v-if="input.type=='editor'">
-														<vue-editor v-model="formDatas[input.key]"></vue-editor>
-													</div> -->
+													<div v-if="input.type=='editor'">
+														<!-- <vue-editor v-model="formDatas[input.key]" :editorToolbar="toolbar"  id="editor1"></vue-editor> -->
+													</div>
 													<div v-if="input.type=='date'">
 														<v-menu
 												          lazy
@@ -133,11 +136,11 @@
 																			</v-layout>
 																		</v-card>
 																		
-																		<v-card style="height: 200px;" v-if="!formDatas[input.key]" @click="onPickFile">
-																			<v-layout align-center justify-center style="margin-top:75px;">
-																				<v-icon dark color="blue" x-large>backup</v-icon>
+																		<v-flex style="height: 200px;" v-if="!formDatas[input.key]" @click="onPickFile">
+																			<v-layout align-center justify-center >
+																				<img class="image-dummy" width="200px" :src="'/images/icon/Antu_folder-camera.svg.png'">
 																			</v-layout>
-																		</v-card>
+																		</v-flex>
 																</label>
 															</v-layout>
 														</div>
@@ -160,8 +163,21 @@
 <script>
 	import Flash from '../../../../../helper/flash'
 	import axios from 'axios'
-	//import { VueEditor } from 'vue2-editor'
+	//import { VueEditor, Quill } from 'vue2-editor'
 	import breadcrumb3button from '../breadcrumb/breadcrumb3button.vue'
+	var toolbars=[
+				[
+					'bold', 'italic', 'underline', 'strike',
+					{ 'header': 1 }, 
+					{ 'header': 2 },
+					{ 'script': 'sub'},
+					{ 'script': 'super' },
+					{ 'indent': '-1'}, 
+					{ 'indent': '+1' },
+					{ 'list': 'ordered'}, { 'list': 'bullet' },
+					'image'
+				]
+			]
 	export default{
 		props:[
 			'id',
@@ -189,9 +205,11 @@
 				btnText:'Upload Image',
 				imageUrl:'sddfdg',
 				image:null,
-				flash:Flash.state
+				flash:Flash.state,
+				toolbar:toolbars
 			}
 		},
+		
 		mounted(){
 			
 		},
@@ -200,7 +218,14 @@
 			  val && this.querySelections(val)
 			}
 		},
+		// editorSettings: {
+		//       modules: {
+		//         imageDrop: true,
+		//         imageResize: {}
+		//       }
+		//     },
 		methods:{
+			
 			submit (opt) {
 		      	if (this.$refs.form.validate()) {
 			        // Native form submission is not yet supporte
@@ -297,3 +322,16 @@
 		}
 	}
 </script>
+<style type="text/css">
+	.image-dummy{
+		opacity: 0.5;
+		transition: all 0.5s ease;
+		-webkit-transition: all 0.5s ease;
+		-o-transition: all 0.5s ease;
+		-moz-transition: all 0.5s ease;
+	}
+	.image-dummy:hover{
+		opacity: 0.8;
+		cursor: pointer;
+	}
+</style>

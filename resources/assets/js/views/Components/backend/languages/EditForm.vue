@@ -33,33 +33,28 @@
 				imageUrl:'',
 				image:null,
 			    group:[
-					{	class:'xs12 sm6 md6',	 key:'name',	type:'text',	 text:'Name',count:100	},
-					{	class:'xs12 sm6 md6',	 key:'code',	type:'text',text:'Code',count:100	},
-					{	class:'xs12 sm6 md6',	 key:'locale',	type:'text',	 text:'Local',count:100	},
-					{	class:'xs12 sm6 md6',	 key:'image',	type:'image',	 text:'Image',count:0,value:''	},
-					{	class:'xs12 sm6 md6',	 key:'directory',	type:'text',	 text:'Directory',count:0,value:''	},
-					{	class:'xs12 sm6 md6',	 key:'status',	type:'select',	 text:'Status',count:0,items:'statusItems'	}
+					{	class:'xs12 sm6 md6',	 key:'name',	type:'text',	 text:'Name'	},
+					{	class:'xs12 sm6 md6',	 key:'code',	type:'text',text:'Code'	},
+					{	class:'xs12 sm6 md6',	 key:'locale',	type:'text',	 text:'Local'	},
+					{	class:'xs12 sm6 md6',	 key:'image',	type:'image',	 text:'Image',value:''	},
+					{	class:'xs12 sm6 md6',	 key:'directory',	type:'text',	 text:'Directory',value:''	},
+					{	class:'xs12 sm6 md6',	 key:'status',	type:'select',	 text:'Status',items:'statusItems'	}
 				],
 				rules:{
 					name: [
-				      (v) => !!v || 'Name is required',
-				      (v) => v && v.length <= 50 || 'Name must be less than 50 characters'
+				      (v) => !!v || 'Name is required'
 				    ],
 				    code: [
-				      (v) => !!v || 'Code is required',
-				      (v) => v && v.length <= 50 || 'Code must be less than 50 characters'
+				      (v) => !!v || 'Code is required'
 				    ],
 				    locale: [
-				      (v) => !!v || 'Local is required',
-				      (v) => v && v.length <= 50 || 'Local must be less than 50 characters'
+				      (v) => !!v || 'Local is required'
 				    ],
 					directory: [
-				      (v) => !!v || 'Directory is required',
-				      (v) => v && v.length <= 50 || 'Directory must be less than 50 characters'
+				      (v) => !!v || 'Directory is required'
 				    ],
 				    sort_order: [
-				      (v) => !!v || 'Sort Order is required',
-				      (v) => v && v.length <= 50 || 'Key must be less than 50 characters'
+				      (v) => !!v || 'Sort Order is required'
 				    ]
 				},
 				data:{

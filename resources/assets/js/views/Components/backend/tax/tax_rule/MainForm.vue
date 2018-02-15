@@ -27,15 +27,14 @@
 				e1:true,
 				valid: true,
 			    group:[
-			    	{	class:'xs12 sm6 md6',	 key:'tax_class_id',	type:'select',	 text:'Tax Class',count:100,items:'tax_class',	},
-			    	{	class:'xs12 sm6 md6',	 key:'tax_rate_id',	type:'select',	 text:'Tax Rate',count:100,items:'tax_rate',	},
-					{	class:'xs12 sm6 md6',	 key:'based',	type:'text',	 text:'Based',count:100	},
-					{	class:'xs12 sm6 md6',	 key:'priority',	type:'text',	 text:'Priority',count:0	},
+			    	{	class:'xs12 sm6 md6',	 key:'tax_class_id',	type:'select',	 text:'Tax Class',items:'tax_class',	},
+			    	{	class:'xs12 sm6 md6',	 key:'tax_rate_id',	type:'select',	 text:'Tax Rate',items:'tax_rate',	},
+					{	class:'xs12 sm6 md6',	 key:'based',	type:'text',	 text:'Based'	},
+					{	class:'xs12 sm6 md6',	 key:'priority',	type:'text',	 text:'Priority'	},
 				],
 				rules:{
 					based: [
-				      (v) => !!v || 'Name is required',
-				      (v) => v && v.length <= 50 || 'Name must be less than 50 characters'
+				      (v) => !!v || 'Name is required'
 				    ],
 				    priority: [
 				      (v) => !!v || 'Priority is required'
