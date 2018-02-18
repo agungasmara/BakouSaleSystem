@@ -107,9 +107,12 @@
 		public function UpdateData($table,$data,$field,$id)
 		{
 			$image = $table::find($id);
-        	$imageDelete=(new ImageMaker)->deleteFile(@$image->image);//delete old image after update data
+			if(@$data['image'] and @$data['image']!=@$image->image){
+        		$imageDelete=(new ImageMaker)->deleteFile(@$image->image);//delete old image after update data
+    		}
 			$update=$table::where($field,$id)->update($data);
-			
+			$imagedb=@$image->image;
+			$img=@$data['image'];
 
 	        return response()->json([
 

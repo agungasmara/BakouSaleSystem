@@ -20,8 +20,10 @@
 
 				<img v-if="index.value=='image'" :src="props.item.image ? props.item.image:'/images/icon/no-image.png'" style="width: auto;max-width: 30px;height: auto;max-height: 30px;">
 				<div v-else-if="index.text=='Action'">
-					<span v-if="eye" style="cursor:pointer;" :style="props.item[index.status]>0 ? 'color:green;':'color:red;'" @click="changeStatus(props.item[index.value],props.item[index.status],index.status)">
-						<i class="material-icons">remove_red_eye</i>
+
+					<span v-if="eye" style="cursor:pointer;" :style="props.item[index.status]>0 ? 'color:green;':'color:red;'"  @click="changeStatus(props.item[index.value],props.item[index.status],index.status)">
+						<v-progress-circular v-if="isProgessing && props.item[index.value]==curID" indeterminate :width="2" color="green"></v-progress-circular>
+						<i class="material-icons" v-else>remove_red_eye</i>
 					</span>
 					<span style="cursor:pointer;color:blue;" @click="editData(props.item[index.value])"">
 						<i class="material-icons">edit</i>
@@ -87,6 +89,8 @@
 		],
 		data(){
 			return{
+				curID:0,
+				isProgessing:false,
 				tile:true,
 				tbloading:true,
 				refreshTable:[],
@@ -151,8 +155,10 @@
 				this.$router.push('edit/'+id)
 			},
 			changeStatus(id,value,field){
-				var progress='progressing'+id
-				this.data[progress]=true
+				this.curID=id
+				
+				this.isProgessing=true
+				console.log(this.isProgessing)
 				if(value==1){
 					value=0
 				}else if(value==0){
@@ -162,13 +168,16 @@
 				axios.put(this.url+id, 
 		          this.dataStatus
 		        ).then((res)=>{
-		        	console.log(res.data)
+		        	this.isProgessing=true
 		        	if(res.data.success==true){
 		        		Flash.setSuccess(res.data.message)
 		        		this.fetchData()
+		        		this.isProgessing=false
 		        	}else{
 		        		Flash.setError(res.data.message)
 		        	}
+
+              		this.isProgessing=false
 		        })
 		        .catch((err) => {
                   	if(err.response.status === 422) {
@@ -176,6 +185,7 @@
 					}
 					Flash.setError('Error while updateing data')
               	})
+              	this.isProgessing=false
 			}
 		}
 	}
