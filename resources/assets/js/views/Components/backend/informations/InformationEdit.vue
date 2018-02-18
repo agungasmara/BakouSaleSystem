@@ -31,7 +31,7 @@
 			    group:[
 			    	{	class:'xs12 sm3 md3',	 key:'language_id',	type:'select',	 text:'Language',items:'languageItems'	},
 					{	class:'xs12 sm9 md9',	 key:'title',	type:'text',	 text:'Information Title'	},
-					{	class:'xs12 sm12 md12',	 key:'description',	type:'editor',text:'Description'	},
+					{	class:'xs12 sm12 md12',	 key:'description',	type:'textarea',text:'Description'	},
 					{	class:'xs12 sm12 md12',	 key:'meta_title',	type:'text',	 text:'Meta Tag Title'	},
 					{	class:'xs12 sm12 md12',	 key:'meta_description',	type:'textarea',text:'Meta Tag Description'	},
 					{	class:'xs12 sm12 md12',	 key:'meta_keyword',	type:'textarea',text:'Meta Tag Keyword'	},
