@@ -1,6 +1,6 @@
 <template>
 	<v-app id="inspire">
-		<table>
+		<table class="table chk-tbl datatable">
 			<thead>
 				<tr>
 					<th>Attribute</th>
@@ -23,7 +23,7 @@
 			     	</td>
 				</tr>
 				<tr >
-					<td colspan="2"></td>
+					<td colspan="2" align="center"></td>
 					<td>
 						<span @click="addAttribute" :disabled="!isValid" style="cursor: pointer;">
 				     		<v-icon large material-icons color="blue darken">add_box</v-icon>
@@ -74,3 +74,28 @@
 		}
 	}
 </script>
+
+<style type="text/css">
+	.current{
+		background-color: #b3d4fc;
+	}
+	table.chk-tbl{
+		background-color: #FFFFFF !important;
+		border-radius:2px;
+		border-collapse:collapse;
+		border-spacing:0;
+		table-layout:fixed;
+		width: 100%;
+		max-width: 100%;
+	}
+	table.chk-tbl tr th{
+		border: solid 1px #d9dbdd;
+		text-align: center;
+	}
+	table.chk-tbl tr.chk-row td{
+		background-color: #edeff2;
+	}
+	table.chk-tbl tr td{
+		border: solid 1px #d9dbdd;
+	}
+</style>

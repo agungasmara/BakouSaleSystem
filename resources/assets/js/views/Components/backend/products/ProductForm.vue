@@ -86,7 +86,9 @@
 														
 													></form-group>
 											    	
-											      	
+											    <div v-if="item.form=='option'">
+											    	<pro-option></pro-option>
+											    </div>	
 											    
 											</v-container>
 					                      </div>
@@ -127,11 +129,11 @@
 	import Flash from '../../../../helper/flash'
 	import axios from 'axios'
 	import formGroup from '../commons/form/formGroup.vue'
-	
+	import proOption from '../product_options/productOptionForm.vue'
 	export default{
 		props:['id'],
 		components: {
-			formGroup
+			formGroup,proOption
 		},
 		data(){
 			return{
@@ -187,7 +189,7 @@
 						info_description:'',
 						title:'Product Optiion',
 						icon:'info_outline',
-						form:'optiion',
+						form:'option',
 					},
 					{
 						info_title:'',
@@ -259,7 +261,7 @@
 
 					],
 					attributes:[],
-					optiion:[],
+					option:[],
 					discount:[],
 					special:[],
 					allary:[],
