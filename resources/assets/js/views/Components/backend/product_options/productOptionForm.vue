@@ -5,7 +5,7 @@
 				<v-flex xs12 sm3 md3>
 					<v-list subheader>
 		            
-		            <v-list-tile avatar v-for="(optItem,index) in optArr" :key="index" :class="{'current':show==index}">
+		            <v-list-tile avatar v-for="(optItem,index) in formDatas" :key="index" :class="{'current':show==index}">
 		              <v-list-tile-action>
 		                <v-icon color="blue" dark left @click="removeOpt(index)">remove_circle</v-icon>
 		              </v-list-tile-action>
@@ -17,7 +17,7 @@
 					<v-select :label="'Option'" id="optSelect" autocomplete :search-input.sync="search" v-model="opt" :items="options" item-value="value" item-text="text"></v-select>
 				</v-flex>
 				<v-flex xs12 sm9 md9 l9>
-					<div v-for="(optItem,index) in optArr" :key="index">
+					<div v-for="(optItem,index) in formDatas" :key="index">
 					
 		          	<div v-if="show==index">
 		          		<v-flex xs12 sm 6 md6 l6>
@@ -146,7 +146,7 @@
 	// 	}
 	// })
 	export default{
-
+		props:['formDatas'],
 		data(){
 			return {
 				search:null,//for option search
@@ -155,7 +155,7 @@
 				options:[],//for option to select as product option
 				product_option_id:0,
 				opt:'text',
-				optArr:[],
+				// formDatas:[],
 				show:'',
 				control:'',
 				selectItem:[
@@ -172,7 +172,7 @@
 		created(){
 			this.getOptions()
 			this.getCheckbox(0)
-			this.show=this.optArr[0]
+			this.show=this.formDatas[0]
 		},
 		watch:{
 			opt:function(text){
@@ -186,8 +186,8 @@
 							value:null,
 							checkItem:[]
 						}
-						vm.optArr.push(itemArr)
-						vm.optArr.forEach(function(v,i){
+						vm.formDatas.push(itemArr)
+						vm.formDatas.forEach(function(v,i){
 							vm.show=i
 						})	
 					}
@@ -220,11 +220,11 @@
 					weight_prefix:null,
 					weight:0
 				}
-				this.optArr[index].checkItem.push(optionArr)
+				this.formDatas[index].checkItem.push(optionArr)
 			},
 			removeOpt:function(index){
 				var vm=this
-				this.optArr.splice(index,1)
+				this.formDatas.splice(index,1)
 				vm.show=index-1
 			}
 		}

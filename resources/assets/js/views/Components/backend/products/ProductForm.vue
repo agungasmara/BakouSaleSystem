@@ -87,7 +87,7 @@
 													></form-group>
 											    	
 											    <div v-if="item.form=='option'">
-											    	<pro-option></pro-option>
+											    	<pro-option v-bind:form-datas="data[item.form]"></pro-option>
 											    </div>	
 											    
 											</v-container>
@@ -277,7 +277,7 @@
 					},
 					links:{},
 					attributes:{},
-					optiion:{},
+					option:[],
 					discount:{},
 					special:{},
 					allary:{},
