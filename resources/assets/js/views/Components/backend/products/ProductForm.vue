@@ -62,7 +62,7 @@
 		                    	<div v-for="item in section">
 			                    	<!-- /start -->
 			                    	<div class="row">
-				                    	<div class="col s12 m12 l3">
+				                    	<div class="col s12 m12 l2">
 				                    		<div class="row">
 					                    		<h4  class="header"> {{item.info_title}} </h4>
 					                    		<div>
@@ -70,7 +70,7 @@
 					                    		</div>
 				                    		</div>
 				                    	</div>
-				                    	<div class="col s12 m12 l6">
+				                    	<div class="col s12 m12 l8">
 					                      
 					                      <div class="row">
 					                      	<v-container grid-list-md>
@@ -93,7 +93,7 @@
 											</v-container>
 					                      </div>
 					                    </div>
-					                    <div class="col s12 m12 l3">
+					                    <div class="col s12 m12 l2">
 					                    	
 				                    		<div class="row" v-if="item.profile">
 					                    		<h4 class="header">

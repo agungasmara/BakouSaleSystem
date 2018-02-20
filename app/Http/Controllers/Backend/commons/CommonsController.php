@@ -104,13 +104,13 @@ class CommonsController extends Controller
         return response()->json($filterGroup);
 
     }
-    public function getCheckbox()
+    public function getChildOption($optID)
     {
 
         $filterGroup=DB::table('option as o')
         ->Join('option_value_description as des','des.option_id','=','o.option_id')
         ->select(['des.option_value_id as value','des.name as text'])
-        ->where('des.option_id',2)
+        ->where('des.option_id',$optID)
         ->get();
 
         return response()->json($filterGroup);

@@ -2,104 +2,102 @@
 	<v-app id="inspire">
 		<v-container grid-list-md>
 			<v-layout row wrap>
-				<v-flex xs12 sm3 md3>
-					<v-list subheader>
-		            
-		            <v-list-tile avatar v-for="(optItem,index) in formDatas" :key="index" :class="{'current':show==index}">
-		              <v-list-tile-action>
-		                <v-icon color="blue" dark left @click="removeOpt(index)">remove_circle</v-icon>
-		              </v-list-tile-action>
-		              <v-list-tile-content  @click="show = index" >
-		                	<v-list-tile-title v-html="optItem.text"></v-list-tile-title>
-		              </v-list-tile-content>
-		            </v-list-tile>
-		          </v-list>
+				<v-flex xs12 sm12 md12>
 					<v-select :label="'Option'" id="optSelect" autocomplete :search-input.sync="search" v-model="opt" :items="options" item-value="value" item-text="text"></v-select>
+		            <div class="chip-box" v-for="(optItem,index) in formDatas" :key="index" :class="{'current':show==index}" @click="getChildOption(optItem.product_option_id)">
+			            <span @click="show = index">
+			            	{{optItem.text}}
+			                
+			            </span>
+			            <v-icon color="red" dark right @click="removeOpt(index)" style="cursor: pointer;">remove_circle</v-icon>
+					</div>
 				</v-flex>
-				<v-flex xs12 sm9 md9 l9>
+				<v-flex xs12 sm12 md12 l12>
 					<div v-for="(optItem,index) in formDatas" :key="index">
 					
 		          	<div v-if="show==index">
-		          		<v-flex xs12 sm 6 md6 l6>
-		          			<v-select :label="'Required'" v-model="optItem.required" :items="selectItem"></v-select>
-		          		</v-flex>
-		          		<div v-if="optItem.text=='checkbox'">
-		          			<table class="chk-tbl">
-		          				<thead>
-		          					<tr>
-		          						<th><small>Option Value</small></th>
-		          						<th><small>Quantity</small></th>
-		          						<th><small>Substract Stock</small></th>
-		          						<th><small>Price</small></th>
-		          						<th><small>Point</small></th>
-		          						<th><small>Weight</small></th>
-		          						<th><small>Action</small></th>
-		          					</tr>
-		          				</thead>
-		          				<tbody>
-			          					<tr v-for="(checkItm,index) in optItem.checkItem" style="border-bottom: solid 1px #ccc;" :class="{'chk-row':index%2==0}">
-			          						<td align="center">
-			          							<v-flex xs12 sm12 md12>
-			          								<v-select :label="'Check'" v-model="checkItm.option_value_id" :items="checkItem"></v-select>
-			          							</v-flex>
-			          						</td>
-			          						<td align="center">
-			          							<v-flex xs12 sm8 md8>
-			          							
-				          							<v-text-field type="number" v-model="checkItm.quantity"></v-text-field>
-				          						</v-flex>
-				          						
-			          						</td>
-			          						<td align="center">
-			          							<v-flex xs12 sm12 md12>
-			          								<v-select v-model="checkItm.substract" :items="selectItem"></v-select>
-			          							</v-flex>
-			          						</td>
-			          						<td align="center">
-			          							<v-flex xs12 sm8 md8>
-			          								<v-select sm1 md1 v-model="checkItm.price_prefix" :items="signSelect"></v-select>
-			          							
-			          							
-			          								<v-text-field sm1 md1 type="number" v-model="checkItm.price"></v-text-field>
-			          							</v-flex>
-			          							
-			          						</td>
-			          						<td align="center">
-			          							<v-flex xs12 sm8 md8>
-			          								<v-select v-model="checkItm.points_prefix" :items="signSelect"></v-select>
-			          							
-			          							
-			          								<v-text-field type="number" v-model="checkItm.points"></v-text-field>
-			          							</v-flex>
-			          							
-			          						</td>
-			          						<td align="center">
-			          							<v-flex xs12 sm8 md8>
-			          								<v-select v-model="checkItm.weight_prefix" :items="signSelect"></v-select>
-			          							
-			          							
-			          								<v-text-field type="number" v-model="checkItm.weight"></v-text-field>
-			          							</v-flex>
-			          						</td>
-			          						<td align="center">
-			          							<span @click="optItem.checkItem.splice(index,1)" style="cursor: pointer;"> 
-													<v-icon large material-icons color="red darken">indeterminate_check_box</v-icon>
-										     	</span>
-			          						</td>
+		          		<v-layout row wrap>
+			          		<v-flex xs12 sm6 md6 l6>
+			          			<v-select :label="'Required'" v-model="optItem.required" :items="selectItem"></v-select>
+			          			<div class="divider"></div>
+			          		</v-flex>
+
+			          		<div v-if="optItem.text=='checkbox' || optItem.text=='radio' || optItem.text=='select'">
+			          			<table class="chk-tbl">
+			          				<thead>
+			          					<tr>
+			          						<th><small>Option Value</small></th>
+			          						<th><small>Quantity</small></th>
+			          						<th><small>Substract Stock</small></th>
+			          						<th><small>Price</small></th>
+			          						<th><small>Point</small></th>
+			          						<th><small>Weight</small></th>
+			          						<th><small>Action</small></th>
 			          					</tr>
-		          					<tr >
-										<td colspan="6"></td>
-										<td align="center">
-											<span @click="addOption(show)" style="cursor: pointer;">
-									     		<v-icon large material-icons color="blue darken">add_box</v-icon>
-									     	</span>
-										</td>
-									</tr>
-		          				</tbody>
-		          			</table>
-		          		</div>
-		          		<div v-if="optItem.text=='date'">
-		          			<v-flex xs12 sm6 md6 l6>
+			          				</thead>
+			          				<tbody>
+				          					<tr v-for="(checkItm,index) in optItem.checkItem" style="border-bottom: solid 1px #ccc;" :class="{'chk-row':index%2==0}">
+				          						<td align="center">
+				          							<v-flex xs12 sm12 md12>
+				          								<v-select :label="'select'" v-model="checkItm.option_value_id" :items="checkItem"></v-select>
+				          							</v-flex>
+				          						</td>
+				          						<td align="center">
+				          							<v-flex xs12 sm8 md8>
+				          							
+					          							<v-text-field type="number" v-model="checkItm.quantity"></v-text-field>
+					          						</v-flex>
+					          						
+				          						</td>
+				          						<td align="center">
+				          							<v-flex xs12 sm12 md12>
+				          								<v-select v-model="checkItm.substract" :items="selectItem"></v-select>
+				          							</v-flex>
+				          						</td>
+				          						<td align="center">
+				          							<v-flex xs12 sm8 md8>
+				          								<v-select sm1 md1 v-model="checkItm.price_prefix" :items="signSelect"></v-select>
+				          							
+				          							
+				          								<v-text-field sm1 md1 type="number" v-model="checkItm.price"></v-text-field>
+				          							</v-flex>
+				          							
+				          						</td>
+				          						<td align="center">
+				          							<v-flex xs12 sm8 md8>
+				          								<v-select v-model="checkItm.points_prefix" :items="signSelect"></v-select>
+				          							
+				          							
+				          								<v-text-field type="number" v-model="checkItm.points"></v-text-field>
+				          							</v-flex>
+				          							
+				          						</td>
+				          						<td align="center">
+				          							<v-flex xs12 sm8 md8>
+				          								<v-select v-model="checkItm.weight_prefix" :items="signSelect"></v-select>
+				          							
+				          							
+				          								<v-text-field type="number" v-model="checkItm.weight"></v-text-field>
+				          							</v-flex>
+				          						</td>
+				          						<td align="center">
+				          							<span @click="optItem.checkItem.splice(index,1)" style="cursor: pointer;"> 
+														<v-icon large material-icons color="red darken">indeterminate_check_box</v-icon>
+											     	</span>
+				          						</td>
+				          					</tr>
+			          					<tr >
+											<td colspan="6"></td>
+											<td align="center">
+												<span @click="addOption(show)" style="cursor: pointer;">
+										     		<v-icon large material-icons color="blue darken">add_box</v-icon>
+										     	</span>
+											</td>
+										</tr>
+			          				</tbody>
+			          			</table>
+			          		</div>
+		          			<v-flex v-if="optItem.text=='date'" xs12 sm6 md6 l6>
 			          			<v-menu
 						          lazy
 						          :close-on-content-click="false"
@@ -118,7 +116,7 @@
 						            prepend-icon="event"
 						            readonly
 						          ></v-text-field>
-						          <v-date-picker v-model="optItem.value"  no-title scrollable actions>
+						          <v-date-picker v-model="optItem.value"  no-title scrollable actionsv :date-format="date=>new Date(date).toTimeSting()" :formatted-value.sync="optItem.value">
 						            <template slot-scope="{ save, cancel }">
 						              <v-card-actions>
 						                <v-spacer></v-spacer>
@@ -129,7 +127,37 @@
 						          </v-date-picker>
 						        </v-menu>
 						    </v-flex>
-		          		</div>
+						    <v-flex v-if="optItem.text=='time'" xs12 sm6 md6 l6>
+						    	<v-menu
+						          ref="menuTime"
+						          lazy
+						          :close-on-content-click="false"
+						          v-model="menu2"
+						          transition="scale-transition"
+						          offset-y
+						          full-width
+						          :nudge-right="40"
+						          max-width="290px"
+						          min-width="290px"
+						          :return-value.sync="optItem.value"
+						        >
+						          <v-text-field
+						            slot="activator"
+						            label="Picker in menuTime"
+						            v-model="optItem.value"
+						            prepend-icon="access_time"
+						            readonly
+						          ></v-text-field>
+						          <v-time-picker v-model="optItem.value" @change="$refs.menuTime.save(time)"></v-time-picker>
+						        </v-menu>
+						    </v-flex>
+		          			<v-flex v-if="optItem.text=='text'" xs12 sm6 md6 l6>
+		          				<v-text-field label="Option Value" v-model="optItem.value" />
+		          			</v-flex>
+		          			<v-flex v-if="optItem.text=='textarea'" xs12 sm12 md12 l12>
+		          				<v-text-field label="Option Value" v-model="optItem.value" textarea />
+		          			</v-flex>
+		          		</v-layout>
 		          	</div>
 		          </div>
 				</v-flex>
@@ -150,8 +178,10 @@
 		data(){
 			return {
 				search:null,//for option search
+				time: null,//time Picker
 				date: null,//date picker
     			menu: false,//menu of date picker
+    			menu2:false,//menu of time picker
 				options:[],//for option to select as product option
 				product_option_id:0,
 				opt:'text',
@@ -171,7 +201,6 @@
 		},
 		created(){
 			this.getOptions()
-			this.getCheckbox(0)
 			this.show=this.formDatas[0]
 		},
 		watch:{
@@ -188,6 +217,7 @@
 						}
 						vm.formDatas.push(itemArr)
 						vm.formDatas.forEach(function(v,i){
+							vm.getChildOption(v.product_option_id)
 							vm.show=i
 						})	
 					}
@@ -200,8 +230,8 @@
 					this.options=res.data
 				})
 			},
-			getCheckbox:function(){
-				axios.get('/api/getCheckbox').then(res=>{
+			getChildOption:function(optID){
+				axios.get('/api/getChildOption/'+optID).then(res=>{
 					this.checkItem=res.data
 				})
 			},
@@ -257,5 +287,15 @@
 	}
 	table.chk-tbl tr td{
 		border: solid 1px #d9dbdd;
+	}
+	.chip-box{
+		display: inline-block;
+		width: auto;
+		padding: 3px 3px 3px 3px;
+		border-radius: 2px;
+		top: 10px !important;
+		margin-right: 3px !important;
+		border: solid 1px #42c0ff;
+		cursor: pointer;
 	}
 </style>
