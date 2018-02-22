@@ -257,7 +257,7 @@ import BackendInformationEdit from './views/Components/backend/informations/Info
 // //***** ProductAttribute*****
 // import productAttr from './views/Components/backend/products/attributes/ProductAttribute.vue'
 // import ProductAttributeList from './views/Components/backend/products/attributes/ProductAttributeList.vue'
-import ProductAttributeForm from './views/Components/backend/products/attributes/ProductAttributeForm.vue'
+//import ProductAttributeForm from './views/Components/backend/product_attribute/ProductAttributeForm.vue'
 //import ProductOptionForm from './views/Components/backend/product_options/ProductOptionForm.vue'
 // import ProductAttributeEdit from './views/Components/backend/products/attributes/ProductAttributeEditForm.vue'
 
@@ -1132,9 +1132,9 @@ const router = new VueRouter({
             }
         ]       
     },
-    {
-      path:'/admin/test/proAttr',name:'proAtrribute',component:ProductAttributeForm
-    },
+    // {
+    //   path:'/admin/test/proAttr',name:'proAtrribute',component:ProductAttributeForm
+    // },
  //    {
 	// 	path:'/admin/test/proOpt',name:'productOption',component:ProductOptionForm
 	// }

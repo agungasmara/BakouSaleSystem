@@ -5,7 +5,7 @@
 			<v-select :label="input.text"  :rules="formRules[input.key]" v-model="formDatas[input.key]" :items="selectItems[input.items]" required></v-select>
 			</div>
 			<div v-if="input.type=='multiple'">
-				<v-select :label="input.text"  :rules="formRules[input.key]" v-model="formDatas[input.key]" :items="selectItems[input.items]" autocomplete :loading="loading" multiple cache-items chips required :search-input.sync="search"></v-select>
+				<v-select :label="input.text"  :rules="formRules[input.key]" v-model="formDatas[input.key]" :items="selectItems[input.items]" autocomplete :loading="loading" multiple cache-items chips clearable required :search-input.sync="search"></v-select>
 			</div>
 			<div v-if="input.type=='image'">
 				<input type="file" id="fileInput"  style="display:none" ref="fileInput" accept="image/*" @change="onFilePicked">
@@ -23,11 +23,11 @@
 								</v-layout>
 							</v-card>
 							
-							<v-card style="height: 200px;" v-if="!formDatas[input.key]" @click="onPickFile">
-								<v-layout align-center justify-center style="margin-top:75px;">
-							    	<v-icon dark color="blue" x-large>backup</v-icon>
+							<v-flex style="height: 200px;" v-if="!formDatas[input.key]" @click="onPickFile">
+								<v-layout align-center justify-center >
+									<img class="image-dummy" width="200px" :src="'/images/icon/Antu_folder-camera.svg.png'">
 								</v-layout>
-							</v-card>
+							</v-flex>
 					</label>
 				</v-layout>
 			</div>

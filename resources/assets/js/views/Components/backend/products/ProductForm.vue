@@ -85,11 +85,21 @@
 														v-bind:select-items="select"
 														
 													></form-group>
-											    	
+											    <div v-if="item.form=='attributes'">
+											    	<pro-attribute v-bind:form-datas="data[item.form]"></pro-attribute>
+											    </div>	
 											    <div v-if="item.form=='option'">
 											    	<pro-option v-bind:form-datas="data[item.form]"></pro-option>
 											    </div>	
-											    
+											    <div v-if="item.form=='discount'">
+											    	<discount v-bind:form-datas="data[item.form]"></discount>
+											    </div>	
+											    <div v-if="item.form=='special'">
+											    	<special v-bind:form-datas="data[item.form]"></special>
+											    </div>	
+											    <div v-if="item.form=='gallery'">
+											    	<product-gallery v-bind:form-datas="data[item.form]"></product-gallery>
+											    </div>	
 											</v-container>
 					                      </div>
 					                    </div>
@@ -129,11 +139,20 @@
 	import Flash from '../../../../helper/flash'
 	import axios from 'axios'
 	import formGroup from '../commons/form/formGroup.vue'
-	import proOption from '../product_options/productOptionForm.vue'
+	import proOption from '../product_feilds/product_options/productOptionForm.vue'
+	import proAttribute from '../product_feilds/product_attribute/productAttributeForm.vue'
+	import discount from '../product_feilds/discount/DiscountForm.vue'
+	import special from '../product_feilds/special/SpecialForm.vue'
+	import productGallery from '../product_feilds/gallery/ProductGallery.vue'
 	export default{
 		props:['id'],
 		components: {
-			formGroup,proOption
+			formGroup,
+			proOption,
+			proAttribute,
+			discount,
+			special,
+			productGallery
 		},
 		data(){
 			return{
@@ -210,7 +229,7 @@
 						info_description:'',
 						title:'Product Gallary',
 						icon:'info_outline',
-						form:'gallary',
+						form:'gallery',
 					},
 
 				],
@@ -253,18 +272,18 @@
 						{	class:'xs12 sm6',	 text:'Status',	key:'status',	type:'select',	Value:'',	items:'status'	},
 					],
 					links:[
-						{	class:'xs12 sm6',	 text:'Categories',	key:'category_id',	type:'select',	 Value:''	,items:'categories'},
-						{	class:'xs12 sm6',	 text:'Filter',	key:'filter_id',	type:'select',	 Value:''	,items:'aaaa'},
-						{	class:'xs12 sm6',	 text:'Store',	key:'store_is',	type:'select',	 Value:''	,items:'aaaa'},
-						{	class:'xs12 sm6',	 text:'Downloads',	key:'downloads',	type:'select',	 Value:''	,items:'aaaa'},
-						{	class:'xs12 sm12',	 text:'Related Product',	key:'related_product',	type:'select',	 Value:''	,items:'aaaa'},
+						{	class:'xs12 sm12',	 text:'Categories',	key:'category_id',	type:'multiple',	 Value:''	,items:'categories'},
+						{	class:'xs12 sm12',	 text:'Filter',	key:'filter_id',	type:'multiple',	 Value:''	,items:'aaaa'},
+						{	class:'xs12 sm12',	 text:'Store',	key:'store_is',	type:'multiple',	 Value:''	,items:'aaaa'},
+						{	class:'xs12 sm12',	 text:'Downloads',	key:'downloads',	type:'multiple',	 Value:''	,items:'aaaa'},
+						{	class:'xs12 sm12',	 text:'Related Product',	key:'related_product',	type:'multiple',	 Value:''	,items:'aaaa'},
 
 					],
 					attributes:[],
 					option:[],
 					discount:[],
 					special:[],
-					allary:[],
+					gallery:[],
 
 				},
 				rules:{
@@ -276,11 +295,11 @@
 						image:''
 					},
 					links:{},
-					attributes:{},
+					attributes:[],
 					option:[],
-					discount:{},
-					special:{},
-					allary:{},
+					discount:[],
+					special:[],
+					gallery:[],
 				},
 				select:{
 					categories:[],
