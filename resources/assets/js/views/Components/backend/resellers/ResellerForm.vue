@@ -200,7 +200,6 @@
 						
 					],
 					data:[
-						{	class:'xs12 sm6',	 text:'Price',	key:'config_comment',	type:'text',	 Value:''},
 						{	class:'xs12 sm6',	 text:'Price',	key:'config_open',	type:'text',	 Value:''},
 						{	class:'xs12 sm6',	 text:'Price',	key:'config_image',	type:'text',	 Value:''},
 						{	class:'xs12 sm6',	 text:'Price',	key:'config_fax',	type:'text',	 Value:''},
@@ -210,6 +209,7 @@
 						{	class:'xs12 sm6',	 text:'Price',	key:'config_owner',	type:'text',	 Value:''},
 						{	class:'xs12 sm6',	 text:'Price',	key:'config_name',	type:'text',	 Value:''},
 						{	class:'xs12 sm6',	 text:'Price',	key:'config_telephone',	type:'text',	 Value:''},
+						{	class:'xs12 sm6',	 text:'Price',	key:'config_comment',	type:'text',	 Value:''},
 						
 					],
 					links:[

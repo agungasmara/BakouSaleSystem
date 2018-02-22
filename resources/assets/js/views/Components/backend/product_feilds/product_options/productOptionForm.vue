@@ -48,7 +48,7 @@
 				          						</td>
 				          						<td align="center">
 				          							<v-flex xs12 sm12 md12>
-				          								<v-select v-model="checkItm.substract" :items="selectItem"></v-select>
+				          								<v-select v-model="checkItm.subtract" :items="selectItem"></v-select>
 				          							</v-flex>
 				          						</td>
 				          						<td align="center">
@@ -205,7 +205,7 @@
 					if(v.value==vm.opt){
 						var itemArr={
 							text:v.text,
-							product_option_id:v.value,
+							option_id:v.value,
 							required:1,
 							value:null,
 							checkItem:[]
@@ -238,7 +238,7 @@
 				var optionArr={
 					option_value_id:0,
 					quantity:0,
-					substract:1,
+					subtract:1,
 					price_prefix:null,
 					price:0,
 					points_prefix:null,
