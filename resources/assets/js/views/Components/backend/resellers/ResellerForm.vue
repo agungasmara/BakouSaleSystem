@@ -1,4 +1,15 @@
-<template id="{{ $route.params.id }}">
+<template>
+<!-- 	<v-app id="inspire">
+		<multi-group
+			
+			v-bind:form-items="tabs"
+			v-bind:form-rules="rules"
+			v-bind:form-datas="data"
+			v-bind:select-items="select"
+			
+		></multi-group>
+	</v-app> -->
+
 	<v-app id="inspire">
 		<!-- <normal-form
 			v-bind:url="url"
@@ -23,17 +34,17 @@
 				<div class="row container">
 				  <div class="container">
 				    <div class="col s10 m6 l6">
-				      <h5 class="breadcrumbs-title">Resellers</h5>
+				      <h5 class="breadcrumbs-title">Products</h5>
 				      	<v-breadcrumbs>
 				        	<v-icon slot="divider">/</v-icon>
-			        		<v-breadcrumbs-item  v-for="item in breadcrumbs" :key="item.text" :disabled="item.disabled">
-			          			{{ item.text }}
+			        		<v-breadcrumbs-item  v-for="breadcrumb in breadcrumbs" :key="breadcrumb.text" :disabled="breadcrumb.disabled">
+			          			{{ breadcrumb.text }}
 			        		</v-breadcrumbs-item>
 			      		</v-breadcrumbs>
 				    </div>
 				    <div class="col s2 m6 l6">
-				     	<router-link to="/admin/reseller/list" replace><v-btn class="btn dropdown-settings waves-effect waves-light breadcrumbs-btn right" color="success">Back</v-btn></router-link>
-				    	<router-link to="/admin/reseller/list" replace><v-btn color="primary" class="btn dropdown-settings breadcrumbs-btn right">Save</v-btn></router-link>
+				     	<router-link :to="back" replace><v-btn class="btn dropdown-settings waves-effect waves-light breadcrumbs-btn right" color="success">Back</v-btn></router-link>
+				    	<v-btn @click="submit()" color="primary" class="btn dropdown-settings breadcrumbs-btn right">Save</v-btn>
 				    </div>
 				  </div>
 				</div>
@@ -48,170 +59,60 @@
 		                  
 		                  <div class="container">
 		                    <v-form v-model="valid" ref="form" lazy-validation>
-		                    	<!-- /start -->
-		                    	<div class="row">
-			                    	<div class="col s12 m12 l3">
-			                    		<div class="row">
-				                    		<h4 class="header">Store</h4>
-				                    		<div>
-				                    			Configure your reseller store to enable activate. 
+		                    	<div v-for="item in section">
+			                    	<!-- /start -->
+			                    	<div class="row">
+				                    	<div class="col s12 m12 l2">
+				                    		<div class="row">
+					                    		<h4  class="header"> {{item.info_title}} </h4>
+					                    		<div>
+					                    			{{item.info_description}}
+					                    		</div>
 				                    		</div>
-			                    		</div>
-			                    	</div>
-			                    	<div class="col s12 m12 l6">
-				                      
-				                      <div class="row">
-				                      	<v-container grid-list-md>
-				                      		<h4 class="header"><i class="material-icons text-left">info_outline</i> &nbsp; Reseller Information</h4>
-				                      		<div class="divider"></div>
-										    <v-layout row wrap>
-										    	<v-flex xs6 sm6 md6>
-										      		<v-text-field label="First Name" v-model="product_name"/></v-text-field>
-										      	</v-flex>
+				                    	</div>
+				                    	<div class="col s12 m12 l8">
+					                      
+					                      <div class="row">
+					                      	<v-container grid-list-md>
+					                      		<h4 class="header"><i class="material-icons text-left"> {{item.icon}} </i> {{item.title}} </h4>
+					                      		<div class="divider"></div>
+											    
+											    	<form-group
+				
+														v-bind:form-items="group[item.form]"
+														v-bind:form-rules="rules"
+														v-bind:form-datas="data[item.form]"
+														v-bind:select-items="select"
+														
+													></form-group>
+											    	
+											    
+											    
+											</v-container>
+					                      </div>
+					                    </div>
+					                    <div class="col s12 m12 l2">
+					                    	
+				                    		<div class="row" v-if="item.profile">
+					                    		<h4 class="header">
+						                    	<center> Product Image </center>
+						                    	</h4>
+						                    		
+							                    	<form-group
+														v-bind:form-items="group[item.profile]"
+														v-bind:form-rules="rules"
+														v-bind:form-datas="data.data"
+														v-bind:select-items="select"
+														
+													></form-group>
+					                    	</div>
+					                    </div>
+					                </div>
+			                      	<div class="clearfix"></div>
+			                    	<!-- */end  -->
+		                    	</div>
 
-										    	<v-flex xs6 sm6 md6>
-										      		<v-text-field label="Last Name" v-model="code"/></v-text-field>
-										      	</v-flex>
-
-										      	<v-flex xs6 sm6 md6>
-										      		<v-text-field label="Owner" v-model="code"/></v-text-field>
-										      	</v-flex>
-
-										      	<v-flex xs6 sm6 md6>
-										      		<v-text-field label="Company" v-model="code"/></v-text-field>
-										      	</v-flex>
-
-										      	<v-flex xs6 sm6 md6>
-										      		<v-text-field label="Primary Email" v-model="code"/></v-text-field>
-										      	</v-flex>
-
-										      	<v-flex xs6 sm6 md6>
-										      		<v-text-field label="Secondary Email" v-model="code"/></v-text-field>
-										      	</v-flex>
-
-										      	<v-flex xs6 sm6 md6>
-										      		<v-text-field label="Website" v-model="code"/></v-text-field>
-										      	</v-flex>
-
-										      	<v-flex xs6 sm6 md6>
-										      		<v-text-field label="Telephone 1" v-model="code"/></v-text-field>
-										      	</v-flex>
-
-										      	<v-flex xs6 sm6 md6>
-										      		<v-text-field label="Telephone 2" v-model="code"/></v-text-field>
-										      	</v-flex>
-
-										      	<v-flex xs6 sm6 md6>
-										      		<v-select label="Country" required></v-select>
-										      	</v-flex>
-
-										      	<v-flex xs6 sm6 md6>
-										      		<v-select label="Province" required></v-select>
-										      	</v-flex>
-
-										      	<v-flex xs6 sm6 md6>
-										      		<v-select label="City" required></v-select>
-										      	</v-flex>
-
-										      	<v-flex xs6 sm6 md6>
-										      		<v-text-field label="Code" v-model="code"/></v-text-field>
-										      	</v-flex>
-
-										      	<v-flex xs12 sm12 md12>
-										      		<v-text-field label="Address 1" v-model="code"/></v-text-field>
-										      	</v-flex>
-
-										      	<v-flex xs12 sm12 md12>
-										      		<v-text-field label="Address 2" v-model="code"/></v-text-field>
-										      	</v-flex>
-										      	
-										    </v-layout>
-										</v-container>
-				                      </div>
-				                    </div>
-				                    <div class="col s12 m12 l3">
-				                    	<img src="/images/NoPicture.png"/>
-				                    </div>
-				                </div>
-		                      	<div class="clearfix"></div>
-		                    	<!-- */end  -->
-
-		                    	<!-- /start -->
-		                    	<div class="row">
-			                    	<div class="col s12 m12 l3">
-			                    		<div class="row">
-				                    		<h4 class="header"></h4>
-			                    		</div>
-			                    	</div>
-			                    	<div class="col s12 m12 l6">
-				                      
-				                      <div class="row">
-				                      	<v-container grid-list-md>
-				                      		<h4 class="header"><i class="material-icons text-left">info_outline</i> &nbsp; Store Owner Login</h4>
-				                      		<div class="divider"></div>
-										    <v-layout row wrap>
-										    	<v-flex xs12 sm12 md12>
-										      		<v-text-field label="Email" v-model="code"/></v-text-field>
-										      	</v-flex>
-
-										    	<v-flex xs6 sm6 md6>
-										      		<v-text-field label="Password" required v-model="code"/></v-text-field>
-										      	</v-flex>
-
-										      	<v-flex xs6 sm6 md6>
-										      		<v-text-field label="Confirm Password" required v-model="code"/></v-text-field>
-										      	</v-flex>
-
-										    </v-layout>
-										</v-container>
-				                      </div>
-				                    </div>
-				                    <div class="col s12 m12 l3"></div>
-				                </div>
-		                      	<div class="clearfix"></div>
-		                    	<!-- */end  -->
-
-
-		                    	<!-- /start -->
-		                    	<div class="row">
-			                    	<div class="col s12 m12 l3">
-			                    		<div class="row">
-				                    		<h4 class="header"></h4>
-			                    		</div>
-			                    	</div>
-			                    	<div class="col s12 m12 l6">
-				                      
-				                      <div class="row">
-				                      	<v-container grid-list-md>
-				                      		<h4 class="header"><i class="material-icons text-left">info_outline</i> &nbsp; Configuration Store</h4>
-				                      		<div class="divider"></div>
-										    <v-layout row wrap>
-										    	<v-flex xs6 sm6 md6>
-										      		<v-text-field label="Store Name" v-model="code"/></v-text-field>
-										      	</v-flex>
-										      	<v-flex xs6 sm6 md6>
-										      		<v-text-field label="Currency" v-model="code"/></v-text-field>
-										      	</v-flex>
-										    	<v-flex xs6 sm6 md6>
-										      		<v-text-field label="Display Price With Tax" v-model="code"/></v-text-field>
-										      	</v-flex>
-
-										      	<v-flex xs6 sm6 md6>
-										      		<v-text-field label="Use Store Tax Address" v-model="code"/></v-text-field>
-										      	</v-flex>
-
-										      	<v-flex xs6 sm6 md6>
-										      		<v-text-field label="Use Customer Tax Address" v-model="code"/></v-text-field>
-										      	</v-flex>
-										    </v-layout>
-										</v-container>
-				                      </div>
-				                    </div>
-				                    <div class="col s12 m12 l3"></div>
-				                </div>
-		                      	<div class="clearfix"></div>
-		                    	<!-- */end  -->
-
+		                    	
 		                    </v-form>
 		                  </div>
 		                </div>
@@ -222,174 +123,210 @@
 		</section>
 	</v-app>
 </template>
-
-<style type="text/css">
-	.layout.row.wrap{padding-top:10px !important;}
-	.text-left{float: left;padding-top:5px;}
-	.row{margin-bottom:0 !important;}
-</style>
-	
 <script>
 	import Flash from '../../../../helper/flash'
 	import axios from 'axios'
-	import normalForm from '../commons/form/normalForm.vue'
+	import formGroup from '../commons/form/formGroup.vue'
 	export default{
 		props:['id'],
-		components:{
-			'normalForm':normalForm
+		components: {
+			formGroup
 		},
 		data(){
-			return {
-				dataID:0,
-				e1:true,
-				valid: true,
-				btnImageDisabled:false,
-				btnText:'Upload Image',
-				imageUrl:'',
-				image:null,
-				url:'/api/carriers/',
-				group:[
-					{	class:'xs12 sm6 md6',	 key:'username',	type:'text',	 text:'Username',count:100,	},
-					{	class:'xs12 sm6 md6',	 key:'user_group_id',	type:'select',items:'userGroupItems',	 text:'User Group',count:100	},
-					{	class:'xs12 sm6 md6',	 key:'firstname',	type:'text',	 text:'First Name',count:100	},
-					{	class:'xs12 sm6 md6',	 key:'lastname',	type:'text',	 text:'Last Name',count:100	},
-					{	class:'xs12 sm4 md4',	 key:'email',	type:'text',	 text:'Email',count:50	},
-					{	class:'xs12 sm4 md4',	 key:'code',	type:'text',	 text:'Code',count:25	},
-					{	class:'xs12 sm4 md4',	 key:'status',	type:'select',items:'statusItems',	 text:'Status',count:100	},
-					{	class:'xs12 sm12 md12',	 key:'image',	type:'image',	 Value:'Photo',count:0	}
+			return{
+				back:'/admin/reseller/list',
+				url:'/admin/api/reseller/',
+				valid:true,
+				breadcrumbs: [
+			        {
+			          text: 'Dashboard',
+			          disabled: false
+			        },
+			        {
+			          text: 'Reseller',
+			          disabled: false
+			        },
+			        {
+			          text: 'Form',
+			          disabled: true
+			        }
+		      	],
+				section:[
+					{
+						info_title:'Store',
+						info_description:'Setup your store here. ',
+						title:'General',
+						icon:'info_outline',
+						profile:'profile',
+						form:'general',
+					},
+					{
+						info_title:'Information',
+						info_description:'Setup your store information',
+						title:'Information',
+						icon:'info_outline',
+						form:'data',
+					},
+					{
+						info_title:'',
+						info_description:'',
+						title:'Localization',
+						icon:'info_outline',
+						form:'local',
+					},
+					{
+						info_title:'',
+						info_description:'',
+						title:'Optiion',
+						icon:'info_outline',
+						form:'option',
+					},
 					
+
 				],
+				group:{
+					profile:[
+						{	class:'xs12 sm12',	key:'image',	type:'image',	 Value:''},
+						
+					],
+					general:[
+						{	class:'xs12',	 text:'config_url',	key:'config_url',	type:'text',	 Value:''},
+						{	class:'xs12',	 text:'config_ssl',	key:'config_ssl',	type:'text',	 Value:''},
+						{	class:'xs12',	 text:'config_meta_title',	key:'config_meta_title',	type:'text',	 Value:''},
+						{	class:'xs12',	 text:'config_meta_description',	key:'config_meta_description',	type:'textarea',	 Value:''},
+						{	class:'xs12',	 text:'config_meta_keyword',	key:'config_meta_keyword',	type:'textarea',	 Value:''},
+						{	class:'xs12',	 text:'config_theme',	key:'config_theme',	type:'text',	 Value:''},
+						{	class:'xs12',	 text:'config_layout_id',	key:'config_layout_id',	type:'text',	 Value:''},
+						
+					],
+					data:[
+						{	class:'xs12 sm6',	 text:'Price',	key:'config_comment',	type:'text',	 Value:''},
+						{	class:'xs12 sm6',	 text:'Price',	key:'config_open',	type:'text',	 Value:''},
+						{	class:'xs12 sm6',	 text:'Price',	key:'config_image',	type:'text',	 Value:''},
+						{	class:'xs12 sm6',	 text:'Price',	key:'config_fax',	type:'text',	 Value:''},
+						{	class:'xs12 sm6',	 text:'Price',	key:'config_email',	type:'text',	 Value:''},
+						{	class:'xs12 sm6',	 text:'Price',	key:'config_geocode',	type:'text',	 Value:''},
+						{	class:'xs12 sm6',	 text:'Price',	key:'config_address',	type:'text',	 Value:''},
+						{	class:'xs12 sm6',	 text:'Price',	key:'config_owner',	type:'text',	 Value:''},
+						{	class:'xs12 sm6',	 text:'Price',	key:'config_name',	type:'text',	 Value:''},
+						{	class:'xs12 sm6',	 text:'Price',	key:'config_telephone',	type:'text',	 Value:''},
+						
+					],
+					links:[
+						{	class:'xs12 sm6',	 text:'Categories',	key:'category_id',	type:'select',	 Value:''	,items:'categories'},
+						{	class:'xs12 sm6',	 text:'Filter',	key:'filter_id',	type:'select',	 Value:''	,items:'aaaa'},
+						{	class:'xs12 sm6',	 text:'Store',	key:'store_is',	type:'select',	 Value:''	,items:'aaaa'},
+						{	class:'xs12 sm6',	 text:'Downloads',	key:'downloads',	type:'select',	 Value:''	,items:'aaaa'},
+						{	class:'xs12 sm12',	 text:'Related Product',	key:'related_product',	type:'select',	 Value:''	,items:'aaaa'},
+
+					],
+					attributes:[],
+					option:[],
+					discount:[],
+					special:[],
+					allary:[],
+
+				},
 				rules:{
-					username: [
-				      (v) => !!v || 'Username is required',
-				      (v) => v && v.length <= 16 || 'Username must be less than 16 characters'
-				    ],
-					firstname: [
-				      (v) => !!v || 'First Name is required',
-				      (v) => v && v.length <= 10 || 'First Name must be less than 10 characters'
-				    ],
-				    lastname: [
-				      (v) => !!v || 'Last Name is required',
-				      (v) => v && v.length <= 10 || 'Last Name must be less than 10 characters'
-				    ],
-				    email: [
-				      (v) => !!v || 'E-mail is required',
-				      (v) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
-				    ],
-				    code: [
-				      (v) => !!v || 'Code is required',
-				      (v) => v && v.length <= 8 || 'Code must be less than 8 characters'
-				    ]
+					
 				},
 				data:{
-					username:'dgdg',
-					firstname: 'dgadg',
-					lastname: 'dgdg',
-					email:'dgadgad@ddgd.com',
-					code: 'dgdag',
-					status:0,
-					user_group_id:1,
-					image:''
+					general:{},
+					data:{
+						image:''
+					},
+					links:{},
+					attributes:{},
+					option:[],
+					discount:{},
+					special:{},
+					allary:{},
 				},
-				selects:{
-					statusItems:[
+				select:{
+					categories:[],
+					manufacturer:[],
+					status:[
 						{text:'Acitve',value:1},
 						{text:'Inactive',value:0}
 					],
-					userGroupItems:[]
 				},
-			    error:false,
-		    	message:[],
-			    select: null,
-			    items: [],
-			    selectGroup:null,
-			    groups:[],
-			    breadcrumbTitle:'View Resellers',
-				breadcrumbs: [
-			        {
-			          text: 'Home',
-			          disabled: false
-			        },
-			        {
-			          text: 'Resellers',
-			          disabled: false
-			        },
-			        {
-			          text: 'View',
-			          disabled: true
-			        }
-			    ],
-			    backUrl:'/admin/reseller/list',
-				flash:Flash.state
+			}
+		},
+		mounted(){
+			if(this.id){
+			 	this.fetchData(this.id)
 			}
 		},
 		created(){
-			this.dataID=this.id
-			this.getUserGroup()
-			this.fetchData(this.id)
+			this.getCategories()
+			this.getManufacturers()
 		},
 		methods:{
-			getImage(event){
-				console.log('data after child handle: ', event)
+			getCategories(){
+				axios.get('/admin/api/getCategories').then((res)=>{
+					this.select.categories=res.data
+				})
 			},
-			getUserGroup(){
-				axios.get('/api/users_group').then((res)=>{
-					this.selects.userGroupItems=res.data
+			getManufacturers(){
+				axios.get('/admin/api/getManufacturers').then((res)=>{
+					this.select.manufacturer=res.data
 				})
 			},
 			fetchData(id){
-				axios.get(this.url+id+'/edit').then((res)=>{
-					// this.data.user_group_id=res.data.user_group_id
-					// this.data.username=res.data.username
-					// this.data.firstname=res.data.firstname
-					// this.data.lastname=res.data.lastname
-					// this.data.email=res.data.email
-					// this.data.code=res.data.code
-					// this.data.status=res.data.status
-					// this.data.image=res.data.image
+				axios.get(this.url+id+'/edit').then(res=>{
 					this.data=res.data
-				})
+				});
 			},
-			
-		    checkPasswordConfirmed(){
-	    		if(this.password===this.confirmPassword){
-		        	this.error=false
-		        }else{
-		        	if(this.confirmPassword===""){
-		        		this.error=false
-		        	}else{
-		        		this.error=true
-		        	}
-		        }
-		        return this.error
+			submit (opt=1) {
+		      	if (this.$refs.form.validate()) {
+			        // Native form submission is not yet supporte
+			        
+			        if(!this.id){
+			        	axios.post(this.url,
+				          this.data
+				        ).then((res)=>{
+				        	console.log(res.data)
+				        	if(res.data.success==true){
+				        		Flash.setSuccess(res.data.message)
+				        		this.$refs.form.reset()
+				        		// if(opt==2){
+				        			this.$router.push(this.back)
+				        		// }
+				        	}else{
+				        		Flash.setError(res.data.message)
+				        	}
+				        })
+				        .catch((err) => {
+	      //                 	if(err.response.status === 422) {
+	      //                     	this.error = err.response.message
+							// }
+							Flash.setError('Error while saving data')
+	                  	})
+			        }else{
+			        	console.log(this.formDatas)
+			        	axios.put(this.url+this.id,
+				          	this.data
+				        ).then((res)=>{
+				        	console.log(res.data)
+				        	if(res.data.success==true){
+				        		Flash.setSuccess(res.data.message)
+				        		// if(opt==2){
+				        			this.$router.push(this.back)
+				        		// }
+				        	}else{
+				        		Flash.setError(res.data.message)
+				        	}
+				        })
+				        .catch((err) => {
+	      //                 	if(err.response.status === 422) {
+	      //                     	this.error = err.response.message
+							// }
+							Flash.setError('Error while updateing data')
+	                  	})
+			        }
+			        
+		      	}
 		    },
-		    onPickFile() {
-		    	this.btnImageDisabled=true
-		    	this.btnText="Uploading..."
-		        this.$refs.fileInput.click()
-		    },
-		    onFilePicked(event){
-		    	
-		    		
-		    	const files=event.target.files
-		    	let filename=files[0].name;
-		    	if(filename.lastIndexOf('.')<=0){
-		    		return alert('Please add a valid file!')
-		    	}
-		    	const fileReader=new FileReader()
-		    	fileReader.addEventListener('load',()=>{
-		    		
-		    		this.imageUrl=fileReader.result
-					this.btnImageDisabled=false
-		    		this.btnText="Upload Image"
-		    	
-		    	})
-		    	fileReader.readAsDataURL(files[0])
-		    	
-		    },
-		    clearImage(){
-		    	this.imageUrl=''
-		    }
 		}
 	}
 </script>
