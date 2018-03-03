@@ -20,7 +20,6 @@ class CategoryController extends Controller
         //
         // return view('frontend.category');
         $category_id = 0;
-        dd($category_id);
         // $category_info = $this->getCategory($category_id);
     }
 
@@ -142,7 +141,7 @@ class CategoryController extends Controller
     public function getProducts($data = array()){
         // dd($data['filter_category_id']);
         $sql = DB::table('product')
-                ->select('product.product_id',DB::raw('(SELECT AVG(rating) AS total FROM sg_review r1 
+                ->select('product_to_category.category_id','product.product_id',DB::raw('(SELECT AVG(rating) AS total FROM sg_review r1 
                 WHERE r1.product_id = sg_product.product_id AND r1.status = 1 
                 GROUP BY r1.product_id) AS rating'),DB::raw('(SELECT price FROM sg_product_discount pd2 WHERE pd2.product_id = sg_product.product_id 
                 AND pd2.customer_group_id = 1 AND pd2.quantity = 1  AND ((pd2.date_start = 0000-00-00
@@ -155,11 +154,14 @@ class CategoryController extends Controller
                 ->leftJoin('product_description','product.product_id','=','product_description.product_id')
                 ->leftJoin('product_to_store','product.product_id','=','product_to_store.product_id')
                 // ->join('product_to_category as p2c','p2c.category_id','=',$data['filter_category_id'])
+                 ->join('product_to_category','product.product_id','=','product_to_category.product_id')
                 ->where('product_description.language_id',1)
                 ->where('product.status',1)
                 ->where('product.date_available','<=',Carbon::today())
                 ->where('product_to_store.store_id',0)
+                ->where('product_to_category.category_id',$data['filter_category_id'])
                 ->groupBy('product_description.name')
+                ->groupBy('product_to_category.category_id')
                 ->groupBy('product.product_id');
                 // ->limit(4);
                 // ->get();
@@ -178,8 +180,9 @@ class CategoryController extends Controller
 
         $product_data = array();
         foreach ($query as $result) {
-            $product_data[] = $this->getProduct($result->product_id);
-        }
+
+            $product_data[] = $this->getProduct($result->product_id,$result->category_id);
+        }        
         return $product_data;
                 
     }
