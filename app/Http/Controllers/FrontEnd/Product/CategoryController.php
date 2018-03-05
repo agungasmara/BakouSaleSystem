@@ -52,7 +52,6 @@ class CategoryController extends Controller
      */
     public function show($category_id)
     {
-
         if (isset($_REQUEST['filter'])) {
 
             $filter = $_REQUEST['filter'];

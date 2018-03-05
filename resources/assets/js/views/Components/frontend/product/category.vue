@@ -918,18 +918,16 @@
         response: null,
       }
     },
-    created() {
-    	this.loading = true
-        axios.get(`/api/category/`+this.id)
-        .then(response => {
-            this.response = response.data['data']
+    watch:{
+        '$route.params.id': function (id) {
+            this.productByCategory(id);
             this.isActive = !this.isActive
-        })
-        .catch(e => {
-          this.errors.push(e)
-        })
-
+        }
     },
+    created() {
+        this.productByCategory(this.id)
+    },
+
     locales: {
         en: {
             'entry_personal_information': 'My personal information',
@@ -949,6 +947,18 @@
         // return this.$scopedSlots.default({
         //   response: this.response.data['data']
         // })
+    },
+    methods:{
+        productByCategory(id){
+            axios.get(`/api/category/`+this.id)
+	        .then(response => {
+	            this.response = response.data['data']
+	            this.isActive = !this.isActive
+	        })
+	        .catch(e => {
+	          this.errors.push(e)
+	        })
+        } 
     }
   }
 </script>

@@ -36,8 +36,7 @@ class LastestController extends Controller
             // 'limit' => $setting['limit']
         );
 
-        $results = $this->getProducts($filter_data);
-        // dd($results);
+        $results = $this->getProducts($filter_data);        
         $products = array();
         if($results){
             foreach ($results as $p) {
@@ -52,7 +51,7 @@ class LastestController extends Controller
                         'price'       => $p->price,
                         'special'     => $p->special,
                         // 'tax'         => $p->tax,
-                        'rating'      => $p->rating,
+                        'rating'      => $p->rating
                         // 'href'        => $this->url->link('product/product', 'product_id=' . $p->product_id)
                     );
                 // }   
