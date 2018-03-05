@@ -1,6 +1,6 @@
 <template>
     <!--<section id="content">-->
-    <section>
+    <section style="margin-top:100px;">
       <!--breadcrumbs start-->
       <!--<div id="breadcrumbs-wrapper" style="display: none;">-->
         <!-- Search for small screen -->
@@ -44,43 +44,53 @@
           <!--Basic Form-->
           <!--<div id="basic-form" class="section">
             <div class="row">-->
-              <v-app id="inspire" style="marign-top:100px">
-                <v-flex xs12 offset-xs0 sm4 offset-sm4 md4 offset-md4>
+              <!-- #########logo -->
+              <center>
+                <div style="padding:40px 0 20px 0;"><img src="/images/logo/bakou.png"/></div>
+              </center>
+
+              <v-app id="inspire" style="marign-top:150px">
+                <v-flex xs12 offset-xs0 sm4 offset-sm6 md4 offset-md4>
                   <v-card>
                     <!--<div class="flash flash__success" v-if="flash.success">
                       {{flash.success}}
                     </div>-->
                     <v-form v-model="valid" ref="form" lazy-validation @submit.prevent="login">
-                            <v-alert class="success" value='true' v-if="flash.success">
-                                <v-icon>home</v-icon> {{flash.success}}
-                            </v-alert>
-                            <v-alert class="danger" value='true' v-if="flash.error">
-                                {{ flash.error }}
-                            </v-alert>
-                            <!--<v-badge class="badge--left" value='true'><span class="badge__badge primary">6<span></span></span></v-badge>-->
-                            <v-alert class="info" value='true' v-if="!flash.success && !flash.error">
-                                <v-icon>home</v-icon> Sign In
-                            </v-alert>
-                            <!-- <div class="flash flash-success" v-if="flash.success">
-                                {{ flash.success }}
-                            </div> -->
-                            
-                            <v-flex xs10 offset-xs1 sm10 offset-sm1 md10 offset-md1>
-                                <v-text-field label="Email" v-model="credential.email" :rules="credential.emailRules" required></v-text-field>
-                                <small class="error__control" v-if="error.email">{{error.email[0]}}</small>
-                            </v-flex>
-                            <v-flex xs10 offset-xs1 sm10 offset-sm1 md10 offset-md1>
-                                <v-text-field type="password" label="Password" v-model="credential.password" :rules="credential.passwordRules" required></v-text-field>
-                                <small class="error__control" v-if="error.password">{{error.password[0]}}</small>
-                            </v-flex>
-                            <v-flex xs6 offset-xs8 sm6 offset-sm8 md6 offset-md8>
-                                <v-btn type="submit" class="btn primary" :disabled="isProcessing">Login</v-btn>
-                            </v-flex>
+                        <v-alert class="success" value='true' v-if="flash.success">
+                            <v-icon>home</v-icon> {{flash.success}}
+                        </v-alert>
+                        <v-alert class="danger" value='true' v-if="flash.error">
+                            {{ flash.error }}
+                        </v-alert>
+                        <!--<v-badge class="badge--left" value='true'><span class="badge__badge primary">6<span></span></span></v-badge>-->
+                        <v-alert class="info" value='true' v-if="!flash.success && !flash.error">
+                            <center><v-icon style="float:left">home</v-icon> <div style="float:left;font-size:16px;padding-left:10px;">USER LOGIN</div></center>
+                        </v-alert>
+                        <!-- <div class="flash flash-success" v-if="flash.success">
+                            {{ flash.success }}
+                        </div> -->
+                        <div class="container">
+                          <v-flex sm12>
+                              <v-text-field label="Email" v-model="credential.email" :rules="credential.emailRules" required></v-text-field>
+                              <small class="error__control" v-if="error.email">{{error.email[0]}}</small>
+                          </v-flex>
+                          <v-flex sm12>
+                              <v-text-field type="password" label="Password" v-model="credential.password" :rules="credential.passwordRules" required></v-text-field>
+                              <small class="error__control" v-if="error.password">{{error.password[0]}}</small>
+                          </v-flex>
+                          <v-flex sm12>
+                            <div>
+                              <v-btn type="submit" class="btn primary" :disabled="isProcessing">Sign In</v-btn>
+                            </div>
+                          </v-flex>
+                        </div>
                         <!-- <div v-tabs>asf</div> -->   
                     </v-form>
                   </v-card>
                 </v-flex>
               </v-app>
+
+              <footer>Copyright&copy;2018. Power By Bakou System. All Right Reserved.</footer>
             <!--</div>
           </div>
 
@@ -88,6 +98,29 @@
       </div>-->
     </section>
 </template>
+
+<style type="text/css">
+footer{text-align: center;padding:10px 0;color:#fff;}
+.application.theme--light{background: none !important}
+.card{overflow: normal !important}
+  html body{
+    overflow-y:hidden;
+    background-image: url(/images/sea.jpg) ;
+    background-position: center center;
+    background-repeat:  no-repeat;
+    background-attachment: fixed;
+    background-size:  cover;
+    background-color: #999;
+  }
+  button.btn.primary{width: 100%;}
+  .btn.primary{margin:10px 0 !important;}
+  .alert{padding:10px;}
+  .alert.info{}
+  .application .theme--light.icon, .theme--light .icon{color:#fff !important;}
+  .application--wrap{min-height: 100%;}
+  .alert.info{background-color:#003a5d !important;color:#fff !important;}
+  button.btn.primary{background-color:#003a5d !important;}
+</style>
 
 <script type="text/javascript">
     import Flash from '../../helper/flash'

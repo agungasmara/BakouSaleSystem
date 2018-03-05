@@ -7,11 +7,11 @@
 
 header .brand-logo {
   margin: 1px 0px;
-  padding: 22px 20px;
+  /*padding: 22px 20px;*/
 }
 
 header .brand-logo img {
-  height: 18px;
+  height: none !important;
 }
 
 #layouts-horizontal .sidebar-collapse {

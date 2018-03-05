@@ -20,15 +20,16 @@ class AddressController extends Controller
 
     public function __construct(){
         $this->middleware('auth:account');
-        // $this->middleware('auth:customer', ['except' => ['logout']]);
     }
         
     public function index(){
     	if(Auth::guard('account')->id()){
-            $Address = Address::where('customer_id',Auth::guard('account')->id())->get();
-    		return response()->json(['data'=>$Address,'success' => true, 'message' => 'Success', 'lang'=>Session::get('applangId')]);
+            $sec_user_id = Auth::guard('account')->id();
+            $Address = Address::getAddress($sec_user_id);
+            return response()->json(['data'=>$Address,'success' => true, 'message' => 'Success', 'lang'=>Session::get('applangId')]);
         }else{
-          	return response()->json(['success' => false, 'message' => 'Unauthorise']);
+          	return response()->json(['success' => false, 'message' => 'Unauthorise'],404);
         }
     }
+
 }

@@ -1,4 +1,4 @@
-<?php
+    <?php
 namespace App\Jobs;
 use App\Jobs\Job;
 use App\Models\User;

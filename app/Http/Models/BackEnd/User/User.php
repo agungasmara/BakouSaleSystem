@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Models\BackEnd\UserGroup\UserGroup;
 class User extends Model
 {
-    protected $table='user';
+    protected $table='users';
     public $timestamps=false;
     protected $primaryKey='user_id';
     protected $fillable=[
@@ -31,10 +31,10 @@ class User extends Model
 	}
     static function AllUser()
     {
-        $users=DB::table('user')
-            ->join('user_group', 'user.user_group_id', '=', 'user_group.user_group_id')
+        $users=DB::table('users')
+            ->join('user_group', 'users.user_group_id', '=', 'user_group.user_group_id')
             ->select(
-                'user_id as id', 
+                'id as id', 
                 'username', 
                 'user_group.name as group',
                 'firstname',
@@ -51,29 +51,8 @@ class User extends Model
 
     static function getUserReseller($group_id)
     {
-        $users=DB::table('user')
-            ->join('user_group', 'user.user_group_id', '=', 'user_group.user_group_id')
-            ->select(
-                'user_id as id', 
-                'username', 
-                'user_group.name as group',
-                'firstname',
-                'lastname',
-                'email', 
-                'code',
-                'image',
-                'status',
-                'date_added'
-            )
-            ->where('user.user_group_id',$group_id)
-            ->get();
-        return $users;
-    }
-
-    static function getUserCarriers($group_id)
-    {
-        $users=DB::table('user')
-            ->join('user_group', 'user.user_group_id', '=', 'user_group.user_group_id')
+        $users=DB::table('users')
+            ->join('user_group', 'users.user_group_id', '=', 'user_group.user_group_id')
             ->select(
                 'id as id', 
                 'username', 
@@ -86,7 +65,28 @@ class User extends Model
                 'status',
                 'date_added'
             )
-            ->where('user.user_group_id',$group_id)
+            ->where('users.user_group_id',$group_id)
+            ->get();
+        return $users;
+    }
+
+    static function getUserCarriers($group_id)
+    {
+        $users=DB::table('users')
+            ->join('user_group', 'users.user_group_id', '=', 'user_group.user_group_id')
+            ->select(
+                'id as id', 
+                'username', 
+                'user_group.name as group',
+                'firstname',
+                'lastname',
+                'email', 
+                'code',
+                'image',
+                'status',
+                'date_added'
+            )
+            ->where('users.user_group_id',$group_id)
             ->get();
         return $users;
     }

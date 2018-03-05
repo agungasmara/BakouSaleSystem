@@ -11,6 +11,10 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
+    // public function __construct(Application $app){
+
+    // }
+
     public function boot()
     {
         //
@@ -23,6 +27,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->bind('Laravel\Passport\PassportServiceProvider',function($app){
+            return new Previewr($app);
+        });
         //
+         // $this->app->bind(NumberInterface::class, NumberServiceProvider::class);
     }
 }

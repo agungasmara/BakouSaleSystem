@@ -109,14 +109,12 @@ if (Request::is('admin*')){
                 Route::get('getCategories', 'Backend\Category\CategoryController@getCategoriesList');
                 Route::get('getCategories_type', 'Backend\Category\CategoryController@getCategoriesType');
                 Route::get('getCategories_parent', 'Backend\Category\CategoryController@getCategoriesParent');
-                 //=====Product API=============================
+                //=====Product API=============================
                 Route::resource('products', 'Backend\Products\ProductsController');
-                Route::resource('reseller', 'Backend\Stores\StoreController');
-
                 Route::get('/getManufacturers','Backend\Manufacturers\ManufacturersController@getManufacturers');
-
-
                 Route::get('/getMenus', 'Backend\Settings\GroupRolesController@index');
+                //=====User=============================
+                Route::resource('user_roles', 'Backend\UserRoles\UserRolesController');
             });
 
         }else{
@@ -134,13 +132,7 @@ if (Request::is('admin*')){
     })->name('login');
 }else if (Request::is('auth*')){
     Route::post('auth/login', 'Auth\LoginController@login');
-
     Route::get('auth/login', 'Auth\LoginController@showLoginForm');
-    // Route::get('auth/login',array('as'=>'login',function(){
-    //     // return view('auth.customer_login');
-    //     return view('index');
-    // }));
-
     Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
     Route::get('auth/logout', function()

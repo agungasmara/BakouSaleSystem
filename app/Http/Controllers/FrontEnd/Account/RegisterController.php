@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Models\FrontEnd\Account\Customer;
 use DB;
+use App\User;
 use Carbon\Carbon;
+use Validator;
 use Session;
 
 class RegisterController extends Controller
@@ -16,60 +18,58 @@ class RegisterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(){
-        $get = Customer::get();
-    }
-    public function store(Request $request)
-    {
-        $success=false;
-        $msg = '';
-        $data = $request->all();             
-        $mail = $this->getMails($request->email);
-        if($mail){
-            return redirect('account/register');
-        }else{
-            $mailCol = $data['email'];
-        }
-        $customer = array(
-            'customer_group_id'=>1,
-            'store_id'=>0,
-            'language_id'=>1,
-            'firstname'=>$data['firstname'],
-            'lastname'=>$data['lastname'],
-            'email'=>$mailCol,
-            'telephone'=>$data['telephone']?$data['telephone']:0,
-            'fax'=>$data['fax']?$data['fax']:0,
-            'password'=>bcrypt($data['password']),
-            'salt'=>1,
-            'cart'=>1,
-            'wishlist'=>1,
-            'newsletter'=>1,
-            'address_id'=>1,
-            'custom_field'=>2,
-            'ip'=>1,
-            'status'=>1,
-            'safe'=>1,
-            'token'=>1,
-            'code'=>1,
-            'date_added'=>Carbon::today()
-        );
-        $saved=Customer::create($customer);
-        if($saved){
-            $success=true;
-            $msg = "Data successfully saved";
-        }else{
-            $success=false;
-            $msg = "Already exist!";
-        }
-        return response()->json([
-            'success'=>$success,
-            'message'=>$msg
+    public function register(Request $request){
+        // dd($request->all());
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|email',
+            'password' => 'required',
+            'confirm_password' => 'required|same:password',
         ]);
+
+        if($validator->fails()) {
+            return response()->json(['error'=>$validator->errors()], 401); 
+        }
+
+        $input = $request->all();
+        if($this->checkHasAccount($input['email'])==0){
+            $input['password'] = bcrypt($input['password']);
+            // user account
+            $User = User::create([
+                'firstname'=>$input['first_name'],
+                'lastname'=>$input['last_name'],
+                'username'=>$input['email'],
+                'email'=>$input['email'],
+                'password'=>bcrypt($input['password']),
+                'user_group_id'=>6,
+            ]);
+            // account customer
+            $Customer = Customer::create([
+                'sec_user_id'=>$User->id,
+                'customer_group'=>1,
+                'language_id'=>1,
+                'firstname'=>$input['first_name'],
+                'lastname'=>$input['last_name'],
+                'email'=>$input['email'],
+                'deviceId'=>$input['deviceId']
+            ]);
+            $success['token'] =  $User->createToken('Token Name')->accessToken;
+            return response()->json(['success' => $success,'user'=>$User,'message' => 'Register successfully.'], 200);
+        }else{
+            return response()->json(['success' => false, 'message' => 'This account is already registered!'], 401);
+        }
     }
 
-    public function getMails($mail){
-        $getMail = Customer::select('email')->where('email',$mail)->first();
-        return $getMail;
+    public function checkHasAccount($email){
+        $user = User::where('email',$email)->first();
+        $result = 1;
+        if($user){
+            $result = 1;
+        }else{
+            $result = 0;
+        }
+        return $result;
     }
 
 }

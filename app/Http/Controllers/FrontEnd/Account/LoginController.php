@@ -7,9 +7,11 @@ use App\Http\Controllers\Controller;
 use App\Jobs\ChangeLocale;
 use App\Http\Models\FrontEnd\Account\Customer;
 use Illuminate\Support\Facades\Hash;
-use DB;
-use Auth;
+use Validator;
+use App\User;
 use Carbon\Carbon;
+use DB;
+use Illuminate\Support\Facades\Auth;
 use Session;
 
 class LoginController extends Controller
@@ -20,42 +22,18 @@ class LoginController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function AuthLogin(Request $request){
-        session_start();
-        // $_SESSION["account_id"] = "855";
-
-        // // remove all session variables
-        // session_unset();
-
-        // // destroy the session
-        // session_destroy(); 
-
-        $success=false;
-        $msg = '';
-        $input = $request->all();             
-        $getPassword = $this->getPassword(trim($input['email']));
-        // if(!empty($getPassword)){
-        if(!empty($getPassword) && password_verify(trim($input['password']),$getPassword->password))
-        {
-            $success=true;
-            $_SESSION["account_id"] = $getPassword->customer_id;
-            $msg = "Data successfully Login";
-        }else{
-            $success=false;
-            $msg = "Data not successfully Login!";
+    public function login(){
+        if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){
+            $user = Auth::user();
+            $success['token'] =  $user->createToken('Token Name')->accessToken;
+            $success['Customer'] = Customer::where('sec_user_id',$user->id)->first();
+            return response()->json(['success' => $success], 200);
         }
-        // }else{
-        //     $success=false;
-        //     $msg = "Data not successfully Login!";
-        // }
-
-        return response()->json([
-            'success'=>$success,
-            'message'=> $msg,
-            'param'=> $input['email'],
-            'lang'=>Session::get('applangId')
-        ]);
+        else{
+            return response()->json(['error'=>'Unauthorised'], 401);
+        }
     }
+
     public function getPassword($email){
         $row = Customer::select('customer_id','password')
                             ->where('email',$email)
@@ -65,18 +43,6 @@ class LoginController extends Controller
 
     }   
     
-    public function AuthLogout(){
-        // dd("testing");
-        session_start();
-        session_unset();
-        session_destroy();
-        return response()->json([
-            'success'=>true,
-            'message'=> "Logout successfully",
-            'lang'=>Session::get('applangId')
-        ]); 
-    }
-
     public function checkAccountAuthorize(){
         if(Auth::guard('account')->id()){
             return response()->json([

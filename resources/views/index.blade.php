@@ -49,15 +49,15 @@
     <script type="text/javascript" src="/vendors/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
     <script type="text/javascript" src="/vendors/jvectormap/vectormap-script.js"></script>
     <!--google map-->
-    <script type="text/javascript" src="/js/scripts/google-map-script.js"></script>
+    <!-- <script type="text/javascript" src="/js/scripts/google-map-script.js"></script> -->
     <!--plugins.js - Some Specific JS codes for Plugin Settings-->
     <script type="text/javascript" src="/js/plugins.js"></script>
     <!--card-advanced.js - Page specific JS-->
-    <script type="text/javascript" src="/js/scripts/dashboard-analytics.js"></script>
+    <!-- <script type="text/javascript" src="/js/scripts/dashboard-analytics.js"></script> -->
     <!--custom-script.js - Add your own theme custom JS-->
     <script type="text/javascript" src="/js/custom-script.js"></script>
-    <script src="https://unpkg.com/vue/dist/vue.js"></script>
-    <script src="https://unpkg.com/vuetify/dist/vuetify.js"></script>
+    <script src="/js/vue.js"></script>
+    <script src="/js/vuetify.js"></script>
     <!-- <script>
         new Vue({ el: '#root' })
     </script> -->

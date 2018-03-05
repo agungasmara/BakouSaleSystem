@@ -71,9 +71,9 @@
 				->OrderBy('m.ordering')
 				->get();
 
-			  foreach ($parent_menus as $parent_menu) {
-			  	 $groupMenu_id = $parent_menu->groupMenu_id;
-            	 $grouRole_id = $parent_menu->grouRole_id;
+			foreach ($parent_menus as $parent_menu) {
+			  	$groupMenu_id = $parent_menu->groupMenu_id;
+            	$grouRole_id = $parent_menu->grouRole_id;
 
 				$children_menu = array();
 				$children = DB::table("menu as m")
@@ -108,7 +108,6 @@
 					'children_menu' => $children_menu
 				);
 			}
-			// dd($menu);
 			return $menu;
 		}
 		public static function getMenusName($language_id=2,$menu_code){

@@ -42,7 +42,8 @@ return [
         ],
 
         'api' => [
-            'driver' => 'token',
+            'driver' => 'passport',
+            // 'driver' => 'token',
             'provider' => 'users',
         ],
 
@@ -86,7 +87,7 @@ return [
         ],
         'account' => [
             'driver' => 'eloquent',
-            'model' => App\Customer::class,
+            'model' => App\Account::class,
         ]
         // 'users' => [
         //     'driver' => 'database',
@@ -116,7 +117,7 @@ return [
             'expire' => 60,
         ],
         'accounts' => [
-            'provider' => 'customer',
+            'provider' => 'users',
             'table' => 'password_resets',
             'expire' => 60,
         ],

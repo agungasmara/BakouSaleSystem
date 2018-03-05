@@ -3,6 +3,8 @@
 namespace App\Http\Models\FrontEnd\Account;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Http\Models\FrontEnd\Account\Address;
+use App\Http\Models\BackEnd\Customer\Customer;
 
 class Address extends Model
 {
@@ -22,4 +24,11 @@ class Address extends Model
 						'custom_field'
 					];
 	public $timestamps = false;	
+
+	static function getAddress($sec_user_id)
+	{
+		$Customer = Customer::where('sec_user_id',$sec_user_id)->first();
+        $Address = Address::where('customer_id',$Customer->customer_id)->get();
+        return $Address;
+	}
 }

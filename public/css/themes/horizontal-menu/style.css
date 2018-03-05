@@ -6310,12 +6310,12 @@ h1 span.logo-text {
 
 header .brand-logo {
   margin: 1px 0px;
-  padding: 22px 20px;
+  /*padding: 22px 20px;*/
   line-height: 0;
 }
 
 header .brand-logo img {
-  height: 18px;
+  /*height: 18px;*/
 }
 
 @media only screen and (max-width: 992px) {
@@ -7015,7 +7015,7 @@ ul.side-nav .collapsible-header.active:after {
 Cards
 ------------------------------------------*/
 .card {
-  overflow: hidden;
+  /*overflow: hidden;*/
 }
 
 #card-stats .card-content {

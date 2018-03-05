@@ -19,6 +19,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// autentication & Security for mobile user
+Route::group(['middleware' => ['auth:api','SettingConfig']], function(){
+	Route::get('v1/address', 'FrontEnd\Account\MobileAPI\AddressController@index');
+});
+
+Route::post('account/login', 'FrontEnd\Account\LoginController@login');
+Route::post('account/register', 'FrontEnd\Account\RegisterController@register');
+
+
 //FrontEnd
 //=====Customer Register API
 Route::post('/customer/register','FrontEnd\Account\RegisterController@store');

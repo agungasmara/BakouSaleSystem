@@ -1,25 +1,24 @@
 <?php
 
 namespace App;
-
+use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\Customer as Authenticatable;
+use Illuminate\Foundation\Auth\Account as Authenticatable;
 
-class Customer extends Authenticatable
+class Account extends Authenticatable
 {
-    use Notifiable;
+    use HasApiTokens, Notifiable;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $guard = 'customer';
-    protected $table = 'customer';
-    protected $primaryKey = 'customer_id';
+    protected $table = 'users';
+    protected $primaryKey = 'id';
 
     protected $fillable = [
-        'email', 'password','api_token'
+        'name', 'email', 'password','api_token'
     ];
 
     /**
@@ -31,8 +30,4 @@ class Customer extends Authenticatable
         'password', 'remember_token','api_token'
     ];
 
-    public function recipes()
-    {
-        return $this->hasMany(Recipe::class);
-    }
 }
