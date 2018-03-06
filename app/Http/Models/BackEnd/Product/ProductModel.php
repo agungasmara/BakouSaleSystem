@@ -63,7 +63,7 @@ class ProductModel extends Model
 			return ['success'=>false,
 					'message'=>'Data fail to delete.'];
 		}
-		return ['success'=>$Product->delete(),
+		return ['deleted'=>$Product->delete(),
     			'message'=>'Data successfully deleted.'];
 	}
 	public function scopeFilter($query,$filter=array())

@@ -25,7 +25,7 @@
 						<v-progress-circular v-if="isProgessing && props.item[index.value]==curID" indeterminate :width="2" color="green"></v-progress-circular>
 						<i class="material-icons" v-else>remove_red_eye</i>
 					</span>
-					<span style="cursor:pointer;color:blue;" @click="editData(props.item[index.value])"">
+					<span style="cursor:pointer;color:blue;" @click="editData(props.item[index.value],props.item.language_id)"">
 						<i class="material-icons">edit</i>
 					</span>
 					&nbsp;
@@ -33,7 +33,7 @@
 						<i class="material-icons">delete_forever</i>
 					</span>
 				</div>
-				<span v-else>{{ props.item[index.value] }}</span>
+				<span v-else v-html="props.item[index.value]"></span>
 
 			</td>
 			
@@ -151,8 +151,13 @@
 				})
 				
 			},
-			editData(id){
-				this.$router.push('edit/'+id)
+			editData(id,lid){
+				if(lid>0){
+					this.$router.push('edit/'+id+'/'+lid)	
+				}else{
+					this.$router.push('edit/'+id)	
+				}
+				
 			},
 			changeStatus(id,value,field){
 				this.curID=id

@@ -135,6 +135,12 @@ import ProductEdit from './views/Components/backend/products/ProductEdit.vue'
 //***** End products *****
 
 //***** Attribute *****
+import Option from './views/Components/backend/options/Option.vue'
+import OptionList from './views/Components/backend/options/OptionList.vue'
+import OptionForm from './views/Components/backend/options/OptionForm.vue'
+import OptionEdit from './views/Components/backend/options/OptionEdit.vue'
+
+//***** Attribute *****
 import Attribute from './views/Components/backend/attributes/Attribute.vue'
 import AttributeList from './views/Components/backend/attributes/AttributeList.vue'
 import AttributeForm from './views/Components/backend/attributes/AttributeForm.vue'
@@ -253,7 +259,11 @@ import BackendInformationList from './views/Components/backend/informations/Info
 import BackendInformationForm from './views/Components/backend/informations/InformationForm.vue'
 import BackendInformationEdit from './views/Components/backend/informations/InformationEdit.vue'
 
-
+//***** Attribute *****
+import Banner from './views/Components/backend/banners/Banner.vue'
+import BannerList from './views/Components/backend/banners/BannerList.vue'
+import BannerForm from './views/Components/backend/banners/BannerForm.vue'
+import BannerEdit from './views/Components/backend/banners/BannerEdit.vue'
 // //***** ProductAttribute*****
 // import productAttr from './views/Components/backend/products/attributes/ProductAttribute.vue'
 // import ProductAttributeList from './views/Components/backend/products/attributes/ProductAttributeList.vue'
@@ -433,6 +443,25 @@ const router = new VueRouter({
     { path: '/admin', name:'ahome',component: Home },
     { path: '/admin/list', name:'floo',component: List },
     { path: '/register', name:'foo',component: Register },
+    { path: '/admin/options', name:'options',component: Option,
+      children: [
+        {
+          path: 'list',
+          name:'OptionList',
+          component: OptionList
+        },
+        {
+          path: 'add',
+          name:'OptionForm',
+          component: OptionForm
+        },
+        {
+          path: 'edit/:id/:lid',
+          name:'OptionEdit',
+          component: OptionEdit,props:true
+        }
+      ]
+    },
     // ***** attributes *****
     { path: '/admin/attributes', name:'attributes',component: Attribute,
       children: [
@@ -1131,6 +1160,25 @@ const router = new VueRouter({
                 props:true
             }
         ]       
+    },
+    { path: '/admin/banners', name:'banners',component: Banner,
+      children: [
+        {
+          path: 'list',
+          name:'BannerList',
+          component: BannerList
+        },
+        {
+          path: 'add',
+          name:'BannerForm',
+          component: BannerForm
+        },
+        {
+          path: 'edit/:id',
+          name:'BannerEdit',
+          component: BannerEdit,props:true
+        }
+      ]
     },
     // {
     //   path:'/admin/test/proAttr',name:'proAtrribute',component:ProductAttributeForm
