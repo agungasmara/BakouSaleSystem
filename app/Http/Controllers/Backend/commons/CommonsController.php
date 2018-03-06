@@ -88,6 +88,14 @@ class CommonsController extends Controller
         return response()->json($filterGroup);
 
     }
+    public function getFilter()
+    {
+
+        $filterGroup=DB::table('filter_description')->select(['filter_id as value','name as text'])->get();
+
+        return response()->json($filterGroup);
+
+    }
     public function getLayout()
     {
 
@@ -104,6 +112,23 @@ class CommonsController extends Controller
         return response()->json($filterGroup);
 
     }
+    public function getStockStatus()
+    {
+
+        $filterGroup=DB::table('stock_status')->select(['stock_status_id as value','name as text'])->get();
+
+        return response()->json($filterGroup);
+
+    }
+    public function getProductRelates()
+    {
+
+        $filterGroup=DB::table('product_description')->select(['product_id as value','name as text'])->get();
+
+        return response()->json($filterGroup);
+
+    }
+
     public function getChildOption($optID)
     {
 

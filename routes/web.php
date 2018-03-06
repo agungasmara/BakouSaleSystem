@@ -114,6 +114,13 @@ if (Request::is('admin*')){
                 Route::resource('reseller', 'Backend\Stores\StoreController');
 
                 Route::get('/getManufacturers','Backend\Manufacturers\ManufacturersController@getManufacturers');
+                // Route::get('/getProductSelect','Backend\Products\ProductsController@getProductSelect');
+                Route::get('/getTaxClass','Backend\commons\CommonsController@getTaxClass');
+                Route::get('/getStore','Backend\commons\CommonsController@getStore');
+                Route::get('/getStockStatus','Backend\commons\CommonsController@getStockStatus');
+                Route::get('/getProductRelates','Backend\commons\CommonsController@getProductRelates');
+                Route::get('/getFilter','Backend\commons\CommonsController@getFilter');
+
 
 
                 Route::get('/getMenus', 'Backend\Settings\GroupRolesController@index');

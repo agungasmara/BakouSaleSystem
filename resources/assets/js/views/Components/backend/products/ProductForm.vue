@@ -249,16 +249,16 @@
 					data:[
 						{	class:'xs12 sm6',	 text:'Price',	key:'price',	type:'text',	 Value:''},
 						{	class:'xs12 sm6',	 text:'Tax Class',	key:'tax_class_id',	type:'select',	 Value:'',	items:'tax_class'},
-						{	class:'xs12 sm6',	 text:'Select Model',	key:'model',	type:'text',	 Value:''},
+						{	class:'xs12 sm6',	 text:'Model',	key:'model',	type:'text',	 Value:''},
 						{	class:'xs12 sm6',	 text:'Manufacturer',	key:'manufacturer_id',	type:'select',	 Value:''	,items:'manufacturer'},
 						{	class:'xs12 sm6',	 text:'SKU',	key:'sku',	type:'text',	 Value:''},
 						{	class:'xs12 sm6',	 text:'UPC',	key:'upc',	type:'text',	 Value:''},
 						{	class:'xs12 sm6',	 text:'JAN',	key:'jan',	type:'text',	 Value:''},
-						{	class:'xs12 sm6',	 text:'Minimum',	key:'minimum',	type:'text',	 Value:''},
-						{	class:'xs12 sm6',	 text:'Quantity',	key:'quantity',	type:'text',	 Value:''},
+						{	class:'xs12 sm6',	 text:'Minimum',	key:'minimum',	type:'number',	 Value:''},
+						{	class:'xs12 sm6',	 text:'Quantity',	key:'quantity',	type:'number',	 Value:''},
 						{	class:'xs12 sm6',	 text:'StockStatus',	key:'stock_status_id',	type:'select',	 Value:'',	items:'stock_status'},
 						{	class:'xs12 sm6',	 text:'Date Available',	key:'date_available',	type:'date',	 Value:''},
-						{	class:'xs12 sm6',	 text:'Shipping',	key:'shipping',	type:'text',	 Value:''},
+						{	class:'xs12 sm6',	 text:'Shipping',	key:'shipping',	type:'select',	 Value:''	,items:'shipping'},
 						// {	class:'xs12 sm6',	 text:'Weight',	key:'weight',	type:'text',	 Value:''},
 						// {	class:'xs12 sm6',	 text:'Weight Class',	key:'weight_class_id',	type:'select',	 Value:'',	items:'weight_class'},
 						// {	class:'xs4 sm2',	 text:'Length',	key:'length',	type:'text',	 Value:''},
@@ -268,15 +268,15 @@
 						// {	class:'xs12 sm6',	 text:'Location',	key:'location',	type:'text',	 Value:''},
 						// {	class:'xs12 sm6',	 text:'Subtract',	key:'subtract',	type:'text',	 Value:''},
 						// {	class:'xs12 sm6',	 text:'Points',	key:'points',	type:'text',	 Value:''},
-						{	class:'xs12 sm6',	 text:'Sort Order',	key:'sort_order',	type:'text',	 Value:''},
+						{	class:'xs12 sm6',	 text:'Sort Order',	key:'sort_order',	type:'number',	 Value:''},
 						{	class:'xs12 sm6',	 text:'Status',	key:'status',	type:'select',	Value:'',	items:'status'	},
 					],
 					links:[
 						{	class:'xs12 sm12',	 text:'Categories',	key:'category_id',	type:'multiple',	 Value:''	,items:'categories'},
-						{	class:'xs12 sm12',	 text:'Filter',	key:'filter_id',	type:'multiple',	 Value:''	,items:'aaaa'},
-						{	class:'xs12 sm12',	 text:'Store',	key:'store_is',	type:'multiple',	 Value:''	,items:'aaaa'},
-						{	class:'xs12 sm12',	 text:'Downloads',	key:'downloads',	type:'multiple',	 Value:''	,items:'aaaa'},
-						{	class:'xs12 sm12',	 text:'Related Product',	key:'related_product',	type:'multiple',	 Value:''	,items:'aaaa'},
+						{	class:'xs12 sm12',	 text:'Filter',	key:'filter_id',	type:'multiple',	 Value:''	,items:'filter'},
+						{	class:'xs12 sm12',	 text:'Store',	key:'store_id',	type:'multiple',	 Value:''	,items:'store'},
+						{	class:'xs12 sm12',	 text:'Related Product',	key:'related_product',	type:'multiple',	 Value:''	,items:'products'},
+						{	class:'xs12 sm12',	 text:'Downloads',	key:'downloads',	type:'text',	 Value:''},
 
 					],
 					attributes:[],
@@ -308,6 +308,11 @@
 						{text:'Acitve',value:1},
 						{text:'Inactive',value:0}
 					],
+					shipping:[
+						{text:'Yes',value:1},
+						{text:'No',value:0}
+					],
+					stock_status:[],
 				},
 			}
 		},
@@ -319,6 +324,11 @@
 		created(){
 			this.getCategories()
 			this.getManufacturers()
+			this.getStore()
+			this.getTaxClass()
+			this.getStockStatus()
+			this.getProductRelates()
+			this.getFilter()
 		},
 		methods:{
 			getCategories(){
@@ -330,6 +340,32 @@
 				axios.get('/admin/api/getManufacturers').then((res)=>{
 					this.select.manufacturer=res.data
 				})
+			},
+			getStore(){
+				axios.get('/admin/api/getStore').then(res=>{
+					this.select.store=res.data
+				});
+			},
+			getTaxClass(){
+				axios.get('/admin/api/getTaxClass').then(res=>{
+					this.select.tax_class=res.data
+				});
+			},
+			
+			getStockStatus(){
+				axios.get('/admin/api/getStockStatus').then(res=>{
+					this.select.stock_status=res.data
+				});
+			},
+			getProductRelates(){
+				axios.get('/admin/api/getProductRelates').then(res=>{
+					this.select.products=res.data
+				});
+			},
+			getFilter(){
+				axios.get('/admin/api/getFilter').then(res=>{
+					this.select.filter=res.data
+				});
 			},
 			fetchData(id){
 				axios.get(this.url+id+'/edit').then(res=>{

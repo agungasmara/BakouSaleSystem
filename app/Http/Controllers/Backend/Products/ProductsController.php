@@ -8,6 +8,9 @@ use App\Http\Models\BackEnd\Product\ProductModel;
 use App\Http\Models\BackEnd\Product\ProductDescription;
 use App\Http\Models\BackEnd\Product\ProductAttribute;
 use App\Http\Models\BackEnd\Product\ProductToCategory;
+use App\Http\Models\BackEnd\Product\ProductToStore;
+use App\Http\Models\BackEnd\Product\ProductFilter;
+use App\Http\Models\BackEnd\Product\ProductRelated;
 use App\Http\Models\BackEnd\Product\ProductOption;
 use App\Http\Models\BackEnd\Product\ProductOptionValue;
 use App\Http\Models\BackEnd\Product\ProductDiscount;
@@ -46,6 +49,28 @@ class ProductsController extends Controller
         $data['date_modified']=date('Y-m-d h:i:s');
         $product_id=ProductModel::insertGetId($data);
 
+        ProductToCategory::where('product_id',$product_id)->delete();
+
+        ProductToStore::where('product_id',$product_id)->delete();
+
+        ProductFilter::where('product_id',$product_id)->delete();
+
+        ProductRelated::where('product_id',$product_id)->delete();
+
+        ProductImage::where('product_id',$product_id)->delete();
+
+        ProductAttribute::where('product_id',$product_id)->delete();
+
+        ProductOption::where('product_id',$product_id)->delete();
+
+        ProductOptionValue::where('product_id',$product_id)->delete();
+
+        ProductDiscount::where('product_id',$product_id)->delete();
+
+        ProductSpecial::where('product_id',$product_id)->delete();
+
+        ProductDescription::where('product_id',$product_id)->delete();
+
 
         if (isset($request['links']['category_id']) && $request['links']['category_id']) {
             # code...
@@ -62,10 +87,25 @@ class ProductsController extends Controller
             foreach ($request['links']['store_id'] as $item) {
                 $p2s['product_id']=$product_id;
                 $p2s['store_id']=$item;
-                ProductToCategory::insert($p2s);
+                ProductToStore::insert($p2s);
             }
         }
-
+        if (isset($request['links']['filter_id']) && $request['links']['filter_id']) {
+            # code...
+            foreach ($request['links']['filter_id'] as $item) {
+                $p2f['product_id']=$product_id;
+                $p2f['filter_id']=$item;
+                ProductFilter::insert($p2f);
+            }
+        }
+        if (isset($request['links']['related_product']) && $request['links']['related_product']) {
+            # code...
+            foreach ($request['links']['related_product'] as $item) {
+                $p2f['product_id']=$product_id;
+                $p2f['related_id']=$item;
+                ProductRelated::insert($p2f);
+            }
+        }
         $fill=(new ProductImage)->getFillable();
         foreach ($request['gallery'] as $item) {
             $item['image']=$this->ImageMaker($dir,$item['image']);
@@ -121,37 +161,141 @@ class ProductsController extends Controller
     }
     public function edit($id)
     {
-        // dd($id);
-
         $Product['data']=ProductModel::find($id);
-        $Product['general']=$Product['data']->Description()->first()->toArray();
-        // dd($Product);
+        $Product['general']=$Product['data']->Description()->get()->toArray();
+        $Product['attributes']=ProductAttribute::where('product_id',$id)->get()->toArray();
+        $Product['discount']=ProductDiscount::where('product_id',$id)->get()->toArray();
+        $Product['gallery']=ProductImage::where('product_id',$id)->get()->toArray();
+        $Product['links']['category_id']=array_pluck(ProductToCategory::where('product_id',$id)->get(['category_id'])->toArray(),'category_id');
+        $Product['links']['store_id']=array_pluck(ProductToStore::where('product_id',$id)->get(['store_id'])->toArray(),'store_id');
+        $Product['links']['filter_id']=array_pluck(ProductFilter::where('product_id',$id)->get(['filter_id'])->toArray(),'filter_id');
+        $Product['links']['related_product']=array_pluck(ProductRelated::where('product_id',$id)->get(['related_id'])->toArray(),'related_id');
+        // $Product['links']['downloads']=ProductRelated::where('product_id',$id)->get('downloads')->toArray();
+        $Product['option']=ProductOption::where('product_id',$id)->get()->toArray();
+        $Product['option']['checkItem']=ProductOptionValue::where('product_id',$id)->get()->toArray();
+        $Product['special']=ProductSpecial::where('product_id',$id)->get()->toArray();
         return $Product;
     }
-    public function update(Request $request,$id)
+    public function update(Request $request,$product_id)
     {
          $fill = (new ProductModel)->getFillable();
         $data=array_only($request['data'],$fill);
         $dir='/images/product';
         $image=$request['data']['image'];
-        if ($image) {
-            $data['image']=$this->ImageMaker($dir,$image);
-        }
+        $data['image']=$this->ImageMaker($dir,$image);
+        $data['date_added']=date('Y-m-d h:i:s');
         $data['date_modified']=date('Y-m-d h:i:s');
-        ProductModel::find($id)->update($data);
+        ProductModel::find($product_id)->update($data);
+
+        ProductToCategory::where('product_id',$product_id)->delete();
+
+        ProductToStore::where('product_id',$product_id)->delete();
+
+        ProductFilter::where('product_id',$product_id)->delete();
+
+        ProductRelated::where('product_id',$product_id)->delete();
+
+        ProductImage::where('product_id',$product_id)->delete();
+
+        ProductAttribute::where('product_id',$product_id)->delete();
+
+        ProductOption::where('product_id',$product_id)->delete();
+
+        ProductOptionValue::where('product_id',$product_id)->delete();
+
+        ProductDiscount::where('product_id',$product_id)->delete();
+
+        ProductSpecial::where('product_id',$product_id)->delete();
+
+        ProductDescription::where('product_id',$product_id)->delete();
 
 
+        if (isset($request['links']['category_id']) && $request['links']['category_id']) {
+            # code...
+            foreach ($request['links']['category_id'] as $item) {
+                $p2c['product_id']=$product_id;
+                $p2c['category_id']=$item;
+                ProductToCategory::insert($p2c);
+            }
+        }
 
 
+        if (isset($request['links']['store_id']) && $request['links']['store_id']) {
+            # code...
+            foreach ($request['links']['store_id'] as $item) {
+                $p2s['product_id']=$product_id;
+                $p2s['store_id']=$item;
+                ProductToStore::insert($p2s);
+            }
+        }
+        if (isset($request['links']['filter_id']) && $request['links']['filter_id']) {
+            # code...
+            foreach ($request['links']['filter_id'] as $item) {
+                $p2f['product_id']=$product_id;
+                $p2f['filter_id']=$item;
+                ProductFilter::insert($p2f);
+            }
+        }
+        if (isset($request['links']['related_product']) && $request['links']['related_product']) {
+            # code...
+            foreach ($request['links']['related_product'] as $item) {
+                $p2f['product_id']=$product_id;
+                $p2f['related_id']=$item;
+                ProductRelated::insert($p2f);
+            }
+        }
+        $fill=(new ProductImage)->getFillable();
+        foreach ($request['gallery'] as $item) {
+            $item['image']=$this->ImageMaker($dir,$item['image']);
+            $data=array_only($item,$fill);
+            $data['product_id']=$product_id;
+            ProductImage::insert($data);
+        }
 
-        // insert product description
+        $fill=(new ProductAttribute)->getFillable();
+        foreach ($request['attributes'] as $item) {
+            $data=array_only($item,$fill);
+            $data['product_id']=$product_id;
+            ProductAttribute::insert($data);
+        }
+
+        $fill=(new ProductOption)->getFillable();
+        foreach ($request['option'] as $item) {
+            $data=array_only($item,$fill);
+            $data['product_id']=$product_id;
+            $product_option_id=ProductOption::insertGetId($data);
+            $fill=(new ProductOptionValue)->getFillable();
+            if ($item['checkItem']) {
+                foreach ($item['checkItem'] as $value) {
+                    $data=array_only($value,$fill);
+                    $data['product_option_id']=$product_option_id;
+                    $data['product_id']=$product_id;
+                    $data['option_id']=$item['option_id'];
+                    ProductOptionValue::insert($data);
+                }
+            }
+        }
+
+        $fill=(new ProductDiscount)->getFillable();
+        foreach ($request['discount'] as $item) {
+            $data=array_only($item,$fill);
+            $data['product_id']=$product_id;
+            ProductDiscount::insert($data);
+        }
+
+
+        $fill=(new ProductSpecial)->getFillable();
+        foreach ($request['special'] as $item) {
+            $data=array_only($item,$fill);
+            $data['product_id']=$product_id;
+            ProductSpecial::insert($data);
+        }
+       
         $fill=(new ProductDescription)->getFillable();
         $data=array_only($request['general'],$fill);
-        $data['product_id']=$id;
+        $data['product_id']=$product_id;
         $data['language_id']=1;
-        $key['product_id']=$id;
-        $key['language_id']=1;
-        return ProductDescription::where($key)->update($data);
+        return (new DataAction)->UpdateData(ProductDescription::class,[],'',$data);
     }
     public function destroy($id)
     {
