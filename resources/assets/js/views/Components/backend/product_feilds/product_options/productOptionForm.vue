@@ -2,7 +2,7 @@
 	<div>
 				<v-flex xs12 sm12 md12>
 					<v-select :label="'Option'" id="optSelect" autocomplete :search-input.sync="search" v-model="opt" :items="options" item-value="value" item-text="text"></v-select>
-		            <div class="chip-box" v-for="(optItem,index) in formDatas" :key="index" :class="{'current':show==index}" @click="getChildOption(optItem.product_option_id)">
+		            <div class="chip-box" v-for="(optItem,index) in formDatas" :key="index" :class="{'current':show==index}" @click="getChildOption(optItem.option_id)">
 			            <span @click="show = index">
 			            	{{optItem.text.toUpperCase()}}
 			                
