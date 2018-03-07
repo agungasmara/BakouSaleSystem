@@ -15,6 +15,9 @@ use Illuminate\Http\Request;
 
 // Route::post('/login','AuthController@login');
 
+
+
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -122,9 +125,17 @@ Route::Resource('/product_attribute_group','Backend\Products\AttributeGroups\Att
 Route::Resource('/attribute','Backend\Attributes\AttributesController');
 Route::Resource('/attribute_group','Backend\Attributes\AttributeGroupController');
 
-//======Attribute API
+//======Filter API
 Route::Resource('/filters','Backend\Filter\FiltersController');
 Route::Resource('/filters_group','Backend\Filter\FilterGroupController');
 
-//======Attribute API
+//======Information API
 Route::Resource('/informations','Backend\Informations\InformationsController');
+
+//======Option API
+Route::Resource('/options','Backend\Options\OptionsController');
+Route::get('/options/{id}/{lid}/edit','Backend\Options\OptionsController@edit');
+Route::put('/options/{id}/{lid}','Backend\Options\OptionsController@update');
+
+//======Option API
+Route::Resource('/banners','Backend\Banners\BannersController');

@@ -113,13 +113,28 @@
 			$update=$table::where($field,$id)->update($data);
 			$imagedb=@$image->image;
 			$img=@$data['image'];
-
-	        return response()->json([
+	        return array(
 
 	            'success'=>true,
 	            'message'=>'Data successfully updated.'
 
-	        ]);
+	        );
+		}
+		public function UpdateDataMultiKey($table,$data,$condition=[],$id)
+		{
+			$image = $table::find($id);
+			if(@$data['image'] and @$data['image']!=@$image->image){
+        		$imageDelete=(new ImageMaker)->deleteFile(@$image->image);//delete old image after update data
+    		}
+			$update=$table::where($condition)->update($data);
+			$imagedb=@$image->image;
+			$img=@$data['image'];
+	        return array(
+
+	            'success'=>true,
+	            'message'=>'Data successfully updated.'
+
+	        );
 		}
 		//Use to delete data from table 
 		public function DeleteData($table,$field,$id)

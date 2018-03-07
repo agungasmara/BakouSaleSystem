@@ -110,6 +110,12 @@
 							      						<v-text-field v-if="formRules[input.key]" :label="input.text" :rules='formRules[input.key]' v-model="formDatas[input.key]" :counter="input.count" required></v-text-field>
 														<v-text-field v-else :label="input.text" v-model="formDatas[input.key]" :counter="input.count"></v-text-field>
 							      					</div>
+
+								                    <div v-if="input.type=='optionImage'">
+								                    	<h4 class="header"><i class="material-icons text-left"> 	info_outline </i> Option Value </h4>
+					                      				<div class="divider"></div>
+								                    	<option-image v-bind:form-datas="formDatas[input.key]"></option-image>
+								                    </div>
 							      				</v-flex>
 							      			</v-layout>
 							      			</div>
@@ -165,6 +171,7 @@
 	import axios from 'axios'
 	//import { VueEditor, Quill } from 'vue2-editor'
 	import breadcrumb3button from '../breadcrumb/breadcrumb3button.vue'
+	import optionImage from '../../options/OptionImages.vue'
 	var toolbars=[
 				[
 					'bold', 'italic', 'underline', 'strike',
@@ -181,6 +188,7 @@
 	export default{
 		props:[
 			'id',
+			'lid',
 			'breadcrumbTitle',
 			'breadcrumbs',
 			'formItems',
@@ -192,6 +200,7 @@
 		],
 		components:{
 			'breadcrumb3button':breadcrumb3button,
+			optionImage,
 			//VueEditor
 		},
 		data(){
@@ -253,7 +262,13 @@
 	                  	})
 			        }else{
 			        	console.log(this.formDatas)
-			        	axios.put(this.url+this.id,
+			        	var url
+			        	if(this.lid>0){
+			        		url=this.url+this.id+'/'+this.lid
+			        	}else{
+			        		url=this.url+this.id
+			        	}
+			        	axios.put(url,
 				          	this.formDatas
 				        ).then((res)=>{
 				        	console.log(res.data)

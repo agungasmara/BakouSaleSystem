@@ -16,21 +16,16 @@
 								<v-form>
 									<input type="file" :id="'additionalImage'+index" style="display: none;" ref="additionalImage" accept="image/*" @change="onFilePicked(index)">
 								
-								<v-layout align-center justify-center >
+								<v-layout align-center justify-center @click="onPickFile(index)">
 									<label style="width: auto;min-width:100px;max-width:200px;min-height:100px;height:auto;max-height: 200px;" >
 										
-											<div style="height: auto;max-height: 200px;padding: 10px;" v-if="attr.image" @click="onPickFile(index)">
-												<!-- <v-badge color="red" overlap v-if="attr.image">
-													<v-btn  style="border-radius: 0px; margin-right: -20px; margin-top: -15px; height: 25px; width:50px; position: absolute; cursor: pointer; position: relative; opacity: 0.7; font-size: 8px;background-color: #ff0000;color:#ffffff;" @click="clearImage(index)">
-														Remove
-													</v-btn>
-												</v-badge> -->
+											<div style="height: auto;max-height: 200px;padding: 10px;" v-if="attr.image">
 												<v-layout align-center justify-center>
-													<img :src="attr.image" style="height:auto;max-height:90px;width: auto;margin-right:0px;margin-top:0px;"  @click="onPickFile(index)">
+													<img :src="attr.image" style="height:auto;max-height:90px;width: auto;margin-right:0px;margin-top:0px;" >
 												</v-layout>
 											</div>
 											
-											<v-flex style="height: 90px;" v-if="!attr.image" @click="onPickFile(index)">
+											<v-flex style="height: 90px;" v-if="!attr.image" >
 												<v-layout align-center justify-center >
 													<img class="image-dummy" width="100px" style="margin-top: 5px;" :src="'/images/icon/Antu_folder-camera.svg.png'">
 												</v-layout>
