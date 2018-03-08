@@ -15,10 +15,10 @@ class SessionModel extends Model
 						];
 	public $incrementing = false;
 	public $timestamps = false;
-	static function AddSession()
+	static function AddSession($session_id)
 	{
 		$data=collect(session()->all());
-		$key['session_id']=session()->getId();
+		$key['session_id']=$session_id;
 		$value['data']=$data->toJson();
 		$value['expire']=Carbon::now();
 		return static::updateOrCreate($key,$value);

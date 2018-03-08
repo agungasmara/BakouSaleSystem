@@ -162,7 +162,7 @@ class ProductsController extends Controller
     public function edit($id)
     {
         $Product['data']=ProductModel::find($id);
-        $Product['general']=$Product['data']->Description()->get()->toArray();
+        $Product['general']=$Product['data']->Description()->first()->toArray();
         $Product['attributes']=ProductAttribute::where('product_id',$id)->get()->toArray();
         $Product['discount']=ProductDiscount::where('product_id',$id)->get()->toArray();
         $Product['gallery']=ProductImage::where('product_id',$id)->get()->toArray();

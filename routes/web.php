@@ -112,7 +112,8 @@ if (Request::is('admin*')){
                 //=====Product API=============================
                 Route::resource('products', 'Backend\Products\ProductsController');
                 Route::get('/getManufacturers','Backend\Manufacturers\ManufacturersController@getManufacturers');
-
+                //=====Sale order=============================
+                Route::resource('sale_order', 'Backend\Order\SaleOrderController');
                 // Route::get('/getProductSelect','Backend\Products\ProductsController@getProductSelect');
                 Route::get('/getTaxClass','Backend\commons\CommonsController@getTaxClass');
                 Route::get('/getStore','Backend\commons\CommonsController@getStore');
