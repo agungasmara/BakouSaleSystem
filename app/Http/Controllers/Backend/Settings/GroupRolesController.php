@@ -13,7 +13,7 @@ class GroupRolesController extends Controller
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
-            SessionModel::AddSession();
+            // SessionModel::AddSession();
             return $next($request);
         });
     }

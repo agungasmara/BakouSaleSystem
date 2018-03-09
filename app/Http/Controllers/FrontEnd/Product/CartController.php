@@ -54,6 +54,7 @@ class CartController extends Controller
 
     public function AddToCart(Request $request)
     {
+       SessionModel::AddSession(request('session_id'));
        return Cart::AddToCart($request->all());
     }
     public function RemoveFromCart(Request $request)
@@ -71,7 +72,17 @@ class CartController extends Controller
     	if (Auth::guard('account')->check()) {
     		$datas['data']=Customer::find(Auth::guard('account')->id())->Cart()->get();
     	}else{
-            $datas['data']=SessionModel::find(session()->getId())->Cart()->get();
+            $datas['data']=SessionModel::find(request('session_id'));
+            if ($datas['data']) {
+               $datas['data']=$datas['data']->Cart()->get();
+               foreach ($datas['data'] as $key => $value) {
+                    $value->name=ProductDescription::find($value->product_id)->value('name');
+
+                    $datas['TotalPrices']+=$value->cart_quantity*$value->price;
+                }
+                $datas['data']=$datas['data']->toArray();
+            }
+            
         }
         // dd($input['session_id']);
         // $datas['session_id']=$input['session_id'];
@@ -90,12 +101,7 @@ class CartController extends Controller
         //                     ->get();
         // }
 
-        foreach ($datas['data'] as $key => $value) {
-            $value->name=ProductDescription::find($value->product_id)->value('name');
-
-            $datas['TotalPrices']+=$value->cart_quantity*$value->price;
-        }
-        $datas['data']=$datas['data']->toArray();
+        
         return $datas;
     }
 
