@@ -29,8 +29,8 @@ class Option extends Model
 	// }
 	static function Options($id,$lid){
 		return DB::table('option_description as optdesc')
-	            ->Join('option as opt','opt.option_id','=','optdesc.option_id')
-	            ->Join('option_value as optv','optv.option_id','=','opt.option_id')
+	            ->leftJoin('option as opt','opt.option_id','=','optdesc.option_id')
+	            ->leftJoin('option_value as optv','optv.option_id','=','opt.option_id')
 	            ->select('opt.option_id','optv.option_value_id','optdesc.name as name','optdesc.language_id','opt.sort_order','optdesc.language_id')
 	            ->where(['opt.option_id'=>$id,'optdesc.language_id'=>$lid]);
 	}

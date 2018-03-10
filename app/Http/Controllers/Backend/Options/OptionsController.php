@@ -98,27 +98,31 @@ class OptionsController extends Controller
         ];
         //return $OptDescCon;
         $saveOption = (new DataAction)->UpdateDataMultiKey(OptionDescription::class,$OptionDesc,$OptDescCon,$id);
-    	 $OptionValue=array();
+    	$OptionValue=array();
         $OptionValueDesc=array();
-        foreach ($request['optionValues'] as $vk=>$vv){
-            $OptionValue=array(
-                'option_id'=>$request->option_id,
-                'sort_order'=>$vv['sort_order'],
-                'image'=>(new ImageMaker)->base64ToImage('images\\icon',$vv['image'])
-            );
-            $OptionValueDesc=array(
-                'option_id'=>$request->option_id,
-                'language_id'=>$request->language_id,
-                'name'=>$vv['name']
-            );
-            (new DataAction)->DeleteData(OptionValue::class,'option_value_id',$id);
-            $saveOptionValue = (new DataAction)->UpdateData(OptionValue::class,$OptionValue,["option_value_id"=>$id],$id); 
-            if($saveOptionValue['success']){
-                $saveOptionValueDesc= (new DataAction)->UpdateData(OptionValueDescription::class,$OptionValueDesc,'option_value_id',$id); 
+        $DeleteOptValue=Option::DeleteOptionValue($request->option_id,$request->language_id);
+        if($DeleteOptValue>0){
+            foreach ($request['optionValues'] as $vk=>$vv){
+                $OptionValue=array(
+                    'option_id'=>$request->option_id,
+                    'sort_order'=>$vv['sort_order'],
+                    'image'=>(new ImageMaker)->base64ToImage('images\\icon',$vv['image'])
+                );
+                $OptionValueDesc=array(
+                    'option_id'=>$request->option_id,
+                    'language_id'=>$request->language_id,
+                    'name'=>$vv['name']
+                );
+                $saveOptionValue = (new DataAction)->StoreData(OptionValue::class,[],"",$OptionValue,"option_value_id"); 
+                if($saveOptionValue['success']){
+                    $OptionValueDesc['option_value_id']=$saveOptionValue['option_value_id'];
+                    $saveOptionValueDesc= (new DataAction)->StoreData(OptionValueDescription::class,[],"",$OptionValueDesc); 
+                    //return $OptionValueDesc;
+                }
             }
+            return $saveOptionValueDesc;
         }
-        return $saveOptionValueDesc;
-        return Option::DeleteOptionValue($request->option_id,$request->language_id);
+        
     } 
     public function destroy($id)
     {

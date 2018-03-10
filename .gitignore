@@ -31,3 +31,12 @@ public/css/themes/horizontal-menu/--materialize.css
 public/js/app.js
 public/js/app.js
 public/js/app.js
+vendor-bk/autoload.php
+vendor-bk/bin/generate-defuse-key
+vendor-bk/bin/generate-defuse-key.bat
+vendor-bk/bin/php-parse
+vendor-bk/bin/phpunit
+vendor-bk/bin/php-parse.bat
+vendor-bk/bin/psysh.bat
+vendor-bk/composer/autoload_classmap.php
+vendor-bk/composer/autoload_files.php

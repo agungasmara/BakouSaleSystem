@@ -41,7 +41,7 @@
 			return{
 				url:'/api/options/',
 				btnNewUrl:'/admin/options/add',
-				listTitle:'Attributes List',
+				listTitle:'Options List',
 				headers: [
 			        { text: 'Option ID',align: 'left',class:'text-xs-left',value: 'option_id'},
 			        { text: 'Option Name',align:'left',class:'text-xs-left', value: 'name' },
@@ -49,14 +49,14 @@
 			        {text: 'Action',align:'center',class:'text-xs-center',value:'option_id',sortable: false}
 			    ],
 				option:[],
-				breadcrumbTitle:'Attributes List',
+				breadcrumbTitle:'Options List',
 				breadcrumbs: [
 			        {
 			          text: 'Administrator',
 			          disabled: false
 			        },
 			        {
-			          text: 'Attributes',
+			          text: 'Options',
 			          disabled: false
 			        },
 			        {
@@ -69,7 +69,7 @@
 		components:{'dataTable':dataTable,'breadcrumb1btn':breadcrumb1btn},
 		created(){
 			this.fetchData()
-			document.title = 'Attributes List';
+			document.title = 'Options List';
 		},
 		methods:{
 			fetchData(){
