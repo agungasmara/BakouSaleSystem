@@ -177,12 +177,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
-<<<<<<< HEAD
 
         // Intervention\Image\ImageServiceProvider::class,
-=======
         Intervention\Image\ImageServiceProvider::class,
->>>>>>> 0dfab28096e6e341d19834a182f6357031d8fa76
 
     ],
 
