@@ -140,7 +140,11 @@
 					                      		<td><b>Sub Total</b></td>
 					                      		<td>$ {{data.sub_total * 1}}</td>
 					                      	</tr>
-					                      	
+					                      	<tr>
+					                      		<td colspan="3">&nbsp;</td>
+					                      		<td><b>Tax Total</b></td>
+					                      		<td>$ {{data.tax * 1}}</td>
+					                      	</tr>
 					                      	<tr>
 					                      		<td colspan="3">&nbsp;</td>
 					                      		<td><b>Total</b></td>

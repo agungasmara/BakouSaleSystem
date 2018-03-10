@@ -65,7 +65,8 @@ class SaleOrderController extends Controller
         $result['data']=$data;
         $result['products']=OrderProduct::where('order_id',$data->order_id)->get();
         $result['sub_total']=OrderProduct::where('order_id',$data->order_id)->sum('total');
-        $result['total']=OrderProduct::where('order_id',$data->order_id)->sum('total');
+        $result['tax']=OrderProduct::where('order_id',$data->order_id)->sum('tax');
+        $result['total']=OrderProduct::where('order_id',$data->order_id)->sum('total')+OrderProduct::where('order_id',$data->order_id)->sum('tax');
         return $result;
     }
 
