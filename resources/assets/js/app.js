@@ -1205,17 +1205,17 @@ const router = new VueRouter({
 //   ]
 // })
 
-// if( document.getElementById("#root") ) {
-  // app backend
-  const app = new Vue({
-      // el: '#root',
-      router,
-      template: `
-      <app></app>
-    `,
-      components: { App },
-  }).$mount('#root')
-// }
+// // if( document.getElementById("#root") ) {
+//   // app backend
+//   const app = new Vue({
+//       // el: '#root',
+//       router,
+//       template: `
+//       <app></app>
+//     `,
+//       components: { App },
+//   }).$mount('#root')
+// // }
 
 // app frontend
 // if(document.getElementById("#root_frontend") ) {

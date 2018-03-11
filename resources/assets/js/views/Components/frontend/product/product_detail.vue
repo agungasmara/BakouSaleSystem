@@ -16,31 +16,53 @@
                 <!-- left column -->
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <!-- product Image and Zoom -->
-                    <div class="-main-image -sp-wrap col-lg-12 -no-padding">
-                        <!-- <a href="/assets/frontend/images/product_details/hi-res-croped/1.jpg">
-                            <img src="/assets/frontend/images/product_details/low-res-white/1.jpg" class="img-responsive" alt="img">
-                            <img v-bind:src="productInfo.image" alt="img" class="img-responsive ">
-                        </a> -->
-                         <router-link v-bind:to="productInfo.image">
-                         <img v-bind:src="productInfo.image" alt="img" class="img-responsive ">
-                        </router-link>
-                        <!-- <a href="/assets/frontend/images/product_details/hi-res-croped/2.jpg">
-                            <img src="/assets/frontend/images/product_details/low-res-white/2.jpg" class="img-responsive" alt="img">
+                    <div class="main-image sp-wrap col-lg-12 no-padding">
+                        <a v-bind:href="productInfo.image">
+                            <img v-bind:src="productInfo.image" alt="img" class="img-responsive">
                         </a>
-                        <a href="/assets/frontend/images/product_details/hi-res-croped/3.jpg">
-                            <img src="/assets/frontend/images/product_details/low-res-white/3.jpg" class="img-responsive" alt="img">
-                        </a> -->
+                        <div class="sp-tb-active">
+                            <template v-for="thumb in gallary">
+                                <a :href="thumb.image">
+                                    <img class="img-responsive" alt="img" :src="thumb.image"/>
+                                </a>
+                            </template>
+                        </div>
+
+                        <!--<template v-for="thumb in gallary">
+                            <a href="/images/catalog/demo/htc_touch_hd_2.jpg"><img
+                                src="/images/catalog/demo/htc_touch_hd_2.jpg" class="img-responsive" alt="img"></a>
+                        </template>-->
+                        <!--<a href="/images/catalog/demo/htc_touch_hd_2.jpg"><img
+                                src="/images/catalog/demo/htc_touch_hd_2.jpg" class="img-responsive" alt="img"></a>
+                        <a href="/images/catalog/demo/htc_touch_hd_2.jpg"><img
+                                src="/images/catalog/demo/htc_touch_hd_2.jpg" class="img-responsive" alt="img"></a>-->
+                        
+                        <!--<a :href="productInfo.image">
+                            <img v-bind:src="productInfo.image" class="img-responsive" alt="img"/>
+                        </a>-->
+                        <!--<template v-for="thumb in gallary">-->
+                        <!--<a v-for="thumb in gallary" v-bind:href="thumb.image">
+                            <img :src="thumb.image"/>
+                        </a>-->
+                        <!--</template>-->
                     </div>
                 </div>
                 <!--/ left column end -->
-
+                
                 <!-- right column -->
                 <div class="col-lg-6 col-md-6 col-sm-5">
+                    <!--<pre>{{gallary|json}}</pre>-->
                     <h1 class="product-title">{{productInfo.name}}</h1>
+                    
+                    <div class="form-group">
+                        <template>
+                            <div v-if="flash.success" class="alert alert-success"><i class="fa fa-wa fa-check"></i> {{ flash.success }}</div>
+                        </template>
+                    </div>
 
                     <h3 class="product-code">Product Code : {{productInfo.sku}}</h3>
                     <div class="rating" v-if="reviewStatus">
-                        <p>.
+                        <p>
                             <span v-for="n in 5">
                                 <span v-if="productInfo.rating < n">
                                     <i class="fa fa-star-o "></i>
@@ -62,19 +84,23 @@
                             </span>
                         </p>
                     </div>
-                    <div class="product-price" v-if="productInfo.special != ''">
-                        <span class="price-sales">
-                            ${{productInfo.price}}
-                        </span> 
-                    </div>
-                    <div class="product-price" v-else>
-                        <span class="price-sales">
-                            ${{productInfo.price}}
-                        </span> 
-                        <span class="price-standard">
-                            ${{productInfo.special}}
-                        </span>
-                    </div>
+                    <template v-if="productInfo.special==null">
+                        <div class="product-price">
+                            <span class="price-sales">
+                                ${{productInfo.price}}
+                            </span> 
+                        </div>
+                    </template>
+                    <template v-else>
+                        <div class="product-price">
+                            <span class="price-sales">
+                                ${{productInfo.special}}
+                            </span> 
+                            <span class="price-standard">
+                                ${{productInfo.price}}
+                            </span>
+                        </div>
+                    </template>
                     <span class="details-description" v-html="productInfo.description">
                     </span>
                     
@@ -99,7 +125,7 @@
                                     
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-sm-6 col-xs-6">
+                            <!--<div class="col-lg-6 col-sm-6 col-xs-6">
                                 <div class="filterBox">
                                     <select class="form-control">
                                         <option value="strawberries" selected>Size</option>
@@ -110,10 +136,39 @@
                                         <option value="apples">S</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div>-->
                         </div>
                     </div>
                     <!-- productFilter -->
+                    <!--Discount Order-->
+                    <template v-if="productDiscount.length>0">
+                        <div v-for="discount in productDiscount">Order : {{discount.quantity}}, price : {{discount.price}}</div>
+                    </template>
+                    <!--<pre>{{productOptions['options'] | json}}</pre>-->
+                    <template v-if="productOptions['options'].length>0">
+                        <template v-for="options in productOptions['options']">
+                            <template v-if="options.type=='color'">
+                                <div class="color-details"><span class="selected-color"><strong>{{options.name}}</strong></span>
+                                    <ul class="swatches Color">
+                                        <li class="selected" v-for="option_val in options['product_option_value']"><a :style="BackgroundColor(option_val.value)"> </a></li>
+                                    </ul>
+                                </div>
+                            </template>
+                            
+                            <template v-else-if="options.type=='select'">
+                                <div class="color-details"><span class="selected-color"><strong>{{options.name}}</strong></span>
+                                    <select class="form-control">
+                                        <option value="strawberries" selected>Choose Size</option>
+                                        <option v-for="option_val in options['product_option_value']" :value="option_val.option_value_id">{{option_val.name}}</option>
+                                    </select>
+                                </div>
+                            </template>
+                                
+                            <template v-else>
+                                Here is radio form
+                            </template>
+                        </template>
+                    </template>
 
                     <div class="cart-actions">
                         <div class="addto row">
@@ -144,16 +199,7 @@
 
                     </div>
                     <!--/.cart-actions-->
-
-                    <!-- product options -->
-                    <div class="color-details"><span class="selected-color"><strong>COLOR</strong></span>
-                        <ul class="swatches Color">
-                            <li class="selected"><a style="background-color:#f1f40e"> </a></li>
-                            <li><a style="background-color:#adadad"> </a></li>
-                            <li><a style="background-color:#4EC67F"> </a></li>
-                        </ul>
-                    </div>
-
+                    
                     <div class="clear"></div>
                     <div class="product-tab w100 clearfix">
                         <ul class="nav nav-tabs">
@@ -343,24 +389,22 @@
                                     How do you rate this product? </label> <br>
 
                                 <div class="rating-here">
-                                    <input type="hidden" class="rating-tooltip-manual" data-filled="fa fa-star fa-2x"
-                                           data-empty="fa fa-star-o fa-2x" data-fractions="3"/>
-
+                                    <input name="rating_count" v-model="formData.rating_count" type="hidden" class="rating-tooltip-manual" data-filled="fa fa-star fa-2x" data-empty="fa fa-star-o fa-2x" data-fractions="3"/>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="rtext">Name</label>
-                                <input type="text" class="form-control" id="rtext" placeholder="Your name" required>
+                                <label for="rtext">Name *</label>
+                                <input value="Visitor" v-model="formData.rating_name" type="text" class="form-control" id="rtext" placeholder="Your name" required>
                             </div>
 
                             <div class="form-group ">
-                                <label>Review</label>
-                                <textarea class="form-control" rows="3" placeholder="Your Review" required></textarea>
+                                <label>Review *</label>
+                                <textarea v-model="formData.rating_text" class="form-control" rows="3" placeholder="Your Review" required></textarea>
 
                             </div>
 
 
-                            <button type="submit" class="btn btn-success">Submit Review</button>
+                            <button type="button" @click="submitReview(productInfo.product_id)" class="btn btn-success">Submit Review</button>
                         </form>
 
 
@@ -378,7 +422,6 @@
     </div>  
 <!-- <div class="gap"></div> -->
 </template>
-
 <style type="text/css">
     .table{
         width: 100%;
@@ -395,7 +438,6 @@
         elements: true
     };
 </script>
-<script src="{{url('assets/frontend/js/pace.min.js')}}"></script>
 
 <script type="text/javascript">
     $(function () {
@@ -411,11 +453,12 @@
     });
 
 </script>
+<!--<script src="/assets/frontend/js/pace.min.js"></script>-->
 <script type="text/javascript">
     /* wait for images to load */
-    $(window).load(function () {
-        $('.sp-wrap').smoothproducts();
-    });
+    // $(window).load(function () {
+    //     $('.sp-wrap').smoothproducts();
+    // });
 </script>
 
 <script>
@@ -430,10 +473,21 @@
         props:['id'],
         data(){
             return{
+                formData: {
+                    rating_count: '',
+                    rating_name: '',
+                    rating_text: ''
+                },
                 isActive: true,
+                gallary:[],
+                productOptions:[],
                 productInfo:[],
+                productDiscount:[],
+                reviews:[],
                 reviewStatus:[],
                 attributeGroups:[],
+                productRelates:[],
+                flash: Flash.state,
                 qty:'',
                 session_id : this.$cookie.get('session_id')
             }
@@ -448,7 +502,6 @@
             $('.search-full').hide(100)
         },
         mounted(){
-            
             // prdouct detail
             // switch color
             $(".swatches li").click(function () {
@@ -474,7 +527,6 @@
                     var pagination = $('.owl-controls .owl-pagination');
                     $(pagination[i]).append("<div class=' owl-has-nav owl-next'><i class='fa fa-angle-right'></i>  </div>");
                     $(pagination1[i]).before("<div class=' owl-has-nav owl-prev'><i class='fa fa-angle-left'></i> </div>");
-
 
                 });
 
@@ -509,8 +561,6 @@
                 items: 8,
                 itemsTablet: [768, 4],
                 itemsMobile: [400, 2]
-
-
             });
 
             // Custom Navigation Events
@@ -545,8 +595,8 @@
             $("#SimilarProductSlider .owl-prev").click(function () {
                 SimilarProductSlider.trigger('owl.prev');
             })
-
-
+            
+            $('.sp-wrap').smoothproducts();
             // Home Look 2 || Single product showcase 
 
             // productShowCase  carousel
@@ -560,8 +610,6 @@
                 goToFirstSpeed: 2000,
                 singleItem: true,
                 autoHeight: true
-
-
             });
 
             // Custom Navigation Events
@@ -587,7 +635,7 @@
                 goToFirstSpeed: 2000,
                 singleItem: true,
                 autoHeight: true
-            });
+            }); 
 
             // Custom Navigation Events
             $("#ps-next").click(function () {
@@ -596,10 +644,6 @@
             $("#ps-prev").click(function () {
                 imageShowCase.trigger('owl.prev');
             })
-
-            $('.sp-wrap').smoothproducts();
-
-
 
             // rating start
             $('.rating-tooltip-manual').rating({
@@ -622,12 +666,69 @@
                         });
                 }
             });
-
+        },
+        watch:{
+            '$route.params.id': function (id) {
+                $('.sp-wrap').smoothproducts()
+                this.productDetails(id)
+                this.isActive = !this.isActive
+                // $(window).load(function () {
+                //     $('.sp-wrap').smoothproducts();
+                // });
+            }
         },
         created(){
-            this.productDetails(this.id);
+            this.productDetails(this.id)
         },
         methods:{
+            BackgroundColor (color) {
+                var value = ['background-color:'+color]
+                // if (this.orderKey === id) {
+                //   value.push('active')
+                // }
+                return value.join(' ')
+            },
+            submitReview(product_id) {
+                // formData.rating_count = '1'
+                // formData.rating_name = '2'
+                // formData.rating_text = '3'
+                this.formData.product_id = product_id
+                this.formData.author = this.formData.rating_name
+                this.formData.text = this.formData.rating_text
+                this.formData.rating = $("input[name='rating_count']").val()
+                //console.log(this.formData)
+		      	// if (this.$refs.form.validate()) {
+			        // Native form submission is not yet supporte
+                if(this.formData.rating_name==''){
+                    alert("Name author is null")
+                    return false
+                }else if(this.formData.rating_text==''){
+                    alert("Description is null")
+                    return false
+                }else{
+                    axios.post("/api/product_review",
+                        this.formData
+                    ).then((res)=>{
+                        console.log(res.data)
+                        if(res.data.success==true){
+                            Flash.setSuccess(res.data.message)
+                            this.productDetails(product_id)
+                            this.isActive = !this.isActive
+                            // $('#modal-review').modal().close();
+                            $('#modal-review').modal('toggle')
+                            // this.$refs.form.reset()
+                            // alert("review success")
+                            // this.$router.push(this.backUrl)
+                        }else{
+                            Flash.setError(res.data.message)
+                        }
+                    })
+                    .catch((err) => {
+                        this.error = err.response.message
+                        Flash.setError('Error while saving data')
+                    })   
+		      	}
+		    },
             productDetails(id){
                 axios.get('/api/detail/'+id).then(res=>{
                     this.productInfo=res.data['data']
@@ -635,6 +736,9 @@
                     this.reviews =res.data['reviews']
                     this.productRelates =res.data['product_relate']
                     this.attributeGroups =res.data['attribute_groups']
+                    this.productDiscount = res.data['discount']
+                    this.gallary = res.data['images']
+                    this.productOptions = res.data['option_value']
                     this.isActive = !this.isActive
                 });
             },

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\FrontEnd\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Models\FrontEnd\Product;
+use App\Http\Models\FrontEnd\Product\Review;
 use DB;
 use Carbon\Carbon;
 use Session;
@@ -76,7 +77,7 @@ class ProductController extends Controller
 			// }
 
 			if (config_review_status) {
-				$rating = (int)$result->rating;
+				$rating = $result->rating;
 			} else {
 				$rating = false;
 			}
@@ -94,9 +95,22 @@ class ProductController extends Controller
 				'href'        => 'product/product', 'product_id=' . $result->product_id
 			);
 		}
-		return response()->json(['data' => $productInfo,'images'=>$images,'attribute_groups' => $attribute_groups,'discount' => $discount_arr,'product_relate' => $product_related,'review_status' => $review_status,'reviews' => $reviews,'success' => true, 'message' => 'Success', 'lang'=>Session::get('applangId')]);
 
-    }
+		$getProductOptions = $this->getProductOptions($id);
+		// dd($getProductOptions);
+		return response()->json(['data' => $productInfo,'option_value' => $getProductOptions,'images'=>$images,'attribute_groups' => $attribute_groups,'discount' => $discount_arr,'product_relate' => $product_related,'review_status' => $review_status,'reviews' => $reviews,'success' => true, 'message' => 'Success', 'lang'=>Session::get('applangId')]);
+
+	}
+	
+	public function product_review(Request $request){
+		$input = $request->all();
+		$input['customer_id']=0;
+		$input['date_added'] = '2017-02-02';
+		$input['date_modified'] = '2017-02-02';
+		$input['status']=1;
+		Review::create($input);
+		return response()->json(['request'=>$request->all(),'success' => true, 'message' => 'Review has been submitted.'], 200);
+	}
     
     public function getProductDiscounts($product_id) {
 		$query = DB::select("SELECT * FROM ".env('DB_PREFIX')."product_discount 
@@ -165,5 +179,69 @@ class ProductController extends Controller
 			$product_data[$result->related_id] = $this->getProduct($result->related_id);
 		}
 		return $product_data;
+	}
+
+	public function getProductOptions($product_id){
+		$data['options'] = array();
+		// dd(Product::getProductOptions($product_id));
+		foreach (Product::getProductOptions($product_id) as $option) {
+			$product_option_value_data = array();
+			foreach ($option['product_option_value'] as $option_value) {
+				// dd($product_option_value_id);
+				if (!$option_value['subtract'] || ($option_value['quantity'] > 0)) {
+
+					//if ((($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) && (float)$option_value['price']) {
+					if (config_customer_price) {
+
+						$price = 0;//$this->currency->format($this->tax->calculate($option_value['price'], $product_info['tax_class_id'], $this->config->get('config_tax') ? 'P' : false), $this->session->data['currency']);
+
+					} else {
+
+						$price = false;
+
+					}
+					$product_option_value_data[] = array(
+
+						'product_option_value_id' => $option_value['product_option_value_id'],
+
+						'option_value_id'         => $option_value['option_value_id'],
+
+						'name'                    => $option_value['name'],
+						// this value take place when option == color&texture
+						'value'					  => $option_value['value'],
+						'image'                   => 'image',//$this->model_tool_image->resize($option_value->image, 50, 50),
+						'option_size_id'				=> $option_value['option_size_id'],
+						'is_instock'				=> $option_value['is_instock'],
+
+						'price'                   => $price,
+
+						'price_prefix'            => $option_value['price_prefix']
+
+					);
+
+				}
+
+			}
+
+			$data['options'][] = array(
+
+				'product_option_id'    => $option['product_option_id'],
+
+				'product_option_value' => $product_option_value_data,
+
+				'option_id'            => $option['option_id'],
+
+				'name'                 => $option['name'],
+
+				'type'                 => $option['type'],
+
+				'value'                => $option['value'],
+
+				'required'             => $option['required']
+
+			);
+
+		}
+		return $data;
 	}
 }

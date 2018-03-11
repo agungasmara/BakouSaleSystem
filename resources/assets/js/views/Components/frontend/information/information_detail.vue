@@ -38,16 +38,25 @@
         created(){
             this.InformationDetails(this.id);
         },
+        // beforeUpdate(){
+        //     var pid = this.$route.params.id;
+        //     //Flash.setState(this.InformationDetails(pid));
+        // },
+        watch:{
+            '$route.params.id': function (id) {
+                this.InformationDetails(id)
+                this.isActive = !this.isActive
+            }
+        },
         beforeUpdate(){
-            var pid = this.$route.params.id;
-            //Flash.setState(this.InformationDetails(pid));
+        },
+        mounted() {
         },
         methods:{
             InformationDetails(id){
                 axios.get('/api/information/'+id).then(res=>{
                     this.StateData=res.data
                     this.isActive = !this.isActive
-                    return false
                 });
             }
         }

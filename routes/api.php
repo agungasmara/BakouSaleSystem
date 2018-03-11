@@ -38,6 +38,8 @@ Route::get('/customer/test','FrontEnd\Account\LoginController@test');
 Route::post('/customer/login','FrontEnd\Account\LoginController@AuthLogin');
 Route::get('/account/logout','FrontEnd\Account\LoginController@AuthLogout');
 Route::get('/customer/get','FrontEnd\Account\LoginController@getPasswordCustomer');
+// =====Product
+Route::post('/product_review','FrontEnd\Product\ProductController@product_review');
 
 //BackEnd
 
