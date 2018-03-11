@@ -2,14 +2,21 @@ import axios from 'axios'
 export default{
 	data: {
 		products:{},
-		isActive:true
+		isActive:true,
+		dialog:false,
+		is_added:{}
 	},
 	AddToCart(product_id,quantity=1,session_id){
 		
-		axios.post('/AddToCart', { product_id, quantity, session_id})
-			 .then(this.MyProduct(session_id))
-			 .catch(function (error) { console.log(error); });
-				
+		axios.post('/AddToCart', { 
+			product_id, quantity, session_id
+		}).then(
+		 	response => this.data.is_added=response.data
+		).then(
+		 	this.MyProduct(session_id)
+		).catch(function (error) { 
+		 	console.log(error); 
+		});
 	},
 
 	UpdateCart(product_id,quantity){

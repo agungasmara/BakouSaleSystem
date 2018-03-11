@@ -62,12 +62,12 @@ class UsersController extends Controller
         if(@$data['image']){
             $data['image']=(new ImageMaker)->base64ToImage('images\\icon',$data['image']);    
         }
-        return (new DataAction)->UpdateData(User::class,$data,'user_id',$id);
+        return (new DataAction)->UpdateData(User::class,$data,'id',$id);
         // return response()->json($data);
     }
     public function destroy($id)
     {
-        return (new DataAction)->DeleteData(User::class,'user_id',$id);
+        return (new DataAction)->DeleteData(User::class,'id',$id);
     }
     public function UserGroup()
     {

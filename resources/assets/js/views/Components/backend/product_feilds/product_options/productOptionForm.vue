@@ -4,7 +4,7 @@
 					<v-select :label="'Option'" id="optSelect" autocomplete :search-input.sync="search" v-model="opt" :items="options" item-value="value" item-text="text"></v-select>
 		            <div class="chip-box" v-for="(optItem,index) in formDatas" :key="index" :class="{'current':show==index}" @click="getChildOption(optItem.option_id)">
 			            <span @click="show = index">
-			            	{{optItem.text.toUpperCase()}}
+			            	{{optItem.text}}
 			                
 			            </span>
 			            <v-icon color="red" dark right @click="removeOpt(index)" style="cursor: pointer;">remove_circle</v-icon>

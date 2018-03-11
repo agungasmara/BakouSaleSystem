@@ -56,6 +56,7 @@ export default {
 	    return {
 	    	isActive: true,
 	    	CartProduct: CartAction.data,
+	    	is_added: CartAction.is_added,
 	    	session_id : this.$cookie.get('session_id')
 	    }
 	},

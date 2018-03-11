@@ -9,7 +9,7 @@ class User extends Model
 {
     protected $table='users';
     public $timestamps=false;
-    protected $primaryKey='user_id';
+    protected $primaryKey='id';
     protected $fillable=[
     	'username',
     	'firstname',

@@ -1,17 +1,6 @@
 <template id="{{ $route.params.id }}">
 	<v-app id="inspire">
-		<!-- <normal-form
-			v-bind:url="url"
-			v-bind:id="dataID"
-			v-bind:breadcrumb-title="breadcrumbTitle"
-			v-bind:breadcrumbs="breadcrumbs"
-			v-bind:form-items="group"
-			v-bind:form-rules="rules"
-			v-bind:form-datas="data"
-			v-bind:select-items="selects"
-			v-bind:back-url="backUrl"
-		></normal-form> -->
-		
+	
 
 		<section id="_content">
 			<!--breadcrumbs start-->
@@ -49,7 +38,7 @@
 		                  
 		                  <div class="container">
 		                    <v-form v-model="valid" ref="form" lazy-validation>
-			                    <!-- <div v-for="item in section">
+			                    <div v-for="item in section">
 			                    	
 			                    	<div class="row">
 				                    	<div class="col s12 m12 l3">
@@ -67,8 +56,8 @@
 					                      		<h4 class="header"><i class="material-icons text-left"> {{item.icon}} </i> {{item.title}} </h4>
 					                      		<div class="divider"></div>
 											    <v-layout row wrap>
-											    	 <v-flex v-for="column in rows[item.form]" :class="column.class">
-											      		<span><i style="float: left;" class="material-icons">{{column.icon}}</i> {{column.key}}</span>
+											    	 <v-flex v-for="column in rows[item.form]" :class="column.class" :key="column.key">
+											      		<span v-if="data.data[column.key]"><i style="float: left;" class="material-icons">{{column.icon}}</i> {{data.data[column.key]}} {{data.data[column.sub]}}</span>
 											      	</v-flex>
 
 											    </v-layout>
@@ -83,215 +72,20 @@
 					                </div>
 			                      	<div class="clearfix"></div>
 			                    	
-		                    	</div> -->
+		                    	</div>
+		     
 		                    	
-		                    	<div class="row">
-			                    	<div class="col s12 m12 l3">
-			                    		<div class="row">
-				                    		<h4 class="header">Order Details</h4>
-				                    		<div>
-				                    			Change general information for this product. 
-				                    		</div>
-			                    		</div>
-			                    	</div>
-			                    	<div class="col s12 m12 l6">
-				                      
-				                      <div class="row">
-				                      	<v-container grid-list-md>
-				                      		<h4 class="header"><i class="material-icons text-left">shopping_cart</i> &nbsp; Order Information</h4>
-				                      		<div class="divider"></div>
-										    <v-layout row wrap>
-										    	<v-flex xs6 sm6 md6>
-										      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Bakou Sale System</span>
-										      	</v-flex>
-
-										    	<v-flex xs6 sm6 md6>
-										      		<span><i style="float: left;" class="material-icons">schedule</i> &nbsp;27/12/2017</span>
-										      	</v-flex>
-
-										      	<v-flex xs6 sm6 md6>
-										      		<span><i style="float: left;" class="material-icons">local_shipping</i> &nbsp;Cash Delivery</span>
-										      	</v-flex>
-
-										      	<v-flex xs6 sm6 md6>
-										      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Flat Shipping Rate</span>
-										      	</v-flex>
-										    </v-layout>
-										</v-container>
-				                      </div>
-				                    </div>
-				                    <div class="col s12 m12 l3"></div>
-				                </div>
-		                      	<div class="clearfix"></div>
 		                    	
 
 		                    	
-		                    	<div class="row">
-			                    	<div class="col s12 m12 l3">
-			                    		<div class="row">
-				                    		<h4 class="header"> Customer Detail</h4>
-				                    		<div>
-				                    			Change general information for this product. 
-				                    		</div>
-			                    		</div>
-			                    	</div>
-			                    	<div class="col s12 m12 l6">
-				                      
-				                      <div class="row">
-				                      	<v-container grid-list-md>
-				                      		<h4 class="header"><i class="material-icons text-left">supervisor_account</i> &nbsp; Customers Information</h4>
-				                      		<div class="divider"></div>
-										    <v-layout row wrap>
-										    	<v-flex xs6 sm6 md6>
-										      		<span><i style="float: left;" class="material-icons">account_circle</i> &nbsp;Khove Mengtek</span>
-										      	</v-flex>
-
-										    	<v-flex xs6 sm6 md6>
-										      		<span><i style="float: left;" class="material-icons">supervisor_account</i> &nbsp;Default</span>
-										      	</v-flex>
-
-										      	<v-flex xs6 sm6 md6>
-										      		<span><i style="float: left;" class="material-icons">mail</i> &nbsp;email@gmail.com</span>
-										      	</v-flex>
-
-										      	<v-flex xs6 sm6 md6>
-										      		<span><i style="float: left;" class="material-icons">phone_iphone</i> &nbsp;(+855)81 988 222</span>
-										      	</v-flex>
-										    </v-layout>
-										</v-container>
-				                      </div>
-				                    </div>
-				                    <div class="col s12 m12 l3"></div>
-				                </div>
-		                      	<div class="clearfix"></div>
-		                    	
+		                    
 
 		                    	
-		                    	<div class="row">
-			                    	<div class="col s12 m12 l3">
-			                    		<div class="row">
-				                    		<h4 class="header">Generate Invoice</h4>
-				                    		<div>
-				                    			Change general information for this product. 
-				                    		</div>
-			                    		</div>
-			                    	</div>
-			                    	<div class="col s12 m12 l6">
-				                      
-				                      <div class="row">
-				                      	<v-container grid-list-md>
-				                      		<h4 class="header"><i class="material-icons text-left">assignment</i> &nbsp; Options</h4>
-				                      		<div class="divider"></div>
-										    <v-layout row wrap>
-										    	<v-flex xs6 sm6 md6>
-										      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Bakou Sale System</span>
-										      	</v-flex>
-
-										    	<v-flex xs6 sm6 md6>
-										      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;27/12/2017</span>
-										      	</v-flex>
-
-										      	<v-flex xs6 sm6 md6>
-										      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Cash Delivery</span>
-										      	</v-flex>
-
-										      	<v-flex xs6 sm6 md6>
-										      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Flat Shipping Rate</span>
-										      	</v-flex>
-										    </v-layout>
-										</v-container>
-				                      </div>
-				                    </div>
-				                    <div class="col s12 m12 l3"></div>
-				                </div>
-		                      	<div class="clearfix"></div>
 		                    	
-
-		                    	
-		                    	<div class="row">
-			                    	<div class="col s12 m12 l3">
-			                    		<div class="row">
-				                    		<h4 class="header"></h4>
-				                    		<div>
-				                    			<!-- Change general information for this product.  -->
-				                    		</div>
-			                    		</div>
-			                    	</div>
-			                    	<div class="col s12 m12 l6">
-				                      
-				                      <div class="row">
-				                      	<v-container grid-list-md>
-				                      		<h4 class="header"><i class="material-icons text-left">location_on</i> &nbsp; Payment Address</h4>
-				                      		<div class="divider"></div>
-										    <v-layout row wrap>
-										    	<v-flex xs6 sm6 md6>
-										      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Bakou Sale System</span>
-										      	</v-flex>
-
-										    	<v-flex xs6 sm6 md6>
-										      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;27/12/2017</span>
-										      	</v-flex>
-
-										      	<v-flex xs6 sm6 md6>
-										      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Cash Delivery</span>
-										      	</v-flex>
-
-										      	<v-flex xs6 sm6 md6>
-										      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Flat Shipping Rate</span>
-										      	</v-flex>
-										    </v-layout>
-										</v-container>
-				                      </div>
-				                    </div>
-				                    <div class="col s12 m12 l3"></div>
-				                </div>
-		                      	<div class="clearfix"></div>
-		                    	
-
-		                    	
-		                    	<div class="row">
-			                    	<div class="col s12 m12 l3">
-			                    		<div class="row">
-				                    		<h4 class="header"></h4>
-				                    		<div>
-				                    			<!-- Change general information for this product.  -->
-				                    		</div>
-			                    		</div>
-			                    	</div>
-			                    	<div class="col s12 m12 l6">
-				                      
-				                      <div class="row">
-				                      	<v-container grid-list-md>
-				                      		<h4 class="header"><i class="material-icons text-left">attach_money</i> &nbsp; Shipping Address</h4>
-				                      		<div class="divider"></div>
-										    <v-layout row wrap>
-										    	<v-flex xs6 sm6 md6>
-										      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Bakou Sale System</span>
-										      	</v-flex>
-
-										    	<v-flex xs6 sm6 md6>
-										      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;27/12/2017</span>
-										      	</v-flex>
-
-										      	<v-flex xs6 sm6 md6>
-										      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Cash Delivery</span>
-										      	</v-flex>
-
-										      	<v-flex xs6 sm6 md6>
-										      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Flat Shipping Rate</span>
-										      	</v-flex>
-										    </v-layout>
-										</v-container>
-				                      </div>
-				                    </div>
-				                    <div class="col s12 m12 l3"></div>
-				                </div>
-		                      	<div class="clearfix"></div>
-		                    	
-		                    	<div class="clearfix"></div>
-		                    	<!-- list order products -->
+		                    
+		                    	<!-- address -->
 		                    	<div id="striped-table">
-					                <h4 class="header"><i class="material-icons text-left">assignment</i> &nbsp; Order #122</h4>
+					                <h4 class="header"><i class="material-icons text-left">assignment</i> &nbsp; Order # {{data.data.order_id}}</h4>
 					                <div class="row">
 					                  <div class="col s12">
 					                    <table class="striped">
@@ -302,21 +96,9 @@
 					                        </tr>
 					                      </thead>
 					                      <tbody>
-					                        <tr>
-					                          <td>Alvin</td>
-					                          <td>Eclair</td>
-					                        </tr>
-					                        <tr>
-					                          <td>Alan</td>
-					                          <td>Jellybean</td>
-					                        </tr>
-					                        <tr>
-					                          <td>Jonathan</td>
-					                          <td>Lollipop</td>
-					                        </tr>
-					                        <tr>
-					                          <td>Shannon</td>
-					                          <td>KitKat</td>
+					                        <tr v-for="addr in rows.address" v-show="data.data[addr.payment] || data.data[addr.shipping]">
+					                        	<td>{{data.data[addr.payment]}}</td>
+					                        	<td>{{data.data[addr.shipping]}}</td>
 					                        </tr>
 					                      </tbody>
 					                    </table>
@@ -342,45 +124,31 @@
 					                        </tr>
 					                      </thead>
 					                      <tbody>
-					                        <tr>
-					                          <td>Alvin</td>
-					                          <td>Eclair</td>
-					                          <td>$0.87</td>
-					                          <td>$0.87</td>
-					                          <td>$0.87</td>
+					                        <tr v-for="product in data.products" >
+					                          <td>{{product.name}}</td>
+					                          <td>{{product.model}}</td>
+					                          <td>{{product.quantity}}</td>
+					                          <td>$ {{product.price * 1}}</td>
+					                          <td>$ {{product.total * 1}}</td>
+					                          
 					                        </tr>
-					                        <tr>
-					                          <td>Alan</td>
-					                          <td>Jellybean</td>
-					                          <td>$3.76</td>
-					                          <td>$0.87</td>
-					                          <td>$0.87</td>
-					                        </tr>
-					                        <tr>
-					                          <td>Jonathan</td>
-					                          <td>Lollipop</td>
-					                          <td>$7.00</td>
-					                          <td>$0.87</td>
-					                          <td>$0.87</td>
-					                        </tr>
-					                        <tr>
-					                          <td>Shannon</td>
-					                          <td>KitKat</td>
-					                          <td>$9.99</td>
-					                          <td>$0.87</td>
-					                          <td>$0.87</td>
-					                        </tr>
+					                        
 					                      </tbody>
 					                      <tfoot style="border-top:1px solid #d0d0d0;">
 					                      	<tr>
 					                      		<td colspan="3">&nbsp;</td>
 					                      		<td><b>Sub Total</b></td>
-					                      		<td>$0.122</td>
+					                      		<td>$ {{data.sub_total * 1}}</td>
+					                      	</tr>
+					                      	<tr>
+					                      		<td colspan="3">&nbsp;</td>
+					                      		<td><b>Tax Total</b></td>
+					                      		<td>$ {{data.tax * 1}}</td>
 					                      	</tr>
 					                      	<tr>
 					                      		<td colspan="3">&nbsp;</td>
 					                      		<td><b>Total</b></td>
-					                      		<td>$12.00</td>
+					                      		<td>$ {{data.total * 1}}</td>
 					                      	</tr>
 					                      </tfoot>
 					                    </table>
@@ -411,6 +179,10 @@
 		},
 		data(){
 			return {
+				back:'/admin/sale_order/list',
+				url:'/admin/api/sale_order/',
+				data:{},
+
 				section:[
 					{
 						info_title:'Order Details',
@@ -433,35 +205,35 @@
 						title:'Options',
 						form:'invoice',
 					},
-					{
-						info_title:'',
-						info_description:'',
-						icon:'location_on',
-						title:'Payment Address',
-						form:'payment',
-					},
-					{
-						info_title:'',
-						info_description:'',
-						icon:'attach_money',
-						title:'Shipping Address',
-						form:'Shipping',
-					},
+					// {
+					// 	info_title:'',
+					// 	info_description:'',
+					// 	icon:'location_on',
+					// 	title:'Payment Address',
+					// 	form:'payment',
+					// },
+					// {
+					// 	info_title:'',
+					// 	info_description:'',
+					// 	icon:'attach_money',
+					// 	title:'Shipping Address',
+					// 	form:'Shipping',
+					// },
 					
 
 				],
 				rows:{
 					order:[
-						{	class:'xs6 sm6',	key:'name',		icon:'info_outline'},
-						{	class:'xs6 sm6',	key:'name',		icon:'schedule'},
-						{	class:'xs6 sm6',	key:'name',		icon:'local_shipping'},
-						{	class:'xs6 sm6',	key:'name',		icon:'info_outline'},
+						{	class:'xs6 sm6',	key:'store_name',		icon:'info_outline'},
+						{	class:'xs6 sm6',	key:'date_added',		icon:'schedule'},
+						{	class:'xs6 sm6',	key:'payment_method',		icon:'local_shipping'},
+						{	class:'xs6 sm6',	key:'shipping_method',		icon:'info_outline'},
 					],
 					Customer:[
-						{	class:'xs6 sm6',	key:'name',		icon:'account_circle'},
-						{	class:'xs6 sm6',	key:'name',		icon:'supervisor_account'},
-						{	class:'xs6 sm6',	key:'name',		icon:'mail'},
-						{	class:'xs6 sm6',	key:'name',		icon:'phone_iphone'},
+						{	class:'xs6 sm6',	key:'firstname',	sub:'lastname',	icon:'account_circle'},
+						{	class:'xs6 sm6',	key:'customer_group_name',		icon:'supervisor_account'},
+						{	class:'xs6 sm6',	key:'email',		icon:'mail'},
+						{	class:'xs6 sm6',	key:'telephone',		icon:'phone_iphone'},
 					],
 					invoice:[
 						{	class:'xs6 sm6',	key:'name',		icon:'info_outline'},
@@ -469,18 +241,19 @@
 						{	class:'xs6 sm6',	key:'name',		icon:'info_outline'},
 						{	class:'xs6 sm6',	key:'name',		icon:'info_outline'},
 					],
-					payment:[
-						{	class:'xs6 sm6',	key:'name',		icon:'info_outline'},
-						{	class:'xs6 sm6',	key:'name',		icon:'info_outline'},
-						{	class:'xs6 sm6',	key:'name',		icon:'info_outline'},
-						{	class:'xs6 sm6',	key:'name',		icon:'info_outline'},
+					address:[
+						{	class:'xs6 sm6',	payment:'payment_company',	shipping:'shipping_company',		icon:'info_outline'},
+						{	class:'xs6 sm6',	payment:'payment_address_1',	shipping:'shipping_address_1',		icon:'info_outline'},
+						{	class:'xs6 sm6',	payment:'payment_address_2',	shipping:'shipping_address_2',		icon:'info_outline'},
+						{	class:'xs6 sm6',	payment:'payment_city',	shipping:'shipping_city',		icon:'info_outline'},
+						{	class:'xs6 sm6',	payment:'payment_zone',	shipping:'shipping_zone',		icon:'info_outline'},
+						{	class:'xs6 sm6',	payment:'payment_country',	shipping:'shipping_country',		icon:'info_outline'},
+						{	class:'xs6 sm6',	payment:'payment_postcode',	shipping:'shipping_postcode',		icon:'info_outline'},
+						{	class:'xs6 sm6',	payment:'payment_code',	shipping:'shipping_code',		icon:'info_outline'},
+						{	class:'xs6 sm6',	payment:'payment_address_format',	shipping:'shipping_address_format',		icon:'info_outline'},
+
 					],
-					Shipping:[
-						{	class:'xs6 sm6',	key:'name',		icon:'info_outline'},
-						{	class:'xs6 sm6',	key:'name',		icon:'info_outline'},
-						{	class:'xs6 sm6',	key:'name',		icon:'info_outline'},
-						{	class:'xs6 sm6',	key:'name',		icon:'info_outline'},
-					],
+					
 				}
 			}
 		},
@@ -499,17 +272,9 @@
 				})
 			},
 			fetchData(id){
-				axios.get(this.url+id+'/edit').then((res)=>{
-					// this.data.user_group_id=res.data.user_group_id
-					// this.data.username=res.data.username
-					// this.data.firstname=res.data.firstname
-					// this.data.lastname=res.data.lastname
-					// this.data.email=res.data.email
-					// this.data.code=res.data.code
-					// this.data.status=res.data.status
-					// this.data.image=res.data.image
+				axios.get(this.url+id+'/edit').then(res=>{
 					this.data=res.data
-				})
+				});
 			},
 			
 		    checkPasswordConfirmed(){

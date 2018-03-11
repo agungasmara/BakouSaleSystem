@@ -264,18 +264,12 @@ import Banner from './views/Components/backend/banners/Banner.vue'
 import BannerList from './views/Components/backend/banners/BannerList.vue'
 import BannerForm from './views/Components/backend/banners/BannerForm.vue'
 import BannerEdit from './views/Components/backend/banners/BannerEdit.vue'
-// //***** ProductAttribute*****
-// import productAttr from './views/Components/backend/products/attributes/ProductAttribute.vue'
-// import ProductAttributeList from './views/Components/backend/products/attributes/ProductAttributeList.vue'
-//import ProductAttributeForm from './views/Components/backend/product_attribute/ProductAttributeForm.vue'
-//import ProductOptionForm from './views/Components/backend/product_options/ProductOptionForm.vue'
-// import ProductAttributeEdit from './views/Components/backend/products/attributes/ProductAttributeEditForm.vue'
 
-// //***** Product Attribute Group*****
-// import ProductAttributeGroup from './views/Components/backend/products/attribute_groups/ProductAttributeGroup.vue'
-// import ProductAttributeGroupList from './views/Components/backend/products/attribute_groups/ProductAttributeGroupList.vue'
-// import ProductAttributeGroupForm from './views/Components/backend/products/attribute_groups/ProductAttributeGroupForm.vue'
-// import ProductAttributeGroupEdit from './views/Components/backend/products/attribute_groups/ProductAttributeGroupEditForm.vue'
+//***** Customer Group *****
+import CustomerGroup from './views/Components/backend/customer_groups/CustomerGroup.vue'
+import CustomerGroupList from './views/Components/backend/customer_groups/CustomerGroupList.vue'
+import CustomerGroupForm from './views/Components/backend/customer_groups/CustomerGroupForm.vue'
+import CustomerGroupEdit from './views/Components/backend/customer_groups/CustomerGroupEdit.vue'
 
 //import router from './router'
 import VueResource from 'vue-resource'
@@ -1180,12 +1174,25 @@ const router = new VueRouter({
         }
       ]
     },
-    // {
-    //   path:'/admin/test/proAttr',name:'proAtrribute',component:ProductAttributeForm
-    // },
- //    {
-	// 	path:'/admin/test/proOpt',name:'productOption',component:ProductOptionForm
-	// }
+    { path: '/admin/customer_groups', name:'customer_groups',component: CustomerGroup,
+      children: [
+        {
+          path: 'list',
+          name:'CustomerGroupList',
+          component: CustomerGroupList
+        },
+        {
+          path: 'add',
+          name:'CustomerGroupForm',
+          component: CustomerGroupForm
+        },
+        {
+          path: 'edit/:id',
+          name:'CustomerGroupEdit',
+          component: CustomerGroupEdit,props:true
+        }
+      ]
+    },
   ],
   scrollBehavior (to, from, savedPosition) {
     return { x: 10, y: 0 }
