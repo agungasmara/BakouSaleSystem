@@ -267,7 +267,7 @@ class ProductsController extends Controller
             if (isset($data['option_id'])) {
                 $product_option_id=ProductOption::insertGetId($data);
                 $fill=(new ProductOptionValue)->getFillable();
-                if ($item['checkItem']) {
+                if (isset($item['checkItem'])) {
                     foreach ($item['checkItem'] as $value) {
                         $data=array_only($value,$fill);
                         $data['product_option_id']=$product_option_id;
@@ -318,6 +318,6 @@ class ProductsController extends Controller
             $image->save(public_path($filepath));     
             return $filepath;
         } 
-        return false;
+        return $image;
     }
 }

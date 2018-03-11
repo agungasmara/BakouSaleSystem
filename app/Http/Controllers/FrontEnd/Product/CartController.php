@@ -80,7 +80,7 @@ class CartController extends Controller
             if ($datas['data']) {
                $datas['data']=$datas['data']->Cart()->get();
                foreach ($datas['data'] as $key => $value) {
-                    $value->name=ProductDescription::find($value->product_id)->value('name');
+                    $value->name=ProductDescription::where('product_id',$value->product_id)->value('name');
 
                     $datas['TotalPrices']+=$value->cart_quantity*$value->price;
                 }
