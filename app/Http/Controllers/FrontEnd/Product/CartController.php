@@ -33,11 +33,11 @@ use Redirect;
 use View;
 
 class CartController extends Controller
-{	
-	public function __construct()
+{   
+    public function __construct()
     {   
         // $this->middleware(function ($request, $next) {
-        // 	// dd(Auth::check());
+        //  // dd(Auth::check());
         //     SessionModel::AddSession();
         //     $data['MyCart']=SessionModel::find(session()->getId())->Cart()->get();
         //     //dd($data);
@@ -54,12 +54,7 @@ class CartController extends Controller
 
     public function AddToCart(Request $request)
     {
-       SessionModel::AddSession(request('session_id'));
-       $product=Cart::AddToCart($request->all());
-       $data['success']='success';
-       $data['message']='message';
-       $data['product']=$product;
-       return $data;
+       return Cart::AddToCart($request->all());
     }
     public function RemoveFromCart(Request $request)
     {
@@ -69,43 +64,34 @@ class CartController extends Controller
     {
         return Cart::UpdateCart($request->all());
     }
-    public function ProductCart()
+    public function ProductCart(Request $request)
     {
-      
+        $input = $request->all();
         $datas['TotalPrices']=0;
-    	if (Auth::guard('account')->check()) {
-    		$datas['data']=Customer::find(Auth::guard('account')->id())->Cart()->get();
-    	}else{
-            $datas['data']=SessionModel::find(request('session_id'));
-            if ($datas['data']) {
-               $datas['data']=$datas['data']->Cart()->get();
-               foreach ($datas['data'] as $key => $value) {
-                    $value->name=ProductDescription::where('product_id',$value->product_id)->value('name');
-
-                    $datas['TotalPrices']+=$value->cart_quantity*$value->price;
-                }
-                $datas['data']=$datas['data']->toArray();
-            }
-            
+        $datas['session_id']=$input['session_id'];
+        if (Auth::guard('account')->id()) {
+            $datas['data']=DB::table('cart')
+                            ->select('product.*','cart.quantity as cart_quantity')
+                            ->join('product','product.product_id','=','cart.product_id')
+                            ->where('cart.customer_id',Auth::guard('account')->id())
+                            ->get();
+        }else{
+            $datas['data'] = DB::table('cart')
+                                ->select('product.*','cart.quantity as cart_quantity')
+                                ->join('product','product.product_id','=','cart.product_id')
+                                ->where('cart.session_id',$input['session_id'])
+                                ->get();
         }
-        // dd($input['session_id']);
-        // $datas['session_id']=$input['session_id'];
-        // $datas['data']=SessionModel::find(session()->getId())->Cart()->get();
-        // if (Auth::guard('account')->id()) {
-        //     $datas['data']=DB::table('cart')
-        //                     ->select('product.*','cart.quantity as cart_quantity')
-        //                     ->join('product','product.product_id','=','cart.product_id')
-        //                     ->where('cart.customer_id',Auth::guard('account')->id())
-        //                     ->get();
-        // }else{
-        //     $datas['data']=DB::table('cart')
-        //                     ->select('product.*','cart.quantity as cart_quantity')
-        //                     ->join('product','product.product_id','=','cart.product_id')
-        //                     ->where('cart.session_id',$input['session_id'])
-        //                     ->get();
-        // }
 
-        
+        foreach ($datas['data'] as $key => $value) {
+            $value->name=ProductDescription::findOrfail($value->product_id)
+                        ->where('product_id',$value->product_id)
+                        ->where('language_id',config_language_id)
+                        ->value('name');
+                        
+            $datas['TotalPrices']+=$value->cart_quantity*$value->price;
+        }
+        $datas['data']=$datas['data']->toArray();
         return $datas;
     }
 

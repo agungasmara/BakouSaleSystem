@@ -1,3 +1,10 @@
+<!-- include pace script for automatic web page progress bar  -->
+<script>
+    paceOptions = {
+        elements: true
+    };
+</script>
+<script src="{{url('assets/frontend/js/pace.min.js')}}"></script>
 
 <!-- Le javascript
 ================================================== -->
@@ -47,17 +54,6 @@
 
 <script src="{{url('assets/frontend/js/grids.js')}}"></script>
 <script src="{{url('assets/frontend/js/enquire.min.js')}}"></script>
-<!-- include custom script for site  -->
-<script src="{{url('assets/frontend/js/script.js')}}"></script>
-
-<!-- include pace script for automatic web page progress bar  -->
-
-<script>
-    paceOptions = {
-        elements: true
-    };
-</script>
-<script src="{{url('assets/frontend/js/pace.min.js')}}"></script>
 
 <script type="text/javascript">
     $(function () {
@@ -71,7 +67,6 @@
         $('#modalAds').modal('show');
         $('#modalAds').removeClass('hide');
     });
-
 </script>
 <script type="text/javascript">
     /* wait for images to load */
@@ -100,11 +95,14 @@
                     title = rate;
                     $(this).tooltip('show');
                 })
-                    .on('rating.rateleave', function () {
-                        $(this).tooltip('hide');
-                    });
+                .on('rating.rateleave', function () {
+                    $(this).tooltip('hide');
+                });
             }
         });
 
     });
 </script>
+
+<!-- include custom script for site  -->
+<script src="{{url('assets/frontend/js/script.js')}}"></script>

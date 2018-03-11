@@ -4,6 +4,7 @@ namespace App\Http\Controllers\FrontEnd\Product;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Models\FrontEnd\Category;
 use DB;
 use Session;
 use Carbon\Carbon;
@@ -133,8 +134,9 @@ class CategoryController extends Controller
             );
 
         $getProducts = $this->getProducts($filter_data);
-
-        return response()->json(['data' => $getProducts,'success' => true, 'message' => 'Success', 'lang'=>Session::get('applangId')]);           
+        $category_info = Category::getCategory($category_id);
+        $getCategoryFilters = Category::getCategoryFilters($category_id);
+        return response()->json(['data' => $getProducts,'category_info'=>$category_info,'getCategoryFilters'=>$getCategoryFilters,'success' => true, 'message' => 'Success', 'lang'=>Session::get('applangId')]);           
     }
 
     public function getProducts($data = array()){

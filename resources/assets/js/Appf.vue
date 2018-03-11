@@ -243,7 +243,7 @@
                         <hr/>
                         <ul class="popular-product">
                             <li v-for="item of fetchStore['fetchStore']">
-                                <router-link v-bind:to="'/store/taobao/'+ item._source.store.store_id">
+                                <router-link v-bind:to="'/store/'+item._source.store.storename+'/'+ item._source.store.store_id">
                                     <div class="pull-left product-img"><img width="120px" v-bind:src="item._source.store.image"/> </div>
                                     <!-- <div class="pull-left">{{item._source.store.storename}}</div> -->
                                     <div class="clearfix"></div>

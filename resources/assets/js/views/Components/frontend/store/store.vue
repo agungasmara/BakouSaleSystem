@@ -938,7 +938,14 @@
         $('.search-full').hide(100)
     },
     mounted: function(){
-    	
+    	$('#search-list').slideUp(100)
+        $('.search-full').hide(100)
+    },
+    watch:{
+        '$route.params.id': function (id) {
+            this.getStoreData(id);
+            this.isActive = !this.isActive
+        }
     },
     created() {
     	this.getStoreData(this.id);
