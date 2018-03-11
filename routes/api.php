@@ -138,4 +138,7 @@ Route::get('/options/{id}/{lid}/edit','Backend\Options\OptionsController@edit');
 Route::put('/options/{id}/{lid}','Backend\Options\OptionsController@update');
 
 //======Option API
-Route::Resource('/banners','Backend\Banners\BannersController');
+Route::Resource('/banners','Backend\Customers\BannersController');
+
+//======Customer Group API
+Route::Resource('/customer_groups','Backend\Customers\CustomerGroupsController');

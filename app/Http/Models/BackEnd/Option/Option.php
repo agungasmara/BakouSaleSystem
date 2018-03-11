@@ -62,14 +62,5 @@ class Option extends Model
 		WHERE opt_desc.language_id='".$lid."' AND optv.option_id='".$id."'";
 
 		return DB::delete($sql);
-		// return DB::table('option_values as optv')
-	 //            	->Join('option_value_description as opt_desc',function($q)
-	 //            	{
-	 //            		$q->on('optv.option_id','=','opt_desc.option_id')
-	 //            		->on('optv.option_value_id','=','opt_desc.option_value_id');
-	 //            	})
-	 //            	->where(['optv.option_id'=>$id,'opt_desc.language_id'=>$lid])
-	 //            	->delete(['opt_desc']);
-	            	//->select('opt_desc.option_value_id','name','sort_order','image')->get();
 	}
 }
