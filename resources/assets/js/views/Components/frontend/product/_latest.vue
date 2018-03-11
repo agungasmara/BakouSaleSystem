@@ -103,7 +103,7 @@
         </div>
 
     </div>
-    <div v-if="flash.success" style="position: fixed;bottom: 30px;right: 30px; color:#FFF;display: block;height: auto;min-height: 30px;width: auto;padding: 10px; border-radius: 3px; background-color: #000;z-index: 100; transition: all 0.3s ease; -web-kit-transition: all 0.3s ease;">
+    <div v-if="flash.success" style="position: fixed;right: 30px; top: 0; color:#FFF;display: block;height: auto;min-height: 30px;width: auto;padding: 10px; border-radius: 3px; background-color: #000;z-index: 100; transition: all 0.3s ease; -web-kit-transition: all 0.3s ease;">
         {{flash.success}}
     </div>
   </div>
