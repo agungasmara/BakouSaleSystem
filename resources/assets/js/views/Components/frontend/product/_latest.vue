@@ -9,7 +9,7 @@
         <div class="container">
             <div class="row xsResponse categoryProduct">
 
-
+                
                 <div v-for="latestProduct of latestProducts" class="item itemauto col-lg-3 col-md-3 col-sm-6 col-xs-6">
                     <!-- <div>{{latest.thumb}}</div> -->
                     <div class="product">
@@ -103,6 +103,9 @@
         </div>
 
     </div>
+    <div v-if="flash.success" style="position: fixed;bottom: 30px;right: 30px; color:#FFF;display: block;height: auto;min-height: 30px;width: auto;padding: 10px; border-radius: 3px; background-color: #000;z-index: 100; transition: all 0.3s ease; -web-kit-transition: all 0.3s ease;">
+        {{flash.success}}
+    </div>
   </div>
   <!-- Demo Features Content end -->
 </template>
@@ -120,6 +123,7 @@
     export default {
         data() {
             return {
+              dialog:true,
               isActive: true,
               flash: Flash.state,
               error: Flash.state,
@@ -156,6 +160,8 @@
         methods: {
           AddToCart(product_id,qty=1){
             CartAction.AddToCart(product_id,qty,this.session_id)
+            Flash.setSuccess(qty+' Item added to your cart.')
+
             window.scrollTo(100,0)
           }
           
