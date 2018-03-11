@@ -55,7 +55,11 @@ class CartController extends Controller
     public function AddToCart(Request $request)
     {
        SessionModel::AddSession(request('session_id'));
-       return Cart::AddToCart($request->all());
+       $product=Cart::AddToCart($request->all());
+       $data['success']='success';
+       $data['message']='message';
+       $data['product']=$product;
+       return $data;
     }
     public function RemoveFromCart(Request $request)
     {

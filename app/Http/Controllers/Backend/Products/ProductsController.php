@@ -125,6 +125,7 @@ class ProductsController extends Controller
         foreach ($request['option'] as $item) {
             $data=array_only($item,$fill);
             $data['product_id']=$product_id;
+            
             $product_option_id=ProductOption::insertGetId($data);
             $fill=(new ProductOptionValue)->getFillable();
             if ($item['checkItem']) {
@@ -263,15 +264,17 @@ class ProductsController extends Controller
         foreach ($request['option'] as $item) {
             $data=array_only($item,$fill);
             $data['product_id']=$product_id;
-            $product_option_id=ProductOption::insertGetId($data);
-            $fill=(new ProductOptionValue)->getFillable();
-            if ($item['checkItem']) {
-                foreach ($item['checkItem'] as $value) {
-                    $data=array_only($value,$fill);
-                    $data['product_option_id']=$product_option_id;
-                    $data['product_id']=$product_id;
-                    $data['option_id']=$item['option_id'];
-                    ProductOptionValue::insert($data);
+            if (isset($data['option_id'])) {
+                $product_option_id=ProductOption::insertGetId($data);
+                $fill=(new ProductOptionValue)->getFillable();
+                if ($item['checkItem']) {
+                    foreach ($item['checkItem'] as $value) {
+                        $data=array_only($value,$fill);
+                        $data['product_option_id']=$product_option_id;
+                        $data['product_id']=$product_id;
+                        $data['option_id']=$item['option_id'];
+                        ProductOptionValue::insert($data);
+                    }
                 }
             }
         }
@@ -295,7 +298,7 @@ class ProductsController extends Controller
         $data=array_only($request['general'],$fill);
         $data['product_id']=$product_id;
         $data['language_id']=1;
-        return (new DataAction)->UpdateData(ProductDescription::class,[],'',$data);
+        return (new DataAction)->UpdateData(ProductDescription::class,$data,'product_id',$product_id);
     }
     public function destroy($id)
     {

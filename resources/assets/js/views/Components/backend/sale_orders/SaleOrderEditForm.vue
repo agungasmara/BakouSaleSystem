@@ -57,7 +57,7 @@
 					                      		<div class="divider"></div>
 											    <v-layout row wrap>
 											    	 <v-flex v-for="column in rows[item.form]" :class="column.class" :key="column.key">
-											      		<span><i style="float: left;" class="material-icons">{{column.icon}}</i> {{data.data[column.key]}} {{data.data[column.sub]}}</span>
+											      		<span v-if="data.data[column.key]"><i style="float: left;" class="material-icons">{{column.icon}}</i> {{data.data[column.key]}} {{data.data[column.sub]}}</span>
 											      	</v-flex>
 
 											    </v-layout>
