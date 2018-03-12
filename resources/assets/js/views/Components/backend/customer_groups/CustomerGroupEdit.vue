@@ -30,7 +30,7 @@
 				valid: true,
 			    group:[
 					{	class:'xs12 sm12 md12',	 key:'name',	type:'text',	 text:'Group Name'	},
-					{	class:'xs12 sm12 md12',	 key:'description',	type:'textarea',text:'Description'},
+					{	class:'xs12 sm12 md12',	 key:'description',	type:'editor',text:'Description'},
 					{	class:'xs12 sm12 md12',	 key:'approval',	type:'checkbox',	 text:'Aprrove new customer',	},
 					{	class:'xs12 sm6 md6',	 key:'sort_order',	type:'number',	 text:'Sort Order',	},
 					{	class:'xs12 sm6 md6',	 key:'language_id',	type:'select',	 text:'Language',items:'languages'	}

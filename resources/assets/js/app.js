@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
+import VueEditor from 'vue2-quill-editor'
 // FrontEnd #######################
 import Appf from './Appf.vue'
 import FHome from './views/Components/frontend/home.vue'
@@ -39,6 +39,7 @@ import Store from './views/Components/frontend/store/store.vue'
 import Footer from './views/Components/frontend/common/_footer.vue'
 
 // Backend ###################
+import PageNotFound from './views/Components/backend/commons/error/pageNotFound'
 import Home from './views/Components/index.vue'
 import Register from './views/Auth/Register.vue'
 import Login from './views/Auth/Login.vue'
@@ -271,6 +272,11 @@ import CustomerGroupList from './views/Components/backend/customer_groups/Custom
 import CustomerGroupForm from './views/Components/backend/customer_groups/CustomerGroupForm.vue'
 import CustomerGroupEdit from './views/Components/backend/customer_groups/CustomerGroupEdit.vue'
 
+//***** Customer *****
+import Customer from './views/Components/backend/customers/Customer.vue'
+import CustomerList from './views/Components/backend/customers/CustomerList.vue'
+import CustomerForm from './views/Components/backend/customers/CustomerForm.vue'
+import CustomerEdit from './views/Components/backend/customers/CustomerEdit.vue'
 //import router from './router'
 import VueResource from 'vue-resource'
 import Vuetify from 'vuetify'
@@ -278,6 +284,7 @@ import Vuetify from 'vuetify'
 Vue.use(Vuetify)
 Vue.use(VueResource);
 Vue.use(VueRouter)
+Vue.use(VueEditor)
 
 Vue.http.options.credentials = true;
 
@@ -437,6 +444,7 @@ const router = new VueRouter({
     { path: '/admin', name:'ahome',component: Home },
     { path: '/admin/list', name:'floo',component: List },
     { path: '/register', name:'foo',component: Register },
+      {path:'*',name:'404NotFound',component:PageNotFound},
     { path: '/admin/options', name:'options',component: Option,
       children: [
         {
@@ -1193,6 +1201,25 @@ const router = new VueRouter({
         }
       ]
     },
+      { path: '/admin/customers', name:'customers',component: Customer,
+          children: [
+              {
+                  path: 'list',
+                  name:'CustomerList',
+                  component: CustomerList
+              },
+              {
+                  path: 'add',
+                  name:'CustomerForm',
+                  component: CustomerForm
+              },
+              {
+                  path: 'edit/:id',
+                  name:'CustomerEdit',
+                  component: CustomerEdit,props:true
+              }
+          ]
+      },
   ],
   scrollBehavior (to, from, savedPosition) {
     return { x: 10, y: 0 }
