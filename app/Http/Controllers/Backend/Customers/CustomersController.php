@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Backend\Customers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Models\Backend\CustomerGroup\CustomerGroup;
-use App\Http\Models\Backend\CustomerGroup\CustomerGroupDescription\CustomerGroupDescription;
+use App\Http\Models\Backend\Customer\Customer;
+//use App\Http\Models\Backend\CustomerGroup\CustomerGroupDescription\CustomerGroupDescription;
 /*
     DataAction class use for any action the data from any table
     For more detail i have comment in DataAction class in commons folder
@@ -15,8 +15,8 @@ class CustomersController extends Controller
 {
     public function index()
     {
-        $CustomerGroup=CustomerGroup::AllCustomerGroups();
-        return response()->json($CustomerGroup);
+        $Customer=Customer::CustomerList();
+        return response()->json($Customer);
     }
     public function store(Request $request)
     {

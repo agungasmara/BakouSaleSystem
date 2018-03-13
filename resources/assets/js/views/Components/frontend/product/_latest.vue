@@ -161,7 +161,11 @@
           AddToCart(product_id,qty=1){
             CartAction.AddToCart(product_id,qty,this.session_id)
             Flash.setSuccess(qty+' Item added to your cart.')
-
+              // let toast = this.$toasted.show("Toasted !!", {
+              //     theme: "primary",
+              //     position: "bottom-right",
+              //     duration : 5000
+              // });
             window.scrollTo(100,0)
           }
           

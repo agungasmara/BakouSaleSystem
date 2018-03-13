@@ -144,3 +144,6 @@ Route::Resource('/banners','Backend\Customers\BannersController');
 
 //======Customer Group API
 Route::Resource('/customer_groups','Backend\Customers\CustomerGroupsController');
+
+//======Customer API
+Route::Resource('/customers','Backend\Customers\CustomersController');
