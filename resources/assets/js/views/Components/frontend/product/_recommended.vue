@@ -6,7 +6,7 @@
 
 		      <div class="container">
 		          <div class="row xsResponse equalHeightCategoryProduct">
-		          	<pre>{{productRecommandeds|json}}</pre>
+		          	<!-- <pre>{{productRecommandeds|json}}</pre> -->
 		          	<template v-for="productRecommanded of productRecommandeds">
 			              <div class="item col-lg-3 col-md-3 col-sm-4 col-xs-6">
 			                  <div class="product">
@@ -16,30 +16,29 @@
 			                      </a>
 
 			                      <div class="image">
-			                          <div class="quickview">
-			                            <a data-toggle="modal" class="btn btn-xs btn-quickview" :data-target="ModalQuickView(productRecommanded.product_id)">
-			                            	Quick View 
-			                            </a>
-			                          </div>
-			                          <router-link v-bind:to="'/product/product_detail/'+ productRecommanded.product_id">
-			                          	 <img v-bind:src="productRecommanded.thumb" alt="img" class="img-responsive">
-									  </router-link>
+		                          <div class="quickview">
+		                            <a data-toggle="modal" class="btn btn-xs btn-quickview" :data-target="ModalQuickView(productRecommanded.product_id)">
+		                            	Quick View 
+		                            </a>
+		                          </div>
+		                          <router-link v-bind:to="'/product/product_detail/'+ productRecommanded.product_id">
+		                          	 <img v-bind:src="productRecommanded.thumb" alt="img" class="img-responsive">
+								  						</router-link>
 
-			                          <div class="promotion">
-			                          	<span class="new-product"> NEW</span>
-			                          	<span class="discount">15% OFF</span>
-			                          </div>
+		                          <div class="promotion">
+		                          	<span class="new-product"> NEW</span>
+		                          	<span class="discount">15% OFF</span>
+		                          </div>
 			                      </div>
-			                      <div class="description">
+			                       <div class="description">
 			                          <h4>
 			                          	<router-link v-bind:to="'/product/product_detail/'+ productRecommanded.product_id">
 			                          		{{productRecommanded.name}}
-										</router-link>
+																	</router-link>
 			                          </h4>
-
 			                          <p v-html="productRecommanded.description">.</p>
-			                          <span class="size">XL / XXL / S </span></div>
-
+			                          <span class="size">XL / XXL / S </span>
+			                        </div>
 			                      <div class="price" v-if="productRecommanded.special != ''">
 			                      	<span>  ${{productRecommanded.price}}</span> 
 			                      </div>
@@ -67,7 +66,8 @@
 									<div class="modal fade" :id="ShowId(productRecommanded.product_id)" tabindex="-1" role="dialog"
 									 aria-labelledby="productSetailsModalAjaxLabel" aria-hidden="true">
 										<div class="modal-dialog">
-										    <div class="modal-content" v-for="productRecommanded of productRecommandeds">
+												{{productRecommanded.product_id}}
+										    <div class="modal-content">
 										        <button aria-hidden="true" data-dismiss="modal" class="close" type="button"> ×</button>
 										        <div class="col-lg-5 col-md-5 col-sm-5  col-xs-12">
 										            <!-- product Image -->
@@ -75,20 +75,19 @@
 										                <a class="product-largeimg-link" href="">
 										                	<img src="images/product_details/low-res-white/1.jpg" class="img-responsive product-largeimg" alt="img">
 										                </a>
+
 										            </div>
 										            <!--/.main-image-->
 
 										            <div class="modal-product-thumb">
-										                <a class="thumbLink selected"><img data-large="images/product_details/low-res-white/1.jpg" alt="img"
-										                                                   class="img-responsive" src="images/product_details/low-res-white/1.jpg">
+										                <a class="thumbLink selected">
+										                	<img data-large="images/product_details/low-res-white/1.jpg" alt="img" class="img-responsive" src="images/product_details/low-res-white/1.jpg">
 										                </a>
-										                <a class="thumbLink"><img data-large="images/product_details/low-res-white/2.jpg" alt="img"
-										                                          class="img-responsive"
-										                                          src="images/product_details/low-res-white/2.jpg">
+										                <a class="thumbLink">
+										                	<img data-large="images/product_details/low-res-white/2.jpg" alt="img" class="img-responsive" src="images/product_details/low-res-white/2.jpg">
 										                </a>
-										                <a class="thumbLink"><img data-large="images/product_details/low-res-white/3.jpg" alt="img"
-										                                          class="img-responsive"
-										                                          src="images/product_details/low-res-white/3.jpg">
+										                <a class="thumbLink">
+										                	<img data-large="images/product_details/low-res-white/3.jpg" alt="img" class="img-responsive" src="images/product_details/low-res-white/3.jpg">
 										                </a>
 										            </div>
 										            <!--/.modal-product-thumb-->
@@ -97,7 +96,9 @@
 
 										        <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 modal-details no-padding">
 										            <div class="modal-details-inner">
-										                <h1 class="product-title"> Lorem ipsum dolor sit amet</h1>
+										                <h1 class="product-title">
+										                	{{productRecommanded.name}}
+										                </h1>
 
 										                    <h3 class="product-code">Product Code : DEN1098</h3>
 
@@ -189,7 +190,6 @@
 										        </div>
 										        <!--/.modal-details-->
 										        <div class="clear"></div>
-
 										    </div>
 										    <!-- /.modal-content -->
 										</div>
@@ -230,6 +230,7 @@
     Vue.use(VueCookie)
 
     export default {
+    	 props:['id'],
         data() {
             return {
             	isActive: true,
@@ -237,19 +238,28 @@
                 error: Flash.state,
                 error: {},
                 productRecommandeds: [],
+                productInfo:[],
                 isProcessing: false,
                 session_id : this.$cookie.get('session_id')
             }
         },
+         watch:{
+            '$route.params.id': function (id) {
+                this.productDetails(id)
+                this.isActive = !this.isActive
+            }
+        },
         created() {
       		axios.get(`/api/recommandProduct`)
-            .then(response => {
-              this.productRecommandeds = response.data['data']
-              this.isActive = !this.isActive
-            })
-            .catch(e => {
-              this.errors.push(e)
-            })
+          .then(response => {
+            this.productRecommandeds = response.data['data']
+            this.isActive = !this.isActive
+          })
+          .catch(e => {
+            this.errors.push(e)
+          }),
+
+          this.productDetails(this.id)
         },
         ready() {
            
@@ -259,14 +269,20 @@
                 var value = ['#productSetailsModalAjax​​'+product_id]
                 return value.join(' ')
             },
-            ShowId (product_id) {
-                var value = ['productSetailsModalAjax​​'+product_id]
-                return value.join(' ')
-            },
+          ShowId (product_id) {
+              var value = ['productSetailsModalAjax​​'+product_id]
+              return value.join(' ')
+          },
           AddToCart(product_id,qty=1){
             CartAction.AddToCart(product_id,qty,this.session_id)
             Flash.setSuccess(qty+' Item added to your cart.')
             window.scrollTo(100,0)
+          },
+          productDetails(id){
+            axios.get('/api/detail/'+id).then(res=>{
+                this.productInfo=res.data['data']
+                this.isActive = !this.isActive
+            });
           }
         }
     }
