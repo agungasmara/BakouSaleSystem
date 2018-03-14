@@ -230,7 +230,6 @@
     Vue.use(VueCookie)
 
     export default {
-    	 props:['id'],
         data() {
             return {
             	isActive: true,
@@ -243,12 +242,6 @@
                 session_id : this.$cookie.get('session_id')
             }
         },
-         watch:{
-            '$route.params.id': function (id) {
-                this.productDetails(id)
-                this.isActive = !this.isActive
-            }
-        },
         created() {
       		axios.get(`/api/recommandProduct`)
           .then(response => {
@@ -257,9 +250,7 @@
           })
           .catch(e => {
             this.errors.push(e)
-          }),
-
-          this.productDetails(this.id)
+          })
         },
         ready() {
            
@@ -277,12 +268,6 @@
             CartAction.AddToCart(product_id,qty,this.session_id)
             Flash.setSuccess(qty+' Item added to your cart.')
             window.scrollTo(100,0)
-          },
-          productDetails(id){
-            axios.get('/api/detail/'+id).then(res=>{
-                this.productInfo=res.data['data']
-                this.isActive = !this.isActive
-            });
           }
         }
     }

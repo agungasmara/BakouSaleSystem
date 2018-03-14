@@ -50,9 +50,9 @@ class CommonsController extends Controller
     public function getCustomerGroup()
     {
 
-        $TaxClass=DB::table('customer_group_description')->select(['customer_group_id as value','name as text'])->get();
+        $customerGroups=DB::table('customer_group_description')->select(['customer_group_id as value','name as text'])->get();
 
-        return response()->json($TaxClass);
+        return response()->json($customerGroups);
 
     }
     
