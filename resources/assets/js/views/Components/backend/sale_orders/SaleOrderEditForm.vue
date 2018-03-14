@@ -236,10 +236,10 @@
 						{	class:'xs6 sm6',	key:'telephone',		icon:'phone_iphone'},
 					],
 					invoice:[
-						{	class:'xs6 sm6',	key:'name',		icon:'info_outline'},
-						{	class:'xs6 sm6',	key:'name',		icon:'info_outline'},
-						{	class:'xs6 sm6',	key:'name',		icon:'info_outline'},
-						{	class:'xs6 sm6',	key:'name',		icon:'info_outline'},
+						// {	class:'xs6 sm6',	key:'name',		icon:'info_outline'},
+						// {	class:'xs6 sm6',	key:'name',		icon:'info_outline'},
+						// {	class:'xs6 sm6',	key:'name',		icon:'info_outline'},
+						// {	class:'xs6 sm6',	key:'name',		icon:'info_outline'},
 					],
 					address:[
 						{	class:'xs6 sm6',	payment:'payment_company',	shipping:'shipping_company',		icon:'info_outline'},
@@ -259,18 +259,10 @@
 		},
 		created(){
 			this.dataID=this.id
-			this.getUserGroup()
-			this.fetchData(this.id)
+			
 		},
 		methods:{
-			getImage(event){
-				console.log('data after child handle: ', event)
-			},
-			getUserGroup(){
-				axios.get('/api/users_group').then((res)=>{
-					this.selects.userGroupItems=res.data
-				})
-			},
+			
 			fetchData(id){
 				axios.get(this.url+id+'/edit').then(res=>{
 					this.data=res.data
@@ -289,33 +281,7 @@
 		        }
 		        return this.error
 		    },
-		    onPickFile() {
-		    	this.btnImageDisabled=true
-		    	this.btnText="Uploading..."
-		        this.$refs.fileInput.click()
-		    },
-		    onFilePicked(event){
-		    	
-		    		
-		    	const files=event.target.files
-		    	let filename=files[0].name;
-		    	if(filename.lastIndexOf('.')<=0){
-		    		return alert('Please add a valid file!')
-		    	}
-		    	const fileReader=new FileReader()
-		    	fileReader.addEventListener('load',()=>{
-		    		
-		    		this.imageUrl=fileReader.result
-					this.btnImageDisabled=false
-		    		this.btnText="Upload Image"
-		    	
-		    	})
-		    	fileReader.readAsDataURL(files[0])
-		    	
-		    },
-		    clearImage(){
-		    	this.imageUrl=''
-		    }
+		    
 		}
 	}
 </script>
