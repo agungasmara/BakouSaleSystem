@@ -53,7 +53,7 @@
 					                      
 					                      <div class="row">
 					                      	<v-container grid-list-md>
-					                      		<h4 class="header"><i class="material-icons text-left"> {{item.icon}} </i> {{item.title}} </h4>
+					                      		<h4 class="header"><i class="material-icons text-left"> {{item.icon}} </i>  {{item.title}} </h4>
 					                      		<div class="divider"></div>
 											    <v-layout row wrap>
 											    	 <v-flex v-for="column in rows[item.form]" :class="column.class" :key="column.key">
@@ -182,7 +182,21 @@
 				back:'/admin/sale_order/list',
 				url:'/admin/api/sale_order/',
 				data:{},
-
+				valid:true,
+				breadcrumbs: [
+			        {
+			          text: 'Dashboard',
+			          disabled: false
+			        },
+			        {
+			          text: 'Sale Order',
+			          disabled: false
+			        },
+			        {
+			          text: 'View',
+			          disabled: true
+			        }
+		      	],
 				section:[
 					{
 						info_title:'Order Details',
@@ -259,28 +273,36 @@
 		},
 		created(){
 			this.dataID=this.id
-			
+			// this.getUserGroup()
+			this.fetchData(this.id)
 		},
 		methods:{
-			
+			// getImage(event){
+			// 	console.log('data after child handle: ', event)
+			// },
+			// getUserGroup(){
+			// 	axios.get('/api/users_group').then((res)=>{
+			// 		this.selects.userGroupItems=res.data
+			// 	})
+			// },
 			fetchData(id){
 				axios.get(this.url+id+'/edit').then(res=>{
 					this.data=res.data
 				});
 			},
 			
-		    checkPasswordConfirmed(){
-	    		if(this.password===this.confirmPassword){
-		        	this.error=false
-		        }else{
-		        	if(this.confirmPassword===""){
-		        		this.error=false
-		        	}else{
-		        		this.error=true
-		        	}
-		        }
-		        return this.error
-		    },
+		    // checkPasswordConfirmed(){
+	    	// 	if(this.password===this.confirmPassword){
+		    //     	this.error=false
+		    //     }else{
+		    //     	if(this.confirmPassword===""){
+		    //     		this.error=false
+		    //     	}else{
+		    //     		this.error=true
+		    //     	}
+		    //     }
+		    //     return this.error
+		    // },
 		    
 		}
 	}
