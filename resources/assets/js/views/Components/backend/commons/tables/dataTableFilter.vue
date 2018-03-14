@@ -1,5 +1,6 @@
 <template>
     <v-card>
+        
         <v-data-table v-bind:headers="dataHeader" :items="dataValue" v-bind:search="search" class="elevation-1" :rows-per-page-items="[25,50,100, { text: 'All', value: -1 }]" :loading="tbloading" sort-desc="true">
             <template slot="items" slot-scope="props">
 
