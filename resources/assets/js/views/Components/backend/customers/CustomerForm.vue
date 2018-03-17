@@ -1,165 +1,286 @@
 <template>
-	<section id="content">
-		<!--breadcrumbs start-->
-		<div id="breadcrumbs-wrapper">
-			<!-- Search for small screen -->
-			<div class="header-search-wrapper grey lighten-2 hide-on-large-only">
-			  <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize">
+	<v-app id="inspire">
+		<!-- <normal-form
+			v-bind:url="url"
+			v-bind:id="0"
+			v-bind:breadcrumb-title="breadcrumbTitle"
+			v-bind:breadcrumbs="breadcrumbs"
+			v-bind:form-items="group"
+			v-bind:form-rules="rules"
+			v-bind:form-datas="data"
+			v-bind:select-items="select"
+			v-bind:back-url="backUrl"
+		></normal-form> -->
+		<section id="_content">
+			<!--breadcrumbs start-->
+			<div id="breadcrumbs-wrapper">
+				<!-- Search for small screen -->
+				<div class="header-search-wrapper grey lighten-2 hide-on-large-only">
+				  <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize">
+				</div>
+				<div class="row container">
+				  <div class="container">
+				    <div class="col s10 m6 l6">
+				      <h5 class="breadcrumbs-title">Products</h5>
+				      	<v-breadcrumbs>
+				        	<v-icon slot="divider">/</v-icon>
+			        		<v-breadcrumbs-item  v-for="breadcrumb in breadcrumbs" :key="breadcrumb.text" :disabled="breadcrumb.disabled">
+			          			{{ breadcrumb.text }}
+			        		</v-breadcrumbs-item>
+			      		</v-breadcrumbs>
+				    </div>
+				    <div class="col s2 m6 l6">
+				     	<router-link :to="back" replace><v-btn class="btn dropdown-settings waves-effect waves-light breadcrumbs-btn right" color="success">Back</v-btn></router-link>
+				    	<v-btn @click="submit()" color="primary" class="btn dropdown-settings breadcrumbs-btn right">Save</v-btn>
+				    </div>
+				  </div>
+				</div>
 			</div>
-			<div class="container">
-			  <div class="row">
-			    <div class="col s10 m6 l6">
-			      <h5 class="breadcrumbs-title">Forms</h5>
-			      <!-- <ol class="breadcrumbs">
-			        <li><a href="index.html">Dashboard</a>
-			        </li>
-			        <li><a href="#">Forms</a>
-			        </li>
-			        <li class="active">Forms Layouts</li>
-			      </ol> -->
-			      	<v-breadcrumbs>
-			        	<v-icon slot="divider">/</v-icon>
-		        		<v-breadcrumbs-item  v-for="item in breadcrumbs" :key="item.text" :disabled="item.disabled">
-		          			{{ item.text }}
-		        		</v-breadcrumbs-item>
-		      		</v-breadcrumbs>
-			    </div>
-			    <div class="col s2 m6 l6">
-			    	<router-link to="/admin/attributes/list" replace><v-btn color="primary" class="btn dropdown-settings breadcrumbs-btn right">Cancel</v-btn></router-link>
-
-			     	<router-link to="/admin/attributes/list" replace><v-btn @click="submit(1)" class="btn dropdown-settings waves-effect waves-light breadcrumbs-btn right" color="success">Save</v-btn></router-link>
-			    </div>
-			  </div>
-			</div>
-		</div>
-		<!--breadcrumbs end-->
-		<div id="basic-form" class="section">
-			<div class="container">
-				<v-app id="inspire">
-					<v-card>
-						<!-- <v-card-title>	
-							<v-breadcrumbs>
-					        	<v-icon slot="divider">forward</v-icon>
-					        		<v-breadcrumbs-item  v-for="item in breadcrumbs" :key="item.text" :disabled="item.disabled">
-					          			{{ item.text }}
-					        		</v-breadcrumbs-item>
-					      	</v-breadcrumbs>
-						</v-card-title> -->
-						<div class="flash flash__success" v-if="flash.success">
-							<v-alert color="success" icon="check_circle" value="true">
-				            	{{flash.success}}
-				            </v-alert>
-			          	</div>
-					    <v-form v-model="valid" ref="form" lazy-validation>
-					    	<v-container grid-list-md offset-s3>
-		              			<v-layout wrap>
-							    	<v-flex xs12 sm6 md6>
-							      		<v-select label="Select Store" v-model="select" :items="items" :rules="[v => !!v || 'Item is required']" required></v-select>
-							      	</v-flex>
-
-							    	<!-- <v-flex xs12 sm6 md6>
-							      		<v-text-field label="Code" v-model="code" :rules="codeRules" :counter="10" required></v-text-field>
-							      	</v-flex> -->
-
-							      	<v-flex xs12 sm6 md6>
-							      		<v-text-field label="Key" v-model="key" :rules="keyRules" :counter="10" required></v-text-field>
-							      	</v-flex>
-
-							      	<v-flex xs12 sm6 md6>
-							      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="10" required></v-text-field>
-							      	</v-flex>
-
-							      	<!-- <v-btn @click="submit(1)" :disabled="!valid">
-								        Save & New
-								    </v-btn>
-								    <v-btn @click="submit(2)" :disabled="!valid">
-								        Save & Close
-								    </v-btn>
-								    <router-link to="/admin/settings/list">
-									    <v-btn>
-									        Cancele
-									    </v-btn>
-								    </router-link> -->
-							    </v-layout>
-							</v-container>
-					    </v-form>
-					</v-card>
-				</v-app>
-			</div>
-		</div>
-	</section>
+			<!--breadcrumbs end-->
+			<div id="basic-form" class="section">
+	            <div class="row col s12">
+	            	<div class="container">
+		              <!-- Form with placeholder -->
+		              <div class="col s12 m12 l12">
+		                <div class="_card-panel">
+		                  
+		                  <div class="container">
+		                    <v-form v-model="valid" ref="form" lazy-validation>
+		                    	<div v-for="item in section">
+			                    	<!-- /start -->
+			                    	<div class="row">
+				                    	<div class="col s12 m12 l2">
+				                    		<div class="row">
+					                    		<h4  class="header"> {{item.info_title}} </h4>
+					                    		<div>
+					                    			{{item.info_description}}
+					                    		</div>
+				                    		</div>
+				                    	</div>
+				                    	<div class="col s12 m12 l8">
+					                      
+					                      <div class="row">
+					                      	<v-container grid-list-md>
+					                      		<h4 class="header"><i class="material-icons text-left"> {{item.icon}} </i> {{item.title}} </h4>
+					                      		<div class="divider"></div>
+					                      		<div>
+					                      			<div class="chip-box" :class="{'current':show=='general'}" @click="showGeneral">General</div>
+					                      			<div class="chip-box" @click="addAddress">Add Address</div>
+					                      			<div class="chip-box" v-for="(optItem,index) in addressItem" :key="index" :class="{'current':show==index}">
+											            <span @click="show = index">
+											            	{{optItem.addr1}}
+											                
+											            </span>
+											            <v-icon color="red" dark right @click="removeOpt(index)" style="cursor: pointer;">remove_circle</v-icon>
+													</div>
+					                      		</div>
+					                      		<v-flex xs12 sm12 md12 l12>
+													<div v-for="(optItem,index) in addressItem" :key="index">
+											          	<div v-if="show==index">
+												          	{{index}}
+											          	</div>
+											          	
+										          	</div>
+										          	<div v-if="show=='general'">
+									          			<form-group
+													
+														v-bind:form-items="group[item.form]"
+														v-bind:form-rules="rules"
+														v-bind:form-datas="data[item.form]"
+														v-bind:select-items="select"
+														
+														></form-group>
+										          	</div>
+										      	</v-flex>
+												</v-container>
+					                      </div>
+					                    </div>
+					                </div>
+			                      	<div class="clearfix"></div>
+			                    	<!-- */end  -->
+		                    	</div>
+		                    </v-form>
+		                  </div>
+		                </div>
+		              </div>
+		            </div>
+	            </div>
+	        </div>
+		</section>
+	</v-app>
 </template>
 <script>
 	import Flash from '../../../../helper/flash'
 	import axios from 'axios'
+	// import normalForm from '../commons/form/normalForm.vue'
+	import formGroup from '../commons/form/formGroup.vue'
 	export default{
+		components:{
+			formGroup
+		},
 		data(){
 			return{
+				url:'/api/customers/',
+				e1:true,
 				valid: true,
-			    code: '',
-			    codeRules: [
-			      (v) => !!v || 'Code is required',
-			      (v) => v && v.length <= 10 || 'Code must be less than 10 characters'
-			    ],
-			    key: '',
-			    keyRules: [
-			      (v) => !!v || 'Key is required',
-			      (v) => v && v.length <= 10 || 'Key must be less than 10 characters'
-			    ],
-			    value: '',
-			    valueRules: [
-			      (v) => !!v || 'Value is required',
-			      (v) => v && v.length <= 10 || 'Value must be less than 10 characters'
-			    ],
-			    select: null,
-			    items: [],
-			    breadcrumbs: [
+				section:[
+					{
+						info_title:'Customer',
+						info_description:'Setup your customer here. ',
+						title:'General',
+						icon:'info_outline',
+						form:'general',
+					},
+				],
+				group:{
+					general:[
+				    	{	class:'xs12 sm12 md12',	 key:'customer_group_id',	type:'select',	 text:'Group',items:'customergroup'	},
+						{	class:'xs12 sm6 md6',	 key:'firstname',	type:'text',	 text:'First Name'	},
+						{	class:'xs12 sm6 md6',	 key:'lastname',	type:'text',text:'Last Name'},
+						{	class:'xs12 sm6 md6',	 key:'email',	type:'text',	 text:'Email',	},
+						{	class:'xs12 sm6 md6',	 key:'telephone',	type:'text',	 text:'Telephone',	},
+						{	class:'xs12 sm6 md6',	 key:'password',	type:'password',	 text:'Password',	},
+						{	class:'xs12 sm6 md6',	 key:'confrimpassword',	type:'password',	 text:'Confirm Password',	},
+						{	class:'xs12 sm12 md12',	 key:'newsletter',	type:'select',	 text:'Newsletter',items:'newsletterItem'	},
+						{	class:'xs12 sm12 md12',	 key:'status',	type:'select',	 text:'Status',items:'statusItem'	},
+						{	class:'xs12 sm12 md12',	 key:'safe',	type:'select',	 text:'Safe',items:'safeItem'	},
+					],
+					address:[
+						{class:'xs12 sm6 md6',	 key:'firstname',	type:'text',	 text:'First Name'	},
+					]
+				},
+				rules:{
+					firstname: [
+				      (v) => !!v || 'First Name is required'
+				    ],
+				    lastname:[
+				      (v) => !!v || 'Last Name is required'
+				    ],
+				    customer_group_id:[
+				      (v) => !!v || 'Group is required'
+				    ],
+				    email:[
+				      (v) => !!v || 'Email is required'
+				    ],
+				    telephone:[
+				      (v) => !!v || 'Telephone is required'
+				    ],
+				    password:[
+				      (v) => !!v || 'Password is required'
+				    ],
+				    confrimpassword:[
+				      (v) => !!v || 'Confirm Password is required'
+				    ]
+				},
+				data:{
+					general:{
+						safe:1,
+						newsletter:1,
+						status:1
+					},
+				},
+				select:{
+					customergroup:[],
+					safeItem:[{text:'Yes',value:1},{text:'No',value:0}],
+					statusItem:[{text:'Enable',value:1},{text:'Disable',value:0}],
+					newsletterItem:[{text:'Enable',value:1},{text:'Disable',value:0}]
+				},
+				breadcrumbTitle:'Customer',
+				breadcrumbs: [
 			        {
-			          text: 'Dashboard',
+			          text: 'Administrator',
 			          disabled: false
 			        },
 			        {
-			          text: 'Attributes',
+			          text: 'Customer',
 			          disabled: false
 			        },
 			        {
-			          text: 'Form',
+			          text: 'Create',
 			          disabled: true
 			        }
-		      	],
-				flash:Flash.state
+			    ],
+			    back:'/admin/customers/list',
+			    addressItem:[],
+			    opt:'text',
+				show:'general',
+				a:1
 			}
 		},
 		created(){
-			this.getStore()
+			this.getLanguage()
+			this.fetchGroup()
+		},
+		watch:{
+			a:function(){
+				if(addressItem.length==0){
+					this.a=0;
+				}
+			}
 		},
 		methods:{
-			getStore(){
-				axios.get('/api/getStore').then((res)=>{
-					this.items=res.data
+			getLanguage(){
+				axios.get('/api/getLanguage').then((res)=>{
+					this.select.languages=res.data
 				})
 			},
-			submit (opt) {
-		      if (this.$refs.form.validate()) {
-		        // Native form submission is not yet supported
-		        axios.post('/api/setting/save', {
-		          store: this.select,
-		          code: this.code,
-		          key: this.key,
-		          value: this.value
-		        }).then((res)=>{
-		        	if(res.data.success==true){
-		        		Flash.setSuccess(res.data.message)
-		        		if(opt==1){
-		        			this.$refs.form.reset()
-		        		}
-		        		else if(opt==2){
-		        			this.$router.push('/admin/settings/list')
-		        		}
-		        	}
-		        })
-		      }
-		    }
+			fetchGroup(){
+                axios.get('/api/getCustomerGroup/').then(res=>[
+                    this.select.customergroup=res.data
+				])
+			},
+			addAddress(){
+				
+				this.addressItem.push({addr1:'Address '+this.a});
+				this.a=this.a+1;
+			},
+			showGeneral(){
+				this.show='general';
+			},
+			removeOpt:function(index){
+				var vm=this
+				this.addressItem.splice(index,1)
+				vm.show=index-1
+			}
 		}
 	}
 </script>
+<style type="text/css">
+	.current{
+		background-color: #b3d4fc;
+	}
+	table.chk-tbl{
+		background-color: #FFFFFF !important;
+		border-radius:2px;
+		border-collapse:collapse;
+		border-spacing:0;
+		table-layout:fixed;
+		width: 100%;
+		max-width: 100%;
+	}
+	table.chk-tbl tr th{
+		border: solid 1px #d9dbdd;
+		text-align: center;
+		padding: 0 3px !important;
+	}
+	table.chk-tbl tr.chk-row td{
+		background-color: #edeff2;
+	}
+	table.chk-tbl tr td{
+		padding: 0px !important;
+	}
+	table.chk-tbl tr td{
+		border: solid 1px #d9dbdd;
+	}
+	.chip-box{
+		display: inline-block;
+		width: auto;
+		padding: 3px 3px 3px 3px;
+		border-radius: 2px;
+		top: 10px !important;
+		margin-bottom: 2px !important;
+		margin-right: 3px !important;
+		border: solid 1px #42c0ff;
+		cursor: pointer;
+	}
+</style>

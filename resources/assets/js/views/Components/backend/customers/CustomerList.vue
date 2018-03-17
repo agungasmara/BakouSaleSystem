@@ -15,22 +15,23 @@
 	            {{listTitle}}
 	        </v-card-title>
 			<v-divider></v-divider>
+			<v-form v-model="valid" ref="formFilter" lazy-validation>
 			<v-container grid-list-md>
 				<v-layout row wrap>
 					<v-flex xs12 sm3 md3>
-						<v-text-field label="Customer Name" v-model="filter.name"></v-text-field>
+						<v-text-field label="Customer Name" v-model="filter.customer_name"></v-text-field>
 					</v-flex>
 					<v-flex xs12 sm3 md3>
 						<v-text-field label="Email" v-model="filter.email"></v-text-field>
 					</v-flex>
 					<v-flex xs12 sm3 md3>
-						<v-select label="Customer Group" :items="customergroup" v-model="filter.group"></v-select>
+						<v-select label="Customer Group" :items="customergroup" v-model="filter.customer_group_id"></v-select>
 					</v-flex>
 					<v-flex xs12 sm3 md3>
 						<v-select label="Status" :items="status" v-model="filter.status"></v-select>
 					</v-flex>
-					<v-flex xs12 sm5 md5>
-						<v-text-field label="Address" v-model="filter.address"></v-text-field>
+					<v-flex xs12 sm4 md4>
+						<v-text-field label="City" v-model="filter.city"></v-text-field>
 					</v-flex>
 					
 					<v-flex xs12 sm5 md5>
@@ -48,11 +49,11 @@
 				          <v-text-field
 				            slot="activator"
 				            label="Picker in menu"
-				            v-model="filter.date"
+				            v-model="filter.date_added"
 				            prepend-icon="event"
 				            readonly
 				          ></v-text-field>
-				          <v-date-picker v-model="filter.date" no-title scrollable actions>
+				          <v-date-picker v-model="filter.date_added" no-title scrollable actions>
 				            <template slot-scope="{ save, cancel }">
 				              <v-card-actions>
 				                <v-spacer></v-spacer>
@@ -63,12 +64,13 @@
 				          </v-date-picker>
 				        </v-menu>
 					</v-flex>
-					<v-flex xs12 sm2 md2 class="text-lg-right">
-						<v-btn>Filter</v-btn>
+					<v-flex xs12 sm3 md3 class="text-lg-right">
+						<v-btn @click="filterCustomer" :disabled="!valid">Filter</v-btn>
+						<v-btn @click="clear">clear</v-btn>
 					</v-flex>
 				</v-layout>
-				
 			</v-container>
+		    </v-form>
 			<v-divider></v-divider>
 		</v-card>
 
@@ -100,6 +102,7 @@
         ],
         data(){
             return{
+            	valid:false,
             	menu:null,
                 url:'/api/customers/',
                 btnNewUrl:'/admin/customers/add',
@@ -119,12 +122,7 @@
 					{text:'Active',value:1},
                     {text:'Inactive',value:0},
 				],
-				filter:{
-                    name:'',
-					email:'',
-					group:'',
-					status:''
-				},
+				filter:{},
                 breadcrumbTitle:'Customer List',
                 breadcrumbs: [
                     {
@@ -158,6 +156,17 @@
                 axios.get('/api/getCustomerGroup/').then(res=>[
                     this.customergroup=res.data
 				])
+			},
+			filterCustomer()
+			{
+				axios.post('/api/filterCustomer',this.filter).then(res=>{
+					if(res.data.result==true){
+						this.customers=res.data.data
+					}
+				})
+			},
+			clear(){
+				this.$refs.formFilter.reset()
 			}
         }
     }

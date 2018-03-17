@@ -82,4 +82,9 @@ class CustomersController extends Controller
         (new DataAction)->DeleteData(CustomerGroup::class,'attribute_id',$id);
         return (new DataAction)->DeleteData(CustomerGroupDescription::class,'attribute_id',$id);
     }
+    public function filterCustomer(Request $request)
+    {
+        $result = Customer::customerByFilter($request->all());
+        return response()->json(['result'=>true,'data'=>$result]);
+    }
 }

@@ -147,3 +147,4 @@ Route::Resource('/customer_groups','Backend\Customers\CustomerGroupsController')
 
 //======Customer API
 Route::Resource('/customers','Backend\Customers\CustomersController');
+Route::post('/filterCustomer','Backend\Customers\CustomersController@filterCustomer');

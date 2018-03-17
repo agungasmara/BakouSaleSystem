@@ -45,4 +45,17 @@ class Customer extends Model
             ->get();
         return $Customers;
     }
+    static function customerByFilter($filter=array())
+    {
+        foreach($filter as $key=>$val){
+            if($val==='' or $val===null){
+                unset($filter[$key]);
+            }
+        }
+        $Customers=DB::table('v_customers')
+            ->select('*'            )
+            ->where($filter)
+            ->get();
+        return $Customers;
+    }
 }
