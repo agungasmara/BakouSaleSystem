@@ -167,6 +167,7 @@
 			},
 			clear(){
 				this.$refs.formFilter.reset()
+				this.fetchData()
 			}
         }
     }

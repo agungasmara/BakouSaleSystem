@@ -66,18 +66,57 @@
 					                      		<div>
 					                      			<div class="chip-box" :class="{'current':show=='general'}" @click="showGeneral">General</div>
 					                      			<div class="chip-box" @click="addAddress">Add Address</div>
-					                      			<div class="chip-box" v-for="(optItem,index) in addressItem" :key="index" :class="{'current':show==index}">
+					                      			<div class="chip-box" v-for="(addr,index) in addressItem" :key="index" :class="{'current':show==index}">
 											            <span @click="show = index">
-											            	{{optItem.addr1}}
+											            	{{addr.addr1}}
 											                
 											            </span>
 											            <v-icon color="red" dark right @click="removeOpt(index)" style="cursor: pointer;">remove_circle</v-icon>
 													</div>
 					                      		</div>
 					                      		<v-flex xs12 sm12 md12 l12>
-													<div v-for="(optItem,index) in addressItem" :key="index">
+													<div v-for="(addr,index) in addressItem" :key="index">
 											          	<div v-if="show==index">
-												          	{{index}}
+												          	<v-form v-model="valid" ref="formFilter" lazy-validation>
+												          		<v-layout row wrap v-for="(addField,i) in addr.form" :key="i">
+												          			<v-flex xs12 sm6 md6>
+												          				<v-text-field v-model="addField.firstname" label="First Name" required :rules="[(v) => !!v || 'First Name is required']">
+												          				</v-text-field>
+												          			</v-flex>
+												          			<v-flex xs12 sm6 md6>
+												          				<v-text-field v-model="addField.lastname" label="Last Name" required :rules="[(v) => !!v || 'Last Name is required']">
+												          				</v-text-field>
+												          			</v-flex>
+												          			<v-flex xs12 sm12 md12>
+												          				<v-text-field v-model="addField.company" label="Company">
+												          				</v-text-field>
+												          			</v-flex>
+												          			<v-flex xs12 sm12 md12>
+												          				<v-text-field v-model="addField.address_1" label="Address 1" required :rules="[(v) => !!v || 'Address 1 is required']">
+												          				</v-text-field>
+												          			</v-flex>
+												          			<v-flex xs12 sm12 md12>
+												          				<v-text-field v-model="addField.address_2" label="Address 2">
+												          				</v-text-field>
+												          			</v-flex>
+												          			<v-flex xs12 sm6 md6>
+												          				<v-text-field v-model="addField.city" label="City" required :rules="[(v) => !!v || 'City is required']">
+												          				</v-text-field>
+												          			</v-flex>
+												          			<v-flex xs12 sm6 md6>
+												          				<v-text-field v-model="addField.passcode" label="Passcode">
+												          				</v-text-field>
+												          			</v-flex>
+												          			<v-flex xs12 sm6 md6>
+												          				<v-select :items="countries" @change="fetchZone(addField.country_id)" v-model="addField.country_id" required :rules="[(v) => !!v || 'Country is required']" label="Country">
+												          				</v-select>
+												          			</v-flex>
+												          			<v-flex xs12 sm6 md6>
+												          				<v-select :disabled="validZone" :items="zones"  v-model="addField.zone_id" required :rules="[(v) => !!v || 'Zone is required']" label="Zone">
+												          				</v-select>
+												          			</v-flex>
+												          		</v-layout>
+												          	</v-form>
 											          	</div>
 											          	
 										          	</div>
@@ -204,7 +243,10 @@
 			    addressItem:[],
 			    opt:'text',
 				show:'general',
-				a:1
+				a:1,
+				countries:[],
+				zones:[],
+				validZone:false
 			}
 		},
 		created(){
@@ -212,11 +254,6 @@
 			this.fetchGroup()
 		},
 		watch:{
-			a:function(){
-				if(addressItem.length==0){
-					this.a=0;
-				}
-			}
 		},
 		methods:{
 			getLanguage(){
@@ -225,13 +262,38 @@
 				})
 			},
 			fetchGroup(){
-                axios.get('/api/getCustomerGroup/').then(res=>[
-                    this.select.customergroup=res.data
-				])
+                axios.get('/api/getSelectList/1').then(res=>{
+                    this.select.customergroup=res.data.customerGroups
+                    this.countries=res.data.countryies
+                    this.zones=res.data.zones
+                    console.log(res.data)
+				})
+			},
+			fetchZone(cid=1){
+				this.validZone=true
+				axios.get('/api/getSelectList/'+cid).then(res=>{
+                    this.zones=res.data.zones
+                    this.validZone=false
+				})
 			},
 			addAddress(){
 				
-				this.addressItem.push({addr1:'Address '+this.a});
+				this.addressItem.push({
+					addr1:'Address '+this.a,form:[
+							{
+								firstname:'',
+								lastname:'',
+								company:'',
+								address_1:'',
+								address_2:'',
+								city:'',
+								postcode:'',
+								country_id:1,
+								zone_id:'',
+								custom_field:''
+							}
+						]
+					});
 				this.a=this.a+1;
 			},
 			showGeneral(){
@@ -241,6 +303,9 @@
 				var vm=this
 				this.addressItem.splice(index,1)
 				vm.show=index-1
+				if(this.addressItem.length==0){
+					vm.show='general'
+				}
 			}
 		}
 	}
