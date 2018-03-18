@@ -1,4 +1,5 @@
 <template>
+	<v-form v-model="valid" ref="form" lazy-validation>
 	<v-layout row wrap>
 		<v-flex v-for="input in formItems" :key="input.key" :class="input.class">
 			<div v-if="input.type=='select'">
@@ -91,6 +92,7 @@
 			</div>
 		</v-flex>
 	</v-layout>
+	</v-form>
 </template>
 <script>
 	import Flash from '../../../../../helper/flash'

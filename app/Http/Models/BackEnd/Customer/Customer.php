@@ -9,6 +9,11 @@ class Customer extends Model
     protected $table='customer';
     protected $primaryKey='customer_id';
     protected $fillable=[
+        'firstname',
+        'lastname',
+        'email',
+        'telephone',
+        'password',
     	'sec_user_id',
     	'customer_group_id',
     	'store_id',
@@ -57,5 +62,28 @@ class Customer extends Model
             ->where($filter)
             ->get();
         return $Customers;
+    }
+    static function Customer($id)
+    {
+        return DB::table('customer')->where('customer_id',$id);
+    }
+    static function CustomerAddress($cid){
+        return DB::table('address')->where('customer_id',$cid);
+    }
+    static function CustomerEdit($id){
+        $Customer=static::Customer($id)->get();
+        foreach($Customer as $k=>$v){
+            $address=static::CustomerAddress($v->customer_id)->get();
+            $v->addressItem=$address->toArray();
+        }
+        return $Customer;
+    }
+    static function DeleteAddress($id)
+    {
+        $sql="DELETE addr
+        FROM sg_customer cus JOIN sg_address addr
+        ON cus.customer_id=addr.customer_id
+        WHERE cus.customer_id='".$id."'";
+        return DB::delete($sql);
     }
 }

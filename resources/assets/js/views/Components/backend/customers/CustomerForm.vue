@@ -31,7 +31,7 @@
 				    </div>
 				    <div class="col s2 m6 l6">
 				     	<router-link :to="back" replace><v-btn class="btn dropdown-settings waves-effect waves-light breadcrumbs-btn right" color="success">Back</v-btn></router-link>
-				    	<v-btn @click="submit()" color="primary" class="btn dropdown-settings breadcrumbs-btn right">Save</v-btn>
+				    	<v-btn @click="submit(1)" :disabled="!valid" color="primary" class="btn dropdown-settings breadcrumbs-btn right">Save</v-btn>
 				    </div>
 				  </div>
 				</div>
@@ -46,6 +46,12 @@
 		                  
 		                  <div class="container">
 		                    <v-form v-model="valid" ref="form" lazy-validation>
+		                    	<v-alert color="success" value='true' v-if="flash.success">
+							          	{{flash.success}}
+							      	</v-alert>
+							      	<v-alert color="error" value='true' v-if="flash.error">
+							          	{{flash.error}}
+							      	</v-alert>
 		                    	<div v-for="item in section">
 			                    	<!-- /start -->
 			                    	<div class="row">
@@ -65,20 +71,21 @@
 					                      		<div class="divider"></div>
 					                      		<div>
 					                      			<div class="chip-box" :class="{'current':show=='general'}" @click="showGeneral">General</div>
-					                      			<div class="chip-box" @click="addAddress">Add Address</div>
-					                      			<div class="chip-box" v-for="(addr,index) in addressItem" :key="index" :class="{'current':show==index}">
+					                      			
+					                      			<div class="chip-box" v-for="(addr,index) in data.addressItem" :key="index" :class="{'current':show==index}">
 											            <span @click="show = index">
-											            	{{addr.addr1}}
+											            	Address {{index+1}}
 											                
 											            </span>
 											            <v-icon color="red" dark right @click="removeOpt(index)" style="cursor: pointer;">remove_circle</v-icon>
 													</div>
+													<div class="chip-box" @click="addAddress">Add Address</div>
 					                      		</div>
 					                      		<v-flex xs12 sm12 md12 l12>
-													<div v-for="(addr,index) in addressItem" :key="index">
+													<div v-for="(addField,index) in data.addressItem" :key="index">
 											          	<div v-if="show==index">
-												          	<v-form v-model="valid" ref="formFilter" lazy-validation>
-												          		<v-layout row wrap v-for="(addField,i) in addr.form" :key="i">
+												          	
+												          		<v-layout row wrap>
 												          			<v-flex xs12 sm6 md6>
 												          				<v-text-field v-model="addField.firstname" label="First Name" required :rules="[(v) => !!v || 'First Name is required']">
 												          				</v-text-field>
@@ -104,7 +111,7 @@
 												          				</v-text-field>
 												          			</v-flex>
 												          			<v-flex xs12 sm6 md6>
-												          				<v-text-field v-model="addField.passcode" label="Passcode">
+												          				<v-text-field v-model="addField.postcode" label="Postcode">
 												          				</v-text-field>
 												          			</v-flex>
 												          			<v-flex xs12 sm6 md6>
@@ -116,18 +123,15 @@
 												          				</v-select>
 												          			</v-flex>
 												          		</v-layout>
-												          	</v-form>
 											          	</div>
 											          	
 										          	</div>
 										          	<div v-if="show=='general'">
 									          			<form-group
-													
 														v-bind:form-items="group[item.form]"
 														v-bind:form-rules="rules"
 														v-bind:form-datas="data[item.form]"
 														v-bind:select-items="select"
-														
 														></form-group>
 										          	</div>
 										      	</v-flex>
@@ -162,6 +166,7 @@
 				url:'/api/customers/',
 				e1:true,
 				valid: true,
+				flash:Flash.state,
 				section:[
 					{
 						info_title:'Customer',
@@ -215,8 +220,11 @@
 					general:{
 						safe:1,
 						newsletter:1,
-						status:1
+						status:1,
+						sec_user_id:0,
+						language_id:1
 					},
+			    	addressItem:[],
 				},
 				select:{
 					customergroup:[],
@@ -240,7 +248,6 @@
 			        }
 			    ],
 			    back:'/admin/customers/list',
-			    addressItem:[],
 			    opt:'text',
 				show:'general',
 				a:1,
@@ -278,9 +285,9 @@
 			},
 			addAddress(){
 				
-				this.addressItem.push({
-					addr1:'Address '+this.a,form:[
+				this.data.addressItem.push(
 							{
+								customer_id:0,
 								firstname:'',
 								lastname:'',
 								company:'',
@@ -292,8 +299,7 @@
 								zone_id:'',
 								custom_field:''
 							}
-						]
-					});
+						);
 				this.a=this.a+1;
 			},
 			showGeneral(){
@@ -301,12 +307,36 @@
 			},
 			removeOpt:function(index){
 				var vm=this
-				this.addressItem.splice(index,1)
+				this.data.addressItem.splice(index,1)
 				vm.show=index-1
-				if(this.addressItem.length==0){
+				if(this.data.addressItem.length==0){
 					vm.show='general'
 				}
-			}
+			},
+			submit (opt) {
+		      	if (this.$refs.form.validate()) {
+			        // Native form submission is not yet supporte
+			        	axios.post(this.url,
+				          this.data
+				        ).then((res)=>{
+				        	console.log(res.data)
+				        	if(res.data.success==true){
+				        		Flash.setSuccess(res.data.message)
+				        		this.$refs.form.reset()
+				        		this.data.addressItem=[]
+				        		this.show='general'
+				        	}else{
+				        		Flash.setError(res.data.message)
+				        	}
+				        })
+				        .catch((err) => {
+	                      	if(err.response.status === 422) {
+	                          	this.error = err.response.message
+							}
+							Flash.setError('Error while saving data')
+	                  	})
+		      	}
+		    }
 		}
 	}
 </script>
