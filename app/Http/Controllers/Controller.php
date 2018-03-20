@@ -239,7 +239,7 @@ class Controller extends BaseController
 						, ps.price ASC LIMIT 1) AS special'),DB::raw('(SELECT points FROM sg_product_reward pr WHERE pr.product_id = sg_product.product_id AND customer_group_id = 1) AS reward'),DB::raw('(SELECT ss.name FROM sg_stock_status ss WHERE ss.stock_status_id = sg_product.stock_status_id AND ss.language_id = 1 ) AS stock_status'),DB::raw('(SELECT wcd.unit FROM sg_weight_class_description wcd WHERE sg_product.weight_class_id = wcd.weight_class_id AND wcd.language_id = 1 ) AS weight_class'),DB::raw('(SELECT lcd.unit FROM sg_length_class_description lcd WHERE sg_product.length_class_id = lcd.length_class_id AND lcd.language_id = 1 ) AS length_class'),DB::raw('(SELECT AVG(rating) AS total FROM sg_review r1 WHERE r1.product_id = sg_product.product_id AND r1.status = 1 GROUP BY r1.product_id) AS rating'),DB::raw('(SELECT COUNT(*) AS total FROM sg_review r2 WHERE r2.product_id = sg_product.product_id AND r2.status = 1 GROUP BY r2.product_id) AS reviews'),'product.sort_order')
 				->leftJoin('product_description','product.product_id','=','product_description.product_id')
 				->leftJoin('product_to_store','product.product_id','=','product_to_store.product_id')
-				->leftJoin('manufacturer','product.product_id','=','product_to_store.product_id')
+				->leftJoin('manufacturer','manufacturer.manufacturer_id','=','product.manufacturer_id')
 				// ->join('product_to_category','product.product_id','=','product_to_category.product_id')
 				->where('product.product_id',$product_id)
 				// ->where('product_to_category.category_id',$category_id)

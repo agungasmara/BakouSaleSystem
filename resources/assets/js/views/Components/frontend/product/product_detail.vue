@@ -5,10 +5,12 @@
             <div class="row">
                 <div class="breadcrumbDiv col-lg-12">
                     <ul class="breadcrumb">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="category.html">MEN COLLECTION</a></li>
-                        <li><a href="sub-category.html">TSHIRT</a></li>
-                        <li class="active">Lorem ipsum dolor sit amet</li>
+                        <li><router-link to="/">Home</router-link></li>
+                        <template v-if="category_info==''">
+                            <li><router-link :to="'/product/category_product/'+category_info.category_id">{{category_info.name}}</router-link></li>
+                        </template>
+                        <li><router-link to="">{{productInfo.name}}</router-link></li>
+                        <!--<li class="active">Lorem ipsum dolor sit amet</li>-->
                     </ul>
                 </div>
             </div>
@@ -16,17 +18,22 @@
                 <!-- left column -->
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <!-- product Image and Zoom -->
-                    <div class="main-image sp-wrap col-lg-12 no-padding">
-                        <a v-bind:href="productInfo.image">
-                            <img v-bind:src="productInfo.image" alt="img" class="img-responsive">
-                        </a>
-                        <div class="sp-tb-active">
-                            <template v-for="thumb in gallary">
-                                <a :href="thumb.image">
-                                    <img class="img-responsive" alt="img" :src="thumb.image"/>
-                                </a>
-                            </template>
-                        </div>
+                    <div class="_main-image _sp-wrap col-lg-12 no-padding">
+                        <center>
+                            <a v-bind:href="productInfo.image">
+                                <img v-bind:src="productInfo.image" alt="img" class="_img-responsive">
+                            </a>
+                            <div class="clearfix"></div>
+                            <div class="sp-tb-active" style="margin-top:20px;">
+                                <template v-for="thumb in gallary">
+                                    <div class="col-sm-2" style="border:1px solid #f4f4f4;border-radius:4px;">
+                                        <a :href="thumb.image">
+                                            <img class="img-responsive" alt="img" :src="thumb.image"/>
+                                        </a>
+                                    </div>
+                                </template>
+                            </div>
+                        </center>
 
                         <!--<template v-for="thumb in gallary">
                             <a href="/images/catalog/demo/htc_touch_hd_2.jpg"><img
@@ -169,6 +176,7 @@
                             </template>
                         </template>
                     </template>
+                    <br/>
 
                     <div class="cart-actions">
                         <div class="addto row">
@@ -178,11 +186,11 @@
                                         Add to Cart
                                 </button>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <!--<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <a class="link-wishlist wishlist btn-block ">
                                     Add to Wishlist
                                 </a>
-                            </div>
+                            </div>-->
                         </div>
                         <div style="clear:both"></div>
                         <h3 class="incaps">
@@ -205,7 +213,7 @@
                         <ul class="nav nav-tabs">
                             <li class="active"><a href="#details" data-toggle="tab">Details</a></li>
                             <li v-if="attributeGroups.length>0"><a href="#size" data-toggle="tab">Specification</a></li>
-                            <li><a href="#shipping" data-toggle="tab">Shipping</a></li>
+                            <!--<li><a href="#shipping" data-toggle="tab">Shipping</a></li>-->
                         </ul>
 
                         <!-- Tab panes -->
@@ -328,13 +336,13 @@
             <!--/.row-->
 
             <div class="row recommended">
-                <h1> YOU MAY ALSO LIKE </h1>
+                <h1 v-if="productRelates.length>0"> YOU MAY ALSO LIKE </h1>
 
                 <div id="_SimilarProductSlider" style="padding-top:20px;">
                     <template>
-                        <div v-for="productRelate of productRelates" class="item col-sm-2">
+                        <div v-for="productRelate of productRelates" class="item col-sm-3">
                             <div class="product">
-                                <router-link v-bind:to="'/product/product_detail/'+ productRelate.product_id">
+                                <router-link v-bind:to="'/product/product_detail/'+ productRelate.product_id+'/0'">
                                   <img v-bind:src="productRelate.thumb" alt="img" class="img-responsive ">
                                 </router-link>
 
@@ -346,8 +354,20 @@
                                     </h4>
 
                                     <div class="price">
-                                        <span>$44</span>
-                                    </div>
+                                        <template v-if="productRelate.special == null">
+                                            <span class="price-sales">
+                                                ${{productRelate.price}}
+                                            </span>
+                                        </template>
+                                        <template v-else>
+                                            <span class="price-sales">
+                                                ${{productRelate.special}}
+                                            </span> 
+                                            <span class="price-standard">
+                                                ${{productRelate.price}}
+                                            </span>
+                                        </template>
+                                        </div>
                                 </div>
                             </div>
                         </div>
@@ -388,8 +408,30 @@
                                 <label>
                                     How do you rate this product? </label> <br>
 
+                                <!--<label>
+                                    <input type="radio" v-model="formData.rating_count" name="agree" value="1"/>
+                                    1</label>
+                                
+                                <label>
+                                    <input type="radio" v-model="formData.rating_count" name="agree" value="2"/>
+                                    2</label>
+                                
+                                <label>
+                                    <input type="radio" v-model="formData.rating_count" name="agree" value="3"/>
+                                    3</label>
+                                
+                                <label>
+                                    <input type="radio" v-model="formData.rating_count" name="agree" value="4"/>
+                                    4</label>
+                                
+                                <label>
+                                    <input type="radio" v-model="formData.rating_count" name="agree" value="5"/>
+                                    5</label>-->
+                                
+
                                 <div class="rating-here">
-                                    <input name="rating_count" v-model="formData.rating_count" type="hidden" class="rating-tooltip-manual" data-filled="fa fa-star fa-2x" data-empty="fa fa-star-o fa-2x" data-fractions="3"/>
+                                    <star-rating v-model="rating"></star-rating>
+                                    <!--<input name="rating_count" v-model="formData.rating_count" type="hidden" class="rating-tooltip-manual" data-filled="fa fa-star fa-2x" data-empty="fa fa-star-o fa-2x" data-fractions="3"/>-->
                                 </div>
                             </div>
                             <div class="form-group">
@@ -465,19 +507,22 @@
     import Flash from '../../../../helper/flash'
     import axios from 'axios'
     import CartAction from '../../../../helper/cart'
+    import StarRating from 'vue-star-rating'
     import Vue from 'vue';
     var VueCookie = require('vue-cookie')
     Vue.use(VueCookie)
 
     export default{
-        props:['id'],
+        props:['id','cat_id'],
         data(){
             return{
+                rating: 1,
                 formData: {
                     rating_count: '',
                     rating_name: '',
                     rating_text: ''
                 },
+                category_info:'',
                 isActive: true,
                 gallary:[],
                 productOptions:[],
@@ -667,10 +712,13 @@
                 }
             });
         },
+        components: {
+            StarRating
+        },
         watch:{
             '$route.params.id': function (id) {
-                $('.sp-wrap').smoothproducts()
-                this.productDetails(id)
+                //$('.sp-wrap').smoothproducts()
+                this.productDetails(id,this.cat_id)
                 this.isActive = !this.isActive
                 // $(window).load(function () {
                 //     $('.sp-wrap').smoothproducts();
@@ -678,7 +726,7 @@
             }
         },
         created(){
-            this.productDetails(this.id)
+            this.productDetails(this.id,this.cat_id)
         },
         methods:{
             BackgroundColor (color) {
@@ -689,13 +737,14 @@
                 return value.join(' ')
             },
             submitReview(product_id) {
+                // alert(this.formData.rating_count)
                 // formData.rating_count = '1'
                 // formData.rating_name = '2'
                 // formData.rating_text = '3'
                 this.formData.product_id = product_id
                 this.formData.author = this.formData.rating_name
                 this.formData.text = this.formData.rating_text
-                this.formData.rating = $("input[name='rating_count']").val()
+                this.formData.rating = this.rating;//$("input[name='rating_count']").val()
                 //console.log(this.formData)
 		      	// if (this.$refs.form.validate()) {
 			        // Native form submission is not yet supporte
@@ -712,10 +761,11 @@
                         console.log(res.data)
                         if(res.data.success==true){
                             Flash.setSuccess(res.data.message)
-                            this.productDetails(product_id)
+                            this.productDetails(product_id,this.cat_id)
                             this.isActive = !this.isActive
                             // $('#modal-review').modal().close();
-                            $('#modal-review').modal('toggle')
+                            $('#modal-review').modal('hide')
+                            // $('#modal-review').modal('toggle')
                             // this.$refs.form.reset()
                             // alert("review success")
                             // this.$router.push(this.backUrl)
@@ -729,9 +779,10 @@
                     })   
 		      	}
 		    },
-            productDetails(id){
-                axios.get('/api/detail/'+id).then(res=>{
+            productDetails(id,cat_id){
+                axios.get('/api/product_detail/'+id+'/'+cat_id).then(res=>{
                     this.productInfo=res.data['data']
+                    this.category_info=res.data['category_info']
                     this.reviewStatus =res.data['review_status']
                     this.reviews =res.data['reviews']
                     this.productRelates =res.data['product_relate']

@@ -13,7 +13,7 @@
 					</v-footer>
 			    </tr>
 		        <tr v-for="product in CartProduct.products.data" v-else  class="miniCartProduct">
-		            <router-link v-bind:to="'/product/product_detail/'+ product.product_id">
+		            <router-link v-bind:to="'/product/product_detail/'+ product.product_id+'/0'">
 			            <td style="width:20%" class="miniCartProductThumb">
 			                <div><a> <img :src="product.image" alt="img"> </a> </div>
 			            </td>

@@ -15,7 +15,10 @@
 
                   <div class="imageHover">
 
-                      <div class="promotion"><span class="discount">15% OFF</span></div>
+                      <template v-if="bestSellerProduct.special != null">
+                        <div class="promotion"><span class="discount"> PROMOTION</span></div>
+                      </template>
+                      <!--<div class="promotion"><span class="discount">15% OFF</span></div>-->
 
                       <div id="carousel-id-1" class="carousel slide" data-ride="carousel" data-interval="0">
                           <!-- Indicators -->
@@ -28,18 +31,18 @@
                           <!-- Wrapper for slides -->
                           <div class="carousel-inner" role="listbox">
                               <div class="item active">
-                                 <router-link v-bind:to="'/product/product_detail/'+ bestSellerProduct.product_id">
+                                 <router-link v-bind:to="'/product/product_detail/'+ bestSellerProduct.product_id+'/0'">
                                   <img v-bind:src="bestSellerProduct.thumb" alt="img" class="img-responsive ">
                                 </router-link>
                               </div>
                               <div class="item">
-                                <router-link v-bind:to="'/product/product_detail/'+ bestSellerProduct.product_id">
+                                <router-link v-bind:to="'/product/product_detail/'+ bestSellerProduct.product_id+'/0'">
                                   <img src="/assets/frontend/images/product/21.jpg" alt="img"
                                     class="img-responsive ">
                                 </router-link>
                               </div>
                               <div class="item">
-                                <router-link v-bind:to="'/product/product_detail/'+ bestSellerProduct.product_id">
+                                <router-link v-bind:to="'/product/product_detail/'+ bestSellerProduct.product_id+'/0'">
                                   <img src="/assets/frontend/images/product/30.jpg" alt="img"
                                     class="img-responsive ">
                                 </router-link>
@@ -60,12 +63,29 @@
                   </div>
 
                   <div class="description">
-                      <h4><router-link v-bind:to="'/product/product_detail/'+ bestSellerProduct.product_id"> {{bestSellerProduct.name}} </router-link></h4>
+                      <h4><router-link v-bind:to="'/product/product_detail/'+ bestSellerProduct.product_id+'/0'"> {{bestSellerProduct.name}} </router-link></h4>
                       <div class="grid-description">
                         <span v-html="bestSellerProduct.description"></span>
                       </div>
-                      <span class="size">XL / XXL / S </span></div>
-                  <div class="price"><span>{{bestSellerProduct.price}}</span></div>
+                      <!--<span class="size">XL / XXL / S </span>-->
+                      <br/>
+                    </div>
+                  <div class="price">
+                    <!--<span>{{bestSellerProduct.price}}</span>-->
+                    <template v-if="bestSellerProduct.special == null">
+                        <span class="price-sales">
+                            ${{bestSellerProduct.price}}
+                        </span>
+                    </template>
+                    <template v-else>
+                        <span class="price-sales">
+                            ${{bestSellerProduct.special}}
+                        </span> 
+                        <span class="price-standard">
+                            ${{bestSellerProduct.price}}
+                        </span>
+                    </template>
+                  </div>
                   <div class="action-control">
                    <a class="btn btn-primary" @click="AddToCart(bestSellerProduct.product_id)"> 
                       <span class="add2cart">

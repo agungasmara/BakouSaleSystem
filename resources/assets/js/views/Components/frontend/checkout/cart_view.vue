@@ -4,8 +4,7 @@
 		    <div class="row">
 		        <div class="breadcrumbDiv col-lg-12">
 		            <ul class="breadcrumb">
-		                <li><a href="">Home</a></li>
-		                <li><a href="">Category</a></li>
+		                <li><router-link to="/">Home</router-link></li>
 		                <li class="active">Cart</li>
 		            </ul>
 		        </div>
@@ -47,12 +46,12 @@
 
 		                            <tr v-for="product in CartProduct.products.data" class="CartProduct" v-if="CartProduct.products.data.length > 0">
 		                                <td class="CartProductThumb">
-		                                    <div><router-link v-bind:to="'/product/product_detail/'+ product.product_id"><img :src="product.image" alt="img"></router-link>
+		                                    <div><router-link v-bind:to="'/product/product_detail/'+ product.product_id+'/0'"><img :src="product.image" alt="img"></router-link>
 		                                    </div>
 		                                </td>
 		                                <td>
 		                                    <div class="CartDescription">
-		                                        <h4><router-link v-bind:to="'/product/product_detail/'+ product.product_id">{{product.name}}</router-link></h4>
+		                                        <h4><router-link v-bind:to="'/product/product_detail/'+ product.product_id+'/0'">{{product.name}}</router-link></h4>
 		                                        <span class="size">12 x 1.5 L</span>
 
 		                                        <div class="price"><span>$ {{product.price*1}}</span></div>

@@ -20,33 +20,41 @@
 		                                 data-target="#productSetailsModalAjax" :id-product="productRecommanded.product_id">Quick View 
 		                            </a>
 		                          </div>
-		                          <router-link v-bind:to="'/product/product_detail/'+ productRecommanded.product_id">
+		                          <router-link v-bind:to="'/product/product_detail/'+ productRecommanded.product_id+'/0'">
 		                          	 <img v-bind:src="productRecommanded.thumb" alt="img" class="img-responsive">
 								  </router-link>
 
-		                          <div class="promotion">
-		                          	<span class="new-product"> NEW</span>
-		                          	<span class="discount">15% OFF</span>
-		                          </div>
+		                          <template v-if="productRecommanded.special != null">
+									<div class="promotion"><span class="discount"> PROMOTION</span></div>
+								  </template>
 		                      </div>
 		                      <div class="description">
 		                          <h4>
-		                          	<router-link v-bind:to="'/product/product_detail/'+ productRecommanded.product_id">
+		                          	<router-link v-bind:to="'/product/product_detail/'+ productRecommanded.product_id+'/0'">
 		                          		{{productRecommanded.name}}
 									</router-link>
 		                          </h4>
 
 		                          <p v-html="productRecommanded.description">.</p>
-		                          <span class="size">XL / XXL / S </span></div>
+		                          <!--<span class="size">XL / XXL / S </span>-->
+								  <br/>
+								</div>
 
-		                      <div class="price" v-if="productRecommanded.special != ''">
-		                      	<span>  ${{productRecommanded.price}}</span> 
-		                      </div>
-
-		                      <div class="price" v-else>
-		                      	<span>  ${{productRecommanded.price}}</span> 
-		                      	<span class="old-price"> ${{productRecommanded.special}}</span>
-		                      </div>
+		                        <div class="price">
+									<template v-if="productRecommanded.special == null">
+										<span class="price-sales">
+											${{productRecommanded.price}}
+										</span>
+									</template>
+									<template v-else>
+										<span class="price-sales">
+											${{productRecommanded.special}}
+										</span> 
+										<span class="price-standard">
+											${{productRecommanded.price}}
+										</span>
+									</template>
+								</div>
 
 		                      <div class="action-control">
 		                      	<a class="btn btn-primary" @click="AddToCart(productRecommanded.product_id)"> 

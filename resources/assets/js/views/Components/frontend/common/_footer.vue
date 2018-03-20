@@ -111,7 +111,7 @@
 
         <div class="footer-bottom">
             <div class="container">
-                <p class="pull-left"> &copy; TSHOP 2014. All right reserved. </p>
+                <p class="pull-left"> &copy; TSHOP 2018. All right reserved. </p>
 
                 <div class="pull-right paymentMethodImg">
                     <img height="30" class="pull-right" src="/assets/frontend/images/site/payment/master_card.png" alt="img"> 

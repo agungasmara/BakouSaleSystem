@@ -1,10 +1,7 @@
 <template>
-	<div v-bind:class="{ active: isActive }" class="loading">
-	
+	<div v-bind:class="{ active: isActive }" class="loading">	
 		<div class="container main-container headerOffset">
-
 		    <!-- Main component call to action -->
-
 		    <div class="row">
 		        <div class="breadcrumbDiv col-lg-12">
 		            <ul class="breadcrumb">
@@ -14,22 +11,19 @@
 		        </div>
 		    </div>
 		    <!-- /.row  -->
-
 		    <div class="row">
-
 		        <!--left column-->
-
 		        <div v-if="response['getCategoryFilters'].length>0" class="col-lg-3 col-md-3 col-sm-12">
 		            <div class="panel-group" id="accordionNo">
 						<!--filter group ########-->
 						<template v-for="gfilter in response['getCategoryFilters']">
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title"><a data-toggle="collapse" href="#collapseBrand"
+									<h4 class="panel-title"><a data-toggle="collapse" :href="collapseGroup(gfilter.filter_group_id,1)"
 															class="collapseWill active ">
 										{{gfilter.name}} <span class="pull-left"> <i class="fa fa-caret-right"></i></span> </a></h4>
 								</div>
-								<div id="collapseBrand" class="panel-collapse collapse in">
+								<div :id="collapseGroup(gfilter.filter_group_id,0)" class="panel-collapse collapse in">
 									<div class="panel-body smoothscroll maxheight300">
 										
 										<template v-for="filter in gfilter['filter']">
@@ -89,7 +83,7 @@
 							</div>
 							<!--/Category menu end-->
 
-							<div style="_display:none" class="panel panel-default">
+							<div style="display:none" class="panel panel-default">
 								<div class="panel-heading">
 									<h4 class="panel-title"><a class="collapseWill active " data-toggle="collapse"
 															href="#collapsePrice">
@@ -438,16 +432,18 @@
 		            <!--/.subCategoryList-->
 
 		            <div class="w100 productFilter clearfix">
-		                <p class="pull-left"> Showing <strong>12</strong> products </p>
+		                <p class="pull-left"> Showing 1–{{page_limit}} of {{response['total_product']}} results </p>
 
 		                <div class="pull-right ">
 		                    <div class="change-order pull-right">
-		                        <select class="form-control" name="orderby">
+		                        <select @change="onChange(filter_name)" v-model="filter_name" class="form-control" name="orderby">
 		                            <option selected="selected">Default sorting</option>
-		                            <option value="popularity">Sort by popularity</option>
+		                            <!--<option value="popularity">Sort by popularity</option>
 		                            <option value="rating">Sort by average rating</option>
-		                            <option value="date">Sort by newness</option>
-		                            <option value="price">Sort by price: low to high</option>
+		                            <option value="date">Sort by newness</option>-->
+									<option value="name-asc">Sort by name: A to Z</option>
+									<option value="name-desc">Sort by name: Z to A</option>
+		                            <option value="price-asc">Sort by price: low to high</option>
 		                            <option value="price-desc">Sort by price: high to low</option>
 		                        </select>
 		                    </div>
@@ -458,464 +454,80 @@
 		            </div>
 		            <!--/.productFilter-->
 		            <div class="row  categoryProduct xsResponse clearfix">
-		                <div v-for="product in response['data']" class="item col-sm-4 col-lg-4 col-md-4 col-xs-6">
-		                    <div class="product">
-		                        <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
-		                           data-placement="left">
-		                            <i class="glyphicon glyphicon-heart"></i>
-		                        </a>
+		                <div>
+							<paginate name="productByCat" :list="productByCat" :per="page_limit" class="_paginate-list">
+								<div v-for="product in paginated('productByCat')" class="item col-sm-4 col-lg-4 col-md-4 col-xs-6">
+									<div class="product">
+										<a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
+										data-placement="left">
+											<i class="glyphicon glyphicon-heart"></i>
+										</a>
 
-		                        <div class="image">
-		                            <div class="quickview">
-		                                <a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product.html"
-		                                   data-target="#productSetailsModalAjax">Quick View </a>
+										<div class="image">
+											<div class="quickview">
+												<a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product.html"
+												data-target="#productSetailsModalAjax">Quick View </a>
+											</div>
+											<router-link v-bind:to="'/product/product_detail/'+ product.product_id+'/'+category_info.category_id"><img v-bind:src="product.image" v-bind:alt="product.name"
+																				class="img-responsive"></router-link>
 
-		                            </div>
-		                            <router-link v-bind:to="'/product/product_detail/'+ product.product_id"><img v-bind:src="product.image" v-bind:alt="product.name"
-		                                                                class="img-responsive"></router-link>
+											<!--<div class="promotion"><span class="new-product"> NEW</span> <span
+													class="discount">15% OFF</span></div>-->
+											<template v-if="product.special != null">
+												<div class="promotion"><span class="discount"> PROMOTION</span></div>
+											</template>
+										</div>
+										<div class="description">
+											<h4><router-link v-bind:to="'/product/product_detail/'+ product.product_id+'/'+category_info.category_id">{{product.name}}</router-link></h4>
 
-		                            <div class="promotion"><span class="new-product"> NEW</span> <span
-		                                    class="discount">15% OFF</span></div>
-		                        </div>
-		                        <div class="description">
-		                            <h4><router-link v-bind:to="'/product/product_detail/'+ product.product_id">{{product.name}}</router-link></h4>
-
-		                            <div class="grid-description">
-		                                <p v-html="product.description">.</p>
-		                            </div>
-		                            <div class="list-description">
-		                                <p> Sed sed rutrum purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-		                                    Pellentesque risus lacus, iaculis in ante vitae, viverra hendrerit ante. Aliquam vel
-		                                    fermentum elit. Morbi rhoncus, neque in vulputate facilisis, leo tortor sollicitudin
-		                                    odio, quis pellentesque lorem nisi quis enim. In dolor mi, hendrerit at blandit
-		                                    vulputate, congue a purus. Sed eget turpis sit amet orci euismod accumsan. Praesent
-		                                    sit amet placerat elit. </p>
-		                            </div>
-		                            <span class="size">XL / XXL / S </span></div>
-		                        <div class="price"><span>${{product.price}}</span></div>
-		                        <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
-		                                class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
-		                    </div>
+											<div class="grid-description">
+												<p v-html="product.description"></p>
+											</div>
+											<div class="list-description">
+												<p v-html="product.description"></p>
+											</div>
+											<!--<span class="size">XL / XXL / S </span>-->
+										</div>
+										<div class="price">
+											<template v-if="product.special == null">
+												<span class="price-sales">
+													${{product.price}}
+												</span>
+											</template>
+											<template v-else>
+												<span class="price-sales">
+													${{product.special}}
+												</span> 
+												<span class="price-standard">
+													${{product.price}}
+												</span>
+											</template>
+										</div>
+										<div class="action-control"><a @click="AddToCart(product.product_id)" class="btn btn-primary"> <span class="add2cart"><i
+												class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
+									</div>
+								</div>
+							</paginate>
 		                </div>
-		                <!--/.item-->
-		                <!-- <div class="item col-sm-4 col-lg-4 col-md-4 col-xs-6">
-		                    <div class="product">
-		                        <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
-		                           data-placement="left">
-		                            <i class="glyphicon glyphicon-heart"></i>
-		                        </a>
-
-		                        <div class="image">
-		                            <div class="quickview">
-		                                <a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product.html"
-		                                   data-target="#productSetailsModalAjax">Quick View </a>
-		                            </div>
-		                            <a href="product-details.html"><img src="/images/product/31.jpg" alt="img"
-		                                                                class="img-responsive"></a>
-
-		                            <div class="promotion"><span class="discount">15% OFF</span></div>
-		                        </div>
-		                        <div class="description">
-		                            <h4><a href="product-details.html">ullamcorper suscipit lobortis </a></h4>
-
-		                            <div class="grid-description">
-		                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-		                            </div>
-		                            <div class="list-description">
-		                                <p> Sed sed rutrum purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-		                                    Pellentesque risus lacus, iaculis in ante vitae, viverra hendrerit ante. Aliquam vel
-		                                    fermentum elit. Morbi rhoncus, neque in vulputate facilisis, leo tortor sollicitudin
-		                                    odio, quis pellentesque lorem nisi quis enim. In dolor mi, hendrerit at blandit
-		                                    vulputate, congue a purus. Sed eget turpis sit amet orci euismod accumsan. Praesent
-		                                    sit amet placerat elit. </p>
-		                            </div>
-		                            <span class="size">XL / XXL / S </span></div>
-		                        <div class="price"><span>$25</span></div>
-		                        <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
-		                                class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
-		                    </div>
-		                </div> -->
-		                <!--/.item-->
-		                <!-- <div class="item col-sm-4 col-lg-4 col-md-4 col-xs-6">
-		                    <div class="product">
-		                        <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
-		                           data-placement="left">
-		                            <i class="glyphicon glyphicon-heart"></i>
-		                        </a>
-
-		                        <div class="image">
-		                            <div class="quickview">
-		                                <a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product.html"
-		                                   data-target="#productSetailsModalAjax">Quick View </a>
-		                            </div>
-		                            <a href="product-details.html"><img src="/images/product/34.jpg" alt="img"
-		                                                                class="img-responsive"></a>
-
-		                            <div class="promotion"><span class="new-product"> NEW</span></div>
-		                        </div>
-		                        <div class="description">
-		                            <h4><a href="product-details.html">demonstraverunt lectores </a></h4>
-
-		                            <div class="grid-description">
-		                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-		                            </div>
-		                            <div class="list-description">
-		                                <p> Sed sed rutrum purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-		                                    Pellentesque risus lacus, iaculis in ante vitae, viverra hendrerit ante. Aliquam vel
-		                                    fermentum elit. Morbi rhoncus, neque in vulputate facilisis, leo tortor sollicitudin
-		                                    odio, quis pellentesque lorem nisi quis enim. In dolor mi, hendrerit at blandit
-		                                    vulputate, congue a purus. Sed eget turpis sit amet orci euismod accumsan. Praesent
-		                                    sit amet placerat elit. </p>
-		                            </div>
-		                            <span class="size">XL / XXL / S </span></div>
-		                        <div class="price"><span>$25</span> <span class="old-price">$75</span></div>
-		                        <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
-		                                class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
-		                    </div>
-		                </div> -->
-		                <!--/.item-->
-		                <!-- <div class="item col-sm-4 col-lg-4 col-md-4 col-xs-6">
-		                    <div class="product">
-		                        <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
-		                           data-placement="left">
-		                            <i class="glyphicon glyphicon-heart"></i>
-		                        </a>
-
-		                        <div class="image">
-		                            <div class="quickview">
-		                                <a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product.html"
-		                                   data-target="#productSetailsModalAjax">Quick View </a>
-		                            </div>
-		                            <a href="product-details.html"><img src="/images/product/35.jpg" alt="img"
-		                                                                class="img-responsive"></a></div>
-		                        <div class="description">
-		                            <h4><a href="product-details.html">humanitatis per</a></h4>
-
-		                            <div class="grid-description">
-		                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-		                            </div>
-		                            <div class="list-description">
-		                                <p> Sed sed rutrum purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-		                                    Pellentesque risus lacus, iaculis in ante vitae, viverra hendrerit ante. Aliquam vel
-		                                    fermentum elit. Morbi rhoncus, neque in vulputate facilisis, leo tortor sollicitudin
-		                                    odio, quis pellentesque lorem nisi quis enim. In dolor mi, hendrerit at blandit
-		                                    vulputate, congue a purus. Sed eget turpis sit amet orci euismod accumsan. Praesent
-		                                    sit amet placerat elit. </p>
-		                            </div>
-		                            <span class="size">XL / XXL / S </span></div>
-		                        <div class="price"><span>$25</span></div>
-		                        <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
-		                                class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
-		                    </div>
-		                </div> -->
-		                <!--/.item-->
-		                <!-- <div class="item col-sm-4 col-lg-4 col-md-4 col-xs-6">
-		                    <div class="product">
-		                        <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
-		                           data-placement="left">
-		                            <i class="glyphicon glyphicon-heart"></i>
-		                        </a>
-
-		                        <div class="image">
-		                            <div class="quickview">
-		                                <a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product.html"
-		                                   data-target="#productSetailsModalAjax">Quick View </a>
-		                            </div>
-		                            <a href="product-details.html"><img src="/images/product/33.jpg" alt="img"
-		                                                                class="img-responsive"></a></div>
-		                        <div class="description">
-		                            <h4><a href="product-details.html">Eodem modo typi</a></h4>
-
-		                            <div class="grid-description">
-		                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-		                            </div>
-		                            <div class="list-description">
-		                                <p> Sed sed rutrum purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-		                                    Pellentesque risus lacus, iaculis in ante vitae, viverra hendrerit ante. Aliquam vel
-		                                    fermentum elit. Morbi rhoncus, neque in vulputate facilisis, leo tortor sollicitudin
-		                                    odio, quis pellentesque lorem nisi quis enim. In dolor mi, hendrerit at blandit
-		                                    vulputate, congue a purus. Sed eget turpis sit amet orci euismod accumsan. Praesent
-		                                    sit amet placerat elit. </p>
-		                            </div>
-		                            <span class="size">XL / XXL / S </span></div>
-		                        <div class="price"><span>$25</span></div>
-		                        <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
-		                                class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
-		                    </div>
-		                </div> -->
-		                <!--/.item-->
-		                <!-- <div class="item col-sm-4 col-lg-4 col-md-4 col-xs-6">
-		                    <div class="product">
-		                        <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
-		                           data-placement="left">
-		                            <i class="glyphicon glyphicon-heart"></i>
-		                        </a>
-
-		                        <div class="image">
-		                            <div class="quickview">
-		                                <a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product.html"
-		                                   data-target="#productSetailsModalAjax">Quick View </a>
-		                            </div>
-		                            <a href="product-details.html"><img src="/images/product/10.jpg" alt="img"
-		                                                                class="img-responsive"></a></div>
-		                        <div class="description">
-		                            <h4><a href="product-details.html">sequitur mutationem </a></h4>
-
-		                            <div class="grid-description">
-		                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-		                            </div>
-		                            <div class="list-description">
-		                                <p> Sed sed rutrum purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-		                                    Pellentesque risus lacus, iaculis in ante vitae, viverra hendrerit ante. Aliquam vel
-		                                    fermentum elit. Morbi rhoncus, neque in vulputate facilisis, leo tortor sollicitudin
-		                                    odio, quis pellentesque lorem nisi quis enim. In dolor mi, hendrerit at blandit
-		                                    vulputate, congue a purus. Sed eget turpis sit amet orci euismod accumsan. Praesent
-		                                    sit amet placerat elit. </p>
-		                            </div>
-		                            <span class="size">XL / XXL / S </span></div>
-		                        <div class="price"><span>$25</span></div>
-		                        <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
-		                                class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
-		                    </div>
-		                </div> -->
-		                <!--/.item-->
-		                <!-- <div class="item col-sm-4 col-lg-4 col-md-4 col-xs-6">
-		                    <div class="product">
-		                        <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
-		                           data-placement="left">
-		                            <i class="glyphicon glyphicon-heart"></i>
-		                        </a>
-
-		                        <div class="image">
-		                            <div class="quickview">
-		                                <a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product.html"
-		                                   data-target="#productSetailsModalAjax">Quick View </a>
-		                            </div>
-		                            <a href="product-details.html"><img src="/images/product/37.jpg" alt="img"
-		                                                                class="img-responsive"></a></div>
-		                        <div class="description">
-		                            <h4><a href="product-details.html">consuetudium lectorum.</a></h4>
-
-		                            <div class="grid-description">
-		                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-		                            </div>
-		                            <div class="list-description">
-		                                <p> Sed sed rutrum purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-		                                    Pellentesque risus lacus, iaculis in ante vitae, viverra hendrerit ante. Aliquam vel
-		                                    fermentum elit. Morbi rhoncus, neque in vulputate facilisis, leo tortor sollicitudin
-		                                    odio, quis pellentesque lorem nisi quis enim. In dolor mi, hendrerit at blandit
-		                                    vulputate, congue a purus. Sed eget turpis sit amet orci euismod accumsan. Praesent
-		                                    sit amet placerat elit. </p>
-		                            </div>
-		                            <span class="size">XL / XXL / S </span></div>
-		                        <div class="price"><span>$25</span> <span class="old-price">$75</span></div>
-		                        <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
-		                                class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
-		                    </div>
-		                </div> -->
-		                <!--/.item-->
-		                <!-- <div class="item col-sm-4 col-lg-4 col-md-4 col-xs-6">
-		                    <div class="product">
-		                        <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
-		                           data-placement="left">
-		                            <i class="glyphicon glyphicon-heart"></i>
-		                        </a>
-
-		                        <div class="image">
-		                            <div class="quickview">
-		                                <a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product.html"
-		                                   data-target="#productSetailsModalAjax">Quick View </a>
-		                            </div>
-		                            <a href="product-details.html"><img src="/images/product/16.jpg" alt="img"
-		                                                                class="img-responsive"></a></div>
-		                        <div class="description">
-		                            <h4><a href="product-details.html">parum claram</a></h4>
-
-		                            <div class="grid-description">
-		                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-		                            </div>
-		                            <div class="list-description">
-		                                <p> Sed sed rutrum purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-		                                    Pellentesque risus lacus, iaculis in ante vitae, viverra hendrerit ante. Aliquam vel
-		                                    fermentum elit. Morbi rhoncus, neque in vulputate facilisis, leo tortor sollicitudin
-		                                    odio, quis pellentesque lorem nisi quis enim. In dolor mi, hendrerit at blandit
-		                                    vulputate, congue a purus. Sed eget turpis sit amet orci euismod accumsan. Praesent
-		                                    sit amet placerat elit. </p>
-		                            </div>
-		                            <span class="size">XL / XXL / S </span></div>
-		                        <div class="price"><span>$25</span> <span class="old-price">$75</span></div>
-		                        <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
-		                                class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
-		                    </div>
-		                </div> -->
-		                <!--/.item-->
-		                <!-- <div class="item col-sm-4 col-lg-4 col-md-4 col-xs-6">
-		                    <div class="product">
-		                        <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
-		                           data-placement="left">
-		                            <i class="glyphicon glyphicon-heart"></i>
-		                        </a>
-
-		                        <div class="image">
-		                            <div class="quickview">
-		                                <a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product.html"
-		                                   data-target="#productSetailsModalAjax">Quick View </a>
-		                            </div>
-		                            <a href="product-details.html"><img src="/images/product/19.jpg" alt="img"
-		                                                                class="img-responsive"></a></div>
-		                        <div class="description">
-		                            <h4><a href="product-details.html">duis dolore </a></h4>
-
-		                            <div class="grid-description">
-		                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-		                            </div>
-		                            <div class="list-description">
-		                                <p> Sed sed rutrum purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-		                                    Pellentesque risus lacus, iaculis in ante vitae, viverra hendrerit ante. Aliquam vel
-		                                    fermentum elit. Morbi rhoncus, neque in vulputate facilisis, leo tortor sollicitudin
-		                                    odio, quis pellentesque lorem nisi quis enim. In dolor mi, hendrerit at blandit
-		                                    vulputate, congue a purus. Sed eget turpis sit amet orci euismod accumsan. Praesent
-		                                    sit amet placerat elit. </p>
-		                            </div>
-		                            <span class="size">XL / XXL / S </span></div>
-		                        <div class="price"><span>$25</span></div>
-		                        <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
-		                                class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
-		                    </div>
-		                </div> -->
-		                <!--/.item-->
-		                <!-- <div class="item col-sm-4 col-lg-4 col-md-4 col-xs-6">
-		                    <div class="product">
-		                        <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
-		                           data-placement="left">
-		                            <i class="glyphicon glyphicon-heart"></i>
-		                        </a>
-
-		                        <div class="image">
-		                            <div class="quickview">
-		                                <a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product.html"
-		                                   data-target="#productSetailsModalAjax">Quick View </a>
-		                            </div>
-		                            <a href="product-details.html"><img src="/images/product/15.jpg" alt="img"
-		                                                                class="img-responsive"></a>
-
-		                            <div class="promotion"><span class="new-product"> NEW</span> <span
-		                                    class="discount">15% OFF</span></div>
-		                        </div>
-		                        <div class="description">
-		                            <h4><a href="product-details.html">aliquam erat volutpat</a></h4>
-
-		                            <div class="grid-description">
-		                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-		                            </div>
-		                            <div class="list-description">
-		                                <p> Sed sed rutrum purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-		                                    Pellentesque risus lacus, iaculis in ante vitae, viverra hendrerit ante. Aliquam vel
-		                                    fermentum elit. Morbi rhoncus, neque in vulputate facilisis, leo tortor sollicitudin
-		                                    odio, quis pellentesque lorem nisi quis enim. In dolor mi, hendrerit at blandit
-		                                    vulputate, congue a purus. Sed eget turpis sit amet orci euismod accumsan. Praesent
-		                                    sit amet placerat elit. </p>
-		                            </div>
-		                            <span class="size">XL / XXL / S </span></div>
-		                        <div class="price"><span>$25</span></div>
-		                        <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
-		                                class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
-		                    </div>
-		                </div> -->
-		                <!--/.item-->
-		                <!-- <div class="item col-sm-4 col-lg-4 col-md-4 col-xs-6">
-		                    <div class="product">
-		                        <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
-		                           data-placement="left">
-		                            <i class="glyphicon glyphicon-heart"></i>
-		                        </a>
-
-		                        <div class="image">
-		                            <div class="quickview">
-		                                <a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product.html"
-		                                   data-target="#productSetailsModalAjax">Quick View </a>
-		                            </div>
-		                            <a href="product-details.html"><img src="/images/product/14.jpg" alt="img"
-		                                                                class="img-responsive"></a>
-
-		                            <div class="promotion"><span class="discount">15% OFF</span></div>
-		                        </div>
-		                        <div class="description">
-		                            <h4><a href="product-details.html">ullamcorper suscipit lobortis </a></h4>
-
-		                            <div class="grid-description">
-		                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-		                            </div>
-		                            <div class="list-description">
-		                                <p> Sed sed rutrum purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-		                                    Pellentesque risus lacus, iaculis in ante vitae, viverra hendrerit ante. Aliquam vel
-		                                    fermentum elit. Morbi rhoncus, neque in vulputate facilisis, leo tortor sollicitudin
-		                                    odio, quis pellentesque lorem nisi quis enim. In dolor mi, hendrerit at blandit
-		                                    vulputate, congue a purus. Sed eget turpis sit amet orci euismod accumsan. Praesent
-		                                    sit amet placerat elit. </p>
-		                            </div>
-		                            <span class="size">XL / XXL / S </span></div>
-		                        <div class="price"><span>$25</span></div>
-		                        <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
-		                                class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
-		                    </div>
-		                </div> -->
-		                <!--/.item-->
-		                <!-- <div class="item col-sm-4 col-lg-4 col-md-4 col-xs-6">
-		                    <div class="product">
-		                        <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist"
-		                           data-placement="left">
-		                            <i class="glyphicon glyphicon-heart"></i>
-		                        </a>
-
-		                        <div class="image">
-		                            <div class="quickview">
-		                                <a data-toggle="modal" class="btn btn-xs btn-quickview" href="ajax/product.html"
-		                                   data-target="#productSetailsModalAjax">Quick View </a>
-		                            </div>
-		                            <a href="product-details.html"><img src="/images/product/17.jpg" alt="img"
-		                                                                class="img-responsive"></a>
-
-		                            <div class="promotion"><span class="new-product"> NEW</span></div>
-		                        </div>
-		                        <div class="description">
-		                            <h4><a href="product-details.html">demonstraverunt lectores </a></h4>
-
-		                            <div class="grid-description">
-		                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-		                            </div>
-		                            <div class="list-description">
-		                                <p> Sed sed rutrum purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-		                                    Pellentesque risus lacus, iaculis in ante vitae, viverra hendrerit ante. Aliquam vel
-		                                    fermentum elit. Morbi rhoncus, neque in vulputate facilisis, leo tortor sollicitudin
-		                                    odio, quis pellentesque lorem nisi quis enim. In dolor mi, hendrerit at blandit
-		                                    vulputate, congue a purus. Sed eget turpis sit amet orci euismod accumsan. Praesent
-		                                    sit amet placerat elit. </p>
-		                            </div>
-		                            <span class="size">XL / XXL / S </span></div>
-		                        <div class="price"><span>$25</span></div>
-		                        <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
-		                                class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
-		                    </div>
-		                </div> -->
 		                <!--/.item-->
 		            </div>
 		            <!--/.categoryProduct || product content end-->
 
 		            <div class="w100 categoryFooter">
 		                <div class="pagination pull-left no-margin-top">
-		                    <ul class="pagination no-margin-top">
-		                        <li><a href="#">«</a></li>
+		                    <!--<ul class="pagination no-margin-top">-->
+								<paginate-links class="pagination no-margin-top" for="productByCat" :show-step-links="true"></paginate-links>
+		                        <!--<li><a href="#">«</a></li>
 		                        <li class="active"><a href="#">1</a></li>
 		                        <li><a href="#">2</a></li>
 		                        <li><a href="#">3</a></li>
 		                        <li><a href="#">4</a></li>
 		                        <li><a href="#">5</a></li>
-		                        <li><a href="#">»</a></li>
-		                    </ul>
+		                        <li><a href="#">»</a></li>-->
+		                    <!--</ul>-->
 		                </div>
 		                <div class="pull-right pull-right col-sm-4 col-xs-12 no-padding text-right text-left-xs">
-		                    <p>Showing 1–450 of 12 results</p>
+		                    <p>Showing 1–{{page_limit}} of {{response['total_product']}} results</p>
 		                </div>
 		            </div>
 		            <!--/.categoryFooter-->
@@ -931,34 +543,106 @@
 </template>
 
 
+<style>
+	/*#app {
+	font-family: 'Avenir', Helvetica, Arial, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-size: 20px;
+	text-align: center;
+	color: #2c3e50;
+	margin-top: 60px;
+	}
+
+	h1,
+	h2 {
+	font-weight: normal;
+	}
+
+	ul {
+	list-style-type: none;
+	padding: 0;
+	}
+
+	li {
+	display: inline-block;
+	margin: 0 10px;
+	}
+	.paginate-list {
+		display: inline-block;
+		padding-left: 0;
+		margin: 20px 0;
+		margin-top: 20px;
+		border-radius: 4px;
+	}
+	.paginate-list li {
+		display: block;
+	}
+	.paginate-links.items {
+		user-select: none;
+	}
+	a {
+		cursor: pointer;
+	}
+	ul.paginate-links.items li.number.active a {
+		color: #f00 !important;
+	}
+	li.active a {
+		font-weight: bold;
+	}
+	li.next:before {
+		content: ' | ';
+		margin-right: 13px;
+		color: #ddd;
+	}
+	li.disabled a {
+		color: #ccc;
+		cursor: no-drop;
+	}
+
+	a {
+	color: #42b983;
+	}*/
+
+</style>
+
 <script type="text/javascript">
 
   import axios from 'axios'
   import Flash from '../../../../helper/flash'
+  import CartAction from '../../../../helper/cart'
   import VueTranslate from 'vue-translate-plugin'
-  import Vue from 'vue';
-  Vue.use(VueTranslate);
+  import VuePaginate from 'vue-paginate'
+  import Vue from 'vue'
+  Vue.use(VuePaginate)
+  Vue.use(VueTranslate)
+  var VueCookie = require('vue-cookie')
+  Vue.use(VueCookie)
   
   export default{
   	props:['id'],
     data(){
       return{
+		productByCat:[],
+		page_limit:15,
+		items: ['Item One', 'Item Two', 'Item Three', 'Item Four', 'Item Five', 'Item Six', 'Item Seven', 'Item Eight', 'Item Nine', 'Item Ten', 'Item Eleven', 'Item Twelve', 'Item Thirteen'],
+    	paginate: ['productByCat'],
         isActive: true,
 		category_info:'',
         loading:true,
         response: null,
+		session_id : this.$cookie.get('session_id')
       }
     },
     watch:{
         '$route.params.id': function (id) {
-            this.productByCategory(id);
+            this.productByCategory(id,'')
             this.isActive = !this.isActive
         }
     },
     created() {
-        this.productByCategory(this.id)
+       this.productByCategory(this.id,'')
     },
-
     locales: {
         en: {
             'entry_personal_information': 'My personal information',
@@ -971,26 +655,37 @@
             'entry_require_field': 'Required Field'
         }
     },
-    mounted: function(){
-
-        // this.loading = true;
-
-        // return this.$scopedSlots.default({
-        //   response: this.response.data['data']
-        // })
-    },
     methods:{
-        productByCategory(id){
-            axios.get(`/api/category/`+this.id)
+		onChange:function(filter_name){
+			this.productByCategory(this.id,filter_name)
+			this.isActive = !this.isActive
+        },
+		collapseGroup(id,flag) {
+			var value = '';
+			if(flag==1){
+				value = ["#collapseGroup"+id]
+			}else{
+				value = ["collapseGroup"+id]
+			}
+			return value.join(' ')
+		},
+        productByCategory(id,filter_name){
+            axios.get('/api/category?category_id='+this.id+'&filter_name='+filter_name)
 	        .then(response => {
 	            this.response = response.data
+				this.productByCat = response.data['data']
 				this.category_info = response.data['category_info']
 	            this.isActive = !this.isActive
 	        })
 	        .catch(e => {
 	          this.errors.push(e)
 	        })
-        } 
+        },
+		AddToCart(product_id,qty=1){
+            CartAction.AddToCart(product_id,qty,this.session_id)
+            Flash.setSuccess(qty+' Item added to your cart.')
+            window.scrollTo(100,0)
+        }
     }
   }
 </script>

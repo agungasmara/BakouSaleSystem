@@ -16,11 +16,12 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-        // return view('frontend.category');
+        $request = $request->all();
         $category_id = 0;
+        $data = $this->getProductByCategory($request);
+        return response()->json(['data' => $data['getProducts'],'total_product'=>$data['getTotalProducts'],'category_info'=>$data['category_info'],'getCategoryFilters'=>$data['getCategoryFilters'],'success' => true, 'message' => 'Success', 'lang'=>Session::get('applangId')]);
         // $category_info = $this->getCategory($category_id);
     }
 
@@ -51,11 +52,12 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($category_id)
+    public function getProductByCategory($request)
     {
-        if (isset($_REQUEST['filter'])) {
+        $category_id=$request['category_id'];
+        if (isset($request['filter'])) {
 
-            $filter = $_REQUEST['filter'];
+            $filter = $request['filter'];
 
         } else {
 
@@ -65,9 +67,9 @@ class CategoryController extends Controller
 
 
 
-        if (isset($_REQUEST['sort'])) {
+        if (isset($request['sort'])) {
 
-            $sort = $_REQUEST['sort'];
+            $sort = $request['sort'];
 
         } else {
 
@@ -77,9 +79,9 @@ class CategoryController extends Controller
 
 
 
-        if (isset($_REQUEST['order'])) {
+        if (isset($request['order'])) {
 
-            $order = $_REQUEST['order'];
+            $order = $request['order'];
 
         } else {
 
@@ -89,9 +91,9 @@ class CategoryController extends Controller
 
 
 
-        if (isset($_REQUEST['page'])) {
+        if (isset($request['page'])) {
 
-            $page = $_REQUEST['page'];
+            $page = $request['page'];
 
         } else {
 
@@ -99,11 +101,19 @@ class CategoryController extends Controller
 
         }
 
+        if (isset($request['filter_name']) && !empty($request['filter_name'])) {
 
+            $filter_name = $request['filter_name'];
 
-        if (isset($_REQUEST['limit'])) {
+        } else {
 
-            $limit = (int)$_REQUEST['limit'];
+            $filter_name = '';
+
+        }
+
+        if (isset($request['limit'])) {
+
+            $limit = (int)$request['limit'];
 
         } else {
 
@@ -118,25 +128,30 @@ class CategoryController extends Controller
                 // 'size' => $size,
 
                 // 'color' => $color,
-
+                'store_id'           => config_store_id,
                 'filter_category_id' => $category_id,
-
                 'filter_filter'      => $filter,
-
                 'sort'               => $sort,
-
                 'order'              => $order,
-
+                'filter_name'        => $filter_name,
                 'start'              => ($page - 1) * $limit,
-                // 'product_filter'     => $getProductIdByFilter,
                 'limit'              => $limit
 
             );
 
         $getProducts = $this->getProducts($filter_data);
-        $category_info = Category::getCategory($category_id);
+        $category_info = Category::getCategory($category_id,$filter_data);
         $getCategoryFilters = Category::getCategoryFilters($category_id);
-        return response()->json(['data' => $getProducts,'category_info'=>$category_info,'getCategoryFilters'=>$getCategoryFilters,'success' => true, 'message' => 'Success', 'lang'=>Session::get('applangId')]);           
+        $getTotalProducts = Category::getTotalProducts($filter_data);
+
+        return array(
+            'getProducts'=>$getProducts,
+            'category_info'=>$category_info,
+            'getCategoryFilters'=>$getCategoryFilters,
+            'getTotalProducts'=>$getTotalProducts
+        );
+        // dd($getTotalProducts);
+        // dd($getTotalProducts);
     }
 
     public function getProducts($data = array()){
@@ -171,17 +186,26 @@ class CategoryController extends Controller
             $sql->Limit($data['limit']);
         }
 
-        if (isset($data['order']) && ($data['order'] == 'DESC')) {
-            $sql->OrderBy("product_description.name","DESC");
-        } else {
-            $sql->OrderBy("product_description.name","ASC");
+        // if (isset($data['order']) && ($data['order'] == 'DESC')) {
+        //     $sql->OrderBy("product_description.name","DESC");
+        // } else {
+        //     $sql->OrderBy("product_description.name","ASC");
+        // }
+
+        if (isset($data['filter_name']) && $data['filter_name']=='price-asc') {
+            $sql->OrderBy("product.price","ASC");
+        } else if(isset($data['filter_name']) && $data['filter_name']=='price-desc') {
+            $sql->OrderBy("product.price","DESC");
         }
 
+        if (isset($data['filter_name']) && $data['filter_name']=='name-asc') {
+            $sql->OrderBy("product_description.name","ASC");
+        } else if(isset($data['filter_name']) && $data['filter_name']=='name-desc') {
+            $sql->OrderBy("product_description.name","DESC");
+        }
         $query = $sql->get();
-
         $product_data = array();
         foreach ($query as $result) {
-
             $product_data[] = $this->getProduct($result->product_id,$result->category_id);
         }        
         return $product_data;

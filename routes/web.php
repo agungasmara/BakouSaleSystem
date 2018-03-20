@@ -199,7 +199,7 @@ Route::get('/api/getTest', 'FrontEnd\TestController@getTest');
 Route::get('/api/show/{id}', 'FrontEnd\TestController@getShow');
 Route::put('/api/update', 'FrontEnd\TestController@UpdateApi');
 // =====Store
-Route::get('/api/store/getStoreData/{id}', 'FrontEnd\Store\StoreController@show');
+Route::get('/api/store/getStoreData', 'FrontEnd\Store\StoreController@index');
 /*|Api Request Header--*/
 Route::get('/api/header','FrontEnd\Common\HeaderController@index');
 /*--| Api Request Slide--*/
@@ -209,7 +209,7 @@ Route::resource('/api/category','FrontEnd\Product\CategoryController');
 Route::get('/api/latest','FrontEnd\Product\LastestController@index');
 Route::get('/api/bestSeller','FrontEnd\Product\BestSellerController@index');
 Route::get('/api/recommandProduct','FrontEnd\Product\RecommandController@index');
-Route::get('/api/detail/{id}','FrontEnd\Product\ProductController@index');
+// Route::get('/api/product_detail','FrontEnd\Product\ProductController@index');
 
 /*--| Api Request Banner--*/
 Route::get('/api/banner','FrontEnd\Design\BannerController@index');

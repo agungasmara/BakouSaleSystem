@@ -2,15 +2,12 @@
   <div style="-display:none;">
     <!-- Fixed navbar start -->
     <div class="navbar navbar-tshop navbar-fixed-top megamenu" role="navigation">
-
         <!-- <div style="height:500px">
             <button @click="initInsertElastic">Click me to insert elastic search</button>
         </div> -->
         <div class="navbar-top">
-            
             <div class="container">
                 <div class="row">
-                    
                     <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6">
                         <div class="pull-left ">
                             <ul class="userMenu ">
@@ -40,7 +37,7 @@
                                 </li>
                                 <li class="dropdown">
                                   <a href="" title="" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> 
-                                    <span class="hidden-xs hidden-sm hidden-md">{{ t('entry_account') }}</span> 
+                                    <span class="hidden-xs hidden-sm hidden-md">My Account<!--{{ t('entry_account') }}--></span> 
                                     <span class="caret"></span>
                                   </a>
                                   <ul class="dropdown-menu">
@@ -256,7 +253,7 @@
                         <ul class="popular-product">
                             <template v-if="searchResults['elasticdata'].length>0">
                                 <li v-for="item of searchResults['elasticdata']">
-                                    <router-link v-bind:to="'/product/product_detail/'+ item._source.id">
+                                    <router-link v-bind:to="'/product/product_detail/'+ item._source.id+'/0'">
                                         <div class="pull-left product-img"><img width="30px" v-bind:src="item._source.imageUrl"/> </div>
                                         <div class="pull-left">{{item._source.name}}
                                             <div>
@@ -330,8 +327,8 @@
     const es_port = 9200;
     var es = require('elasticsearch');
     var client = new es.Client({
-    host: 'localhost:9200',
-    log: 'trace',
+        host: 'localhost:9200',
+        log: 'trace',
     });
 
     export default{

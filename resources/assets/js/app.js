@@ -302,7 +302,7 @@ const router = new VueRouter({
     {path: '/product', name:'product',component:Product,
         children: [
             {
-              path: 'product_detail/:id',
+              path: 'product_detail/:id/:cat_id',
               name: ProductDetail,
               component: ProductDetail,props:true
             },
