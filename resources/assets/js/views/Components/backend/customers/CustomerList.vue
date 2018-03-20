@@ -1,176 +1,174 @@
 <template>
-	<section id="content">
+
+	<v-app id="inspire">
+
 		<!--breadcrumbs start-->
-		<div id="breadcrumbs-wrapper">
-			<!-- Search for small screen -->
-			<div class="header-search-wrapper grey lighten-2 hide-on-large-only">
-			  <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize">
-			</div>
-			<div class="container">
-			  <div class="row">
-			    <div class="col s10 m6 l6">
-			      <h5 class="breadcrumbs-title">Attribute</h5>
-			      <!-- <ol class="breadcrumbs">
-			        <li><a href="index.html">Dashboard</a>
-			        </li>
-			        <li><a href="#">List</a>
-			        </li>
-			        <li class="active">Attributes</li>
-			      </ol> -->
-			      	<v-breadcrumbs>
-			        	<v-icon slot="divider">/</v-icon>
-		        		<v-breadcrumbs-item  v-for="item in breadcrumbs" :key="item.text" :disabled="item.disabled">
-		          			{{ item.text }}
-		        		</v-breadcrumbs-item>
-		      		</v-breadcrumbs>
-			    </div>
-			    <div class="col s2 m6 l6">
-			      	<router-link to="/admin/attributes/add" replace><v-btn class="btn dropdown-settings waves-effect waves-light breadcrumbs-btn right" color="primary">Create New</v-btn></router-link>
-			    </div>
-			  </div>
-			</div>
-		</div>
-		<!--breadcrumbs end-->
+		<breadcrumb1btn
+				v-bind:breadcrumb-item="breadcrumbs"
+				v-bind:btn-new-url="btnNewUrl"
+				v-bind:breadcrumb-title="breadcrumbTitle"
+		></breadcrumb1btn>
 
-		<div>
-			<v-app id="inspire">
-				<!-- <v-breadcrumbs>
-			        <v-icon slot="divider">chevron_right</v-icon>
+		<!--Data table component-->
+		<v-card>
+			<v-card-title>
+	            {{listTitle}}
+	        </v-card-title>
+			<v-divider></v-divider>
+			<v-form v-model="valid" ref="formFilter" lazy-validation>
+			<v-container grid-list-md>
+				<v-layout row wrap>
+					<v-flex xs12 sm3 md3>
+						<v-text-field label="Customer Name" v-model="filter.customer_name"></v-text-field>
+					</v-flex>
+					<v-flex xs12 sm3 md3>
+						<v-text-field label="Email" v-model="filter.email"></v-text-field>
+					</v-flex>
+					<v-flex xs12 sm3 md3>
+						<v-select label="Customer Group" :items="customergroup" v-model="filter.customer_group_id"></v-select>
+					</v-flex>
+					<v-flex xs12 sm3 md3>
+						<v-select label="Status" :items="status" v-model="filter.status"></v-select>
+					</v-flex>
+					<v-flex xs12 sm4 md4>
+						<v-text-field label="City" v-model="filter.city"></v-text-field>
+					</v-flex>
+					
+					<v-flex xs12 sm5 md5>
+						<v-menu
+				          lazy
+				          :close-on-content-click="false"
+				          v-model="menu"
+				          transition="scale-transition"
+				          offset-y
+				          full-width
+				          :nudge-right="40"
+				          max-width="290px"
+				          min-width="290px"
+				        >
+				          <v-text-field
+				            slot="activator"
+				            label="Picker in menu"
+				            v-model="filter.date_added"
+				            prepend-icon="event"
+				            readonly
+				          ></v-text-field>
+				          <v-date-picker v-model="filter.date_added" no-title scrollable actions>
+				            <template slot-scope="{ save, cancel }">
+				              <v-card-actions>
+				                <v-spacer></v-spacer>
+				                <v-btn flat color="primary" @click="cancel">Cancel</v-btn>
+				                <v-btn flat color="primary" @click="save">OK</v-btn>
+				              </v-card-actions>
+				            </template>
+				          </v-date-picker>
+				        </v-menu>
+					</v-flex>
+					<v-flex xs12 sm3 md3 class="text-lg-right">
+						<v-btn @click="filterCustomer" :disabled="!valid">Filter</v-btn>
+						<v-btn @click="clear">clear</v-btn>
+					</v-flex>
+				</v-layout>
+			</v-container>
+		    </v-form>
+			<v-divider></v-divider>
+		</v-card>
 
-		        	<v-breadcrumbs-item v-for="item in items" :key="item.text" :disabled="item.disabled">
+		<data-table
+				v-bind:list-title="listTitle"
+				v-bind:data-header="headers"
+				v-bind:data-value="customers"
+				v-bind:url="url"
+				v-bind:btn-new-url="btnNewUrl"
+				v-on:change="fetchData"
+				v-bind:del="false"
+				v-bind:eye="false">
+		</data-table>
 
-		          		{{ item.text }}
+		<!--End of data table-->
 
-		        	</v-breadcrumbs-item>
-			    </v-breadcrumbs> -->
+	</v-app>
 
-				<v-card>
-				  
-			      <v-card-title>
-			        <v-spacer>
-			        	<div>
-			                Attribute List
-			            </div>
-			        </v-spacer>
-			        <v-text-field append-icon="search" label="Search" single-line hide-details v-model="search"></v-text-field>
-			      </v-card-title>
-				    <v-data-table v-bind:headers="headers" :items="settings" v-bind:search="search" class="elevation-1" >
-						<template slot="items" slot-scope="props">
-							<td class="text-xs-center">{{ props.item.setting_id }}</td>
-							<td class="text-xs-left">{{ props.item.name }}</td>
-							<td class="text-xs-left">{{ props.item.code }}</td>
-							<td class="text-xs-left">{{ props.item.key }}</td>
-							<td class="text-xs-left">{{ props.item.value }}</td>
-							<td class="text-xs-left">{{ props.item.serialized }}</td>
-							<td class="text-xs-center">
-								<span style="cursor:pointer;" @click="editSetting(props.item.setting_id)"">
-									<i class="material-icons">edit</i>
-								</span>
-								<span style="cursor:pointer;" v-on:click="confirmDel(props.item.setting_id,props.item.name)"><i class="material-icons">delete_forever</i></span>
-							</td>
-						</template>
-						<template slot="pageText" slot-scope="{ pageStart, pageStop }">
-				          From {{ pageStart }} to {{ pageStop }}
-				        </template>
-				    </v-data-table>
-			    </v-card>
-			    <v-layout row justify-center>
-			      <v-dialog v-model="dialog" persistent max-width="290">
-			        <v-card>
-			          <v-card-title class="headline">Message</v-card-title>
-			          	<v-card-text>
-			          		{{ deleteMessage }} {{ settingID }}?
-			          	</v-card-text>
-			          <v-card-actions>
-			            <v-spacer></v-spacer>
-			            <v-btn color="green darken-1" flat @click="deleteItem(settingID,0)">Cancle</v-btn>
-			            <v-btn color="green darken-1" flat @click="deleteItem(settingID,1)">Agree</v-btn>
-			          </v-card-actions>
-			        </v-card>
-			      </v-dialog>
-			    </v-layout>
-			</v-app>
-		</div>
-	</section>
 </template>
 
 <script>
-	import Flash from '../../../../helper/flash'
-	import axios from 'axios'
-	export default{
-		props:['settingid'],
-		data(){
-			return{
-				deleteMessage:'',
-				settingName:'',
-				settingID:'',
-				dialog:false,
-				max25chars: (v) => v.length <= 25 || 'Input too long!',
-				tmp: '',
-				search: '',
-				pagination: {},
-				headers: [
-			        { text: 'Setting ID',align: 'left',value: 'setting_id'},
-			        { text: 'Store Name',align:'center', value: 'name' },
-			        { text: 'code',align:'center', value: 'code' },
-			        { text: 'Key',align:'center', value: 'key' },
-			        { text: 'Value',align:'center', value: 'value' },
-			        { text: 'Serialized',align:'center', value: 'serialized' },
-			        { text: 'Action', value: 'action',align:'center',sortable:false }
-			    ],
-				settings:[],
-				breadcrumbs: [
-			        {
-			          text: 'Dashboard',
-			          disabled: false
-			        },
-			        {
-			          text: 'Attributes',
-			          disabled: false
-			        },
-			        {
-			          text: 'List',
-			          disabled: true
-			        }
-			    ]
+    import Flash from '../../../../helper/flash'
+    import axios from 'axios'
+    import dataTable from '../commons/tables/dataTableFilter.vue'
+    import breadcrumb1btn from '../commons/breadcrumb/breadcrumb1btn.vue'
+    export default{
+        props:[
+            'id'//this use to pass id of record to data table component
+        ],
+        data(){
+            return{
+            	valid:false,
+            	menu:null,
+                url:'/api/customers/',
+                btnNewUrl:'/admin/customers/add',
+                listTitle:'Customer List',
+                headers: [
+                    { text: 'Customer ID',align: 'left',class:'text-xs-left',value: 'customer_id'},
+                    { text: 'Customer Name',align:'left',class:'text-xs-left', value: 'customer_name' },
+                    { text: 'Email',align:'left',class:'text-xs-left', value: 'email' },
+                    { text: 'Customer Group',align:'left',class:'text-xs-left', value: 'group' },
+                    { text: 'Customer IP',align:'left',class:'text-xs-left', value: 'ip' },
+                    { text: 'Date Added',align:'left',class:'text-xs-left', value: 'date_added' },
+                    {text: 'Action',align:'center',class:'text-xs-center',value:'customer_id',status:'status',sortable: false}
+                ],
+                customers:[],
+                customergroup:[],
+				status:[
+					{text:'Active',value:1},
+                    {text:'Inactive',value:0},
+				],
+				filter:{},
+                breadcrumbTitle:'Customer List',
+                breadcrumbs: [
+                    {
+                        text: 'Administrator',
+                        disabled: false
+                    },
+                    {
+                        text: 'Customer',
+                        disabled: false
+                    },
+                    {
+                        text: 'Lists',
+                        disabled: true
+                    }
+                ]
+            }
+        },
+        components:{'dataTable':dataTable,'breadcrumb1btn':breadcrumb1btn},
+        created(){
+            this.fetchData()
+            document.title = 'Customer List';
+            this.fetchGroup();
+        },
+        methods:{
+            fetchData(){
+                axios.get(this.url).then(response=>{
+                    this.customers=response.data;
+            	});
+            },
+			fetchGroup(){
+                axios.get('/api/getCustomerGroup/').then(res=>[
+                    this.customergroup=res.data
+				])
+			},
+			filterCustomer()
+			{
+				axios.post('/api/filterCustomer',this.filter).then(res=>{
+					if(res.data.result==true){
+						this.customers=res.data.data
+					}
+				})
+			},
+			clear(){
+				this.$refs.formFilter.reset()
+				this.fetchData()
 			}
-		},
-		created(){
-			this.fetchSettings()
-			document.title = 'Attributes';
-		},
-		methods:{
-			fetchSettings(){
-				axios.get('/api/setting/list').then(response=>{
-					this.settings=response.data;
-				});
-			},
-			confirmDel(id,name){
-				this.deleteMessage='Are you sure you want to delete setting with ID:'
-				this.dialog=true;
-				this.settingName=name
-				this.settingID=id
-			},
-			deleteItem(id,opt){
-				if(opt==1){
-					this.deleteMessage='Deleting...'
-					axios.delete('/api/setting/delete/'+id).then((res)=>{
-						
-						if(res.data.deleted==true){
-							this.deleteMessage='Delete Successfully'
-							this.dialog=false
-							this.fetchSettings()
-						}
-						
-					})
-				}else{
-					this.dialog=false
-				}
-			},
-			editSetting(id){
-				//this.components.push(id)
-				this.$router.push('/admin/attributes/edit/'+id)
-			}
-		}
-	}
+        }
+    }
 </script>

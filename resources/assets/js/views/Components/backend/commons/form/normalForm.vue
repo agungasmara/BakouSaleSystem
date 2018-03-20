@@ -57,7 +57,7 @@
 														
 													</div>
 													<div v-if="input.type=='editor'">
-														<!-- <vue-editor v-model="formDatas[input.key]" :editorToolbar="toolbar"  id="editor1"></vue-editor> -->
+														 <vue-editor v-model="formDatas[input.key]" style="min-height: 200px;" :editorToolbar="toolbar" id="editor1"></vue-editor>
 													</div>
 													<div v-if="input.type=='date'">
 														<v-menu
@@ -169,7 +169,6 @@
 <script>
 	import Flash from '../../../../../helper/flash'
 	import axios from 'axios'
-	//import { VueEditor, Quill } from 'vue2-editor'
 	import breadcrumb3button from '../breadcrumb/breadcrumb3button.vue'
 	import optionImage from '../../options/OptionImages.vue'
 	var toolbars=[
@@ -215,7 +214,7 @@
 				imageUrl:'sddfdg',
 				image:null,
 				flash:Flash.state,
-				toolbar:toolbars
+				toolbar:toolbars,
 			}
 		},
 		

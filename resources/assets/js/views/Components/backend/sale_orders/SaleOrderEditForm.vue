@@ -53,7 +53,7 @@
 					                      
 					                      <div class="row">
 					                      	<v-container grid-list-md>
-					                      		<h4 class="header"><i class="material-icons text-left"> {{item.icon}} </i> {{item.title}} </h4>
+					                      		<h4 class="header"><i class="material-icons text-left"> {{item.icon}} </i>  {{item.title}} </h4>
 					                      		<div class="divider"></div>
 											    <v-layout row wrap>
 											    	 <v-flex v-for="column in rows[item.form]" :class="column.class" :key="column.key">
@@ -182,7 +182,21 @@
 				back:'/admin/sale_order/list',
 				url:'/admin/api/sale_order/',
 				data:{},
-
+				valid:true,
+				breadcrumbs: [
+			        {
+			          text: 'Dashboard',
+			          disabled: false
+			        },
+			        {
+			          text: 'Sale Order',
+			          disabled: false
+			        },
+			        {
+			          text: 'View',
+			          disabled: true
+			        }
+		      	],
 				section:[
 					{
 						info_title:'Order Details',
@@ -236,10 +250,10 @@
 						{	class:'xs6 sm6',	key:'telephone',		icon:'phone_iphone'},
 					],
 					invoice:[
-						{	class:'xs6 sm6',	key:'name',		icon:'info_outline'},
-						{	class:'xs6 sm6',	key:'name',		icon:'info_outline'},
-						{	class:'xs6 sm6',	key:'name',		icon:'info_outline'},
-						{	class:'xs6 sm6',	key:'name',		icon:'info_outline'},
+						// {	class:'xs6 sm6',	key:'name',		icon:'info_outline'},
+						// {	class:'xs6 sm6',	key:'name',		icon:'info_outline'},
+						// {	class:'xs6 sm6',	key:'name',		icon:'info_outline'},
+						// {	class:'xs6 sm6',	key:'name',		icon:'info_outline'},
 					],
 					address:[
 						{	class:'xs6 sm6',	payment:'payment_company',	shipping:'shipping_company',		icon:'info_outline'},
@@ -259,63 +273,37 @@
 		},
 		created(){
 			this.dataID=this.id
-			this.getUserGroup()
+			// this.getUserGroup()
 			this.fetchData(this.id)
 		},
 		methods:{
-			getImage(event){
-				console.log('data after child handle: ', event)
-			},
-			getUserGroup(){
-				axios.get('/api/users_group').then((res)=>{
-					this.selects.userGroupItems=res.data
-				})
-			},
+			// getImage(event){
+			// 	console.log('data after child handle: ', event)
+			// },
+			// getUserGroup(){
+			// 	axios.get('/api/users_group').then((res)=>{
+			// 		this.selects.userGroupItems=res.data
+			// 	})
+			// },
 			fetchData(id){
 				axios.get(this.url+id+'/edit').then(res=>{
 					this.data=res.data
 				});
 			},
 			
-		    checkPasswordConfirmed(){
-	    		if(this.password===this.confirmPassword){
-		        	this.error=false
-		        }else{
-		        	if(this.confirmPassword===""){
-		        		this.error=false
-		        	}else{
-		        		this.error=true
-		        	}
-		        }
-		        return this.error
-		    },
-		    onPickFile() {
-		    	this.btnImageDisabled=true
-		    	this.btnText="Uploading..."
-		        this.$refs.fileInput.click()
-		    },
-		    onFilePicked(event){
-		    	
-		    		
-		    	const files=event.target.files
-		    	let filename=files[0].name;
-		    	if(filename.lastIndexOf('.')<=0){
-		    		return alert('Please add a valid file!')
-		    	}
-		    	const fileReader=new FileReader()
-		    	fileReader.addEventListener('load',()=>{
-		    		
-		    		this.imageUrl=fileReader.result
-					this.btnImageDisabled=false
-		    		this.btnText="Upload Image"
-		    	
-		    	})
-		    	fileReader.readAsDataURL(files[0])
-		    	
-		    },
-		    clearImage(){
-		    	this.imageUrl=''
-		    }
+		    // checkPasswordConfirmed(){
+	    	// 	if(this.password===this.confirmPassword){
+		    //     	this.error=false
+		    //     }else{
+		    //     	if(this.confirmPassword===""){
+		    //     		this.error=false
+		    //     	}else{
+		    //     		this.error=true
+		    //     	}
+		    //     }
+		    //     return this.error
+		    // },
+		    
 		}
 	}
 </script>

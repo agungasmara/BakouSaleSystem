@@ -70,7 +70,7 @@ if(isset($_COOKIE['Language'])){
 //     return response()->json(['success' => false, 'message' => 'Unable to login'], 401);
 // });
 
-Route::post('login', function(Illuminate\Http\Request $request) 
+Route::post('login', function(Illuminate\Http\Request $request)
 {
     if($request->is_account==1){
         if (Auth::guard('account')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {

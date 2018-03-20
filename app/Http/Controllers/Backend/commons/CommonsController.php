@@ -50,9 +50,9 @@ class CommonsController extends Controller
     public function getCustomerGroup()
     {
 
-        $TaxClass=DB::table('customer_group_description')->select(['customer_group_id as value','name as text'])->get();
+        $customerGroups=DB::table('customer_group_description')->select(['customer_group_id as value','name as text'])->get();
 
-        return response()->json($TaxClass);
+        return response()->json($customerGroups);
 
     }
     
@@ -140,5 +140,19 @@ class CommonsController extends Controller
 
         return response()->json($filterGroup);
 
+    }
+    public function getSelectList($cid)
+    {
+         $customerGroups=DB::table('customer_group_description')->select(['customer_group_id as value','name as text'])->get();
+         $countries=DB::table('country')->select(['country_id as value','name as text'])->get();
+         $zones=DB::table('zone')->select(['zone_id as value','name as text'])->where('country_id',$cid)->get();
+
+        return response()->json(
+            [
+                'customerGroups'=>$customerGroups,
+                'countryies'=>$countries,
+                'zones'=>$zones
+            ]
+        );
     }
 }

@@ -41,10 +41,10 @@
 					{	class:'xs12 sm6 md6',	 key:'top',	type:'text',	 text:'Top',count:100	},
 					{	class:'xs12 sm6 md6',	 key:'language_id',	type:'text',	 text:'Choose Language',count:100	},
 					{	class:'xs12 sm6 md6',	 key:'name',	type:'text',	 text:'Name',count:50	},
-					{	class:'xs12 sm6 md6',	 key:'description',	type:'text',	 text:'description',count:50	},
-					{	class:'xs12 sm4 md4',	 key:'meta_title',	type:'text',	 text:'Meta Title',count:50	},
-					{	class:'xs12 sm4 md4',	 key:'meta_keyword',	type:'text',	 text:'Meta Keyword',count:25	},
-					{	class:'xs12 sm4 md4',	 key:'meta_description',	type:'text',	 text:'Meta Description',count:100	},
+					{	class:'xs12',	 key:'description',	type:'textarea',	 text:'description',count:50	},
+					{	class:'xs12 sm6',	 key:'meta_title',	type:'text',	 text:'Meta Title',count:50	},
+					{	class:'xs12 sm6',	 key:'meta_keyword',	type:'text',	 text:'Meta Keyword',count:25	},
+					{	class:'xs12',	 key:'meta_description',	type:'textarea',	 text:'Meta Description',count:100	},
 					{	class:'xs12 sm12 md12',	 key:'image',	type:'image',	 Value:'',count:0	}
 					
 				],

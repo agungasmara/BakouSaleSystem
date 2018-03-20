@@ -59,6 +59,7 @@ Route::get('/getFilterGroup','Backend\commons\CommonsController@getFilterGroup')
 Route::get('/getLayout','Backend\commons\CommonsController@getLayout');
 Route::get('/getOptions','Backend\commons\CommonsController@getOptions');
 Route::get('/getChildOption/{id}','Backend\commons\CommonsController@getChildOption');
+Route::get('/getSelectList/{cid}','Backend\commons\CommonsController@getSelectList');
 //=====Setting API=============================
 
 Route::get('/settings/item/','Backend\Settings\SettingsController@item');//use to get all config item to put into dropdown list in setting edit form 
@@ -146,3 +147,7 @@ Route::Resource('/banners','Backend\Customers\BannersController');
 
 //======Customer Group API
 Route::Resource('/customer_groups','Backend\Customers\CustomerGroupsController');
+
+//======Customer API
+Route::Resource('/customers','Backend\Customers\CustomersController');
+Route::post('/filterCustomer','Backend\Customers\CustomersController@filterCustomer');

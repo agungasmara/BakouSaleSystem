@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Backend\Customers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Models\Backend\CustomerGroup\CustomerGroup;
-use App\Http\Models\Backend\CustomerGroup\CustomerGroupDescription\CustomerGroupDescription;
+use App\Http\Models\Backend\Customer\Customer;
+use App\Http\Models\Backend\Customer\CustomerAddress;
+use App\Http\Models\Backend\Customer\CustomerIp;
 /*
     DataAction class use for any action the data from any table
     For more detail i have comment in DataAction class in commons folder
@@ -15,41 +16,38 @@ class CustomersController extends Controller
 {
     public function index()
     {
-        $CustomerGroup=CustomerGroup::AllCustomerGroups();
-        return response()->json($CustomerGroup);
+        $Customer=Customer::CustomerList();
+        return response()->json($Customer);
     }
     public function store(Request $request)
     {
         //data for Customer Group value
-        $CustomerGroup=(new CustomerGroup)->getFillable();
-        $CustomerGroup=$request->only($CustomerGroup);
-
-        //Data for Customer Group description
-        $customerGroupDesc=(new CustomerGroupDescription)->getFillable();
-        $customerGroupDesc=$request->only($customerGroupDesc);
-        
-        //condition to check if Customer Group value is already existed
-        $attrCond=[
-            'name'=>$request->name
-        ];
-        
-        //save Customer Group value and return attribute_id to insert to Customer Group description
-        $saveAttribute = (new DataAction)->StoreData(CustomerGroup::class,[],"",$CustomerGroup,"attribute_id");
-
+        $fill=(new Customer)->getFillable();
+        $Customer=array_only($request['general'],$fill);
+        $Customer['date_added']=date('Y-m-d H:i:s'); 
+        $Customer['ip']='1'; 
+        //save Customer Group value and return customer_id to insert to Customer Group description
+       $saveCustomer = (new DataAction)->StoreData(Customer::class,[],"",$Customer,"customer_id");
         //if Customer Group value is insert successfull
-        if($saveAttribute['success']){
-            
-            //get id from child array(data)
-            $customerGroupDesc['attribute_id'] = $saveCustomerGroup['attribute_id'];
-
-            //return success message if data have been successfully save to database
-            return (new DataAction)->StoreData(CustomerGroupDescription::class,$attrCond,"",$customerGroupDesc); 
-
+        if($saveCustomer['success']){
+            $customerIp=['customer_id'=>$saveCustomer['customer_id'],'ip'=>$request->ip(),'date_added'=>date('Y-m-d H:i:s')];
+            (new DataAction)->StoreData(CustomerIp::class,[],"",$customerIp);
+            //Data for Customer Address
+            if(!empty($request['addressItem'])){
+                $Address=array();
+                foreach($request['addressItem'] as $key=>$form){
+                    $Address=$form;
+                    $Address['customer_id'] = $saveCustomer['customer_id'];
+                    //return success message if data have been successfully save to database
+                    $saveAddress=(new DataAction)->StoreData(CustomerAddress::class,[],"",$Address); 
+                }
+                return $saveAddress;
+            }else{
+                return $saveCustomer;
+            }
         }else{
-
             //if data doesn't saved to database this will return success false and message why data not save
-            return $saveCustomerGroup;
-
+            return $saveCustomer;
         }
     }
     public function show($id)
@@ -58,28 +56,56 @@ class CustomersController extends Controller
     }
     public function edit($id)
     {
-        $CustomerGroup=CustomerGroup::CustomerGroupEdit($id);
-        foreach($CustomerGroup as $CustomerGroup){
-        	$attributeArr=$CustomerGroup;
+        $customer = Customer::CustomerEdit($id);
+        $fill=(new Customer)->getFillable();
+        foreach($customer as $key=>$value){
+            $customer=$value;
         }
-        return response()->json($attributeArr);
+        return response()->json(['general'=>$customer]);
     }
     public function update(Request $request,$id)
     {
         //data for Customer Group value
-        $CustomerGroup=(new CustomerGroup)->getFillable();
-        $CustomerGroup=$request->only($CustomerGroup);
-
-        //Data for Customer Group description
-        $customerGroupDesc=(new CustomerGroupDescription)->getFillable();
-        $customerGroupDesc=$request->only($customerGroupDesc);
-
-        $saveCustomerGroup = (new DataAction)->UpdateData(CustomerGroup::class,$CustomerGroup,'attribute_id',$id);
-    	return (new DataAction)->UpdateData(CustomerGroupDescription::class,$customerGroupDesc,'attribute_id',$id);
+        $fill=(new Customer)->getFillable();
+        $Customer=array_only($request['general'],$fill);
+        $Customer['date_added']=date('Y-m-d H:i:s'); 
+        $Customer['ip']='1'; 
+        //save Customer Group value and return customer_id to insert to Customer Group description
+       $saveCustomer = (new DataAction)->UpdateData(Customer::class,$Customer,"customer_id",$id);
+        //if Customer Group value is insert successfull
+        if($saveCustomer['success']){
+            $customerIp=['ip'=>$request->ip(),'date_added'=>date('Y-m-d H:i:s')];
+            (new DataAction)->UpdateData(CustomerIp::class,$customerIp,"customer_id",$id);
+            //delete all address before and re insert to update address
+            $deleteAddress=Customer::DeleteAddress($id);
+            if($deleteAddress>0){
+                //Data for Customer Address
+                if(!empty($request['addressItem'])){
+                    $Address=array();
+                    foreach($request['addressItem'] as $key=>$form){
+                        $Address=$form;
+                        $Address['customer_id'] = $id;
+                        //return success message if data have been successfully save to database
+                        $saveAddress=(new DataAction)->StoreData(CustomerAddress::class,[],"",$Address); 
+                    }
+                    return $saveAddress;
+                }else{
+                    return $saveCustomer;
+                }
+            }
+        }else{
+            //if data doesn't saved to database this will return success false and message why data not save
+            return $saveCustomer;
+        }
     } 
     public function destroy($id)
     {
-        (new DataAction)->DeleteData(CustomerGroup::class,'attribute_id',$id);
+        (new DataAction)->DeleteData(Customer::class,'attribute_id',$id);
         return (new DataAction)->DeleteData(CustomerGroupDescription::class,'attribute_id',$id);
+    }
+    public function filterCustomer(Request $request)
+    {
+        $result = Customer::customerByFilter($request->all());
+        return response()->json(['result'=>true,'data'=>$result]);
     }
 }
