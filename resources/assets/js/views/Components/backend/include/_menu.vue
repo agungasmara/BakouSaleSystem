@@ -8,8 +8,8 @@
                 <h1 class="logo-wrapper">
                   <!-- <a href="/admin" class="brand-logo darken-1"> -->
                     <router-link class="brand-logo darken-1"  to="/admin">
-                      <!-- <img src="/images/logo/materialize-logo.png" alt="materialize logo"> -->
-                      <span class="logo-text hide-on-med-and-down">Bakou Store</span>
+                      <img width="60px" src="/assets/frontend/images/logo.png" alt="Skymall">
+                      <!--<span class="logo-text hide-on-med-and-down">Skymall</span>-->
                     </router-link>
                   <!-- </a> -->
                 </h1>
@@ -133,16 +133,16 @@
         <!-- HORIZONTL NAV START-->
         <nav id="horizontal-nav" class="white hide-on-med-and-down">
           <div class="nav-wrapper">
-            <ul id="ul-horizontal-nav" class="left hide-on-med-and-down">
+            <ul v-click-outside="outside" id="ul-horizontal-nav" class="left hide-on-med-and-down">
               <template v-for="m of menu_data">
                 <li>
-                  <router-link :data-id="m.parent_menu_id" class="dropdown-menu" :to="m.p_menu_link" :data-activates="thClassValue(m.parent_menu_id)">
+                  <a :data-id="m.parent_menu_id" @mouseover.once="showSkill()" class="dropdown-menu" @click="OnMenuDrop(m.parent_menu_id)" href="javascript:void(0);" :data-activates="thClassValue(m.parent_menu_id)">
                     <i class="material-icons">{{m.fa_icon}}</i>
                     <span>{{m.parent_menu_name}}
                       <i class="material-icons right">keyboard_arrow_down</i>
                     </span>
-                  </router-link>
-                  <ul :id="thClassValue(m.parent_menu_id)" class="dropdown-content dropdown-horizontal-list">
+                  </a>
+                  <ul :id="thClassValue(m.parent_menu_id)" v-bind:class="'dropdown-content dropdown-horizontal-list dropdown-content-parent'+ m.parent_menu_id">
                     <template v-for="sm of m['children_menu']">
                       <li><router-link :to="sm.c_menu_link">{{sm.child_menu_name}}</router-link></li>
                     </template>
@@ -176,8 +176,10 @@
 </style>
 
 <script type="text/javascript">
-	import axios from 'axios';
+	import axios from 'axios'
   import common from '../../../../helper/common' 
+  import $ from 'jquery'
+
     export default{
         data(){
             return{
@@ -204,6 +206,16 @@
           document.head.appendChild(dataTable);
         },
         methods:{
+          outside: function(e) {
+            $(".dropdown-content.dropdown-horizontal-list").removeClass("active")
+            // this.clickOutside += 1
+            // console.log('clicked outside!')
+          },
+          OnMenuDrop(parent_menu_id){
+            // alert(parent_menu_id)
+            $(".dropdown-content.dropdown-horizontal-list").removeClass("active")
+            $(".dropdown-content-parent"+parent_menu_id).addClass("active",5000)
+          },
         	thClassValue (id) {
             var value = ['Templatesdropdown_12'+id]
             // if (this.orderKey === id) {
