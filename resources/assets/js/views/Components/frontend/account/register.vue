@@ -30,7 +30,7 @@
                     </alert>
                 </div>
                
-                <form role="form" class="regForm">
+                <form role="form" class="regForm" @submit.prevent="submit">
                     <template>
                       <div v-if="flash.error" class="alert alert-danger"><i class="fa fa-wa fa-info-circle"></i> {{ flash.error }}</div>
                     </template>
@@ -178,7 +178,7 @@
                         I have read and agree to the Privacy Policy  
                         <input type="checkbox" name="agree" value="1" checked="checked" />
                         &nbsp;
-                        <input @click="submit()" type="button" value="Countinue" class="btn btn-primary" />
+                        <input type="submit" value="Countinue" class="btn btn-primary" />
                       </div>
                     </div>
                     <div class="customer-padding" style="padding-bottom: 50px !important;"></div>
@@ -255,21 +255,27 @@
         },
         methods: {
             submit () {
-                axios.post('/api/customer/register', {
-                  firstname: this.firstname,
-                  lastname: this.lastname,
+                axios.post('/api/account/register', {
+                  first_name: this.firstname,
+                  last_name: this.lastname,
                   email: this.email,
                   telephone: this.telephone,
                   fax: this.fax,
                   password: this.password,
-                  confirm: this.confirm,
+                  confirm_password: this.confirm,
+                  deviceId: 0,
                 }).then((res)=>{
-                    if(res.data.success==true){
-                      Flash.setSuccess('Congratulations! You have now successfully registered.')
-                        this.$router.push('/account/login');
+                    if(res.data.success){
+                      Flash.setSuccess(res.data.message)
+                      this.$router.push('/account/login');
                     }else{
-                      Flash.setError('You enter wrong username or password!')
+                      Flash.setError(res.data.message)
                     }
+                }).catch((err) => {
+                  if(err.response.status === 401) {
+                      this.error = err.response.data
+                  }
+                  Flash.setError('Error while trying to register.')
                 })
             },
         },

@@ -166,7 +166,7 @@ if (Request::is('admin*')){
         //Information
         Route::get('information/{id}', 'FrontEnd\Information\InformationController@index');
         // Account
-        Route::post('account/register', 'FrontEnd\Account\RegisterController@save');
+        //Route::post('account/register', 'FrontEnd\Account\RegisterController@save');
     });
 }else if (Request::is('lang*')){
     Route::get('lang/{lang}', ['as'=>'lang.switch', 'uses'=>'FrontEnd\Language\LanguageController@switchLang']);

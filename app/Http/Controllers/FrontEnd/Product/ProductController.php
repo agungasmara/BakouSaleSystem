@@ -15,6 +15,7 @@ class ProductController extends Controller
 {
 
     public function index($id,$category_id=0){
+		dd(bcrypt("test"));
     	// Get Info product Details
 		$productInfo = $this->getProductByCategory($id,$category_id);
 		$filter_data = array(

@@ -6,6 +6,7 @@
             
             <div class="modal-dialog">
                 <div class="modal-content">
+                    {{productInfo|json}}
                     <button aria-hidden="true" data-dismiss="modal" class="close" type="button"> ×</button>
                     <div class="col-lg-5 col-md-5 col-sm-5  col-xs-12">
                         <!-- product Image -->

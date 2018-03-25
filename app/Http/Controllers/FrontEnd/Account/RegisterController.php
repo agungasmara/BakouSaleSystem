@@ -34,14 +34,14 @@ class RegisterController extends Controller
 
         $input = $request->all();
         if($this->checkHasAccount($input['email'])==0){
-            $input['password'] = bcrypt($input['password']);
+            //$input['password'] = bcrypt($input['password']);
             // user account
             $User = User::create([
                 'firstname'=>$input['first_name'],
                 'lastname'=>$input['last_name'],
                 'username'=>$input['email'],
                 'email'=>$input['email'],
-                'password'=>bcrypt($input['password']),
+                'password'=>bcrypt(trim($input['password'])),
                 'user_group_id'=>6,
             ]);
             // account customer
@@ -54,10 +54,10 @@ class RegisterController extends Controller
                 'email'=>$input['email'],
                 'deviceId'=>$input['deviceId']
             ]);
-            $success['token'] =  $User->createToken('Token Name')->accessToken;
-            return response()->json(['success' => $success,'user'=>$User,'message' => 'Register successfully.'], 200);
+            $token =  $User->createToken('Token Name')->accessToken;
+            return response()->json(['success' => true,'token'=>$token,'user'=>$User,'message' => 'Register successfully.Please, Login.'], 200);
         }else{
-            return response()->json(['success' => false, 'message' => 'This account is already registered!'], 401);
+            return response()->json(['success' => false, 'message' => 'This account is already registered!'], 200);
         }
     }
 

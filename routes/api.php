@@ -34,7 +34,7 @@ Route::post('account/register', 'FrontEnd\Account\RegisterController@register');
 Route::group(['middleware' => ['SettingConfig']], function(){
     //FrontEnd
     //=====Customer Register API
-    Route::post('/customer/register','FrontEnd\Account\RegisterController@store');
+    // Route::post('/customer/register','FrontEnd\Account\RegisterController@store');
     Route::get('/customer/test','FrontEnd\Account\LoginController@test');
     Route::post('/customer/login','FrontEnd\Account\LoginController@AuthLogin');
     Route::get('/account/logout','FrontEnd\Account\LoginController@AuthLogout');
