@@ -8,7 +8,7 @@
                 <h1 class="logo-wrapper">
                   <!-- <a href="/admin" class="brand-logo darken-1"> -->
                     <router-link class="brand-logo darken-1"  to="/admin">
-                      <img width="60px" src="/assets/frontend/images/logo.png" alt="Skymall">
+                      <img width="120px" src="/images/logo/bakou.png" alt="Logo">
                       <!--<span class="logo-text hide-on-med-and-down">Skymall</span>-->
                     </router-link>
                   <!-- </a> -->
