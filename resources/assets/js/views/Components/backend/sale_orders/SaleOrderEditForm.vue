@@ -154,8 +154,35 @@
 					                    </table>
 					                  </div>
 					                </div>
-					              </div>
-		                    	
+					            </div>
+		                    	<!-- order history -->
+		                    	<div id="striped-table">
+					                <h4 class="header"><i class="material-icons text-left">info_outline</i> &nbsp; Order History</h4>
+					                <div class="row">
+					                  <div class="col s12">
+					                    <table class="striped">
+					                      <thead>
+					                        <tr>
+
+					                          <th data-field="date_added">Date Added</th>
+					                          <th data-field="comment">Comment</th>
+					                          <th data-field="status">Status</th>
+					                          <th data-field="notified">Customer Notified</th>
+					                          
+					                        </tr>
+					                      </thead>
+					                      <tbody>
+					                        <tr v-for="history in data.order_history" >
+					                          <td>{{history.date_added}}</td>
+					                          <td>{{history.comment}}</td>
+					                          <td>{{data.order_status[history.order_status_id]}}</td>
+					                          <td>{{history.notify}}</td>
+					                        </tr>
+					                      </tbody>
+					                    </table>
+					                  </div>
+					                </div>
+					            </div>
 		                    	
 		                    </v-form>
 		                  </div>
@@ -277,32 +304,13 @@
 			this.fetchData(this.id)
 		},
 		methods:{
-			// getImage(event){
-			// 	console.log('data after child handle: ', event)
-			// },
-			// getUserGroup(){
-			// 	axios.get('/api/users_group').then((res)=>{
-			// 		this.selects.userGroupItems=res.data
-			// 	})
-			// },
+			
 			fetchData(id){
 				axios.get(this.url+id+'/edit').then(res=>{
 					this.data=res.data
 				});
 			},
 			
-		    // checkPasswordConfirmed(){
-	    	// 	if(this.password===this.confirmPassword){
-		    //     	this.error=false
-		    //     }else{
-		    //     	if(this.confirmPassword===""){
-		    //     		this.error=false
-		    //     	}else{
-		    //     		this.error=true
-		    //     	}
-		    //     }
-		    //     return this.error
-		    // },
 		    
 		}
 	}
