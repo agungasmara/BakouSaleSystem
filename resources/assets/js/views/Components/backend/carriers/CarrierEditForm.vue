@@ -60,7 +60,7 @@
 											<div class="row">
 												<h4 class="header"><i class="material-icons text-left">local_shipping</i> &nbsp; Delivery Information</h4>
 												<div class="divider"></div>
-												
+																									
 												<div id="carrier_wizard" class="panel swMain">
 													<ul class="steps nbr_steps_4 anchor">
 														<li class="selected">
@@ -101,17 +101,123 @@
 														</li>
 													</ul>
 													
-													<!--content step-->
-													<div class="_stepContainer" style="height: 544px;">
-														<div id="_step-1" class="step_container content">
-															
-															<!--form##################-->
-															
-															<!--#End Form##############-->
+												</div>
+												<!--content step-->
+												<div class="_stepContainer" style="height: 544px;     border: solid 1px #d3d8db;background-color: #fff;border-radius: 5px;">
+
+													<div id="_step-1" class="step_container content">
+														<!--form##################-->
+														<div class="general_setting" style="display: none;">
+															<v-container fluid grid-list-md>
+														    <v-layout row wrap>
+														      <v-flex xs12 sm6>
+														        <v-text-field
+														          name="input-1-3"
+														          label="Carriers man"
+														          single-line
+														        ></v-text-field>
+														      </v-flex>
+														      <v-flex xs12 sm6>
+														        <v-text-field
+														          name="input-1-3"
+														          label="Transit time"
+														          single-line
+														        ></v-text-field>
+														      </v-flex>
+														    </v-layout>
+														    <v-layout row wrap>
+														      <v-flex xs12 sm6>
+														        <v-text-field
+														          name="input-1-3"
+														          label="Speed grade"
+														          single-line
+														        ></v-text-field>
+														      </v-flex>
+														      <v-flex xs12 sm6>
+														       	<img :src="imageUrl" height="150" v-if="imageUrl"/>
+																		<v-text-field label="Select Image" @click='pickFile' v-model='imageName' prepend-icon='attach_file'></v-text-field>
+																		
+																		<input
+																			type="file"
+																			style="display: none"
+																			ref="image"
+																			accept="image/*"
+																			@change="onFilePicked"
+																		>
+														      </v-flex>
+
+														    </v-layout>
+														    <v-layout row wrap>
+														      <v-flex xs12 sm6>
+														         <v-text-field
+														          name="input-1-3"
+														          label="Tracking Url"
+														          single-line
+														        ></v-text-field>
+														      </v-flex>
+														    </v-layout>
+
+														  </v-container>
+														</div>
+														<div class="shipping_location">
+															<v-container fluid grid-list-md>
+														    <v-layout row wrap>
+														      <v-flex xs12 sm6>
+														        <v-text-field
+														          name="input-1-3"
+														          label="Carriers man"
+														          single-line
+														        ></v-text-field>
+														      </v-flex>
+														      <v-flex xs12 sm6>
+														        <v-text-field
+														          name="input-1-3"
+														          label="Transit time"
+														          single-line
+														        ></v-text-field>
+														      </v-flex>
+														    </v-layout>
+														    <v-layout row wrap>
+														      <v-flex xs12 sm6>
+														        <v-text-field
+														          name="input-1-3"
+														          label="Speed grade"
+														          single-line
+														        ></v-text-field>
+														      </v-flex>
+														      <v-flex xs12 sm6>
+														       	<img :src="imageUrl" height="150" v-if="imageUrl"/>
+																		<v-text-field label="Select Image" @click='pickFile' v-model='imageName' prepend-icon='attach_file'></v-text-field>
+																		
+																		<input
+																			type="file"
+																			style="display: none"
+																			ref="image"
+																			accept="image/*"
+																			@change="onFilePicked"
+																		>
+														      </v-flex>
+
+														    </v-layout>
+														    <v-layout row wrap>
+														      <v-flex xs12 sm6>
+														         <v-text-field
+														          name="input-1-3"
+														          label="Tracking Url"
+														          single-line
+														        ></v-text-field>
+														      </v-flex>
+														    </v-layout>
+
+														  </v-container>
+														</div>
+														<!--#End Form##############-->
+														<div>
 															
 														</div>
 													</div>
 												</div>
+
 											</div>
 										</div>
 									</div>
@@ -148,7 +254,7 @@
     padding: 20px;
     margin-bottom: 20px;
     border: solid 1px #d3d8db;
-    background-color: #fff;
+    /*background-color: #fff;*/
     -webkit-border-radius: 5px;
     border-radius: 5px;
 }
@@ -423,7 +529,30 @@
 		    },
 		    clearImage(){
 		    	this.imageUrl=''
-		    }
+		    },
+			   pickFile () {
+	          this.$refs.image.click ()
+	       },
+			
+				onFilePicked (e) {
+					const files = e.target.files
+					if(files[0] !== undefined) {
+						this.imageName = files[0].name
+						if(this.imageName.lastIndexOf('.') <= 0) {
+							return
+						}
+						const fr = new FileReader ()
+						fr.readAsDataURL(files[0])
+						fr.addEventListener('load', () => {
+							this.imageUrl = fr.result
+							this.imageFile = files[0] // this is an image file that can be sent to server...
+						})
+					} else {
+						this.imageName = ''
+						this.imageFile = ''
+						this.imageUrl = ''
+					}
+				}  
 		}
 	}
 </script>
