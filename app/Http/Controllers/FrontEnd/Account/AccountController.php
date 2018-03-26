@@ -20,7 +20,7 @@
          */
 
         public function __construct(){
-            $this->middleware('auth:account');
+            //$this->middleware('auth:account');
             // $this->middleware('auth:customer', ['except' => ['logout']]);
         }
 
@@ -29,7 +29,8 @@
         }
 
         public function getCustomer(){
-            $CustomerInfo = Customer::where('customer_id',Auth::guard('account')->id())->first();
+            $CustomerInfo = Customer::where('sec_user_id',Auth::guard('account')->id())->first();
+            //dd($CustomerInfo);
             $AddressInfo = Address::where('address_id',$CustomerInfo->address_id)->first();
             $data = array(
                 'firstname' => $AddressInfo->firstname,
