@@ -16,6 +16,7 @@ use App\Http\Models\BackEnd\Product\ProductOptionValue;
 use App\Http\Models\BackEnd\Product\ProductDiscount;
 use App\Http\Models\BackEnd\Product\ProductSpecial;
 use App\Http\Models\BackEnd\Product\ProductImage;
+use App\Http\Models\BackEnd\Option\OptionDescription;
 // use App\Http\Controllers\Backend\commons\ImageMaker;
 use Intervention\Image\ImageManagerStatic as Image;
 use App\Http\Controllers\Backend\commons\DataAction;
@@ -162,6 +163,7 @@ class ProductsController extends Controller
     }
     public function edit($id)
     {
+        $language_id=1;
         $Product['data']=ProductModel::find($id);
         $Product['general']=$Product['data']->Description()->first()->toArray();
         $Product['attributes']=ProductAttribute::where('product_id',$id)->get()->toArray();
@@ -173,8 +175,33 @@ class ProductsController extends Controller
         $Product['links']['related_product']=array_pluck(ProductRelated::where('product_id',$id)->get(['related_id'])->toArray(),'related_id');
         // $Product['links']['downloads']=ProductRelated::where('product_id',$id)->get('downloads')->toArray();
         $Product['option']=ProductOption::where('product_id',$id)->get()->toArray();
-        $Product['option']['checkItem']=ProductOptionValue::where('product_id',$id)->get()->toArray();
+        foreach ($Product['option'] as $key => $value) {
+            $Product['option'][$key]['text']=strtolower(OptionDescription::where('option_id',$value['option_id'])->where('language_id',$language_id)->value('name'));
+            if ($value) {
+                $checkItem=ProductOptionValue::where('product_id',$id)->where('product_option_id',$value['product_option_id'])->get()->toArray();
+                    $Product['option'][$key]['checkItem']=$checkItem;
+            }
+        }
+        // [{"text":"textarea","option_id":6,"required":1,"value":null,"checkItem":[]}]
+        // foreach ($request['option'] as $item) {
+        //     $data=array_only($item,$fill);
+        //     $data['product_id']=$product_id;
+        //     if (isset($data['option_id'])) {
+        //         $product_option_id=ProductOption::insertGetId($data);
+        //         $fill=(new ProductOptionValue)->getFillable();
+        //         if (isset($item['checkItem'])) {
+        //             foreach ($item['checkItem'] as $value) {
+        //                 $data=array_only($value,$fill);
+        //                 $data['product_option_id']=$product_option_id;
+        //                 $data['product_id']=$product_id;
+        //                 $data['option_id']=$item['option_id'];
+        //                 ProductOptionValue::insert($data);
+        //             }
+        //         }
+        //     }
+        // }
         $Product['special']=ProductSpecial::where('product_id',$id)->get()->toArray();
+        // dd($Product);
         return $Product;
     }
     public function update(Request $request,$product_id)
