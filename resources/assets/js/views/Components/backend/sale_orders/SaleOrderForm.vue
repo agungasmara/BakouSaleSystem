@@ -1,5 +1,5 @@
 <template>
-	<v-app id="inspire">
+	<v-app id="inspire" xs12 sm10 md10>
 		<!--breadcrumbs start-->
 		<div id="breadcrumbs-wrapper">
 			<!-- Search for small screen -->
@@ -16,6 +16,9 @@
 		          			{{ item.text }}
 		        		</v-breadcrumbs-item>
 		      		</v-breadcrumbs>
+			    </div>
+			    <div class="col s2 m6 l6">
+			    	<router-link :to="backUrl" replace><v-btn color="primary" class="btn dropdown-settings breadcrumbs-btn right">Cancel</v-btn></router-link>
 			    </div>
 			  </div>
 			</div>
@@ -62,25 +65,34 @@
 	          				</tr>
 	          			</thead>
 	          			<tbody>
-	          				<tr v-for="(product,index) in selectedProducts">
+	          				<tr v-for="(pro,index) in selectedProducts">
 	          					<td>
-
+	          						<p v-for="item in pro.options">
+	          							-{{item}}
+	          						</p>
 	          					</td>
-	          					<td></td>
-	          					<td></td>
-	          					<td></td>
-	          					<td></td>
-	          					<td></td>
+	          					<td>Canon</td>
+	          					<td>
+	          						<v-text-field v-model="pro.quantity" type="number"></v-text-field>
+	          					</td>
+	          					<td>pro.unitprice</td>
+	          					<td>{{pro.quantity*pro.unitprice}}</td>
+	          					<td>
+	          						<span @click="selectedProducts.splice(index,1)"  style="cursor: pointer;"> 
+										<v-icon large material-icons color="red darken">indeterminate_check_box</v-icon>
+							     	</span>
+	          					</td>
 	          				</tr>
 	          			</tbody>
 	          		</table>
+	          		<v-divider></v-divider>
 	          		<v-container grid-list-md>
 	          			<v-layout row wrap>
 		          			<v-flex xs12 sm3 md3>
-		          				<v-select label="Product"  :rules="[(v) => !!v || 'Product is required']" v-model="product" :items="productlists" required autocomplete></v-select>
+		          				<v-select label="Product"  @change="showOpt" :rules="[(v) => !!v || 'Product is required']" v-model="selectedItem.product" :items="productlists" required autocomplete></v-select>
 		          			</v-flex>
 		          			<v-flex xs12 sm3 md3>
-		          				<v-text-field v-model="quantity" label="Quantity" :rules="[(v) => !!v || 'Product quantity is required']" required></v-text-field>
+		          				<v-text-field v-model="selectedItem.quantity" label="Quantity" :rules="[(v) => !!v || 'Product quantity is required']" required></v-text-field>
 		          			</v-flex>
 		          		</v-layout>
 		          		<v-divider></v-divider>
@@ -95,8 +107,8 @@
 				          				Checkbox
 				          			</v-flex>
 				          			<v-flex xs6 ms3 md3>
-				          				<v-checkbox label="Checkbox 1"></v-checkbox>
-				          				<v-checkbox label="Checkbox 2"></v-checkbox>
+				          				<v-checkbox label="Checkbox 1" v-model="selectedItem.checkbox1"></v-checkbox>
+				          				<v-checkbox label="Checkbox 2" v-model="selectedItem.checkbox2"></v-checkbox>
 				          			</v-flex>
 				          		</v-layout>
 				          	</v-flex>
@@ -148,7 +160,7 @@
 			          			</v-layout>
 			          		</v-flex>
 			          		<v-flex xs12 sm12 md12 class="text-lg-right">
-			          			<v-btn color="primary">Add Product</v-btn>
+			          			<v-btn color="primary" @click="addProduct()">Add Product</v-btn>
 			          		</v-flex>
 		          		</v-layout>
 	          		</v-container>
@@ -157,21 +169,114 @@
 	          <v-btn flat @click.native="e1=e1 - 1">Back</v-btn>
 	        </v-stepper-content>
 	        <v-stepper-content step="3">
-	          <v-card color="grey lighten-1" class="mb-5" height="200px"></v-card>
+	          <full-screen-form
+					v-bind:url="url"
+					v-bind:id="0"
+					v-bind:form-items="payments"
+					v-bind:form-rules="rules"
+					v-bind:form-datas="data"
+					v-bind:select-items="select"
+					v-bind:back-url="backUrl"
+				></full-screen-form>
 	          <v-btn color="primary" @click.native="e1 = 4" style="float: right;">Continue</v-btn>
 	          <v-btn flat @click.native="e1=e1 - 1">Back</v-btn>
 	        </v-stepper-content>
 	        <v-stepper-content step="4">
-	          <v-card color="grey lighten-1" class="mb-5" height="200px">
-	          	<v-flex xs12 sm12 md12>
-	          		<h1>4</h1>
-	          	</v-flex>
-	          </v-card>
+	          <full-screen-form
+					v-bind:url="url"
+					v-bind:id="0"
+					v-bind:form-items="shiping"
+					v-bind:form-rules="rules"
+					v-bind:form-datas="data"
+					v-bind:select-items="select"
+					v-bind:back-url="backUrl"
+				></full-screen-form>
 	          <v-btn color="primary" @click.native="e1 = 5" style="float: right;">Continue</v-btn>
 	          <v-btn flat @click.native="e1=e1 - 1">Back</v-btn>
 	        </v-stepper-content>
 	        <v-stepper-content step="5">
-	          <v-card color="grey lighten-1" class="mb-5" height="200px"></v-card>
+	          <table class="table datatable">
+          			<thead>
+          				<tr>
+          					<th>Product</th>
+          					<th>Model</th>
+          					<th>Quantity</th>
+          					<th>Unit Price</th>
+          					<th>Total</th>
+          				</tr>
+          			</thead>
+          			<tbody>
+          				<tr v-for="(pro,index) in selectedProducts">
+          					<td>
+          						<p v-for="item in pro.options">
+          							-{{item}}
+          						</p>
+          					</td>
+          					<td>Canon</td>
+          					<td>
+          						{{pro.quantity}}
+          					</td>
+          					<td>pro.unitprice</td>
+          					<td>{{pro.quantity*pro.unitprice}}</td>
+          				</tr>
+          				<tr>
+          					<td colspan="4" class="text-lg-right">Sub-Total:</td>
+          					<td>700</td>
+          				</tr>
+          				<tr>
+          					<td colspan="4" class="text-lg-right">Total:</td>
+          					<td>700</td>
+          				</tr>
+          			</tbody>
+          		</table>
+          		<v-divider></v-divider>
+          		<v-container grid-list-md>
+          		<v-layout row wrap>
+	          		<v-flex xs12 sm12 md12>
+	          			<h5>Choose Option(s)</h5>
+	          			<v-divider></v-divider>
+	          		</v-flex>
+	          		<v-flex xs10 sm10 md10>
+	          			<v-select label="Select"  :rules="[(v) => !!v || 'Select is required']" v-model="selectedItem.select" :items="selectItems" required></v-select>
+	          		</v-flex>
+	          		<v-flex xs2 sm2 md2 class="text-md-center">
+	          			<v-btn color="primary">Apply</v-btn>
+	          		</v-flex>
+	          		<v-flex xs10 sm10 md10>
+	          			<v-select label="Select"  :rules="[(v) => !!v || 'Select is required']" v-model="selectedItem.select" :items="selectItems" required></v-select>
+	          		</v-flex>
+	          		<v-flex xs2 sm2 md2 class="text-md-center">
+	          			<v-btn color="primary">Apply</v-btn>
+	          		</v-flex>
+	          		<v-flex xs10 sm10 md10>
+          				<v-text-field label="Coupon" v-model="selectedItem.textarea"></v-text-field>
+          			</v-flex>
+          			<v-flex xs2 sm2 md2 class="text-md-center">
+	          			<v-btn color="primary">Apply</v-btn>
+	          		</v-flex>
+          			<v-flex xs12 sm10 md10>
+          				<v-text-field label="Voucher" v-model="selectedItem.textarea"></v-text-field>
+          			</v-flex>
+          			<v-flex xs2 sm2 md2 class="text-md-center">
+	          			<v-btn color="primary">Apply</v-btn>
+	          		</v-flex>
+          			<v-flex xs12 sm10 md10>
+          				<v-text-field label="Reward" v-model="selectedItem.textarea"></v-text-field>
+          			</v-flex>
+          			<v-flex xs2 sm2 md2 class="text-md-center">
+	          			<v-btn color="primary">Apply</v-btn>
+	          		</v-flex>
+          			<v-flex xs12 sm3 md3>
+          				<v-select label="Status"  :rules="[(v) => !!v || 'Select is required']" v-model="selectedItem.select" :items="select.statusItems" required></v-select>
+          			</v-flex>
+          			<v-flex xs12 sm12 md12>
+          				<v-text-field label="Comment" v-model="selectedItem.textarea" textarea></v-text-field>
+          			</v-flex>
+          			<v-flex xs12 sm6 md6>
+          				<v-text-field label="Affiliate" v-model="selectedItem.textarea"></v-text-field>
+          			</v-flex>
+	          	</v-layout>
+	          	</v-container>
 	          <v-btn color="primary" @click="saveSale()" style="float: right;">Save</v-btn>
 	          <v-btn flat @click.native="e1=e1 - 1">Back</v-btn>
 	        </v-stepper-content>
@@ -207,6 +312,32 @@
 					{	class:'xs12 sm3 md3',	 key:'email',	type:'text',  text:'Email'	},
 					{	class:'xs12 sm3 md3',	 key:'telephone',	type:'text',text:'Telephone'},
 				],
+				payments:[
+					{	class:'xs12 sm12 md12',	 key:'address_id',	type:'select',text:'Choose Address',items:'addressItem'	},
+					{	class:'xs12 sm3 md3',	 key:'first_name',	type:'text',	 text:'First Name'},
+					{	class:'xs12 sm3 md3',	 key:'last_name',	type:'text',text:'Last Name'	},
+					{	class:'xs12 sm3 md3',	 key:'company',	type:'text',text:'Company'	},
+					{	class:'xs12 sm3 md3',	 key:'email',	type:'text',  text:'Email'	},
+					{	class:'xs12 sm12 md12',	 key:'address_1',	type:'text',text:'Address 1'},
+					{	class:'xs12 sm12 md12',	 key:'address_2',	type:'text',text:'Address 2'},
+					{	class:'xs12 sm3 md3',	 key:'city',	type:'text',  text:'City'	},
+					{	class:'xs12 sm3 md3',	 key:'passcode',	type:'text',  text:'Passcode'	},
+					{	class:'xs12 sm3 md3',	 key:'country',	type:'select',text:'Country',items:'countriesItem'	},
+					{	class:'xs12 sm3 md3',	 key:'region',	type:'select',text:'Region/State',items:'regionItem'	},
+				],
+				shiping:[
+					{	class:'xs12 sm12 md12',	 key:'address_id',	type:'select',text:'Choose Address',items:'addressItem'	},
+					{	class:'xs12 sm3 md3',	 key:'first_name',	type:'text',	 text:'First Name'},
+					{	class:'xs12 sm3 md3',	 key:'last_name',	type:'text',text:'Last Name'	},
+					{	class:'xs12 sm3 md3',	 key:'company',	type:'text',text:'Company'	},
+					{	class:'xs12 sm3 md3',	 key:'email',	type:'text',  text:'Email'	},
+					{	class:'xs12 sm12 md12',	 key:'address_1',	type:'text',text:'Address 1'},
+					{	class:'xs12 sm12 md12',	 key:'address_2',	type:'text',text:'Address 2'},
+					{	class:'xs12 sm3 md3',	 key:'city',	type:'text',  text:'City'	},
+					{	class:'xs12 sm3 md3',	 key:'passcode',	type:'text',  text:'Passcode'	},
+					{	class:'xs12 sm3 md3',	 key:'country',	type:'select',text:'Country',items:'countriesItem'	},
+					{	class:'xs12 sm3 md3',	 key:'region',	type:'select',text:'Region/State',items:'regionItem'	},
+				],
 				selectedProducts:[],
 				selectedItem:{},
 				productlists:[
@@ -221,6 +352,7 @@
 					{text:'Small',value:1},
 					{text:'Medium',value:2}
 				],
+				total:0,
 				rules:{
 					first_name: [
 				      (v) => !!v || 'First Name is required',
@@ -233,6 +365,18 @@
 				    ],
 				   	telephone:[
 				      (v) => !!v || 'Telephone is required'
+				    ],
+				    address_1:[
+				      (v) => !!v || 'Address 1 is required'
+				    ],
+				    city:[
+				      (v) => !!v || 'City is required'
+				    ],
+				    country:[
+				      (v) => !!v || 'City is required'
+				    ],
+				    region:[
+				      (v) => !!v || 'City is required'
 				    ]
 				},
 				data:{
@@ -253,6 +397,23 @@
 					],
 					customergroups:[
 						{text:'Defalt',value:1}
+					],
+					addressItem:[
+						'--None--'
+					],
+					countriesItem:[
+						'Cambodia',
+						'Thai',
+						'US'
+					],
+					regionItem:[
+						'Phnom Penh',
+						'Bangkok',
+						'LA'
+					],
+					statusItems:[
+						'Pending',
+						'Canceled'
 					]
 				},
 				breadcrumbTitle:'Sale Order',
@@ -270,28 +431,28 @@
 			          disabled: true
 			        }
 			    ],
-			    backUrl:'/admin/options/list',
+			    backUrl:'/admin/sale_order/list',
 			}
 		},
 		created(){
 			
 		},
-		watch:{
-			product:function(){
-				this.showOption=true;
-			}
-		},
 		methods:{
 		    saveSale(){
 		    	alert('Successfully saved')
 		    },
+		    showOpt(){
+		    	this.showOption=true;
+		    },
 		    addProduct(){
 		    	var itemInfo={
-						name:'Camera canon 70D',
+						name:this.selectedItem.name,
 						model:'Canon',
-						quantity:5,
+						quantity:this.selectedItem.quantity,
 						unitprice:700,
+						options:this.selectedItem
 					};
+				this.selectedProducts.push(itemInfo);
 		    }
 		}
 	}
