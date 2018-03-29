@@ -63,12 +63,12 @@
 																									
 												<div id="carrier_wizard" class="panel swMain">
 													<ul class="steps nbr_steps_4 anchor">
-														<li class="selected">
+														<li class="selected" style="display: none;">
 															<a href="#step-1" class="selected" isdone="1" rel="1">
 																<span class="stepNumber">1</span>
-																<span class="stepDesc">
+															  <span class="stepDesc">
 																	General settings<br>
-																							</span>
+																</span>
 																<span class="chevron"></span>
 															</a>
 														</li>
@@ -159,57 +159,83 @@
 
 														  </v-container>
 														</div>
-														<div class="shipping_location">
-															<v-container fluid grid-list-md>
-														    <v-layout row wrap>
-														      <v-flex xs12 sm6>
-														        <v-text-field
-														          name="input-1-3"
-														          label="Carriers man"
-														          single-line
-														        ></v-text-field>
-														      </v-flex>
-														      <v-flex xs12 sm6>
-														        <v-text-field
-														          name="input-1-3"
-														          label="Transit time"
-														          single-line
-														        ></v-text-field>
-														      </v-flex>
-														    </v-layout>
-														    <v-layout row wrap>
-														      <v-flex xs12 sm6>
-														        <v-text-field
-														          name="input-1-3"
-														          label="Speed grade"
-														          single-line
-														        ></v-text-field>
-														      </v-flex>
-														      <v-flex xs12 sm6>
-														       	<img :src="imageUrl" height="150" v-if="imageUrl"/>
-																		<v-text-field label="Select Image" @click='pickFile' v-model='imageName' prepend-icon='attach_file'></v-text-field>
-																		
-																		<input
-																			type="file"
-																			style="display: none"
-																			ref="image"
-																			accept="image/*"
-																			@change="onFilePicked"
-																		>
-														      </v-flex>
 
+														<div class="shipping_location">
+															<v-container fluid>
+														    <v-layout row>
+														      <v-flex xs4>
+														        <v-subheader>Billing</v-subheader>
+														      </v-flex>
+														      <v-flex xs8>
+														         <v-radio-group v-model="radios" :mandatory="false">
+																      <v-radio label="According to total price." value="radio-1"></v-radio>
+																      <v-radio label="According to total weight." value="radio-2"></v-radio>
+																    </v-radio-group>
+														      </v-flex>
 														    </v-layout>
-														    <v-layout row wrap>
-														      <v-flex xs12 sm6>
-														         <v-text-field
-														          name="input-1-3"
-														          label="Tracking Url"
-														          single-line
+														    <v-layout row>
+														      <v-flex xs4>
+														        <v-subheader>Tax</v-subheader>
+														      </v-flex>
+														      <v-flex xs8>
+														      	<v-select
+															          :items="items"
+															          v-model="e1"
+															          label="No Tax"
+															          single-line
+															      ></v-select>
+														      </v-flex>
+														    </v-layout>
+														    <v-layout row>
+														      <v-flex xs4>
+														        <v-subheader>Out-of-rang behavior</v-subheader>
+														      </v-flex>
+														      <v-flex xs8>
+														      	<v-select
+															          :items="items"
+															          v-model="e1"
+															          label="Apply the cost of the highest"
+															          single-line
+															        ></v-select>
+														      </v-flex>
+														    </v-layout>
+														    <v-layout row>
+														    	<v-flex xs12>
+														    		<v-subheader><span style="color: red;">Ranges</span><span style="color: red;">*</span></v-subheader>
+														    	</v-flex>
+														    </v-layout>
+														    <v-layout row>
+														      <v-flex xs4>
+														      	<v-subheader>Will be applied when the weight is	>= <span style="color: red;padding-left: 10px"> kg</span></v-subheader>
+														      </v-flex>
+														      <v-flex xs8>
+														        <v-text-field
+														          label=""
+														          value="0.000000"
+														          prefix=""
 														        ></v-text-field>
 														      </v-flex>
+														    </v-layout>
+														    <v-layout row>
+														    	<v-flex xs4>
+														      	<v-subheader>Will be applied when the weight is <
+														      		<span style="color: red;padding-left: 10px"> kg</span></v-subheader>
+														      </v-flex>
+														      <v-flex xs8>
+														        <v-text-field
+														          label=""
+														          value=""
+														          prefix=""
+														        ></v-text-field>
+														      </v-flex>
+														    </v-layout>
+
+														    <v-layout row>
+														    	<v-btn>Normal</v-btn>
 														    </v-layout>
 
 														  </v-container>
+															
 														</div>
 														<!--#End Form##############-->
 														<div>
