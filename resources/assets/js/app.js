@@ -101,7 +101,9 @@ import PickupsEditForm from './views/Components/backend/pickups/PickupsEditForm.
 //SaleOrder ########################
 import SaleOrder from './views/Components/backend/sale_orders/SaleOrder.vue'
 import SaleOrderList from './views/Components/backend/sale_orders/SaleOrderList.vue'
+import SaleOrderForm from './views/Components/backend/sale_orders/SaleOrderForm.vue'
 import SaleOrderEditForm from './views/Components/backend/sale_orders/SaleOrderEditForm.vue'
+import ViewSaleOrder from './views/Components/backend/sale_orders/ViewSaleOrder.vue'
 
 //User group#########################
 // import UserGroupForm from './views/Components/backend/groups/MainForm.vue'
@@ -746,8 +748,14 @@ const router = new VueRouter({
             },
             {
                 path:'add',
-                name:'SaleOrderEditForm',
-                component:SaleOrderEditForm
+                name:'SaleOrderForm',
+                component:SaleOrderForm
+            },
+            {
+                path:'view/:id',
+                name:'SaleOrderView',
+                component:ViewSaleOrder,
+                props:true
             },
             {
                 path:'edit/:id',

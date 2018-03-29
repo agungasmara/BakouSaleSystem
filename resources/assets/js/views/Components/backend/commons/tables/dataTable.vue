@@ -21,9 +21,12 @@
 				<img v-if="index.value=='image'" :src="props.item.image ? props.item.image:'/images/icon/no-image.png'" style="width: auto;max-width: 30px;height: auto;max-height: 30px;">
 				<div v-else-if="index.text=='Action'">
 
-					<span v-if="eye" style="cursor:pointer;" :style="props.item[index.status]>0 ? 'color:green;':'color:red;'"  @click="changeStatus(props.item[index.value],props.item[index.status],index.status)">
+					<span v-if="eye==true" style="cursor:pointer;" :style="props.item[index.status]>0 ? 'color:green;':'color:red;'"  @click="changeStatus(props.item[index.value],props.item[index.status],index.status)">
 						<v-progress-circular v-if="isProgessing && props.item[index.value]==curID" indeterminate :width="2" color="green"></v-progress-circular>
 						<i class="material-icons" v-else>remove_red_eye</i>
+					</span>
+					<span v-if="eye=='view'" style="cursor:pointer;color:green;"  @click="showDetail(props.item[index.value])">
+						<i class="material-icons">remove_red_eye</i>
 					</span>
 					<span style="cursor:pointer;color:blue;" @click="editData(props.item[index.value],props.item.language_id)"">
 						<i class="material-icons">edit</i>
@@ -158,6 +161,13 @@
 					this.$router.push('edit/'+id)	
 				}
 				
+			},
+			showDetail(id,lid){
+				if(lid>0){
+					this.$router.push('view/'+id+'/'+lid)	
+				}else{
+					this.$router.push('view/'+id)	
+				}
 			},
 			changeStatus(id,value,field){
 				this.curID=id

@@ -57,7 +57,7 @@
 														
 													</div>
 													<div v-if="input.type=='editor'">
-														 <vue-editor v-model="formDatas[input.key]" style="min-height: 200px;" :editorToolbar="toolbar" id="editor1"></vue-editor>
+														 <vue-editor v-model="formDatas[input.key]" style="min-height: 200px;" :editorToolbar="toolbar"></vue-editor>
 													</div>
 													<div v-if="input.type=='date'">
 														<v-menu
