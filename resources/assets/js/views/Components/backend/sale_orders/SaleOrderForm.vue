@@ -37,7 +37,7 @@
 	      </v-stepper-header>
 	      <v-stepper-items>
 	        <v-stepper-content step="1">
-	          	
+	          	<!--Setp 1 for customer information form-->
 	          	<full-screen-form
 					v-bind:url="url"
 					v-bind:id="0"
@@ -52,6 +52,7 @@
 	          <v-btn color="primary" @click.native="e1 = 2" style="float: right;" :disabled="!valid">Continue</v-btn>
 	        </v-stepper-content>
 	        <v-stepper-content step="2">
+	        	<!--step to for product information form include quantity to order-->
 	          	<v-form v-model="valid" ref="formProduct" lazy-validation>
 	          		<table class="table datatable">
 	          			<thead>
@@ -96,11 +97,13 @@
 		          			</v-flex>
 		          		</v-layout>
 		          		<v-divider></v-divider>
+		          		<!--check if product has Option then show the option related to product to order-->
 		          		<v-layout row wrap v-if="showOption">
 		          			<v-flex xs12 sm12 md12>
 			          			<h5>Choose Option(s)</h5>
 			          			<v-divider></v-divider>
 			          		</v-flex>
+			          		<!--this is dynamic base on how many Option related to product-->
 			          		<v-flex xs12 sm12 md12>
 				          		<v-layout row wrap>
 				          			<v-flex xs6 sm3 md3>
@@ -168,6 +171,7 @@
 	          <v-btn color="primary" @click.native="e1 = 3" style="float: right;">Continue</v-btn>
 	          <v-btn flat @click.native="e1=e1 - 1">Back</v-btn>
 	        </v-stepper-content>
+	        <!--step 3 payment information-->
 	        <v-stepper-content step="3">
 	          <full-screen-form
 					v-bind:url="url"
@@ -181,6 +185,7 @@
 	          <v-btn color="primary" @click.native="e1 = 4" style="float: right;">Continue</v-btn>
 	          <v-btn flat @click.native="e1=e1 - 1">Back</v-btn>
 	        </v-stepper-content>
+	        <!--step 4 shiping information-->
 	        <v-stepper-content step="4">
 	          <full-screen-form
 					v-bind:url="url"
@@ -194,6 +199,7 @@
 	          <v-btn color="primary" @click.native="e1 = 5" style="float: right;">Continue</v-btn>
 	          <v-btn flat @click.native="e1=e1 - 1">Back</v-btn>
 	        </v-stepper-content>
+	        <!--step 5 calculate total ordered product-->
 	        <v-stepper-content step="5">
 	          <table class="table datatable">
           			<thead>
@@ -352,7 +358,6 @@
 					{text:'Small',value:1},
 					{text:'Medium',value:2}
 				],
-				total:0,
 				rules:{
 					first_name: [
 				      (v) => !!v || 'First Name is required',
