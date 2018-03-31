@@ -76,7 +76,7 @@
 	          					<td>
 	          						<v-text-field v-model="pro.quantity" type="number"></v-text-field>
 	          					</td>
-	          					<td>pro.unitprice</td>
+	          					<td>{{pro.unitprice}}</td>
 	          					<td>{{pro.quantity*pro.unitprice}}</td>
 	          					<td>
 	          						<span @click="selectedProducts.splice(index,1)"  style="cursor: pointer;"> 
@@ -222,7 +222,7 @@
           					<td>
           						{{pro.quantity}}
           					</td>
-          					<td>pro.unitprice</td>
+          					<td>{{pro.unitprice}}</td>
           					<td>{{pro.quantity*pro.unitprice}}</td>
           				</tr>
           				<tr>

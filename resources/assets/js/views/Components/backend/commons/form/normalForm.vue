@@ -73,7 +73,7 @@
 												        >
 												          <v-text-field
 												            slot="activator"
-												            label="Picker in menu"
+												            :label="input.text"
 												            v-model="formDatas[input.key]"
 												            prepend-icon="event"
 												            readonly

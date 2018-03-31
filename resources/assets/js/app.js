@@ -279,6 +279,13 @@ import Customer from './views/Components/backend/customers/Customer.vue'
 import CustomerList from './views/Components/backend/customers/CustomerList.vue'
 import CustomerForm from './views/Components/backend/customers/CustomerForm.vue'
 import CustomerEdit from './views/Components/backend/customers/CustomerEdit.vue'
+
+//***** Customer *****
+import Return from './views/Components/backend/sale_orders/return/Return.vue'
+import ReturnList from './views/Components/backend/sale_orders/return/ReturnList.vue'
+import ReturnForm from './views/Components/backend/sale_orders/return/ReturnForm.vue'
+import ReturnEdit from './views/Components/backend/sale_orders/return/ReturnEdit.vue'
+
 //import router from './router'
 import VueResource from 'vue-resource'
 import Vuetify from 'vuetify'
@@ -1209,25 +1216,44 @@ const router = new VueRouter({
         }
       ]
     },
-      { path: '/admin/customers', name:'customers',component: Customer,
-          children: [
-              {
-                  path: 'list',
-                  name:'CustomerList',
-                  component: CustomerList
-              },
-              {
-                  path: 'add',
-                  name:'CustomerForm',
-                  component: CustomerForm
-              },
-              {
-                  path: 'edit/:id',
-                  name:'CustomerEdit',
-                  component: CustomerEdit,props:true
-              }
-          ]
-      },
+	{ path: '/admin/customers', name:'customers',component: Customer,
+	  	children: [
+	      	{
+	          path: 'list',
+	          name:'CustomerList',
+	          component: CustomerList
+			},
+			{
+			  path: 'add',
+			  name:'CustomerForm',
+			  component: CustomerForm
+			},
+			{
+			  path: 'edit/:id',
+			  name:'CustomerEdit',
+			  component: CustomerEdit,props:true
+			}
+	  ]
+	},
+	{ path: '/admin/returns', name:'return',component: Return,
+	  	children: [
+	      	{
+	          path: 'list',
+	          name:'ReturnList',
+	          component: ReturnList
+			},
+			{
+			  path: 'add',
+			  name:'ReturnForm',
+			  component: ReturnForm
+			},
+			{
+			  path: 'edit/:id',
+			  name:'ReturnEdit',
+			  component: ReturnEdit,props:true
+			}
+	  ]
+	},
   ],
   scrollBehavior (to, from, savedPosition) {
     return { x: 10, y: 0 }
