@@ -103,7 +103,7 @@
 		},
 		data(){
 			return{
-				url:'/api/customers/',
+				url:'/api/returns/',
 				e1:true,
 				valid: true,
 				flash:Flash.state,
@@ -210,7 +210,7 @@
 			          disabled: true
 			        }
 			    ],
-			    back:'/admin/customers/list',
+			    back:'/admin/returns/list',
 			}
 		},
 		created(){
