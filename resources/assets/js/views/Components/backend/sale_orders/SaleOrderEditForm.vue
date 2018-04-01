@@ -61,10 +61,6 @@
 											      	</v-flex>
 
 											    </v-layout>
-											    	
-											    	
-											      	
-											    
 											</v-container>
 					                      </div>
 					                    </div>
@@ -73,16 +69,6 @@
 			                      	<div class="clearfix"></div>
 			                    	
 		                    	</div>
-		     
-		                    	
-		                    	
-
-		                    	
-		                    
-
-		                    	
-		                    	
-		                    
 		                    	<!-- address -->
 		                    	<div id="striped-table">
 					                <h4 class="header"><i class="material-icons text-left">assignment</i> &nbsp; Order # {{data.data.order_id}}</h4>

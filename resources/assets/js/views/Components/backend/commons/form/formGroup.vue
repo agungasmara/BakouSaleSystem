@@ -1,9 +1,12 @@
 <template>
+	<v-container grid-list-md>
 	<v-form v-model="valid" ref="form" lazy-validation>
+
 	<v-layout row wrap>
+		
 		<v-flex v-for="input in formItems" :key="input.key" :class="input.class">
 			<div v-if="input.type=='select'">
-			<v-select :label="input.text"  :rules="formRules[input.key]" v-model="formDatas[input.key]" :items="selectItems[input.items]" required></v-select>
+			<v-select :label="input.text"  :rules="formRules[input.key]" v-model="formDatas[input.key]" :items="selectItems[input.items]" required autocomplete></v-select>
 			</div>
 			<div v-if="input.type=='multiple'">
 				<v-select :label="input.text"  :rules="formRules[input.key]" v-model="formDatas[input.key]" :items="selectItems[input.items]" autocomplete :loading="loading" multiple cache-items chips clearable required :search-input.sync="search"></v-select>
@@ -35,6 +38,9 @@
 			<div v-if="input.type=='password'">
 				<v-text-field  label="Confirm Password" v-model="formDatas[input.key]" name="confirmpassword" :rules="formRules[input.key]" required :append-icon="e1 ? 'visibility' : 'visibility_off'" :append-icon-cb="() => (e1 = !e1)" :type="e1 ? 'password' : 'text'"></v-text-field>
 			</div>
+			<div v-if="input.type=='editor'">
+				 <vue-editor v-model="formDatas[input.key]" id="editor" :placeholder="input.text" :editorToolbar="toolbar"></vue-editor>
+			</div>
 			<div v-if="input.type=='textarea'">
 				<v-text-field v-if="formRules[input.key]" textarea v-model="formDatas[input.key]" :rules='formRules[input.key]' :label="input.text" color="light-blue" required></v-text-field>
 				<v-text-field v-else textarea v-model="formDatas[input.key]" :rules='formRules[input.key]' :label="input.text" color="light-blue"></v-text-field>
@@ -53,7 +59,7 @@
 		        >
 		          <v-text-field
 		            slot="activator"
-		            label="Picker in menu"
+		            :label="input.text"
 		            v-model="formDatas[input.key]"
 		            prepend-icon="event"
 		            readonly
@@ -92,12 +98,27 @@
 			</div>
 		</v-flex>
 	</v-layout>
+	
 	</v-form>
+</v-container>
 </template>
 <script>
 	import Flash from '../../../../../helper/flash'
 	import axios from 'axios'
 	//import { VueEditor } from 'vue2-editor'
+	var toolbars=[
+		[
+			'bold', 'italic', 'underline', 'strike',
+			{ 'header': 1 }, 
+			{ 'header': 2 },
+			{ 'script': 'sub'},
+			{ 'script': 'super' },
+			{ 'indent': '-1'}, 
+			{ 'indent': '+1' },
+			{ 'list': 'ordered'}, { 'list': 'bullet' },
+			'image'
+		]
+	]
 	export default{
 		props:[
 			'formItems',
@@ -117,7 +138,8 @@
 				btnText:'Upload Image',
 				imageUrl:'sddfdg',
 				image:null,
-				flash:Flash.state
+				flash:Flash.state,
+				toolbar:toolbars,
 			}
 		},
 		mounted(){
