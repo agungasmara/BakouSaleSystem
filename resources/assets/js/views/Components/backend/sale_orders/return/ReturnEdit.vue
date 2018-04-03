@@ -219,28 +219,56 @@
 		watch:{
 		},
 		methods:{
-			submit (opt) {
+			submit (opt=1) {
 		      	if (this.$refs.form.validate()) {
 			        // Native form submission is not yet supporte
+			        
+			        if(!this.id){
 			        	axios.post(this.url,
 				          this.data
 				        ).then((res)=>{
 				        	console.log(res.data)
 				        	if(res.data.success==true){
 				        		Flash.setSuccess(res.data.message)
-				        		this.$refs.form.reset()
+				        		// this.$refs.form.reset()
+				        		// if(opt==2){
+				        			// this.$router.push(this.back)
+				        		// }
 				        	}else{
 				        		Flash.setError(res.data.message)
 				        	}
 				        })
 				        .catch((err) => {
-	                      	if(err.response.status === 422) {
-	                          	this.error = err.response.message
-							}
+	      //                 	if(err.response.status === 422) {
+	      //                     	this.error = err.response.message
+							// }
 							Flash.setError('Error while saving data')
 	                  	})
+			        }else{
+			        	console.log(this.formDatas)
+			        	axios.put(this.url+this.id,
+				          	this.data
+				        ).then((res)=>{
+				        	console.log(res.data)
+				        	if(res.data.success==true){
+				        		Flash.setSuccess(res.data.message)
+				        		// if(opt==2){
+				        			// this.$router.push(this.back)
+				        		// }
+				        	}else{
+				        		Flash.setError(res.data.message)
+				        	}
+				        })
+				        .catch((err) => {
+	      //                 	if(err.response.status === 422) {
+	      //                     	this.error = err.response.message
+							// }
+							Flash.setError('Error while updateing data')
+	                  	})
+			        }
+			        
 		      	}
-		    }
+		    },
 		}
 	}
 </script>

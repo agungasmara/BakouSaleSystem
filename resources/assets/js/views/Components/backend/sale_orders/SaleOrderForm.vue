@@ -43,7 +43,7 @@
 					v-bind:id="0"
 					v-bind:form-items="customer"
 					v-bind:form-rules="rules"
-					v-bind:form-datas="data"
+					v-bind:form-datas="data.customer"
 					v-bind:select-items="select"
 					v-bind:back-url="backUrl"
 				></full-screen-form>
@@ -66,10 +66,10 @@
 	          				</tr>
 	          			</thead>
 	          			<tbody>
-	          				<tr v-for="(pro,index) in selectedProducts">
+	          				<tr v-for="(pro,index) in data.products">
 	          					<td>
 	          						<p v-for="item in pro.options">
-	          							-{{item}}
+	          							- {{item}}
 	          						</p>
 	          					</td>
 	          					<td>Canon</td>
@@ -79,7 +79,7 @@
 	          					<td>{{pro.unitprice}}</td>
 	          					<td>{{pro.quantity*pro.unitprice}}</td>
 	          					<td>
-	          						<span @click="selectedProducts.splice(index,1)"  style="cursor: pointer;"> 
+	          						<span @click="data.products.splice(index,1)"  style="cursor: pointer;"> 
 										<v-icon large material-icons color="red darken">indeterminate_check_box</v-icon>
 							     	</span>
 	          					</td>
@@ -178,7 +178,7 @@
 					v-bind:id="0"
 					v-bind:form-items="payments"
 					v-bind:form-rules="rules"
-					v-bind:form-datas="data"
+					v-bind:form-datas="data.payment"
 					v-bind:select-items="select"
 					v-bind:back-url="backUrl"
 				></full-screen-form>
@@ -192,7 +192,7 @@
 					v-bind:id="0"
 					v-bind:form-items="shiping"
 					v-bind:form-rules="rules"
-					v-bind:form-datas="data"
+					v-bind:form-datas="data.shipping"
 					v-bind:select-items="select"
 					v-bind:back-url="backUrl"
 				></full-screen-form>
@@ -385,11 +385,11 @@
 				    ]
 				},
 				data:{
-					name:'',
-					option_id:'',
-					language_id:'',
-					sort_order:0,
-					optionValues:[]
+					customer:{},
+					products:[],
+					payment:{},
+					shipping:{},
+					total:[]
 				},
 				select:{
 					stores:[
@@ -451,13 +451,13 @@
 		    },
 		    addProduct(){
 		    	var itemInfo={
-						name:this.selectedItem.name,
+						name:this.selectedItem.product,
 						model:'Canon',
 						quantity:this.selectedItem.quantity,
 						unitprice:700,
 						options:this.selectedItem
 					};
-				this.selectedProducts.push(itemInfo);
+				this.data.products.push(itemInfo);
 		    }
 		}
 	}
