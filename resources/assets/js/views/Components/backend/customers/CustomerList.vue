@@ -18,23 +18,23 @@
 			<v-form v-model="valid" ref="formFilter" lazy-validation>
 			<v-container grid-list-md>
 				<v-layout row wrap>
-					<v-flex xs12 sm3 md3>
+					<v-flex xs12 sm4 md4>
 						<v-text-field label="Customer Name" v-model="filter.customer_name"></v-text-field>
 					</v-flex>
-					<v-flex xs12 sm3 md3>
+					<v-flex xs12 sm4 md4>
 						<v-text-field label="Email" v-model="filter.email"></v-text-field>
 					</v-flex>
-					<v-flex xs12 sm3 md3>
+					<v-flex xs12 sm4 md4>
 						<v-select label="Customer Group" :items="customergroup" v-model="filter.customer_group_id"></v-select>
 					</v-flex>
-					<v-flex xs12 sm3 md3>
+					<v-flex xs12 sm4 md4>
 						<v-select label="Status" :items="status" v-model="filter.status"></v-select>
 					</v-flex>
 					<v-flex xs12 sm4 md4>
 						<v-text-field label="City" v-model="filter.city"></v-text-field>
 					</v-flex>
 					
-					<v-flex xs12 sm5 md5>
+					<v-flex xs12 sm4 md4>
 						<v-menu
 				          lazy
 				          :close-on-content-click="false"
@@ -64,7 +64,7 @@
 				          </v-date-picker>
 				        </v-menu>
 					</v-flex>
-					<v-flex xs12 sm3 md3 class="text-lg-right">
+					<v-flex xs12 sm12 md12 class="text-lg-right">
 						<v-btn @click="filterCustomer" :disabled="!valid">Filter</v-btn>
 						<v-btn @click="clear">clear</v-btn>
 					</v-flex>
