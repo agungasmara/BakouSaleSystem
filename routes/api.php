@@ -154,3 +154,6 @@ Route::post('/filterCustomer','Backend\Customers\CustomersController@filterCusto
 
 //=====Sale order=============================
 Route::resource('sale_order', 'Backend\Order\SaleOrderController');
+
+//=====Sale order=============================
+Route::resource('carrier', 'Backend\Shipment\ShipmentController');
