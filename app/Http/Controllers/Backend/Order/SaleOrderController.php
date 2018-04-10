@@ -185,6 +185,6 @@ class SaleOrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return (new DataAction)->DeleteData(User::class,'id',$id);
     }
 }
