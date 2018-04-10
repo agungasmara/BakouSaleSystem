@@ -29,7 +29,7 @@ class Controller extends BaseController
 				->leftJoin('category_to_store' , 'category.category_id', '=', 'category_to_store.category_id')
 				->where('category.category_type_id',$cat_type)
 				->where('category.parent_id',$parent_id)
-				->where('category_to_store.store_id',0)
+				->where('category_to_store.store_id',config_store_id)
 				->where('category.status',1)
 				->get();
 				
@@ -205,7 +205,7 @@ class Controller extends BaseController
 				->where('product_description.language_id',1)
 				->where('product.status',1)
 				->where('product.date_available','<=',Carbon::today())
-				->where('product_to_store.store_id',0)
+				->where('product_to_store.store_id',config_store_id)
 				->groupBy('product_description.name')
 				->groupBy('product.product_id');
 				// ->limit(4);
@@ -243,10 +243,10 @@ class Controller extends BaseController
 				// ->join('product_to_category','product.product_id','=','product_to_category.product_id')
 				->where('product.product_id',$product_id)
 				// ->where('product_to_category.category_id',$category_id)
-				->where('product_description.language_id',1)
+				->where('product_description.language_id',config_language_id)
 				->where('product.status',1)
 				->where('product.date_available','<=',Carbon::today())
-				->where('product_to_store.store_id',0)
+				->where('product_to_store.store_id',config_store_id)
 				->first();
 			return($query);
 		
@@ -267,7 +267,7 @@ class Controller extends BaseController
 	// 			->where('product_description.language_id',1)
 	// 			->where('product.status',1)
 	// 			->where('product.date_available','<=',Carbon::today())
-	// 			->where('product_to_store.store_id',0)
+	// 			->where('product_to_store.store_id',config_store_id)
 	// 			->first();
 	// 		return($query);
 		

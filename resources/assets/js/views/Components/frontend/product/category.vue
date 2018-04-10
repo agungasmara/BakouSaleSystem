@@ -13,10 +13,10 @@
 		    <!-- /.row  -->
 		    <div class="row">
 		        <!--left column-->
-		        <div v-if="response['getCategoryFilters'].length>0" class="col-lg-3 col-md-3 col-sm-12">
+		        <div v-if="category_filter.length>0" class="col-lg-3 col-md-3 col-sm-12">
 		            <div class="panel-group" id="accordionNo">
 						<!--filter group ########-->
-						<template v-for="gfilter in response['getCategoryFilters']">
+						<template v-for="gfilter in category_filter">
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<h4 class="panel-title"><a data-toggle="collapse" :href="collapseGroup(gfilter.filter_group_id,1)"
@@ -432,7 +432,7 @@
 		            <!--/.subCategoryList-->
 
 		            <div class="w100 productFilter clearfix">
-		                <p class="pull-left"> Showing 1–{{page_limit}} of {{response['total_product']}} results </p>
+		                <p class="pull-left"> Showing 1–{{page_limit}} of {{total_product}} results </p>
 
 		                <div class="pull-right ">
 		                    <div class="change-order pull-right">
@@ -453,8 +453,8 @@
 		                </div>
 		            </div>
 		            <!--/.productFilter-->
-		            <div class="row  categoryProduct xsResponse clearfix">
-		                <div>
+		            <div class="row categoryProduct xsResponse clearfix">
+		                <div v-if="productByCat.length>0">
 							<paginate name="productByCat" :list="productByCat" :per="page_limit" class="_paginate-list">
 								<div v-for="product in paginated('productByCat')" class="item col-sm-4 col-lg-4 col-md-4 col-xs-6">
 									<div class="product">
@@ -516,7 +516,7 @@
 		            <div class="w100 categoryFooter">
 		                <div class="pagination pull-left no-margin-top">
 		                    <!--<ul class="pagination no-margin-top">-->
-								<paginate-links class="pagination no-margin-top" for="productByCat" :show-step-links="true"></paginate-links>
+								<paginate-links v-if="productByCat.length>0" class="pagination no-margin-top" for="productByCat" :show-step-links="true"></paginate-links>
 		                        <!--<li><a href="#">«</a></li>
 		                        <li class="active"><a href="#">1</a></li>
 		                        <li><a href="#">2</a></li>
@@ -527,7 +527,7 @@
 		                    <!--</ul>-->
 		                </div>
 		                <div class="pull-right pull-right col-sm-4 col-xs-12 no-padding text-right text-left-xs">
-		                    <p>Showing 1–{{page_limit}} of {{response['total_product']}} results</p>
+		                    <p>Showing 1–{{page_limit}} of {{total_product}} results</p>
 		                </div>
 		            </div>
 		            <!--/.categoryFooter-->
@@ -623,7 +623,10 @@
   	props:['id'],
     data(){
       return{
+		filter_name:'',
 		productByCat:[],
+		total_product:0,
+		category_filter:[],
 		page_limit:15,
 		items: ['Item One', 'Item Two', 'Item Three', 'Item Four', 'Item Five', 'Item Six', 'Item Seven', 'Item Eight', 'Item Nine', 'Item Ten', 'Item Eleven', 'Item Twelve', 'Item Thirteen'],
     	paginate: ['productByCat'],
@@ -672,10 +675,14 @@
         productByCategory(id,filter_name){
             axios.get('/api/category?category_id='+this.id+'&filter_name='+filter_name)
 	        .then(response => {
-	            this.response = response.data
-				this.productByCat = response.data['data']
-				this.category_info = response.data['category_info']
-	            this.isActive = !this.isActive
+				if(response.data['data'].length>0){
+					this.response = response.data
+					this.productByCat = response.data['data']
+					this.category_info = response.data['category_info']
+					this.category_filter = response.data['getCategoryFilters']
+					this.total_product = response.data['total_product']
+					this.isActive = !this.isActive
+				}
 	        })
 	        .catch(e => {
 	          this.errors.push(e)

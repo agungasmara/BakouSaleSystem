@@ -120,13 +120,13 @@ if (Request::is('admin*')){
                 Route::get('/getStockStatus','Backend\commons\CommonsController@getStockStatus');
                 Route::get('/getProductRelates','Backend\commons\CommonsController@getProductRelates');
                 Route::get('/getFilter','Backend\commons\CommonsController@getFilter');
-
-
-
-
-                Route::get('/getMenus', 'Backend\Settings\GroupRolesController@index');
+                Route::get('/getMenus', 'Backend\Settings\GroupRolesController@getMenus');
+                //=====User Role============================= 
+                Route::resource('/user_role', 'Backend\Settings\GroupRolesController');
                 //=====User=============================
                 Route::resource('user_roles', 'Backend\UserRoles\UserRolesController');
+                //=====Customer=============================
+                Route::resource('customer_field', 'Backend\Customers\CustomerFieldController');
             });
 
         }else{

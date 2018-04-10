@@ -3,6 +3,7 @@
 namespace App\Http\Models\BackEnd\Product;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Http\Models\BackEnd\Product\ProductDescription;
 use Carbon\Carbon;
 class ProductModel extends Model
 {
@@ -59,6 +60,7 @@ class ProductModel extends Model
 	static function DeleteProduct($product_id)
 	{
 		$Product=static::find($product_id);
+		$ProductDescription = ProductDescription::where('product_id',$product_id)->delete();
 		if (!$Product) {
 			return ['success'=>false,
 					'message'=>'Data fail to delete.'];

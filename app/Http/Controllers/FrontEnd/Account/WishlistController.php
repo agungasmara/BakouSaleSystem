@@ -26,10 +26,10 @@ class WishlistController extends Controller
                     ->Join('product_description','product.product_id','=','product_description.product_id')
                     ->Join('customer_wishlist','customer_wishlist.product_id','=','product.product_id')
                     ->Join('product_to_store','product.product_id','=','product_to_store.product_id')
-                    ->where('product_description.language_id',1)
+                    ->where('product_description.language_id',config_language_id)
                     ->where('customer_wishlist.customer_id',Auth::guard('account')->id())
                     // ->where('product.status',1)
-                    ->where('product_to_store.store_id',0)
+                    ->where('product_to_store.store_id',config_store_id)
                     // ->groupBy('product_description.name')
                     // ->groupBy('customer_wishlist.product_id')
                     ->get();

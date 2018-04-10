@@ -44,7 +44,7 @@
 				    </div>
 				    <div class="col s2 m6 l6">
 				     	<router-link :to="back" replace><v-btn class="btn dropdown-settings waves-effect waves-light breadcrumbs-btn right" color="success">Back</v-btn></router-link>
-				    	<v-btn @click="submit()" color="primary" class="btn dropdown-settings breadcrumbs-btn right">Save</v-btn>
+				    	<v-btn @click="submit(1)" color="primary" class="btn dropdown-settings breadcrumbs-btn right">Save</v-btn>
 				    </div>
 				  </div>
 				</div>
@@ -144,6 +144,15 @@
 	import discount from '../product_feilds/discount/DiscountForm.vue'
 	import special from '../product_feilds/special/SpecialForm.vue'
 	import productGallery from '../product_feilds/gallery/ProductGallery.vue'
+	import {post} from '../../../../helper/api'
+	const es_host = 'http://localhost';
+    const es_port = 9200;
+    var es = require('elasticsearch');
+    var client = new es.Client({
+        host: 'localhost:9200',
+        log: 'trace',
+    });
+
 	export default{
 		props:['id'],
 		components: {
@@ -372,8 +381,45 @@
 					this.data=res.data
 				});
 			},
+			initInsertElastic(){
+				let params = {
+					"id": "28",
+					"name": "Headphones & Headsets - In-Ear Headphones",
+					"price": "11",
+					"status": 1,
+					"description": "description product",
+					"isCrawler": false,
+					"imageUrl": "http://localhost:8000/images/catalog/demo/hp_2.jpg",
+					"crawlPrice": "$.332",
+					"crawlpriceSpecial": "211",
+					"crawldiscountRate": "23",
+					"sourceWebsite": "http://www.google.com",
+					"productLink": "http://localhost:8000/product/product_detail/42",
+					"categories": {
+						"cat_id": "1",
+						"cat_name": "Headphones & Headsets",
+						"cat_alias": "Headphones & Headsets"
+					},
+					"brand": {
+						"brandname": "Petro",
+						"image": "http://localhost:8000/images/store/taobao.jpg",
+						"brand_id": 1
+					},
+					"store": {
+						"store_id":1,
+						"storename": "Bakou Store",
+						"image": "http://localhost:8000/images/store/bakou.png"
+					},
+					"popular": 1
+				}
+				post(''+es_host+':'+es_port+'/store/product/3333', params).then(response => {
+					alert("success")
+				},{headers: {'Content-Type': 'application/json','Accept': 'application/json','Access-Control-Allow-Origin': '*','Access-Control-Allow-Headers': 'Origin, Accept, Content-Type, Authorization, Access-Control-Allow-Origin'}}, response => {
+				})
+			},
 			submit (opt=1) {
-		      	if (this.$refs.form.validate()) {
+
+		      	// if (this.$refs.form.validate()) {
 			        // Native form submission is not yet supporte
 			        
 			        if(!this.id){
@@ -383,9 +429,10 @@
 				        	console.log(res.data)
 				        	if(res.data.success==true){
 				        		Flash.setSuccess(res.data.message)
+								this.initInsertElastic()
 				        		// this.$refs.form.reset()
 				        		// if(opt==2){
-				        			// this.$router.push(this.back)
+				        		this.$router.push(this.back)
 				        		// }
 				        	}else{
 				        		Flash.setError(res.data.message)
@@ -405,8 +452,9 @@
 				        	console.log(res.data)
 				        	if(res.data.success==true){
 				        		Flash.setSuccess(res.data.message)
+								this.initInsertElastic()
 				        		// if(opt==2){
-				        			// this.$router.push(this.back)
+				        		this.$router.push(this.back)
 				        		// }
 				        	}else{
 				        		Flash.setError(res.data.message)
@@ -420,7 +468,7 @@
 	                  	})
 			        }
 			        
-		      	}
+		      	// }
 		    },
 		}
 	}

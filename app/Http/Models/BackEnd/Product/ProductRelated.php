@@ -11,7 +11,6 @@ class ProductRelated extends Model
     protected $fillable=[
     	'product_id',
 		'related_id',
-		
     ];
     public $timestamps = false;
 }

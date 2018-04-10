@@ -51,7 +51,7 @@ class InformationController extends Controller
                 ->leftJoin('information_to_store','information.information_id','=','information_to_store.information_id')
                 ->where('information.information_id',$information_id)
                 ->where('information_description.language_id',1)
-                ->where('information_to_store.store_id',0)
+                ->where('information_to_store.store_id',config_store_id)
                 ->where('information.status',1)
                 ->distinct()
                 ->first();

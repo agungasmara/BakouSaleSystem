@@ -125,7 +125,7 @@ class ProductController extends Controller
 				->where('product_description.language_id',1)
 				->where('product.status',1)
 				->where('product.date_available','<=',Carbon::today())
-				->where('product_to_store.store_id',0);
+				->where('product_to_store.store_id',config_store_id);
 		if($category_id>0){
 			$query->where('product_to_category.category_id',$category_id);
 		}
