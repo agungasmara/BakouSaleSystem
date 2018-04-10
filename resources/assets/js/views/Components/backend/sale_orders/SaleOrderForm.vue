@@ -90,7 +90,7 @@
 	          		<v-container grid-list-md>
 	          			<v-layout row wrap>
 		          			<v-flex xs12 sm3 md3>
-		          				<v-select label="Product"  @change="showOpt" :rules="[(v) => !!v || 'Product is required']" v-model="selectedItem.product" :items="productlists" required autocomplete></v-select>
+		          				<v-select label="Product"  @change="showOpt" :rules="[(v) => !!v || 'Product is required']" v-model="selectedItem.product" :items="select['productlists']" required autocomplete></v-select>
 		          			</v-flex>
 		          			<v-flex xs12 sm3 md3>
 		          				<v-text-field v-model="selectedItem.quantity" label="Quantity" :rules="[(v) => !!v || 'Product quantity is required']" required></v-text-field>
@@ -303,7 +303,7 @@
 		data(){
 			return {
 				back:'/admin/sale_order/list',
-				url:'/admin/api/sale_order/',
+				url:'/api/sale_order/',
 				data:{},
 				valid:true,
 				e1:0,
@@ -392,34 +392,34 @@
 					total:[]
 				},
 				select:{
-					stores:[
-						{text:'Defalt',value:1}
-					],
-					currencies:[
-						{text:'Euro',value:1},
-						{text:'USSD',value:2},
-						{text:'Pound',value:3}
-					],
-					customergroups:[
-						{text:'Defalt',value:1}
-					],
-					addressItem:[
-						'--None--'
-					],
-					countriesItem:[
-						'Cambodia',
-						'Thai',
-						'US'
-					],
-					regionItem:[
-						'Phnom Penh',
-						'Bangkok',
-						'LA'
-					],
-					statusItems:[
-						'Pending',
-						'Canceled'
-					]
+					// stores:[
+					// 	{text:'Defalt',value:1}
+					// ],
+					// currencies:[
+					// 	{text:'Euro',value:1},
+					// 	{text:'USD',value:2},
+					// 	{text:'Pound',value:3}
+					// ],
+					// customergroups:[
+					// 	{text:'Defalt',value:1}
+					// ],
+					// addressItem:[
+					// 	'--None--'
+					// ],
+					// countriesItem:[
+					// 	'Cambodia',
+					// 	'Thai',
+					// 	'US'
+					// ],
+					// regionItem:[
+					// 	'Phnom Penh',
+					// 	'Bangkok',
+					// 	'LA'
+					// ],
+					// statusItems:[
+					// 	'Pending',
+					// 	'Canceled'
+					// ]
 				},
 				breadcrumbTitle:'Sale Order',
 				breadcrumbs: [
@@ -440,9 +440,19 @@
 			}
 		},
 		created(){
-			
+			this.fetchData();
 		},
 		methods:{
+			onchange(item,id){
+		    	if (item) {
+			    	axios.get('/api/getLocations/'+id).then(response => this.selectItem[item]=response.data);
+		    	}
+		    },
+		    fetchData(){
+				axios.get(this.url+'create').then(response=>{
+					this.select=response.data;
+				});
+			},
 		    saveSale(){
 		    	alert('Successfully saved')
 		    },

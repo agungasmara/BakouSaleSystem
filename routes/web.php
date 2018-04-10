@@ -158,8 +158,8 @@ if (Request::is('admin*')){
     Route::middleware([])->prefix('api')->group(function () {
 
         Route::get('product_cart', 'FrontEnd\Product\CartController@ProductCart');
-        Route::get('getLocations/{country_id?}', 'FrontEnd\Product\CartController@getLocations');
-        Route::get('getShipping/{id?}', 'FrontEnd\Product\CartController@getShipping');
+        Route::get('getLocations/{country_id?}', 'Backend\commons\CommonsController@getLocations');
+        Route::get('getShipping/{id?}', 'Backend\commons\CommonsController@getShipping');
         Route::get('get_product/{num}', 'FrontEnd\Product\ProductController@GetProduct');
         Route::get('footer', 'FrontEnd\Common\FooterController@getFooter');
 
