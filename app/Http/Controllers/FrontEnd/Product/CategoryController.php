@@ -138,7 +138,7 @@ class CategoryController extends Controller
                 'limit'              => $limit
 
             );
-
+            
         $getProducts = $this->getProducts($filter_data);
         $category_info = Category::getCategory($category_id,$filter_data);
         $getCategoryFilters = Category::getCategoryFilters($category_id);
@@ -170,11 +170,11 @@ class CategoryController extends Controller
                 ->leftJoin('product_description','product.product_id','=','product_description.product_id')
                 ->leftJoin('product_to_store','product.product_id','=','product_to_store.product_id')
                 // ->join('product_to_category as p2c','p2c.category_id','=',$data['filter_category_id'])
-                 ->join('product_to_category','product.product_id','=','product_to_category.product_id')
+                ->join('product_to_category','product.product_id','=','product_to_category.product_id')
                 ->where('product_description.language_id',1)
                 ->where('product.status',1)
                 ->where('product.date_available','<=',Carbon::today())
-                ->where('product_to_store.store_id',0)
+                ->where('product_to_store.store_id',$data['store_id'])
                 ->where('product_to_category.category_id',$data['filter_category_id'])
                 ->groupBy('product_description.name')
                 ->groupBy('product_to_category.category_id')

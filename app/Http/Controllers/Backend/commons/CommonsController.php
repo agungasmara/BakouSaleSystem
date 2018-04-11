@@ -129,6 +129,33 @@ class CommonsController extends Controller
 
     }
 
+    public function getCurrency($value='')
+    {
+        $filterGroup=DB::table('currency')->select(['currency_id as value','code as text'])->get();
+
+        return response()->json($filterGroup);
+    }
+    public function getLocations($country_id='')
+    {
+        if ($country_id) {
+            $data=Zone::select('country_id','name','zone_id as value')->where('country_id',$country_id)->where('status',1)->get()->toArray();
+        }else{
+            $data=Country::select('name','country_id as value')->where('status',1)->get()->toArray();
+        }
+        // dd($data);
+        return $data;
+    }
+    public function getShipping($id='')
+    {
+        $data=ShippingCourier::select('shipping_courier_name as label','shipping_courier_code','shipping_courier_id as value');
+        if (!$id) {
+            $data=$data->get()->toArray();
+        }else{
+            $data=$data->where('shipping_courier_id',$id)->first()->toArray();
+        }
+        // dd($data);
+        return $data;
+    }
     public function getChildOption($optID)
     {
 

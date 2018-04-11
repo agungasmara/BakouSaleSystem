@@ -9,6 +9,7 @@ use App\Http\Models\BackEnd\Product\ProductDescription;
 use App\Http\Models\BackEnd\Product\ProductAttribute;
 use App\Http\Models\BackEnd\Product\ProductToCategory;
 use App\Http\Models\BackEnd\Product\ProductToStore;
+use App\Http\Models\BackEnd\Product\CategoryToStore;
 use App\Http\Models\BackEnd\Product\ProductFilter;
 use App\Http\Models\BackEnd\Product\ProductRelated;
 use App\Http\Models\BackEnd\Product\ProductOption;
@@ -82,7 +83,6 @@ class ProductsController extends Controller
             }
         }
 
-
         if (isset($request['links']['store_id']) && $request['links']['store_id']) {
             # code...
             foreach ($request['links']['store_id'] as $item) {
@@ -91,6 +91,7 @@ class ProductsController extends Controller
                 ProductToStore::insert($p2s);
             }
         }
+
         if (isset($request['links']['filter_id']) && $request['links']['filter_id']) {
             # code...
             foreach ($request['links']['filter_id'] as $item) {
@@ -102,9 +103,9 @@ class ProductsController extends Controller
         if (isset($request['links']['related_product']) && $request['links']['related_product']) {
             # code...
             foreach ($request['links']['related_product'] as $item) {
-                $p2f['product_id']=$product_id;
-                $p2f['related_id']=$item;
-                ProductRelated::insert($p2f);
+                $p2r['product_id']=$product_id;
+                $p2r['related_id']=$item;
+                ProductRelated::insert($p2r);
             }
         }
         $fill=(new ProductImage)->getFillable();
@@ -206,7 +207,7 @@ class ProductsController extends Controller
     }
     public function update(Request $request,$product_id)
     {
-         $fill = (new ProductModel)->getFillable();
+        $fill = (new ProductModel)->getFillable();
         $data=array_only($request['data'],$fill);
         $dir='/images/product';
         $image=$request['data']['image'];
@@ -235,7 +236,7 @@ class ProductsController extends Controller
 
         ProductSpecial::where('product_id',$product_id)->delete();
 
-        ProductDescription::where('product_id',$product_id)->delete();
+        // ProductDescription::where('product_id',$product_id)->delete();
 
 
         if (isset($request['links']['category_id']) && $request['links']['category_id']) {
@@ -267,9 +268,9 @@ class ProductsController extends Controller
         if (isset($request['links']['related_product']) && $request['links']['related_product']) {
             # code...
             foreach ($request['links']['related_product'] as $item) {
-                $p2f['product_id']=$product_id;
-                $p2f['related_id']=$item;
-                ProductRelated::insert($p2f);
+                $p2r['product_id']=$product_id;
+                $p2r['related_id']=$item;
+                ProductRelated::insert($p2r);
             }
         }
         $fill=(new ProductImage)->getFillable();

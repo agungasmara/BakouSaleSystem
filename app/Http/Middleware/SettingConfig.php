@@ -28,7 +28,7 @@ class SettingConfig
 
     public function handle($request, Closure $next)
     {  
-        $store_id=isset($store_id) ? $store_id : 0 ;
+        $store_id=isset($store_id) ? $store_id : 2 ;
         $SettingConfig = DB::table('setting')->where('store_id',$store_id)->get(); 
         foreach ($SettingConfig as $key => $value) {
             define($value->key, $value->value);

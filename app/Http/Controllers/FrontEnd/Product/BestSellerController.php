@@ -54,7 +54,7 @@ class BestSellerController extends Controller
 				->where('order.order_status_id','>',0)
 				->where('product.status',1)
 				->where('product.date_available','<=',Carbon::today())
-				->where('product_to_store.store_id',0)
+				->where('product_to_store.store_id',config_store_id)
 				->GroupBy('order_product.product_id');
 			if (isset($data['order']) && ($data['order'] == 'DESC')) {
 				$sql->OrderBy("total","DESC");

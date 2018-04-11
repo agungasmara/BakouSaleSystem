@@ -20,7 +20,9 @@
 
 				<img v-if="index.value=='image'" :src="props.item.image ? props.item.image:'/images/icon/no-image.png'" style="width: auto;max-width: 30px;height: auto;max-height: 30px;">
 				<div v-else-if="index.text=='Action'">
-
+					<span v-if="detail" style="cursor:pointer;color:green;" @click="editViewData(props.item[index.value],props.item.language_id)"">
+						<i class="material-icons">open_in_new</i>
+					</span>
 					<span v-if="eye==true" style="cursor:pointer;" :style="props.item[index.status]>0 ? 'color:green;':'color:red;'"  @click="changeStatus(props.item[index.value],props.item[index.status],index.status)">
 						<v-progress-circular v-if="isProgessing && props.item[index.value]==curID" indeterminate :width="2" color="green"></v-progress-circular>
 						<i class="material-icons" v-else>remove_red_eye</i>
@@ -88,6 +90,7 @@
 			'url',//resource url laravel
 			'btnNewUrl',
 			'del',
+			'detail',
 			'eye'
 		],
 		data(){
@@ -154,13 +157,20 @@
 				})
 				
 			},
+			editViewData(id,lid){
+				if(lid>0){
+					this.$router.push('permission/'+id+'/'+lid)	
+				}else{
+					this.$router.push('permission/'+id)	
+				}
+			},
 			editData(id,lid){
+				alert('testing')
 				if(lid>0){
 					this.$router.push('edit/'+id+'/'+lid)	
 				}else{
 					this.$router.push('edit/'+id)	
 				}
-				
 			},
 			showDetail(id,lid){
 				if(lid>0){

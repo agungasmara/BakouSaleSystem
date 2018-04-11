@@ -120,13 +120,13 @@ if (Request::is('admin*')){
                 Route::get('/getStockStatus','Backend\commons\CommonsController@getStockStatus');
                 Route::get('/getProductRelates','Backend\commons\CommonsController@getProductRelates');
                 Route::get('/getFilter','Backend\commons\CommonsController@getFilter');
-
-
-
-
-                Route::get('/getMenus', 'Backend\Settings\GroupRolesController@index');
+                Route::get('/getMenus', 'Backend\Settings\GroupRolesController@getMenus');
+                //=====User Role============================= 
+                Route::resource('/user_role', 'Backend\Settings\GroupRolesController');
                 //=====User=============================
                 Route::resource('user_roles', 'Backend\UserRoles\UserRolesController');
+                //=====Customer=============================
+                Route::resource('customer_field', 'Backend\Customers\CustomerFieldController');
             });
 
         }else{
@@ -158,8 +158,8 @@ if (Request::is('admin*')){
     Route::middleware([])->prefix('api')->group(function () {
 
         Route::get('product_cart', 'FrontEnd\Product\CartController@ProductCart');
-        Route::get('getLocations/{country_id?}', 'FrontEnd\Product\CartController@getLocations');
-        Route::get('getShipping/{id?}', 'FrontEnd\Product\CartController@getShipping');
+        Route::get('getLocations/{country_id?}', 'Backend\commons\CommonsController@getLocations');
+        Route::get('getShipping/{id?}', 'Backend\commons\CommonsController@getShipping');
         Route::get('get_product/{num}', 'FrontEnd\Product\ProductController@GetProduct');
         Route::get('footer', 'FrontEnd\Common\FooterController@getFooter');
 

@@ -34,7 +34,6 @@ import CheckoutSuccess from './views/Components/frontend/checkout/checkout_succe
 // **** Store *****
 import Store from './views/Components/frontend/store/store.vue'
 
-
 // **** Footer *****
 import Footer from './views/Components/frontend/common/_footer.vue'
 
@@ -101,9 +100,19 @@ import PickupsEditForm from './views/Components/backend/pickups/PickupsEditForm.
 //SaleOrder ########################
 import SaleOrder from './views/Components/backend/sale_orders/SaleOrder.vue'
 import SaleOrderList from './views/Components/backend/sale_orders/SaleOrderList.vue'
-import SaleOrderForm from './views/Components/backend/sale_orders/SaleOrderForm.vue'
 import SaleOrderEditForm from './views/Components/backend/sale_orders/SaleOrderEditForm.vue'
-import ViewSaleOrder from './views/Components/backend/sale_orders/ViewSaleOrder.vue'
+import SaleOrderForm from './views/Components/backend/sale_orders/SaleOrderForm.vue'
+
+//Quotation ########################
+import Quotation from './views/Components/backend/quotations/Quotation.vue'
+import QuotationList from './views/Components/backend/quotations/QuotationList.vue'
+import QuotationForm from './views/Components/backend/quotations/QuotationForm.vue'
+import QuotationEditForm from './views/Components/backend/quotations/QuotationEditForm.vue'
+
+//ReturnOrder ########################
+import ReturnOrder from './views/Components/backend/return_orders/ReturnOrder.vue'
+import ReturnOrderList from './views/Components/backend/return_orders/ReturnOrderList.vue'
+import ReturnOrderEditForm from './views/Components/backend/return_orders/ReturnOrderEditForm.vue'
 
 //User group#########################
 // import UserGroupForm from './views/Components/backend/groups/MainForm.vue'
@@ -274,18 +283,17 @@ import CustomerGroupList from './views/Components/backend/customer_groups/Custom
 import CustomerGroupForm from './views/Components/backend/customer_groups/CustomerGroupForm.vue'
 import CustomerGroupEdit from './views/Components/backend/customer_groups/CustomerGroupEdit.vue'
 
+//***** Customer Field *****
+import CustomerField from './views/Components/backend/customer_fields/CustomerField.vue'
+import CustomerFieldList from './views/Components/backend/customer_fields/CustomerFieldList.vue'
+import CustomerFieldForm from './views/Components/backend/customer_fields/CustomerFieldForm.vue'
+import CustomerFieldEdit from './views/Components/backend/customer_fields/CustomerFieldEdit.vue'
+
 //***** Customer *****
 import Customer from './views/Components/backend/customers/Customer.vue'
 import CustomerList from './views/Components/backend/customers/CustomerList.vue'
 import CustomerForm from './views/Components/backend/customers/CustomerForm.vue'
 import CustomerEdit from './views/Components/backend/customers/CustomerEdit.vue'
-
-//***** Customer *****
-import Return from './views/Components/backend/sale_orders/return/Return.vue'
-import ReturnList from './views/Components/backend/sale_orders/return/ReturnList.vue'
-import ReturnForm from './views/Components/backend/sale_orders/return/ReturnForm.vue'
-import ReturnEdit from './views/Components/backend/sale_orders/return/ReturnEdit.vue'
-
 //import router from './router'
 import VueResource from 'vue-resource'
 import Vuetify from 'vuetify'
@@ -759,15 +767,51 @@ const router = new VueRouter({
                 component:SaleOrderForm
             },
             {
-                path:'view/:id',
-                name:'SaleOrderView',
-                component:ViewSaleOrder,
-                props:true
-            },
-            {
                 path:'edit/:id',
                 name:'SaleOrderEdit',
                 component:SaleOrderEditForm,
+                props:true
+            }
+        ]       
+    },
+    //Quotation 
+    {path:'/admin/quotation',name:'Quotation',component:Quotation,
+        children:[
+            {
+                path:'list',
+                name:'QuotationList',
+                component:QuotationList
+            },
+            {
+                path:'add',
+                name:'QuotationForm',
+                component:QuotationForm
+            },
+            {
+                path:'edit/:id',
+                name:'QuotationEditForm',
+                component:QuotationEditForm,
+                props:true
+            }
+        ]       
+    },
+    //Return Order 
+    {path:'/admin/return_order',name:'ReturnOrder',component:ReturnOrder,
+        children:[
+            {
+                path:'list',
+                name:'ReturnOrderList',
+                component:ReturnOrderList
+            },
+            {
+                path:'add',
+                name:'ReturnOrderEditForm',
+                component:ReturnOrderEditForm
+            },
+            {
+                path:'edit/:id',
+                name:'ReturnOrderEdit',
+                component:ReturnOrderEditForm,
                 props:true
             }
         ]       
@@ -1216,44 +1260,44 @@ const router = new VueRouter({
         }
       ]
     },
-	{ path: '/admin/customers', name:'customers',component: Customer,
-	  	children: [
-	      	{
-	          path: 'list',
-	          name:'CustomerList',
-	          component: CustomerList
-			},
-			{
-			  path: 'add',
-			  name:'CustomerForm',
-			  component: CustomerForm
-			},
-			{
-			  path: 'edit/:id',
-			  name:'CustomerEdit',
-			  component: CustomerEdit,props:true
-			}
-	  ]
-	},
-	{ path: '/admin/returns', name:'return',component: Return,
-	  	children: [
-	      	{
-	          path: 'list',
-	          name:'ReturnList',
-	          component: ReturnList
-			},
-			{
-			  path: 'add',
-			  name:'ReturnForm',
-			  component: ReturnForm
-			},
-			{
-			  path: 'edit/:id',
-			  name:'ReturnEdit',
-			  component: ReturnEdit,props:true
-			}
-	  ]
-	},
+    { path: '/admin/customer_field', name:'customer_field',component: CustomerGroup,
+      children: [
+        {
+          path: 'list',
+          name:'CustomerFieldList',
+          component: CustomerFieldList
+        },
+        {
+          path: 'add',
+          name:'CustomerFieldForm',
+          component: CustomerFieldForm
+        },
+        {
+          path: 'edit/:id',
+          name:'CustomerFieldEdit',
+          component: CustomerFieldEdit,props:true
+        }
+      ]
+    },
+      { path: '/admin/customers', name:'customers',component: Customer,
+          children: [
+              {
+                  path: 'list',
+                  name:'CustomerList',
+                  component: CustomerList
+              },
+              {
+                  path: 'add',
+                  name:'CustomerForm',
+                  component: CustomerForm
+              },
+              {
+                  path: 'edit/:id',
+                  name:'CustomerEdit',
+                  component: CustomerEdit,props:true
+              }
+          ]
+      },
   ],
   scrollBehavior (to, from, savedPosition) {
     return { x: 10, y: 0 }

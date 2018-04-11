@@ -40,7 +40,7 @@ class FooterController extends Controller
                 ->leftJoin('information_description','information.information_id','=','information_description.information_id')
                 ->leftJoin('information_to_store','information.information_id','=','information_to_store.information_id')
                 ->where('information_description.language_id',1)
-                ->where('information_to_store.store_id',0)
+                ->where('information_to_store.store_id',config_store_id)
                 ->where('information.status',1)
                 //->orderBy('information.sort_order','LCASE(information_description.title)','asc')
                 ->orderBy('information.sort_order','asc')

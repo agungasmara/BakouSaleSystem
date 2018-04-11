@@ -25,9 +25,9 @@
 		      		</v-breadcrumbs>
 			    </div>
 			    <div class="col s2 m6 l6">
-			    	<router-link to="/admin/attributes/list" replace><v-btn color="primary" class="btn dropdown-settings breadcrumbs-btn right">Cancel</v-btn></router-link>
+			    	<router-link to="/admin/user_role/list" replace><v-btn color="primary" class="btn dropdown-settings breadcrumbs-btn right">Cancel</v-btn></router-link>
 
-			     	<router-link to="/admin/attributes/list" replace><v-btn @click="submit(1)" class="btn dropdown-settings waves-effect waves-light breadcrumbs-btn right" color="success">Save</v-btn></router-link>
+			     	<router-link to="/admin/user_role/list" replace><v-btn @click="submit(1)" class="btn dropdown-settings waves-effect waves-light breadcrumbs-btn right" color="success">Save</v-btn></router-link>
 			    </div>
 			  </div>
 			</div>
@@ -52,36 +52,25 @@
 			          	</div>
 					    <v-form v-model="valid" ref="form" lazy-validation>
 					    	<v-container grid-list-md>
-		              			<v-layout wrap>
-							    	<v-flex xs12 sm6 md6>
-							      		<v-select label="Select Store" v-model="select" :items="items" :rules="[v => !!v || 'Item is required']" required></v-select>
-							      	</v-flex>
-
-							    	<!-- <v-flex xs12 sm6 md6>
-							      		<v-text-field label="Code" v-model="code" :rules="codeRules" :counter="10" required></v-text-field>
-							      	</v-flex> -->
-
-							      	<v-flex xs12 sm6 md6>
-							      		<v-text-field label="Key" v-model="key" :rules="keyRules" :counter="10" required></v-text-field>
-							      	</v-flex>
-
-							      	<v-flex xs12 sm6 md6>
-							      		<v-text-field label="Value" v-model="value" :rules="valueRules" :counter="10" required></v-text-field>
-							      	</v-flex>
-
-							      	<!-- <v-btn @click="submit(1)" :disabled="!valid">
-								        Save & New
-								    </v-btn>
-								    <v-btn @click="submit(2)" :disabled="!valid">
-								        Save & Close
-								    </v-btn>
-								    <router-link to="/admin/settings/list">
-									    <v-btn>
-									        Cancele
-									    </v-btn>
-								    </router-link> -->
-							    </v-layout>
-							</v-container>
+							    	<v-container fluid>
+											<v-layout wrap>
+												<v-flex xs12 sm3 md3>
+													User Permission
+												</v-flex>
+												<v-flex xs12 sm9 md9>
+													<!--<p>{{ selected }}</p>-->
+													<template v-for="item in items">
+														<label style="font-size: 16px;font-weight: bold;margin-bottom: 15px;">{{item.parent_menu_name}}</label>
+															<div style="margin-left:30px;">
+																<template v-for="child in item['children_menu']">
+																	<v-checkbox :label="child.child_menu_name" v-model="selected" :value="child.child_menu_name"></v-checkbox>
+																</template>
+															</div>
+													</template>
+												</v-flex>
+											</v-layout>
+										</v-container>
+								</v-container>
 					    </v-form>
 					</v-card>
 				</v-app>
@@ -95,6 +84,7 @@
 	export default{
 		data(){
 			return{
+				selected:[],
 				valid: true,
 			    code: '',
 			    codeRules: [
@@ -119,7 +109,7 @@
 			          disabled: false
 			        },
 			        {
-			          text: 'Attributes',
+			          text: 'Permission',
 			          disabled: false
 			        },
 			        {
@@ -135,31 +125,32 @@
 		},
 		methods:{
 			getStore(){
-				axios.get('/api/getStore').then((res)=>{
-					this.items=res.data
+				axios.get('/admin/api/getMenus').then((res)=>{
+					this.items=res.data['data']
 				})
 			},
 			submit (opt) {
-		      if (this.$refs.form.validate()) {
-		        // Native form submission is not yet supported
-		        axios.post('/api/setting/save', {
-		          store: this.select,
-		          code: this.code,
-		          key: this.key,
-		          value: this.value
-		        }).then((res)=>{
-		        	if(res.data.success==true){
-		        		Flash.setSuccess(res.data.message)
-		        		if(opt==1){
-		        			this.$refs.form.reset()
-		        		}
-		        		else if(opt==2){
-		        			this.$router.push('/admin/settings/list')
-		        		}
-		        	}
-		        })
-		      }
-		    }
+				// console.log(this.selected)
+				// console.log("=================")
+				// if (this.$refs.form.validate()) {
+				// 	axios.post('/api/setting/save', {
+				// 		store: this.select,
+				// 		code: this.code,
+				// 		key: this.key,
+				// 		value: this.value
+				// 	}).then((res)=>{
+				// 		if(res.data.success==true){
+				// 			Flash.setSuccess(res.data.message)
+				// 			if(opt==1){
+				// 				this.$refs.form.reset()
+				// 			}
+				// 			else if(opt==2){
+				// 				this.$router.push('/admin/user_role/list')
+				// 			}
+				// 		}
+				// 	})
+				// }
+		  }
 		}
 	}
 </script>

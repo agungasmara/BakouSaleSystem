@@ -29,7 +29,7 @@ class Controller extends BaseController
 				->leftJoin('category_to_store' , 'category.category_id', '=', 'category_to_store.category_id')
 				->where('category.category_type_id',$cat_type)
 				->where('category.parent_id',$parent_id)
-				->where('category_to_store.store_id',0)
+				->where('category_to_store.store_id',config_store_id)
 				->where('category.status',1)
 				->get();
 				
@@ -205,6 +205,7 @@ class Controller extends BaseController
 				->where('product_description.language_id',1)
 				->where('product.status',1)
 				->where('product.date_available','<=',Carbon::today())
+				// ->where('product_to_store.store_id',config_store_id)
 				->where('product_to_store.store_id',0)
 				->groupBy('product_description.name')
 				->groupBy('product.product_id');
@@ -243,9 +244,11 @@ class Controller extends BaseController
 				// ->join('product_to_category','product.product_id','=','product_to_category.product_id')
 				->where('product.product_id',$product_id)
 				// ->where('product_to_category.category_id',$category_id)
+				// ->where('product_description.language_id',config_language_id)
 				->where('product_description.language_id',1)
 				->where('product.status',1)
 				->where('product.date_available','<=',Carbon::today())
+				// ->where('product_to_store.store_id',config_store_id)
 				->where('product_to_store.store_id',0)
 				->first();
 			return($query);
@@ -267,10 +270,158 @@ class Controller extends BaseController
 	// 			->where('product_description.language_id',1)
 	// 			->where('product.status',1)
 	// 			->where('product.date_available','<=',Carbon::today())
-	// 			->where('product_to_store.store_id',0)
+	// 			->where('product_to_store.store_id',config_store_id)
 	// 			->first();
 	// 		return($query);
 		
 	// }
+	public function getLanguages()
+    {
 
+        $languages=DB::table('language')->select(['language_id as value','name as text'])->get();
+
+        return $languages;
+
+    }
+    public function getCreditTypes()
+    {
+
+        $creditType=DB::table('credit_type')->select(['credit_type_id as value','name as text'])->get();
+
+        return $creditType;
+
+    }
+    public function getGeoZones()
+    {
+
+        $GeoZone=DB::table('geo_zone')->select(['geo_zone_id as value','name as text'])->get();
+
+        return $GeoZone;
+
+    }
+    public function getTaxRates()
+    {
+
+        $TaxRate=DB::table('tax_rate')->select(['tax_rate_id as value','name as text'])->get();
+
+        return $TaxRate;
+
+    }
+    public function getTaxClasses()
+    {
+
+        $TaxClass=DB::table('tax_class')->select(['tax_class_id as value','title as text'])->get();
+
+        return $TaxClass;
+
+    }
+    public function getCustomerGroups()
+    {
+
+        $customerGroups=DB::table('customer_group_description')->select(['customer_group_id as value','name as text'])->get();
+
+        return $customerGroups;
+
+    }
+    
+    public function getStores()
+    {
+
+        $stores=DB::table('store')->select(['store_id as value','name as text'])->get();
+
+        return $stores;
+
+    }
+    public function getAttributeGroups()
+    {
+
+        $atrributeGroup=DB::table('attribute_group_description')->select(['attribute_group_id as value','name as text'])->get();
+
+        return $atrributeGroup;
+
+    }
+    public function getAttributes()
+    {
+
+        $atrribute=DB::table('attribute_description')->select(['attribute_id as value','name as text'])->get();
+
+        return $atrribute;
+
+    }
+    public function getFilterGroups()
+    {
+
+        $filterGroup=DB::table('filter_group_description')->select(['filter_group_id as value','name as text'])->get();
+
+        return $filterGroup;
+
+    }
+    public function getFilters()
+    {
+
+        $filterGroup=DB::table('filter_description')->select(['filter_id as value','name as text'])->get();
+
+        return $filterGroup;
+
+    }
+    public function getLayouts()
+    {
+
+        $filterGroup=DB::table('layout')->select(['layout_id as value','name as text'])->get();
+
+        return $filterGroup;
+
+    }
+    public function getOption()
+    {
+
+        $filterGroup=DB::table('option')->select(['option_id as value','type as text'])->get();
+
+        return $filterGroup;
+
+    }
+    public function getStockStatu()
+    {
+
+        $filterGroup=DB::table('stock_status')->select(['stock_status_id as value','name as text'])->get();
+
+        return $filterGroup;
+
+    }
+    public function getProductRelate()
+    {
+
+        $filterGroup=DB::table('product_description')->select(['product_id as value','name as text'])->get();
+
+        return $filterGroup;
+
+    }
+
+    public function getCurrencies($value='')
+    {
+        $filterGroup=DB::table('currency')->select(['currency_id as value','code as text'])->get();
+
+        return $filterGroup;
+    }
+    public function getLocation($country_id='')
+    {
+        if ($country_id) {
+            $data=Zone::select('country_id','name','zone_id as value')->where('country_id',$country_id)->where('status',1)->get()->toArray();
+        }else{
+            $data=Country::select('name','country_id as value')->where('status',1)->get()->toArray();
+        }
+        // dd($data);
+        return $data;
+    }
+    public function getShippingMethod($id='')
+    {
+        $data=ShippingCourier::select('shipping_courier_name as label','shipping_courier_code','shipping_courier_id as value');
+        if (!$id) {
+            $data=$data->get()->toArray();
+        }else{
+            $data=$data->where('shipping_courier_id',$id)->first()->toArray();
+        }
+        // dd($data);
+        return $data;
+    }
 }
