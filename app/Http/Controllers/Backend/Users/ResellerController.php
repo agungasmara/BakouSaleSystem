@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Http\Models\BackEnd\User\User;
-use App\Http\Models\BackEnd\UserGroup\UserGroup;
+use App\Http\Models\BackEnd\User\Config;
+use App\Http\Models\BackEnd\Store\Store;
 use Intervention\Image\ImageManagerStatic as Image;
 use App\Http\Controllers\Backend\commons\ImageMaker;
 /*
@@ -37,16 +38,34 @@ class ResellerController extends Controller
     {
 
         $data=(new User)->getFillable();
-        $data=$request->only($data);
-        
-        $condition=[
-            'username'=>$data['username'],
-            'email'=>$data['email']
-        ];
-        $data['image']=(new ImageMaker)->base64ToImage('images\\icon',$data['image']);
-        return (new DataAction)->StoreData(User::class,$condition,"or",$data);
-        //return response()->json($data);
-
+        $user=$request['user'];
+        $user['image']=(new ImageMaker)->base64ToImage('images\\icon',$user['image']);
+        $config=$request['config'];
+        $configArr=array();
+        $config['config_image']=(new ImageMaker)->base64ToImage('images\\store',$user['image']);
+        $storeInfo=$request['storeInfo'];
+        // $condition=[
+        //     'username'=>$data['username'],
+        //     'email'=>$data['email']
+        // ];
+        // $data['image']=(new ImageMaker)->base64ToImage('images\\icon',$data['image']);
+        $saveReseller = (new DataAction)->StoreData(User::class,[],"",$user,"user_id");
+        if($saveReseller['success']){
+            $storeInfo['owner_id']=$saveReseller['user_id'];
+            $saveStore = (new DataAction)->StoreData(Store::class,[],"",$storeInfo,"store_id");
+            if($saveStore['success']){
+                $config['config_store_id']=$saveStore['store_id'];
+                foreach ($config as $key=>$value){
+                    $configArr=['store_id'=>$saveStore['store_id'],'key'=>$key,'value'=>$value];
+                    $saveConfig=(new DataAction)->StoreData(Config::class,[],"",$configArr);
+                }
+                return $saveConfig;
+            }
+            return $saveConfig;
+        }
+        else{
+            return $saveReseller;
+        }
     }
     public function show($id)
     {

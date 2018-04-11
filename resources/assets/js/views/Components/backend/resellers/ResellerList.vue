@@ -2,10 +2,11 @@
 	<div>
 		<v-app id="inspire">
 			<!--breadcrumbs start-->
-			<breadcrumb-no-btn 
+			<breadcrumb1btn 
 				v-bind:breadcrumb-item="breadcrumbs"
+				v-bind:btn-new-url="btnNewUrl"
 				v-bind:breadcrumb-title="breadcrumbTitle"
-			></breadcrumb-no-btn>
+			></breadcrumb1btn>
 			<data-table 
 				v-bind:list-title="listTitle"
 		    	v-bind:data-header="headers" 
@@ -26,7 +27,7 @@
 	import Flash from '../../../../helper/flash'
 	import axios from 'axios'
 	import dataTable from '../commons/tables/dataTable.vue'
-	import BreadcrumbNoBtn from '../commons/breadcrumb/breadcrumbnobtn.vue'
+	import breadcrumb1btn from '../commons/breadcrumb/breadcrumb1btn.vue'
 	export default{
 		props:[
 			'id'
@@ -85,7 +86,7 @@
 			    ]
 			}
 		},
-		components:{dataTable,BreadcrumbNoBtn},
+		components:{dataTable,breadcrumb1btn},
 		created(){
 			this.fetchData()
 			document.title = 'Resellers List';
