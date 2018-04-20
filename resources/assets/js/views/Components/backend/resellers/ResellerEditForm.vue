@@ -306,7 +306,7 @@
 				    ]
 				},
 				config:{
-					config_country_id:1
+					
 				},
 				resellerInfo:
 				{
@@ -374,10 +374,10 @@
 			this.getUserGroup()
 			this.getSelectList(this.cid)
 			this.fetchData(this.id)
-			this.config.config_url=this.resellerInfo.website;
-			this.config.config_email=this.resellerInfo.email;
-			this.storeInfo.name=this.config.config_name;
-			this.storeInfo.url=this.config.config_url;
+			// this.config.config_url=this.resellerInfo.website;
+			// this.config.config_email=this.resellerInfo.email;
+			// this.storeInfo.name=this.config.config_name;
+			// this.storeInfo.url=this.resellerInfo.website;
 		},
 		watch:{
 			confirmPassword:function(){
@@ -386,15 +386,15 @@
 			resellerInfo:{
 				handler:function(v,ov){
 					var vm=this
-					vm.config.config_url=ov.website;
-					vm.config.config_email=ov.email;
-					vm.storeInfo.url=ov.website;
+					vm.config.config_url=v.website;
+					vm.config.config_email=v.email;
+					vm.storeInfo.url=v.website;
 				},deep:true
 			},
 			config:{
 				handler:function(v,ov){
 					var vm=this
-					vm.storeInfo.name=ov.config_name;
+					vm.storeInfo.name=v.config_name;
 				},deep:true
 			}
 		},
@@ -437,6 +437,8 @@
 				axios.get(this.url+id+'/edit').then((res)=>{
 					this.resellerInfo=res.data.resellerInfo.original
 					this.config=res.data.configItem
+					console.log(res.data.configItem.config_url)
+					this.storeInfo.url=res.data.configItem.config_url
 				})
 			},
 		    submit (opt) {

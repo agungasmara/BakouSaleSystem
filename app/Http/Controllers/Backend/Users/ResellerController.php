@@ -122,18 +122,10 @@ class ResellerController extends Controller
         //return $store->store_id;
         //$config['config_store_id']=$saveStore['store_id'];
         foreach ($config as $key=>$value){
-            $configArr[]=['code'=>'config','key'=>$key,'value'=>$value];
-            //$saveConfig=(new DataAction)->UpdateData(Config::class,$configArr,'store_id',$store->store_id);
-            //$updateConfig=Config::where('store_id',$store->store_id)
-            //->update($configArr[$key]);
-            // $updateConfig=DB::table('setting')
-            // ->where('store_id',$store->store_id)
-            // ->update(['code'=>'config','key'=>$key,'value'=>$value]);
-            // break;
-            Config::where('store_id',$store->store_id)->update(['code'=>'config','key'=>$key,'value'=>$value]);
+            //$configArr[]=['code'=>'config','key'=>$key,'value'=>$value];
+            Config::where(['store_id'=>$store->store_id,'key'=>$key])->update(['code'=>'config','key'=>$key,'value'=>$value]);
         }
         return array(
-            'data'=>$store->store_id,
             'success'=>true,
             'message'=>'Data successfully updated.'
 
