@@ -114,7 +114,6 @@
 			$imagedb=@$image->image;
 			$img=@$data['image'];
 	        return array(
-
 	            'success'=>true,
 	            'message'=>'Data successfully updated.'
 

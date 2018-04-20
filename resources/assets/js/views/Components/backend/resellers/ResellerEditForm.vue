@@ -1,33 +1,5 @@
-<!-- <template id="{{ $route.params.id }}">
-	<v-app id="inspire">
-		<normal-form
-			v-bind:url="url"
-			v-bind:id="dataID"
-			v-bind:breadcrumb-title="breadcrumbTitle"
-			v-bind:breadcrumbs="breadcrumbs"
-			v-bind:form-items="group"
-			v-bind:form-rules="rules"
-			v-bind:form-datas="data"
-			v-bind:select-items="selects"
-			v-bind:back-url="backUrl"
-		></normal-form>
-	</v-card>
-</v-app>
-</template> -->
 <template id="{{ $route.params.id }}">
 	<v-app id="inspire">
-		<!-- <normal-form
-			v-bind:url="url"
-			v-bind:id="dataID"
-			v-bind:breadcrumb-title="breadcrumbTitle"
-			v-bind:breadcrumbs="breadcrumbs"
-			v-bind:form-items="group"
-			v-bind:form-rules="rules"
-			v-bind:form-datas="data"
-			v-bind:select-items="selects"
-			v-bind:back-url="backUrl"
-		></normal-form> -->
-	
 		<section id="_content">
 			<!--breadcrumbs start-->
 			<div id="breadcrumbs-wrapper">
@@ -48,7 +20,9 @@
 				    </div>
 				    <div class="col s2 m6 l6">
 				     	<router-link to="/admin/reseller/list" replace><v-btn class="btn dropdown-settings waves-effect waves-light breadcrumbs-btn right" color="success">Back</v-btn></router-link>
-				    	<router-link to="/admin/reseller/list" replace><v-btn color="primary" class="btn dropdown-settings breadcrumbs-btn right">Save</v-btn></router-link>
+				    	<v-btn @click.prevent="submit(1)" :disabled="!valid" class="btn dropdown-settings waves-effect waves-light breadcrumbs-btn right" color="success">
+			     		Save
+			     	</v-btn>
 				    </div>
 				  </div>
 				</div>
@@ -56,6 +30,12 @@
 			<!--breadcrumbs end-->
 			<div id="basic-form" class="section">
 	            <div class="row col s12">
+	            	<v-alert color="success" value='true' v-if="flash.success">
+			          	{{flash.success}}
+			      	</v-alert>
+			      	<v-alert color="error" value='true' v-if="flash.error">
+			          	{{flash.error}}
+			      	</v-alert>
 	            	<div class="container">
 		              <!-- Form with placeholder -->
 		              <div class="col s12 m12 l12">
@@ -89,7 +69,7 @@
 										      	</v-flex>
 
 										      	<v-flex xs6 sm6 md6>
-										      		<v-text-field label="Owner" v-model="resellerInfo.owner"/></v-text-field>
+										      		<v-text-field label="Owner" v-model="config.config_owner"/></v-text-field>
 										      	</v-flex>
 
 										      	<v-flex xs6 sm6 md6>
@@ -117,15 +97,15 @@
 										      	</v-flex>
 
 										      	<v-flex xs6 sm6 md6>
-										      		<v-select label="Country" v-model="resellerInfo.country" required></v-select>
+										      		<v-select label="Country" v-model="config.config_country_id" :items="countryItem" required autocomplete @change="loadProvince"></v-select>
 										      	</v-flex>
 
 										      	<v-flex xs6 sm6 md6>
-										      		<v-select label="Province" v-model="resellerInfo.province" required></v-select>
+										      		<v-select label="Province" v-model="resellerInfo.province" :items="provinceItem" autocomplete required></v-select>
 										      	</v-flex>
 
 										      	<v-flex xs6 sm6 md6>
-										      		<v-select label="City" v-model="resellerInfo.city" required></v-select>
+										      		<v-select label="City" :items="cityItem" v-model="resellerInfo.city" required></v-select>
 										      	</v-flex>
 
 										      	<v-flex xs6 sm6 md6>
@@ -145,7 +125,36 @@
 				                      </div>
 				                    </div>
 				                    <div class="col s12 m12 l3">
-				                    	<img src="/images/NoPicture.png"/>
+				                    	<div class="row">
+						                    		<h4 class="header">
+							                    	<center> Upload Image </center>
+							                    	</h4>
+							                    		
+								                    	<div >
+															<input type="file" id="fileInput"  style="display:none" ref="fileInput" accept="image/*" @change="onFilePicked">
+															<v-layout align-center justify-center >
+																<label for="fileInput" style="width: auto;min-width:200px;max-width:500px;min-height:200px;height:auto;max-height: 300px;" >
+																	
+																		<v-card style="height: auto;max-height: 200px;padding: 10px;" v-if="resellerInfo.image" @click="onPickFile">
+																			<v-badge color="red" overlap v-if="resellerInfo.image">
+																				<v-btn  style="border-radius: 0px; margin-right: -20px; margin-top: -15px; height: 25px; width:50px; position: absolute; cursor: pointer; position: relative; opacity: 0.7; font-size: 8px;" @click="clearImage">
+																					Remove
+																				</v-btn>
+																			</v-badge>
+																			<v-layout align-center justify-center>
+																				<img :src="resellerInfo.image" style="height:auto;max-height:200px;width: auto;margin-right:-110px;margin-top:-10px;"  @click="onPickFile">
+																			</v-layout>
+																		</v-card>
+																		
+																		<v-flex style="height: 200px;" v-if="!resellerInfo.image" @click="onPickFile">
+																			<v-layout align-center justify-center >
+																				<img class="image-dummy" width="200px" :src="'/images/icon/Antu_folder-camera.svg.png'">
+																			</v-layout>
+																		</v-flex>
+																</label>
+															</v-layout>
+														</div>
+						                    	</div>
 				                    </div>
 				                </div>
 		                      	<div class="clearfix"></div>
@@ -170,11 +179,12 @@
 										      	</v-flex>
 
 										    	<v-flex xs6 sm6 md6>
-										      		<v-text-field label="Password"/></v-text-field>
+										      		<v-text-field label="Password" type="password" v-model="resellerInfo.password"/></v-text-field>
 										      	</v-flex>
 
 										      	<v-flex xs6 sm6 md6>
-										      		<v-text-field label="Confirm Password"/></v-text-field>
+										      		<v-text-field label="Confirm Password" type="password" v-model="confirmPassword"/></v-text-field>
+										      		<span v-if="error" style="color:#ff3300">Password did not matched</span>
 										      	</v-flex>
 
 										    </v-layout>
@@ -202,12 +212,12 @@
 				                      		<div class="divider"></div>
 										    <v-layout row wrap>
 										    	<v-flex xs6 sm6 md6>
-										      		<v-text-field label="Store Name" v-model="storeInfo.config_name"/></v-text-field>
+										      		<v-text-field label="Store Name" v-model="config.config_name"/></v-text-field>
 										      	</v-flex>
 										      	<v-flex xs6 sm6 md6>
-										      		<v-text-field label="Currency" v-model="storeInfo.config_currency"/></v-text-field>
+										      		<v-text-field label="Currency" v-model="config.config_currency"/></v-text-field>
 										      	</v-flex>
-										    	<v-flex xs6 sm6 md6>
+										    	<!-- <v-flex xs6 sm6 md6>
 										      		<v-text-field label="Display Price With Tax"/></v-text-field>
 										      	</v-flex>
 
@@ -216,8 +226,8 @@
 										      	</v-flex>
 
 										      	<v-flex xs6 sm6 md6>
-										      		<v-text-field label="Use Customer Tax Address"/></v-text-field>
-										      	</v-flex>
+										      		<v-text-field v-model="config.config_tax_customer" label="Use Customer Tax Address"/></v-text-field>
+										      	</v-flex> -->
 
 										      	<!-- <v-flex xs12 sm12 md12>
 										      		<v-checkbox :label="`Checkbox 1: ${checkbox.toString()}`"
@@ -295,18 +305,31 @@
 				      (v) => v && v.length <= 8 || 'Code must be less than 8 characters'
 				    ]
 				},
-				data:{
-					username:'dgdg',
-					firstname: 'dgadg',
-					lastname: 'dgdg',
-					email:'dgadgad@ddgd.com',
-					code: 'dgdag',
-					status:0,
-					user_group_id:1,
-					image:''
+				config:{
+					config_country_id:1
 				},
-				resellerInfo:'',
-				storeInfo:'',
+				resellerInfo:
+				{
+					username:'',
+					firstname: '',
+					lastname: '',
+					email:'',
+					email_2:'',
+					company:'',
+					website:'',
+					image:'',
+					code:'',
+					city:'',
+					telephone_1:'',
+					telephone_2:'',
+					address_1:'',
+					address_2:'',
+					user_group_id:5,
+					password:''
+				},
+				storeInfo:{
+
+				},
 				selects:{
 					statusItems:[
 						{text:'Acitve',value:1},
@@ -315,11 +338,19 @@
 					userGroupItems:[]
 				},
 			    error:false,
+			    confirmPassword:'',
 		    	message:[],
 			    select: null,
 			    items: [],
+			    cid:1,
 			    selectGroup:null,
 			    groups:[],
+			    countryItem:[],
+			    provinceItem:[],
+			    cityItem:[
+			    	{text:'Phnom Penh',value:1},
+			    	{text:'Steung Sen',value:2}
+			    ],
 			    breadcrumbTitle:'Edit Reseller',
 				breadcrumbs: [
 			        {
@@ -340,9 +371,32 @@
 			}
 		},
 		created(){
-			this.dataID=this.id
 			this.getUserGroup()
+			this.getSelectList(this.cid)
 			this.fetchData(this.id)
+			this.config.config_url=this.resellerInfo.website;
+			this.config.config_email=this.resellerInfo.email;
+			this.storeInfo.name=this.config.config_name;
+			this.storeInfo.url=this.config.config_url;
+		},
+		watch:{
+			confirmPassword:function(){
+				this.checkPasswordConfirmed()
+			},
+			resellerInfo:{
+				handler:function(v,ov){
+					var vm=this
+					vm.config.config_url=ov.website;
+					vm.config.config_email=ov.email;
+					vm.storeInfo.url=ov.website;
+				},deep:true
+			},
+			config:{
+				handler:function(v,ov){
+					var vm=this
+					vm.storeInfo.name=ov.config_name;
+				},deep:true
+			}
 		},
 		methods:{
 			getImage(event){
@@ -353,32 +407,73 @@
 					this.selects.userGroupItems=res.data
 				})
 			},
-			fetchData(id){
-				axios.get(this.url+id+'/edit').then((res)=>{
-					this.resellerInfo = res.data['resellerData']
-					this.storeInfo = res.data['store']
+			loadProvince(cid){
+				axios.get('/api/getSelectList/'+cid).then(res=>{
+					this.provinceItem=res.data.zones
+				})
+			},
+			getSelectList(cid){
+				axios.get('/api/getSelectList/'+cid).then(res=>{
+					this.countryItem=res.data.countryies
+					this.provinceItem=res.data.zones
 				})
 			},
 		    checkPasswordConfirmed(){
-	    		if(this.password===this.confirmPassword){
+	    		if(this.resellerInfo.password===this.confirmPassword){
 		        	this.error=false
+		        	this.valid=true
 		        }else{
 		        	if(this.confirmPassword===""){
-		        		this.error=false
+		        		this.error=true
+		        		this.valid=false
 		        	}else{
 		        		this.error=true
+		        		this.valid=false
 		        	}
 		        }
 		        return this.error
 		    },
+			fetchData(id){
+				axios.get(this.url+id+'/edit').then((res)=>{
+					this.resellerInfo=res.data.resellerInfo.original
+					this.config=res.data.configItem
+				})
+			},
+		    submit (opt) {
+		      	if (this.$refs.form.validate()) {
+			        // Native form submission is not yet supporte
+		        	axios.put(this.url+this.id,
+			          {
+			          	user:this.resellerInfo,
+			          	config:this.config,
+			          	storeInfo:this.storeInfo
+			          }
+			        ).then((res)=>{
+			        	console.log(res.data)
+			        	if(res.data.success==true){
+			        		Flash.setSuccess(res.data.message)
+			        	}else{
+			        		Flash.setError(res.data.message)
+			        	}
+			        })
+			        .catch((err) => {
+                      	if(err.response.status === 422) {
+                          	this.error = err.response.message
+						}
+						Flash.setError('Error while saving data')
+                  	})
+		      	}
+		    },
 		    onPickFile() {
+				
+
 		    	this.btnImageDisabled=true
 		    	this.btnText="Uploading..."
-		        this.$refs.fileInput.click()
+		        
 		    },
 		    onFilePicked(event){
 		    	
-		    		
+		    	
 		    	const files=event.target.files
 		    	let filename=files[0].name;
 		    	if(filename.lastIndexOf('.')<=0){
@@ -387,17 +482,34 @@
 		    	const fileReader=new FileReader()
 		    	fileReader.addEventListener('load',()=>{
 		    		
-		    		this.imageUrl=fileReader.result
+		    		//this.imageUrl=fileReader.result
 					this.btnImageDisabled=false
 		    		this.btnText="Upload Image"
+		    		this.resellerInfo.image=fileReader.result
+
 		    	
 		    	})
 		    	fileReader.readAsDataURL(files[0])
 		    	
 		    },
 		    clearImage(){
-		    	this.imageUrl=''
-		    }
+		    	//this.imageUrl=''
+		    	this.resellerInfo.image=''
+		    	this.$refs.fileInput=''
+		    },
 		}
 	}
 </script>
+<style type="text/css">
+	.image-dummy{
+		opacity: 0.5;
+		transition: all 0.5s ease;
+		-webkit-transition: all 0.5s ease;
+		-o-transition: all 0.5s ease;
+		-moz-transition: all 0.5s ease;
+	}
+	.image-dummy:hover{
+		opacity: 0.8;
+		cursor: pointer;
+	}
+</style>

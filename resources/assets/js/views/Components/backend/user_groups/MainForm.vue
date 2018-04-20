@@ -34,7 +34,6 @@
 			    group:[
 					{	class:'xs12 sm6 md6', key:'name',type:'text', text:'Group Name',count:100},
 					{	class:'xs12 sm6 md6', key:'group_type',	type:'text',text:'Group type',count:100	},
-					{	class:'xs12 sm6 md6', key:'permissions', type:'multiple',text:'Permissions',count:100,items:'permissions'}
 				],
 				rules:{
 					name: [
@@ -44,10 +43,7 @@
 				    group_type: [
 				      (v) => !!v || 'Group Type is required',
 				      (v) => v && v.length <= 50 || 'Group Type must be less than 50 characters'
-				    ],
-				    permissions: [
-				    	() => permissions.length > 0 || 'You must choose at least one'
-				    ],
+				    ]
 				},
 				data:{
 					name:'dgdg',
@@ -56,7 +52,7 @@
 				},
 				select:{
 					stores:[],
-					permissions: ['Product Attribute','Product Price']
+					permissionsItem: ['Product Attribute','Product Price']
 				},
 				breadcrumbTitle:'Settings',
 				breadcrumbs: [

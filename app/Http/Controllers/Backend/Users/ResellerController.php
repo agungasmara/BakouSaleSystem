@@ -56,12 +56,12 @@ class ResellerController extends Controller
             if($saveStore['success']){
                 $config['config_store_id']=$saveStore['store_id'];
                 foreach ($config as $key=>$value){
-                    $configArr=['store_id'=>$saveStore['store_id'],'key'=>$key,'value'=>$value];
+                    $configArr=['store_id'=>$saveStore['store_id'],'code'=>'config','key'=>$key,'value'=>$value];
                     $saveConfig=(new DataAction)->StoreData(Config::class,[],"",$configArr);
                 }
                 return $saveConfig;
             }
-            return $saveConfig;
+            return $saveStore;
         }
         else{
             return $saveReseller;
@@ -70,48 +70,79 @@ class ResellerController extends Controller
     public function show($id)
     {
 
-        return (new DataAction)->EditData(User::class,$id);
-
     }
 
     public function edit($id)
     {
-
-        $resellerData = DB::table('users')
-                ->join('store','store.owner_id','=','users.id')
-                ->where('id',$id)
-                ->first();
-        $StoreData = DB::table('setting')->Where('store_id',$resellerData->store_id)->get();
-            $data = [];
-            $str = '';
-            foreach ($StoreData as $key => $value) {
-                define('store_'.$value->key, $value->value);
+        $reseller=(new DataAction)->EditData(User::class,$id);
+        // return response()->json([
+        //     'resellerInfo'=> $reseller,
+        //     'config'=>Config::getConfigToUpdate($id)
+        // ]);
+        $config = Config::getConfigToUpdate($id);
+        $configItem=array();
+        foreach($config as $key=>$value){
+            if(is_numeric($value->value)){
+                $val=(int)$value->value;
+            }else{
+                $val=$value->value;
             }
-            $store = array(
-                'config_image'=>store_config_image,
-                'config_email'=>store_config_email,
-                'config_url'=>store_config_url,
-                'config_name'=>store_config_name,
-                'config_address'=>store_config_address,
-                'config_currency'=>store_config_currency
-            );
-        return response()->json(['store'=>$store,'resellerData'=>$resellerData]);
+            $configItem[$value->key]=$val;
+        }
+        foreach($reseller as $key=>$res){
+            if(is_numeric($res)){
+                $reseller[]=(int)$res;
+            }
+        }
+        return response()->json([
+            'resellerInfo'=> $reseller,
+            'configItem'=>$configItem
+        ]);
 
     }
     
     public function update(Request $request,$id)
     {
         $data=(new User)->getFillable();
-        $data=$request->only($data);
-        if(@$data['image']){
-            $data['image']=(new ImageMaker)->base64ToImage('images\\icon',$data['image']);    
+        $user=$request['user'];
+        $user['image']=(new ImageMaker)->base64ToImage('images\\icon',$user['image']);
+        $config=$request['config'];
+        $configArr=array();
+        $config['config_image']=(new ImageMaker)->base64ToImage('images\\store',$user['image']);
+        $storeInfo=$request['storeInfo'];
+        // $condition=[
+        //     'username'=>$data['username'],
+        //     'email'=>$data['email']
+        // ];
+        // $data['image']=(new ImageMaker)->base64ToImage('images\\icon',$data['image']);
+        $saveReseller = (new DataAction)->UpdateData(User::class,$user,"id",$id);
+        
+        $saveStore = (new DataAction)->UpdateData(Store::class,$storeInfo,"owner_id",$id);
+        $store=Store::where('owner_id',$id)->first();
+        //return $store->store_id;
+        //$config['config_store_id']=$saveStore['store_id'];
+        foreach ($config as $key=>$value){
+            $configArr[]=['code'=>'config','key'=>$key,'value'=>$value];
+            //$saveConfig=(new DataAction)->UpdateData(Config::class,$configArr,'store_id',$store->store_id);
+            //$updateConfig=Config::where('store_id',$store->store_id)
+            //->update($configArr[$key]);
+            // $updateConfig=DB::table('setting')
+            // ->where('store_id',$store->store_id)
+            // ->update(['code'=>'config','key'=>$key,'value'=>$value]);
+            // break;
+            Config::where('store_id',$store->store_id)->update(['code'=>'config','key'=>$key,'value'=>$value]);
         }
-        return (new DataAction)->UpdateData(User::class,$data,'user_id',$id);
-        // return response()->json($data);
+        return array(
+            'data'=>$store->store_id,
+            'success'=>true,
+            'message'=>'Data successfully updated.'
+
+        );
+        //return $saveConfig;
     }
     public function destroy($id)
     {
-        return (new DataAction)->DeleteData(User::class,'user_id',$id);
+        return (new DataAction)->DeleteData(User::class,'id',$id);
     }
     public function UserGroup()
     {

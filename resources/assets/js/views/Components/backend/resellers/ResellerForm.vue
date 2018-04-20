@@ -409,14 +409,24 @@
 		created(){
 			this.getUserGroup()
 			this.getSelectList(this.cid)
-			this.config.config_url=this.resellerInfo.website;
-			this.config.config_email=this.resellerInfo.email;
-			this.storeInfo.name=this.config.config_name;
-			this.storeInfo.url=this.config.config_url;
 		},
 		watch:{
 			confirmPassword:function(){
 				this.checkPasswordConfirmed()
+			},
+			resellerInfo:{
+				handler:function(v,ov){
+					var vm=this
+					vm.config.config_url=ov.website;
+					vm.config.config_email=ov.email;
+					vm.storeInfo.url=ov.website;
+				},deep:true
+			},
+			config:{
+				handler:function(v,ov){
+					var vm=this
+					vm.storeInfo.name=ov.config_name;
+				},deep:true
 			}
 		},
 		methods:{

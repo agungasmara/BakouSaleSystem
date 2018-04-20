@@ -165,7 +165,6 @@
 				}
 			},
 			editData(id,lid){
-				alert('testing')
 				if(lid>0){
 					this.$router.push('edit/'+id+'/'+lid)	
 				}else{

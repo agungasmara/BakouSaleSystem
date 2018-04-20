@@ -50,6 +50,7 @@
 							      					
 													<div v-if="input.type=='password'">
 														<v-text-field  label="Confirm Password" v-model="formDatas[input.key]" name="confirmpassword" :rules="formRules[input.key]" required :append-icon="e1 ? 'visibility' : 'visibility_off'" :append-icon-cb="() => (e1 = !e1)" :type="e1 ? 'password' : 'text'"></v-text-field>
+														<span v-if="error && input.key=='confirmPassword'" style="color:#ff3300">Password did not matched</span>
 													</div>
 													<div v-if="input.type=='textarea'">
 														<v-text-field v-if="formRules[input.key]" multi-line v-model="formDatas[input.key]" :rules='formRules[input.key]' :label="input.text" color="light-blue" required></v-text-field>
@@ -215,15 +216,34 @@
 				image:null,
 				flash:Flash.state,
 				toolbar:toolbars,
+				error:false,
+				confirmPassword:''
 			}
 		},
-		
 		mounted(){
-			
+			this.confirmPassword=this.formDatas.confirmPassword
 		},
 		watch: {
 			search (val) {
 			  val && this.querySelections(val)
+			},
+			formDatas:{
+				handler:function(v,ov){
+					var vm = this
+					console.log(ov.password+'<->'+v.confirmPassword)
+					if(ov.password===v.confirmPassword){
+			        	vm.error=false
+			        	vm.valid=true
+			        }else{
+			        	if(v.confirmPassword===""){
+			        		vm.error=true
+			        		vm.valid=false
+			        	}else{
+			        		vm.error=true
+			        		vm.valid=false
+			        	}
+			        }
+				},deep:true
 			}
 		},
 		// editorSettings: {
@@ -289,6 +309,21 @@
 			        }
 			        
 		      	}
+		    },
+		    checkPasswordConfirmed(){
+	    		if(this.formDatas.password===this.confirmPassword){
+		        	this.error=false
+		        	this.valid=true
+		        }else{
+		        	if(this.confirmPassword===""){
+		        		this.error=true
+		        		this.valid=false
+		        	}else{
+		        		this.error=true
+		        		this.valid=false
+		        	}
+		        }
+		        return this.error
 		    },
 			onPickFile() {
 				

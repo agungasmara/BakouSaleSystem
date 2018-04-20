@@ -16,7 +16,7 @@
 		    	v-on:change="fetchData"
 		    	v-on:data-actions="actions"
 		    	v-bind:del="true"
-		    	v-bind:eye="true">
+		    	v-bind:eye="false">
 		    </data-table>
 
 		</v-app>
