@@ -57,7 +57,7 @@
 		// getMenu
 		public static function getMenus($language_id=1,$menu_type_id=1){
 			$menu = array();
-			$Group_ID = 1;//Auth::user()->group_id;
+			$Group_ID = Auth::user()->user_group_id;
 			$parent_menus = DB::table("group_role as gr")
 				->JOIN('group_role_detail as grd', 'grd.group_role_id', '=', 'gr.id')
 				->JOIN('menu as m','m.menu_code','=','grd.menu_code')

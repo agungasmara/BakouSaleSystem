@@ -9,6 +9,77 @@
             <div class="card">
               <div class="card-content cyan white-text">
                 <p class="card-stats-title">
+                  <i class="material-icons">person_outline</i> Total Products</p>
+                <h4 class="card-stats-number">566</h4>
+                <p class="card-stats-compare">
+                  <i class="material-icons">keyboard_arrow_up</i> 15%
+                  <span class="cyan text text-lighten-5">from yesterday</span>
+                </p>
+              </div>
+              <div class="card-action cyan darken-1">
+                <div id="clients-bar" class="center-align"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col s12 m6 l3">
+            <div class="card">
+              <div class="card-content red accent-2 white-text">
+                <p class="card-stats-title">
+                  <i class="material-icons">attach_money</i>Total Sales</p>
+                <h4 class="card-stats-number">$8990.63</h4>
+                <p class="card-stats-compare">
+                  <i class="material-icons">keyboard_arrow_up</i> 70%
+                  <span class="red-text text-lighten-5">last month</span>
+                </p>
+              </div>
+              <div class="card-action red darken-1">
+                <div id="sales-compositebar" class="center-align"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col s12 m6 l3">
+            <div class="card">
+              <div class="card-content cyan white-text">
+                <p class="card-stats-title">
+                  <i class="material-icons">person_outline</i> Order Processing</p>
+                <h4 class="card-stats-number">566</h4>
+                <p class="card-stats-compare">
+                  <i class="material-icons">keyboard_arrow_up</i> 15%
+                  <span class="cyan text text-lighten-5">from yesterday</span>
+                </p>
+              </div>
+              <div class="card-action cyan darken-1">
+                <div id="clients-bar" class="center-align"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col s12 m6 l3">
+            <div class="card">
+              <div class="card-content deep-orange accent-2 white-text">
+                <p class="card-stats-title">
+                  <i class="material-icons">content_copy</i> New Invoice</p>
+                <h4 class="card-stats-number">1806</h4>
+                <p class="card-stats-compare">
+                  <i class="material-icons">keyboard_arrow_down</i> 3%
+                  <span class="deep-orange-text text-lighten-5">from last month</span>
+                </p>
+              </div>
+              <div class="card-action  deep-orange darken-1">
+                <div id="invoice-line" class="center-align"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--card stats end-->
+
+      <!--card stats start-->
+      <div id="card-stats">
+        <div class="row">
+          <div class="col s12 m6 l3">
+            <div class="card">
+              <div class="card-content cyan white-text">
+                <p class="card-stats-title">
                   <i class="material-icons">person_outline</i> New Clients</p>
                 <h4 class="card-stats-number">566</h4>
                 <p class="card-stats-compare">
