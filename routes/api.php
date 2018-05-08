@@ -156,4 +156,8 @@ Route::post('/filterCustomer','Backend\Customers\CustomersController@filterCusto
 Route::resource('sale_order', 'Backend\Order\SaleOrderController');
 
 //=====carrier=============================
-Route::resource('carrier', 'Backend\Shipment\ShipmentController');
+// Route::resource('carrier', 'Backend\Shipment\ShipmentController');
+Route::resource('/getShipment','Backend\Shipment\ShipmentController');
+Route::get('/undelivery','Backend\Shipment\ShipmentController@undelivery');
+Route::get('/delivery','Backend\Shipment\ShipmentController@delivery');
+Route::get('/pickups','Backend\Shipment\ShipmentController@pickups');

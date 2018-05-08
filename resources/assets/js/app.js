@@ -80,6 +80,7 @@ import CarrierEditForm from './views/Components/backend/carriers/CarrierEditForm
 import Shipment from './views/Components/backend/shipment/Shipment.vue'
 import ShipmentList from './views/Components/backend/shipment/ShipmentList.vue'
 import ShipmentEditForm from './views/Components/backend/shipment/ShipmentEditForm.vue'
+import ShipmentViewForm from './views/Components/backend/shipment/ShipmentViewForm.vue'
 
 //Delivery ########################
 import Delivery from './views/Components/backend/delivery/Delivery.vue'
@@ -686,6 +687,12 @@ const router = new VueRouter({
                 path:'edit/:id',
                 name:'ShipmentEdit',
                 component:ShipmentEditForm,
+                props:true
+            },
+            {
+                path:'view/:id',
+                name:'ShipmentView',
+                component:ShipmentViewForm,
                 props:true
             }
         ]       

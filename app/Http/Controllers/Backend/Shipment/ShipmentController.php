@@ -17,30 +17,7 @@ class ShipmentController extends Controller
 
     public function index()
     {
-        $sql=DB::table('order_shipment')
-                    ->select('order_status.name as order_status','order.*','shipping_courier.shipping_courier_name','order_shipment.tracking_number','order_shipment.order_shipment_id')
-                    ->join('order','order.order_id','=','order_shipment.order_id')
-                    ->join('shipping_courier','shipping_courier.shipping_courier_id','=','order_shipment.shipping_courier_id')
-                    ->join('order_status','order_status.order_status_id','=','order.order_status_id')
-                    ->get();
-
-        $data = array();
-        foreach ($sql as $result) {
-            $data[] = array(
-                'id'=>$result->order_shipment_id,
-                'tracking_number'=>$result->tracking_number,
-                'order_no'=>$result->order_id,
-                'courier'=>$result->shipping_courier_name,
-                'recipient'=>$result->firstname.' '.$result->lastname,
-                'sender'=>$result->shipping_courier_name,
-                'payment'=>$result->order_status,
-                'to_pay'=>$result->currency_code,
-                'delivery_status'=>$result->order_status,
-                'delivery_date'=>$result->date_added
-            );
-        }
-        
-        return response()->json($data);
+        return $this->getOrderShipment();
     }
 
     public function show($id){
@@ -55,7 +32,7 @@ class ShipmentController extends Controller
                     ->where('customer_group_description.language_id',config_language_id)
                     ->where('order_shipment.order_shipment_id',$id)
                     ->first();   
-        $getProductOrder = DB::table('order_product')->get();
+        $getProductOrder = DB::table('order_product')->where('order_id',$id)->get();
         return response()->json(['shipment'=>$getShipment,'order_product'=>$getProductOrder]);
     }
 
@@ -80,6 +57,31 @@ class ShipmentController extends Controller
     {
 
         
+    }
+    public function undelivery($value='')
+    {
+        return $this->getOrderShipment(18);
+    }
+    public function delivery($value='')
+    {
+        return $this->getOrderShipment(19);
+    }
+    public function pickups($value='')
+    {
+        return $this->getOrderShipment(17);
+    }
+    public function getOrderShipment($status='')
+    {
+        $sql=DB::table('order_shipment')
+                    ->select( 'order_status.name as order_status','order.*','shipping_courier.shipping_courier_name','order_shipment.tracking_number','order_shipment.order_shipment_id', DB::raw('CONCAT(sg_order.firstname," ",sg_order.lastname) AS recipient') )
+                    ->join('order','order.order_id','=','order_shipment.order_id')
+                    ->join('shipping_courier','shipping_courier.shipping_courier_id','=','order_shipment.shipping_courier_id')
+                    ->join('order_status','order_status.order_status_id','=','order.order_status_id');
+        if ($status) {
+            $sql=$sql->where('order.order_status_id',$status);
+        }
+                    
+        return $sql->get();
     }
 
 }
