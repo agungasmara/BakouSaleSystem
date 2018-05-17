@@ -101,6 +101,7 @@ import PickupsEditForm from './views/Components/backend/pickups/PickupsEditForm.
 import SaleOrder from './views/Components/backend/sale_orders/SaleOrder.vue'
 import SaleOrderList from './views/Components/backend/sale_orders/SaleOrderList.vue'
 import SaleOrderEditForm from './views/Components/backend/sale_orders/SaleOrderEditForm.vue'
+import SaleOrderForm from './views/Components/backend/sale_orders/SaleOrderForm.vue'
 
 //Quotation ########################
 import Quotation from './views/Components/backend/quotations/Quotation.vue'
@@ -762,8 +763,8 @@ const router = new VueRouter({
             },
             {
                 path:'add',
-                name:'SaleOrderEditForm',
-                component:SaleOrderEditForm
+                name:'SaleOrderForm',
+                component:SaleOrderForm
             },
             {
                 path:'edit/:id',

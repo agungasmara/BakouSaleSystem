@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Http\Models\BackEnd\User\User;
-use App\Http\Models\BackEnd\UserGroup\UserGroup;
+use App\Http\Models\BackEnd\User\Config;
+use App\Http\Models\BackEnd\Store\Store;
 use Intervention\Image\ImageManagerStatic as Image;
 use App\Http\Controllers\Backend\commons\ImageMaker;
 /*
@@ -37,62 +38,103 @@ class ResellerController extends Controller
     {
 
         $data=(new User)->getFillable();
-        $data=$request->only($data);
-        
-        $condition=[
-            'username'=>$data['username'],
-            'email'=>$data['email']
-        ];
-        $data['image']=(new ImageMaker)->base64ToImage('images\\icon',$data['image']);
-        return (new DataAction)->StoreData(User::class,$condition,"or",$data);
-        //return response()->json($data);
-
+        $user=$request['user'];
+        $user['image']=(new ImageMaker)->base64ToImage('images\\icon',$user['image']);
+        $config=$request['config'];
+        $configArr=array();
+        $config['config_image']=(new ImageMaker)->base64ToImage('images\\store',$user['image']);
+        $storeInfo=$request['storeInfo'];
+        // $condition=[
+        //     'username'=>$data['username'],
+        //     'email'=>$data['email']
+        // ];
+        // $data['image']=(new ImageMaker)->base64ToImage('images\\icon',$data['image']);
+        $saveReseller = (new DataAction)->StoreData(User::class,[],"",$user,"user_id");
+        if($saveReseller['success']){
+            $storeInfo['owner_id']=$saveReseller['user_id'];
+            $saveStore = (new DataAction)->StoreData(Store::class,[],"",$storeInfo,"store_id");
+            if($saveStore['success']){
+                $config['config_store_id']=$saveStore['store_id'];
+                foreach ($config as $key=>$value){
+                    $configArr=['store_id'=>$saveStore['store_id'],'code'=>'config','key'=>$key,'value'=>$value];
+                    $saveConfig=(new DataAction)->StoreData(Config::class,[],"",$configArr);
+                }
+                return $saveConfig;
+            }
+            return $saveStore;
+        }
+        else{
+            return $saveReseller;
+        }
     }
     public function show($id)
     {
-
-        return (new DataAction)->EditData(User::class,$id);
 
     }
 
     public function edit($id)
     {
-
-        $resellerData = DB::table('users')
-                ->join('store','store.owner_id','=','users.id')
-                ->where('id',$id)
-                ->first();
-        $StoreData = DB::table('setting')->Where('store_id',$resellerData->store_id)->get();
-            $data = [];
-            $str = '';
-            foreach ($StoreData as $key => $value) {
-                define('store_'.$value->key, $value->value);
+        $reseller=(new DataAction)->EditData(User::class,$id);
+        // return response()->json([
+        //     'resellerInfo'=> $reseller,
+        //     'config'=>Config::getConfigToUpdate($id)
+        // ]);
+        $config = Config::getConfigToUpdate($id);
+        $configItem=array();
+        foreach($config as $key=>$value){
+            if(is_numeric($value->value)){
+                $val=(int)$value->value;
+            }else{
+                $val=$value->value;
             }
-            $store = array(
-                'config_image'=>store_config_image,
-                'config_email'=>store_config_email,
-                'config_url'=>store_config_url,
-                'config_name'=>store_config_name,
-                'config_address'=>store_config_address,
-                'config_currency'=>store_config_currency
-            );
-        return response()->json(['store'=>$store,'resellerData'=>$resellerData]);
+            $configItem[$value->key]=$val;
+        }
+        foreach($reseller as $key=>$res){
+            if(is_numeric($res)){
+                $reseller[]=(int)$res;
+            }
+        }
+        return response()->json([
+            'resellerInfo'=> $reseller,
+            'configItem'=>$configItem
+        ]);
 
     }
     
     public function update(Request $request,$id)
     {
         $data=(new User)->getFillable();
-        $data=$request->only($data);
-        if(@$data['image']){
-            $data['image']=(new ImageMaker)->base64ToImage('images\\icon',$data['image']);    
+        $user=$request['user'];
+        $user['image']=(new ImageMaker)->base64ToImage('images\\icon',$user['image']);
+        $config=$request['config'];
+        $configArr=array();
+        $config['config_image']=(new ImageMaker)->base64ToImage('images\\store',$user['image']);
+        $storeInfo=$request['storeInfo'];
+        // $condition=[
+        //     'username'=>$data['username'],
+        //     'email'=>$data['email']
+        // ];
+        // $data['image']=(new ImageMaker)->base64ToImage('images\\icon',$data['image']);
+        $saveReseller = (new DataAction)->UpdateData(User::class,$user,"id",$id);
+        
+        $saveStore = (new DataAction)->UpdateData(Store::class,$storeInfo,"owner_id",$id);
+        $store=Store::where('owner_id',$id)->first();
+        //return $store->store_id;
+        //$config['config_store_id']=$saveStore['store_id'];
+        foreach ($config as $key=>$value){
+            //$configArr[]=['code'=>'config','key'=>$key,'value'=>$value];
+            Config::where(['store_id'=>$store->store_id,'key'=>$key])->update(['code'=>'config','key'=>$key,'value'=>$value]);
         }
-        return (new DataAction)->UpdateData(User::class,$data,'user_id',$id);
-        // return response()->json($data);
+        return array(
+            'success'=>true,
+            'message'=>'Data successfully updated.'
+
+        );
+        //return $saveConfig;
     }
     public function destroy($id)
     {
-        return (new DataAction)->DeleteData(User::class,'user_id',$id);
+        return (new DataAction)->DeleteData(User::class,'id',$id);
     }
     public function UserGroup()
     {

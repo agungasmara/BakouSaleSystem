@@ -12,6 +12,8 @@ use App\Http\Models\FrontEnd\Order\OrderShipment;
 use App\Http\Models\FrontEnd\Order\OrderTotal;
 use App\Http\Models\FrontEnd\Order\ShippingCourier;
 use App\Http\Models\BackEnd\OrderStatus\OrderStatus;
+use App\Http\Controllers\BackEnd\commons\CommonsController;
+
 use App\Http\Models\BackEnd\CustomerGroup\CustomerGroupDescription\CustomerGroupDescription;
 
 class SaleOrderController extends Controller
@@ -33,7 +35,15 @@ class SaleOrderController extends Controller
      */
     public function create()
     {
-        //
+
+        $select['stores']=$this->getStores();
+        $select['currencies']=$this->getCurrencies();
+        $select['customergroups']=$this->getCustomerGroups();
+        $select['productlists']=array_pluck($this->getProducts(), 'name', 'product_id');
+        // $select['']=
+        // $select['']=
+        // dd($select);
+        return $select;
     }
 
     /**
@@ -47,9 +57,9 @@ class SaleOrderController extends Controller
         $request['firstname']='sineth';
         $request['lastname']='sineth';
         $request['email']='simsineth855@gmail.com';
+        $request['store_id']=0;
         $request['invoice_no']='00001';
         $request['invoice_prefix']='cc_';
-        $request['store_id']=0;
         $request['store_name']='test';
         $request['store_url']='test';
         $request['customer_id']=0;
