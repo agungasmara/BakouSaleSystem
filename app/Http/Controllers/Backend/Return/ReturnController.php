@@ -4,7 +4,11 @@ namespace App\Http\Controllers\backend\Return;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\Http\Models\BackEnd\Return\ReturnAction;
+use App\Http\Models\BackEnd\Return\ReturnHistory;
+use App\Http\Models\BackEnd\Return\ReturnReason;
+use App\Http\Models\BackEnd\Return\ReturnStatus;
+use App\Http\Models\BackEnd\Return\ReturnModel;
 class ReturnController extends Controller
 {
     /**
@@ -14,7 +18,7 @@ class ReturnController extends Controller
      */
     public function index()
     {
-        //
+        return ReturnModel::all();
     }
 
     /**

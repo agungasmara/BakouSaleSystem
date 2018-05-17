@@ -176,7 +176,7 @@ if (Request::is('admin*')){
 
 // Backend
 //=====Shipment=============================
-Route::resource('/api/getShipment','Backend\Shipment\ShipmentController');
+
 
 // Front End
 Route::post('/AddToCart','FrontEnd\Product\CartController@AddToCart');
