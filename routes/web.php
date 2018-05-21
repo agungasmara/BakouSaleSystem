@@ -12,7 +12,7 @@
 // link reference multiple authentication https://www.codementor.io/okoroaforchukwuemeka/9-tips-to-set-up-multiple-authentication-in-laravel-ak3gtwjvt
 // language
 
-Auth::routes();
+//Auth::routes();
 // if (Request::is('customer*')){
     // Route::get('customer', 'FrontEnd\Account\AccountController@customer');
 if (Request::is('account*')){
