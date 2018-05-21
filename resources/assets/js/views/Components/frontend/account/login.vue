@@ -30,7 +30,7 @@
                     <input type="hidden" v-model="credential.is_account" value="1">
                     <div class="form-group required">
                         <label class="control-label text-right">Email</label>
-                        <input type="email" class="form-control" placeholder="Enter email" v-model="credential.email" required>
+                        <input type="email" class="form-control" placeholder="Email" v-model="credential.email" required>
                     </div>
                     <div class="form-group required">
                         <label class="control-label text-right">Password</label>
