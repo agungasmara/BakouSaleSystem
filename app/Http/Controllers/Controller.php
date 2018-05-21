@@ -205,8 +205,8 @@ class Controller extends BaseController
 				->where('product_description.language_id',1)
 				->where('product.status',1)
 				->where('product.date_available','<=',Carbon::today())
-				// ->where('product_to_store.store_id',config_store_id)
-				->where('product_to_store.store_id',0)
+				 ->where('product_to_store.store_id',config_store_id)
+				// ->where('product_to_store.store_id',0)
 				->groupBy('product_description.name')
 				->groupBy('product.product_id');
 				// ->limit(4);
@@ -248,8 +248,8 @@ class Controller extends BaseController
 				->where('product_description.language_id',1)
 				->where('product.status',1)
 				->where('product.date_available','<=',Carbon::today())
-				// ->where('product_to_store.store_id',config_store_id)
-				->where('product_to_store.store_id',0)
+				 ->where('product_to_store.store_id',config_store_id)
+				// ->where('product_to_store.store_id',0)
 				->first();
 			return($query);
 		
