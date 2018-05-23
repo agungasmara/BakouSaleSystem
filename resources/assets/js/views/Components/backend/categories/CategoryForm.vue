@@ -39,7 +39,7 @@
 					{	class:'xs12 sm6 md6',	 key:'status',	type:'select',items:'statusItems',	 text:'Status',count:100	},
 					{	class:'xs12 sm6 md6',	 key:'column',	type:'text',	 text:'Column',count:50	},
 					{	class:'xs12 sm6 md6',	 key:'top',	type:'text',	 text:'Top',count:100	},
-					{	class:'xs12 sm6 md6',	 key:'language_id',	type:'text',	 text:'Choose Language',count:100	},
+					{	class:'xs12 sm6 md6',	 key:'language_id',	type:'select',	 text:'Choose Language12',items:'language',count:100	},
 					{	class:'xs12 sm6 md6',	 key:'name',	type:'text',	 text:'Name',count:50	},
 					{	class:'xs12',	 key:'description',	type:'textarea',	 text:'description',count:50	},
 					{	class:'xs12 sm6',	 key:'meta_title',	type:'text',	 text:'Meta Title',count:50	},
@@ -100,6 +100,7 @@
 					],
 					categoryType:[],
 					categoryParent:[],
+					language:[],
 				},
 				flash:Flash.state,
 				breadcrumbTitle:'Categories',
@@ -124,6 +125,7 @@
 			this.id ? this.fetchData(this.id) : ''
 			this.categoryType()
 			this.categoryParent()
+			this.language()
 		},
 		methods:{
 			fetchData(id){
@@ -139,6 +141,12 @@
 			categoryParent(){
 				axios.get('/admin/api/getCategories_parent').then((res)=>{
 					this.select.categoryParent=res.data
+				})
+			},
+			language(){
+				debugger;
+				axios.get('/admin/api/getLanguages').then((res)=>{
+					this.select.language=res.data
 				})
 			}
 		}

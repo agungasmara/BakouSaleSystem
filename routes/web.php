@@ -109,6 +109,7 @@ if (Request::is('admin*')){
                 Route::get('getCategories', 'Backend\Category\CategoryController@getCategoriesList');
                 Route::get('getCategories_type', 'Backend\Category\CategoryController@getCategoriesType');
                 Route::get('getCategories_parent', 'Backend\Category\CategoryController@getCategoriesParent');
+                Route::get('getLanguages', 'Backend\Languages\LanguagesController@getLanguage');
                 //=====Product API=============================
                 Route::resource('products', 'Backend\Products\ProductsController');
                 Route::get('/getManufacturers','Backend\Manufacturers\ManufacturersController@getManufacturers');

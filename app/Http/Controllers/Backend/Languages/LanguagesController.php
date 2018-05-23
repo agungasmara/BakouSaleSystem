@@ -61,4 +61,15 @@ class LanguagesController extends Controller
     {
     	return (new DataAction)->DeleteData(Language::class,'language_id',$id);
     }
+     public function getLanguage()
+    {
+        $data=Language::select('language_id')->get();
+        // foreach ($data as $value) {
+        //     $value->text=$value->Description()->value('name');
+        //     $value->value=$value->language_id;
+        // }
+        return Language::select('language_id as value','name as text')->get();
+        // dd($data->toArray());
+        //return $data;
+    }
 }
