@@ -124,8 +124,14 @@
 			this.id ? this.fetchData(this.id) : ''
 			this.categoryType()
 			this.categoryParent()
+			this.inputGroupClasses()
+
+			let recaptchaScript = document.createElement('script')
+            recaptchaScript.setAttribute('src', '/js/vuetify.js')
+            document.head.appendChild(recaptchaScript)
 		},
 		methods:{
+			
 			fetchData(id){
 				axios.get(this.url+id+'/edit').then(res=>{
 					this.data=res.data
