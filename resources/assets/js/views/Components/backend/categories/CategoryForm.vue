@@ -128,6 +128,7 @@
 			this.language()
 		},
 		methods:{
+			
 			fetchData(id){
 				axios.get(this.url+id+'/edit').then(res=>{
 					this.data=res.data
