@@ -1,4 +1,4 @@
-<template id="{{ $route.params.id }}">
+<template id="{{ $route.params.id }}" lid="{{ $route.params.lid }}">
 	<div v-bind:class="{ active: isActive }" class="loading">
 		<v-app id="inspire">
 			<!-- <normal-form
@@ -417,7 +417,7 @@
 	import axios from 'axios'
 	import normalForm from '../commons/form/normalForm.vue'
 	export default{
-		props:['id'],
+		props:['id','lid'],
 		components:{
 			'normalForm':normalForm
 		},

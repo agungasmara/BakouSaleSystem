@@ -9,7 +9,39 @@
 	      					<div v-if="input.type=='multiple'">
 	      						<v-select :label="input.text"  :rules="formRules[input.key]" v-model="formDatas[input.key]" :items="selectItems[input.items]" autocomplete :loading="loading" multiple cache-items chips required :search-input.sync="search"></v-select>
 	      					</div>
-	      					
+	      					<div class="col s12 m12 l3" v-if="input.type=='image'">
+					                    	
+	                    		<div class="row text-lg-right">
+		                    		<h4 class="header">
+			                    	<center> Logo </center>
+			                    	</h4>
+			                    		
+				                    	<div >
+											<input type="file" id="fileInput"  style="display:none" ref="fileInput" accept="image/*" @change="onFilePicked">
+											<v-layout align-center justify-center >
+												<label for="fileInput" style="width: auto;min-width:50px;max-width:200px;min-height:50px;height:auto;max-height: 100px;" >
+													
+														<v-card style="height: auto;max-height: 50px;padding: 10px;" v-if="formDatas[input.key]" @click="onPickFile">
+															<v-badge color="red" overlap v-if="formDatas[input.key]">
+																<v-btn  style="border-radius: 0px; margin-right: -20px; margin-top: -15px; height: 25px; width:50px; position: absolute; cursor: pointer; position: relative; opacity: 0.7; font-size: 8px;" @click="clearImage">
+																	Remove
+																</v-btn>
+															</v-badge>
+															<v-layout align-center justify-center>
+																<img :src="formDatas[input.key]" style="height:auto;max-height:50px;width: auto;margin-right:-110px;margin-top:-10px;"  @click="onPickFile">
+															</v-layout>
+														</v-card>
+														
+														<v-flex style="height: 50px;" v-if="!formDatas[input.key]" @click="onPickFile">
+															<v-layout align-center justify-center >
+																<img class="image-dummy" width="200px" :src="'/images/icon/Antu_folder-camera.svg.png'">
+															</v-layout>
+														</v-flex>
+												</label>
+											</v-layout>
+										</div>
+		                    	</div>
+		                    </div>
 							<div v-if="input.type=='password'">
 								<v-text-field  label="Confirm Password" v-model="formDatas[input.key]" name="confirmpassword" :rules="formRules[input.key]" required :append-icon="e1 ? 'visibility' : 'visibility_off'" :append-icon-cb="() => (e1 = !e1)" :type="e1 ? 'password' : 'text'"></v-text-field>
 							</div>

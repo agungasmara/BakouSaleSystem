@@ -33,43 +33,71 @@
 			</div>
 			<!--breadcrumbs end-->
 
-			<v-form ref="form" lazy-validation>
+			<v-form v-model="valid" ref="formFilter" lazy-validation>
 		    	<v-container grid-list-md>
           			<v-layout wrap>
 				    	<v-flex xs12 sm3 md3>
-				      		<v-text-field label="Tracking Number"></v-text-field>
+				      		<v-text-field label="Tracking Number" v-model="filter.tracking_number"></v-text-field>
 				      	</v-flex>
 
 				      	<v-flex xs12 sm3 md3>
-				      		<v-text-field label="Order No"></v-text-field>
+				      		<v-text-field label="Order No" v-model="filter.order_no"></v-text-field>
 				      	</v-flex>
 
 				      	<v-flex xs12 sm3 md3>
-				      		<v-text-field label="Couriers"></v-text-field>
+				      		<v-text-field label="Couriers" v-model="filter.shipping_courier_name"></v-text-field>
 				      	</v-flex>
 
 				      	<v-flex xs12 sm3 md3>
-				      		<v-text-field label="Recipient"></v-text-field>
+				      		<v-text-field label="Recipient" v-model="filter.recipient"></v-text-field>
 				      	</v-flex>
 
 				      	<v-flex xs12 sm3 md3>
-				      		<v-text-field label="Order Status"></v-text-field>
+				      		<v-text-field label="Order Status" v-model="filter.order_status"></v-text-field>
 				      	</v-flex>
 
 				      	<v-flex xs12 sm3 md3>
-				      		<v-text-field label="To Pay"></v-text-field>
+				      		<v-text-field label="To Pay" v-model="filter.currency_code"></v-text-field>
 				      	</v-flex>
 
 				      	<v-flex xs12 sm3 md3>
-				      		<v-text-field label="Delivery Date"></v-text-field>
+				      		<v-menu
+					          lazy
+					          :close-on-content-click="false"
+					          v-model="menu"
+					          transition="scale-transition"
+					          offset-y
+					          full-width
+					          :nudge-right="40"
+					          max-width="290px"
+					          min-width="290px"
+					        >
+					          <v-text-field
+					            slot="activator"
+					            label="Delivery Date"
+					            v-model="filter.date_added"
+					            prepend-icon="event"
+					            readonly
+					          ></v-text-field>
+					          <v-date-picker v-model="filter.date_added" no-title scrollable actions>
+					            <template slot-scope="{ save, cancel }">
+					              <v-card-actions>
+					                <v-spacer></v-spacer>
+					                <v-btn flat color="primary" @click="cancel">Cancel</v-btn>
+					                <v-btn flat color="primary" @click="save">OK</v-btn>
+					              </v-card-actions>
+					            </template>
+					          </v-date-picker>
+					        </v-menu>
 				      	</v-flex>
 
-				      	<v-flex xs12 sm3 md3>
-				      		<v-text-field label="Payment"></v-text-field>
-				      	</v-flex>
+				      	<!-- <v-flex xs12 sm3 md3>
+				      		<v-text-field label="Payment" v-model="filter.payment_status"></v-text-field>
+				      	</v-flex> -->
 
-				      	<v-flex xs12 sm12 md12 p-right>
-				      		<v-btn color="primary" class="btn dropdown-settings breadcrumbs-btn right">Filter</v-btn>
+				      	<v-flex xs12 sm12 md12 class="text-lg-right">
+				      		<v-btn @click="filterCustomer" :disabled="!valid">Filter</v-btn>
+						<v-btn @click="clear">clear</v-btn>
 				      	</v-flex>
 				      	
 				    </v-layout>
@@ -108,6 +136,8 @@
 				listTitle:'Shipment List',
 				url:'/api/getShipment',
 				btnNewUrl:'/admin/shipment/add',
+				menu:null,
+				valid:false,
 				headers: [
 			        { text: 'ID',align: 'left',class:'text-xs-left',value: 'id'},
 			        { text: 'Tracking No',align:'left',class:'text-xs-left', value: 'tracking_number' },
@@ -140,6 +170,7 @@
 			    		value: 'hello'
 			    	}
 			    ],
+			    filter:{},
 				shipments:[],
 				breadcrumbTitle:'Shipment List',
 				breadcrumbs: [
@@ -168,6 +199,19 @@
 				axios.get(this.url).then(response=>{
 					this.shipments=response.data;
 				});
+			},
+			filterCustomer()
+			{
+				axios.post('/api/filterShippment',this.filter).then(res=>{
+					if(res.data.result==true){
+						this.shipments=res.data.data
+						//console.log(res.data.data)
+					}
+				})
+			},
+			clear(){
+				this.$refs.formFilter.reset()
+				this.fetchData()
 			}
 		}
 	}

@@ -136,7 +136,7 @@
             <ul v-click-outside="outside" id="ul-horizontal-nav" class="left hide-on-med-and-down">
               <template v-for="m of menu_data">
                 <li>
-                  <a :data-id="m.parent_menu_id" @mouseover.once="showSkill()" class="dropdown-menu" @click="OnMenuDrop(m.parent_menu_id)" href="javascript:void(0);" :data-activates="thClassValue(m.parent_menu_id)">
+                  <a :data-id="m.parent_menu_id" @mouseover="showSkill(m.parent_menu_id)" class="dropdown-menu" @click="OnMenuDrop(m.parent_menu_id)" href="javascript:void(0);" :data-activates="thClassValue(m.parent_menu_id)">
                     <i class="material-icons">{{m.fa_icon}}</i>
                     <span>{{m.parent_menu_name}}
                       <i class="material-icons right">keyboard_arrow_down</i>
@@ -215,6 +215,9 @@
             // alert(parent_menu_id)
             $(".dropdown-content.dropdown-horizontal-list").removeClass("active")
             $(".dropdown-content-parent"+parent_menu_id).addClass("active",5000)
+          },
+          showSkill(parent_menu_id){
+            this.OnMenuDrop(parent_menu_id);
           },
         	thClassValue (id) {
             var value = ['Templatesdropdown_12'+id]

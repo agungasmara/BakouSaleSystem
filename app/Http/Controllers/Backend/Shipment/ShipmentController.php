@@ -72,16 +72,30 @@ class ShipmentController extends Controller
     }
     public function getOrderShipment($status='')
     {
-        $sql=DB::table('order_shipment')
-                    ->select( 'order_status.name as order_status','order.*','shipping_courier.shipping_courier_name','order_shipment.tracking_number','order_shipment.order_shipment_id', DB::raw('CONCAT(sg_order.firstname," ",sg_order.lastname) AS recipient') )
-                    ->join('order','order.order_id','=','order_shipment.order_id')
-                    ->join('shipping_courier','shipping_courier.shipping_courier_id','=','order_shipment.shipping_courier_id')
-                    ->join('order_status','order_status.order_status_id','=','order.order_status_id');
+        $sql=DB::table('v_shipment_detail')
+                    ->select( '*');
         if ($status) {
-            $sql=$sql->where('order.order_status_id',$status);
+            $sql=$sql->where('order_status_id',$status);
         }
                     
         return $sql->get();
+    }
+    public function filterShippment(Request $request)
+    {
+        $filter=$request->all();
+        foreach($filter as $key=>$val){
+            if($val==='' or $val===null){
+                unset($filter[$key]);
+            }
+        }
+        
+        $sql=DB::table('v_shipment_detail')
+                    ->select( '*');
+        //             ->join('order_status','order_status.order_status_id','=','order.order_status_id');
+        //if ($status) {
+            $sql=$sql->where($filter);
+        //}
+        return response()->json(['result'=>true,'data'=>$sql->get()]); 
     }
 
 }
