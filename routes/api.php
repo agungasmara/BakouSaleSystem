@@ -161,4 +161,4 @@ Route::resource('/getShipment','Backend\Shipment\ShipmentController');
 Route::post('/filterShippment','Backend\Shipment\ShipmentController@filterShippment');
 Route::get('/undelivery','Backend\Shipment\ShipmentController@undelivery');
 Route::get('/delivery','Backend\Shipment\ShipmentController@delivery');
-Route::get('/pickups','Backend\Shipment\ShipmentController@pickups');
+Route::get('/pickup','Backend\Shipment\ShipmentController@pickups');

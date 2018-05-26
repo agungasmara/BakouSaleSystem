@@ -58,15 +58,15 @@ class ShipmentController extends Controller
 
         
     }
-    public function undelivery($value='')
+    public function undelivery()
     {
         return $this->getOrderShipment(18);
     }
-    public function delivery($value='')
+    public function delivery()
     {
         return $this->getOrderShipment(19);
     }
-    public function pickups($value='')
+    public function pickups()
     {
         return $this->getOrderShipment(17);
     }
@@ -74,10 +74,10 @@ class ShipmentController extends Controller
     {
         $sql=DB::table('v_shipment_detail')
                     ->select( '*');
-        if ($status) {
+        if ($status!='') {
             $sql=$sql->where('order_status_id',$status);
         }
-                    
+        
         return $sql->get();
     }
     public function filterShippment(Request $request)

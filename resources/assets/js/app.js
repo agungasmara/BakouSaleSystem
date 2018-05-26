@@ -725,7 +725,7 @@ const router = new VueRouter({
             {
                 path:'list',
                 name:'UndeliveryList',
-                component:DeliveryList
+                component:UndeliveryList
             },
             {
                 path:'add',
@@ -733,7 +733,7 @@ const router = new VueRouter({
                 component:UndeliveryEditForm
             },
             {
-                path:'edit/:id',
+                path:'edit/:id/:lid',
                 name:'UndeliveryEdit',
                 component:UndeliveryEditForm,
                 props:true
@@ -746,7 +746,7 @@ const router = new VueRouter({
             {
                 path:'list',
                 name:'PickupsList',
-                component:DeliveryList
+                component:PickupsList
             },
             {
                 path:'add',
@@ -754,7 +754,7 @@ const router = new VueRouter({
                 component:PickupsEditForm
             },
             {
-                path:'edit/:id',
+                path:'edit/:id/:lid',
                 name:'PickupsEdit',
                 component:PickupsEditForm,
                 props:true

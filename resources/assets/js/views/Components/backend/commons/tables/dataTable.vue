@@ -89,6 +89,7 @@
 			'dataValue',//fetch record and pass to data table component
 			'url',//resource url laravel
 			'btnNewUrl',
+			'backUrl',
 			'del',
 			'detail',
 			'eye'
