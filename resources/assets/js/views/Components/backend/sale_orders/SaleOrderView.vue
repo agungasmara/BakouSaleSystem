@@ -68,7 +68,7 @@
 					                      		<div class="divider"></div>
 											    <v-layout row wrap>
 											    	<v-flex xs6 sm6 md6>
-											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Track No: <b>{{data.tracking_number}}</b></span>
+											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Track No: <b>{{data.tracking}}</b></span>
 											      	</v-flex>
 
 											    	<v-flex xs6 sm6 md6>
@@ -76,7 +76,7 @@
 											      	</v-flex>
 
 											    	<v-flex xs6 sm6 md6>
-											      		<span><i style="float: left;" class="material-icons">local_shipping</i> &nbsp;Courier: <b>{{data.shipping_courier_name}}</b></span>
+											      		<span><i style="float: left;" class="material-icons">local_shipping</i> &nbsp;Courier: <b>{{data.shipping_name}}</b></span>
 											      	</v-flex>
 
 											    	<v-flex xs6 sm6 md6>
@@ -171,7 +171,7 @@
 											      	</v-flex>
 
 											    	<v-flex xs6 sm6 md6>
-											      		<span><i style="float: left;" class="material-icons">date_range</i> &nbsp;Order Date: <b>27/12/2017</b></span>
+											      		<span><i style="float: left;" class="material-icons">date_range</i> &nbsp;Order Date: <b>{{data.date_added}}</b></span>
 											      	</v-flex>
 
 											      	<v-flex xs6 sm6 md6>
@@ -208,19 +208,19 @@
 					                      		<div class="divider"></div>
 											    <v-layout row wrap>
 											    	<v-flex xs6 sm6 md6>
-											      		<span><i style="float: left;" class="material-icons">account_circle</i> &nbsp;Name: <b>{{data.customer_firstname}} {{$data.customer_lastname}}</b></span>
+											      		<span><i style="float: left;" class="material-icons">account_circle</i> &nbsp;Name: <b>{{data.firstname}} {{data.lastname}}</b></span>
 											      	</v-flex>
 
 											    	<v-flex xs6 sm6 md6>
-											      		<span><i style="float: left;" class="material-icons">supervisor_account</i> &nbsp;Customer Group: <b>{{data.customer_group}}</b></span>
+											      		<span><i style="float: left;" class="material-icons">supervisor_account</i> &nbsp;Customer Group: <b>{{data.customer_group_name}}</b></span>
 											      	</v-flex>
 
 											      	<v-flex xs6 sm6 md6>
-											      		<span><i style="float: left;" class="material-icons">mail</i> &nbsp;Email: <b>{{data.customer_email}}</b></span>
+											      		<span><i style="float: left;" class="material-icons">mail</i> &nbsp;Email: <b>{{data.email}}</b></span>
 											      	</v-flex>
 
 											      	<v-flex xs6 sm6 md6>
-											      		<span><i style="float: left;" class="material-icons">phone_iphone</i> &nbsp;Contact: <b>{{data.customer_telephone}}</b></span>
+											      		<span><i style="float: left;" class="material-icons">phone_iphone</i> &nbsp;Contact: <b>{{data.telephone}}</b></span>
 											      	</v-flex>
 											    </v-layout>
 											</v-container>
@@ -294,7 +294,7 @@
 											      	</v-flex>
 
 											    	<v-flex xs6 sm6 md6>
-											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Order Date: <b>{{data.order_date}}</b></span>
+											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Order Date: <b>{{data.date_added}}</b></span>
 											      	</v-flex>
 
 											      	<v-flex xs6 sm6 md6>
@@ -335,7 +335,7 @@
 											      	</v-flex>
 
 											    	<v-flex xs6 sm6 md6>
-											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Order Date: <b>{{data.order_date}}</b></span>
+											      		<span><i style="float: left;" class="material-icons">info_outline</i> &nbsp;Order Date: <b>{{data.date_added}}</b></span>
 											      	</v-flex>
 
 											      	<v-flex xs6 sm6 md6>
@@ -431,9 +431,9 @@
 				btnText:'Upload Image',
 				imageUrl:'',
 				image:null,
-				url:'/api/getShipment/',
+				url:'/admin/api/sale_order/',
 				group:[
-					{	class:'xs12 sm6 md6',	 key:'username',	type:'text',	 text:'Username',count:100,	},
+					{	class:'xs12 sm6 md6',	 key:'name',	type:'text',	 text:'Product',count:100,	},
 					{	class:'xs12 sm6 md6',	 key:'user_group_id',	type:'select',items:'userGroupItems',	 text:'User Group',count:100	},
 					{	class:'xs12 sm6 md6',	 key:'firstname',	type:'text',	 text:'First Name',count:100	},
 					{	class:'xs12 sm6 md6',	 key:'lastname',	type:'text',	 text:'Last Name',count:100	},
@@ -518,8 +518,9 @@
 			},
 			fetchData(id){
 				axios.get(this.url+id).then((res)=>{
-					this.data=res.data['shipment']
-					this.order_product=res.data['order_product']
+					debugger;
+					this.data=res.data['data']
+					this.order_product=res.data.products
 					this.isActive = !this.isActive
 				})
 			},
