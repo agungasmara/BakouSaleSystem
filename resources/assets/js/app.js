@@ -692,7 +692,7 @@ const router = new VueRouter({
                 component:CarrierForm
             },
             {
-                path:'edit',
+                path:'edit/:id',
                 name:'CarrierEdit',
                 component:CarrierEditForm,
                 props:true

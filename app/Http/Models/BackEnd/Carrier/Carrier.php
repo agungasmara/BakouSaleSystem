@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Carrier extends Model
 {
     protected $table='carrier';
-    protected $primaryKey='currency_id';
+    protected $primaryKey='carrier_id';
     protected $fillable=[
     	'reference_id',
     	'tax_rule_group_id',

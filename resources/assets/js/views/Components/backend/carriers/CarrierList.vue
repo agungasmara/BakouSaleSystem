@@ -16,7 +16,7 @@
 		    	v-on:change="fetchData"
 		    	v-on:data-actions="actions"
 		    	v-bind:del="true"
-		    	v-bind:eye="true">
+		    	v-bind:eye="false">
 		    </data-table>
 
 		</v-app>
@@ -35,20 +35,13 @@
 		data(){
 			return{
 				listTitle:'Resellers List',
-				url:'/api/carriers/',
+				url:'/api/carriers',
 				btnNewUrl:'/admin/carrier/add',
 				headers: [
-			        { text: 'ID',align: 'left',class:'text-xs-left',value: 'id'},
-			        { text: 'Username',align:'left',class:'text-xs-left', value: 'username' },
-			        { text: 'Group',align:'left',class:'text-xs-left', value: 'group' },
-			        { text: 'First Name',align:'left',class:'text-xs-left', value: 'firstname' },
-			        { text: 'Last Name',align:'left',class:'text-xs-left', value: 'lastname' },
-			        { text: 'Email',align:'left',class:'text-xs-left', value: 'email' },
-			        { text: 'Code',align:'left',class:'text-xs-left', value: 'code' },
-			        { text: 'Image',align:'left',class:'text-xs-left', value: 'image' },
-			        { text: 'Status',align:'left',class:'text-xs-left', value: 'status' },
-			        { text: 'Date',align:'left',class:'text-xs-left', value: 'date_added' },
-			        { text: 'Action', value: 'id',status:'status',class:'text-xs-center',align:'center',sortable:false }
+			        { text: 'ID',align: 'left',class:'text-xs-left',value: 'carrier_id'},
+			        { text: 'Name',align:'left',class:'text-xs-left', value: 'name' },
+			        { text: 'Url',align:'left',class:'text-xs-left', value: 'url' },
+			        { text: 'Action', value: 'carrier_id',status:'status',class:'text-xs-center',align:'center',sortable:false }
 			    ],
 			    actions:[
 			    	{
