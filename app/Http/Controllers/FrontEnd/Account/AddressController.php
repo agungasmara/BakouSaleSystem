@@ -32,4 +32,10 @@ class AddressController extends Controller
         }
     }
 
+    public function getCheckoutAddress(){
+        $sec_user_id = Auth::guard('account')->id();
+        $Address = Address::getCheckoutAddress($sec_user_id);
+        return response()->json(['success' => true, 'message' => 'Success', 'lang'=>Session::get('applangId'),'data'=>$Address]);
+    }
+
 }

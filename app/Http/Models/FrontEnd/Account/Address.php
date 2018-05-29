@@ -28,7 +28,21 @@ class Address extends Model
 	static function getAddress($sec_user_id)
 	{
 		$Customer = Customer::where('sec_user_id',$sec_user_id)->first();
-        $Address = Address::where('customer_id',$Customer->customer_id)->get();
-        return $Address;
+		if($Customer){
+			$Address = Address::where('customer_id',$Customer->customer_id)->get();
+		}else{
+			$Address = [];
+		}
+		return $Address;
+	}
+	static function getCheckoutAddress($sec_user_id)
+	{
+		$Customer = Customer::where('sec_user_id',$sec_user_id)->first();
+		if($Customer){
+			$Address = Address::where('customer_id',$Customer->customer_id)->first();
+		}else{
+			$Address = [];
+		}
+		return $Address;
 	}
 }
