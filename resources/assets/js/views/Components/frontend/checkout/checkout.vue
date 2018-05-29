@@ -27,7 +27,7 @@
 		            <div class="row userInfo">
 		                <div class="col-xs-12 col-sm-12">
 		                    <div class="w100 clearfix">
-
+								{{get_checkout_address | json}}
 		                    	<!-- tabs header -->
 		                        <ul class="orderStep orderStepLook2">
 		                        	<li v-for="(tab, i) in tabs" :class="{'active':activeTab==i}" @click="activeTab=i">
@@ -377,7 +377,7 @@ export default {
              	CartProduct: CartAction.data,
              	shippingList:{},
              	activeTab: 0,
-             	customer_info:[],
+             	get_checkout_address:[],
              	selectItem:{
              		country:{},
              		shipping_zone:{},
@@ -553,13 +553,13 @@ export default {
        
     },
     created() {
-    	this.CustomerInfo()
+    	this.getCheckoutAddress()
     },
     methods: {
-    	CustomerInfo() {
-            axios.get(`/api/customer_info`)
+    	getCheckoutAddress() {
+            axios.get(`/api/get_checkout_address`)
 	        .then(response => {
-	            this.customer_info = response.data['data']
+	            this.get_checkout_address = response.data['data']
 	            this.isActive = !this.isActive
 	        })
 	        .catch(e => {
