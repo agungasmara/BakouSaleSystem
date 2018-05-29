@@ -13,7 +13,7 @@ use App\Http\Models\FrontEnd\Order\OrderTotal;
 use App\Http\Models\FrontEnd\Order\ShippingCourier;
 use App\Http\Models\BackEnd\OrderStatus\OrderStatus;
 use App\Http\Controllers\BackEnd\commons\CommonsController;
-
+use Illuminate\Support\Facades\DB;
 use App\Http\Models\BackEnd\CustomerGroup\CustomerGroupDescription\CustomerGroupDescription;
 
 class SaleOrderController extends Controller
@@ -25,7 +25,8 @@ class SaleOrderController extends Controller
      */
     public function index()
     {
-        return OrderModel::all();
+
+        return OrderModel::AllOrder();
     }
 
     /**
@@ -149,7 +150,15 @@ class SaleOrderController extends Controller
      */
     public function show($id)
     {
-        $data=OrderModel::find($id);
+        $data = DB::table('order as o')
+                    ->Join('order_status as os','o.order_status_id','=','os.order_status_id')
+                    ->Join('shipping_courier as sc','o.shipping_courier_id','=','sc.shipping_courier_id')
+                    ->Join('customer_group_description as cgd','o.customer_group_id','=','cgd.customer_group_id')
+                    ->select('o.*','os.name as order_status','sc.shipping_courier_name as shipping_name','cgd.name as customer_group_name')
+                    ->where('order_id','=',$id)->first();
+        // dd($data);
+        //$data=OrderModel::find($id);
+
         $data->customer_group_name=CustomerGroupDescription::find($data->customer_group_id)->value('name');
         $result['data']=$data;
         $result['order_history']=OrderHistory::where('order_id',$data->order_id)->get();

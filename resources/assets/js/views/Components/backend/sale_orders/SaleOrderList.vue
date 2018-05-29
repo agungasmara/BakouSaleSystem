@@ -134,10 +134,9 @@
 				menu2:null,
 				valid:true,
 				headers: [
-			        { text: 'ID',align: 'left',class:'text-xs-left',value: 'order_id'},
-			        { text: 'First Name',align:'left',class:'text-xs-left', value: 'firstname' },
-			        { text: 'Last Name',align:'left',class:'text-xs-left', value: 'lastname' },
-			        { text: 'Status',align:'left',class:'text-xs-left', value: 'status' },
+			        { text: 'Order ID',align: 'left',class:'text-xs-left',value: 'order_id'},
+			        { text: 'Customer',align:'left',class:'text-xs-left', value: 'firstname' },
+			        { text: 'Status',align:'left',class:'text-xs-left', value: 'order_status' },
 			        { text: 'Total',align:'left',class:'text-xs-left', value: 'total' },
 			        { text: 'Date Add',align:'left',class:'text-xs-left', value: 'date_added' },
 			        { text: 'Date Modified',align:'left',class:'text-xs-left', value: 'date_added' },

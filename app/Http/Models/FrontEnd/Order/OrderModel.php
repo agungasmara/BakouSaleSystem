@@ -3,6 +3,7 @@
 namespace App\http\models\frontend\order;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class OrderModel extends Model
 {
@@ -82,5 +83,16 @@ class OrderModel extends Model
 		}
 		return $datas;
 	}
+
+	static function AllOrder()
+	{
+	    $AllOrders=DB::table('order as o')
+                ->Join('order_status as os','o.order_status_id','=','os.order_status_id')
+                ->Join('shipping_courier as sc','o.shipping_courier_id','=','sc.shipping_courier_id')
+                ->Join('customer_group_description as cgd','o.customer_group_id','=','cgd.customer_group_id')
+                ->select('o.*','os.name as order_status','sc.shipping_courier_name as shipping_name','cgd.name as customer_group_name')
+                ->get();
+      	return $AllOrders;
+	 }
 
 }
