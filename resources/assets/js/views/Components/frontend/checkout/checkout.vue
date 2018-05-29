@@ -376,6 +376,7 @@ export default {
         return {
              	CartProduct: CartAction.data,
              	shippingList:{},
+				zoneList:{},
              	activeTab: 0,
              	get_checkout_address:[],
              	selectItem:{
@@ -544,6 +545,7 @@ export default {
     mounted(){
     	axios.get('/api/getLocations/').then(response => this.selectItem.country=response.data);
     	axios.get('/api/getShipping/').then(response => this.shippingList=response.data);
+		axios.get('/api/getGeoZone/').then(response => this.zoneList=response.data);
     	// render dom select
     	// $('select.form-control').select2();
     	// The currently active tab, init as the 1st item in the tabs array
