@@ -85,21 +85,7 @@
 														v-bind:select-items="select"
 														
 													></form-group>
-											    <div v-if="item.form=='attributes'">
-											    	<pro-attribute v-bind:form-datas="data[item.form]"></pro-attribute>
-											    </div>	
-											    <div v-if="item.form=='option'">
-											    	<pro-option v-bind:form-datas="data[item.form]"></pro-option>
-											    </div>	
-											    <div v-if="item.form=='discount'">
-											    	<discount v-bind:form-datas="data[item.form]"></discount>
-											    </div>	
-											    <div v-if="item.form=='special'">
-											    	<special v-bind:form-datas="data[item.form]"></special>
-											    </div>	
-											    <div v-if="item.form=='gallery'">
-											    	<product-gallery v-bind:form-datas="data[item.form]"></product-gallery>
-											    </div>	
+											    
 											</v-container>
 					                      </div>
 					                    </div>
@@ -218,14 +204,14 @@
 						{	class:'xs6 sm6',	 text:'Transit time',	key:'tag',	type:'text',	 Value:''	},
 						{	class:'xs6 sm6',	 text:'Speed grade',	key:'meta_title',	type:'text',	 Value:''	},
 						{	class:'xs6 sm6',	 text:'Tracking Url',	key:'meta_keyword',	type:'text',	 Value:''	},
-						
+						{	class:'xs12 sm12',	 text:'Store',	key:'store_id',	type:'multiple',	 Value:''	,items:'store'},
 					],
 					data:[
-						{	class:'xs12',	 text:'Out-of-rang behavior',	key:'minimum',	type:'select',	 Value:'' ,	items:'tax_class'},
 						{	class:'xs12',	 text:'Tax Class',	key:'tax_class_id',	type:'select',	 Value:'',	items:'tax_class'},
+						{	class:'xs12',	 text:'Out-of-rang behavior',	key:'minimum',	type:'select',	 Value:'' ,	items:'tax_class'},
 						{	class:'xs12',	 text:'Active',	key:'active',	type:'checkbox',	 Value:'1'},
 						{	class:'xs12',	 text:'Free shipping',	key:'is_free',	type:'checkbox',	 Value:'1'},
-						{	class:'xs12',	 text:'Add handling costs',	key:'shipping_handling',	type:'checkbox',	 Value:'1'},
+						{	class:'xs12',	 text:'Add handling costs',	key:'shipping_handling',	type:'checkbox', Value:'1'},
 						
 					],
 					links:[
@@ -254,24 +240,16 @@
 						image:''
 					},
 					links:{},
-					attributes:[],
-					option:[],
-					discount:[],
-					special:[],
-					gallery:[],
+					
 				},
 				select:{
-					categories:[],
-					manufacturer:[],
+					tax_class:[],
+					store:[],
 					status:[
 						{text:'Acitve',value:1},
 						{text:'Inactive',value:0}
 					],
-					shipping:[
-						{text:'Yes',value:1},
-						{text:'No',value:0}
-					],
-					stock_status:[],
+					
 				},
 			}
 		},
@@ -281,25 +259,13 @@
 			}
 		},
 		created(){
-			this.getCategories()
-			this.getManufacturers()
+			
 			this.getStore()
 			this.getTaxClass()
-			this.getStockStatus()
-			this.getProductRelates()
-			this.getFilter()
+			
 		},
 		methods:{
-			getCategories(){
-				axios.get('/admin/api/getCategories').then((res)=>{
-					this.select.categories=res.data
-				})
-			},
-			getManufacturers(){
-				axios.get('/admin/api/getManufacturers').then((res)=>{
-					this.select.manufacturer=res.data
-				})
-			},
+			
 			getStore(){
 				axios.get('/admin/api/getStore').then(res=>{
 					this.select.store=res.data
@@ -311,62 +277,12 @@
 				});
 			},
 			
-			getStockStatus(){
-				axios.get('/admin/api/getStockStatus').then(res=>{
-					this.select.stock_status=res.data
-				});
-			},
-			getProductRelates(){
-				axios.get('/admin/api/getProductRelates').then(res=>{
-					this.select.products=res.data
-				});
-			},
-			getFilter(){
-				axios.get('/admin/api/getFilter').then(res=>{
-					this.select.filter=res.data
-				});
-			},
 			fetchData(id){
 				axios.get(this.url+id+'/edit').then(res=>{
 					this.data=res.data
 				});
 			},
-			initInsertElastic(){
-				let params = {
-					"id": "28",
-					"name": "Headphones & Headsets - In-Ear Headphones",
-					"price": "11",
-					"status": 1,
-					"description": "description product",
-					"isCrawler": false,
-					"imageUrl": "http://localhost:8000/images/catalog/demo/hp_2.jpg",
-					"crawlPrice": "$.332",
-					"crawlpriceSpecial": "211",
-					"crawldiscountRate": "23",
-					"sourceWebsite": "http://www.google.com",
-					"productLink": "http://localhost:8000/product/product_detail/42",
-					"categories": {
-						"cat_id": "1",
-						"cat_name": "Headphones & Headsets",
-						"cat_alias": "Headphones & Headsets"
-					},
-					"brand": {
-						"brandname": "Petro",
-						"image": "http://localhost:8000/images/store/taobao.jpg",
-						"brand_id": 1
-					},
-					"store": {
-						"store_id":1,
-						"storename": "Bakou Store",
-						"image": "http://localhost:8000/images/store/bakou.png"
-					},
-					"popular": 1
-				}
-				post(''+es_host+':'+es_port+'/store/product/3333', params).then(response => {
-					alert("success")
-				},{headers: {'Content-Type': 'application/json','Accept': 'application/json','Access-Control-Allow-Origin': '*','Access-Control-Allow-Headers': 'Origin, Accept, Content-Type, Authorization, Access-Control-Allow-Origin'}}, response => {
-				})
-			},
+			
 			submit (opt=1) {
 
 		      	// if (this.$refs.form.validate()) {

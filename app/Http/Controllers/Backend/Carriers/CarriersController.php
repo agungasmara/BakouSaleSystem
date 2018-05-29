@@ -14,7 +14,7 @@ class CarriersController extends Controller
 {
     public function index()
     {
-        $Carriers=Carrier::all();
+        $Carriers=Carrier::where('active',true)->where('deleted',false)->get();
         return response()->json($Carriers);
     }
     public function store(Request $request)
@@ -41,10 +41,10 @@ class CarriersController extends Controller
     {
          $data=(new Carrier)->getFillable();
         $data=$request->only($data);
-         return (new DataAction)->UpdateData(Carrier::class,$data,'currency_id',$id);
+         return (new DataAction)->UpdateData(Carrier::class,$data,'carrier_id',$id);
     }
     public function destroy($id)
     {
-        return (new DataAction)->DeleteData(Carrier::class,'currency_id',$id);
+        return (new DataAction)->DeleteData(Carrier::class,'carrier_id',$id);
     }
 }
