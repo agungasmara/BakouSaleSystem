@@ -140,6 +140,13 @@ import CategoryForm from './views/Components/backend/categories/CategoryForm.vue
 import CategoryEdit from './views/Components/backend/categories/CategoryEdit.vue'
 //***** End Categories *****
 
+//***** CategoryType *****
+import CategoryType from './views/Components/backend/category_type/CategoryType.vue'
+import CategoryTypeList from './views/Components/backend/category_type/CategoryTypeList.vue'
+import CategoryTypeForm from './views/Components/backend/category_type/CategoryTypeForm.vue'
+import CategoryTypeEdit from './views/Components/backend/category_type/CategoryTypeEdit.vue'
+//***** End CategoryType *****
+
 //***** products *****
 import Products from './views/Components/backend/products/Product.vue'
 import ProductList from './views/Components/backend/products/ProductList.vue'
@@ -538,6 +545,26 @@ const router = new VueRouter({
           path: 'edit/:id',
           name:'CategoryEdit',
           component: CategoryForm,props:true
+        }
+      ]
+    },
+    { path: '/admin/category_type', name:'category_type',component: CategoryType,
+      children: [
+        {
+          path: 'list',
+          name:'CategoryTypeList',
+          component: CategoryTypeList
+        },
+        {
+          path: 'add',
+          name:'CategoryTypeForm',
+          component: CategoryTypeForm
+        },
+        {
+          path: 'edit/:id',
+          name:'CategoryTypeEdit',
+          component: CategoryTypeEdit,
+          props:true
         }
       ]
     },

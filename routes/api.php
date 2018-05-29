@@ -134,6 +134,10 @@ Route::Resource('/attribute_group','Backend\Attributes\AttributeGroupController'
 Route::Resource('/filters','Backend\Filter\FiltersController');
 Route::Resource('/filters_group','Backend\Filter\FilterGroupController');
 
+//======CategoryType API
+Route::Resource('/category_type','Backend\CategoryType\CategoryTypeController');
+
+
 //======Information API
 Route::Resource('/informations','Backend\Informations\InformationsController');
 
