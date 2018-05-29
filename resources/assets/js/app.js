@@ -104,6 +104,7 @@ import SaleOrder from './views/Components/backend/sale_orders/SaleOrder.vue'
 import SaleOrderList from './views/Components/backend/sale_orders/SaleOrderList.vue'
 import SaleOrderEditForm from './views/Components/backend/sale_orders/SaleOrderEditForm.vue'
 import SaleOrderForm from './views/Components/backend/sale_orders/SaleOrderForm.vue'
+import SaleOrderView from './views/Components/backend/sale_orders/SaleOrderView.vue'
 
 //Quotation ########################
 import Quotation from './views/Components/backend/quotations/Quotation.vue'
@@ -805,6 +806,12 @@ const router = new VueRouter({
                 path:'edit/:id',
                 name:'SaleOrderEdit',
                 component:SaleOrderEditForm,
+                props:true
+            },
+            {
+                path:'view/:id',
+                name:'SaleOrderView',
+                component:SaleOrderView,
                 props:true
             }
         ]       
