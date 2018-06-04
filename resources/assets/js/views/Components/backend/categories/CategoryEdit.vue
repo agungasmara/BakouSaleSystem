@@ -272,7 +272,7 @@
 			submit (opt) {
 		      if (this.$refs.form.validate()) {
 		        // Native form submission is not yet supported
-		        axios.post('/admin/api/categories/'+ this.id, {
+		        axios.put('/admin/api/categories/'+ this.id, {
 		          category_type_id: this.data.category_type_id,
 		          parent_id: this.data.parent_id,
 		          sort_order: this.data.sort_order,
