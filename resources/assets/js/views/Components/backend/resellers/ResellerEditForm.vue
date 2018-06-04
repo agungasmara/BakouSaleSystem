@@ -126,35 +126,37 @@
 				                    </div>
 				                    <div class="col s12 m12 l3">
 				                    	<div class="row">
-						                    		<h4 class="header">
-							                    	<center> Upload Image </center>
-							                    	</h4>
+				                    		<h4 class="header">
+					                    	<center> Upload Image </center>
+					                    	</h4>
 							                    		
-								                    	<div >
-															<input type="file" id="fileInput"  style="display:none" ref="fileInput" accept="image/*" @change="onFilePicked">
-															<v-layout align-center justify-center >
-																<label for="fileInput" style="width: auto;min-width:200px;max-width:500px;min-height:200px;height:auto;max-height: 300px;" >
-																	
-																		<v-card style="height: auto;max-height: 200px;padding: 10px;" v-if="resellerInfo.image" @click="onPickFile">
-																			<v-badge color="red" overlap v-if="resellerInfo.image">
-																				<v-btn  style="border-radius: 0px; margin-right: -20px; margin-top: -15px; height: 25px; width:50px; position: absolute; cursor: pointer; position: relative; opacity: 0.7; font-size: 8px;" @click="clearImage">
-																					Remove
-																				</v-btn>
-																			</v-badge>
-																			<v-layout align-center justify-center>
-																				<img :src="resellerInfo.image" style="height:auto;max-height:200px;width: auto;margin-right:-110px;margin-top:-10px;"  @click="onPickFile">
-																			</v-layout>
-																		</v-card>
-																		
-																		<v-flex style="height: 200px;" v-if="!resellerInfo.image" @click="onPickFile">
-																			<v-layout align-center justify-center >
-																				<img class="image-dummy" width="200px" :src="'/images/icon/Antu_folder-camera.svg.png'">
-																			</v-layout>
-																		</v-flex>
-																</label>
-															</v-layout>
-														</div>
-						                    	</div>
+					                    	<div>
+												<input type="file" id="fileInput"  style="display:none" ref="fileInput" accept="image/*" @change="onFilePicked">
+												<v-layout align-center justify-center >
+													<label for="fileInput" style="width: auto;min-width:200px;max-width:500px;min-height:200px;height:auto;max-height: 300px;" >
+														
+															<v-card style="height: auto;max-height: 200px;padding: 10px;" v-if="resellerInfo.image" @click="onPickFile">
+																<v-badge color="red" overlap v-if="resellerInfo.image">
+																	<v-btn  style="border-radius: 0px; margin-right: -20px; margin-top: -15px; height: 25px; width:50px; position: absolute; cursor: pointer; position: relative; opacity: 0.7; font-size: 8px;" @click="clearImage">
+																		Remove
+																	</v-btn>
+																</v-badge>
+
+																<v-layout align-center justify-center>
+																	<img :src="resellerInfo.image" style="height:auto;max-height:200px;width: auto;margin-right:-110px;margin-top:-10px;"  @click="onPickFile">
+																</v-layout>
+															</v-card>
+															
+															<v-flex style="height: 200px;" v-if="!resellerInfo.image" @click="onPickFile">
+																<v-layout align-center justify-center >
+																	<img class="image-dummy" width="200px" :src="'/images/icon/Antu_folder-camera.svg.png'">
+																</v-layout>
+															</v-flex>
+
+													</label>
+												</v-layout>
+											</div>
+						                </div>
 				                    </div>
 				                </div>
 		                      	<div class="clearfix"></div>
@@ -442,6 +444,7 @@
 				})
 			},
 		    submit (opt) {
+		    	debugger;
 		      	if (this.$refs.form.validate()) {
 			        // Native form submission is not yet supporte
 		        	axios.put(this.url+this.id,
@@ -451,6 +454,7 @@
 			          	storeInfo:this.storeInfo
 			          }
 			        ).then((res)=>{
+			        	debugger;
 			        	console.log(res.data)
 			        	if(res.data.success==true){
 			        		Flash.setSuccess(res.data.message)

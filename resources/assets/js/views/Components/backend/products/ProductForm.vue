@@ -115,7 +115,6 @@
 														v-bind:form-rules="rules"
 														v-bind:form-datas="data.data"
 														v-bind:select-items="select"
-														
 													></form-group>
 					                    	</div>
 					                    </div>

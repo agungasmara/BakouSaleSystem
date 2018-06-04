@@ -154,6 +154,7 @@
 				});
 			},
 			submit (id,opt) {
+				debugger;
 		      if (this.$refs.form.validate()) {
 		        // Native form submission is not yet supported
 		        axios.put('/api/setting/update/'+id, {
@@ -162,6 +163,7 @@
 		          key: this.key,
 		          value: this.value
 		        }).then((res)=>{
+		        	debugger;
 		        	if(res.data.success==true){
 		        		Flash.setSuccess(res.data.message)
 		        		if(opt==2){

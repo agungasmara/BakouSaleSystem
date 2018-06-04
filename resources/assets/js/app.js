@@ -545,7 +545,7 @@ const router = new VueRouter({
         {
           path: 'edit/:id',
           name:'CategoryEdit',
-          component: CategoryForm,props:true
+          component: CategoryEdit,props:true
         }
       ]
     },

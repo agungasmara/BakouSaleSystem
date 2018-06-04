@@ -57,10 +57,19 @@ class CategoryController extends Controller
     }
     public function update(Request $request,$id)
     {
-        
-        $data=$request->all();
-        return $data;
-        return (new DataAction)->UpdateData(CategoryModel::class,$data,'category_id',$id);
+        //$data=$request->all();
+        // return $data;
+        //return (new DataAction)->UpdateData(CategoryModel::class,$data,'category_id',$id);
+         //data for Category value
+        $Category=(new CategoryModel)->getFillable();
+        $Category=$request->only($Category);
+
+        //Data for Category description
+        $categoryTypeDesc=(new CategoryDescription)->getFillable();
+        $categoryTypeDesc=$request->only($categoryTypeDesc);
+
+        $saveInformation = (new DataAction)->UpdateData(CategoryModel::class,$Category,'category_id',$id);
+        return (new DataAction)->UpdateData(CategoryDescription::class,$categoryTypeDesc,'category_id',$id);
     }
     public function destroy($id)
     {

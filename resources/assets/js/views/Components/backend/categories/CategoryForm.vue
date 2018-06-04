@@ -1,6 +1,7 @@
 <template>
+
 <v-app id="inspire">
-	<normal-form
+	<!-- <normal-form
 		v-bind:url="url"
 		v-bind:id="0"
 		v-bind:breadcrumb-title="breadcrumbTitle"
@@ -10,7 +11,121 @@
 		v-bind:form-datas="data"
 		v-bind:select-items="select"
 		v-bind:back-url="backUrl"
-	></normal-form>
+	></normal-form> -->
+	<section id="_content">
+		<!--breadcrumbs start-->
+		<!--breadcrumbs start-->
+		<breadcrumb3button
+		v-bind:breadcrumb-item="breadcrumbs"
+		v-bind:breadcrumb-title="breadcrumbTitle"
+		v-bind:submit="submit"
+		v-bind:is-valid="valid"
+		v-bind:back-url="backUrl"
+		></breadcrumb3button>
+		<!--breadcrumbs end-->
+		<!--breadcrumbs end-->
+
+		<div class="flash flash__success" v-if="flash.success">
+			<v-alert color="success" icon="check_circle" value="true">
+            	{{flash.success}}	
+            </v-alert>
+      	</div>
+  	
+		<div id="basic-form" class="section">
+            <div class="row col s12">
+            	<div class="container">
+	              <div class="col s12 m12 l12">
+	                <div class="_card-panel">
+
+	                  
+	                  <div class="container">
+	                    <v-form v-model="valid" ref="form" lazy-validation>
+
+	                    	<div class="row">
+		                    	<div class="col s12 m12 l2">
+		                    		<div class="row">
+			                    		<h4  class="header">CATEGORIES</h4>
+			                    		<div>
+			                    			Set up your Categories here
+			                    		</div>
+		                    		</div>
+		                    	</div>
+		                    	<div class="col s12 m12 l8">
+			                      
+			                      <div class="row">
+			                      	<v-container grid-list-md>
+			                      		<v-layout wrap>
+				                      		<v-flex xs12 sm6 md6>
+									      		<v-select label="Select Category" v-model="data.category_type_id"  :items="select.categoryType"  :rules="[v => !!v || 'Item is required']" required></v-select>
+									      	</v-flex>
+
+									    	<v-flex xs12 sm6 md6>
+									      		<v-select label="Select CategoryType" v-model="parent_id"  :items="filteredData"  :rules="[v => !!v || 'Item is required']" required></v-select>
+									      	</v-flex>
+
+									      	<v-flex xs12 sm6 md6>
+									      		<v-text-field label="Sort Order" v-model="sort_order" :rules="codeRules" :counter="100"></v-text-field>
+									      	</v-flex>
+									      	<v-flex xs12 sm6 md6>
+									      		<v-select label="Status" v-model="status"  :items="select.statusItems"></v-select>
+									      	</v-flex>
+									      	<v-flex xs12 sm6 md6>
+									      		<v-text-field label="Column" v-model="column"></v-text-field>
+									      	</v-flex>
+									      	<v-flex xs12 sm6 md6>
+									      		<v-text-field label="Top" v-model="top"></v-text-field>
+									      	</v-flex>
+									      	<v-flex xs12 sm6 md6>
+									      		<v-select label="Choose Language" v-model="language_id"  :items="select.language"></v-select>
+									      	</v-flex>
+									      	<v-flex xs12 sm6 md6>
+									      		<v-text-field label="Name" v-model="name" :rules="keyName" :counter="100" required></v-text-field>
+									      	</v-flex>
+									      	<v-flex xs12 sm6 md6>
+									      		<v-text-field label="Description" v-model="description" :counter="100"></v-text-field>
+									      	</v-flex>
+									      	<v-flex xs12 sm6 md6>
+									      		<v-text-field label="Meta Title" v-model="meta_title" :counter="100"></v-text-field>
+									      	</v-flex>
+									      		<v-flex xs12 sm6 md6>
+									      		<v-text-field label="Meta Keyword" v-model="meta_keyword" :counter="100"></v-text-field>
+									      	</v-flex>
+									      	<v-flex xs12 sm6 md6>
+									      		<v-text-field label="Meta Description" v-model="meta_description" :counter="100"></v-text-field>
+									      	</v-flex>
+								      	</v-layout>
+									</v-container>
+
+			                      </div>
+			                    </div>
+			                    <div class="col s12 m12 l2">
+			                    	
+		                    		<div class="row" v-for="item in section">
+			                    		<h4 class="header">
+				                    	<center> Product Image </center>
+				                    	</h4>
+
+				                    	<form-group
+											v-bind:form-items="group[item.profile]"
+											v-bind:form-rules="rules"
+											v-bind:form-datas="data.data"
+											v-bind:select-items="select"
+										></form-group>
+				                    		
+			                    	</div>
+			                    </div>
+			                </div>
+	                      	<div class="clearfix"></div>
+
+	                    </v-form>
+	                  </div>
+	                </div>
+	              </div>
+	            </div>
+            </div>
+        </div>
+
+	</section>
 </v-app>
 </template>
 	
@@ -18,6 +133,7 @@
 	import Flash from '../../../../helper/flash'
 	import axios from 'axios'
 	import normalForm from '../commons/form/normalForm.vue'
+	import breadcrumb3button from '../commons/breadcrumb/breadcrumb3button.vue'
 	export default{
 		components:{
 			'normalForm':normalForm
@@ -32,66 +148,62 @@
 				btnText:'Upload Image',
 				imageUrl:'',
 				image:null,
-			    group:[
-					{	class:'xs12 sm6 md6',	 key:'category_type_id',	type:'select',	text:'Choose Category Type',	items:'categoryType',	count:100,	},
-					{	class:'xs12 sm6 md6',	 key:'parent_id',	type:'select',	items:'categoryParent',	text:'Choose Parent Category',count:100	},
-					{	class:'xs12 sm6 md6',	 key:'sort_order',	type:'text',	 text:'Sort Order',count:100	},
-					{	class:'xs12 sm6 md6',	 key:'status',	type:'select',items:'statusItems',	 text:'Status',count:100	},
-					{	class:'xs12 sm6 md6',	 key:'column',	type:'text',	 text:'Column',count:50	},
-					{	class:'xs12 sm6 md6',	 key:'top',	type:'text',	 text:'Top',count:100	},
-					{	class:'xs12 sm6 md6',	 key:'language_id',	type:'select',	 text:'Choose Language',items:'language',count:100	},
-					{	class:'xs12 sm6 md6',	 key:'name',	type:'text',	 text:'Name',count:50	},
-					{	class:'xs12',	 key:'description',	type:'textarea',	 text:'description',count:50	},
-					{	class:'xs12 sm6',	 key:'meta_title',	type:'text',	 text:'Meta Title',count:50	},
-					{	class:'xs12 sm6',	 key:'meta_keyword',	type:'text',	 text:'Meta Keyword',count:25	},
-					{	class:'xs12',	 key:'meta_description',	type:'textarea',	 text:'Meta Description',count:100	},
-					{	class:'xs12 sm12 md12',	 key:'image',	type:'image',	 Value:'',count:0	}
-					
+				breadcrumbTitle:'Users',
+				keyName: [
+			      (v) => !!v || 'Name is required',
+			      (v) => v && v.length <= 100 || 'Name must be less than 100 characters'
+			    ],
+				breadcrumbs: [
+			        {
+			          text: 'Adminstrator',
+			          disabled: false
+			        },
+			        {
+			          text: 'Setting',
+			          disabled: false
+			        },
+			        {
+			          text: 'Create',
+			          disabled: true
+			        }
+		      	],
+		      	section:[
+					{
+						info_title:'',
+						info_description:'',
+						title:'Product Gallary',
+						icon:'info_outline',
+						form:'gallery',
+					}
 				],
+				group:{
+					
+				},
 				rules:{
-					// username: [
-				 //      (v) => !!v || 'Username is required',
-				 //      (v) => v && v.length <= 16 || 'Username must be less than 16 characters'
-				 //    ],
-					// firstname: [
-				 //      (v) => !!v || 'First Name is required',
-				 //      (v) => v && v.length <= 10 || 'First Name must be less than 10 characters'
-				 //    ],
-				 //    lastname: [
-				 //      (v) => !!v || 'Last Name is required',
-				 //      (v) => v && v.length <= 10 || 'Last Name must be less than 10 characters'
-				 //    ],
-				 //    email: [
-				 //      (v) => !!v || 'E-mail is required',
-				 //      (v) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
-				 //    ],
-				 //    password: [
-				 //      (v) => !!v || 'Password is required',
-				 //      (v) => v && v.length <= 32 || 'Password must be less than 32 characters'
-				 //    ],
-				 //    confirmPassword: [
-				 //      (v) => !!v || 'Confirm Password is required',
-				 //      (v) => v && v.length <= 32 || 'Confirm Password must be less than 32 characters'
-				 //    ],
-				 //    code: [
-				 //      (v) => !!v || 'Code is required',
-				 //      (v) => v && v.length <= 8 || 'Code must be less than 8 characters'
-				 //    ]
+				
+				},
+				rules:{
+					
 				},
 				data:{
-					// category_type_id:'',
-					// image:'',
-					// parent_id:'',
-					// top:'',
-					// column:'',
-					// sort_order:'',
-					// status:'',
-					// language_id:'',
-					// name:'',
-					// description:'',
-					// meta_title:'',
-					// meta_description:'',
-					// meta_keyword:'',
+					category_type_id:'',
+					image:'',
+					parent_id:'',
+					top:'',
+					column:'',
+					sort_order:'',
+					status:'',
+					language_id:'',
+					name:'',
+					description:'',
+					meta_title:'',
+					meta_description:'',
+					meta_keyword:'',
+					//category_type: '',
+					data:{
+						image:''
+					},
+					gallery:[]
 				},
 				select:{
 					statusItems:[
@@ -121,11 +233,20 @@
 			    backUrl:'/admin/categories/list',
 			}
 		},
+		components:{
+			'breadcrumb3button':breadcrumb3button
+		},
 		created(){
 			this.id ? this.fetchData(this.id) : ''
 			this.categoryType()
 			this.categoryParent()
 			this.language()
+		},
+		computed: {
+		    filteredData() {
+				let options = this.select.categoryParent
+		       return options.filter(o => o.value == this.data.category_type_id)
+		    }
 		},
 		methods:{
 			
@@ -136,7 +257,10 @@
 			},
 			categoryType(){
 				axios.get('/admin/api/getCategories_type').then((res)=>{
-					this.select.categoryType=res.data
+					this.select.categoryType=res.data;
+				})
+				axios.get('/admin/api/getCategories_parent').then((res)=>{
+					this.select.categoryParent=res.data
 				})
 			},
 			categoryParent(){
@@ -145,11 +269,41 @@
 				})
 			},
 			language(){
-				debugger;
 				axios.get('/admin/api/getLanguages').then((res)=>{
 					this.select.language=res.data
 				})
-			}
+			},
+			submit (opt) {
+		      if (this.$refs.form.validate()) {
+		        // Native form submission is not yet supported
+		        axios.post('/admin/api/categories', {
+		          category_type_id: this.data.category_type_id,
+		          parent_id: this.parent_id,
+		          sort_order: this.sort_order,
+		          status: this.status,
+		          column: this.column,
+		          top: this.top,
+		          language_id:this.language_id,
+		          name:this.name,
+		          description: this.description,
+		          meta_title: this.meta_title,
+		          meta_keyword: this.meta_keyword,
+		          meta_description: this.meta_description
+
+		        }).then((res)=>{
+		        	if(res.data.success==true){
+		        		Flash.setSuccess(res.data.message)
+		        		if(opt==1){
+		        			this.$refs.form.reset()
+		        		}
+		        		else if(opt==2){
+		        			this.$router.push('/admin/api/categories/list')
+		        		}
+		        	}
+		        })
+		      }
+		    }
+			
 		}
 	}
 </script>

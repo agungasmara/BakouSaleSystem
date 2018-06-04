@@ -54,7 +54,7 @@ class CategoryTypeController extends Controller
         $categoryTypeDesc=$request->only($categoryTypeDesc);
 
         $saveInformation = (new DataAction)->UpdateData(CategoryType::class,$Category,'category_type_id',$id);
-         (new DataAction)->UpdateData(CategoryTypeDescription::class,$categoryTypeDesc,'category_type_id',$id);
+        return (new DataAction)->UpdateData(CategoryTypeDescription::class,$categoryTypeDesc,'category_type_id',$id);
 
     } 
      public function destroy($id)
