@@ -24,6 +24,10 @@ class Address extends Model
 						'custom_field'
 					];
 	public $timestamps = false;	
+	
+	public function Customer(){
+		return $this->belongsTo('App\Http\Models\FrontEnd\Customer','customer_id');
+	}
 
 	static function getAddress($sec_user_id)
 	{

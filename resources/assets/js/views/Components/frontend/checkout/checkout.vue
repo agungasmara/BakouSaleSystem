@@ -28,6 +28,7 @@
 		                <div class="col-xs-12 col-sm-12">
 		                    <div class="w100 clearfix">
 								{{get_checkout_address | json}}
+								<input type="text" v-model="get_checkout_address['address_id']"/>
 		                    	<!-- tabs header -->
 		                        <ul class="orderStep orderStepLook2">
 		                        	<li v-for="(tab, i) in tabs" :class="{'active':activeTab==i}" @click="activeTab=i">
