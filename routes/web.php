@@ -144,6 +144,7 @@ if (Request::is('admin*')){
                 Route::get('/getOptions','Backend\commons\CommonsController@getOptions');
                 Route::get('/getChildOption/{id}','Backend\commons\CommonsController@getChildOption');
                 Route::get('/getSelectList/{cid}','Backend\commons\CommonsController@getSelectList');
+                Route::get('/getCarrier/','Backend\commons\CommonsController@getCarrier');
                 //=====Setting API=============================
 
                 Route::get('/settings/item/','Backend\Settings\SettingsController@item');//use to get all config item to put into dropdown list in setting edit form 

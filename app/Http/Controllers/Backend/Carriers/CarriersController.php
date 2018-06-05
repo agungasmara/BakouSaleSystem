@@ -22,11 +22,7 @@ class CarriersController extends Controller
         $data=(new Carrier)->getFillable();
         $data=$request->only($data);
         
-        $condition=[
-            'title'=>$data['title']
-        ];
-
-        return (new DataAction)->StoreData(Carrier::class,$condition,"",$data);
+        return (new DataAction)->StoreData(Carrier::class,[],"",$data);
         //return response()->json($data);
     }
     public function show($id)

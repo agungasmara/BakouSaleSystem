@@ -122,6 +122,14 @@ class CommonsController extends Controller
         return response()->json($filterGroup);
 
     }
+    public function getCarrier()
+    {
+
+        $filterGroup=DB::table('shipping_courier')->select(['shipping_courier_id as value','shipping_courier_name as text'])->get();
+
+        return response()->json($filterGroup);
+
+    }
     public function getProductRelates()
     {
 
