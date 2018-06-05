@@ -27,7 +27,7 @@
 		},
 		data(){
 			return{
-				url:'/api/settings/',
+				url:'/admin/api/settings/',
 				e1:true,
 				valid: true,
 			    group:[
@@ -81,7 +81,7 @@
 		},
 		methods:{
 			getStore(){
-				axios.get('/api/getStore').then((res)=>{
+				axios.get('/admin/api/getStore').then((res)=>{
 					this.selects.storeItems=res.data
 				})
 			},
@@ -95,7 +95,7 @@
 				});
 			},
 			fetchSettingItem(){
-				axios.get('/api/settings/item/').then((res)=>{
+				axios.get('/admin/api/settings/item/').then((res)=>{
 					this.selects.codeItems=res.data.code
 					this.selects.keyItems=res.data.key
 					this.selects.valueItems=res.data.value

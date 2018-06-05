@@ -39,7 +39,7 @@
 		],
 		data(){
 			return{
-				url:'/api/customer_field/',
+				url:'/admin/api/customer_field/',
 				btnNewUrl:'/admin/customer_field/add',
 				listTitle:'Customer Field List',
 				headers: [

@@ -38,7 +38,7 @@
 		],
 		data(){
 			return{
-				url:'/api/order_status/',
+				url:'/admin/api/order_status/',
 				btnNewUrl:'/admin/order_status/add',
 				listTitle:'Order Status List',
 				headers: [

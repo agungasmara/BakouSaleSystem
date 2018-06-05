@@ -23,7 +23,7 @@
 		},
 		data(){
 			return{
-				url:'/api/attribute/',
+				url:'/admin/api/attribute/',
 				e1:true,
 				valid: true,
 			    group:[
@@ -77,12 +77,12 @@
 		},
 		methods:{
 			getAttributeGroup(){
-				axios.get('/api/getAttributeGroup').then((res)=>{
+				axios.get('/admin/api/getAttributeGroup').then((res)=>{
 					this.select.attributeGroups=res.data
 				})
 			},
 			getLanguage(){
-				axios.get('/api/getLanguage').then((res)=>{
+				axios.get('/admin/api/getLanguage').then((res)=>{
 					this.select.languages=res.data
 				})
 			}

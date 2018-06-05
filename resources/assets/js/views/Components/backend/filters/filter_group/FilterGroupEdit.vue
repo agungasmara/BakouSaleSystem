@@ -25,7 +25,7 @@
 		},
 		data(){
 			return{
-				url:'/api/filters_group/',
+				url:'/admin/api/filters_group/',
 				e1:true,
 				valid: true,
 			    group:[
@@ -80,7 +80,7 @@
 				});
 			},
 			getLanguage(){
-				axios.get('/api/getLanguage').then((res)=>{
+				axios.get('/admin/api/getLanguage').then((res)=>{
 					this.select.languages=res.data
 				})
 			}

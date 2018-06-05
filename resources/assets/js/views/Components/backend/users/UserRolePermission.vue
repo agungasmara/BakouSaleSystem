@@ -133,7 +133,7 @@
 				// console.log(this.selected)
 				// console.log("=================")
 				// if (this.$refs.form.validate()) {
-				// 	axios.post('/api/setting/save', {
+				// 	axios.post('/admin/api/setting/save', {
 				// 		store: this.select,
 				// 		code: this.code,
 				// 		key: this.key,

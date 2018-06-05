@@ -38,7 +38,7 @@
 		],
 		data(){
 			return{
-				url:'/api/lengths/',
+				url:'/admin/api/lengths/',
 				btnNewUrl:'/admin/lengths/add',
 				listTitle:'Lengths List',
 				headers: [

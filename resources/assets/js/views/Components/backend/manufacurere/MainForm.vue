@@ -23,7 +23,7 @@
 		},
 		data(){
 			return{
-				url:'/api/manufacturers/',
+				url:'/admin/api/manufacturers/',
 				e1:true,
 				valid: true,
 			    group:[

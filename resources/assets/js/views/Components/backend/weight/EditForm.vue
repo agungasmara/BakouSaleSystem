@@ -25,7 +25,7 @@
 		},
 		data(){
 			return{
-				url:'/api/weights/',
+				url:'/admin/api/weights/',
 				e1:true,
 				valid: true,
 			    group:[
@@ -88,7 +88,7 @@
 				});
 			},
 			getLanguage(){
-				axios.get('/api/getLanguage').then((res)=>{
+				axios.get('/admin/api/getLanguage').then((res)=>{
 					this.select.languageItems=res.data
 				})
 			}

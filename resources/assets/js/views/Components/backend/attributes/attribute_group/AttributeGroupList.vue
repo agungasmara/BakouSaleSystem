@@ -39,7 +39,7 @@
 		],
 		data(){
 			return{
-				url:'/api/attribute_group/',
+				url:'/admin/api/attribute_group/',
 				btnNewUrl:'/admin/attributes_group/add',
 				listTitle:'Attributes List',
 				headers: [

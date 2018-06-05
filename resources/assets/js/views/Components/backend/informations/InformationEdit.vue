@@ -25,7 +25,7 @@
 		},
 		data(){
 			return{
-				url:'/api/informations/',
+				url:'/admin/api/informations/',
 				e1:true,
 				valid: true,
 			    group:[
@@ -114,12 +114,12 @@
 				});
 			},
 			getLanguage(){
-				axios.get('/api/getLanguage').then((res)=>{
+				axios.get('/admin/api/getLanguage').then((res)=>{
 					this.select.languageItems=res.data
 				})
 			},
 			getLayout(){
-				axios.get('/api/getLayout').then((res)=>{
+				axios.get('/admin/api/getLayout').then((res)=>{
 					this.select.layoutItem=res.data
 				})
 			}

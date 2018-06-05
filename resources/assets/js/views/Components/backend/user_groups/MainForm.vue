@@ -24,7 +24,7 @@
 		},
 		data(){
 			return{
-				url:'/api/settings/',
+				url:'/admin/api/settings/',
 				e1:true,
 				valid: true,
 				btnImageDisabled:false,
@@ -83,7 +83,7 @@
 						this.errorName=false
 						this.validName=false
 						this.checkNameMessage='Checking Group Name...'
-						axios.get('/api/users_group/checkIfExisted/name/'+this.groupName).then((res)=>{
+						axios.get('/admin/api/users_group/checkIfExisted/name/'+this.groupName).then((res)=>{
 							if(res.data.Existed==true){
 								this.valid=false
 								this.errorName=true
@@ -121,7 +121,7 @@
 			submit (opt) {
 		      	if (this.$refs.formUserGroup.validate()) {
 			        // Native form submission is not yet supported
-			        axios.post('/api/user_groups', {
+			        axios.post('/admin/api/user_groups', {
 			          groupName: this.groupName,
 			          groupType: this.groupType,
 			          permissions: '{"access":["'+this.permissions.join('","')+'"]}'

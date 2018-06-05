@@ -25,7 +25,7 @@
 		},
 		data(){
 			return{
-				url:'/api/tax_class/',
+				url:'/admin/api/tax_class/',
 				e1:true,
 				valid: true,
 			    group:[

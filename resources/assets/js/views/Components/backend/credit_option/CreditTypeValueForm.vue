@@ -23,7 +23,7 @@
 		},
 		data(){
 			return{
-				url:'/api/credit_type_value/',
+				url:'/admin/api/credit_type_value/',
 				e1:true,
 				valid: true,
 			    group:[
@@ -73,7 +73,7 @@
 		},
 		methods:{
 			getCreditType(){
-				axios.get('/api/getCreditType').then((res)=>{
+				axios.get('/admin/api/getCreditType').then((res)=>{
 					this.select.creditType=res.data
 				})
 			}

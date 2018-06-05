@@ -39,7 +39,7 @@
 		],
 		data(){
 			return{
-				url:'/api/stock_status/',
+				url:'/admin/api/stock_status/',
 				btnNewUrl:'/admin/stock_status/add',
 				listTitle:'Stock Status List',
 				headers: [

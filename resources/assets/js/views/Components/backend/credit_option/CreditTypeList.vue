@@ -39,7 +39,7 @@
 		],
 		data(){
 			return{
-				url:'/api/credit_type/',
+				url:'/admin/api/credit_type/',
 				btnNewUrl:'/admin/credit_type/add',
 				listTitle:'Credit Type List',
 				headers: [

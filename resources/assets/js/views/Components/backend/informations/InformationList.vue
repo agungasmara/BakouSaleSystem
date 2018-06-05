@@ -39,7 +39,7 @@
 		],
 		data(){
 			return{
-				url:'/api/informations/',
+				url:'/admin/api/informations/',
 				btnNewUrl:'/admin/informations/add',
 				listTitle:'Informations List',
 				headers: [

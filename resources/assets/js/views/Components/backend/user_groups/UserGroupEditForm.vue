@@ -108,7 +108,7 @@
 		},
 		methods:{
 			fetchUserGroup(id){
-				axios.get('/api/users_group/getuser_groupbyid/'+id).then(res=>{
+				axios.get('/admin/api/users_group/getuser_groupbyid/'+id).then(res=>{
 					this.code=res.data.code
 					this.key=res.data.key
 					this.value=res.data.value
@@ -119,7 +119,7 @@
 				debugger;
 		      if (this.$refs.form.validate()) {
 		        // Native form submission is not yet supported
-		        axios.put('/api/users_group/update/'+this.id, {
+		        axios.put('/admin/api/users_group/update/'+this.id, {
 		          store: this.select,
 		          code: this.code,
 		          key: this.key,

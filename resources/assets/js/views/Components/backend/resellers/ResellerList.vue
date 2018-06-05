@@ -35,7 +35,7 @@
 		data(){
 			return{
 				listTitle:'Resellers List',
-				url:'/api/resellers/',
+				url:'/admin/api/resellers/',
 				btnNewUrl:'/admin/reseller/add',
 				headers: [
 			        { text: 'ID',align: 'left',class:'text-xs-left',value: 'id'},

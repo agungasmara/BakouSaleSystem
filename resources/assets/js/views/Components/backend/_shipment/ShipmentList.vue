@@ -76,7 +76,7 @@
 		data(){
 			return{
 				listTitle:'Resellers List',
-				url:'/api/carriers/',
+				url:'/admin/api/carriers/',
 				btnNewUrl:'/admin/shipment/add',
 				headers: [
 			        { text: 'ID',align: 'left',class:'text-xs-left',value: 'id'},

@@ -23,7 +23,7 @@
 		},
 		data(){
 			return{
-				url:'/api/currencies/',
+				url:'/admin/api/currencies/',
 				e1:true,
 				valid: true,
 				btnImageDisabled:false,

@@ -39,7 +39,7 @@
 		],
 		data(){
 			return{
-				url:'/api/tax_class/',
+				url:'/admin/api/tax_class/',
 				btnNewUrl:'/admin/tax_class/add',
 				listTitle:'Tax Class List',
 				headers: [

@@ -39,7 +39,7 @@
 		],
 		data(){
 			return{
-				url:'/api/weights/',
+				url:'/admin/api/weights/',
 				btnNewUrl:'/admin/weights/add',
 				listTitle:'Weights List',
 				headers: [

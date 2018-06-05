@@ -113,7 +113,7 @@
 		data(){
 			return{
 				listTitle:'Delivery List',
-				url:'/api/delivery',
+				url:'/admin/api/delivery',
 				menu:null,
 				btnNewUrl:'/admin/shipment/add',
 				valid:false,
@@ -181,7 +181,7 @@
 			},
 			filterCustomer()
 			{
-				axios.post('/api/filterShippment',this.filter).then(res=>{
+				axios.post('/admin/api/filterShippment',this.filter).then(res=>{
 					if(res.data.result==true){
 						this.shipments=res.data.data
 						//console.log(res.data.data)

@@ -38,7 +38,7 @@
 		],
 		data(){
 			return{
-				url:'/api/downloads/',
+				url:'/admin/api/downloads/',
 				btnNewUrl:'/admin/downloads/add',
 				listTitle:'Weights List',
 				headers: [

@@ -39,7 +39,7 @@
 		],
 		data(){
 			return{
-				url:'/api/banners/',
+				url:'/admin/api/banners/',
 				btnNewUrl:'/admin/banners/add',
 				listTitle:'Attributes List',
 				headers: [

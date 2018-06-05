@@ -33,7 +33,7 @@
 		data(){
 			return{
 				listTitle:'User Group List',
-				url:'/api/user_groups/',
+				url:'/admin/api/user_groups/',
 				btnNewUrl:'/admin/users_group/add',
 				headers: [
 					{ text: 'Group ID',align: 'left',class:'text-xs-left',value: 'user_group_id'},

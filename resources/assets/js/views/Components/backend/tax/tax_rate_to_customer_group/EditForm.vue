@@ -25,7 +25,7 @@
 		},
 		data(){
 			return{
-				url:'/api/tax_rate_to_customer_group/',
+				url:'/admin/api/tax_rate_to_customer_group/',
 				e1:true,
 				valid: true,
 			    group:[
@@ -75,10 +75,10 @@
 				});
 			},
 			getTaxItem(){
-				axios.get('/api/getTaxRate').then((res)=>{
+				axios.get('/admin/api/getTaxRate').then((res)=>{
 					this.select.tax_rate=res.data
 				})
-				axios.get('/api/getCustomerGroup').then((res)=>{
+				axios.get('/admin/api/getCustomerGroup').then((res)=>{
 					this.select.customer_group=res.data
 				})
 			}

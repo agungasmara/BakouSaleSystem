@@ -141,12 +141,12 @@
 		},
 		methods:{
 			getStore(){
-				axios.get('/api/getStore').then((res)=>{
+				axios.get('/admin/api/getStore').then((res)=>{
 					this.items=res.data
 				})
 			},
 			fetchSetting(id){
-				axios.get('/api/setting/getsettingbyid/'+id).then(res=>{
+				axios.get('/admin/api/setting/getsettingbyid/'+id).then(res=>{
 					this.code=res.data.code
 					this.key=res.data.key
 					this.value=res.data.value
@@ -156,7 +156,7 @@
 			submit (id,opt) {
 		      if (this.$refs.form.validate()) {
 		        // Native form submission is not yet supported
-		        axios.put('/api/setting/update/'+id, {
+		        axios.put('/admin/api/setting/update/'+id, {
 		          store: this.select,
 		          code: this.code,
 		          key: this.key,

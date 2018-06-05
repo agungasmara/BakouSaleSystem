@@ -195,7 +195,7 @@
 				});
 			},
 			filterOrder(){
-				axios.post('/api/filterOrder',this.filter).then(res=>{
+				axios.post('/admin/api/filterOrder',this.filter).then(res=>{
 					if(res.data.result==true){
 						this.customers=res.data.data
 					}

@@ -38,7 +38,7 @@
 		],
 		data(){
 			return{
-				url:'/api/tax_rate/',
+				url:'/admin/api/tax_rate/',
 				btnNewUrl:'/admin/tax_rate/add',
 				listTitle:'Tax Rate List',
 				headers: [

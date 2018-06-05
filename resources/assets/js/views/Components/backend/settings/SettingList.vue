@@ -39,8 +39,8 @@
 		],
 		data(){
 			return{
-				url:'/api/settings/',
-				deleteApiUrl:'/api/settings/delete/',
+				url:'/admin/api/settings/',
+				deleteApiUrl:'/admin/api/settings/delete/',
 				urlEdit:'/admin/settings/edit/',
 				btnNewUrl:'/admin/settings/add',
 				listTitle:'Setting List',

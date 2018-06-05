@@ -39,7 +39,7 @@
 		],
 		data(){
 			return{
-				url:'/api/filters/',
+				url:'/admin/api/filters/',
 				btnNewUrl:'/admin/filters/add',
 				listTitle:'Filters List',
 				headers: [

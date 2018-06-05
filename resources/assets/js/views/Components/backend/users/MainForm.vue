@@ -24,7 +24,7 @@
 		},
 		data(){
 			return {
-				url:'/api/users/',
+				url:'/admin/api/users/',
 				e1:true,
 				valid: true,
 				btnImageDisabled:false,
@@ -120,7 +120,7 @@
 		},
 		methods:{
 			getUserGroup(){
-				axios.get('/api/users_group').then((res)=>{
+				axios.get('/admin/api/users_group').then((res)=>{
 					this.select.userGroupItems=res.data
 				})
 			}

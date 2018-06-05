@@ -23,7 +23,7 @@
 		},
 		data(){
 			return{
-				url:'/api/languages/',
+				url:'/admin/api/languages/',
 				e1:true,
 				valid: true,
 				btnImageDisabled:false,

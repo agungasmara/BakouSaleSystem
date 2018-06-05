@@ -23,7 +23,7 @@
 		},
 		data(){
 			return{
-				url:'/api/order_status/',
+				url:'/admin/api/order_status/',
 				e1:true,
 				valid: true,
 				btnImageDisabled:false,
@@ -70,7 +70,7 @@
 		},
 		methods:{
 			getLanguage(){
-				axios.get('/api/getLanguage').then((res)=>{
+				axios.get('/admin/api/getLanguage').then((res)=>{
 					this.select.languages=res.data
 				})
 			}

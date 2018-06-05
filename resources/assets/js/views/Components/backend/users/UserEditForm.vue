@@ -33,7 +33,7 @@
 				btnText:'Upload Image',
 				imageUrl:'',
 				image:null,
-				url:'/api/users/',
+				url:'/admin/api/users/',
 				group:[
 					{	class:'xs12 sm6 md6',	 key:'username',	type:'text',	 text:'Username',count:100,	},
 					{	class:'xs12 sm6 md6',	 key:'user_group_id',	type:'select',items:'userGroupItems',	 text:'User Group',count:100	},
@@ -119,7 +119,7 @@
 				console.log('data after child handle: ', event)
 			},
 			getUserGroup(){
-				axios.get('/api/users_group').then((res)=>{
+				axios.get('/admin/api/users_group').then((res)=>{
 					this.selects.userGroupItems=res.data
 				})
 			},

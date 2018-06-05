@@ -131,12 +131,12 @@
 		},
 		methods:{
 			getCustomerGroup(){
-				axios.get('/api/getCustomerGroup').then((res)=>{
+				axios.get('/admin/api/getCustomerGroup').then((res)=>{
 					this.customerGroup=res.data
 				})
 			},
 			getLanguage(){
-				axios.get('/api/getLanguage').then((res)=>{
+				axios.get('/admin/api/getLanguage').then((res)=>{
 					this.languages=res.data
 				})
 			},

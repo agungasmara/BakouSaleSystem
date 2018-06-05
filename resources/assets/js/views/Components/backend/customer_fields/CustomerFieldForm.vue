@@ -23,7 +23,7 @@
 		},
 		data(){
 			return{
-				url:'/api/customer_groups/',
+				url:'/admin/api/customer_groups/',
 				e1:true,
 				valid: true,
 			    group:[
@@ -78,7 +78,7 @@
 		},
 		methods:{
 			getLanguage(){
-				axios.get('/api/getLanguage').then((res)=>{
+				axios.get('/admin/api/getLanguage').then((res)=>{
 					this.select.languages=res.data
 				})
 			}

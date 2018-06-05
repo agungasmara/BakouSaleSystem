@@ -39,7 +39,7 @@
 		],
 		data(){
 			return{
-				url:'/api/languages/',
+				url:'/admin/api/languages/',
 				btnNewUrl:'/admin/languages/add',
 				listTitle:'Languages List',
 				headers: [

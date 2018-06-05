@@ -202,14 +202,14 @@
 		},
 		methods:{
 			getCategories(){
-				axios.get('admin/api/categories/list').then((res)=>{
+				axios.get('admin/admin/api/categories/list').then((res)=>{
 					this.items=res.data
 				})
 			},
 			submit (opt) {
 		      if (this.$refs.form.validate()) {
 		        // Native form submission is not yet supported
-		        axios.post('/api/setting/save', {
+		        axios.post('/admin/api/setting/save', {
 		          store: this.select,
 		          code: this.code,
 		          key: this.key,

@@ -25,7 +25,7 @@
 		},
 		data(){
 			return{
-				url:'/api/lengths/',
+				url:'/admin/api/lengths/',
 				e1:true,
 				valid: true,
 			    group:[
@@ -88,7 +88,7 @@
 				});
 			},
 			getLanguage(){
-				axios.get('/api/getLanguage').then((res)=>{
+				axios.get('/admin/api/getLanguage').then((res)=>{
 					this.select.languageItems=res.data
 				})
 			}

@@ -38,7 +38,7 @@
 		],
 		data(){
 			return{
-				url:'/api/tax_rate_to_customer_group/',
+				url:'/admin/api/tax_rate_to_customer_group/',
 				btnNewUrl:'/admin/tax_rate_customer_group/add',
 				listTitle:'Tax Rate To Customer Group List',
 				headers: [

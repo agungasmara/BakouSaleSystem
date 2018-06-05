@@ -141,7 +141,7 @@
 		},
 		methods:{
 			fetchSettings(){
-				axios.get('/api/setting/list').then(response=>{
+				axios.get('/admin/api/setting/list').then(response=>{
 					this.settings=response.data;
 				});
 			},
@@ -154,7 +154,7 @@
 			deleteItem(id,opt){
 				if(opt==1){
 					this.deleteMessage='Deleting...'
-					axios.delete('/api/setting/delete/'+id).then((res)=>{
+					axios.delete('/admin/api/setting/delete/'+id).then((res)=>{
 						
 						if(res.data.deleted==true){
 							this.deleteMessage='Delete Successfully'

@@ -39,7 +39,7 @@
 		],
 		data(){
 			return{
-				url:'/api/category_type/',
+				url:'/admin/api/category_type/',
 				btnNewUrl:'/admin/category_type/add',
 				listTitle:'Category Type List',
 				headers: [

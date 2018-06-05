@@ -35,7 +35,7 @@
 		data(){
 			return{
 				listTitle:'Resellers List',
-				url:'/api/carriers',
+				url:'/admin/api/carriers',
 				btnNewUrl:'/admin/carrier/add',
 				headers: [
 			        { text: 'ID',align: 'left',class:'text-xs-left',value: 'carrier_id'},

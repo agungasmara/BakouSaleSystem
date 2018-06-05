@@ -25,7 +25,7 @@
 		},
 		data(){
 			return{
-				url:'/api/manufacturers/',
+				url:'/admin/api/manufacturers/',
 				e1:true,
 				valid: true,
 			    group:[
@@ -81,7 +81,7 @@
 				});
 			},
 			getStore(){
-				axios.get('/api/getStore').then((res)=>{
+				axios.get('/admin/api/getStore').then((res)=>{
 					this.select.storesItems=res.data
 				})
 			}

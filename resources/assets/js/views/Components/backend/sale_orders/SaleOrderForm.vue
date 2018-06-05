@@ -303,7 +303,7 @@
 		data(){
 			return {
 				back:'/admin/sale_order/list',
-				url:'/api/sale_order/',
+				url:'/admin/api/sale_order/',
 				data:{},
 				valid:true,
 				e1:0,
@@ -445,7 +445,7 @@
 		methods:{
 			onchange(item,id){
 		    	if (item) {
-			    	axios.get('/api/getLocations/'+id).then(response => this.selectItem[item]=response.data);
+			    	axios.get('/admin/api/getLocations/'+id).then(response => this.selectItem[item]=response.data);
 		    	}
 		    },
 		    fetchData(){

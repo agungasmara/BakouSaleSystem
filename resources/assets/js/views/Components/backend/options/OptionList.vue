@@ -39,7 +39,7 @@
 		],
 		data(){
 			return{
-				url:'/api/options/',
+				url:'/admin/api/options/',
 				btnNewUrl:'/admin/options/add',
 				listTitle:'Options List',
 				headers: [

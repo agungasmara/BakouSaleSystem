@@ -23,7 +23,7 @@
 		},
 		data(){
 			return{
-				url:'/api/settings/',
+				url:'/admin/api/settings/',
 				e1:true,
 				valid: true,
 				btnImageDisabled:false,
@@ -82,7 +82,7 @@
 		},
 		methods:{
 			getStore(){
-				axios.get('/api/getStore').then((res)=>{
+				axios.get('/admin/api/getStore').then((res)=>{
 					this.select.stores=res.data
 				})
 			}

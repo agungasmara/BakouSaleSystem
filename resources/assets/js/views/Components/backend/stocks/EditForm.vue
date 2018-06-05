@@ -27,7 +27,7 @@
 		},
 		data(){
 			return{
-				url:'/api/stock_status/',
+				url:'/admin/api/stock_status/',
 				e1:true,
 				valid: true,
 				btnImageDisabled:false,
@@ -82,7 +82,7 @@
 				});
 			},
 			fetchLanguage(){
-				axios.get('/api/getLanguage').then((res)=>{
+				axios.get('/admin/api/getLanguage').then((res)=>{
 					this.select.languages=res.data
 					// console.log(res.data.code)
 				})

@@ -753,7 +753,7 @@
 				btnText:'Upload Image',
 				imageUrl:'',
 				image:null,
-				url:'/api/carriers/',
+				url:'/admin/api/carriers/',
 				checked: [],
         checked1: '',
         ingredients: [{
@@ -1016,7 +1016,7 @@
 				console.log('data after child handle: ', event)
 			},
 			getUserGroup(){
-				axios.get('/api/users_group').then((res)=>{
+				axios.get('/admin/api/users_group').then((res)=>{
 					this.selects.userGroupItems=res.data
 				})
 			},

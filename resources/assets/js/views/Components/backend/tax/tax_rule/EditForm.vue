@@ -25,7 +25,7 @@
 		},
 		data(){
 			return{
-				url:'/api/tax_rule/',
+				url:'/admin/api/tax_rule/',
 				e1:true,
 				valid: true,
 				group:[
@@ -79,16 +79,16 @@
 		},
 		methods:{
 			fetchData(id){
-				axios.get('/api/tax_rule/'+id+'/edit').then(res=>{
+				axios.get('/admin/api/tax_rule/'+id+'/edit').then(res=>{
 					this.data=res.data
 					console.log(res.data)
 				});
 			},
 			getTaxItem(){
-				axios.get('/api/getTaxClass').then((res)=>{
+				axios.get('/admin/api/getTaxClass').then((res)=>{
 					this.select.tax_class=res.data
 				})
-				axios.get('/api/getTaxRate').then((res)=>{
+				axios.get('/admin/api/getTaxRate').then((res)=>{
 					this.select.tax_rate=res.data
 				})
 			}

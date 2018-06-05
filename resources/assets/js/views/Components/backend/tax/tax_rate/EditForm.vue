@@ -25,7 +25,7 @@
 		},
 		data(){
 			return{
-				url:'/api/tax_rate/',
+				url:'/admin/api/tax_rate/',
 				e1:true,
 				valid: true,
 			    group:[
@@ -92,7 +92,7 @@
 		},
 		methods:{
 			getGeoZone(){
-				axios.get('/api/getGeoZone').then((res)=>{
+				axios.get('/admin/api/getGeoZone').then((res)=>{
 					this.select.geo_zone=res.data
 				})
 			},

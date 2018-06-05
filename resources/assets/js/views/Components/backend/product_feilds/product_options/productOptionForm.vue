@@ -221,12 +221,12 @@
 		},
 		methods:{
 			getOptions:function(){
-				axios.get('/api/getOptions').then(res=>{
+				axios.get('/admin/api/getOptions').then(res=>{
 					this.options=res.data
 				})
 			},
 			getChildOption:function(optID){
-				axios.get('/api/getChildOption/'+optID).then(res=>{
+				axios.get('/admin/api/getChildOption/'+optID).then(res=>{
 					this.checkItem=res.data
 				})
 			},

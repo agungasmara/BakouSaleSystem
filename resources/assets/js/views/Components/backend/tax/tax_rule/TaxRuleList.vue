@@ -38,7 +38,7 @@
 		],
 		data(){
 			return{
-				url:'/api/tax_rule/',
+				url:'/admin/api/tax_rule/',
 				btnNewUrl:'/admin/tax_rule/add',
 				listTitle:'Tax Rule List',
 				headers: [

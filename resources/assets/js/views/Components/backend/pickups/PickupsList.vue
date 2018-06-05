@@ -113,7 +113,7 @@
 		data(){
 			return{
 				listTitle:'Pickup List',
-				url:'/api/pickup',
+				url:'/admin/api/pickup',
 				menu:null,
 				btnNewUrl:'/admin/pickup/add',
 				valid:false,
@@ -181,7 +181,7 @@
 			},
 			filterCustomer()
 			{
-				axios.post('/api/filterShippment',this.filter).then(res=>{
+				axios.post('/admin/api/filterShippment',this.filter).then(res=>{
 					if(res.data.result==true){
 						this.pickups=res.data.data
 						//console.log(res.data.data)

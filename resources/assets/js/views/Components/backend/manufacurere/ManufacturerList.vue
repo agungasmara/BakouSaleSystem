@@ -38,7 +38,7 @@
 		],
 		data(){
 			return{
-				url:'/api/manufacturers/',
+				url:'/admin/api/manufacturers/',
 				btnNewUrl:'/admin/manufacturers/add',
 				listTitle:'Weights List',
 				headers: [

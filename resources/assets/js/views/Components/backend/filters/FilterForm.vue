@@ -23,7 +23,7 @@
 		},
 		data(){
 			return{
-				url:'/api/filters/',
+				url:'/admin/api/filters/',
 				e1:true,
 				valid: true,
 			    group:[
@@ -77,12 +77,12 @@
 		},
 		methods:{
 			getFilterGroup(){
-				axios.get('/api/getFilterGroup').then((res)=>{
+				axios.get('/admin/api/getFilterGroup').then((res)=>{
 					this.select.filterGroups=res.data
 				})
 			},
 			getLanguage(){
-				axios.get('/api/getLanguage').then((res)=>{
+				axios.get('/admin/api/getLanguage').then((res)=>{
 					this.select.languages=res.data
 				})
 			}

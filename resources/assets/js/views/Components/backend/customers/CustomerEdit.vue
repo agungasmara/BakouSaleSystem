@@ -164,7 +164,7 @@
         },
         data(){
             return{
-                url:'/api/customers/',
+                url:'/admin/api/customers/',
                 e1:true,
                 valid: true,
                 flash:Flash.state,
@@ -274,12 +274,12 @@
                 });
             },
             getLanguage(){
-                axios.get('/api/getLanguage').then((res)=>{
+                axios.get('/admin/api/getLanguage').then((res)=>{
                     this.select.languages=res.data
                 })
             },
             fetchGroup(){
-                axios.get('/api/getSelectList/1').then(res=>{
+                axios.get('/admin/api/getSelectList/1').then(res=>{
                     this.select.customergroup=res.data.customerGroups
                     this.countries=res.data.countryies
                     this.zones=res.data.zones
@@ -288,7 +288,7 @@
             },
             fetchZone(cid=1){
                 this.validZone=true
-                axios.get('/api/getSelectList/'+cid).then(res=>{
+                axios.get('/admin/api/getSelectList/'+cid).then(res=>{
                     this.zones=res.data.zones
                     this.validZone=false
                 })

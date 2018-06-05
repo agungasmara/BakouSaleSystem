@@ -34,7 +34,7 @@
 		data(){
 			return{
 				listTitle:'User List',
-				url:'/api/users/',
+				url:'/admin/api/users/',
 				btnNewUrl:'/admin/users/add',
 				headers: [
 			        { text: 'ID',align: 'left',class:'text-xs-left',value: 'id'},

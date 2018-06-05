@@ -64,12 +64,12 @@
 		},
 		methods:{
 			getAttribute(){
-				axios.get('/api/getAttribute').then((res)=>{
+				axios.get('/admin/api/getAttribute').then((res)=>{
 					this.attributes=res.data
 				})
 			},
 			getLanguage(){
-				axios.get('/api/getLanguage').then((res)=>{
+				axios.get('/admin/api/getLanguage').then((res)=>{
 					this.languages=res.data
 				})
 			},

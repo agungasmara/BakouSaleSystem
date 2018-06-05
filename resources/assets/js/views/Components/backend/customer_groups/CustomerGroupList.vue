@@ -39,7 +39,7 @@
 		],
 		data(){
 			return{
-				url:'/api/customer_groups/',
+				url:'/admin/api/customer_groups/',
 				btnNewUrl:'/admin/customer_groups/add',
 				listTitle:'Customer Group List',
 				headers: [

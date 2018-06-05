@@ -104,7 +104,7 @@
             return{
             	valid:false,
             	menu:null,
-                url:'/api/customers/',
+                url:'/admin/api/customers/',
                 btnNewUrl:'/admin/customers/add',
                 listTitle:'Customer List',
                 headers: [
@@ -153,13 +153,13 @@
             	});
             },
 			fetchGroup(){
-                axios.get('/api/getCustomerGroup/').then(res=>[
+                axios.get('/admin/api/getCustomerGroup/').then(res=>[
                     this.customergroup=res.data
 				])
 			},
 			filterCustomer()
 			{
-				axios.post('/api/filterCustomer',this.filter).then(res=>{
+				axios.post('/admin/api/filterCustomer',this.filter).then(res=>{
 					if(res.data.result==true){
 						this.customers=res.data.data
 					}

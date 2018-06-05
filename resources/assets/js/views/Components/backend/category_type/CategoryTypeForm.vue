@@ -23,7 +23,7 @@
 		},
 		data(){
 			return{
-				url:'/api/category_type',
+				url:'/admin/api/category_type',
 				e1:true,
 				valid: true,
 			    group:[
@@ -73,13 +73,13 @@
 		},
 		methods:{
 			getFilterGroup(){
-				axios.get('/api/category_type').then((res)=>{
+				axios.get('/admin/api/category_type').then((res)=>{
 					debugger;
 					this.select.filterGroups=res.data
 				})
 			},
 			getLanguage(){
-				axios.get('/api/getLanguage').then((res)=>{
+				axios.get('/admin/api/getLanguage').then((res)=>{
 					this.select.languages=res.data
 				})
 			}

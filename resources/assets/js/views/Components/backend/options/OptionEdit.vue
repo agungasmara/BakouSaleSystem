@@ -26,7 +26,7 @@
 		},
 		data(){
 			return{
-				url:'/api/options/',
+				url:'/admin/api/options/',
 				e1:true,
 				valid: true,
 			    group:[
@@ -92,12 +92,12 @@
 				});
 			},
 			getOptions(){
-				axios.get('/api/getOptions').then((res)=>{
+				axios.get('/admin/api/getOptions').then((res)=>{
 					this.select.attributeGroups=res.data
 				})
 			},
 			getLanguage(){
-				axios.get('/api/getLanguage').then((res)=>{
+				axios.get('/admin/api/getLanguage').then((res)=>{
 					this.select.languages=res.data
 				})
 			}

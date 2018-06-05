@@ -38,7 +38,7 @@
 		],
 		data(){
 			return{
-				url:'/api/currencies/',
+				url:'/admin/api/currencies/',
 				btnNewUrl:'/admin/currencies/add',
 				listTitle:'Currencies List',
 				headers: [
