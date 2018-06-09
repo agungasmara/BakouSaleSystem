@@ -56,11 +56,13 @@
 			                      	<v-container grid-list-md>
 			                      		<v-layout wrap>
 				                      		<v-flex xs12 sm6 md6>
-									      		<v-select label="Select Category" v-model="data.category_type_id"  :items="select.categoryType"  :rules="[v => !!v || 'Item is required']" required></v-select>
+									      		<!-- <v-select @change="changedValue" label="Select CategoryType" v-model="category_type_id"  :items="select.categoryType"  :rules="[v => !!v || 'Item is required']" required></v-select> -->
+									      		<v-select label="Select CategoryType" v-model="data.category_type_id"  :items="select.categoryType"  :rules="[v => !!v || 'Item is required']" required></v-select>
 									      	</v-flex>
 
 									    	<v-flex xs12 sm6 md6>
-									      		<v-select label="Select CategoryType" v-model="parent_id"  :items="filteredData"  :rules="[v => !!v || 'Item is required']" required></v-select>
+									      		<!-- <v-select label="Select Category" v-model="parent_id"  :items="select.categoryParent"  :rules="[v => !!v || 'Item is required']" required></v-select> -->
+									      		<v-select label="Select Category" v-model="data.parent_id"  :items="filteredData"  :rules="[v => !!v || 'Item is required']" required autocomplete></v-select>
 									      	</v-flex>
 
 									      	<v-flex xs12 sm6 md6>
@@ -244,12 +246,17 @@
 		},
 		computed: {
 		    filteredData() {
-				let options = this.select.categoryParent
-		       return options.filter(o => o.value == this.data.category_type_id)
+				let options = this.select.categoryParent;
+		       return options.filter(o => o.category_type_id == this.data.category_type_id)
 		    }
 		},
 		methods:{
-			
+			// changedValue() {
+			//     axios.get('/admin/api/getCategories_parent/'+this.category_type_id).then((res)=>{
+			//     	debugger;
+			// 		this.select.categoryParent=res.data
+			// 	})
+			// },
 			fetchData(id){
 				axios.get(this.url+id+'/edit').then(res=>{
 					this.data=res.data
@@ -259,15 +266,13 @@
 				axios.get('/admin/api/getCategories_type').then((res)=>{
 					this.select.categoryType=res.data;
 				})
-				axios.get('/admin/api/getCategories_parent').then((res)=>{
-					this.select.categoryParent=res.data
-				})
 			},
 			categoryParent(){
 				axios.get('/admin/api/getCategories_parent').then((res)=>{
 					this.select.categoryParent=res.data
 				})
 			},
+
 			language(){
 				axios.get('/admin/api/getLanguages').then((res)=>{
 					this.select.language=res.data

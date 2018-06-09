@@ -7,6 +7,7 @@ use App\Http\Models\BackEnd\Category\CategoryDescription;
 use App\Http\Models\BackEnd\Category\CategoryType;
 use App\Http\Controllers\Backend\commons\DataAction;
 use App\Http\Controllers\Backend\commons\ImageMaker;
+use Illuminate\Support\Facades\DB;
 class CategoryController extends Controller
 {
     public function index()
@@ -88,12 +89,17 @@ class CategoryController extends Controller
     }
     public function getCategoriesParent()
     {
-        $data=CategoryModel::select('category_id')->Parent()->Active()->get();
-        foreach ($data as $value) {
-            $value->text=$value->Description()->value('name');
-            $value->value=$value->category_id;
-        }
-        // dd($data->toArray());
+        // $data=CategoryModel::select('category_id')->Parent()->Active()->get();
+        // foreach ($data as $value) {
+        //     $value->text=$value->Description()->value('name');
+        //     $value->value=$value->category_id;
+        // }
+        // return $data;
+        $data = DB::table('category')
+                ->Join('category_description','category.category_id','=','category_description.category_id')
+                ->select('category.category_id as value','category_description.name as text','category.category_type_id')
+                // ->where('category.category_type_id',intval($id))
+                ->get();
         return $data;
     }
     public function menu()

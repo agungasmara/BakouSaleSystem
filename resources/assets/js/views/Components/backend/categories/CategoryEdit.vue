@@ -56,11 +56,13 @@
 			                      	<v-container grid-list-md>
 			                      		<v-layout wrap>
 				                      		<v-flex xs12 sm6 md6>
-									      		<v-select label="Select Category" v-model="data.category_type_id"  :items="select.categoryType"  :rules="[v => !!v || 'Item is required']" required></v-select>
+									      		<!-- <v-select label="Select Category" v-model="data.category_type_id"  :items="select.categoryType"  :rules="[v => !!v || 'Item is required']" required></v-select> -->
+									      		<v-select label="Select CategoryType" v-model="data.category_type_id"  :items="select.categoryType"  :rules="[v => !!v || 'Item is required']" required></v-select>
 									      	</v-flex>
 
 									    	<v-flex xs12 sm6 md6>
-									      		<v-select label="Select CategoryType" v-model="data.parent_id"  :items="filteredData"  :rules="[v => !!v || 'Item is required']" required></v-select>
+									      		<!-- <v-select label="Select CategoryType" v-model="data.parent_id"  :items="filteredData"  :rules="[v => !!v || 'Item is required']" required></v-select> -->
+									      		<v-select label="Select Category" v-model="data.parent_id"  :items="filteredData"  :rules="[v => !!v || 'Item is required']" required autocomplete></v-select>
 									      	</v-flex>
 
 									      	<v-flex xs12 sm6 md6>
@@ -240,8 +242,8 @@
 		},
 		computed: {
 		    filteredData() {
-				let options = this.select.categoryParent
-		       return options.filter(o => o.value == this.data.category_type_id)
+				let options = this.select.categoryParent;
+		       return options.filter(o => o.category_type_id == this.data.category_type_id)
 		    }
 		},
 		methods:{
