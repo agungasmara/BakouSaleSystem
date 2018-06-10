@@ -5,7 +5,9 @@
         <!-- <div style="height:500px">
             <button @click="initInsertElastic">Click me to insert elastic search</button>
         </div> -->
+
         <div class="navbar-top">
+            <!--container-->
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6">
@@ -291,6 +293,61 @@
 </template>
 
 <style type="text/css">
+    .alert-success {
+    background-color: #4caf50;
+}
+
+.alert-success i {
+    background: #388e3c;
+}
+
+.alert i {
+    padding-top: 10px;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    text-align: center;
+    width: 60px;
+    font-size: 40px;
+    -webkit-animation: alert-icon-anim 1s;
+    -moz-animation: alert-icon-anim 1s;
+    -ms-animation: alert-icon-anim 1s;
+    -o-animation: alert-icon-anim 1s;
+    animation: alert-icon-anim 1s;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.15);
+}
+
+.alert.fadeOut {
+    -moz-transform: translate(0, -100%);
+    -ms-transform: translate(0, -100%);
+    -o-transform: translate(0, -100%);
+    -webkit-transform: translate(0, -100%);
+    transform: translate(0, -100%);
+}
+
+.alert {
+    font-size: 14px;
+    position: absolute;
+    width:100%;
+    padding: 18px 40px 18px 75px;
+    z-index: 30;
+    color: #fff;
+    border-radius: 0;
+    min-height: 60px;
+    box-sizing: border-box;
+    border: none;
+    font-weight: 600;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+    transition: 1s all cubic-bezier(1, -0.01, 0, 0.99);
+}
+.alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+
     span.special-price{/*color:#4ec67f;*/color:#000;padding-left: 10px;}
     span.original-price{color:#f00;text-decoration: line-through;}
     .product-img{padding-right: 10px;}
