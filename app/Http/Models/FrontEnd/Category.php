@@ -130,7 +130,7 @@ class Category extends Model
 				 ->leftjoin('category_to_store as c2s','c.category_id', '=', 'c2s.category_id')
 				 ->where('c.category_id',"". (int)$category_id . "")
 				 ->where('cd.language_id',"" . (int)config_language_id . "")
-				 ->where('c2s.store_id',(int)$data['store_id'])
+				//  ->where('c2s.store_id',(int)$data['store_id'])
 				 ->where('c.status',1)
 				 ->first();
 		

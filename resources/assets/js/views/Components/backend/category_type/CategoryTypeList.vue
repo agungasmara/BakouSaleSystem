@@ -18,7 +18,7 @@
 		    	v-bind:url="url"
 	    		v-bind:btn-new-url="btnNewUrl"
 		    	v-on:change="fetchData"
-		    	v-bind:del="false"
+		    	v-bind:del="true"
 		    	v-bind:eye="false">
 		    </data-table>
 
