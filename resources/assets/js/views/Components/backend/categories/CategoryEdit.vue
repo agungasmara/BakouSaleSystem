@@ -64,7 +64,16 @@
 									      		<!-- <v-select label="Select CategoryType" v-model="data.parent_id"  :items="filteredData"  :rules="[v => !!v || 'Item is required']" required></v-select> -->
 									      		<v-select label="Select Category" v-model="data.parent_id"  :items="filteredData"  :rules="[v => !!v || 'Item is required']" required autocomplete></v-select>
 									      	</v-flex>
-
+									      	<v-flex xs12 sm6 md6>
+									      		<v-select
+										          :items="select.filter"
+										          v-model="data.filter_id"
+										          label="Filter"
+										          multiple
+										          chips
+										          persistent-hint
+										        ></v-select>
+									      	</v-flex>
 									      	<v-flex xs12 sm6 md6>
 									      		<v-text-field label="Sort Order" v-model="data.sort_order" :counter="100"></v-text-field>
 									      	</v-flex>
@@ -201,7 +210,8 @@
 					data:{
 						image:''
 					},
-					gallery:[]
+					gallery:[],
+					filter_id:'',
 				},
 				select:{
 					statusItems:[
@@ -211,6 +221,7 @@
 					categoryType:[],
 					categoryParent:[],
 					language:[],
+					filter:[],
 				},
 				flash:Flash.state,
 				breadcrumbTitle:'Categories',
@@ -239,6 +250,7 @@
 			this.categoryType()
 			this.categoryParent()
 			this.language()
+			this.getFilter()
 		},
 		computed: {
 		    filteredData() {
@@ -251,6 +263,11 @@
 			fetchData(id){
 				axios.get(this.url+id+'/edit').then(res=>{
 					this.data=res.data
+				});
+			},
+			getFilter(){
+				axios.get('/admin/api/getFilter').then(res=>{
+					this.select.filter=res.data
 				});
 			},
 			categoryType(){
@@ -286,7 +303,8 @@
 		          description: this.data.description,
 		          meta_title: this.data.meta_title,
 		          meta_keyword: this.data.meta_keyword,
-		          meta_description: this.data.meta_description
+		          meta_description: this.data.meta_description,
+		          filter_id:this.data.filter_id,
 
 		        }).then((res)=>{
 		        	if(res.data.success==true){

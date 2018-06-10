@@ -57,12 +57,24 @@
 			                      		<v-layout wrap>
 				                      		<v-flex xs12 sm6 md6>
 									      		<!-- <v-select @change="changedValue" label="Select CategoryType" v-model="category_type_id"  :items="select.categoryType"  :rules="[v => !!v || 'Item is required']" required></v-select> -->
-									      		<v-select label="Select CategoryType" v-model="data.category_type_id"  :items="select.categoryType"  :rules="[v => !!v || 'Item is required']" required></v-select>
+									      		<v-select label="Select CategoryType" v-model="data.category_type_id"  :items="select.categoryType"  :rules="[v => !!v || 'Category Type is required']" required></v-select>
 									      	</v-flex>
 
 									    	<v-flex xs12 sm6 md6>
 									      		<!-- <v-select label="Select Category" v-model="parent_id"  :items="select.categoryParent"  :rules="[v => !!v || 'Item is required']" required></v-select> -->
-									      		<v-select label="Select Category" v-model="data.parent_id"  :items="filteredData"  :rules="[v => !!v || 'Item is required']" required autocomplete></v-select>
+									      		<v-select label="Select Category" v-model="parent_id"  :items="filteredData"  :rules="[v => !!v || 'Category is required']" required autocomplete></v-select>
+									      	</v-flex>
+
+									      	<v-flex xs12 sm6 md6>
+									      		<v-select
+										          :items="select.filter"
+										          v-model="filter_id"
+										          label="Filter"
+										          multiple
+										          chips
+										          persistent-hint
+										          :rules="[v => !!v || 'Filter is required']"
+										        required></v-select>
 									      	</v-flex>
 
 									      	<v-flex xs12 sm6 md6>
@@ -81,7 +93,7 @@
 									      		<v-select label="Choose Language" v-model="language_id"  :items="select.language"></v-select>
 									      	</v-flex>
 									      	<v-flex xs12 sm6 md6>
-									      		<v-text-field label="Name" v-model="name" :rules="keyName" :counter="100" required></v-text-field>
+									      		<v-text-field label="Name" v-model="name" :rules="[v => !!v || 'Name is required']":counter="100" required></v-text-field>
 									      	</v-flex>
 									      	<v-flex xs12 sm6 md6>
 									      		<v-text-field label="Description" v-model="description" :counter="100"></v-text-field>
@@ -155,6 +167,22 @@
 			      (v) => !!v || 'Name is required',
 			      (v) => v && v.length <= 100 || 'Name must be less than 100 characters'
 			    ],
+			    states: [
+		          'Alabama', 'Alaska', 'American Samoa', 'Arizona',
+		          'Arkansas', 'California', 'Colorado', 'Connecticut',
+		          'Delaware', 'District of Columbia', 'Federated States of Micronesia',
+		          'Florida', 'Georgia', 'Guam', 'Hawaii', 'Idaho',
+		          'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
+		          'Louisiana', 'Maine', 'Marshall Islands', 'Maryland',
+		          'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
+		          'Missouri', 'Montana', 'Nebraska', 'Nevada',
+		          'New Hampshire', 'New Jersey', 'New Mexico', 'New York',
+		          'North Carolina', 'North Dakota', 'Northern Mariana Islands', 'Ohio',
+		          'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico',
+		          'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee',
+		          'Texas', 'Utah', 'Vermont', 'Virgin Island', 'Virginia',
+		          'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
+		        ],
 				breadcrumbs: [
 			        {
 			          text: 'Adminstrator',
@@ -215,6 +243,8 @@
 					categoryType:[],
 					categoryParent:[],
 					language:[],
+					categories:[],
+					filter:[],
 				},
 				flash:Flash.state,
 				breadcrumbTitle:'Categories',
@@ -243,6 +273,8 @@
 			this.categoryType()
 			this.categoryParent()
 			this.language()
+			this.getCategories()
+			this.getFilter()
 		},
 		computed: {
 		    filteredData() {
@@ -251,16 +283,20 @@
 		    }
 		},
 		methods:{
-			// changedValue() {
-			//     axios.get('/admin/api/getCategories_parent/'+this.category_type_id).then((res)=>{
-			//     	debugger;
-			// 		this.select.categoryParent=res.data
-			// 	})
-			// },
+			getFilter(){
+				axios.get('/admin/api/getFilter').then(res=>{
+					this.select.filter=res.data
+				});
+			},
 			fetchData(id){
 				axios.get(this.url+id+'/edit').then(res=>{
 					this.data=res.data
 				});
+			},
+			getCategories(){
+				axios.get('/admin/api/getCategories').then((res)=>{
+					this.select.categories=res.data
+				})
 			},
 			categoryType(){
 				axios.get('/admin/api/getCategories_type').then((res)=>{
@@ -284,6 +320,7 @@
 		        axios.post('/admin/api/categories', {
 		          category_type_id: this.data.category_type_id,
 		          parent_id: this.parent_id,
+		          filter_id: this.filter_id,
 		          sort_order: this.sort_order,
 		          status: this.status,
 		          column: this.column,

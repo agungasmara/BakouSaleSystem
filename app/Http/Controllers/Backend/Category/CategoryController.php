@@ -7,6 +7,7 @@ use App\Http\Models\BackEnd\Category\CategoryDescription;
 use App\Http\Models\BackEnd\Category\CategoryType;
 use App\Http\Controllers\Backend\commons\DataAction;
 use App\Http\Controllers\Backend\commons\ImageMaker;
+use App\Http\Models\BackEnd\Category\CategoryFilter;
 use Illuminate\Support\Facades\DB;
 class CategoryController extends Controller
 {
@@ -29,10 +30,13 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $data = (new CategoryModel)->getFillable();
+
         $request['image']=(new ImageMaker)->base64ToImage('images\\icon',$request['image']);
         $request['date_added']=date('Y-m-d');
         $request['date_modified']=date('Y-m-d');
+        // Insert Category Filter
         $data = $request->only($data);
+        
         if ($request->has('category_id')) {
             CategoryModel::find($request['category_id'])->update($data);
             $data = (new CategoryDescription)->getFillable();
@@ -42,6 +46,17 @@ class CategoryController extends Controller
             $request['category_id']=CategoryModel::insertGetId($data); 
             $data = (new CategoryDescription)->getFillable();
             $data = $request->only($data);
+
+            
+            if (isset($request['category_id'])) {
+                # code...
+                foreach ($request['filter_id'] as $item) {
+                    $p2f['category_id']=$request['category_id'];
+                    $p2f['filter_id']=$item;
+                    CategoryFilter::insert($p2f);
+                }
+            }
+
             return (new DataAction)->StoreData(CategoryDescription::class,[],'',$data);
         }
     }
@@ -52,29 +67,38 @@ class CategoryController extends Controller
         foreach ($description as $key=>$value) {
             $data[$key]=$value;
         }
-        // dd($data);
+        $data['filter_id']=array_pluck(CategoryFilter::where('category_id',$id)->get(['filter_id'])->toArray(),'filter_id');
         return $data;
         
     }
     public function update(Request $request,$id)
     {
-        //$data=$request->all();
-        // return $data;
-        //return (new DataAction)->UpdateData(CategoryModel::class,$data,'category_id',$id);
          //data for Category value
-        $Category=(new CategoryModel)->getFillable();
-        $Category=$request->only($Category);
+        $fill=(new CategoryModel)->getFillable();
+        $data=$request->only($fill);
+        CategoryModel::find($id)->update($data);
+
+        CategoryFilter::where('category_id',$id)->delete();
+        if (isset($request['filter_id']) && $request['filter_id']) {
+            # code...
+            foreach ($request['filter_id'] as $item) {
+                $p2f['category_id']=$id;
+                $p2f['filter_id']=$item;
+                CategoryFilter::insert($p2f);
+            }
+        }
 
         //Data for Category description
-        $categoryTypeDesc=(new CategoryDescription)->getFillable();
-        $categoryTypeDesc=$request->only($categoryTypeDesc);
+        $fillCategoryDes=(new CategoryDescription)->getFillable();
+        $categoryTypeDesc=$request->only($fillCategoryDes);
 
-        $saveInformation = (new DataAction)->UpdateData(CategoryModel::class,$Category,'category_id',$id);
         return (new DataAction)->UpdateData(CategoryDescription::class,$categoryTypeDesc,'category_id',$id);
     }
     public function destroy($id)
     {
-        CategoryModel::where('parent_id',$id)->update(['parent_id'=>0]);
+        //CategoryModel::where('parent_id',$id)->update(['parent_id'=>0]);
+        CategoryDescription::where('category_id',$id)->delete();
+        CategoryFilter::where('category_id',$id)->delete();
         return (new DataAction)->DeleteData(CategoryModel::class,'category_id',$id);
         
     }

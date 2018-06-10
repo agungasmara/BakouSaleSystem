@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Models\BackEnd\Category;
-
+use App\Http\Models\BackEnd\Category\CategoryFilter;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
@@ -40,12 +40,34 @@ class CategoryModel extends Model
 	}
 	static function DeleteCategory($category_id)
 	{
+		// $Category=static::find($category_id);
+		// if (!$Category) {
+		// 	return false;
+		// }
+		// return $Category->delete();
+
 		$Category=static::find($category_id);
-		if (!$Category) {
-			return false;
+		$CategoryDescription = CategoryDescription::where('category_id',$category_id)->delete();
+		$CategoryFilter = CategoryFilter::where('category_id',$category_id)->delete();
+		if (!$Product) {
+			return ['success'=>false,
+					'message'=>'Data fail to delete.'];
 		}
-		return $Category->delete();
+		return ['deleted'=>$Category->delete(),
+    			'message'=>'Data successfully deleted.'];
+
 	}
+	// static function DeleteProduct($product_id)
+	// {
+	// 	$Product=static::find($product_id);
+	// 	$ProductDescription = ProductDescription::where('product_id',$product_id)->delete();
+	// 	if (!$Product) {
+	// 		return ['success'=>false,
+	// 				'message'=>'Data fail to delete.'];
+	// 	}
+	// 	return ['deleted'=>$Product->delete(),
+ //    			'message'=>'Data successfully deleted.'];
+	// }
 	public function Description()
 	{
 		$language_id=1;
