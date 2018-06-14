@@ -122,6 +122,8 @@ if (Request::is('admin*')){
                 Route::get('/getProductRelates','Backend\commons\CommonsController@getProductRelates');
                 Route::get('/getFilter','Backend\commons\CommonsController@getFilter');
                 Route::get('/getMenus', 'Backend\Settings\GroupRolesController@getMenus');
+                //=====Carriers========================
+                Route::get('getCarriers', 'Backend\Carriers\CarriersController@getCarriers');
                 //=====User Role============================= 
                 Route::resource('/user_role', 'Backend\Settings\GroupRolesController');
                 //=====User=============================

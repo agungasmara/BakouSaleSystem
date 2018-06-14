@@ -17,6 +17,10 @@ class CarriersController extends Controller
         $Carriers=Carrier::where('active',true)->where('deleted',false)->get();
         return response()->json($Carriers);
     }
+    public function getCarriers(){
+        return Carrier::select('carrier_id as value','name as text')->get();
+    }
+
     public function store(Request $request)
     {
         $data=(new Carrier)->getFillable();

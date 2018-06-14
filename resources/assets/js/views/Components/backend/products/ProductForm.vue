@@ -281,6 +281,7 @@
 					],
 					links:[
 						{	class:'xs12 sm12',	 text:'Categories',	key:'category_id',	type:'multiple',	 Value:''	,items:'categories'},
+						{	class:'xs12 sm12',	 text:'Carriers',	key:'carrier_id',	type:'multiple',	 Value:''	,items:'carriers'},
 						{	class:'xs12 sm12',	 text:'Filter',	key:'filter_id',	type:'multiple',	 Value:''	,items:'filter'},
 						{	class:'xs12 sm12',	 text:'Store',	key:'store_id',	type:'multiple',	 Value:''	,items:'store'},
 						{	class:'xs12 sm12',	 text:'Related Product',	key:'related_product',	type:'multiple',	 Value:''	,items:'products'},
@@ -311,6 +312,7 @@
 				},
 				select:{
 					categories:[],
+					carriers:[],
 					manufacturer:[],
 					status:[
 						{text:'Acitve',value:1},
@@ -331,6 +333,7 @@
 		},
 		created(){
 			this.getCategories()
+			this.geCarriers()
 			this.getManufacturers()
 			this.getStore()
 			this.getTaxClass()
@@ -342,6 +345,11 @@
 			getCategories(){
 				axios.get('/admin/api/getCategories').then((res)=>{
 					this.select.categories=res.data
+				})
+			},
+			geCarriers(){
+				axios.get('/admin/api/getCarriers').then((res)=>{
+					this.select.carriers=res.data
 				})
 			},
 			getManufacturers(){

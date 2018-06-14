@@ -104,7 +104,7 @@ class CategoryController extends Controller
     }
     public function getCategoriesList()
     {
-        $language_id=1;
+        $language_id=config_language_id;
         return CategoryDescription::select('category_id as value','name as text')->where('language_id',$language_id)->get();
     }
     public function getCategoriesType()
