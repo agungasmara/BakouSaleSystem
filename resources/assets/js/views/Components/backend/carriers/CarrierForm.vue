@@ -34,7 +34,7 @@
 				<div class="row container">
 				  <div class="container">
 				    <div class="col s10 m6 l6">
-				      <h5 class="breadcrumbs-title">Products</h5>
+				      <h5 class="breadcrumbs-title">Carriers</h5>
 				      	<v-breadcrumbs>
 				        	<v-icon slot="divider">/</v-icon>
 			        		<v-breadcrumbs-item  v-for="breadcrumb in breadcrumbs" :key="breadcrumb.text" :disabled="breadcrumb.disabled">
@@ -205,12 +205,12 @@
 						
 					],
 					general:[
-						{	class:'xs6 sm6',	 text:'Carrier Name',	key:'name',	type:'text',	 Value:''},
-						{	class:'xs6 sm6',	 text:'Transit time',	key:'tag',	type:'text',	 Value:''	},
-						{	class:'xs6 sm6',	 text:'Speed grade',	key:'meta_title',	type:'text',	 Value:''	},
+						{	class:'xs6 sm6',	 text:'Carrier Name',	key:'name',	type:'text', Value:''},
+						{	class:'xs6 sm6',	 text:'Transit time',	key:'delay',	type:'text',	 Value:''	},
+						{	class:'xs6 sm6',	 text:'Speed grade',	key:'grade',	type:'text',	 Value:''	},
 						{	class:'xs6 sm6',	 text:'Tracking Url',	key:'url',	type:'text',	 Value:''	},
-						{	class:'xs12 sm12',	 text:'Store',	key:'store_id',	type:'multiple',	 Value:''	,items:'store'},
-						{	class:'xs12 sm12',	 text:'Carrier',	key:'reference_id',	type:'select',	 Value:''	,items:'carrier'},
+						{	class:'xs12 sm12',	 text:'Store',	key:'store_id',	type:'multiple',	 Value:''	,items:'store'}
+						// {	class:'xs12 sm12',	 text:'Carrier',	key:'reference_id',	type:'select',	 Value:''	,items:'carrier'},
 					],
 					data:[
 						{	class:'xs12',	 text:'Tax Class',	key:'tax_class_id',	type:'select',	 Value:'',	items:'tax_class'},
@@ -227,18 +227,34 @@
 						{	class:'xs12 sm6',	 text:'Maximum package depth (cm)',	key:'max_depth',	type:'number',	 Value:''	},
 						{	class:'xs12 sm6',	 text:'Maximum package weight (kg)',	key:'max_weight',	type:'number',	 Value:''	},
 
-
-
-
-
-
-
 					],
 					
 
 				},
 				rules:{
-					
+					name: [
+				      (v) => !!v || 'Name is required',
+				      (v) => v && v.length <= 16 || 'Username must be less than 16 characters'
+				    ],
+					store_id:[
+						(v) => !!v || 'Store is required'
+					],
+					tax_class_id:[
+						(v) => !!v || 'Tax Class is required'
+					],
+					range_behavior:[
+						(v) => !!v || 'Range Behavior is required'
+					],
+					delay: [
+				      (v) => !!v || 'Transmit time is required'
+				    ],
+					url: [
+				      (v) => !!v || 'URL is required'
+				    ],
+				    code: [
+				      (v) => !!v || 'Code is required',
+				      (v) => v && v.length <= 8 || 'Code must be less than 8 characters'
+				    ]
 				},
 				data:{
 					general:{},
@@ -298,7 +314,7 @@
 			
 			submit (opt=1) {
 
-		      	// if (this.$refs.form.validate()) {
+		      	if (this.$refs.form.validate()) {
 			        // Native form submission is not yet supporte
 			        
 			        if(!this.id){
@@ -347,7 +363,7 @@
 	                  	})
 			        }
 			        
-		      	// }
+		      	}
 		    },
 		}
 	}

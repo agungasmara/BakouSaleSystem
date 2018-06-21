@@ -93,9 +93,9 @@
 	            $message='Data successfully saved.';
 	        }
 	        if($id==""){
-	        	return array('success'=>$success,'message'=>$message);
+	        	return array('success'=>$success,'message'=>$message,'data'=>$data);
 	        }else{
-	         	return array('success'=>$success,'message'=>$message,$id=>$saved);
+	         	return array('success'=>$success,'message'=>$message,$id=>$saved,'data'=>$data);
 	        }
 		}
 		public function EditData($table,$id)
@@ -114,7 +114,8 @@
 			$imagedb=@$image->image;
 			$img=@$data['image'];
 	        return array(
-	            'success'=>true,
+				'success'=>true,
+				'data'=>$data,
 	            'message'=>'Data successfully updated.'
 
 	        );

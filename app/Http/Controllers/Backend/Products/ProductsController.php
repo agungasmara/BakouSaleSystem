@@ -54,7 +54,7 @@ class ProductsController extends Controller
 
         ProductToCategory::where('product_id',$product_id)->delete();
 
-        ProductToCarrier::where('product_id',$product_id)->delete();
+        // ProductToCarrier::where('product_id',$product_id)->delete();
 
         ProductToStore::where('product_id',$product_id)->delete();
 
@@ -76,15 +76,15 @@ class ProductsController extends Controller
 
         ProductDescription::where('product_id',$product_id)->delete();
 
-        if (isset($request['links']['carrier_id']) && $request['links']['carrier_id']) {
-            # code...
-            foreach ($request['links']['carrier_id'] as $item) {
-                $p2cr['product_id']=$product_id;
-                $p2cr['carrier_id']=$item;
-                $p2cr['store_id']=config_store_id;
-                ProductToCarrier::insert($p2cr);
-            }
-        }
+        // if (isset($request['links']['carrier_id']) && $request['links']['carrier_id']) {
+        //     # code...
+        //     foreach ($request['links']['carrier_id'] as $item) {
+        //         $p2cr['product_id']=$product_id;
+        //         $p2cr['carrier_id']=$item;
+        //         $p2cr['store_id']=config_store_id;
+        //         ProductToCarrier::insert($p2cr);
+        //     }
+        // }
 
         if (isset($request['links']['category_id']) && $request['links']['category_id']) {
             # code...
@@ -338,6 +338,7 @@ class ProductsController extends Controller
         $data=array_only($request['general'],$fill);
         $data['product_id']=$product_id;
         $data['language_id']=1;
+        dd($data);
         return (new DataAction)->UpdateData(ProductDescription::class,$data,'product_id',$product_id);
     }
     public function destroy($id)

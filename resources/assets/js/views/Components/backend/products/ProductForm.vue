@@ -281,7 +281,7 @@
 					],
 					links:[
 						{	class:'xs12 sm12',	 text:'Categories',	key:'category_id',	type:'multiple',	 Value:''	,items:'categories'},
-						{	class:'xs12 sm12',	 text:'Carriers',	key:'carrier_id',	type:'multiple',	 Value:''	,items:'carriers'},
+						// {	class:'xs12 sm12',	 text:'Carriers',	key:'carrier_id',	type:'multiple',	 Value:''	,items:'carriers'},
 						{	class:'xs12 sm12',	 text:'Filter',	key:'filter_id',	type:'multiple',	 Value:''	,items:'filter'},
 						{	class:'xs12 sm12',	 text:'Store',	key:'store_id',	type:'multiple',	 Value:''	,items:'store'},
 						{	class:'xs12 sm12',	 text:'Related Product',	key:'related_product',	type:'multiple',	 Value:''	,items:'products'},
@@ -296,7 +296,26 @@
 
 				},
 				rules:{
-					
+					name: [
+				      (v) => !!v || 'Product name is required',
+				      (v) => v && v.length >= 2 || 'Product name must be greater than 2 characters'
+				    ],
+					delay: [
+				      (v) => !!v || 'Transmit time is required'
+				    ],
+				    grade: [
+				      (v) => !!v || 'Grade is required'
+				    ],
+					url: [
+				      (v) => !!v || 'URL is required'
+				    ],
+					store_id: [
+					  (v) => !!v || 'Store is required'
+					],
+				    code: [
+				      (v) => !!v || 'Code is required',
+				      (v) => v && v.length <= 8 || 'Code must be less than 8 characters'
+				    ]
 				},
 				data:{
 					general:{},
@@ -426,7 +445,7 @@
 			},
 			submit (opt=1) {
 
-		      	// if (this.$refs.form.validate()) {
+		      	if (this.$refs.form.validate()) {
 			        // Native form submission is not yet supporte
 			        
 			        if(!this.id){
@@ -475,7 +494,7 @@
 	                  	})
 			        }
 			        
-		      	// }
+		      	}
 		    },
 		}
 	}

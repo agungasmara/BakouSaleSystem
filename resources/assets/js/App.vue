@@ -96,7 +96,6 @@
       mounted: function () {
         window.addEventListener('load', () => {
             setTimeout(() => {
-              
               // run after everything is in-place
             }, 100)
         })
