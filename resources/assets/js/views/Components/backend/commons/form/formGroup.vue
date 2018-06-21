@@ -6,7 +6,7 @@
 		
 		<v-flex v-for="input in formItems" :key="input.key" :class="input.class">
 			<div v-if="input.type=='select'">
-			<v-select :label="input.text"  :rules="formRules[input.key]" v-model="formDatas[input.key]" :items="selectItems[input.items]" required autocomplete></v-select>
+			<v-select :label="input.text" :rules="formRules[input.key]" v-model="formDatas[input.key]" :items="selectItems[input.items]" required autocomplete></v-select>
 			</div>
 			<div v-if="input.type=='multiple'">
 				<v-select :label="input.text"  :rules="formRules[input.key]" v-model="formDatas[input.key]" :items="selectItems[input.items]" autocomplete :loading="loading" multiple cache-items chips clearable required :search-input.sync="search"></v-select>
@@ -106,6 +106,7 @@
 	import Flash from '../../../../../helper/flash'
 	import axios from 'axios'
 	//import { VueEditor } from 'vue2-editor'
+	
 	var toolbars=[
 		[
 			'bold', 'italic', 'underline', 'strike',

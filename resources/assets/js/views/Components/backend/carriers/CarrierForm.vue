@@ -104,7 +104,7 @@
 							                    	<form-group
 														v-bind:form-items="group[item.profile]"
 														v-bind:form-rules="rules"
-														v-bind:form-datas="data.data"
+														v-bind:form-datas="data"
 														v-bind:select-items="select"
 														
 													></form-group>
@@ -192,7 +192,7 @@
 					{
 						info_title:'',
 						info_description:'',
-						title:'Size, weight, and group access',
+						title:'Option delivery',
 						icon:'info_outline',
 						form:'links',
 					},
@@ -213,19 +213,19 @@
 						// {	class:'xs12 sm12',	 text:'Carrier',	key:'reference_id',	type:'select',	 Value:''	,items:'carrier'},
 					],
 					data:[
-						{	class:'xs12',	 text:'Tax Class',	key:'tax_class_id',	type:'select',	 Value:'',	items:'tax_class'},
-						{	class:'xs12',	 text:'Out-of-rang behavior',	key:'range_behavior',	type:'select',	 Value:'' ,	items:'tax_class'},
-						{	class:'xs12 sm6',	 text:'Active',	key:'active',	type:'checkbox',	 Value:'1'},
+						{	class:'xs12',	 text:'Tax Class',	key:'tax_rules_group_id',	type:'select',	 Value:'',	items:'tax_class'},
 						{	class:'xs12 sm6',	 text:'Free shipping',	key:'is_free',	type:'checkbox',	 Value:'1'},
 						{	class:'xs12 sm6',	 text:'Add handling costs',	key:'shipping_handling',	type:'checkbox', Value:'1'},
-						{	class:'xs12 sm6',	 text:'Grade',	key:'grade',	type:'checkbox',	 Value:'1'},
 						
 					],
 					links:[
-						{	class:'xs12 sm6',	 text:'Maximum package width (cm)',	key:'max_width',	type:'number',	 Value:''	},
-						{	class:'xs12 sm6',	 text:'Maximum package height (cm)',	key:'max_height',	type:'number',	 Value:''	},
-						{	class:'xs12 sm6',	 text:'Maximum package depth (cm)',	key:'max_depth',	type:'number',	 Value:''	},
-						{	class:'xs12 sm6',	 text:'Maximum package weight (kg)',	key:'max_weight',	type:'number',	 Value:''	},
+						// {	class:'xs12',	 text:'Out-of-rang behavior',	key:'range_behavior',	type:'select',	 Value:'' ,	items:'tax_class'},
+						{	class:'xs12 sm6',	 text:'Active',	key:'active',	type:'checkbox',	 Value:'1'},
+						{	class:'xs12 sm6',	 text:'Grade',	key:'grade',	type:'checkbox',	 Value:'1'},
+						// {	class:'xs12 sm6',	 text:'Maximum package width (cm)',	key:'max_width',	type:'number',	 Value:''	},
+						// {	class:'xs12 sm6',	 text:'Maximum package height (cm)',	key:'max_height',	type:'number',	 Value:''	},
+						// {	class:'xs12 sm6',	 text:'Maximum package depth (cm)',	key:'max_depth',	type:'number',	 Value:''	},
+						// {	class:'xs12 sm6',	 text:'Maximum package weight (kg)',	key:'max_weight',	type:'number',	 Value:''	},
 
 					],
 					
@@ -239,28 +239,19 @@
 					store_id:[
 						(v) => !!v || 'Store is required'
 					],
-					tax_class_id:[
+					tax_rules_group_id:[
 						(v) => !!v || 'Tax Class is required'
 					],
-					range_behavior:[
-						(v) => !!v || 'Range Behavior is required'
-					],
+					
 					delay: [
 				      (v) => !!v || 'Transmit time is required'
 				    ],
-					url: [
-				      (v) => !!v || 'URL is required'
-				    ],
-				    code: [
-				      (v) => !!v || 'Code is required',
-				      (v) => v && v.length <= 8 || 'Code must be less than 8 characters'
-				    ]
+					
+				   
 				},
 				data:{
 					general:{},
-					data:{
-						image:''
-					},
+					image:'',
 					links:{},
 					
 				},
