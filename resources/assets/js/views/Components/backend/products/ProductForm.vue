@@ -262,11 +262,11 @@
 						{	class:'xs12 sm6',	 text:'SKU',	key:'sku',	type:'text',	 Value:''},
 						{	class:'xs12 sm6',	 text:'UPC',	key:'upc',	type:'text',	 Value:''},
 						{	class:'xs12 sm6',	 text:'JAN',	key:'jan',	type:'text',	 Value:''},
-						{	class:'xs12 sm6',	 text:'Minimum',	key:'minimum',	type:'number',	 Value:''},
+						{	class:'xs12 sm6',	 text:'Minimum',	key:'minimum',	type:'number',	 Value:'1'},
 						{	class:'xs12 sm6',	 text:'Quantity',	key:'quantity',	type:'number',	 Value:''},
-						{	class:'xs12 sm6',	 text:'StockStatus',	key:'stock_status_id',	type:'select',	 Value:'',	items:'stock_status'},
+						{	class:'xs12 sm6',	 text:'StockStatus',	key:'stock_status_id',	type:'select',	 Value:'0',	items:'stock_status'},
 						{	class:'xs12 sm6',	 text:'Date Available',	key:'date_available',	type:'date',	 Value:''},
-						{	class:'xs12 sm6',	 text:'Shipping',	key:'shipping',	type:'select',	 Value:''	,items:'shipping'},
+						{	class:'xs12 sm6',	 text:'Shipping',	key:'shipping',	type:'select',	 Value:'0'	,items:'shipping'},
 						// {	class:'xs12 sm6',	 text:'Weight',	key:'weight',	type:'text',	 Value:''},
 						// {	class:'xs12 sm6',	 text:'Weight Class',	key:'weight_class_id',	type:'select',	 Value:'',	items:'weight_class'},
 						// {	class:'xs4 sm2',	 text:'Length',	key:'length',	type:'text',	 Value:''},
@@ -277,7 +277,7 @@
 						// {	class:'xs12 sm6',	 text:'Subtract',	key:'subtract',	type:'text',	 Value:''},
 						// {	class:'xs12 sm6',	 text:'Points',	key:'points',	type:'text',	 Value:''},
 						{	class:'xs12 sm6',	 text:'Sort Order',	key:'sort_order',	type:'number',	 Value:''},
-						{	class:'xs12 sm6',	 text:'Status',	key:'status',	type:'select',	Value:'',	items:'status'	},
+						{	class:'xs12 sm6',	 text:'Status',	key:'status',	type:'select',	Value:'0',	items:'status'	},
 					],
 					links:[
 						{	class:'xs12 sm12',	 text:'Categories',	key:'category_id',	type:'multiple',	 Value:''	,items:'categories'},
@@ -300,6 +300,30 @@
 				      (v) => !!v || 'Product name is required',
 				      (v) => v && v.length >= 2 || 'Product name must be greater than 2 characters'
 				    ],
+				    image: [
+				    	(v) => !!v || 'Image required'
+				    ],
+					price: [
+						(v) => !!v || 'Price required'
+					],
+					tax_class_id: [
+						(v) => !!v || 'Tax Class required'
+					],
+					quantity: [
+						(v) => !!v || 'Quantity required'
+					],
+					stock_status_id: [
+						(v) => !!v || 'StockStatus required'
+					],
+					date_available: [
+						(v) => !!v || 'Date Available required'
+					],
+					shipping: [
+						(v) => !!v || 'Shipping required'
+					],
+					status: [
+						(v) => !!v || 'Status required'
+					],
 					delay: [
 				      (v) => !!v || 'Transmit time is required'
 				    ],
@@ -310,7 +334,8 @@
 				      (v) => !!v || 'URL is required'
 				    ],
 					store_id: [
-					  (v) => !!v || 'Store is required'
+					  (v) => !!v.length > 0 || 'Store is required'
+					  // "[() => select.length > 0 || 'You must choose at least one']"
 					],
 				    code: [
 				      (v) => !!v || 'Code is required',
