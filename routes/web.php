@@ -147,6 +147,7 @@ if (Request::is('admin*')){
                 Route::get('/getChildOption/{id}','Backend\commons\CommonsController@getChildOption');
                 Route::get('/getSelectList/{cid}','Backend\commons\CommonsController@getSelectList');
                 Route::get('/getCarrier/','Backend\commons\CommonsController@getCarrier');
+                Route::get('/getUserGroups/','Backend\commons\CommonsController@getUserGroups');
                 //=====Setting API=============================
 
                 Route::get('/settings/item/','Backend\Settings\SettingsController@item');//use to get all config item to put into dropdown list in setting edit form 
@@ -158,11 +159,11 @@ if (Request::is('admin*')){
 
                 Route::get('/getUsers','Backend\UserGroups\UserGroupsController@getUsers');
                 Route::get('/permission','Backend\UserGroups\UserGroupsController@getPermission');
-                Route::get('/users_group/checkIfExisted/{field}/{value}','Backend\UserGroups\UserGroupsController@ValidateData');
+                Route::get('/user_groups/checkIfExisted/{field}/{value}','Backend\UserGroups\UserGroupsController@ValidateData');
 
 
                 //=====User API
-                Route::get('/users_group','Backend\Users\UsersController@UserGroup');
+                Route::get('/user_groups','Backend\Users\UsersController@UserGroup');
                 Route::get('/user/checkIfExisted/{field}/{value}','Backend\Users\UsersController@ValidateData');
                 Route::Resource('/users','Backend\Users\UsersController');
                 Route::Resource('/resellers','Backend\Users\ResellerController');

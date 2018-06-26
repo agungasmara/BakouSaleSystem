@@ -120,7 +120,7 @@
 		},
 		methods:{
 			getUserGroup(){
-				axios.get('/admin/api/users_group').then((res)=>{
+				axios.get('/admin/api/getUserGroups').then((res)=>{
 					this.select.userGroupItems=res.data
 				})
 			}
