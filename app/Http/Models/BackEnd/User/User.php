@@ -18,10 +18,8 @@ class User extends Model
     	'image',
     	'email',
     	'password',
-    	'salt',
     	'code',
     	'status',
-    	'ip',
     	'date_added'
     ]; 
     //protected $hidden=['user_group_id','password','salt','ip'];

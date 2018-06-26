@@ -71,7 +71,7 @@ class UsersController extends Controller
     }
     public function UserGroup()
     {
-        return response()->json(UserGroup::Groups());
+        return response()->json(UserGroup::all());
     }
     public function ValidateData($field,$value){
         

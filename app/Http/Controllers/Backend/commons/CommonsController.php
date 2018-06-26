@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Models\Backend\Country\Country;
 use App\Http\Models\Backend\Zone\Zone;
 use Illuminate\Support\Facades\DB;
+use App\Http\Models\BackEnd\UserGroup\UserGroup;
 class CommonsController extends Controller
 {
     public function getLanguage()
@@ -130,6 +131,12 @@ class CommonsController extends Controller
         return response()->json($filterGroup);
 
     }
+
+    public function getUserGroups()
+    {
+        return response()->json(UserGroup::Groups());
+    }
+
     public function getProductRelates()
     {
 
