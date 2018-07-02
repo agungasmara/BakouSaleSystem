@@ -26,8 +26,7 @@
 			    </div>
 			    <div class="col s2 m6 l6">
 			    	<router-link to="/admin/user_role/list" replace><v-btn color="primary" class="btn dropdown-settings breadcrumbs-btn right">Cancel</v-btn></router-link>
-
-			     	<router-link to="/admin/user_role/list" replace><v-btn @click="submit(1)" class="btn dropdown-settings waves-effect waves-light breadcrumbs-btn right" color="success">Save</v-btn></router-link>
+			     	<v-btn @click="submit(1)" class="btn dropdown-settings waves-effect waves-light breadcrumbs-btn right" color="success">Save</v-btn>
 			    </div>
 			  </div>
 			</div>
@@ -56,6 +55,13 @@
 											<v-layout wrap>
 												<v-flex xs12 sm3 md3>
 													User Permission
+													<v-checkbox
+              v-model="ex4"
+              label="red"
+              color="red"
+              value="red"
+              hide-details
+            ></v-checkbox>
 												</v-flex>
 												<v-flex xs12 sm9 md9>
 													<!--<p>{{ selected }}</p>-->
@@ -63,7 +69,7 @@
 														<label style="font-size: 16px;font-weight: bold;margin-bottom: 15px;">{{item.parent_menu_name}}</label>
 															<div style="margin-left:30px;">
 																<template v-for="child in item['children_menu']">
-																	<v-checkbox :label="child.child_menu_name" v-model="selected" :value="child.child_menu_name"></v-checkbox>
+																	<v-checkbox hide-details :label="child.child_menu_name" v-model="selected" :value="child.menu_id"></v-checkbox> => {{item.read}}
 																</template>
 															</div>
 													</template>
@@ -82,6 +88,7 @@
 	import Flash from '../../../../helper/flash'
 	import axios from 'axios'
 	export default{
+		props:['id'],
 		data(){
 			return{
 				selected:[],
@@ -125,11 +132,13 @@
 		},
 		methods:{
 			getStore(){
-				axios.get('/admin/api/getMenus').then((res)=>{
+				axios.get('/admin/api/permission/'+this.id).then((res)=>{
 					this.items=res.data['data']
 				})
 			},
 			submit (opt) {
+				console.log("=======================");
+				console.log(this.selected);
 				// console.log(this.selected)
 				// console.log("=================")
 				// if (this.$refs.form.validate()) {

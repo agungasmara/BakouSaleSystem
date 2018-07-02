@@ -122,7 +122,7 @@ import ReturnOrderEditForm from './views/Components/backend/return_orders/Return
 // import UserGroupList from './views/Components/backend/groups/UserGroupList.vue'
 // import UserGroupEditForm from './views/Components/backend/groups/UserGroupEditForm.vue'
 import UserGroup from './views/Components/backend/user_groups/UserGroup.vue'
-import UserGroupForm from './views/Components/backend/user_groups/MainForm.vue'
+import UserGroupForm from './views/Components/backend/user_groups/UserGroupEditForm.vue'
 import UserGroupList from './views/Components/backend/user_groups/UserGroupList.vue'
 import UserGroupEditForm from './views/Components/backend/user_groups/UserGroupEditForm.vue'
 //User Role#########################
@@ -1371,16 +1371,16 @@ const router = new VueRouter({
   }).$mount('#root')
 // }
 
-// app frontend
-// if(document.getElementById("#root_frontend") ) {
-  const appf = new Vue({
-      // el: '#root',
-      router,
-      template: `
-      <appf></appf>`,
-      components: { Appf },
-  }).$mount('#root_frontend')
-// }
+// // app frontend
+// // if(document.getElementById("#root_frontend") ) {
+//   const appf = new Vue({
+//       // el: '#root',
+//       router,
+//       template: `
+//       <appf></appf>`,
+//       components: { Appf },
+//   }).$mount('#root_frontend')
+// // }
 
 // if( document.getElementById("#root_login") ) {
   const AuthLogin = new Vue({

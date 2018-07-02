@@ -2,9 +2,7 @@
 	
 	namespace App\Helpers;
 	use App\Http\Controllers\Controller;
-	use App\Models\Admin\setup_mgr\Currency;
-	use App\Models\Admin\discount\DiscountPermission;
-	use App\Models\POS\POSCusOrder;
+	use App\Http\Models\BackEnd\Store\Store;
 	use Carbon\Carbon;
 	use DB;
 	use Validator;
@@ -23,6 +21,11 @@
 			$total = floatval($result->total_sales);
 			//+floatval($result->discount)+floatval($result->vat_percentag)
 			return common::FormatCurrentcy($total);
+		}
+		
+		public static function getStoreIdByUser($user_id){
+			$query = Store::where('sec_user_id',$user_id)->first();
+			return $query->store_id;
 		}
 
 		public static function getReilFraction(){
@@ -67,7 +70,7 @@
 				->WHERE('m.parent_id',0)
 				->WHERE('m.menu_type_id',$menu_type_id)
 				->WHERE('md.language_id',$language_id)
-				->SELECT('grd.menu_id as groupMenu_id','gr.id as grouRole_id','m.fa_icon as fa_icon','m.default as default','m.menu_link as p_menu_link','m.menu_code as menu_code','md.name as parent_menu_name','m.id as parent_menu_id')
+				->SELECT('grd.read','grd.write','grd.menu_id as groupMenu_id','gr.id as grouRole_id','m.fa_icon as fa_icon','m.default as default','m.menu_link as p_menu_link','m.menu_code as menu_code','md.name as parent_menu_name','m.id as parent_menu_id')
 				->OrderBy('m.ordering')
 				->get();
 
@@ -105,11 +108,74 @@
 					'default' => $parent_menu->default,
 					'menu_code' => $parent_menu->menu_code,
 					'p_menu_link' => $parent_menu->p_menu_link,
-					'children_menu' => $children_menu
+					'children_menu' => $children_menu,
+					
 				);
 			}
 			return $menu;
 		}
+		// getPermission
+		public static function getPermission($group_role_id){
+			$language_id=2;
+			$menu_type_id=1;
+			$menu = array();
+			$Group_ID = Auth::user()->user_group_id;
+			$parent_menus = DB::table("group_role as gr")
+				->JOIN('group_role_detail as grd', 'grd.group_role_id', '=', 'gr.id')
+				->JOIN('menu as m','m.menu_code','=','grd.menu_code')
+				->JOIN('menu_description as md','m.id','=','md.menu_id')
+				->WHERE('m.is_active',1)
+				->WHERE('m.parent_id',0)
+				->WHERE('m.menu_type_id',$menu_type_id)
+				->WHERE('md.language_id',$language_id)
+				->WHERE('grd.group_role_id',$group_role_id)
+				->SELECT('grd.read','grd.menu_id as groupMenu_id','gr.id as grouRole_id','m.fa_icon as fa_icon','m.default as default','m.menu_link as p_menu_link','m.menu_code as menu_code','md.name as parent_menu_name','m.id as parent_menu_id')
+				->OrderBy('m.ordering')
+				->get();
+
+			foreach ($parent_menus as $parent_menu) {
+			  	$groupMenu_id = $parent_menu->groupMenu_id;
+            	$grouRole_id = $parent_menu->grouRole_id;
+
+				$children_menu = array();
+				$children = DB::table("menu as m")
+							->JOIN('menu_description as md','m.id','=','md.menu_id')
+							->JOIN('group_role_detail as grd','grd.menu_id','=','m.id')
+							->WHERE('m.is_active',1)
+							->WHERE('grd.group_role_id','=',$grouRole_id)
+							->WHERE('m.parent_id','=',$groupMenu_id)
+							->WHERE('m.parent_id','>',0)
+							->WHERE('m.parent_id',$parent_menu->parent_menu_id)
+							->WHERE('md.language_id',$language_id)
+							->SELECT('m.id as menu_id','m.menu_code as menu_code','m.menu_link as c_menu_link','md.name as child_menu_name')
+							->OrderBy('m.ordering')
+							// ->OrderBy('md.namve')
+							->get(); 
+
+				foreach ($children as $child) {
+					$children_menu[] = array(
+						'child_menu_name' => $child->child_menu_name,
+						'c_menu_link' => $child->c_menu_link,
+						'menu_code' => $child->menu_code,
+						'menu_id' => $child->menu_id
+					);
+				}
+
+				$menu[] = array(
+					'parent_menu_id'=>$parent_menu->parent_menu_id,
+					'read'=>$parent_menu->read,
+					'parent_menu_name' => $parent_menu->parent_menu_name,
+					'fa_icon' => $parent_menu->fa_icon,
+					'default' => $parent_menu->default,
+					'menu_code' => $parent_menu->menu_code,
+					'p_menu_link' => $parent_menu->p_menu_link,
+					'children_menu' => $children_menu,
+					
+				);
+			}
+			return $menu;
+		}
+
 		public static function getMenusName($language_id=2,$menu_code){
 			
 			$data = DB::table("menu_description as md")

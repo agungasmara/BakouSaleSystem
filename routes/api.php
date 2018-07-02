@@ -43,5 +43,4 @@ Route::group(['middleware' => ['SettingConfig']], function(){
     // =====Product
     Route::get('/product_detail/{product_id}/{category_id}','FrontEnd\Product\ProductController@index');
     Route::post('/product_review','FrontEnd\Product\ProductController@product_review');
-    Route::Resource('/user_groups','Backend\UserGroups\UserGroupsController');
 });

@@ -12,10 +12,10 @@ class Store extends Model
 	public $timestamps=false;
 	protected $fillable=[
     	'name',
-    	'url',
-    	'lastname',
-    	'owner_id',
-    	'ssl'
+		'url',
+		'ssl',
+    	'sec_user_id',
+    	'is_default'
     ]; 
     public function settings()
     {

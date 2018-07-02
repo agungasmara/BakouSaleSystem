@@ -11,18 +11,31 @@ class User extends Model
     public $timestamps=false;
     protected $primaryKey='id';
     protected $fillable=[
-    	'username',
+    	'user_group_id',
     	'firstname',
     	'lastname',
-    	'user_group_id',
-    	'image',
-    	'email',
-    	'password',
-    	'salt',
-    	'code',
-    	'status',
-    	'ip',
-    	'date_added'
+    	'gender',
+    	'dob',
+    	'company',
+    	'website',
+    	'owner',
+    	'address_1',
+    	'address_2',
+        'username',
+        'email',
+        'email_2',
+        'password',
+        'telephone_1',
+        'telephone_2',
+        'country',
+        'province',
+        'city',
+        'code',
+        'image',
+        'status',
+        'remember_token',
+        'date_added',
+        'updated_at'
     ]; 
     //protected $hidden=['user_group_id','password','salt','ip'];
 

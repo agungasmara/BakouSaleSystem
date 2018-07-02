@@ -22,6 +22,10 @@ use App\Http\Models\BackEnd\Option\OptionDescription;
 // use App\Http\Controllers\Backend\commons\ImageMaker;
 use Intervention\Image\ImageManagerStatic as Image;
 use App\Http\Controllers\Backend\commons\DataAction;
+use DB;
+use Auth;
+use App\Helpers\common;
+
 class ProductsController extends Controller
 {
     public function __construct()
@@ -30,12 +34,20 @@ class ProductsController extends Controller
     }
     public function index()
     {
-
-        $Products = ProductModel::select('product_id','model','image','price','quantity','sort_order','status')->OrderBy('product_id','desc')->get();
-        foreach ($Products as $Product) {
-            $Product->name=$Product->Description()->value('name');
-            $Product->id=$Product->product_id;
-        }
+        $store_id = common::getStoreIdByUser(Auth::user()->id);
+        // $Products = ProductModel::select('product_id','model','image','price','quantity','sort_order','status')->OrderBy('product_id','desc')->get();
+        $Products = DB::table('product as p')
+                    ->Join('product_to_store as p2s','p2s.product_id','p.product_id')
+                    ->Join('product_description as pd','pd.product_id','p.product_id')
+                    ->Where('pd.language_id',config_language_id)
+                    ->Where('p2s.store_id',$store_id)
+                    ->OrderBy('p.product_id','desc')
+                    ->select('p.product_id','p.model','p.image','p.price','p.quantity','p.sort_order','p.status')
+                    ->get();
+        // foreach ($Products as $Product) {
+        //     $Product->name=$Product->Description()->value('name');
+        //     $Product->id=$Product->product_id;
+        // }
         // dd($Products);
         return $Products;
     }

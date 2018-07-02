@@ -24,6 +24,7 @@ use App\Http\Controllers\Backend\commons\ValidateDataController;
     For more detail i have comment in DataAction class in commons folder
 */
 use App\Http\Controllers\Backend\commons\DataAction;
+use App\Helpers\common;
 
 class UserGroupsController extends Controller
 {
@@ -61,9 +62,8 @@ class UserGroupsController extends Controller
         return response()->json(UserGroup::Groups());
     }
     public function ValidateData($field,$value){
-        
-        $existed=false;
 
+        $existed=false;
         //instant the object
         $validate=new ValidateDataController;
         if($field=="username"){
@@ -74,5 +74,13 @@ class UserGroupsController extends Controller
             return $validate->CheckDataExist('user','email',$value);
         }
         
+    }
+
+    public function getPermission($id){
+        $getPermission = common::getPermission($id);
+        $data['success']=true;
+        $data['data']=$getPermission;
+        $data['total']=count($getPermission);
+        return response()->json($data);
     }
 }

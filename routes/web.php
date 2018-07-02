@@ -157,11 +157,12 @@ if (Request::is('admin*')){
 
 
                 Route::get('/getUsers','Backend\UserGroups\UserGroupsController@getUsers');
-                Route::get('/permission','Backend\UserGroups\UserGroupsController@getPermission');
+                Route::get('/permission/{id}','Backend\UserGroups\UserGroupsController@getPermission');
                 Route::get('/users_group/checkIfExisted/{field}/{value}','Backend\UserGroups\UserGroupsController@ValidateData');
 
 
                 //=====User API
+                Route::Resource('/user_groups','Backend\UserGroups\UserGroupsController');
                 Route::get('/users_group','Backend\Users\UsersController@UserGroup');
                 Route::get('/user/checkIfExisted/{field}/{value}','Backend\Users\UsersController@ValidateData');
                 Route::Resource('/users','Backend\Users\UsersController');

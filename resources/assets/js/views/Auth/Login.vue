@@ -63,9 +63,9 @@
                             {{ flash.error }}
                         </v-alert>
                         <!--<v-badge class="badge--left" value='true'><span class="badge__badge primary">6<span></span></span></v-badge>-->
-                        <v-alert class="info" value='true' v-if="!flash.success && !flash.error">
+                        <!--<v-alert class="info" value='true' v-if="!flash.success && !flash.error">
                             <center><v-icon style="float:left">home</v-icon> <div style="float:left;font-size:16px;padding-left:10px;">USER LOGIN</div></center>
-                        </v-alert>
+                        </v-alert>-->
                         <!-- <div class="flash flash-success" v-if="flash.success">
                             {{ flash.success }}
                         </div> -->
