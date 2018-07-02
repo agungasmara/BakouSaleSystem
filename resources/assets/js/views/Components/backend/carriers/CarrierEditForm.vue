@@ -34,7 +34,7 @@
 				<div class="row container">
 				  <div class="container">
 				    <div class="col s10 m6 l6">
-				      <h5 class="breadcrumbs-title">Products</h5>
+				      <h5 class="breadcrumbs-title">Carriers</h5>
 				      	<v-breadcrumbs>
 				        	<v-icon slot="divider">/</v-icon>
 			        		<v-breadcrumbs-item  v-for="breadcrumb in breadcrumbs" :key="breadcrumb.text" :disabled="breadcrumb.disabled">
@@ -58,6 +58,11 @@
 		                <div class="_card-panel">
 		                  
 		                  <div class="container">
+		                  	<div class="flash flash__success" v-if="flash.success">
+								<v-alert color="success" icon="check_circle" value="true">
+					            	{{flash.success}}
+					            </v-alert>
+				          	</div>
 		                    <v-form v-model="valid" ref="form" lazy-validation>
 		                    	<div v-for="item in section">
 			                    	<!-- /start -->
@@ -99,7 +104,7 @@
 							                    	<form-group
 														v-bind:form-items="group[item.profile]"
 														v-bind:form-rules="rules"
-														v-bind:form-datas="data.data"
+														v-bind:form-datas="data"
 														v-bind:select-items="select"
 														
 													></form-group>
@@ -187,7 +192,7 @@
 					{
 						info_title:'',
 						info_description:'',
-						title:'Size, weight, and group access',
+						title:'Option delivery',
 						icon:'info_outline',
 						form:'links',
 					},
@@ -200,40 +205,49 @@
 						
 					],
 					general:[
-						{	class:'xs6 sm6',	 text:'Carrier Name',	key:'name',	type:'text',	 Value:''},
-						{	class:'xs6 sm6',	 text:'Transit time',	key:'tag',	type:'text',	 Value:''	},
-						{	class:'xs6 sm6',	 text:'Speed grade',	key:'meta_title',	type:'text',	 Value:''	},
+						{	class:'xs6 sm6',	 text:'Carrier Name',	key:'name',	type:'text', Value:''},
+						{	class:'xs6 sm6',	 text:'Transit time',	key:'delay',	type:'text',	 Value:''	},
+						{	class:'xs6 sm6',	 text:'Speed grade',	key:'grade',	type:'text',	 Value:''	},
 						{	class:'xs6 sm6',	 text:'Tracking Url',	key:'url',	type:'text',	 Value:''	},
-						{	class:'xs12 sm12',	 text:'Store',	key:'store_id',	type:'multiple',	 Value:''	,items:'store'},
-						{	class:'xs12 sm12',	 text:'Carrier',	key:'reference_id',	type:'select',	 Value:''	,items:'carrier'},
+						{	class:'xs12 sm12',	 text:'Store',	key:'store_id',	type:'multiple',	 Value:''	,items:'store'}
+						// {	class:'xs12 sm12',	 text:'Carrier',	key:'reference_id',	type:'select',	 Value:''	,items:'carrier'},
 					],
 					data:[
-						{	class:'xs12',	 text:'Tax Class',	key:'tax_class_id',	type:'select',	 Value:'',	items:'tax_class'},
-						{	class:'xs12',	 text:'Out-of-rang behavior',	key:'range_behavior',	type:'select',	 Value:'' ,	items:'tax_class'},
-						{	class:'xs12 sm6',	 text:'Active',	key:'active',	type:'checkbox',	 Value:'1'},
+						{	class:'xs12',	 text:'Tax Class',	key:'tax_rules_group_id',	type:'select',	 Value:'',	items:'tax_class'},
 						{	class:'xs12 sm6',	 text:'Free shipping',	key:'is_free',	type:'checkbox',	 Value:'1'},
 						{	class:'xs12 sm6',	 text:'Add handling costs',	key:'shipping_handling',	type:'checkbox', Value:'1'},
-						{	class:'xs12 sm6',	 text:'Grade',	key:'grade',	type:'checkbox',	 Value:'1'},
 						
 					],
 					links:[
-						{	class:'xs12 sm6',	 text:'Maximum package width (cm)',	key:'max_width',	type:'number',	 Value:''	},
-						{	class:'xs12 sm6',	 text:'Maximum package height (cm)',	key:'max_height',	type:'number',	 Value:''	},
-						{	class:'xs12 sm6',	 text:'Maximum package depth (cm)',	key:'max_depth',	type:'number',	 Value:''	},
-						{	class:'xs12 sm6',	 text:'Maximum package weight (kg)',	key:'max_weight',	type:'number',	 Value:''	},
-
-
-
-
-
-
+						// {	class:'xs12',	 text:'Out-of-rang behavior',	key:'range_behavior',	type:'select',	 Value:'' ,	items:'tax_class'},
+						{	class:'xs12 sm6',	 text:'Active',	key:'active',	type:'checkbox',	 Value:'1'},
+						{	class:'xs12 sm6',	 text:'Grade',	key:'grade',	type:'checkbox',	 Value:'1'},
+						// {	class:'xs12 sm6',	 text:'Maximum package width (cm)',	key:'max_width',	type:'number',	 Value:''	},
+						// {	class:'xs12 sm6',	 text:'Maximum package height (cm)',	key:'max_height',	type:'number',	 Value:''	},
+						// {	class:'xs12 sm6',	 text:'Maximum package depth (cm)',	key:'max_depth',	type:'number',	 Value:''	},
+						// {	class:'xs12 sm6',	 text:'Maximum package weight (kg)',	key:'max_weight',	type:'number',	 Value:''	},
 
 					],
 					
 
 				},
 				rules:{
+					name: [
+				      (v) => !!v || 'Name is required',
+				      (v) => v && v.length <= 16 || 'Username must be less than 16 characters'
+				    ],
+					store_id:[
+						(v) => !!v || 'Store is required'
+					],
+					tax_rules_group_id:[
+						(v) => !!v || 'Tax Class is required'
+					],
 					
+					delay: [
+				      (v) => !!v || 'Transmit time is required'
+				    ],
+					
+				   
 				},
 				data:{
 					general:{},
@@ -252,6 +266,7 @@
 					],
 					
 				},
+				flash:Flash.state
 			}
 		},
 		mounted(){
@@ -292,7 +307,7 @@
 			
 			submit (opt=1) {
 
-		      	// if (this.$refs.form.validate()) {
+		      	if (this.$refs.form.validate()) {
 			        // Native form submission is not yet supporte
 			        
 			        if(!this.id){
@@ -341,7 +356,7 @@
 	                  	})
 			        }
 			        
-		      	// }
+		      	}
 		    },
 		}
 	}

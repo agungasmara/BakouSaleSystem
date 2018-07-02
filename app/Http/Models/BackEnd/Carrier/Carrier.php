@@ -10,8 +10,9 @@ class Carrier extends Model
     protected $primaryKey='carrier_id';
     protected $fillable=[
     	'reference_id',
-    	'tax_rule_group_id',
-    	'name',
+    	'tax_rules_group_id',
+        'name',
+    	'image',
     	'url',
     	'active',
     	'deleted',
@@ -29,6 +30,7 @@ class Carrier extends Model
         'max_depth',
         'max_weight',
         'grade',
+        'delay'
     ];
     public $timestamps=false;
 }

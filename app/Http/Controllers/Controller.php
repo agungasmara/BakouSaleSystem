@@ -6,6 +6,8 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Intervention\Image\ImageManagerStatic as Image;
+
 use DB;
 use AVG;
 use Carbon\Carbon;
@@ -18,6 +20,22 @@ class Controller extends BaseController
 				->Join('category_type_description' ,'category_type.category_type_id','=' ,'category_type_description.category_type_id')
 				->get();
     	return $query;
+    }
+    public function ImageMaker($dir,$image)
+    {
+        if( preg_match('/data:image/', $image) ){                
+            preg_match('/data:image\/(?<mime>.*?)\;/', $image , $groups);
+            $mimetype = $groups['mime'];
+            $file_name = uniqid().'.'.$mimetype;          
+            $file_name=preg_replace('/\s/','', $file_name);
+            $filepath = "$dir/$file_name";    
+            $image = Image::make($image)->resize(400, null, function ($constraint) {
+                                $constraint->aspectRatio();
+                            });
+            $image->save(public_path($filepath));     
+            return $filepath;
+        } 
+        return $image;
     }
     /*
 	# query get category
