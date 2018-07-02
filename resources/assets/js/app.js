@@ -1371,16 +1371,16 @@ const router = new VueRouter({
   }).$mount('#root')
 // }
 
-// // app frontend
-// // if(document.getElementById("#root_frontend") ) {
-//   const appf = new Vue({
-//       // el: '#root',
-//       router,
-//       template: `
-//       <appf></appf>`,
-//       components: { Appf },
-//   }).$mount('#root_frontend')
-// // }
+// app frontend
+// if(document.getElementById("#root_frontend") ) {
+  const appf = new Vue({
+      // el: '#root',
+      router,
+      template: `
+      <appf></appf>`,
+      components: { Appf },
+  }).$mount('#root_frontend')
+// }
 
 // if( document.getElementById("#root_login") ) {
   const AuthLogin = new Vue({
