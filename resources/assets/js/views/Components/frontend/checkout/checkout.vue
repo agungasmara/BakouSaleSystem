@@ -380,6 +380,24 @@ export default {
 				zoneList:{},
              	activeTab: 0,
              	get_checkout_address:[],
+             	rules:{
+					name: [
+				      (v) => !!v || 'Name is required',
+				      (v) => v && v.length <= 16 || 'Username must be less than 16 characters'
+				    ],
+					store_id:[
+						(v) => !!v.length > 0 || 'Store is required'
+					],
+					tax_rules_group_id:[
+						(v) => !!v || 'Tax Class is required'
+					],
+					
+					delay: [
+				      (v) => !!v || 'Transmit time is required'
+				    ],
+					
+				   
+				},
              	selectItem:{
              		country:{},
              		shipping_zone:{},

@@ -237,7 +237,7 @@
 				      (v) => v && v.length <= 16 || 'Username must be less than 16 characters'
 				    ],
 					store_id:[
-						(v) => !!v || 'Store is required'
+						(v) => !!v.length > 0 || 'Store is required'
 					],
 					tax_rules_group_id:[
 						(v) => !!v || 'Tax Class is required'
